@@ -6,7 +6,7 @@ import { Property, ReviewExport } from "../../../../actions";
 
 // TODO: [QA-6605] Error pulling 'neighborhood' data into a comment 'Location Within Market'
 describe(`Check that generated text pulls in the first submarket`,
-    { tags: [ "@property", "@site_description", "@check_export", "@fix" ] }, () => {
+    { tags: [ "@property", "@site_description", "@check_export" ] }, () => {
         
         it("[QA-4481]", () => {
             cy.stepInfo(`1. Create a new report on the WebApp and navigate to Property > Market.`);

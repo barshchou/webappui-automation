@@ -4,7 +4,7 @@ import { Income, Property } from "../../../../actions";
 import { createReport } from "../../../../actions/base/baseTest.actions";
 
 describe(`[QA-5049] [QA-5050] [QA-5051] [Income>Expense forecast] Custom card values calculations + card appearance`,
-    { tags: [ "@snapshot_tests", "@income", "@expense_forecast", "@fix" ] }, () => {
+    { tags: [ "@snapshot_tests", "@income", "@expense_forecast" ] }, () => {
         before("Login, create report", () => {
             createReport(testData.reportCreationData);
             cy.saveLocalStorage();

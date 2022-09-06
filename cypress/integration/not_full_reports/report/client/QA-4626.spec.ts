@@ -4,7 +4,7 @@ import { createReport } from "../../../../actions/base/baseTest.actions";
 import testData from '../../../../fixtures/not_full_reports/report/client/QA-4626.fixture';
 import Enums from '../../../../enums/enums';
 
-describe("Verify the display of the Client page.", { tags:[ "@report", "@client", "@fix" ] }, () => {
+describe("Verify the display of the Client page.", { tags:[ "@report", "@client" ] }, () => {
     beforeEach("Login, create report", () => {
         createReport(testData.reportCreationData);
     });

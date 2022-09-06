@@ -4,7 +4,7 @@ import NavigationSection from "../../../../../actions/base/navigationSection.act
 import Income from "../../../../../actions/income/income.manager";
 
 describe("Verify Amenities drop-down field in the Map filter section on Rent Comps page", 
-    { tags:[ "@income", "@commercial", "@in_place_rent_roll", "@fix" ] }, () => {
+    { tags:[ "@income", "@commercial", "@in_place_rent_roll" ] }, () => {
         beforeEach("Login, create report", () => {
             createReport(testData.reportCreationData);
         });

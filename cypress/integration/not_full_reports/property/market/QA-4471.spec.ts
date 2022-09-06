@@ -5,7 +5,7 @@ import { Property } from "../../../../actions";
 
 
 describe("'Pull from dropbox' clicked - needed files are uploaded", 
-    { tags: [ "@property", "@market", "@fix" ] }, () => {
+    { tags: [ "@property", "@market" ] }, () => {
 
         before("Login, create report", () => {
             createReport(testData.reportCreationData);

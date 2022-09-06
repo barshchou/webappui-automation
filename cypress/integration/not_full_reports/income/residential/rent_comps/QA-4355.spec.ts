@@ -8,7 +8,7 @@ const reportCreationData = ReportDataCreator.getReportData("4355");
 
 describe(`Verify the user can switch to 'Building' type of search on clicking 'Search Per Building' button on 
 'Are you sure you want to search Per Building?' waring overlay`, 
-{ tags:[ "@income", "@commercial", "@in_place_rent_roll", "@fix" ] }, () => {
+{ tags:[ "@income", "@commercial", "@in_place_rent_roll" ] }, () => {
     beforeEach("Login, create report", () => {
         createReport(reportCreationData);
     });

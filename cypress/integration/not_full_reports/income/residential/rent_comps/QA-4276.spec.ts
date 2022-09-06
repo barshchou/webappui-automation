@@ -5,7 +5,7 @@ import Income from "../../../../../actions/income/income.manager";
 
 describe(`Verify Sort By drop-down field for results sorting on Map filter section on Rent Comps page 
 when Unit search type is selected`, 
-{ tags:[ "@income", "@commercial", "@in_place_rent_roll", "@fix" ] }, () => {
+{ tags:[ "@income", "@commercial", "@in_place_rent_roll" ] }, () => {
     beforeEach("Login, create report", () => {
         createReport(testData.reportCreationData);
     });

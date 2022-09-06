@@ -4,7 +4,7 @@ import NavigationSection from "../../../../../actions/base/navigationSection.act
 import Income from "../../../../../actions/income/income.manager";
 
 describe("Verify Min Rent and Max Rent text fields", 
-    { tags:[ "@income", "@commercial", "@in_place_rent_roll", "@fix" ] }, () => {
+    { tags:[ "@income", "@commercial", "@in_place_rent_roll" ] }, () => {
         beforeEach("Login, create report", () => {
             createReport(testData.reportCreationData);
         });
