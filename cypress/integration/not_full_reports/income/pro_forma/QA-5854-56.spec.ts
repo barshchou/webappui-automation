@@ -6,7 +6,7 @@ import { Income, Property } from "../../../../actions";
 import { BoweryReports } from '../../../../types/boweryReports.type';
 
 describe("Pro Forma Page validation Operating Expenses -> Custom Expense", 
-    { tags:[ "@income", "@pro_forma" ] }, () => { 
+    { tags:[ "@income", "@pro_forma", "@fix" ] }, () => { 
     
         before("Login, create report, prepare data", () => {
             cy.stepInfo(`1. Create new report or open the report which is already created. 

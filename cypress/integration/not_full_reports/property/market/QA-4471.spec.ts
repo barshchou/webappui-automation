@@ -4,7 +4,7 @@ import { _NavigationSection } from "../../../../actions/base";
 import { Property } from "../../../../actions";
 
 
-describe("'Pull from dropbox' clicked - needed files are uploaded", { tags: [ "@property", "@market" ] }, () => {
+describe("'Pull from dropbox' clicked - needed files are uploaded", { tags: [ "@property", "@market", "@fix" ] }, () => {
 
     before("Login, create report", () => {
         createReport(testData.reportCreationData);

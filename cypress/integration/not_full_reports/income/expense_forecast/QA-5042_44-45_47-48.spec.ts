@@ -6,7 +6,7 @@ import Enums from "../../../../enums/enums";
 
 describe(`[QA-5042] [QA-5044] [QA-5045] [QA-5047] [QA-5048] 
 [Income>Expense forecast] 'Add New Expense Category' button and modal functionality`,
-{ tags: [ "@income", "@expense_forecast" ] }, () => {
+{ tags: [ "@income", "@expense_forecast", "@fix" ] }, () => {
     before("Login, create report", () => {
         createReport(testData.reportCreationData);
         cy.saveLocalStorage();

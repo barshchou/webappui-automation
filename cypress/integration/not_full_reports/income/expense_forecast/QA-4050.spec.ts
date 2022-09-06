@@ -5,7 +5,7 @@ import { createReport } from "../../../../actions/base/baseTest.actions";
 import Enums from "../../../../enums/enums";
 
 describe(`Verify that Generated Commentary for Total Operating Expenses is updated on the Expense Forecast page`, 
-    { tags: [ "@income", "@expense_forecast" ] }, () => {
+    { tags: [ "@income", "@expense_forecast", "@fix" ] }, () => {
 
         beforeEach("Login, create report", () => {
             createReport(testData.reportCreationData);

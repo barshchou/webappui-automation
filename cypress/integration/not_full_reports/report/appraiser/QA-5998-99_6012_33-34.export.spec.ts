@@ -6,7 +6,7 @@ import Enums from '../../../../enums/enums';
 import { normalizeText } from '../../../../../utils/string.utils';
 
 describe("Add Appraiser / Inspector button functionality", 
-    { tags:[ "@report", "@appraiser", "@check_export" ] }, () => {
+    { tags:[ "@report", "@appraiser", "@check_export", "@fix" ] }, () => {
 
         it("[QA-5998-99_6012_33-34]", () => {
             cy.stepInfo("Precondition: Create report");

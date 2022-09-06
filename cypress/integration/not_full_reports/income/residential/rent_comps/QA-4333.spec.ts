@@ -7,7 +7,7 @@ const reportCreationData = ReportDataCreator.getReportData("4333");
 
 describe(`Verify Select button for the results displayed in the Map section is transferring to Selected on clicking 
 when the Unit type of search is selected on the Rent Comps page`, 
-{ tags:[ "@income", "@commercial", "@in_place_rent_roll" ] }, () => {
+{ tags:[ "@income", "@commercial", "@in_place_rent_roll", "@fix" ] }, () => {
     beforeEach("Login, create report", () => {
         createReport(reportCreationData);
     });

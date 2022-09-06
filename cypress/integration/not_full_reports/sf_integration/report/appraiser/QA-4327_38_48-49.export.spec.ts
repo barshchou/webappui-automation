@@ -7,7 +7,7 @@ import testData from
 
 describe(`Verify the Inspector's name is pre-filled in the Appraisers section on WebApp with the name 
         corresponding to the Inspector value for that job in SalesForce.`,
-{ tags: [ "@check_export", "@report", "@appraiser", "@salesforce" ] }, () => {
+{ tags: [ "@check_export", "@report", "@appraiser", "@salesforce", "@fix" ] }, () => {
     
     it("[QA-4327_48-49]", () => {
         cy.stepInfo('1. Create a report with SF job');

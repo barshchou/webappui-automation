@@ -6,7 +6,7 @@ import launchDarklyApi from "../../../../api/launchDarkly.api";
 
 describe(`Square Foot row in Tax Liability grid is displayed according to 
 selected Basis for Square Foot Analysis`, 
-{ tags: [ "@income", "@tax_info", "@feature_flag" ] }, () => {
+{ tags: [ "@income", "@tax_info", "@feature_flag", "@fix" ] }, () => {
 
     it("[QA-5882_83_85]", () => {
         cy.stepInfo("1. Create report");
