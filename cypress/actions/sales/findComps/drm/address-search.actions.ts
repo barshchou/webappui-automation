@@ -4,8 +4,6 @@ import { Alias } from '../../../../utils/alias.utils';
 import { getDataFromDb } from "../../../../../cypress/db/index";
 import mapKeysUtils from "../../../../utils/mapKeys.utils";
 import { CompPlex } from "../../../../types/compplex.type";
-import { aliasQuery } from "../../../../utils/graphql.utils";
-import {  gqlOperationNames } from "../../../../utils/alias.utils";
 
 class AddressSearchActions {
     Page: typeof findCompsPage;
@@ -46,9 +44,6 @@ class AddressSearchActions {
      */
     
     addCompViaAddressSearchById(address: string, compId: string) {
-        cy.intercept('POST', '/graphql', req => {
-            aliasQuery(req, gqlOperationNames.searchTransactionsByAddresses);
-        });
         this.enterAddressToCompAddress(address)
             .clickSearchCompAddressButton();
         //We should compare comp's id with element attr in future, not with id in response 
