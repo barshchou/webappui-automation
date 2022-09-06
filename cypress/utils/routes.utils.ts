@@ -51,7 +51,8 @@ const routes =  {
     reviewExport: "/review-and-export",
     organizationInfo: "/organization-info",
     subjectPropertySiteDetails: "/subject-property#site-details",
-    subjectPropertyDescription: "subject-property#property-description"
+    subjectPropertyDescription: "/subject-property#property-description",
+    subjectPropertyHistory: "/subject-property#property-history"
 } as const;
 
 export default routes;
