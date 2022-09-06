@@ -4,7 +4,8 @@ const marketResearchTypes = {
     withNeighborhoodAndArea: "2200016060",
     withoutMultipleNeighborhoodAndArea: "1764459005",
     withoutEmptyNeighborhoodAndArea: "2010277287",
-    withFullMarketAndSubmarket: "2200016060"
+    withFullMarketAndSubmarket: "2200016060",
+    withMultipleSubmarket: "2200019013"
 } as const;
 
 export default Object.freeze(marketResearchTypes);
