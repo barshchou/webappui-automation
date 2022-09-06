@@ -20,6 +20,7 @@ class ExpenseForecastPage extends BasePage {
      * If card is custom - locator gets forecast card name and 
      * changes it (according to the rule from webapp) for qa-data attribute 
      */
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
     forecastItemCardFull(forecastItem: string, custom = false) {
         return cy.get(`[data-qa='${forecastItem}-forecast-item']`);
         /*
