@@ -18,8 +18,9 @@ export default class BaseActionsExt<T extends BasePage> extends BaseActions {
         this.Page = page;
     }
 
-    verifyTooltipNotExist() {
-        this.Page.tooltip.should("not.exist");
+    verifyTooltipExistOrNot(isExist = true) {
+        const matcher = isExist ? "exist" : "not.exist";
+        this.Page.tooltip.should(matcher);
         return this;
     } 
 

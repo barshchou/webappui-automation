@@ -155,6 +155,20 @@ class ClientActions extends BaseActionsExt<typeof clientPage> {
         clientPage.getNYCBApplicationNumber(clientIndex).should("exist");
         return this;
     }
+
+    clickRemoveAdditionalClientBtn(index = 0): ClientActions {
+        clientPage.getRemoveIcon(index).click();
+        return this;
+    }
+
+    verifyAdditionalClientRemoved(clientIndex = 1, undoIndex = 0): ClientActions {
+        clientPage.undoBtn.eq(undoIndex).should("exist");
+        // Wait when remove additional client
+        cy.wait(4000);
+        clientPage.getClientFileNumberField(clientIndex).should("not.exist");
+        clientPage.getNYCBApplicationNumber(clientIndex).should("not.exist");
+        return this;
+    }
 }
 
 export default new ClientActions(clientPage);

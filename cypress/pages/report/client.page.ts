@@ -52,6 +52,8 @@ class ClientPage extends BasePage {
 
     get maxClientMessage() { return cy.contains("Max of four clients allowed"); }
 
+    get undoBtn() { return cy.contains("Undo"); }
+
 }
 
 export default new ClientPage();
