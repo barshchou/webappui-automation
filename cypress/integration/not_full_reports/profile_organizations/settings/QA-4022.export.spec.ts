@@ -15,7 +15,6 @@ describe("[QA-4022] A hard coded sentence is updated on the Organization page",
             cy.stepInfo('2. Navigate to Organization -> Settings and verify commentary text');
             _NavigationSection.navigateToProfileOrganization(enums.MENU_LINKS.organization);
             Organization._OrganizationActions.openOrganizationSettingsPage();
-            _NavigationSection.submitSaveChangesModal();
             Organization._OrganizationSettingsActions
                 .verifyMortgageComponentIntroductionCommentary(testData.commentary);
 

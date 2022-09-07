@@ -456,7 +456,6 @@ class CommercialRentCompsActions extends BaseActionsExt<typeof rentCompsPage> {
     /**
      * Draw polygon using coordinates. Need wait to render polygon 
      * @param coordinates Starts from map top left
-     * @param verifyPolygons Count unit in render polygon
      * @param dialogTitle Dialog title to click
      * @param isSelect Apply changes or not
      */
@@ -488,7 +487,6 @@ class CommercialRentCompsActions extends BaseActionsExt<typeof rentCompsPage> {
      * Nikita: Edit only first element in changeable polygon
      * TODO: Need to figure out a way to change all the elements in edit polygon
      * @param coordinates Starts from map top left
-     * @param verifyPolygons Count unit in render polygon
      * @param dialogTitle Dialog title to click
      * @param isSelect Apply changes or not
      */
