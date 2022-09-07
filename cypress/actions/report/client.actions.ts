@@ -1,7 +1,6 @@
 import clientPage from "../../pages/report/client.page";
 import { replaceEntersWithLineBreak } from "../../../utils/string.utils";
 import BaseActionsExt from "../base/base.actions.ext";
-import Enums from "../../enums/enums";
 
 class ClientActions extends BaseActionsExt<typeof clientPage> {
     verifyInputChangesToBeUnsaved(clientFileNumber: string): ClientActions {
