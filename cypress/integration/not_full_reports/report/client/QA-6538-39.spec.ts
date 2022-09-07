@@ -1,5 +1,5 @@
-import { Report } from './../../../../actions';
-import testData from "../../../../fixtures/not_full_reports/report/client/QA-6538.fixture";
+import { Report } from '../../../../actions';
+import testData from "../../../../fixtures/not_full_reports/report/client/QA-6538-39.fixture";
 import { createReport } from "../../../../actions/base/baseTest.actions";
 import { _NavigationSection } from "../../../../actions/base";
 
@@ -9,7 +9,7 @@ describe("Verify the functionality of the Add Additional Client button",
             createReport(testData.reportCreationData);
         });
 
-        it("[QA-6538]", () => {
+        it("[QA-6538-39]", () => {
             cy.stepInfo("1. Navigate to the Report > Client page");
             _NavigationSection.navigateToClientPage();
            
@@ -41,5 +41,15 @@ describe("Verify the functionality of the Add Additional Client button",
                         and the text 'Max of four clients allowed' appears below the button.`);
             Report._Client.Page.addAdditionalClientBtn.should("be.disabled");
             Report._Client.Page.maxClientMessage.should("exist");
+
+            cy.stepInfo("8. Hover the remove 'X' button and verify the tooltip 'Remove' is displayed on hover");
+            Report._Client.Page.getRemoveIcon().trigger("mouseover");
+            Report._Client.verifyTooltipExistOrNot();
+
+            cy.stepInfo(`9. Click on the remove 'X' button and verify the The 'Client X', 'Client File Number' and 
+                        'NYCB Application Number' fields become disabled and the 'Undo' button is displayed for 
+                        3 seconds before they disappear`);
+            Report._Client.clickRemoveAdditionalClientBtn()
+                .verifyAdditionalClientRemoved(3);
         });
     });
