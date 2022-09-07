@@ -3,31 +3,35 @@ import { MongoClient } from 'mongodb';
 import mapKeysUtils from '../utils/mapKeys.utils';
 import { CompPlex } from "../types/compplex.type";
 
-
 class ComplexDatabaseModule {
-
+    
     /**
      * Function determines url and name of comp-plex database, then  connects to database and retrieve 
-     * the array (max = 10) of comps with necessary property (@param filterPath) value (@param filterValue)
+     * the array (max = 10) of comps with necessary property and its value 
+     * @param compProperty Comp property path in database collection
+     * @param compPropertyValue Comp property value in database collection
      */
-    setCompsArrayFromDb = (filterPath: CompPlex.AddressSearch.CompPropertyInDB, 
-        filterValue: string) => {
-        const { mongoUrl, dbName } = this.determinePassedEnv();
+    setCompsArrayFromDb = (compProperty: CompPlex.AddressSearch.CompPropertyInDB, 
+        compPropertyValue: string) => {
+        const { mongoUrl, dbName } = this.selectDatabaseSecrets();
         cy.task('retrieveDataFromDb', { dbUrl: mongoUrl, dbName: dbName, 
-            filterPath: filterPath, filterValue: filterValue }).then(data => {
+            compPropertyPathInDB: compProperty, compPropertyValueInDB: compPropertyValue }).then(data => {
             cy.log(<string>data);
             cy._mapSet(mapKeysUtils.arrayOfCompsFromDB, data);
         });
     };
-
+ 
     /**
      * Function connects to Comp-plex database and retrieve the array (max = 10) of comps with 
-     * necessary property (@param filterPath) value (@param filterValue)
+     * necessary property and its value 
+     * @param compPropertyPathInDB Comp property path in database collection
+     * @param compPropertyValueInDB Comp property value in database collection
      */
-    retrieveDataFromDb = async (url: string, dbName: string, filterPath: string, filterValue: string) => {
+    retrieveDataFromDb = async (url: string, dbName: string, compPropertyPathInDB: string, 
+        compPropertyValueInDB: string) => {
         const client = new MongoClient(url);
         const collectionName = "sales-transactions";
-        const filter = { [filterPath] : filterValue } ;
+        const filter = { [compPropertyPathInDB] : compPropertyValueInDB } ;
         try {
             await client.connect();
             console.log('Connected successfully to server');
@@ -42,12 +46,21 @@ class ComplexDatabaseModule {
     };
 
     /**
-     * Function determines what environment was passed when test was started
+     * Function determines what environment was passed when test was started and returns 
+     * necessary secrets for relative comp-plex database 
      */
-    determinePassedEnv = () => {
-        const databaseSecrets = {
+    selectDatabaseSecrets = () => {
+        cy.log(`Secrets to Comp-plex database on ${Cypress.env("url")} env`);
+        return this.databaseSecrets()[Cypress.env("url")];
+    };
+
+    /**
+     * Function returns a list of secrets for different comp-plex databases
+     */
+    databaseSecrets = () => {
+        return {
             "dev":{
-                mongoUrl: Cypress.env("CYPRESS_COMP_PLEX_DEV_DATABASE"), //move + divide Cypress.env
+                mongoUrl: Cypress.env("CYPRESS_COMP_PLEX_DEV_DATABASE"), 
                 dbName: Cypress.env("CYPRESS_COMP_PLEX_DB_DEV_NAME")
             },
             "compDev":{
@@ -72,8 +85,8 @@ class ComplexDatabaseModule {
                 dbName: Cypress.env("CYPRESS_COMP_PLEX_DB_STAGE_NAME")
             }
         };
-        return databaseSecrets[Cypress.env("url")];
     };
+
 }
 
 export default new ComplexDatabaseModule();

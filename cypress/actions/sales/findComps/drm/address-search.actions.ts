@@ -39,10 +39,10 @@ class AddressSearchActions {
     }
     
     /**
-     * Action adds a comp with certain address (@param address) by its id (@param compId) 
-     * from the list of comps on address search modal
+     * Action adds a comp with certain address by its id from the list of comps on address search modal
+     * @param address Comp address
+     * @param compId Comp id (retrieved from database)
      */
-    
     addCompViaAddressSearchById(address: string, compId: string) {
         this.enterAddressToCompAddress(address)
             .clickSearchCompAddressButton();
@@ -60,8 +60,10 @@ class AddressSearchActions {
     }
   
     /**
-     * Action adds a comp by index (@param compIndex) 
-     * with necessary property (@param compPropertyKey) value (@param compPropertyValue)
+     * Action adds a comp (by index from retrieved array) with necessary property and its value
+     * @param compIndex Comps index in array, retrieved from db 
+     * @param compProperty Comps property
+     * @param compPropertyValue Comps property value
      */
     addCompByParameter (compIndex: number, compProperty: CompPlex.AddressSearch.CompPropertyInDB,
         compPropertyValue: string) { 
