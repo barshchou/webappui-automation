@@ -20,11 +20,6 @@ describe("Verify the functionality of the Add Additional Client",
             cy.stepInfo(`3. Fill the Client field with any valid data (e.g. Andrew Winston) and 
                         verify Add Additional Client' button is still disabled`);
             Report._Client.enterClientName(testData.clientNames[0])
-                .Page.addAdditionalClientBtn.should("be.disabled");
-
-            cy.stepInfo(`4. Fill the Client File Number field with any valid data (e.g. 8675309) and 
-                verify Add Additional Client' button has become enabled`);
-            Report._Client.enterClientFileNumber(testData.clientNumber)
                 .Page.addAdditionalClientBtn.should("be.enabled");
 
             cy.stepInfo("5. Click on the 'Add Additional Client' three times button");
@@ -45,9 +40,9 @@ describe("Verify the functionality of the Add Additional Client",
         });
 
         it("[QA-6539]", () => {
-            cy.stepInfo("2. Fill the 'Client' field and 'Client File Number' and click 'Add additional client");
+            cy.stepInfo("2. Fill the 'Client' field and click 'Add additional client");
             Report._Client.enterClientName(testData.clientNames[0])
-                .enterClientFileNumber(testData.clientNumber)
+
                 .clickAddAdditionalClientBtn();
 
             cy.stepInfo("3. Hover the remove 'X' button and verify the tooltip 'Remove' is displayed on hover");
@@ -62,9 +57,8 @@ describe("Verify the functionality of the Add Additional Client",
         });
 
         it("[QA-6540]", () => {
-            cy.stepInfo("2. Fill the 'Client' field and 'Client File Number' and click 'Add additional client");
+            cy.stepInfo("2. Fill the 'Client' field and click 'Add additional client");
             Report._Client.enterClientName(testData.clientNames[0])
-                .enterClientFileNumber(testData.clientNumber)
                 .clickAddAdditionalClientBtn();
 
             cy.stepInfo(`2. Click on the remove 'X' button and Click on the 'Undo' button. 
@@ -77,9 +71,8 @@ describe("Verify the functionality of the Add Additional Client",
         });
 
         it("[QA-6541-42]", () => {
-            cy.stepInfo("2. Fill the 'Client' field and 'Client File Number'");
-            Report._Client.enterClientName(testData.clientNames[0])
-                .enterClientFileNumber(testData.clientNumber);
+            cy.stepInfo("2. Fill the 'Client' field");
+            Report._Client.enterClientName(testData.clientNames[0]);
                 
             cy.stepInfo("3. Verify Intended User comment with one users");
             Report._Client.Page.formCommentTextBox(testData.intendedUser).invoke("text").then(text => {

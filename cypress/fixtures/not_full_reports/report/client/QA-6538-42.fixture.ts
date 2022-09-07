@@ -23,7 +23,7 @@ const intendedUserText = {
 const identificationOfTheClientText = {
     oneClient: "Greystone Servicing Corporation, Inc. has engaged Bowery Valuation and is Bowery Valuation’s" +
     " client for this assignment.",
-    
+
     manyClient: "Greystone Servicing Corporation, Inc., Manhatten Valley LM Apartment, LLC," + 
     " Flip That House, Inc have engaged Bowery Valuation and are Bowery Valuation’s clients for" +
     " this assignment"
@@ -31,7 +31,6 @@ const identificationOfTheClientText = {
 
 export default {
     reportCreationData: ReportDataCreator.getReportData("6538-42"),
-    clientNumber: "8675309",
     intendedUser: Enums.PAGES_TEXTBOX_NAMES.intendedUser,
     identificationOfTheClient: Enums.PAGES_TEXTBOX_NAMES.identificationOfTheClient,
     clientNames,

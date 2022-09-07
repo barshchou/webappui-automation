@@ -22,9 +22,8 @@ conditionalDescribe("Newly created client is displayed for a Client 2, Client 3 
         });
 
         it("[QA-6545]", () => {
-            cy.stepInfo("2. Fill the 'Client' field and 'Client File Number' and click 'Add additional client");
-            Report._Client.enterClientName(testData.clientName)
-                .enterClientFileNumber(testData.clientNumber);
+            cy.stepInfo("2. Fill the 'Client' field  and click 'Add additional client");
+            Report._Client.enterClientName(testData.clientName);
 
             cy.stepInfo("3. Click on the 'Add' button in the callout");
             Report._Client.clickSaveButton()
