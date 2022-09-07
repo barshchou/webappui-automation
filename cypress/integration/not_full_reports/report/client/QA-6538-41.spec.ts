@@ -1,5 +1,5 @@
 import { Report } from '../../../../actions';
-import testData from "../../../../fixtures/not_full_reports/report/client/QA-6538-40.fixture";
+import testData from "../../../../fixtures/not_full_reports/report/client/QA-6538-41.fixture";
 import { createReport } from "../../../../actions/base/baseTest.actions";
 import { _NavigationSection } from "../../../../actions/base";
 
@@ -18,7 +18,7 @@ describe("Verify the functionality of the Add Additional Client",
 
             cy.stepInfo(`3. Fill the Client field with any valid data (e.g. Andrew Winston) and 
                         verify Add Additional Client' button is still disabled`);
-            Report._Client.enterClientName(testData.clientName)
+            Report._Client.enterClientName(testData.clientNames[0])
                 .Page.addAdditionalClientBtn.should("be.disabled");
 
             cy.stepInfo(`4. Fill the Client File Number field with any valid data (e.g. 8675309) and 
@@ -44,8 +44,8 @@ describe("Verify the functionality of the Add Additional Client",
         });
 
         it("[QA-6539]", () => {
-            cy.stepInfo(`2. Fill the 'Client' field and 'Client File Number' and click 'Add additional client`);
-            Report._Client.enterClientName(testData.clientName)
+            cy.stepInfo("2. Fill the 'Client' field and 'Client File Number' and click 'Add additional client");
+            Report._Client.enterClientName(testData.clientNames[0])
                 .enterClientFileNumber(testData.clientNumber)
                 .clickAddAdditionalClientBtn();
 
@@ -61,8 +61,8 @@ describe("Verify the functionality of the Add Additional Client",
         });
 
         it("[QA-6540]", () => {
-            cy.stepInfo(`2. Fill the 'Client' field and 'Client File Number' and click 'Add additional client`);
-            Report._Client.enterClientName(testData.clientName)
+            cy.stepInfo("2. Fill the 'Client' field and 'Client File Number' and click 'Add additional client");
+            Report._Client.enterClientName(testData.clientNames[0])
                 .enterClientFileNumber(testData.clientNumber)
                 .clickAddAdditionalClientBtn();
 
@@ -73,5 +73,21 @@ describe("Verify the functionality of the Add Additional Client",
                 .clickUndoBtn()
                 .verifyAdditionalClientEnableOrNot()
                 .Page.getRemoveIcon().should("exist");
+        });
+
+        it.only("[QA-6531]", () => {
+            cy.stepInfo("2. Fill the 'Client' field and 'Client File Number'");
+            Report._Client.enterClientName(testData.clientNames[0])
+                .enterClientFileNumber(testData.clientNumber)
+                .verifyIntendedUserTextBox(testData.textOneClient);
+
+            cy.stepInfo("3. Add and Fill additional clients");
+            for (let i = 0; i <= 3; i++) {
+                Report._Client.clickAddAdditionalClientBtn()
+                    .enterClientName(testData.clientNames[i + 1]);
+            }
+
+            cy.stepInfo("4. Verify Intended User comment");
+            Report._Client.verifyIntendedUserTextBox(testData.textWithManyClient);
         });
     });

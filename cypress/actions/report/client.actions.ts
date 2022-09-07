@@ -38,16 +38,19 @@ class ClientActions extends BaseActionsExt<typeof clientPage> {
 
     enterClientName(name: string, index = 0): ClientActions {
         clientPage.getClientNameField(index).clear().type(name).type("{enter}");
+        clientPage.getClientNameField(index).should("have.value", name);
         return this;
     }
     
     enterClientFileNumber(name:string, index = 0): ClientActions {
         clientPage.getClientFileNumberField(index).clear().type(name).should("have.value", name);
+        clientPage.getClientFileNumberField(index).should("have.value", name);
         return this;
     }
 
     enterNycbApplicationNumber(name:string, index = 0): ClientActions {
         clientPage.getNYCBApplicationNumber(index).clear().type(name).should("have.value", name);
+        clientPage.getNYCBApplicationNumber(index).should("have.value", name);
         return this;
     }
 
