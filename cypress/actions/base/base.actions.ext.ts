@@ -1,3 +1,4 @@
+import { RealClickOptions } from 'cypress-real-events/commands/realClick';
 /* eslint-disable @typescript-eslint/triple-slash-reference */
 // eslint-disable-next-line multiline-comment-style
 /// <reference types="cypress-xpath" />
@@ -108,8 +109,9 @@ export default class BaseActionsExt<T extends BasePage> extends BaseActions {
     }
 
     // TODO: QA-6548 Removed cy.wait() when we determine how to save changes after editing
-    enterFormCommentTextBox(name: string, text: string, isClickHeader = true): this {
-        this.Page.formCommentTextBox(name).realClick({ position: "bottomRight" }).type(text);
+    enterFormCommentTextBox(name: string, text: string, isClickHeader = true, 
+        option: RealClickOptions = { position: "bottomRight" }): this {
+        this.Page.formCommentTextBox(name).realClick({ position: option.position }).type(text);
         if (isClickHeader) {
             this.Page.Header.realClick();
         }

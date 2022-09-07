@@ -6,7 +6,6 @@ import { createReport } from "../../../../../actions/base/baseTest.actions";
 
 describe("Verify the display of the Unit grid with the added comparable unit on the '$ Rent Comps' page", 
     { tags:[ "@income", "@residential", "@rent_comps" ] }, () => {
-
         beforeEach("Login action", () => {
             createReport(tesData.reportCreationData);
         });
