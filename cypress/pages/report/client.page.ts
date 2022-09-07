@@ -42,7 +42,7 @@ class ClientPage extends BasePage {
 
     chipModified(index?: number) { return cy.get('[ui="indicator"]').eq((index !== 0) ? index : 0); }
 
-    get addNewClient() { return cy.xpath("//*[@data-qa='callout-btn']//child::*[@target='_self']"); }
+    get addNewClient() { return cy.xpath("//*[@data-qa='callout-btn']"); }
 
     commentaryText(commentaryTitle: string) { 
         return cy.xpath(`//h6[.='${commentaryTitle}']//following::div[@data-slate-editor][1]`); 
@@ -53,6 +53,8 @@ class ClientPage extends BasePage {
     get maxClientMessage() { return cy.contains("Max of four clients allowed"); }
 
     get undoBtn() { return cy.contains("Undo"); }
+
+    getClientListItem(name: string) { return cy.get(`[data-value='${name}']`); }
 
 }
 

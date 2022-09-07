@@ -185,6 +185,11 @@ class ClientActions extends BaseActionsExt<typeof clientPage> {
         clientPage.getNYCBApplicationNumber(clientIndex).should(matcher);
         return this;
     }
+
+    clickAddNewClient(): ClientActions {
+        clientPage.addNewClient.click();
+        return this;
+    }
 }
 
 export default new ClientActions(clientPage);

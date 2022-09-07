@@ -31,7 +31,7 @@ conditionalDescribe("Verify the functionality of the Client field.",
                 .enterClientName("Debbie Gerstner");
 
             cy.stepInfo(`3. Proceed to the Organization > Create New Client page and create a new client, save it.`);
-            Report._Client.Page.addNewClient.click();
+            Report._Client.clickAddNewClient();
             Organization._CreateNewClient.createNewClient(testData.clientCreationData);
 
             cy.stepInfo(`4. Proceed to the Report > Client page and verify that a newly created client is 
