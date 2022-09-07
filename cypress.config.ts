@@ -95,8 +95,8 @@ export default defineConfig({
             });
 
             on("task", {
-                async retrieveDataFromDb({ dbUrl, dbName, filterPath, filterValue }) {
-                    return await db.retrieveDataFromDb(dbUrl, dbName, filterPath, filterValue);
+                async retrieveDataFromDb({ dbUrl, dbName, compPropertyPathInDB, compPropertyValueInDB }) {
+                    return await db.retrieveDataFromDb(dbUrl, dbName, compPropertyPathInDB, compPropertyValueInDB);
                 }
             });
 
