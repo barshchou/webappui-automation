@@ -11,28 +11,12 @@ class ComplexDatabaseModule {
      */
     setCompsArrayFromDb = (filterPath: CompPlex.AddressSearch.CompPropertyInDB, 
         filterValue: string) => {
-
-        //   const { mongoUrl, dbName } = determinePassedEnv();
-
-        const dbKeys =  this.determinePassedEnv();
-        /*
-         *   Connection URL
-         * const url =  determinePassedEnv().passedEnv; 
-         */
-        cy.log('1!!!!!!', dbKeys);
-
-        /*
-         *  Database Name
-         * const dbName = determinePassedEnv().passedDbName;
-         */
-        //s  cy.log('2!!!!!!', mongoUrl, dbName);
-
-        cy.task('retrieveDataFromDb', { dbUrl: dbKeys, dbName: dbKeys, 
+        const { mongoUrl, dbName } = this.determinePassedEnv();
+        cy.task('retrieveDataFromDb', { dbUrl: mongoUrl, dbName: dbName, 
             filterPath: filterPath, filterValue: filterValue }).then(data => {
             cy.log(<string>data);
             cy._mapSet(mapKeysUtils.arrayOfCompsFromDB, data);
         });
-        return null;
     };
 
 
@@ -60,7 +44,7 @@ class ComplexDatabaseModule {
     determinePassedEnv = () => {
         const databaseSecrets = {
             "dev":{
-                mongoUrl: Cypress.env("CYPRESS_COMP_PLEX_DEV_DATABASE"),
+                mongoUrl: Cypress.env("CYPRESS_COMP_PLEX_DEV_DATABASE"), //move + divide Cypress.env
                 dbName: Cypress.env("CYPRESS_COMP_PLEX_DB_DEV_NAME")
             },
             "compDev":{
