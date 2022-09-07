@@ -76,7 +76,7 @@ describe("Verify the functionality of the Add Additional Client",
                 .Page.getRemoveIcon().should("exist");
         });
 
-        it.only("[QA-6541-42]", () => {
+        it("[QA-6541-42]", () => {
             cy.stepInfo("2. Fill the 'Client' field and 'Client File Number'");
             Report._Client.enterClientName(testData.clientNames[0])
                 .enterClientFileNumber(testData.clientNumber);
