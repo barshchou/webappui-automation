@@ -3,39 +3,21 @@ import NavigationSection from "../../../../actions/base/navigationSection.action
 import Sales from "../../../../actions/sales/sales.manager";
 import { createReport } from "../../../../actions/base/baseTest.actions";
 import { ReviewExport } from "../../../../actions";
-import { pathSpecData } from "../../../../../utils/fixtures.utils";
 
 describe("Generated Commentary is the same both in the Webapp and downloaded doc file", 
     { tags: [ "@sales", "@value_conclusion" ] }, () => {
         it("[QA-4329]", () => {
-            cy.stepInfo(`1. Create new report or open the report which is already created`);
+            cy.stepInfo(`1. Create report`);
             createReport(testData.reportCreationData);
 
-            cy.stepInfo(`2. Go to Sales → Find Comps and select some comps`);
-            NavigationSection.navigateToFindComps();
-            Sales.FindComps.resetAllFilters();
-            for (let comp = 0; comp < testData.compsAmount; comp++) {
-                Sales.FindComps.selectCompFromMap(comp)
-                    .openCompForEdit(comp)
-                    .updateCompPropertyInfo(testData.compGbaInput)
-                    .updateSaleInfoPrice(testData.contractPrice)
-                    .saveCompChanges();
-            }
-
-            cy.stepInfo(`3. Go to Sales → Adjust Comps → Sales Adjustment Grid table and adjust prices`);
-            NavigationSection.navigateToAdjustComps();
-            Sales.AdjustComps.checkCalculationUnitsRadio(testData.calculationUnits);
-            testData.compsAdjustments.forEach((adjustments, index) => {
-                Sales.AdjustComps.enterMarketAdjustmentsGroup(Object.keys(adjustments), 
-                    Object.values(adjustments), index);
-            });
-
-            cy.stepInfo(`4. Verify generated commentary with adjusted prices`);
+            cy.stepInfo(`2. Navigate to Sales Value Conclusion`);
             NavigationSection.navigateToSalesValueConclusion();
-            Sales.ValueConclusion.enterSaleValueConclusion(testData.valueConclusion)
-                .verifyGeneratedCommentaryCalculated();
 
-            cy.stepInfo('5. Export report');
+            cy.stepInfo(`3. Click the pencil icon in the Sales Value Conclusion Discussion and add some characters`);
+            Sales.ValueConclusion.verifyGeneratedCommentary(testData.commentaryData.generatedCommentary)
+                .enterNewCommentary(testData.textUpdate, false);
+
+            cy.stepInfo('4. Export report');
             NavigationSection.openReviewAndExport();
             ReviewExport.generateDocxReport().waitForReportGenerated()
                 .downloadAndConvertDocxReport(testData.reportCreationData.reportNumber);
@@ -46,12 +28,10 @@ describe("Generated Commentary is the same both in the Webapp and downloaded doc
                 .then(file => {
                     cy.log(<string>file);
                     cy.visit(<string>file);
-                    cy.stepInfo(`6. Open downloaded report and go to Sales Comparison Approach. Compare Generated 
+                    cy.stepInfo(`5. Open downloaded report and go to Sales Comparison Approach. Compare Generated 
                     Commentary from the downloaded report with the Generated Commentary from the App → Sales → 
                     Value Conclusion → Sales Value Conclusion Discussion → Generated Commentary`);
-                    cy.readFile(`${pathSpecData()}${Cypress.spec.name}.txt`).then(text => { 
-                        cy.contains(text);
-                    });
+                    cy.contains(testData.commentaryData.newCommentary);
                 }); 
         });
     });
