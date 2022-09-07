@@ -12,7 +12,7 @@ describe(`Verify the 'Changes will be lost' modal functionality for Intended Use
 
     it("[QA-4634]", () => {
         cy.stepInfo(`1. Activate text field on the Report > Client page for Intended User 
-        section.`);
+                    section.`);
         _NavigationSection.navigateToClientPage()
             .verifyProgressBarNotExist();
           
@@ -26,7 +26,7 @@ describe(`Verify the 'Changes will be lost' modal functionality for Intended Use
         cy.stepInfo(`4. Click on the Revert to Original button again.`);
         Report._Client.enterFormCommentTextBox(testData.intendedUser, testData.textToType, false)
             .clickNarrativeSuggestions(testData.verifyListValue)
-            .Page.formRevertToOriginalBtn().click();
+            .clickRevertToOriginalButtonBySection(testData.intendedUser);
 
         cy.stepInfo(`5. Click on the X icon and verify that the modal is closed and no changes are applied.`);
         Report._Client.clickCloseIcon()
@@ -35,8 +35,8 @@ describe(`Verify the 'Changes will be lost' modal functionality for Intended Use
         cy.stepInfo(`6. Click on the Revert to Original button again.`);
         Report._Client.enterFormCommentTextBox(testData.intendedUser, testData.textToType, false)
             .clickNarrativeSuggestions(testData.verifyListValue)
-            .Page.formRevertToOriginalBtn().click();
-        Report._Client.clickCloseIcon();
+            .clickRevertToOriginalButtonBySection(testData.intendedUser)
+            .clickCloseIcon();
 
         cy.stepInfo(`7. Click on the Cancel button in the modal and verify that 
                     the modal is closed and no changes are applied.`);
@@ -62,7 +62,7 @@ describe(`Verify the 'Changes will be lost' modal functionality for Intended Use
         cy.stepInfo(`12. Click on the Revert to Original button again.`);
         Report._Client.enterFormCommentTextBox(testData.identificationOfTheClient, testData.textToType, false)
             .clickNarrativeSuggestions(testData.verifyListValue, 1)
-            .Page.formRevertToOriginalBtn(1).click();
+            .clickRevertToOriginalButtonBySection(testData.identificationOfTheClient);
 
         cy.stepInfo(`14. Click on the X icon and verify that the modal is closed and no changes are applied.`);
         Report._Client.clickCloseIcon()
@@ -71,7 +71,7 @@ describe(`Verify the 'Changes will be lost' modal functionality for Intended Use
         cy.stepInfo(`15. Click on the Revert to Original button again.`);
         Report._Client.enterFormCommentTextBox(testData.identificationOfTheClient, testData.textToType, false)
             .clickNarrativeSuggestions(testData.verifyListValue, 1)
-            .Page.formRevertToOriginalBtn(1).click();
+            .clickRevertToOriginalButtonBySection(testData.identificationOfTheClient);
         Report._Client.clickCloseIcon();
 
         cy.stepInfo(`16. Click on the Cancel button in the modal and verify that 

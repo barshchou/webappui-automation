@@ -28,10 +28,8 @@ and Identification of the Client sections`,
 
         cy.stepInfo(`4. Click on the Revert to Original button and verify the 'Changes will be lost modal' 
         is displayed`);
-        Report._Client.Page.formRevertToOriginalBtnBySectionName(testData.intendedUser).click();
-        Report._Client.Page.formYesRevertBtn.click();
-        Report._Client.verifyFormCommentTextBoxText(testData.intendedUser, 
-            testData.verifyIntendedUserTextArea);
+        Report._Client.revertToOriginalCommentarySectionByName(testData.intendedUser)
+            .verifyFormCommentTextBoxText(testData.intendedUser, testData.verifyIntendedUserTextArea);
            
         cy.stepInfo(`5. Click on the Edit button on the Report > Client page for 
                      Identification of the Client section.`);
@@ -50,10 +48,8 @@ and Identification of the Client sections`,
 
         cy.stepInfo(`8. Click on the Revert to Original button and verify the 'Changes will be lost modal' 
         is displayed`);
-        Report._Client.Page.formRevertToOriginalBtnBySectionName(testData.identificationOfTheClient)
-            .click();
-        Report._Client.Page.formYesRevertBtn.click();
-        Report._Client.verifyFormCommentTextBoxText(testData.identificationOfTheClient,
-            testData.verifyIdentificationOfTheClientTextArea);
+        Report._Client.revertToOriginalCommentarySectionByName(testData.identificationOfTheClient)
+            .verifyFormCommentTextBoxText(testData.identificationOfTheClient, 
+                testData.verifyIdentificationOfTheClientTextArea);
     });
 });

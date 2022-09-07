@@ -49,8 +49,7 @@ conditionalDescribe("Verify the functionality of the Client field.",
             cy.stepInfo(`6. Verify the Client Company is displayed in the Intended User and 
             Identification of the Client section as a chip and to the Client Guidelines Discussion - 
             GC (if the Client has Company added on the Organization > Clients page).`);
-            Report._Client.Page.formCommentTextBox(Enums.PAGES_TEXTBOX_NAMES.identificationOfTheClient)
-                .should("contain.text", testData.companyName);
+            Report._Client.verifyFormCommentTextBoxText(testData.identificationOfTheClient, testData.companyName);
 
             cy.stepInfo(`7. Proceed to the Preview & Edit > Cover page and verify that 
             the Client from the previous step is displayed in the REQUESTED BY section.`);
