@@ -11,7 +11,7 @@ describe("Verify the Appraiser Commentary field",
             createReport(testData.reportCreationData);
         });
 
-        it("Test body", () => {
+        it("[QA-4646]", () => {
             NavigationSection.navigateToClientPage();
             Report._Client
                 .enterFormCommentTextBox(testData.textBoxName, testData.textToType, true, { position: "center" });

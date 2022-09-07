@@ -28,7 +28,7 @@ describe("Add Appraiser / Inspector button functionality",
                 .verifySignCheckbox(testData.inspectorName, false);
 
             cy.stepInfo("5. Verify generated Certification Inspection comment");
-            Report._Appraiser.Page.certificationInspectionText.invoke("text")
+            Report._Appraiser.Page.formCommentTextBox(Enums.PAGES_TEXTBOX_NAMES.certificationInspection).invoke("text")
                 .then(text => {
                     expect(normalizeText(text)).to.eq(testData.certificationInspectionComment);
                 });

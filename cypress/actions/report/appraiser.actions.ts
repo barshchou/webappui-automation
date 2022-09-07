@@ -76,7 +76,8 @@ class AppraiserActions extends BaseActionsExt<typeof appraiserPage> {
 
     verifyCertificationInspectionCommentary(): AppraiserActions {
         appraiserPage.getAllNamesWithCheckPersonallyInspectedReportCheckboxes(true).each(item => {
-            appraiserPage.certificationInspectionText.should("include.text", item.text());
+            appraiserPage.formCommentTextBox(Enums.PAGES_TEXTBOX_NAMES.certificationInspection)
+                .should("include.text", item.text());
         });
         return this;
     }

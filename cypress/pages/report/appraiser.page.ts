@@ -29,10 +29,6 @@ class AppraiserPage extends BasePage {
         return cy.xpath(`//*[contains(text(), '${appraiserName}')]/following::*[@data-qa='remove-btn']`).eq(0);
     }
 
-    get certificationInspectionText() {
-        return cy.xpath("//*[h6[.='Certification Inspection']]//following::div[@data-slate-editor][1]");
-    }
-
     getAllNamesWithCheckSignReportCheckboxes(isChecked = true) { 
         return cy.xpath(`//*[@data-qa="signReport-checkbox"]//*[@value='${isChecked}']` + 
         `/../../../*[@data-qa="fullName"]`); 

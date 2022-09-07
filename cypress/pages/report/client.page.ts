@@ -15,6 +15,7 @@ class ClientPage extends BasePage {
 
     get appraiserCommentary() { return cy.get("[name='clientGuidelinesDiscussion.additionalCommentary']"); }
 
+    // TODO: [QA-6858] Add data-qa attribute for tooltip
     get guidelinesTooltip() {
         return cy.xpath(`//*[h6[.='Client Guidelines Discussion']]//following::` + 
         `span[.='The following generated commentary will appear in the Letter of Transmittal of your report.'][1]`); 
