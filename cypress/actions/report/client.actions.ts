@@ -169,6 +169,19 @@ class ClientActions extends BaseActionsExt<typeof clientPage> {
         clientPage.getNYCBApplicationNumber(clientIndex).should("not.exist");
         return this;
     }
+
+    clickUndoBtn(index = 0): ClientActions {
+        clientPage.undoBtn.eq(index).click();
+        return this;
+    }
+
+    verifyAdditionalClientEnableOrNot(clientIndex = 1, isEnable = true): ClientActions {
+        const matcher = isEnable ? "be.enabled" : "be.disabled";
+        clientPage.getClientNameField(clientIndex).should(matcher);
+        clientPage.getClientFileNumberField(clientIndex).should(matcher);
+        clientPage.getNYCBApplicationNumber(clientIndex).should(matcher);
+        return this;
+    }
 }
 
 export default new ClientActions(clientPage);

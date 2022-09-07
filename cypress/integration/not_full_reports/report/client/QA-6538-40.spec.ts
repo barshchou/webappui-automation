@@ -59,4 +59,19 @@ describe("Verify the functionality of the Add Additional Client",
             Report._Client.clickRemoveAdditionalClientBtn()
                 .verifyAdditionalClientRemoved();
         });
+
+        it("[QA-6540]", () => {
+            cy.stepInfo(`2. Fill the 'Client' field and 'Client File Number' and click 'Add additional client`);
+            Report._Client.enterClientName(testData.clientName)
+                .enterClientFileNumber(testData.clientNumber)
+                .clickAddAdditionalClientBtn();
+
+            cy.stepInfo(`2. Click on the remove 'X' button and Click on the 'Undo' button. 
+                        Verify fields enable or disable, remove icon visible or not`);
+            Report._Client.clickRemoveAdditionalClientBtn()
+                .verifyAdditionalClientEnableOrNot(1, false)
+                .clickUndoBtn()
+                .verifyAdditionalClientEnableOrNot()
+                .Page.getRemoveIcon().should("exist");
+        });
     });
