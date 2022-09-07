@@ -78,6 +78,8 @@ class ReportCreator {
             ? this.setConclusionValue() 
             : this.setConclusionValue(options.conclusionValue);
         
+        testNumber += Date.now().toString();
+
         return this.setReportNumber(testNumber, this.isSalesForcePull).build();
     }
 }
