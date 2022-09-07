@@ -94,4 +94,6 @@ export default class BasePage {
     formCommentTextBox(name: string) {
         return cy.xpath(`//*[.='${name}']//following::*[@data-slate-editor][1]`);
     }
+
+    getRemoveIcon(rowNumber = 0) { return cy.get("[data-testid='CancelIcon']").eq(rowNumber); }
 }
