@@ -5,11 +5,11 @@ class ClientPage extends BasePage {
 
     get warningMessage() { return cy.xpath("//*[contains(@data-qa, 'callout-btn')]/parent::*"); }
 
-    get clientNameField() { return cy.get("*[name=client]"); }
+    getClientNameField(index = 0) { return cy.get("*[name=client]").eq(index); }
 
-    get clientFileNumberField() { return cy.get('[name="clientFileNumber"]'); }
+    getClientFileNumberField(index = 0) { return cy.get(`[reportClients[${index}].clientFileNumber]`); }
 
-    get nycbApplicationNumber() { return cy.get("[name=applicationNumber]"); }
+    getNYCBApplicationNumber(index = 0) { return cy.get(`[reportClients[${index}].applicationNumber]`); }
 
     get addClientButton() { return cy.xpath("//a[.='Add']"); }
 
@@ -47,6 +47,9 @@ class ClientPage extends BasePage {
     commentaryText(commentaryTitle: string) { 
         return cy.xpath(`//h6[.='${commentaryTitle}']//following::div[@data-slate-editor][1]`); 
     }
+
+    get addAdditionalClientBtn() { return cy.contains("Add additional client"); } 
+
 }
 
 export default new ClientPage();

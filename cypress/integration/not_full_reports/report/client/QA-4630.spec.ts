@@ -13,14 +13,14 @@ describe("Verify the functionality of the NYCB Application No. (optional) field"
             cy.stepInfo(`1. Proceed to the Report > Client page.`);
             _NavigationSection.navigateToClientPage();
             Report._Client.verifyProgressBarNotExist()
-                .activateTextAreaInput(Report._Client.Page.nycbApplicationNumber);
+                .activateTextAreaInput(Report._Client.Page.getNYCBApplicationNumber());
 
             cy.stepInfo(`2. Try to enter any num. value / non-integer / non-num. / long value 
             in the Client File Number field (NO validation).`);
             Report._Client.enterNycbApplicationNumber(testData.clientFileNumber);
 
             cy.stepInfo(`3. Try to copy-paste any value into the Client File Number field, save it.`);
-            Report._Client.Page.nycbApplicationNumber.invoke("val", testData.clientFileNumber);
+            Report._Client.Page.getNYCBApplicationNumber().invoke("val", testData.clientFileNumber);
 
             cy.stepInfo(`4. Proceed to the Preview & Edit > Cover page and verify that the Client 
             from the previous step is displayed in the APPRAISAL REPORT section.`);

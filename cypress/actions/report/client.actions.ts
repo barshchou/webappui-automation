@@ -31,23 +31,23 @@ class ClientActions extends BaseActionsExt<typeof clientPage> {
         return this;
     }
 
-    verifyInputChangesToBeUnsaved(clientFileNumber: string): ClientActions {
-        clientPage.clientFileNumberField.should("have.value", clientFileNumber);
+    verifyInputChangesToBeUnsaved(clientFileNumber: string, index = 0): ClientActions {
+        clientPage.getClientFileNumberField(index).should("have.value", clientFileNumber);
         return this;
     }
 
-    enterClientName(name: string): ClientActions {
-        clientPage.clientNameField.clear().type(name).type("{enter}");
+    enterClientName(name: string, index = 0): ClientActions {
+        clientPage.getClientNameField(index).clear().type(name).type("{enter}");
         return this;
     }
     
-    enterClientFileNumber(name:string): ClientActions {
-        clientPage.clientFileNumberField.clear().type(name).should("have.value", name);
+    enterClientFileNumber(name:string, index = 0): ClientActions {
+        clientPage.getClientFileNumberField(index).clear().type(name).should("have.value", name);
         return this;
     }
 
-    enterNycbApplicationNumber(name:string): ClientActions {
-        clientPage.nycbApplicationNumber.clear().type(name).should("have.value", name);
+    enterNycbApplicationNumber(name:string, index = 0): ClientActions {
+        clientPage.getNYCBApplicationNumber(index).clear().type(name).should("have.value", name);
         return this;
     }
 
