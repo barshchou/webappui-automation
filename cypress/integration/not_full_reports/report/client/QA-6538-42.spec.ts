@@ -1,5 +1,5 @@
 import { Report } from '../../../../actions';
-import testData from "../../../../fixtures/not_full_reports/report/client/QA-6538-41.fixture";
+import testData from "../../../../fixtures/not_full_reports/report/client/QA-6538-42.fixture";
 import { createReport } from "../../../../actions/base/baseTest.actions";
 import { _NavigationSection } from "../../../../actions/base";
 import { normalizeText } from '../../../../../utils/string.utils';
@@ -76,7 +76,7 @@ describe("Verify the functionality of the Add Additional Client",
                 .Page.getRemoveIcon().should("exist");
         });
 
-        it("[QA-6541]", () => {
+        it.only("[QA-6541-42]", () => {
             cy.stepInfo("2. Fill the 'Client' field and 'Client File Number'");
             Report._Client.enterClientName(testData.clientNames[0])
                 .enterClientFileNumber(testData.clientNumber);
@@ -84,19 +84,31 @@ describe("Verify the functionality of the Add Additional Client",
             cy.stepInfo("3. Verify Intended User comment with one users");
             Report._Client.Page.formCommentTextBox(testData.intendedUser).invoke("text").then(text => {
                 let normalText = normalizeText(text);
-                expect(normalText).to.include(testData.textOneClient);
+                expect(normalText).to.include(testData.intendedUserText.oneClient);
             });
 
-            cy.stepInfo("4. Add and Fill additional clients");
+            cy.stepInfo("4. Verify Identification Of The Client comment with one users");
+            Report._Client.Page.formCommentTextBox(testData.identificationOfTheClient).invoke("text").then(text => {
+                let normalText = normalizeText(text);
+                expect(normalText).to.include(testData.identificationOfTheClientText.oneClient);
+            });
+
+            cy.stepInfo("5. Add and Fill additional clients");
             for (let i = 0; i < 3; i++) {
                 Report._Client.clickAddAdditionalClientBtn()
                     .enterClientName(testData.clientNames[i + 1], i + 1);
             }
 
-            cy.stepInfo("5. Verify Intended User comment with many users");
+            cy.stepInfo("6. Verify Intended User comment with many users");
             Report._Client.Page.formCommentTextBox(testData.intendedUser).invoke("text").then(text => {
                 let normalText = normalizeText(text);
-                expect(normalText).to.include(testData.textWithManyClient);
+                expect(normalText).to.include(testData.intendedUserText.manyClient);
+            });
+
+            cy.stepInfo("7. Verify Identification Of The Client comment with many users");
+            Report._Client.Page.formCommentTextBox(testData.identificationOfTheClient).invoke("text").then(text => {
+                let normalText = normalizeText(text);
+                expect(normalText).to.include(testData.identificationOfTheClientText.manyClient);
             });
         });
     });
