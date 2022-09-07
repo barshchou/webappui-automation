@@ -1,3 +1,4 @@
+/* eslint-disable no-console */
 import { MongoClient } from 'mongodb';
 import mapKeysUtils from '../utils/mapKeys.utils';
 import { CompPlex } from "../types/compplex.type";
@@ -19,7 +20,6 @@ class ComplexDatabaseModule {
         });
     };
 
-
     /**
      * Function connects to Comp-plex database and retrieve the array (max = 10) of comps with 
      * necessary property (@param filterPath) value (@param filterValue)
@@ -28,14 +28,17 @@ class ComplexDatabaseModule {
         const client = new MongoClient(url);
         const collectionName = "sales-transactions";
         const filter = { [filterPath] : filterValue } ;
-        await client.connect();
-        // eslint-disable-next-line no-console
-        console.log('Connected successfully to server');
-        const db = client.db(dbName);
-        const collection = db.collection(collectionName);
-        let data = await collection.find(filter, { limit:10 }).toArray();
-        client.close();
-        return data;
+        try {
+            await client.connect();
+            console.log('Connected successfully to server');
+            const db = client.db(dbName);
+            const collection = db.collection(collectionName);
+            let data = await collection.find(filter, { limit:10 }).toArray();
+            client.close();
+            return data; 
+        } catch (error) {
+            console.log(error);
+        } 
     };
 
     /**
