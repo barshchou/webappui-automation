@@ -259,9 +259,12 @@ class ValueConclusionActions extends BaseActionsExt<typeof valueConclusionPage> 
         return this;
     }
 
-    enterNewCommentary(commentary: string): this {
+    enterNewCommentary(commentary: string, clearText = true): this {
         valueConclusionPage.editCommentaryButton.click();
-        valueConclusionPage.commentaryInput.clear().type(commentary).should("have.text", commentary);
+        if (clearText) {
+            valueConclusionPage.commentaryInput.clear();
+        }
+        valueConclusionPage.commentaryInput.type(commentary).should("include.text", commentary);
         return this;
     }
 
