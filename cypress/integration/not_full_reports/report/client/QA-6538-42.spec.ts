@@ -42,7 +42,6 @@ describe("Verify the functionality of the Add Additional Client",
         it("[QA-6539]", () => {
             cy.stepInfo("2. Fill the 'Client' field and click 'Add additional client");
             Report._Client.enterClientName(testData.clientNames[0])
-
                 .clickAddAdditionalClientBtn();
 
             cy.stepInfo("3. Hover the remove 'X' button and verify the tooltip 'Remove' is displayed on hover");
