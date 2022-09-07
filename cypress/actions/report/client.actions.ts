@@ -143,6 +143,18 @@ class ClientActions extends BaseActionsExt<typeof clientPage> {
         this.Page.commentaryText(commentaryTitle).should("include.text", `${expectedText}`);
         return this;
     }
+
+    clickAddAdditionalClientBtn(): ClientActions {
+        clientPage.addAdditionalClientBtn.click();
+        return this;
+    }
+
+    verifyAdditionalClientAdded(clientIndex = 1): ClientActions {
+        clientPage.getClientNameField(clientIndex).should("exist");
+        clientPage.getClientFileNumberField(clientIndex).should("exist");
+        clientPage.getNYCBApplicationNumber(clientIndex).should("exist");
+        return this;
+    }
 }
 
 export default new ClientActions(clientPage);

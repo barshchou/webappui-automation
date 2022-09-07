@@ -7,9 +7,9 @@ class ClientPage extends BasePage {
 
     getClientNameField(index = 0) { return cy.get("*[name=client]").eq(index); }
 
-    getClientFileNumberField(index = 0) { return cy.get(`[reportClients[${index}].clientFileNumber]`); }
+    getClientFileNumberField(index = 0) { return cy.get(`[name='reportClients[${index}].clientFileNumber']`); }
 
-    getNYCBApplicationNumber(index = 0) { return cy.get(`[reportClients[${index}].applicationNumber]`); }
+    getNYCBApplicationNumber(index = 0) { return cy.get(`[name='reportClients[${index}].applicationNumber']`); }
 
     get addClientButton() { return cy.xpath("//a[.='Add']"); }
 
@@ -49,6 +49,8 @@ class ClientPage extends BasePage {
     }
 
     get addAdditionalClientBtn() { return cy.contains("Add additional client"); } 
+
+    get maxClientMessage() { return cy.contains("Max of four clients allowed"); }
 
 }
 
