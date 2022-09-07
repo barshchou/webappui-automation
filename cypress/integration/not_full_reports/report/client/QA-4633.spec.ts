@@ -21,7 +21,7 @@ and Identification of the Client sections`,
             .should("be.visible").and("be.disabled");
 
         cy.stepInfo(`3. Edit comment and verify that the Revert to Original button becomes enabled`);
-        Report._Client.enterIntendedUserTextBox(testData.textToType)
+        Report._Client.enterFormCommentTextBox(testData.intendedUser, testData.textToType, false)
             .clickNarrativeSuggestions(testData.verifySuggestion);
         Report._Client.Page.formRevertToOriginalBtnBySectionName(testData.intendedUser)
             .should("be.enabled");
@@ -43,7 +43,7 @@ and Identification of the Client sections`,
             .should("be.visible").and("be.disabled");
 
         cy.stepInfo(`7. Edit comment and verify that the Revert to Original button becomes enabled`);
-        Report._Client.enterIdentificationOfTheClientTextBox(testData.textToType)
+        Report._Client.enterFormCommentTextBox(testData.identificationOfTheClient, testData.textToType, false)
             .clickNarrativeSuggestions(testData.verifySuggestion, 1);
         Report._Client.Page.formRevertToOriginalBtnBySectionName(testData.identificationOfTheClient)
             .should("be.enabled");

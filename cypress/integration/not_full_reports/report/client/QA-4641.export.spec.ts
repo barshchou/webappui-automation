@@ -28,15 +28,17 @@ describe(`Verify the "Linked" chips dropdown in the new narrative component for 
             Report._Client.Page.formCommentTextBox(testData.intendedUserCommentaryTitle)
         );
         testData.chips.forEach(chip => {
-            Report._Client.enterIntendedUserTextBox(`=${chip.typeSuggestValue}`)
-                .clickNarrativeSuggestions(chip.suggestionName)
+            Report._Client.Page.formCommentTextBox(testData.intendedUserCommentaryTitle)
+                .type(`=${chip.typeSuggestValue}`);
+            Report._Client.clickNarrativeSuggestions(chip.suggestionName)
                 .verifyFormCommentTextBoxText(testData.intendedUserCommentaryTitle, chip.verifySuggest);
         });
         Report._Client.activateTextAreaInput(
             Report._Client.Page.formCommentTextBox(testData.identificationOfTheClientCommentaryTitle));
         testData.chips.forEach(chip => {
-            Report._Client.enterIdentificationOfTheClientTextBox(`=${chip.typeSuggestValue}`)
-                .clickNarrativeSuggestions(chip.suggestionName, 1)
+            Report._Client.Page.formCommentTextBox(testData.identificationOfTheClientCommentaryTitle)
+                .type(`=${chip.typeSuggestValue}`);
+            Report._Client.clickNarrativeSuggestions(chip.suggestionName, 1)
                 .verifyFormCommentTextBoxText(testData.identificationOfTheClientCommentaryTitle, chip.verifySuggest);
         });
         Report._Client.inactivateTextAreaInput();

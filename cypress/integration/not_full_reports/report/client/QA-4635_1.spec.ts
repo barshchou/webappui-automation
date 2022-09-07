@@ -11,12 +11,11 @@ describe(`Verify the Save button functionality for Identification of the Client 
 
         it("[QA-4635_1]", () => {
             cy.stepInfo(`1. Activate text field on the Report > Client page for Intended User section`);
-            _NavigationSection.navigateToClientPage();
-            Report._Client.verifyProgressBarNotExist()
-                .activateTextAreaInput(Report._Client.Page.formCommentTextBox(testData.identificationOfTheClient));
+            _NavigationSection.navigateToClientPage()
+                .verifyProgressBarNotExist();
 
             cy.stepInfo(`2. Edit comment, inactivate text area and verify text save`);
-            Report._Client.enterIdentificationOfTheClientTextBox(testData.textToType)
+            Report._Client.enterFormCommentTextBox(testData.identificationOfTheClient, testData.textToType, false)
                 .clickNarrativeSuggestions(testData.verifyListValue, 1)
                 .inactivateTextAreaInput()
                 .verifyFormCommentTextBoxText(testData.identificationOfTheClient,
@@ -28,9 +27,7 @@ describe(`Verify the Save button functionality for Identification of the Client 
                 testData.verifyAreaValue, testData.matcher);
 
             cy.stepInfo(`4. Edit comment, inactivate text area and verify text save`);
-            Report._Client.activateTextAreaInput(Report._Client.Page
-                .formCommentTextBox(testData.identificationOfTheClient))
-                .enterIdentificationOfTheClientTextBox(testData.textToType)
+            Report._Client.enterFormCommentTextBox(testData.identificationOfTheClient, testData.textToType, false)
                 .clickNarrativeSuggestions(testData.verifyListValue, 1)
                 .inactivateTextAreaInput()
                 .verifyFormCommentTextBoxText(testData.identificationOfTheClient,
@@ -49,9 +46,7 @@ describe(`Verify the Save button functionality for Identification of the Client 
                 .verifyProgressBarNotExist();
 
             cy.stepInfo(`7. Edit comment, inactivate text area and verify text save`);
-            Report._Client.activateTextAreaInput(Report._Client.Page
-                .formCommentTextBox(testData.identificationOfTheClient))
-                .enterIdentificationOfTheClientTextBox(testData.textToType)
+            Report._Client.enterFormCommentTextBox(testData.identificationOfTheClient, testData.textToType, false)
                 .clickNarrativeSuggestions(testData.verifyListValue, 1)
                 .inactivateTextAreaInput()
                 .verifyFormCommentTextBoxText(testData.identificationOfTheClient,
@@ -63,9 +58,7 @@ describe(`Verify the Save button functionality for Identification of the Client 
                 testData.verifyAreaValue, testData.matcher);
 
             cy.stepInfo(`9. Edit comment, inactivate text area and verify text save`);
-            Report._Client.activateTextAreaInput(Report._Client.Page
-                .formCommentTextBox(testData.identificationOfTheClient))
-                .enterIdentificationOfTheClientTextBox(testData.textToType)
+            Report._Client.enterFormCommentTextBox(testData.identificationOfTheClient, testData.textToType, false)
                 .clickNarrativeSuggestions(testData.verifyListValue, 1)
                 .inactivateTextAreaInput()
                 .verifyFormCommentTextBoxText(testData.identificationOfTheClient,
@@ -83,9 +76,7 @@ describe(`Verify the Save button functionality for Identification of the Client 
                 .verifyProgressBarNotExist();
 
             cy.stepInfo(`12. Edit comment, inactivate text area and verify text save`);
-            Report._Client.activateTextAreaInput(Report._Client.Page
-                .formCommentTextBox(testData.identificationOfTheClient))
-                .enterIdentificationOfTheClientTextBox(testData.textToType)
+            Report._Client.enterFormCommentTextBox(testData.identificationOfTheClient, testData.textToType, false)
                 .clickNarrativeSuggestions(testData.verifyListValue, 1)
                 .inactivateTextAreaInput()
                 .verifyFormCommentTextBoxText(testData.identificationOfTheClient,
@@ -97,9 +88,7 @@ describe(`Verify the Save button functionality for Identification of the Client 
                 testData.verifyAreaValue, testData.matcher);
 
             cy.stepInfo(`14. Edit comment, inactivate text area and verify text save`);
-            Report._Client.activateTextAreaInput(Report._Client.Page
-                .formCommentTextBox(testData.identificationOfTheClient))
-                .enterIdentificationOfTheClientTextBox(testData.textToType)
+            Report._Client.enterFormCommentTextBox(testData.identificationOfTheClient, testData.textToType, false)
                 .clickNarrativeSuggestions(testData.verifyListValue, 1)
                 .inactivateTextAreaInput()
                 .verifyFormCommentTextBoxText(testData.identificationOfTheClient,

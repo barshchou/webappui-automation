@@ -20,17 +20,16 @@ describe("Verify the Client Guidelines Discussion on the page",
                         'Lot', 'Concluded Cap Rate', 'Zones', 'CurrentCondition', 'As Stabilized Condition'`);
             Report._Client.activateTextAreaInput(Report._Client.Page.formCommentTextBox(testData.intendedUser));
             testData.chips.forEach(chip => {
-                Report._Client
-                    .enterIntendedUserTextBox(`=${chip.typeSuggestValue}`)
-                    .clickNarrativeSuggestions(chip.suggestionName)
+                Report._Client.Page.formCommentTextBox(testData.intendedUser).type(`=${chip.typeSuggestValue}`);
+                Report._Client.clickNarrativeSuggestions(chip.suggestionName)
                     .verifyFormCommentTextBoxText(testData.intendedUser, chip.verifySuggest);
             });
             Report._Client.activateTextAreaInput(Report._Client.Page
                 .formCommentTextBox(testData.identificationOfTheClient));
             testData.chips.forEach(chip => {
-                Report._Client
-                    .enterIdentificationOfTheClientTextBox(`=${chip.typeSuggestValue}`)
-                    .clickNarrativeSuggestions(chip.suggestionName, 1)
+                Report._Client.Page.formCommentTextBox(testData.identificationOfTheClient)
+                    .type(`=${chip.typeSuggestValue}`);
+                Report._Client.clickNarrativeSuggestions(chip.suggestionName, 1)
                     .verifyFormCommentTextBoxText(testData.identificationOfTheClient,
                         chip.verifySuggest);
             });

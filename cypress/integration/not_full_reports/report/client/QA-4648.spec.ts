@@ -16,11 +16,9 @@ describe("[QA-4648] Verify the Save button functionality on the Report > Client 
                 .Page.formSaveBtn().should('be.visible');
 
             cy.stepInfo(`2. Fill in the editable fields with values and click on the Save button.`);
-            Report._Client.activateTextAreaInput(Report._Client.Page.formCommentTextBox(testData.intendedUser))
-                .enterIntendedUserTextBox(testData.textToType)
+            Report._Client.enterFormCommentTextBox(testData.intendedUser, testData.textToType, false)
                 .clickNarrativeSuggestions(testData.verifyListValue)
-                .activateTextAreaInput(Report._Client.Page.formCommentTextBox(testData.identificationOfTheClient))
-                .enterIdentificationOfTheClientTextBox(testData.textToType)
+                .enterFormCommentTextBox(testData.identificationOfTheClient, testData.textToType, false)
                 .clickNarrativeSuggestions(testData.verifyListValue, 1)
                 .inactivateTextAreaInput()
                 .verifyFormCommentTextBoxText(testData.intendedUser, testData.verifyAreaValue)

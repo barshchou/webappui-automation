@@ -68,16 +68,6 @@ class ClientActions extends BaseActionsExt<typeof clientPage> {
         return this;
     } 
 
-    enterIntendedUserTextBox(textToType: string): ClientActions {
-        clientPage.formCommentTextBox(Enums.PAGES_TEXTBOX_NAMES.intendedUser).type(textToType);
-        return this;
-    }
-
-    enterIdentificationOfTheClientTextBox(textToType: string): ClientActions {
-        clientPage.formCommentTextBox(Enums.PAGES_TEXTBOX_NAMES.identificationOfTheClient).type(textToType);
-        return this;
-    }
-
     clickNarrativeSuggestions(verifyListValue: string, numberLists = 0): ClientActions {
         clientPage.narrativeSuggestionsList.eq(numberLists).contains(verifyListValue).dblclick({ force: true });
         return this;
