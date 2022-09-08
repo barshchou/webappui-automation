@@ -185,7 +185,7 @@ class FindCompsPage extends BasePage {
     }
 
     compEditButton(index = 0) {
-        return this.getSelectedComparable(index).xpath(`//button[.='Details']`);
+        return this.getSelectedComparable(index).xpath(`//button[.='Details']`).eq(index);
     }
 
     get saveCompProperty() {

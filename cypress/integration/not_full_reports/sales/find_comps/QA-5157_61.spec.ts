@@ -29,6 +29,7 @@ conditionalDescribe(`[QA-5157] [QA-5161] [Sales > Find Comps] "Date Sold" sortin
         Sales._FindComps.Page.sortSalesCompsSelectValue.should('contain', testData.sortSalesCompsDateSold);
     });
 
+    // TODO: [QA-6820] Refactor 'Reset All' filter to some more specific.
     it("[QA-5161] [Sales > Find Comps] 'Date Sold' sorting is applied correctly to selected comps", () => {
         cy.stepInfo(`1.Verify that when "Date Sold" option in Sort dropdown is selected 
                     comps are sorted in the next order:
