@@ -10,6 +10,7 @@ import Enums from "../../../../enums/enums";
 const compProperty = Enums.COMP_PROPERTIES_PATHS_DB.compPropertyPathsInDB.saleStatus;
 const compStatusContract = Enums.COMP_PROPERTIES_PATHS_DB.saleStatusValuesInDB.inContract;
 const compStatusDate = Enums.COMP_PROPERTIES_PATHS_DB.saleStatusValuesInDB.date;
+const compStatusListing = Enums.COMP_PROPERTIES_PATHS_DB.saleStatusValuesInDB.listing;
 
 conditionalDescribe('describe', {
     tags: [ "@test" ] },  () => {
@@ -23,6 +24,7 @@ conditionalDescribe('describe', {
         cy.log('test start');
         Sales.FindComps.AddressSearch.openAddressSearchTab()
             .addCompByParameter(2, compProperty, compStatusContract)
-            .addCompByParameter(1, compProperty, compStatusDate);
+            .addCompByParameter(1, compProperty, compStatusDate)
+            .addCompByParameter(0, compProperty, compStatusListing);
     });
 });
