@@ -47,6 +47,8 @@ class SubjectPropertyDataPage extends BasePage {
         return cy.xpath(`//*[contains(@name, 'commercialUnitCount')]//following::*[contains(text(), '${text}')][1]`);
     }
 
+    get currentOwnerField() { return cy.get("[name=currentOwner]"); }
+
 }
 
 export default new SubjectPropertyDataPage();

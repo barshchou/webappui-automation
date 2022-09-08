@@ -29,7 +29,8 @@ describe.skip("Full bowery way, multifamily as complete report", { tags: [ "@ful
             .enterYearBuilt(testData.siteDetails.yearBuilt)
             .enterSiteArea(testData.siteDetails.siteArea)
             .fillAsCompleteBuildingDescription(testData.asCompleteDescription)
-            .fillCurrentBuildDescription(testData.currentDescription);
+            .fillCurrentBuildDescription(testData.currentDescription)
+            .enterCurrentOwner(testData.owner.name);
         NavigationSection.navigateToPropertyMarket();
         Property.Market.verifyTimeOnMarket(testData.timeOnMarket)
             .fillMarketResearch(testData.marketResearch, Enums.MARKET_ANALYSIS_USES.multifamily, false)
@@ -37,8 +38,7 @@ describe.skip("Full bowery way, multifamily as complete report", { tags: [ "@ful
             .clickPullFromDropbox()
             .verifyMarketByAnalysisUseHasFile(Enums.MARKET_ANALYSIS_USES.multifamily)
             .clickSaveContinueButton();
-        Property.History.enterCurrentOwner(testData.owner.name)
-            .checkIsUnderContractCheckbox()
+        Property.History.checkIsUnderContractCheckbox()
             .enterContractDetails(testData.contractDetails)
             .clickSaveContinueButton();
         Property.Description.selectGeneralPropertyCondition(testData.siteInspection.generalPropertyCondition)

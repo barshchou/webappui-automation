@@ -153,6 +153,11 @@ class SubjectPropertyDataActions extends BaseActionsExt<typeof subjectPropertyDa
         return this;
     }
 
+    enterCurrentOwner(owner: string): SubjectPropertyDataActions {
+        subjectPropertyDataPage.currentOwnerField.clear().type(owner).should("have.value", owner);
+        return this;
+    }
+
 }
 
 export default new SubjectPropertyDataActions(subjectPropertyDataPage);
