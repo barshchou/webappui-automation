@@ -60,16 +60,16 @@ class ComplexDatabaseModule {
     databaseSecrets = () => {
         return {
             "dev":{
-                mongoUrl: Cypress.env("CYPRESS_COMP_PLEX_DEV_DATABASE"), 
-                dbName: Cypress.env("CYPRESS_COMP_PLEX_DB_DEV_NAME")
+                mongoUrl: Cypress.env("COMP_PLEX_DEV_DATABASE"), 
+                dbName: Cypress.env("COMP_PLEX_DB_DEV_NAME")
             },
             "compDev":{
-                mongoUrl: Cypress.env("CYPRESS_COMP_PLEX_DEV_DATABASE"),
-                dbName: Cypress.env("CYPRESS_COMP_PLEX_DB_DEV_NAME")
+                mongoUrl: Cypress.env("COMP_PLEX_DEV_DATABASE"),
+                dbName: Cypress.env("COMP_PLEX_DB_DEV_NAME")
             },
             "custom":{
-                mongoUrl: Cypress.env("CYPRESS_COMP_PLEX_DEV_DATABASE"),
-                dbName: Cypress.env("CYPRESS_COMP_PLEX_DB_DEV_NAME")
+                mongoUrl: Cypress.env("COMP_PLEX_DEV_DATABASE"),
+                dbName: Cypress.env("COMP_PLEX_DB_DEV_NAME")
             },
             //We don't have keys for prod db yet
             "prod":{
@@ -77,12 +77,12 @@ class ComplexDatabaseModule {
                 dbName: Cypress.env("-")
             },
             "staging":{
-                mongoUrl: Cypress.env("CYPRESS_COMP_PLEX_STAGE_DATABASE"),
-                dbName: Cypress.env("CYPRESS_COMP_PLEX_DB_STAGE_NAME")
+                mongoUrl: Cypress.env("COMP_PLEX_STAGE_DATABASE"),
+                dbName: Cypress.env("COMP_PLEX_DB_STAGE_NAME")
             },
             "compStage":{
-                mongoUrl: Cypress.env("CYPRESS_COMP_PLEX_STAGE_DATABASE"),
-                dbName: Cypress.env("CYPRESS_COMP_PLEX_DB_STAGE_NAME")
+                mongoUrl: Cypress.env("COMP_PLEX_STAGE_DATABASE"),
+                dbName: Cypress.env("COMP_PLEX_DB_STAGE_NAME")
             }
         };
     };
