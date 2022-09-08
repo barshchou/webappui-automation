@@ -142,3 +142,6 @@ test.spec.ts
 
 # Finder settings
 **/.DS_Store
+
+# Fleet settings
+.fleet

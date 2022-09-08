@@ -17,14 +17,11 @@ class ClientPage extends BasePage {
 
     get appraiserCommentary() { return cy.get("[name='clientGuidelinesDiscussion.additionalCommentary']"); }
 
+    // TODO: [QA-6858] Add data-qa attribute for tooltip
     get guidelinesTooltip() {
-        return cy.get("[aria-label='The following generated commentary will appear in the Letter " +
-        "of Transmittal of your report.'] svg"); 
+        return cy.xpath(`//*[h6[.='Client Guidelines Discussion']]//following::` + 
+        `span[.='The following generated commentary will appear in the Letter of Transmittal of your report.'][1]`); 
     }
-
-    get toCheckTooltipExist() { return cy.get("[role=tooltip]"); }
-
-    get clientGuidelinesCommentary() { return cy.get("[data-qa^='clientGuidelinesDiscussion.commentary']"); }
 
     get guidelinesCommentaryEditButton() { return cy.get("[data-qa=generated-commentary-edit-btn]"); }
 

@@ -19,8 +19,7 @@ describe("Verify entered Use is displayed in Selected Rent Comps table",
 
             cy.stepInfo(`3. On the Income > Commercial > Rent Comps, comp has been added with Other -> 
                         Use-Other added text field`);
-            _NavigationSection.clickCommercialRentComps()
-                .submitSaveChangesModal();
+            _NavigationSection.navigateToCommercialRentComps();
             Income._CommercialManager.RentComps.clickManuallyAddANewCompButton()
                 .searchNewCompByAddress(testData.address);
             testData.rentCompFields.forEach(field => {

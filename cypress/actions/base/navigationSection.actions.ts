@@ -254,6 +254,15 @@ class NavigationSectionActions extends BaseActionsExt<typeof navigationSectionPa
         return this;
     }
 
+    navigateToCommercialCompGroupsDiscussion(): NavigationSectionActions {
+        this.clickIncomeApproachButton()
+            .clickCommercialMenuIfClosed()
+            .clickCommercialCompGroupsDiscussion()
+            .submitSaveChangesModal()
+            .waitForUrl(routesUtils.commercialCompGroupsDiscussion);
+        return this;
+    }
+
     navigateToComparableExpenses(): NavigationSectionActions {
         this.clickIncomeApproachButton()
             .clickComparableExpenses()

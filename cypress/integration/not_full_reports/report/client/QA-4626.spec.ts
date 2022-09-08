@@ -9,7 +9,7 @@ describe("Verify the display of the Client page.", { tags:[ "@report", "@client"
         createReport(testData.reportCreationData);
     });
 
-    it("Test body", () => {
+    it("[QA-4626]", () => {
         cy.stepInfo("1. Proceed to the Report > Client page.");
         _NavigationSection.navigateToClientPage();
 

@@ -49,7 +49,8 @@ const routes =  {
     reportAppraiser: "/appraisers",
     renovation: "/renovations",
     reviewExport: "/review-and-export",
-    organizationInfo: "/organization-info"
+    organizationInfo: "/organization-info",
+    commercialCompGroupsDiscussion: "/commercial-comp-groups-discussion"
 } as const;
 
 export default routes;
