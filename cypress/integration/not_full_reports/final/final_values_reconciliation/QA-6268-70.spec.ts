@@ -4,16 +4,13 @@ import { createReport } from "../../../../actions/base/baseTest.actions";
 import NavigationSection from "../../../../actions/base/navigationSection.actions";
 import Property from "../../../../actions/property/property.manager";
 import { Income } from "../../../../actions";
-import launchDarklyApi from "../../../../api/launchDarkly.api";
 
 // TODO: Test fails due to bug: https://bowery.atlassian.net/browse/WEB-6862
 describe(`As Is, As Stabilized, As Completed Market Value is calculated correctly on Reconciliation card 
         for ACAS report`,
 { tags:[ "@final", "@final_values_reconciliation" ] }, () => {
-
     beforeEach("Login, create report", () => {
         cy.stepInfo(`1. Set feature flag and create report`);
-        launchDarklyApi.setFeatureFlagForUser(testData.featureFlagKey, testData.onFeatureFlag);
         createReport(testData.reportCreationData);
 
         cy.stepInfo(`2. Set square foot analysis and value for it; 

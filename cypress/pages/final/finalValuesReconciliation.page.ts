@@ -25,8 +25,12 @@ class FinalValuesReconciliationPage extends BasePage {
 
     get finalValueAsIsDate() { return cy.get("[data-qa=asIs-date]"); }
 
-    finalValueConclusion(valueConclusion: string) { 
+    salesComparisonApproachValue(valueConclusion: string) { 
         return cy.get(`[data-qa="salesApproach${valueConclusion}-conclusion"]`);
+    }
+
+    finalValueOpinion(valueConclusion: string) {
+        return cy.get(`[data-qa="${valueConclusion}-conclusion"]`);
     }
 }
 

@@ -71,7 +71,7 @@ class FinalValuesReconciliationActions extends BaseActionsExt<typeof finalValues
             : valueConclusionKeys.asIsMarketFinalAmount;
         cy._mapGet(key).then(salesComparisonApproachValue => {
             let valueConclusionNameAdjusted = conclusionValueName.replace(' ', '');
-            finalValuesPage.finalValueConclusion(valueConclusionNameAdjusted)
+            finalValuesPage.salesComparisonApproachValue(valueConclusionNameAdjusted)
                 .should('have.text', salesComparisonApproachValue);
         });
         
@@ -88,7 +88,7 @@ class FinalValuesReconciliationActions extends BaseActionsExt<typeof finalValues
             let valueConclusionNameAdjusted = conclusionValueName.replace(' ', '');
             valueConclusionNameAdjusted = valueConclusionNameAdjusted.charAt(0).toLocaleLowerCase() 
                 + valueConclusionNameAdjusted.slice(1);
-            finalValuesPage.finalValueConclusion(valueConclusionNameAdjusted)
+            finalValuesPage.finalValueOpinion(valueConclusionNameAdjusted)
                 .should('have.text', finalValueOpinion);
         });
         return this;
