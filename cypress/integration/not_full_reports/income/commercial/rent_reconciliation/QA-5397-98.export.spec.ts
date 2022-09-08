@@ -55,7 +55,7 @@ describe(`Verify "Trended Rent/SF" row in the "Rent Reconciliation Adjustment gr
 
             cy.stepInfo("4. Export the report");
             _NavigationSection.Actions.openReviewAndExport();
-            ReviewExport.selectSectionsToIncludeInExport(testData.sectionsToExport)
+            ReviewExport.selectSectionsToIncludeInExport(testData.sectionToExport)
                 .generateDocxReport().waitForReportGenerated()
                 .downloadAndConvertDocxReport(testData.reportCreationData.reportNumber);
         });

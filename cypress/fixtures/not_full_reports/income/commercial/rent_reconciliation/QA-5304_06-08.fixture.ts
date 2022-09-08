@@ -17,11 +17,6 @@ const _marketConditionAdjustments = (): number[] => {
     return [ 5, -6.51, 30.01 ];
 };
 
-const _sectionsToExport: BoweryReports.SectionsToIncludeInExport[] = [
-    Enums.SECTIONS_TO_INCLUDE_IN_EXPORT.salesComparisonApproach,
-    Enums.SECTIONS_TO_INCLUDE_IN_EXPORT.reconciliationAndFinalValueOpinion
-];
-
 export default {
     reportCreationData: _reportCreationData,
     leaseStatuses: _leaseStatuses,
@@ -35,5 +30,5 @@ export default {
     calculationTypeSF: Enums.CALCULATION_TYPE.dollarPerSF,
     leaseTermsAdjustments: _leaseTermsAdjustments(),
     marketConditionAdjustments: _marketConditionAdjustments(),
-    sectionsToExport: _sectionsToExport
+    sectionToExport: [ Enums.SECTIONS_TO_INCLUDE_IN_EXPORT.incomeCapitalizationApproach ]
 };

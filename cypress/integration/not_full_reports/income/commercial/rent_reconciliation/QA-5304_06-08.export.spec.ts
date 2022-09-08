@@ -78,7 +78,7 @@ describe(`Verify the "Lease Terms Adjustment Sub-Total"`,
 
             cy.stepInfo("8. Export the report");
             _NavigationSection.Actions.openReviewAndExport();
-            ReviewExport.selectSectionsToIncludeInExport(testData.sectionsToExport)
+            ReviewExport.selectSectionsToIncludeInExport(testData.sectionToExport)
                 .generateDocxReport().waitForReportGenerated()
                 .downloadAndConvertDocxReport(testData.reportCreationData.reportNumber);
         });
