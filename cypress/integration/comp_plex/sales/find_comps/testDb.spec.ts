@@ -12,7 +12,7 @@ const compStatusContract = Enums.COMP_PROPERTIES_PATHS_DB.saleStatusValuesInDB.i
 const compStatusDate = Enums.COMP_PROPERTIES_PATHS_DB.saleStatusValuesInDB.date;
 
 conditionalDescribe('describe', {
-    tags: [ "@comp_plex_standalone" ] },  () => {
+    tags: [ "@test" ] },  () => {
     before(() => {
         createReport(testData.reportCreationData);
         _NavigationSection.navigateToFindComps()

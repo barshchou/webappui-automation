@@ -51,7 +51,8 @@ class AddressSearchActions {
             expect(response.statusCode).equal(200);
             let compsArrayList = response.body.data.searchTransactionsByAddresses;
             let focusCompIndex = compsArrayList.findIndex(i => i.id === compId);
-            cy.log(compsArrayList, focusCompIndex);
+            cy.log(`List of comps`, compsArrayList);
+            cy.log(`Index of necessary comp is ${focusCompIndex}`);
             expect(focusCompIndex).to.be.above(-1);
             findCompsPage.loadingModalSpinner.should('not.exist');
             this.Page.selectCompButton(focusCompIndex).click();  
@@ -67,14 +68,16 @@ class AddressSearchActions {
      */
     addCompByParameter (compIndex: number, compProperty: CompPlex.AddressSearch.CompPropertyInDB,
         compPropertyValue: string) { 
-        ComplexDatabaseModule.setCompsArrayFromDb(compProperty, compPropertyValue);
+        ComplexDatabaseModule.getCompsArrayFromDb(compProperty, compPropertyValue).then(data => {
+            cy.log(`Array of comps in database`, <string>data);
+            cy._mapSet(mapKeysUtils.arrayOfCompsFromDB, data);
+        });
         cy._mapGet(mapKeysUtils.arrayOfCompsFromDB).then(dataArray => {
-            cy.log(<any>dataArray);
             let comp = dataArray[compIndex];
             let { address: { flatValue }, id } = <any>comp;
             let compAddress = flatValue;
             let compId = id;
-            cy.log(compAddress, compId);
+            cy.log(`Address of necessary comp is ${compAddress}, and its id is ${compId}`);
             this.addCompViaAddressSearchById(compAddress, compId);
         } ); 
         return this;

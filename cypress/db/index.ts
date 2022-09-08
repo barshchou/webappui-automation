@@ -1,6 +1,5 @@
 /* eslint-disable no-console */
 import { MongoClient } from 'mongodb';
-import mapKeysUtils from '../utils/mapKeys.utils';
 import { CompPlex } from "../types/compplex.type";
 
 class ComplexDatabaseModule {
@@ -11,14 +10,11 @@ class ComplexDatabaseModule {
      * @param compProperty Comp property path in database collection
      * @param compPropertyValue Comp property value in database collection
      */
-    setCompsArrayFromDb = (compProperty: CompPlex.AddressSearch.CompPropertyInDB, 
+    getCompsArrayFromDb = (compProperty: CompPlex.AddressSearch.CompPropertyInDB, 
         compPropertyValue: string) => {
         const { mongoUrl, dbName } = this.selectDatabaseSecrets();
-        cy.task('retrieveDataFromDb', { dbUrl: mongoUrl, dbName: dbName, 
-            compPropertyPathInDB: compProperty, compPropertyValueInDB: compPropertyValue }).then(data => {
-            cy.log(<string>data);
-            cy._mapSet(mapKeysUtils.arrayOfCompsFromDB, data);
-        });
+        return cy.task('retrieveDataFromDb', { dbUrl: mongoUrl, dbName: dbName, 
+            compPropertyPathInDB: compProperty, compPropertyValueInDB: compPropertyValue });
     };
  
     /**
@@ -38,11 +34,12 @@ class ComplexDatabaseModule {
             const db = client.db(dbName);
             const collection = db.collection(collectionName);
             let data = await collection.find(filter, { limit:10 }).toArray();
-            client.close();
             return data; 
         } catch (error) {
             console.log(error);
-        } 
+        } finally {
+            client.close();
+        }
     };
 
     /**
@@ -50,14 +47,14 @@ class ComplexDatabaseModule {
      * necessary secrets for relative comp-plex database 
      */
     selectDatabaseSecrets = () => {
-        cy.log(`Secrets to Comp-plex database on ${Cypress.env("url")} env`);
-        return this.databaseSecrets()[Cypress.env("url")];
+        cy.log(`Secrets to Comp-plex database on ${Cypress.env("url")} env are taken`);
+        return this.databaseSecrets[Cypress.env("url")];
     };
 
     /**
      * Function returns a list of secrets for different comp-plex databases
      */
-    databaseSecrets = () => {
+    get databaseSecrets() {
         return {
             "dev":{
                 mongoUrl: Cypress.env("COMP_PLEX_DEV_DATABASE"), 
@@ -85,7 +82,7 @@ class ComplexDatabaseModule {
                 dbName: Cypress.env("COMP_PLEX_DB_STAGE_NAME")
             }
         };
-    };
+    }
 
 }
 
