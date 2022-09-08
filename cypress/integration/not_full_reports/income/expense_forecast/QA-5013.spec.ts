@@ -114,47 +114,39 @@ describe(`[QA-5013] [Income>Expense forecast] Selected expense card is displayed
 
             /*
              * TODO: Uncomment this code + code below, after bug fix https://bowery.atlassian.net/browse/WEB-5881
-             * 
-             * Income._ExpenseForecastActions.chooseForecastItemBasis(testData.expenseForecastFuelFixture('room'));
-             * _NavigationSection.navigateToProForma();
-             * testData.expensesInProFormaByDefaultArray.forEach(element => {
-             *     Income._ProFormaActions.Page.categoryCellTotal(element).should('exist');
-             * });
              */
+            Income._ExpenseForecastActions.chooseForecastItemBasis(testData.expenseForecastFuelFixture('room'));
+            _NavigationSection.navigateToProForma();
+            testData.expensesInProFormaByDefaultArray.forEach(element => {
+                Income._ProFormaActions.Page.categoryCellTotal(element).should('exist');
+            });
+             
         });
 
         it(`Verify if “Include Expense on Pro Forma” is selected -> this  expense category 
             is displayed in the Expense Forecast page > Total operating expenses card (TOE card basis = Per SF) 
             and generated comment (Per Room measure for Fuel + Empty Appraiser's forecasts)`, () => {
-            /*
-             * TODO: Uncomment this code + code below, after bug fix https://bowery.atlassian.net/browse/WEB-5881
-             * 
-             * _NavigationSection.navigateToExpenseForecast();
-             * testData.verifyTOECommentGenerated(testData.buildingDescription.grossArea,
-             *     testData.numberOfResidentialUnits,
-             *     testData.rentRollResUnitFixture.rooms,
-             * ).
-             *     verifyTOEAppraisersValueLinePSF(testData.buildingDescription.grossArea,
-             *         testData.numberOfResidentialUnits,
-             *         testData.rentRollResUnitFixture.rooms);
-             */
+            _NavigationSection.navigateToExpenseForecast();
+            testData.verifyTOECommentGenerated(testData.buildingDescription.grossArea,
+                testData.numberOfResidentialUnits,
+                testData.rentRollResUnitFixture.rooms,
+            ).
+                verifyTOEAppraisersValueLinePSF(testData.buildingDescription.grossArea,
+                    testData.numberOfResidentialUnits,
+                    testData.rentRollResUnitFixture.rooms);
         });
 
         it(`Verify if “Include Expense on Pro Forma” is selected -> this  expense category 
             is displayed in the Expense Forecast page > Total operating expenses card (TOE card basis = Per Unit) 
             and generated comment (Per Room measure for Fuel + Empty Appraiser's forecasts)`, () => {
-            /*
-             * TODO: Uncomment this code + code below, after bug fix https://bowery.atlassian.net/browse/WEB-5881
-             * 
-             * Income._ExpenseForecastActions.chooseForecastItemBasis(testData.expenseForecastTotalFixture('unit'));
-             * testData.verifyTOECommentGenerated(testData.buildingDescription.grossArea,
-             *     testData.numberOfResidentialUnits,
-             *     testData.rentRollResUnitFixture.rooms).
-             *     verifyTOEAppraisersValueLinePerUnit(testData.buildingDescription.grossArea,
-             *         testData.numberOfResidentialUnits,
-             *         testData.rentRollResUnitFixture.rooms);
-             * Income._ExpenseForecastActions.chooseForecastItemBasis(testData.expenseForecastTotalFixture('sf'));
-             */
+            Income._ExpenseForecastActions.chooseForecastItemBasis(testData.expenseForecastTotalFixture('unit'));
+            testData.verifyTOECommentGenerated(testData.buildingDescription.grossArea,
+                testData.numberOfResidentialUnits,
+                testData.rentRollResUnitFixture.rooms).
+                verifyTOEAppraisersValueLinePerUnit(testData.buildingDescription.grossArea,
+                    testData.numberOfResidentialUnits,
+                    testData.rentRollResUnitFixture.rooms);
+            Income._ExpenseForecastActions.chooseForecastItemBasis(testData.expenseForecastTotalFixture('sf'));
         });
 
         it(`Verify if “Include Expense on Pro Forma” is selected -> this  expense category 
@@ -180,11 +172,15 @@ describe(`[QA-5013] [Income>Expense forecast] Selected expense card is displayed
                 verifyTOEAppraisersValueLinePSF(testData.buildingDescription.grossArea,
                     testData.numberOfResidentialUnits,
                     testData.rentRollResUnitFixture.rooms);
+
+            cy.pause();
         });
 
         it(`Verify if “Include Expense on Pro Forma” is selected -> this  expense category 
             is displayed in the Expense Forecast page > Total operating expenses card (TOE card basis = Per Unit) 
             and generated comment (Per Room measure for Fuel + Full Appraiser's forecasts)`, () => {
+            cy.pause();
+
             Income._ExpenseForecastActions.chooseForecastItemBasis(testData.expenseForecastTotalFixture('unit'));
             testData.verifyTOECommentGenerated(testData.buildingDescription.grossArea,
                 testData.numberOfResidentialUnits,
