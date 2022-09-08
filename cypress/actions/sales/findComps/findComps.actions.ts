@@ -413,43 +413,44 @@ class FindCompsActions extends BaseActionsExt<typeof findCompsPage> {
         return this;
     }
     
-    updateCompPropertyInfo(gbaValue = 300, 
-        yearBuilt = "1970", 
-        floors = 10, 
-        commercialUnits = 5, 
-        commercialArea = 1500,
-        compType = Enums.COMPARABLE_TYPES.mixedUse): FindCompsActions {
-
+    updateCompPropertyInfo(params: BoweryReports.FindComps.CompsData = { 
+        gbaValue: 300, 
+        yearBuilt: "1970", 
+        floors: 10, 
+        commercialUnits: 5, 
+        commercialArea: 1500,
+        compType: Enums.COMPARABLE_TYPES.mixedUse
+    }): FindCompsActions {
         this.openCompPropertyInfoForEdit();
-        this.PropertyInfo.setCompType(compType);
+        this.PropertyInfo.setCompType(params.compType);
         findCompsPage.gbaNewComp.as(compPlex.gbaNewComp);
         findCompsPage.yearBuiltNewComp.as(compPlex.yearBuiltNewComp);
         findCompsPage.floorsNewComp.as(compPlex.floorsNewComp);
 
-        if (compType === Enums.COMPARABLE_TYPES.mixedUse) {
+        if (params.compType === Enums.COMPARABLE_TYPES.mixedUse) {
             findCompsPage.commercialAreaNewComp.as(compPlex.commercialAreaNewComp);
             findCompsPage.createCompNumberCommercialUnits.as(compPlex.createCompNumberCommercialUnits);
         }
 
         this.clearNumericInputNewComp(compPlex.gbaNewComp);
         cy.get(`@${compPlex.gbaNewComp}`).focus();
-        cy.get(`@${compPlex.gbaNewComp}`).realType(`{enter}${gbaValue}`, { pressDelay: 45, delay: 50 });
+        cy.get(`@${compPlex.gbaNewComp}`).realType(`{enter}${params.gbaValue}`, { pressDelay: 45, delay: 50 });
         this.clearNumericInputNewComp(compPlex.yearBuiltNewComp);
         cy.get(`@${compPlex.yearBuiltNewComp}`).realClick();
-        cy.get(`@${compPlex.yearBuiltNewComp}`).realType(`{enter}${yearBuilt}`, { pressDelay: 45, delay: 50 });
+        cy.get(`@${compPlex.yearBuiltNewComp}`).realType(`{enter}${params.yearBuilt}`, { pressDelay: 45, delay: 50 });
         this.clearNumericInputNewComp(compPlex.floorsNewComp);
         cy.get(`@${compPlex.floorsNewComp}`).realClick();
-        cy.get(`@${compPlex.floorsNewComp}`).realType(`{enter}${floors}`, { pressDelay: 45, delay: 50 });
+        cy.get(`@${compPlex.floorsNewComp}`).realType(`{enter}${params.floors}`, { pressDelay: 45, delay: 50 });
 
-        if (compType === Enums.COMPARABLE_TYPES.mixedUse) {
+        if (params.compType === Enums.COMPARABLE_TYPES.mixedUse) {
             this.clearNumericInputNewComp(compPlex.createCompNumberCommercialUnits);
             cy.get(`@${compPlex.createCompNumberCommercialUnits}`).realClick();
             cy.get(`@${compPlex.createCompNumberCommercialUnits}`)
-                .realType(`{enter}${commercialUnits}`, { pressDelay: 45, delay: 50 });
+                .realType(`{enter}${params.commercialUnits}`, { pressDelay: 45, delay: 50 });
             this.clearNumericInputNewComp(compPlex.commercialAreaNewComp);
             cy.get(`@${compPlex.commercialAreaNewComp}`).focus();
             cy.get(`@${compPlex.commercialAreaNewComp}`)
-                .realType(`{enter}${commercialArea}`, { pressDelay: 45, delay: 50 });
+                .realType(`{enter}${params.commercialArea}`, { pressDelay: 45, delay: 50 });
         }
 
         findCompsPage.PropertyInfoDoneBtn.click();

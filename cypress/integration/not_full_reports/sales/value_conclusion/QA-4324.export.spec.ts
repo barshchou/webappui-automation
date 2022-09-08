@@ -1,10 +1,9 @@
 import { conditionalDescribe } from './../../../checkIsProd.utils';
 import testData from "../../../../fixtures/not_full_reports/sales/value_conclusion/QA-4324.fixture";
-import NavigationSection from "../../../../actions/base/navigationSection.actions";
-import Sales from "../../../../actions/sales/sales.manager";
+import { _NavigationSection } from '../../../../actions/base';
 import { createReport } from "../../../../actions/base/baseTest.actions";
-import { ReviewExport } from "../../../../actions";
 import { pathSpecData } from "../../../../../utils/fixtures.utils";
+import { ReviewExport, Sales } from "../../../../actions";
 
 // TODO: Remove conditional describe (due to sales comp update) when find comp approach change 
 conditionalDescribe("Sales Value Conclusion Discussion Generated Commentary has dynamic prices", 
@@ -14,31 +13,31 @@ conditionalDescribe("Sales Value Conclusion Discussion Generated Commentary has 
             createReport(testData.reportCreationData);
 
             cy.stepInfo(`2. Go to Sales → Find Comps and select some comps`);
-            NavigationSection.navigateToFindComps();
-            Sales.FindComps.resetAllFilters();
+            _NavigationSection.navigateToFindComps();
+            Sales._FindComps.resetAllFilters();
             for (let comp = 0; comp < testData.compsAmount; comp++) {
-                Sales.FindComps.selectCompFromMap(comp)
+                Sales._FindComps.selectCompFromMap(comp)
                     .openCompForEdit(comp)
-                    .updateCompPropertyInfo(testData.compGbaInput)
+                    .updateCompPropertyInfo()
                     .updateSaleInfoPrice(testData.contractPrice)
                     .saveCompChanges();
             }
 
             cy.stepInfo(`3. Go to Sales → Adjust Comps → Sales Adjustment Grid table and adjust prices`);
-            NavigationSection.navigateToAdjustComps();
-            Sales.AdjustComps.checkCalculationUnitsRadio(testData.calculationUnits);
+            _NavigationSection.navigateToAdjustComps();
+            Sales._AdjustComps.checkCalculationUnitsRadio(testData.calculationUnits);
             testData.compsAdjustments.forEach((adjustments, index) => {
-                Sales.AdjustComps.enterMarketAdjustmentsGroup(Object.keys(adjustments), 
+                Sales._AdjustComps.enterMarketAdjustmentsGroup(Object.keys(adjustments), 
                     Object.values(adjustments), index);
             });
 
             cy.stepInfo(`4. Verify generated commentary with adjusted prices`);
-            NavigationSection.navigateToSalesValueConclusion();
-            Sales.ValueConclusion.enterSaleValueConclusion(testData.valueConclusion)
+            _NavigationSection.navigateToSalesValueConclusion();
+            Sales._ValueConclusion.enterSaleValueConclusion(testData.valueConclusion)
                 .verifyGeneratedCommentaryCalculated();
 
             cy.stepInfo('5. Export report');
-            NavigationSection.openReviewAndExport();
+            _NavigationSection.openReviewAndExport();
             ReviewExport.generateDocxReport().waitForReportGenerated()
                 .downloadAndConvertDocxReport(testData.reportCreationData.reportNumber);
         });

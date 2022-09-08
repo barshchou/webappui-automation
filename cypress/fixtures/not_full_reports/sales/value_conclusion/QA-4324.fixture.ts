@@ -20,7 +20,6 @@ export default {
         incomeValue: Enums.INCOME_TYPE.both
     }),
     compsAmount: 2,
-    compGbaInput: 300,
     contractPrice: 150000,
     calculationUnits: Enums.CALCULATION_UNITS.psf,
     compsAdjustments: [

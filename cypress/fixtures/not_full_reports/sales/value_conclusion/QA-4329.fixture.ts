@@ -1,7 +1,7 @@
 import Enums from "../../../../enums/enums";
 import ReportDataCreator from "../../../data_creator/reportData.creator";
 
-const _textUpdate = "!@# some new text ^&*( 1111111";
+const textUpdate = "!@# some new text ^&*( 1111111";
 
 const commentaryFixture = () => {
     return {
@@ -11,7 +11,7 @@ const commentaryFixture = () => {
         newCommentary: "The comparable sales exhibited a range between undefined per square foot and undefined " +
             "per square foot with an average of $0.00 per square foot and a median of $0.00 per square foot. Thus, " +
             "considering the elements of comparison noted above, our opinion of market value is $0.00 per square foot."
-            + _textUpdate
+            + textUpdate
     };
 };
 
@@ -20,5 +20,5 @@ export default {
         incomeValue: Enums.INCOME_TYPE.both
     }),
     commentaryData: Object.freeze(commentaryFixture()),
-    textUpdate: _textUpdate
+    textUpdate
 };

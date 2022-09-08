@@ -1,8 +1,7 @@
 import testData from "../../../../fixtures/not_full_reports/sales/value_conclusion/QA-4329.fixture";
-import NavigationSection from "../../../../actions/base/navigationSection.actions";
-import Sales from "../../../../actions/sales/sales.manager";
+import { _NavigationSection } from '../../../../actions/base';
 import { createReport } from "../../../../actions/base/baseTest.actions";
-import { ReviewExport } from "../../../../actions";
+import { ReviewExport, Sales } from "../../../../actions";
 
 describe("Generated Commentary is the same both in the Webapp and downloaded doc file", 
     { tags: [ "@sales", "@value_conclusion" ] }, () => {
@@ -11,14 +10,14 @@ describe("Generated Commentary is the same both in the Webapp and downloaded doc
             createReport(testData.reportCreationData);
 
             cy.stepInfo(`2. Navigate to Sales Value Conclusion`);
-            NavigationSection.navigateToSalesValueConclusion();
+            _NavigationSection.navigateToSalesValueConclusion();
 
             cy.stepInfo(`3. Click the pencil icon in the Sales Value Conclusion Discussion and add some characters`);
-            Sales.ValueConclusion.verifyGeneratedCommentary(testData.commentaryData.generatedCommentary)
+            Sales._ValueConclusion.verifyGeneratedCommentary(testData.commentaryData.generatedCommentary)
                 .enterNewCommentary(testData.textUpdate, false);
 
             cy.stepInfo('4. Export report');
-            NavigationSection.openReviewAndExport();
+            _NavigationSection.openReviewAndExport();
             ReviewExport.generateDocxReport().waitForReportGenerated()
                 .downloadAndConvertDocxReport(testData.reportCreationData.reportNumber);
         });
