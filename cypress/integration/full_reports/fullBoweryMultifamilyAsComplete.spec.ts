@@ -97,8 +97,7 @@ describe.skip("Full bowery way, multifamily as complete report", { tags: [ "@ful
             .uploadTaxMap(testData.propertyMaps.taxMapFile)
             .captureSubjectMap()
             .clickSaveContinueButton();
-        Property.Photos.uploadPhotosBySectionName(testData.facadePhotos)
-            .uploadPhotosBySectionName(testData.subjectPhotos)
+        Property.Photos.uploadPhotosBySectionName(testData.subjectPhotos)
             .uploadPhotosBySectionName(testData.exteriorEntrancePhotos)
             .uploadPhotosBySectionName(testData.stairwayPhotos)
             .uploadPhotosBySectionName(testData.hallwayPhotos)
