@@ -5,16 +5,17 @@ import Income from "../../../../../actions/income/income.manager";
 
 const reportCreationData = ReportDataCreator.getReportData("4309");
 
-describe("Verify Zoom in and Zoom out buttons for the map on Rent Comps page when Unit search type is selected", () => {
-    beforeEach("Login, create report", () => {
-        createReport(reportCreationData);
-    });
+describe("Verify Zoom in and Zoom out buttons for the map on Rent Comps page when Unit search type is selected", 
+    { tags:[ "@income", "@commercial", "@in_place_rent_roll" ] }, () => {
+        beforeEach("Login, create report", () => {
+            createReport(reportCreationData);
+        });
 
-    it("[QA-4309]", () => {
-        NavigationSection.navigateToResidentialRentComps()
-            .verifyProgressBarNotExist();
-        Income.Residential.RentComps.BaseActions.verifyUnitSelected()
-            .clickZoomInButton()
-            .clickZoomOutButton();
+        it("[QA-4309]", () => {
+            NavigationSection.navigateToResidentialRentComps()
+                .verifyProgressBarNotExist();
+            Income.Residential.RentComps.BaseActions.verifyUnitSelected()
+                .clickZoomInButton()
+                .clickZoomOutButton();
+        });
     });
-});
