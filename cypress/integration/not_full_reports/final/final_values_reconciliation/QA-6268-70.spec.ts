@@ -6,7 +6,7 @@ import Property from "../../../../actions/property/property.manager";
 import { Income } from "../../../../actions";
 import launchDarklyApi from "../../../../api/launchDarkly.api";
 
-describe(`As Is Market Value is calculated correctly on Reconciliation card`,
+describe(`As Is, As Stabilized, As Completed Market Value is calculated correctly on Reconciliation card`,
     { tags:[ "@final", "@final_values_reconciliation" ] }, () => {
 
         beforeEach("Login, create report", () => {
@@ -129,7 +129,5 @@ describe(`As Is Market Value is calculated correctly on Reconciliation card`,
             Final._FinalValuesReconciliation.verifyFinalValueOpinion(testData.valueConclusionAsComplete)
                 .verifyFinalValueOpinion(testData.valueConclusionAsStabilized)
                 .verifyFinalValueOpinion(testData.valueConclusionAsIs);
-
-            cy.pause();
         });
     });
