@@ -55,6 +55,8 @@ describe("Pro Forma page table Miscellaneous Loss",
 
             cy.stepInfo(`8. Go to Income → Miscellaneous → Storage and fill in all necessary values`); 
             _NavigationSection.navigateToStorage();
+
+            _NavigationSection.navigateToStorage();
             Income._MiscellaneousManager.Storage.addStorageIncome(testData.storageIncome)
                 .enterStorageVCLossPercentage(testData.storageVCLoss, testData.storageVcLossTypeRadio);
 

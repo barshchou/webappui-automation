@@ -62,14 +62,12 @@ describe("Verify the Commercial Stabilized Rent Roll table on export",
 
             cy.stepInfo(`6. On the Income > Commercial > Rent Reconciliation, the Market Rent Conclusion 
                         field is filled with any value`);
-            _NavigationSection.clickRentReconciliationButton()
-                .submitSaveChangesModal();
+            _NavigationSection.navigateToRentReconciliation();
             Income._CommercialManager.RentReconciliation
                 .addMarketRentConclusion(numberWithCommas(testData.marketRentConclusion));
     
             cy.stepInfo(`7. Proceed to the Income > Commercial > Stabilized Rent Roll page.`);
-            _NavigationSection.clickCommercialStabRentRollButton()
-                .submitSaveChangesModal();
+            _NavigationSection.navigateToCommercialStabilizedRentRoll();
     
             cy.stepInfo(`8. Click on the Autofill Vacant Units button and verify the Rent PSF column is auto-filled 
                         (Note: Annual and Monthly Rent columns are disabled).`);

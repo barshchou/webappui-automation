@@ -50,6 +50,7 @@ const routes =  {
     renovation: "/renovations",
     reviewExport: "/review-and-export",
     organizationInfo: "/organization-info",
+    commercialCompGroupsDiscussion: "/commercial-comp-groups-discussion",
     subjectPropertyData: "/subject-property"
 } as const;
 
