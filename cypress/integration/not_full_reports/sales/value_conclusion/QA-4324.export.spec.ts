@@ -1,3 +1,4 @@
+import { conditionalDescribe } from './../../../checkIsProd.utils';
 import testData from "../../../../fixtures/not_full_reports/sales/value_conclusion/QA-4324.fixture";
 import NavigationSection from "../../../../actions/base/navigationSection.actions";
 import Sales from "../../../../actions/sales/sales.manager";
@@ -5,7 +6,8 @@ import { createReport } from "../../../../actions/base/baseTest.actions";
 import { ReviewExport } from "../../../../actions";
 import { pathSpecData } from "../../../../../utils/fixtures.utils";
 
-describe("Sales Value Conclusion Discussion Generated Commentary has dynamic prices", 
+// TODO: Remove conditional describe (due to sales comp update) when find comp approach change 
+conditionalDescribe("Sales Value Conclusion Discussion Generated Commentary has dynamic prices", 
     { tags: [ "@sales", "@value_conclusion" ] }, () => {
         it("[QA-4324]", () => {
             cy.stepInfo(`1. Create new report or open the report which is already created`);
