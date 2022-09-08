@@ -9,6 +9,7 @@ describe("[QA-4087] Verify validation of the Residential Units and Commercial Un
     () => {
 
         beforeEach("Login, create report", () => {
+            // TODO: Check this spec later, maybe we can remove this timeout here
             Cypress.config().defaultCommandTimeout = 60000;
             createReport(testData.reportCreationData);
         });
