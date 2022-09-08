@@ -40,7 +40,7 @@ describe("Verify the display of the multiple clients on the Cover page on export
                 .then(file => {
                     cy.log(<string>file);
                     cy.visit(<string>file);
-                    cy.stepInfo(`5. The NYCB Application No. for client 1, the NYCB Application No. for client 2, 
+                    cy.stepInfo(`6. The NYCB Application No. for client 1, the NYCB Application No. for client 2, 
                                 the NYCB Application No. for client 3 and the NYCB Application No. 
                                 for client 4 are displayed and separated by a comma`);
                     cy.xpath("//*[contains(text(), 'NYCB Application No.')]").invoke("text").then(text => {
