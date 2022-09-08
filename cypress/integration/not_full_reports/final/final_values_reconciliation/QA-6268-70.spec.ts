@@ -6,6 +6,7 @@ import Property from "../../../../actions/property/property.manager";
 import { Income } from "../../../../actions";
 import launchDarklyApi from "../../../../api/launchDarkly.api";
 
+// TODO: Test fails due to bug: https://bowery.atlassian.net/browse/WEB-6862
 describe(`As Is, As Stabilized, As Completed Market Value is calculated correctly on Reconciliation card`,
     { tags:[ "@final", "@final_values_reconciliation" ] }, () => {
 
