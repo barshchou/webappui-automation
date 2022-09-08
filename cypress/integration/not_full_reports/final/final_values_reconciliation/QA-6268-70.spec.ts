@@ -127,8 +127,8 @@ describe(`As Is Market Value is calculated correctly on Reconciliation card`,
             Less Residential Rent Loss - Less Commercial Rent Loss - Less Undetermined Commercial Rent Loss - 
             Renovation Budget - Less Buyout Cost - Less Entrepreneurial Profit*]`);
             Final._FinalValuesReconciliation.verifyFinalValueOpinion(testData.valueConclusionAsComplete)
-                .verifySalesComparisonApproach(testData.valueConclusionAsStabilized)
-                .verifySalesComparisonApproach(testData.valueConclusionAsIs);
+                .verifyFinalValueOpinion(testData.valueConclusionAsStabilized)
+                .verifyFinalValueOpinion(testData.valueConclusionAsIs);
 
             cy.pause();
         });
