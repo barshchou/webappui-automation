@@ -269,4 +269,6 @@ export namespace BoweryReports {
     export type ExpenseDataProvider = typeof Enums.EXPENSE_DATA_PROVIDER[KeyInfo.ExpenseDataProvider]
     export type ExpenseItemBasisOfComparison = typeof
         Enums.EXPENSE_ITEM_BASIS_OF_COMPARISON[KeyInfo.ExpenseItemBasisOfComparison]
+    
+    export type FinalValuesApproach = typeof Enums.FINAL_VALUES_APPROACH[KeyInfo.FinalValuesApproach]
 }

@@ -8,6 +8,7 @@ import BaseActionsExt from "../base/base.actions.ext";
 import { BoweryReports } from "../../types/boweryReports.type";
 import capRateConclusionKeys from '../../utils/mapKeys/income/capRateConclusion/capRateConclusion.keys';
 import Enums from "../../enums/enums";
+import valueConclusionKeys from '../../utils/mapKeys/sales/valueConclusion.keys';
 
 class ValueConclusionActions extends BaseActionsExt<typeof valueConclusionPage> {
 
@@ -535,6 +536,18 @@ class ValueConclusionActions extends BaseActionsExt<typeof valueConclusionPage> 
             valueConclusionPage.headerSalesValue.invoke('text').should('include', finalValue);
         });
         
+        return this;
+    }
+
+    setMarketValueFinal(conclusionValueName: BoweryReports.ValueConclusionName): ValueConclusionActions {
+        valueConclusionPage.finalValueCell(conclusionValueName).invoke('text').then(finalValue => {
+            let key = conclusionValueName != Enums.VALUE_CONCLUSION_NAME.asIs 
+                ? conclusionValueName == Enums.VALUE_CONCLUSION_NAME.asStabilized 
+                    ? valueConclusionKeys.asStabilizedFinalAmount
+                    : valueConclusionKeys.asCompleteFinalAmount
+                : valueConclusionKeys.asIsMarketFinalAmount;
+            cy._mapSet(key, finalValue);
+        });
         return this;
     }
 }

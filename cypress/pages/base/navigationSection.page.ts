@@ -140,6 +140,8 @@ class NavigationSection extends BasePage {
     get whatsNewButton() { return cy.get(`[aria-label="What's New"]`); }
 
     get helpAndResourcesButton() { return cy.get(`[aria-label="Help & Resources"]`); }
+
+    get finalValuesReconciliationButton() { return cy.get(`#final-values-and-reconciliation`); }
 }
 
 export default new NavigationSection();

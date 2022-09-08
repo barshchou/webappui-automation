@@ -1,5 +1,8 @@
 import finalValuesPage from "../../pages/final/finalValuesReconciliation.page";
+import { BoweryReports } from "../../types/boweryReports.type";
+import valueConclusionKeys from "../../utils/mapKeys/sales/valueConclusion.keys";
 import BaseActionsExt from "../base/base.actions.ext";
+import Enums from "../../enums/enums";
 
 class FinalValuesReconciliationActions extends BaseActionsExt<typeof finalValuesPage> {
 
@@ -59,6 +62,37 @@ class FinalValuesReconciliationActions extends BaseActionsExt<typeof finalValues
         return this;
     }
 
+    verifySalesComparisonApproach(conclusionValueName: BoweryReports.ValueConclusionName): 
+    FinalValuesReconciliationActions {
+        let key = conclusionValueName != Enums.VALUE_CONCLUSION_NAME.asIs 
+            ? conclusionValueName == Enums.VALUE_CONCLUSION_NAME.asStabilized 
+                ? valueConclusionKeys.asStabilizedFinalAmount
+                : valueConclusionKeys.asCompleteFinalAmount
+            : valueConclusionKeys.asIsMarketFinalAmount;
+        cy._mapGet(key).then(salesComparisonApproachValue => {
+            let valueConclusionNameAdjusted = conclusionValueName.replace(' ', '');
+            finalValuesPage.finalValueConclusion(valueConclusionNameAdjusted)
+                .should('have.text', salesComparisonApproachValue);
+        });
+        
+        return this;
+    }
+
+    verifyFinalValueOpinion(conclusionValueName: BoweryReports.ValueConclusionName): FinalValuesReconciliationActions {
+        let key = conclusionValueName != Enums.VALUE_CONCLUSION_NAME.asIs 
+            ? conclusionValueName == Enums.VALUE_CONCLUSION_NAME.asStabilized 
+                ? valueConclusionKeys.asStabilizedFinalAmount
+                : valueConclusionKeys.asCompleteFinalAmount
+            : valueConclusionKeys.asIsMarketFinalAmount;
+        cy._mapGet(key).then(finalValueOpinion => {
+            let valueConclusionNameAdjusted = conclusionValueName.replace(' ', '');
+            valueConclusionNameAdjusted = valueConclusionNameAdjusted.charAt(0).toLocaleLowerCase() 
+                + valueConclusionNameAdjusted.slice(1);
+            finalValuesPage.finalValueConclusion(valueConclusionNameAdjusted)
+                .should('have.text', finalValueOpinion);
+        });
+        return this;
+    }
 }
 
 export default new FinalValuesReconciliationActions(finalValuesPage);
