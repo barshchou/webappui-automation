@@ -1,7 +1,7 @@
 import { numberWithCommas } from "../../../../../../utils/numbers.utils"; 
 import testData from 
     "../../../../../fixtures/not_full_reports/income/commercial/in_place_rent_roll/QA-4484_86_88-90.fixture";
-import { Income, Property, ReviewExport } from "../../../../../actions";
+import { DataCollections, Income, ReviewExport } from "../../../../../actions";
 import { _NavigationSection } from "../../../../../actions/base";
 import { createReport } from "../../../../../actions/base/baseTest.actions";
 
@@ -9,7 +9,6 @@ describe(`[Income > Commercial > In-Place Rent Roll > Generated Commentary]
         Verify the suggested text dropdown`,
 { tags:[ "@income", "@commercial", "@in_place_rent_roll", "@check_export" ] }, () => {
 
-    //TODO update test after test-cases updates QA-6543
     it("[QA-4484], [QA-4486]", () => {
         cy.stepInfo(`1. Login, create report and proceed to the 
                     Income > Commercial > In-Place Rent Roll page.`);
@@ -31,12 +30,11 @@ describe(`[Income > Commercial > In-Place Rent Roll > Generated Commentary]
         });
     });
 
-    //TODO update test after test-cases updates QA-6543
     it("[QA-4488] As Is", () => {
         cy.stepInfo(`Preconditions: The mixed report is created and several commercial units are added.`);
         createReport(testData.reportCreationDataAsIs);
-        _NavigationSection.navigateToPropertySummary();
-        Property._Summary.enterNumberOfCommercialUnits(testData.numberOfCommercialUnits)
+        _NavigationSection.navigateToSubjectPropertyData();
+        DataCollections._SubjectPropertyData.enterNumberOfCommercialUnits(testData.numberOfCommercialUnits)
             .enterNumberOfResUnits(testData.numberOfResidentialUnits)
             .enterGrossBuildingArea(testData.grossBuildingArea)
             .enterSiteArea(testData.siteArea)
@@ -84,13 +82,12 @@ describe(`[Income > Commercial > In-Place Rent Roll > Generated Commentary]
             }); 
     });
 
-    //TODO update test after test-cases updates QA-6543
     it("[QA-4489] As Stabilized", () => {
         cy.stepInfo(`Preconditions: The mixed report is created and several commercial units are added.`);
         createReport(testData.reportCreationDataAsStabilized);
 
-        _NavigationSection.navigateToPropertySummary();
-        Property._Summary.enterNumberOfCommercialUnits(testData.numberOfCommercialUnits)
+        _NavigationSection.navigateToSubjectPropertyData();
+        DataCollections._SubjectPropertyData.enterNumberOfCommercialUnits(testData.numberOfCommercialUnits)
             .enterNumberOfResUnits(testData.numberOfResidentialUnits)
             .enterGrossBuildingArea(testData.grossBuildingArea)
             .enterSiteArea(testData.siteArea)
@@ -138,13 +135,12 @@ describe(`[Income > Commercial > In-Place Rent Roll > Generated Commentary]
             }); 
     });
 
-    //TODO update test after test-cases updates QA-6543
     it("[QA-4490] As Completed", () => {
         cy.stepInfo(`Preconditions: The mixed report is created and several commercial units are added.`);
         createReport(testData.reportCreationDataAsComplete);
 
-        _NavigationSection.navigateToPropertySummary();
-        Property._Summary.enterNumberOfCommercialUnits(testData.numberOfCommercialUnits)
+        _NavigationSection.navigateToSubjectPropertyData();
+        DataCollections._SubjectPropertyData.enterNumberOfCommercialUnits(testData.numberOfCommercialUnits)
             .enterNumberOfResUnits(testData.numberOfResidentialUnits)
             .enterCurrentNumberOfResUnits(testData.currentNumberOfResidentialUnits)
             .enterCurrentNumberOfCommercialUnits(testData.currentNumberOfCommercialUnits)

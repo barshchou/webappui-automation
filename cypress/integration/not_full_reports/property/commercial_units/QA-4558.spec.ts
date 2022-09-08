@@ -1,7 +1,7 @@
 import testData from "../../../../fixtures/not_full_reports/property/commercial_units/QA-4558.fixture";
 import { createReport } from "../../../../actions/base/baseTest.actions";
 import { _NavigationSection } from "../../../../actions/base";
-import { Income, Property } from "../../../../actions";
+import { DataCollections, Income, Property } from "../../../../actions";
 
 describe("Verify the functionality of the Use* radio button", 
     { tags:[ "@property", "@commercial_units" ] }, () => {
@@ -9,8 +9,8 @@ describe("Verify the functionality of the Use* radio button",
         beforeEach("Login, create report", () => {
             createReport(testData.reportCreationData);
             cy.stepInfo("1. Navigate to property summary and enter commercial units");
-            _NavigationSection.navigateToPropertySummary();
-            Property._Summary.enterNumberOfCommercialUnits(testData.numberOfCommercialUnits);
+            _NavigationSection.navigateToSubjectPropertyData();
+            DataCollections._SubjectPropertyData.enterNumberOfCommercialUnits(testData.numberOfCommercialUnits);
             cy.stepInfo("2. Navigate to commercial units");
             _NavigationSection.navigateToCommercialUnits();
         });

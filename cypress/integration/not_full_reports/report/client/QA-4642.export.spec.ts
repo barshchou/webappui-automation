@@ -1,4 +1,4 @@
-import { Property, Report, ReviewExport } from '../../../../actions';
+import { DataCollections, Report, ReviewExport } from '../../../../actions';
 import testData from "../../../../fixtures/not_full_reports/report/client/QA-4642.fixture";
 import { createReport } from "../../../../actions/base/baseTest.actions";
 import { _NavigationSection } from '../../../../actions/base';
@@ -8,8 +8,8 @@ describe("Verify the Client Guidelines Discussion on the page",
         it("[QA-4642]",  () => {
             cy.stepInfo(`1. Proceed to the Report > Client page`);
             createReport(testData.reportCreationData);
-            _NavigationSection.navigateToPropertySummary();
-            Property._Summary.enterBuildingName(testData.buildingName);
+            _NavigationSection.navigateToSubjectPropertyData();
+            DataCollections._SubjectPropertyData.enterBuildingName(testData.buildingName);
             _NavigationSection.navigateToClientPage().verifyProgressBarNotExist();
 
             cy.stepInfo(`2. Enter the “=“ and verify the "Linked" chips dropdown for both sections: 

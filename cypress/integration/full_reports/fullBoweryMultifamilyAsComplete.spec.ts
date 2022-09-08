@@ -11,6 +11,7 @@ import proFormaTypesEnum from "../../enums/proFormaTypes.enum";
 import tableExpenseHistoryCellNames from "../../../cypress/enums/expense/expenseHistoryTableRows.enum";
 import { loginAction } from "../../actions/base/baseTest.actions";
 import Enums from "../../enums/enums";
+import { DataCollections } from "../../actions";
 
 describe.skip("Full bowery way, multifamily as complete report", { tags: [ "@full_report" ] }, () => {
     it("Test", () => {
@@ -23,15 +24,13 @@ describe.skip("Full bowery way, multifamily as complete report", { tags: [ "@ful
             .uploadFile(testData.keyInfoEngagementData.engagementFileName);
         NavigationSection.navigateToClientPage();
         Report.Client.enterClientName(testData.clientData.clientName);
-        NavigationSection.navigateToPropertySummary();
-        Property.Summary.verifySiteDetails(testData.siteDetails)
+        NavigationSection.navigateToSubjectPropertyData();
+        DataCollections._SubjectPropertyData.verifySiteDetails(testData.siteDetails)
             .enterYearBuilt(testData.siteDetails.yearBuilt)
             .enterSiteArea(testData.siteDetails.siteArea)
             .fillAsCompleteBuildingDescription(testData.asCompleteDescription)
-            .clickWalkUpTypeButtons()
-            .fillCurrentBuildDescription(testData.currentDescription)
-            .editAsCompleteExport(testData.asCompleteDescription.asCompleteExportText)
-            .clickSaveContinueButton();
+            .fillCurrentBuildDescription(testData.currentDescription);
+        NavigationSection.navigateToPropertyMarket();
         Property.Market.verifyTimeOnMarket(testData.timeOnMarket)
             .fillMarketResearch(testData.marketResearch, Enums.MARKET_ANALYSIS_USES.multifamily, false)
             .enterMarketQuarter(testData.marketResearch.quarter)

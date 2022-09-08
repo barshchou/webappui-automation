@@ -55,5 +55,8 @@ export enum Tag {
     unit_inspection = "@unit_inspection",
     source_information = "@source_information",
     expense_history = "@expense_history",
-    cms = "@cms"
+    cms = "@cms",
+    data_collections = "@data_collections",
+    subject_property_data = "@subject_property_data",
+    property_description = "@property_description"
 }

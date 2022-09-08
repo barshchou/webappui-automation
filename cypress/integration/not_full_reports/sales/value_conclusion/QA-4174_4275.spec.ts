@@ -1,10 +1,9 @@
 import testData from "../../../../fixtures/not_full_reports/sales/value_conclusion/QA-4174_4275.fixture";
-import NavigationSection from "../../../../actions/base/navigationSection.actions";
-import Sales from "../../../../actions/sales/sales.manager";
 import { createReport } from "../../../../actions/base/baseTest.actions";
 import Enums from "../../../../enums/enums";
-import * as PagesRoutes from "../../../../enums/pages_routes";
-import { Property } from "../../../../actions";
+import { DataCollections, Sales } from "../../../../actions";
+import { _NavigationSection } from "../../../../actions/base";
+import routesUtils from "../../../../utils/routes.utils";
 
 describe(`[QA-4174] Prospective Market Value As Stabilized is calculated with correct formula
                [QA-4275] Basis for Square Foot Analysis value pulled from Property -> Summary -> 
@@ -23,18 +22,18 @@ describe(`[QA-4174] Prospective Market Value As Stabilized is calculated with co
     Object.values(Enums.BASIS_SQUARE_FOOT_ANALYSIS).forEach(( value, index) => {
         it(`Test with ${value} Basis for Square Foot Analysis`, () => {
             cy.stepInfo(`1. Navigate to Property -> Summary, select ${value} basis and enter it's value`);
-            NavigationSection.openPageByVisit(PagesRoutes._PropertyRoutes._Summary);
-            Property._Summary.selectBasisSquareFootAnalysis(value);
+            _NavigationSection.openPageByVisit(routesUtils.subjectPropertyData);
+            DataCollections._SubjectPropertyData.selectBasisSquareFootAnalysis(value);
             if (value === Enums.BASIS_SQUARE_FOOT_ANALYSIS.grossBuildingArea) {
-                Property._Summary.enterGrossBuildingArea(testData.basisSFAnalysisValues[index]);
+                DataCollections._SubjectPropertyData.enterGrossBuildingArea(testData.basisSFAnalysisValues[index]);
             } else {
-                Property._Summary.fillBasisSquareFootAnalysis(testData.basisSFAnalysisValues[index]);
+                DataCollections._SubjectPropertyData.fillBasisSquareFootAnalysis(testData.basisSFAnalysisValues[index]);
             }
 
             cy.stepInfo(`2. Navigate to Sales -> Value Conclusion, verify Basis, it's value, 
             As stabilized amount and Final value`);
-            NavigationSection.navigateToSalesValueConclusion();
-            Sales.ValueConclusion.enterSaleValueConclusion(testData.valueConclusion)
+            _NavigationSection.navigateToSalesValueConclusion();
+            Sales._ValueConclusion.enterSaleValueConclusion(testData.valueConclusion)
                 .verifyBasisSFAnalysisTableCellText(Object.values(Enums.BASIS_SQUARE_FOOT_ANALYSIS_TEXTS)[index])
                 .verifyBasisForAnalysisAmount(testData.basisSFAnalysisValues[index])
                 .verifyProspectiveMarketValueAmount(testData.valueConclusionAsStabilized, 

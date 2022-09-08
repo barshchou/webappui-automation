@@ -11,7 +11,7 @@ import Enums from "../../enums/enums";
 
 class NavigationSectionActions extends BaseActionsExt<typeof navigationSectionPage> {
     
-    waitForUrl(route: Utils.Routes) {
+    waitForUrl(route: Utils.Routes | string) {
         cy.url().should("include", route);
         return this;
     }
@@ -496,14 +496,15 @@ class NavigationSectionActions extends BaseActionsExt<typeof navigationSectionPa
         return this;
     }
 
-    navigateToSubjectPropertyData(section = Enums.SUBJECT_PROPERTY_DATA_SECTIONS.siteDetails, isSubmitChanges = true
+    navigateToSubjectPropertyData(section: BoweryReports.SubjectPropertyDataSections = Enums
+        .SUBJECT_PROPERTY_DATA_SECTIONS.siteDetails, isSubmitChanges = true
     ): NavigationSectionActions {
         this.clickDataCollectionsIcon()
             .clickSubjectPropertyDataMenuIfClosed()
             .clickSubjectPropertyDataSectionAnchor(section)
             .submitSaveChangesModal(isSubmitChanges)
             .verifyProgressBarNotExist()
-            .waitForUrl(routesUtils.subjectPropertyData);
+            .waitForUrl(`${routesUtils.subjectPropertyData}#${section}`);
         return this;
     }
 
@@ -553,8 +554,9 @@ class NavigationSectionActions extends BaseActionsExt<typeof navigationSectionPa
      */
     openPageByVisit(pageRoute: string): NavigationSectionActions {
         const baseUrl = Cypress.config().baseUrl;
+        const routeToPaste = pageRoute.startsWith("/") ? pageRoute.replace("/", "") : pageRoute;
         cy._mapGet(mapKeysUtils.reportId).then(reportId => {
-            cy.visit(`${baseUrl}/report/${reportId}/${pageRoute}`);
+            cy.visit(`${baseUrl}/report/${reportId}/${routeToPaste}`);
         });
 
         return this;

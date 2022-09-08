@@ -1,7 +1,7 @@
 import testData from "../../../../../fixtures/not_full_reports/income/commercial/rent_comps/QA-4185-87.fixture";
 import { createReport } from "../../../../../actions/base/baseTest.actions";
 import { _NavigationSection } from "../../../../../actions/base";
-import { Income, Property } from "../../../../../actions";
+import { DataCollections, Income } from "../../../../../actions";
 import { _IncomeRoutes } from "../../../../../enums/pages_routes";
 
 describe(`[QA-4186] Unit of Measure on Commercial Unit Details modal is defaulted to selection on in-Place RR page
@@ -12,8 +12,8 @@ describe(`[QA-4186] Unit of Measure on Commercial Unit Details modal is defaulte
     before("Create report, add commercial units, choose Per Square Foot Per Month as basis of rent", () => {
         createReport(testData.reportCreationData);
         cy.stepInfo(`Add ${testData.unitsNumber} commercial units`);
-        _NavigationSection.navigateToPropertySummary();
-        Property._Summary.enterNumberOfCommercialUnits(testData.unitsNumber);
+        _NavigationSection.navigateToSubjectPropertyData();
+        DataCollections._SubjectPropertyData.enterNumberOfCommercialUnits(testData.unitsNumber);
         cy.stepInfo("Choose Per Square Foot Per Month as basis of rent on In-Place Rent Roll Page");
         _NavigationSection.navigateToCommercialInPlaceRentRoll();
         Income._CommercialManager.InPlaceRentRoll.chooseLeaseStatusByRowNumber(testData.leaseStatus)

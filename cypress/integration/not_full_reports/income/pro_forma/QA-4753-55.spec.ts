@@ -2,8 +2,7 @@ import { numberWithCommas } from '../../../../../utils/numbers.utils';
 import testData from "../../../../fixtures/not_full_reports/income/pro_forma/QA-4753-55.fixture";
 import { createReport } from "../../../../actions/base/baseTest.actions";
 import { _NavigationSection } from "../../../../actions/base";
-import { Property } from '../../../../actions';
-import { Income } from "../../../../actions";
+import { DataCollections, Income, Property } from "../../../../actions";
 import proFormaTypes from "../../../../enums/proFormaTypes.enum";
 import Enums from "../../../../enums/income/incomeTypesCellNames.enum";
 
@@ -14,8 +13,8 @@ describe("Pro Forma page table Effective Gross Income validation",
             cy.stepInfo(`1. Create new report or open the report which is already created. 
                     Make sure that there is at least three commercial units.`);
             createReport(testData.reportCreationData);
-            _NavigationSection.navigateToPropertySummary();
-            Property._Summary.enterGrossBuildingArea(testData.grossBuildingArea)
+            _NavigationSection.navigateToSubjectPropertyData();
+            DataCollections._SubjectPropertyData.enterGrossBuildingArea(testData.grossBuildingArea)
                 .enterNumberOfResUnits(testData.numberOfResidentialUnits)
                 .enterNumberOfCommercialUnits(testData.numberOfCommercialUnits);
 
@@ -40,8 +39,7 @@ describe("Pro Forma page table Effective Gross Income validation",
         
             cy.stepInfo(`5. Go to Income → Reimbursement Summary and add Real Estate Taxes 
             Reimbursement for commercial units`); 
-            _NavigationSection.clickCommercialReimbursementSummaryButton()
-                .submitSaveChangesModal();
+            _NavigationSection.navigateToCommercialReimbursementSummary();
             Income._CommercialManager.ReimbursementSummary.addNewCommercialReimbursement(
                 testData.expenseType, testData.expenseTypeCellName, 
                 testData.reimbursementType, testData.knownInformation)
@@ -62,20 +60,17 @@ describe("Pro Forma page table Effective Gross Income validation",
                 .addParkingVCLossPercentage(testData.vcLossTypeRadio, testData.parkingVCLoss);
 
             cy.stepInfo(`8. Go to Income → Miscellaneous → Laundry and fill in all necessary values`); 
-            _NavigationSection.clickLaundryButton()
-                .submitSaveChangesModal();
+            _NavigationSection.navigateToLaundry();
             Income._MiscellaneousManager.Laundry.enterLaundryIncome(testData.laundryIncome)
                 .enterLaundryVCLossPercentage(testData.laundryVCLoss, testData.laundryVcLossTypeRadio);
 
             cy.stepInfo(`9. Go to Income → Miscellaneous → Storage and fill in all necessary values`); 
-            _NavigationSection.clickStorageButton()
-                .submitSaveChangesModal();
+            _NavigationSection.navigateToStorage();
             Income._MiscellaneousManager.Storage.addStorageIncome(testData.storageIncome)
                 .enterStorageVCLossPercentage(testData.storageVCLoss, testData.storageVcLossTypeRadio);
 
             cy.stepInfo(`10. Go to Income → Miscellaneous → Other and fill in all necessary values`); 
-            _NavigationSection.clickOtherButton()
-                .submitSaveChangesModal();
+            _NavigationSection.navigateToOther();
             Income._MiscellaneousManager.Other.addOtherIncome(testData.otherIncomeItem);
 
             cy.saveLocalStorage();
