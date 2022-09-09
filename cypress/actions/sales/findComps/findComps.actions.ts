@@ -490,7 +490,7 @@ class FindCompsActions extends BaseActionsExt<typeof findCompsPage> {
         return this;
     }
 
-    zoomInAndResetFilters(zoomCount = 1): FindCompsActions {
+    zoomInAndResetFilters(zoomCount = 3): FindCompsActions {
         this.clickZoomInButton(zoomCount)
             .resetAllFilters();
         return this;
