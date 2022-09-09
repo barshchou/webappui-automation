@@ -489,6 +489,22 @@ class FindCompsActions extends BaseActionsExt<typeof findCompsPage> {
         findCompsPage.SaleInfoEditBtn.click();
         return this;
     }
+
+    zoomInAndResetFilters(zoomCount = 1): FindCompsActions {
+        this.clickZoomInButton(zoomCount)
+            .resetAllFilters();
+        return this;
+    }
+
+    clickZoomInButton(clickCount = 1): FindCompsActions {
+        for (let index = 0; index < clickCount; index++) {
+            findCompsPage.zoomInButton.click();
+        }
+        
+        findCompsPage.loadingModalSpinner.should('exist');
+        findCompsPage.loadingModalSpinner.should('not.exist');
+        return this;
+    }
 }
 
 export default new FindCompsActions(findCompsPage);
