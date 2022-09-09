@@ -1,12 +1,13 @@
 import { BoweryReports } from "../../types/boweryReports.type";
 import BasePage from "../base/base.page";
+
 class CommercialUnitsPage extends BasePage {
     get iconExchangeComUnits() { return cy.get("[data-icon=exchange]"); }
 
     get iconExchangeTooltip() { return cy.get(".MuiTooltip-tooltip"); }
     
     get numberCommercialUnitsField() { 
-        return cy.xpath("//*[.='No. of Commercial Units']//following::*[@inputmode][1]"); 
+        return cy.xpath("//*[.='No. of Commercial Units']//following::input[1]");
     }
 
     getIconDeleteImage(category: BoweryReports.ImageType, index = 0) {
@@ -75,7 +76,7 @@ class CommercialUnitsPage extends BasePage {
     get commercialUnitsDiscussionTitle() { return cy.xpath("//h6[.='Commercial Unit SF Discussion']"); }
 
     commercialUnitDescriptionTitle(unitNumber = 1) { 
-        return cy.xpath(`//div[.='Commercial Unit ${unitNumber} Description']`); 
+        return cy.xpath(`//h6[.='Commercial Unit ${unitNumber} Description']`);
     }
 
     commercialUnitsTab(unitNumber = 1) { 

@@ -6,7 +6,7 @@ import { BoweryReports } from "../../types/boweryReports.type";
 class AmenitiesActions extends BaseActionsExt<typeof amenitiesPage> {
 
     addParkingPlaces(numberOfPlaces: number): AmenitiesActions {
-        amenitiesPage.hasParkingCheckbox.check().should("have.value", "true");
+        this.checkParkingCheckbox();
         amenitiesPage.parkingSpacesNumberField.clear().type(`${numberOfPlaces}`);
         if (isDecimal(numberOfPlaces)) {
             numberOfPlaces = cutDecimalPartToNumberOfDigits(numberOfPlaces, 0);
@@ -63,10 +63,19 @@ class AmenitiesActions extends BaseActionsExt<typeof amenitiesPage> {
         return this;
     }
 
+    checkParkingCheckbox(check = true): AmenitiesActions {
+        amenitiesPage.hasParkingCheckbox.invoke('attr', 'value').then(status => {
+            status != `${check}` 
+                ? amenitiesPage.hasParkingCheckbox.click().should('have.value', `${check}`) 
+                : null;
+        });
+        return this;
+    }
+
     addStorageUnits(units: number): AmenitiesActions {
         this.checkStorageCheckbox();
-        amenitiesPage.storageUnitsTextField.clear().type(`${units}`);
-        amenitiesPage.storageUnitsTextField.should("have.value", units);
+        amenitiesPage.storageUnitsTextField.clear().type(`${units}`)
+            .should("have.value", units);
         return this;
     }
 

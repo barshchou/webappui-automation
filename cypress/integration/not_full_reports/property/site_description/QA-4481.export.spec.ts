@@ -5,10 +5,10 @@ import { Property, ReviewExport } from "../../../../actions";
 
 
 // TODO: [QA-6605] Error pulling 'neighborhood' data into a comment 'Location Within Market'
-describe(`[QA-4481] Check that generated text pulls in the first submarket`,
+describe(`Check that generated text pulls in the first submarket`,
     { tags: [ "@property", "@site_description", "@check_export" ] }, () => {
         
-        it("Test body", () => {
+        it("[QA-4481]", () => {
             cy.stepInfo(`1. Create a new report on the WebApp and navigate to Property > Market.`);
             createReport(testData.reportCreationData);
             _NavigationSection.navigateToPropertyMarket();
@@ -21,8 +21,6 @@ describe(`[QA-4481] Check that generated text pulls in the first submarket`,
                 .enterMarketQuarter(testData.submarketAndMarketQuarter)
                 .enterMarketYear(testData.submarketAndMarketYear);
 
-            Property._Market.checkUncheckMarketAnalysisUseCheckbox(testData.marketAnalysisUses[0], false);
-
             testData.marketAnalysisUses.forEach((use, index) => {
                 Property._Market.checkUncheckMarketAnalysisUseCheckbox(use, true)
                     .enterMarket(testData.marketValues[index], use)
@@ -32,7 +30,7 @@ describe(`[QA-4481] Check that generated text pulls in the first submarket`,
             cy.stepInfo(`3. Navigate to Property > Site Description and check that 
                         generated text pulls in the first submarket`);
             _NavigationSection.openSiteDescriptionInProperty();
-            Property._SiteDescription.verifyGeneratedCommentary(testData.discussion, testData.commentary);
+            Property._SiteDescription.verifyFormCommentTextBoxText(testData.commentName, testData.commentary);
         
             cy.stepInfo(`4. Export the report`);
             _NavigationSection.openReviewAndExport();
@@ -48,7 +46,7 @@ describe(`[QA-4481] Check that generated text pulls in the first submarket`,
                     cy.stepInfo(`5. Proceed to Site Description and verify that 
                                 Location Description commentary has been exported correctly.`);
                     cy.visit(<string>file);
-                    cy.contains("Site Description").scrollIntoView().next("table").within(() => {
+                    cy.contains(testData.exportSectionName).scrollIntoView().next("table").within(() => {
                         cy.get("tr").eq(0).find("td").eq(1).find("p")
                             .should("have.text", testData.commentary);
                     }); 

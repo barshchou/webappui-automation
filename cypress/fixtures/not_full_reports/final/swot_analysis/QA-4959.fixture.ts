@@ -14,4 +14,5 @@ export default {
         " related to the speed and consistency of the recovery.",
         "Economic uncertainty and potential market instability related to the war in Ukraine.",
     ],
+    exportSectionName: enums.EXPORT_TITLES.threats
 };

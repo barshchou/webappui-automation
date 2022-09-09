@@ -25,5 +25,6 @@ export default {
     ] as BoweryReports.SalesAdjustmentGrid.CalculationUnits[], 
     basis: "Price per Unit",
     cumulativePricePerUnit: _cumulativePricePerUnit,
-    compAddress: _compAddress
+    compAddress: _compAddress,
+    exportSectionName: Enums.EXPORT_TITLES.cumulativePricePerUnit
 };

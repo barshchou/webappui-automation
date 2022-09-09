@@ -8,7 +8,7 @@ jobs:
   Run-tsc-check:
     runs-on: ubuntu-latest
     if: github.event.label.name == 'ready_for_review'
-    container: cypress/browsers:node16.13.2-chrome100-ff98
+    container: cypress/included:10.3.1
     steps:
       - name: Checkout
         uses: actions/checkout@v3
@@ -25,7 +25,7 @@ jobs:
     needs: Run-tsc-check
     timeout-minutes: 20
     runs-on: ubuntu-latest
-    container: cypress/browsers:node16.13.2-chrome100-ff98
+    container: cypress/included:10.3.1
     permissions:
       id-token: write
       contents: read
@@ -54,20 +54,24 @@ jobs:
           echo ::set-output name=URL::$URL
           echo ::set-output name=CUSTOM_URL::$CUSTOM_URL
 
+      - name: Configure secrets
+        if: ${{ !env.ACT }} 
+        uses: aws-actions/configure-aws-credentials@v1
+        with:
+            role-to-assume: arn:aws:iam::814827541967:role/GithubOIDC-Role-QMKR3DR5WV3B
+            aws-region: 'us-east-1'
+            
       - name: Run smoke end-to-end tests with Currents dev
         uses: Bowery-RES/action-run-e2e-tests@latest
         with:
           github_token: ${{ secrets.GH_PERSONAL_ACCESS_TOKEN }}
-          username: ${{ secrets.USERNAME }}
-          password: ${{ secrets.PASSWORD }}
           url: ${{ steps.define_pull_request_data.outputs.URL }}
           customUrl: ${{ steps.define_pull_request_data.outputs.CUSTOM_URL }}
           tags: grep=,grepTags=@smoke,burn=
-          record_key: ${{ secrets.CURRENTS_RECORD_KEY }}
           ref: ${{ github.sha }}
+          secret_name: 'Github/Cypress/webapp-e2e-secrets'
         env:
           DD_CIVISIBILITY_AGENTLESS_ENABLED: true
-          DD_API_KEY: ${{ secrets.DD_API_KEY }}
           DD_ENV: ${{ github.event.inputs.url }}
           DD_SERVICE: 'webapp'
 
@@ -75,7 +79,7 @@ jobs:
     needs: [Run-tsc-check, Run-smoke-tests]
     timeout-minutes: 90
     runs-on: ubuntu-latest
-    container: cypress/browsers:node16.13.2-chrome100-ff98
+    container: cypress/included:10.3.1
     permissions:
       id-token: write
       contents: read
@@ -102,21 +106,25 @@ jobs:
           CHANGED_SPECS=$(npx find-cypress-specs --branch master)
           echo ::set-output name=CHANGED_SPECS::$CHANGED_SPECS
 
+      - name: Configure secrets
+        if: ${{ !env.ACT }} 
+        uses: aws-actions/configure-aws-credentials@v1
+        with:
+            role-to-assume: arn:aws:iam::814827541967:role/GithubOIDC-Role-QMKR3DR5WV3B
+            aws-region: 'us-east-1'
+
       - name: Run included specs
         if: steps.define_specs.outputs.CHANGED_SPECS != null
         uses: Bowery-RES/action-run-e2e-tests@latest
         with:
           github_token: ${{ secrets.GH_PERSONAL_ACCESS_TOKEN }}
-          username: ${{ secrets.USERNAME }}
-          password: ${{ secrets.PASSWORD }}
           url: ${{ needs.Run-smoke-tests.outputs.URL }}
           customUrl: ${{ needs.Run-smoke-tests.outputs.CUSTOM_URL }}
           spec_file: ${{ steps.define_specs.outputs.CHANGED_SPECS }}
-          record_key: ${{ secrets.CURRENTS_RECORD_KEY }}
           tags: grep=,grepTags=,burn=
           ref: ${{ github.sha }}
+          secret_name: 'Github/Cypress/webapp-e2e-secrets'
         env:
           DD_CIVISIBILITY_AGENTLESS_ENABLED: true
-          DD_API_KEY: ${{ secrets.DD_API_KEY }}
           DD_ENV: ${{ github.event.inputs.url }}
           DD_SERVICE: 'webapp'

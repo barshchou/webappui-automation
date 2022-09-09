@@ -63,11 +63,13 @@ class FindCompsPage extends BasePage {
     }
 
     getRemoveSelectedCompButtonByAddress(address: string) {
-        return cy.contains(address).parent().find('[data-qa="selected-comp-remove-btn"]');
+        return cy.contains("td", address).siblings("td[data-qa=selected-comp-actions]")
+            .find('[data-qa="selected-comp-remove-btn"]');
     }
 
     getRemoveDeletedCompButtonByAddress(address: string) {
-        return cy.contains(address).parent().find('[data-qa="removed-comp-remove-btn"]');
+        return cy.contains("td", address).siblings("td[data-qa=removed-comp-actions]")
+            .find('[data-qa="removed-comp-remove-btn"]');
     }
 
     getRemoveCompFromMapButtonByAddress(address: string) {
@@ -149,7 +151,11 @@ class FindCompsPage extends BasePage {
         return cy.get('[data-qa="filter-completedInPeriod"]');
     }
 
-    filterSalePeriodValue(value: string) {
+    get compStatusFilter() {
+        return cy.get("[data-qa=filter-statuses]");
+    }
+
+    filterOptionValue(value: string) {
         return cy.get(`[role="option"][data-value="${value}"]`);
     }
 
@@ -168,10 +174,6 @@ class FindCompsPage extends BasePage {
     get jobSearchTab() {
         return cy.get('[data-qa="job-tab"]');
     }
-
-    get reportIdInput() {
-        return cy.get('input[placeholder="Find a specific Report ID"]');
-    }
     
     get selectedForReportTitle() {
         return this.importCompModal.contains("Selected for report");
@@ -179,6 +181,14 @@ class FindCompsPage extends BasePage {
 
     get sfNewComp() {
         return cy.get('[title="SF"]');
+    }
+
+    compEditButton(index = 0) {
+        return this.getSelectedComparable(index).xpath(`//button[.='Details']`).eq(index);
+    }
+
+    get saveCompProperty() {
+        return cy.get(`[class="ant-modal-footer"]`, { includeShadowDom: true }).find("button").eq(1);
     }
 }
 

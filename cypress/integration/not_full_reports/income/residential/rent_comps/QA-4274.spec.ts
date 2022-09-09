@@ -3,19 +3,20 @@ import { createReport } from "../../../../../actions/base/baseTest.actions";
 import NavigationSection from "../../../../../actions/base/navigationSection.actions";
 import Income from "../../../../../actions/income/income.manager";
 
-describe("Verify Amenities drop-down field in the Map filter section on Rent Comps page", () => {
-    beforeEach("Login, create report", () => {
-        createReport(testData.reportCreationData);
-    });
+describe("Verify Amenities drop-down field in the Map filter section on Rent Comps page", 
+    { tags:[ "@income", "@commercial", "@in_place_rent_roll" ] }, () => {
+        beforeEach("Login, create report", () => {
+            createReport(testData.reportCreationData);
+        });
 
-    it("Test body", () => {
-        NavigationSection.navigateToRentComps();
-        Income.Residential.RentComps.BaseActions.clickAmenitiesArrow()
-            .checkListOfCheckboxesByQa(testData.amenitiesQaAttr)
-            .clickUnitTypesArrowButton()
-            .clickUnitTypesArrowButton()
-            .clickAmenitiesArrow()
-            .uncheckListOfCheckboxesByQa(testData.amenitiesQaAttr)
-            .clickAmenitiesArrow();
+        it("[QA-4274]", () => {
+            NavigationSection.navigateToResidentialRentComps();
+            Income.Residential.RentComps.BaseActions.clickAmenitiesArrow()
+                .checkListOfCheckboxesByQa(testData.amenitiesQaAttr)
+                .clickUnitTypesArrowButton()
+                .clickUnitTypesArrowButton()
+                .clickAmenitiesArrow()
+                .uncheckListOfCheckboxesByQa(testData.amenitiesQaAttr)
+                .clickAmenitiesArrow();
+        });
     });
-});

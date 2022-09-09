@@ -6,7 +6,7 @@ const allCheckboxes = Object.values(Enums.AMENITIES_CHECKBOXES);
 const withoutAdditionalCheckboxes = allCheckboxes.filter(unit => !unit.startsWith("building.outdoorSpace"));
 
 const buildingCheckboxes = allCheckboxes.filter(unit => {
-    unit.startsWith("building") && !unit.includes("building.outdoorSpace");
+    return unit.startsWith("building") && !unit.includes("building.outdoorSpace");
 });
 
 const unitCheckboxes = allCheckboxes.filter(unit => unit.startsWith("unit"));

@@ -9,13 +9,13 @@ const reportCreationFixture = () => {
 
 const _adminUsername = Cypress.env(`${Enums.USERS.webappAdminUsername}`);
 const _adminPassword = Cypress.env(`${Enums.USERS.webappAdminPassword}`);
-const _commentary = "A survey of active lenders in the subject property's influencing" + 
-                    " market indicates that 25-year and 30-year mortgage commitments" +
-                    " are typically 100 to 300 basis points above 10-year treasuries.";
+const _commentary = "A survey of active lenders in the subject property's influencing market indicates that " +
+    "25-year and 30-year mortgage commitments are typically 175 to 400 basis points above 10-year treasuries.";
 
 export default {
     reportCreationData: reportCreationFixture(),
     adminUsername: _adminUsername,
     adminPassword: _adminPassword,
-    commentary: _commentary
+    commentary: _commentary,
+    exportSectionName: Enums.EXPORT_TITLES.mortgageComponent
 };

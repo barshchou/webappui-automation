@@ -32,12 +32,12 @@ describe.skip("Verify the Comps can be added by entering the existing Report ID 
                 NavigationSection.navigateToFindComps(true);
                 Sales.FindComps.clickImportComparableButton()
                 // eslint-disable-next-line @typescript-eslint/no-explicit-any
-                    .enterReportToSearchComp(<any>reportId);
+                    .JobSearch.enterReportToSearchComp(<any>reportId);
             });
-            Sales.FindComps.Actions.clickSearchButton()
-                .checkSingleSalesCompsByEventId()
+            Sales.FindComps.JobSearch.clickSearchButton();
+            Sales.FindComps.checkSingleSalesCompsByEventId()
                 .selectAllCompsForImport()
                 .checkSelectedSingleSalesComps()
-                .clickImportCompsFromReportButton();
+                .JobSearch.clickImportCompsFromReportButton();
         });
     });

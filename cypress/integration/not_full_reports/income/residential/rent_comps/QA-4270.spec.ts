@@ -3,18 +3,19 @@ import { createReport } from "../../../../../actions/base/baseTest.actions";
 import NavigationSection from "../../../../../actions/base/navigationSection.actions";
 import Income from "../../../../../actions/income/income.manager";
 
-describe(" Verify Bedrooms drop-down field in the Map filter section", () => {
-    beforeEach("Login, create report", () => {
-        createReport(testData.reportCreationData);
-    });
+describe("Verify Bedrooms drop-down field in the Map filter section", 
+    { tags:[ "@income", "@commercial", "@in_place_rent_roll" ] }, () => {
+        beforeEach("Login, create report", () => {
+            createReport(testData.reportCreationData);
+        });
 
-    it("Test body", () => {
-        NavigationSection.navigateToRentComps()
-            .verifyProgressBarNotExist();
-        Income.Residential.RentComps.BaseActions.clickNumberOfBedroomsArrow()
-            .checkListOfCheckboxesByQa(testData.numberOfBedroomsQaAttr)
-            .clickSourceOfInfoButton()
-            .clickNumberOfBedroomsArrow()
-            .uncheckListOfCheckboxesByQa(testData.numberOfBedroomsQaAttr);
+        it("[QA-4270]", () => {
+            NavigationSection.navigateToResidentialRentComps()
+                .verifyProgressBarNotExist();
+            Income.Residential.RentComps.BaseActions.clickNumberOfBedroomsArrow()
+                .checkListOfCheckboxesByQa(testData.numberOfBedroomsQaAttr)
+                .clickSourceOfInfoButton()
+                .clickNumberOfBedroomsArrow()
+                .uncheckListOfCheckboxesByQa(testData.numberOfBedroomsQaAttr);
+        });
     });
-});
