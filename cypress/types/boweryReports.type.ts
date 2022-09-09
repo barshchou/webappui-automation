@@ -75,7 +75,10 @@ export namespace BoweryReports {
             typeof Enums.SALES_ADJUSTMENT_GRID_DISCUSSIONS[KeyInfo.SalesAdjustmentGridDiscussionsKeys]
         export type SalesAdjustmentGridRows = 
             typeof Enums.SALES_ADJUSTMENT_GRID_ROWS[KeyInfo.SalesAdjustmentGridRowsKeys]
-
+        export type OtherAdjustmentsRows =
+            typeof Enums.OTHER_ADJUSTMENTS_EXPANSION_ROWS[KeyInfo.OtherAdjustmentsExpansionRowsKeys]
+        export type UtilitiesAdjustmentsRows =
+            typeof Enums.UTILITIES_ADJUSTMENTS_EXPANSION_ROWS[KeyInfo.UtilitiesAdjustmentsExpansionRowsKeys]
     }
 
     export type ProFormaAnyIncome = {
@@ -186,6 +189,11 @@ export namespace BoweryReports {
         taxYear: number
     }
 
+    export type ProjectedTaxesSectionsKeys = keyof typeof Enums.PROJECTED_TAXES_SECTIONS
+    export type ProjectedTaxesSectionsValues = typeof Enums.PROJECTED_TAXES_SECTIONS[KeyInfo.ProjectedTaxesSectionsKeys]
+    export type ProjectedTaxesInputsNamesValues = 
+        typeof Enums.PROJECTED_TAXES_INPUTS[KeyInfo.ProjectedTaxesInputsNamesKeys]
+
     export type UnitType = keyof typeof Enums.UNIT_TYPE
     export type SourceOfInformation = typeof Enums.SOURCE_OF_INFORMATION[KeyInfo.SourceOfInformationKeys]
     export type Amenities = keyof typeof Enums.AMENITIES
@@ -213,24 +221,36 @@ export namespace BoweryReports {
 
     export type MarketAnalysisUses = keyof typeof Enums.MARKET_ANALYSIS_USES
 
+    export type ExportTitles = typeof Enums.EXPORT_TITLES[KeyInfo.ExportTitlesKeys];
+
     export type PropertyConditions = typeof Enums.PROPERTY_CONDITIONS[KeyInfo.PropertyConditions];
 
     export type PropertyConditionsRadios = keyof typeof Enums.PROPERTY_CONDITIONS_RADIOS;
     export type BondTickers = typeof Enums.BOND_TYPES[KeyInfo.BondTypes]
     export type BondTypes = keyof typeof  Enums.BOND_TYPES
-	export type ExpenseCardNames = typeof Enums.EXPENSES_CARD_NAMES[KeyInfo.ExpenseCardName]
+    export type ExpenseCardNames = typeof Enums.EXPENSES_CARD_NAMES[KeyInfo.ExpenseCardName]
 
     export namespace FindComps {
+        export type CompsData = {
+            gbaValue?: number
+            yearBuilt?: string,
+            floors?: number,
+            commercialUnits?: number,
+            commercialArea?: number,
+            compType?: ComparableTypes
+        }
         export type SalePeriodValues = typeof Enums.SALE_PERIOD_VALUES[KeyInfo.SalePeriodValues]
         export type SelectedComparablesSortType = typeof Enums.SORT_VALUES[KeyInfo.SortValues]
         export type ConditionValueType = typeof Enums.CONDITION_VALUES[KeyInfo.ConditionValues]
         export type ComparableTypes = typeof Enums.COMPARABLE_TYPES[KeyInfo.ComparableTypes]
         export type SaleStatusType = typeof Enums.SALE_STATUSES[KeyInfo.SaleStatuses]
+        export type CompStatusValues = typeof Enums.COMP_STATUS_VALUES[KeyInfo.CompStatusValues]
     }
     
     export type CalculationType = typeof Enums.CALCULATION_TYPE[KeyInfo.CalculationType]
     export type FileSelection = typeof Enums.FILE_SELECTION_NAMES[KeyInfo.FileSelection]
 
+    export type FeasiblePropertyType = keyof typeof Enums.FEASIBLE_PROPERTY_TYPES
     export type PropertyDiscussion = typeof Enums.PROPERTY_DISCUSSION_NAMES[KeyInfo.PropertyDiscussion]
     export type BasisSquareFootAnalysis = typeof Enums.BASIS_SQUARE_FOOT_ANALYSIS[KeyInfo.BasisSquareFootAnalysis]
     export type BasisSquareFootAnalysisTexts =
@@ -246,4 +266,19 @@ export namespace BoweryReports {
         type: BoweryReports.DateType,
         date: string
     }
+
+    export type HighestAndBestUseComments = typeof Enums.HIGHEST_AND_BEST_USE_COMMENTS_ENUM[
+        KeyInfo.HighestAndBestUseCommentsKeys
+    ]
+    export type AdjustmentExpansionLabels =
+        typeof Enums.ADJUSTMENT_EXPANSION_LABELS[KeyInfo.AdjustmentExpansionLabelsKeys]
+
+    export type ChipsType = typeof Enums.CHIPS[KeyInfo.ChipsKeys]
+    export type ExpenseDataProvider = typeof Enums.EXPENSE_DATA_PROVIDER[KeyInfo.ExpenseDataProvider]
+    export type ExpenseItemBasisOfComparison = typeof
+        Enums.EXPENSE_ITEM_BASIS_OF_COMPARISON[KeyInfo.ExpenseItemBasisOfComparison]
+
+    export type PagesTexboxNamesType = typeof Enums.PAGES_TEXTBOX_NAMES[KeyInfo.PagesTexboxNamesKeys]
+    
+    export type FinalValuesApproach = typeof Enums.FINAL_VALUES_APPROACH[KeyInfo.FinalValuesApproach]
 }

@@ -22,7 +22,7 @@ describe("Verify the Save & Continue button functionality on the Stabilized Rent
                 .chooseCheckBoxesIsInspectedFromList(testData.isInspected);
 
             cy.stepInfo(` 2. Verify the Save & Continue button is displayed on the Stabilized Rent Roll page `);
-            Base._NavigationSection.clickIncomeApproachButton().navigateToStabilizedRentRollInCommercial();
+            Base._NavigationSection.navigateToCommercialStabilizedRentRoll();
             Income._CommercialManager.StabilizedRentRoll.verifyThatPageIsOpened()
                 .Page.SaveAndContinueBtn.scrollIntoView().should('exist');
 

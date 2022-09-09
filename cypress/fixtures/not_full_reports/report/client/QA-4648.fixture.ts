@@ -1,7 +1,10 @@
+import Enums from "../../../../enums/enums";
 import ReportDataCreator from "../../../data_creator/reportData.creator";
 
 export default {
     reportCreationData: ReportDataCreator.getReportData("4648"),
+    intendedUser: Enums.PAGES_TEXTBOX_NAMES.intendedUser,
+    identificationOfTheClient: Enums.PAGES_TEXTBOX_NAMES.identificationOfTheClient,
     textToType: "=F",
     verifyListValue: "Foreclosure Sale",
     verifyAreaValue: "The above transaction reflects a foreclosure sale of the property. Typically in a " + 

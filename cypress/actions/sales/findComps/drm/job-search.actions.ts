@@ -3,7 +3,7 @@ import { findCompsPage } from "../../../../pages/sales/findComps.page";
 import { CompPlex } from "../../../../types/compplex.type";
 import { Alias } from "../../../../utils/alias.utils";
 
-const { numberFilters, salePeriod, propertyType } = enums.COMPPLEX_ENUM._jobSearch;
+const { numberFilters, salePeriod, propertyType, minMaxInputs } = enums.COMPPLEX_ENUM._jobSearch;
 
 
 class JobSearchActions {
@@ -25,6 +25,42 @@ class JobSearchActions {
         this.Page.jobSearchFilterPropertyType.should("exist");
         this.Page.jobSearchFilterResidentialUnits.should("exist");
         this.Page.jobSearchOnAppJobCheckbox.should("exist");
+        return this;
+    }
+
+    checkAllFiltersAreEnabled() {
+        this.Page.jobSearchFilterInputCompletedIn.should("be.enabled");
+        this.Page.jobSearchFilterInputPropertyType.should("be.enabled");
+        this.Page.jobSearchOnAppJobCheckbox.should("be.enabled");
+        Object.values(numberFilters).forEach(element => {
+            Object.values(minMaxInputs).forEach(key => {
+                this.Page.jobSearchGetFilterInput(key, element).should("be.enabled");
+            });
+        });
+        return this;
+    }
+
+    checkAllFiltersAreDisabled() {
+        this.Page.jobSearchFilterInputCompletedIn.should("be.disabled");
+        this.Page.jobSearchFilterInputPropertyType.should("be.disabled");
+        this.Page.jobSearchOnAppJobCheckbox.should("be.disabled");
+        Object.values(numberFilters).forEach(element => {
+            Object.values(minMaxInputs).forEach(key => {
+                this.Page.jobSearchGetFilterInput(key, element).should("be.disabled");
+            });
+        });
+        return this;
+    }
+
+    checkAllFiltersAreEmpty() {
+        this.Page.jobSearchFilterInputCompletedIn.should("have.value", "");
+        this.Page.jobSearchFilterInputPropertyType.should("have.value", "");
+        this.Page.jobSearchOnAppJobCheckbox.should("not.be.checked");
+        Object.values(numberFilters).forEach(element => {
+            Object.values(minMaxInputs).forEach(key => {
+                this.Page.jobSearchGetFilterInput(key, element).should("be.empty");
+            });
+        });
         return this;
     }
 
@@ -50,7 +86,7 @@ class JobSearchActions {
                          * composing selector from key (min or max) and filterName,
                          * accessing to data (`minmax["min"]`) and casting `number` to `string`
                          */
-                        this.Page.jobSearchGetFilterInput(key, filterName).type(minmax[key].toString());
+                        this.Page.jobSearchGetFilter(key, filterName).type(minmax[key].toString());
                         // waiting map to be updated since every enter to filter triggers gql query
                         cy.wait(`@${Alias.gql.SearchJobs}`, { timeout: 120000 });
                     }   
@@ -111,7 +147,7 @@ class JobSearchActions {
         if (!Cypress._.isNil(period)) {
             cy.log(`Sale Period for JobFilter: ${salePeriod[period]}`);
             this.Page.filterSalePeriod.click();
-            this.Page.filterSalePeriodValue(salePeriod[period]).click();
+            this.Page.filterOptionValue(salePeriod[period]).click();
             cy.wait(`@${Alias.gql.SearchJobs}`, { timeout: 120000 });
         } else {
             cy.log("No Sale Period was sent to filter");
@@ -127,9 +163,14 @@ class JobSearchActions {
      * @param type Type(s) of property in JobSearch (can select one or more)
      */
     jobSearchSetPropertyTypes(type: CompPlex.JobSearch.PropertyType) {
-        this.Page.jobSearchFilterPropertyType.click();
-        this.Page.filterPropertyTypeValue(propertyType[type]).type(`{esc}`, { force:true });
-        cy.wait(`@${Alias.gql.SearchJobs}`, { timeout: 120000 });
+        if (!Cypress._.isNil(type)) {
+            cy.log(`Property Type for JobFilter: ${propertyType[type]}`);
+            this.Page.jobSearchFilterPropertyType.click();
+            this.Page.filterPropertyTypeValue(propertyType[type]).type(`{esc}`, { force:true });
+            cy.wait(`@${Alias.gql.SearchJobs}`, { timeout: 120000 });
+        } else {
+            cy.log("No Property Type was sent to filter");
+        }
         return this;
     }
 
@@ -139,7 +180,8 @@ class JobSearchActions {
      */
     jobSearchSetupFilter(filter: CompPlex.JobSearch.JobFilter) {
         this.jobSearchSetSalePeriod(filter.salePeriod)
-            .jobSearchSetPropertyTypes(filter.propertyType).jobSearchSetOnAppJobs(filter.isShowOnlyOnAppJobs);
+            .jobSearchSetPropertyTypes(filter.propertyType)
+            .jobSearchSetOnAppJobs(filter.isShowOnlyOnAppJobs); 
         // iterating over existing filters and setting the value
         Object.values(numberFilters).forEach(element => {
             this.jobSearchFilterSetMinMax(element, filter[element]);
@@ -155,19 +197,42 @@ class JobSearchActions {
         return this;
     }
 
+
+
+
     /**
      * Focuses on first available job icon on map and opens its job-card
      */
-    focusOnJobIcon() {
-        this.Page.selectCompsIconOnMap.first().dblclick({ force:true });
-        cy.wait(`@${Alias.gql.SearchJobs}`, { timeout: 120000 }).as(Alias.jobSearch.jobCardComp);
-        this.Page.selectCompsIconOnMap.first().click();
+    focusOnJobIcon(iconIndex = 0) {
+        this.Page.selectCompsIconOnMap.eq(iconIndex).dblclick({ force:true });
+        cy.wait(`@${Alias.gql.SearchJobs}`, { timeout: 120000 });
+        /**
+         * We need cy.wait here, because after gql response spinner sometimes may appear later
+         */
+        cy.wait(1000);
+        findCompsPage.loadingModalSpinner.should('not.exist');
+        /** 
+         * We need cy.wait here, because after spinner some of the comp 
+         * icons still in process of rendering their position on the map (so are non-clickable)
+         */
+        cy.wait(1000);
+        this.Page.selectCompsIconOnMap.eq(iconIndex).click();
         this.Page.jobCard.should("be.visible");
-
+        /**
+         * We need cy.wait + loadingModalSpinner.should('not.exist') here, because after 
+         * selectCompsIconOnMap.eq(iconIndex).click() gql response may be executed, may be not.
+         */
+        cy.wait(1000);
+        findCompsPage.loadingModalSpinner.should('not.exist');
+        cy.get(`@${Alias.gql.SearchJobs}`).as(Alias.jobSearch.jobCardComp);
         // ernst: after job-card became visible - we need retrieve all necessary comp data for further manipulations
         this.retrieveJobCardData(Alias.jobSearch.jobCardComp, Alias.jobSearch.selectedCompData);
         return this;
     }
+
+
+
+
 
     /**
      * Parse data from intercepted request `searchJobs` when we zoom in to JobCard
@@ -236,5 +301,99 @@ class JobSearchActions {
         });
         return this;
     }
+    
+    /**
+     * Action opens 'JOB SEARCH' tab, enters report id, finds comp on map
+     * and imports comps to existing report
+     */
+    addNewCompViaReportId(reportId: string) {
+        this.enterReportToSearchComp(reportId)
+            .clickSearchButton()
+            .clickSelectCompsIconOnMap()
+            .clickSelectCompsButton()
+            .clickSelectAllButton()
+            .clickImportCompsFromReportButton();
+        return this;
+    }
+
+    
+    /**
+     * Action enters report id into field 'Report ID' on 'JOB SEARCH' tab
+     * 
+     * NOTES: 
+     * 1. If it needs, we can upgrade this method, cos it cant add two imports because of scroll.
+     */
+    enterReportToSearchComp(reportID: string) {
+        cy.intercept("GET", `/salesComps/eventIds/${reportID}`)
+            .as(Alias.salesCompsEventIds);
+            
+        /*
+         * method chain below is necessary to interact with input correctly 
+         * this is the stable implementation we could provide    
+         */
+        findCompsPage.reportIdInput
+            .should('exist')
+            // making `reportIdInput` interactable to Cypress' `type` method  
+            .realClick({ clickCount: 10 })
+            // append some text to clear input further since we need need clear input to type some new data
+            .type("textforclear", { force: true })
+            .realClick({ clickCount: 10 })
+            // focusing on input to make Cypress' `clear` method work
+            .focus()
+            .clear( { force: true })
+            // making `reportIdInput` interactable to Cypress' `type` method once more
+            .realClick({ clickCount: 10 })
+            .should('be.focused')
+            .realType(`${reportID}{enter}`);
+        findCompsPage.reportIdInput.should("have.value", reportID);
+        return this;
+    }
+
+    clickSearchButton() {
+        findCompsPage.searchButton.should('exist')
+            .should('be.enabled').click();
+        return this;
+    }
+    
+    clickSelectCompsIconOnMap(index = 0) {
+        findCompsPage.selectCompsIconOnMap.should('exist');
+        findCompsPage.selectCompsIconOnMap.eq(index).click();
+        findCompsPage.selectCompsButton.should('exist');
+        return this;
+    }
+
+    clickSelectCompsButton() {
+        findCompsPage.selectCompsButton.should('exist')
+            .should('be.enabled').click();
+        return this;
+    }
+    
+    clickSelectAllButton() {
+        findCompsPage.selectAllButton.should('exist').should('be.enabled');
+        findCompsPage.selectedForReportTitle.should('exist');
+        findCompsPage.selectAllButton.click();
+        return this;
+    }
+
+    clickImportCompsFromReportButton() {
+        findCompsPage.addToReportCompsButton.should("be.visible")
+            .should("be.enabled").click();
+        return this;
+    }
+
+    clearReportIdField() {
+        findCompsPage.reportIdClearButton.should('exist')
+            .click();
+        findCompsPage.reportIdInput.should("be.empty");
+        return this;
+    }
+
+    clearAllFiltersViaReset() {
+        this.Page.filtersResetAllButton.should('exist')
+            .click();
+        this.checkAllFiltersAreEmpty();
+        return this;
+    }
+    
 }
 export default new JobSearchActions(findCompsPage);

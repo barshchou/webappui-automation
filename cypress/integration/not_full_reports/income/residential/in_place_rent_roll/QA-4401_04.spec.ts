@@ -14,7 +14,8 @@ describe("Verify the Save and Save&Continue buttons functionality",
         });
 
         it("QA-4401 Save button", () => {
-            Income.Residential.InPlaceRentRoll.clickSaveButton();
+            Income.Residential.InPlaceRentRoll.clickSaveButton()
+                .verifyProgressBarNotExist();
             cy.reload();
             Income.Residential.InPlaceRentRoll.verifyProgressBarNotExist()
                 .verifyCheckboxIsChecked(testData.forecastLabel);

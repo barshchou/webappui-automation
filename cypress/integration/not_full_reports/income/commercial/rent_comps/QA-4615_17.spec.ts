@@ -11,7 +11,7 @@ describe("Verify Input in 'Use-Other*' free text works correctly",
             createReport(testData.reportCreationData);
         });
 
-        it("[QA-4618]", () => {
+        it("[QA-4615-17]", () => {
             cy.stepInfo("2. Go to Income > Commercial > Rent Comps add comp and click Edit"); 
             _NavigationSection.navigateToCommercialRentComps();
             Income._CommercialManager.RentComps.openMap()

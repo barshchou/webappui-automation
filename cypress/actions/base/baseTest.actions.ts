@@ -5,6 +5,8 @@ import { createPayload } from "../../api/report_payloads/462Avenue1NY.payload";
 import mapKeysUtils from "../../utils/mapKeys.utils";
 import { _HomePage } from ".";
 import { Alias, gqlOperationNames } from "../../utils/alias.utils";
+import { Report } from "../index";
+import reportTitlesEnum from "../../enums/pages_titles/reportTitles.enum";
 
 /**
  * Login action
@@ -40,7 +42,8 @@ export const createReport = (reportCreationData: BoweryAutomation.ReportCreation
             });
             cy._mapGet(mapKeysUtils.reportId).then(reportId => {
                 cy.log("Report id: "+reportId);
-                cy.visit(`/report/${reportId}`);
+                cy.visit(`/report/${reportId}/report-information`);
+                Report._KeyInfo.Page.pageTitle.should("have.text", reportTitlesEnum.KEY_INFO).and("be.visible");
             });
         } else {
             _HomePage.createReport(reportCreationData);
@@ -67,6 +70,7 @@ export const salesInterceptions = () => {
         aliasQuery(req, gqlOperationNames.updateJob);
         aliasQuery(req, gqlOperationNames.findTransactionsByIdsAndVersions);
         aliasQuery(req, gqlOperationNames.searchJobs);
+        aliasQuery(req, gqlOperationNames.searchTransactionsByAddresses);
     });
 };
 
