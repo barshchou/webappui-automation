@@ -100,20 +100,15 @@ TODO: add flow regarding comp-plex development later
 
 ### Secrets update <a id="#secrets-update"></a>
 
+Quick recap: please, refer to next page in [Notion](https://www.notion.so/boweryvaluation/AWS-Secret-Manager-db893148e2b34445928f787169791485)
+
 We have tests which requires login as specific user (Lead Appraiser, Appraiser user, Admin and etc), you can find them by `@permissions_roles` tag. 
 
 Or we want store some secret data which is too complex and big to store in GH Actions secrets (any json-like structure).
 
 We could've store these secrets in GH Actions secrets, but in that case we won't have an option to edit them (especially, if we store a pretty big `json`).
 
-That's why we need AWS Secret Manager. We set there secret `Github/Cypress/User_Roles` which store data about User Roles (their usernames and passwords). 
-If you want to edit/add secrets: 
 
-TODO: better add link to Notion page with images
-1. Go to the AWS (use AWS SSO, which you can find in `Google apps` in your Bowery Gmail account).
-2. Select `GoogleSAMLPowerUserRole` in `bowery-prod` section.
-3. Find AWS Secret Manager in Search and navigate there.
-4. Paste secret name you want to edit or create your own (**IMPORTANT:** Naming convention for such secrets should be next - Github/Cypress/**, like `Github/Cypress/User_Roles`).
 
   ### GH Actions debug <a id="gh_actions_debug"></a>
 
@@ -139,9 +134,9 @@ cypress/downloads/TestAutoReport-QA-4719 - 462 1st Avenue, Manhattan, NY 10016.d
 
 ## Usage <a id="usage"></a>
 
-General way to run all cypress tests to run `npx cypress run` command. This command will run all existing test spec headless in electron browser at staging environment, using Api login method by default. General way to open cypress GUI is to run `npx cypress open` command.
+TLDR: to open Cypress - run `npm run cy:open`. Don't forget to create `cypress.env.json` in root of project fill it with value of `Github/Cypress/webapp-e2e-secrets` secret from AWS Secret Manager. 
 
-`package.json` file in `"scripts":` property contains ready to use commands for some mostly used cases. For example `npm run cy:open` command will open cypress GUI, `npm run cy:chrome_headed_prod_api` will run all tests in chrome headed browser at production environment, using Api login method etc.  
+For more info: refer to [description of npm script](#npm_scripts)
 
 ### CLI flags <a id="cli_flags"></a>
 
@@ -154,7 +149,7 @@ npx cypress run --env url=prod
 ```
 or
 ```shell
-npm run 
+npm run cy:open -- --env url=custom,customUrl='https://playwright.dev'
 ```
 will run tests at production environment. If this variable was not passed, uses `staging` by default.
 2. `loginMethod=` - accepts values `ui` or `api` for login by UI or Api. Example of usage: `npx cypress run --env loginMethod=ui` will launch tests with login by UI. If this variable was not passed, uses `api` by default.
@@ -163,7 +158,7 @@ Example of combining previous variables: `npx cypress run --env url=dev,loginMet
 
 ### Tags and tagged test run <a id="tagged_run"></a>
 
-Sometimes there could be a case when we need to run 
+Please, refer to next page in [Notion](https://www.notion.so/boweryvaluation/Tags-and-their-usage-6b99bfbe85144ed9aba19c64684062ca)
 
 ### Run tests on custom env / localhost <a id="run_tests_in_custom_env"></a>
 
@@ -210,6 +205,8 @@ Please, refer to [Notion](https://www.notion.so/boweryvaluation/webapp-ui-automa
 | -------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | act:debug            | Runs [act cli](https://github.com/nektos/act) for local GithubAction workflow (you can check install_notes in `.act` dir for more).                                                                                                                                          |
 | cy:open      | Opens [Cypress GUI](https://docs.cypress.io/guides/getting-started/installing-cypress#Opening-Cypress)                                                     |
+| cy:open:comp_plex      | Opens [Cypress GUI](https://docs.cypress.io/guides/getting-started/installing-cypress#Opening-Cypress) with on Comp-plex dev env                                                     |
+| cy:run      | Base command to run Cypress tests in headless mode. By default uses Electron (to use Chrome - pass `--browser=chrome` to command)                                                     |
 | cy:chrome:snapshot_tests       | Runs [snapshot tests](https://github.com/jaredpalmer/cypress-image-snapshot#cypress-image-snapshot) in headless Chrome                                                        |
 | cy:chrome:update_snapshots    | Updates [snapshot tests](https://github.com/jaredpalmer/cypress-image-snapshot#updating-snapshots) in headless Chrome                                 |
 | cy:chrome_headed_stage_api     | Runs tests in a headed-mode on staging env (default env for test runs) in Chrome |
