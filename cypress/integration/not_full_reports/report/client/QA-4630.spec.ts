@@ -25,6 +25,6 @@ describe("Verify the functionality of the NYCB Application No. (optional) field"
             cy.stepInfo(`4. Proceed to the Preview & Edit > Cover page and verify that the Client 
             from the previous step is displayed in the APPRAISAL REPORT section.`);
             _NavigationSection.navigateToCoverPage();
-            PreviewEdit._CoverPage.verifyApplicationNumber(testData.clientFileNumber);
+            PreviewEdit._CoverPage.verifyRequestedRow(testData.applicationNumber, testData.clientFileNumber);
         });
     });

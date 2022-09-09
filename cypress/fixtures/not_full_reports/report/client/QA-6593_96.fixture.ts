@@ -2,14 +2,14 @@ import ReportDataCreator from "../../../data_creator/reportData.creator";
 
 const clientNames = [
     "Andrew Winston",
-    "Brent Carter",
+    "Betsy Lim",
     "Joseph Weishaar",
     "Jorge Lopez"
 ];
 
 const organizationNames = [
     "Greystone Servicing Corporation, Inc.",
-    "Greystone Servicing Corporation, Inc.",
+    "Alpine Bank",
     "Manhatten Valley LM Apartment",
     "LLC, Flip That House"
 ];

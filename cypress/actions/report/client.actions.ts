@@ -148,7 +148,7 @@ class ClientActions extends BaseActionsExt<typeof clientPage> {
     }
 
     clickAddAdditionalClientBtn(): ClientActions {
-        clientPage.addAdditionalClientBtn.click();
+        clientPage.addAdditionalClientBtn.click({ force: true });
         return this;
     }
 
