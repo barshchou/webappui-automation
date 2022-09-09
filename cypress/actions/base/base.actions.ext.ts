@@ -10,6 +10,7 @@ import { RealClickOptions } from 'cypress-real-events/commands/realClick';
 import BasePage from "../../pages/base/base.page";
 import BaseActions from "./base.actions";
 import { numberWithCommas } from "../../../utils/numbers.utils";
+import { Utils } from '../../types/utils.type';
 
 export default class BaseActionsExt<T extends BasePage> extends BaseActions {
     Page: T;
@@ -181,6 +182,29 @@ export default class BaseActionsExt<T extends BasePage> extends BaseActions {
         (""+value).split("").forEach(n => {
             cy.get(`@${elemAlias}`).eq(index).focus().type(`${n}`);
             cy.wait(100);
+        });
+        return this;
+    }
+
+    waitForUrl(route: Utils.Routes) {
+        cy.url().should("include", route);
+        return this;
+    }
+
+    submitSaveChangesModal(saveChanges = true): this {
+        cy.get("body").then($body => {
+            if ($body.text().includes("You have unsaved changes")) {
+                cy.get("[data-qa=form-confirm-dialog]").invoke('prop', 'hidden').then($prop => {
+                    cy.log(`${$prop}`);
+                    if ($prop == false) {
+                        if (saveChanges) { 
+                            this.clickYesButton(); 
+                        } else {
+                            this.clickNoButton();
+                        }
+                    }
+                });
+            }
         });
         return this;
     }

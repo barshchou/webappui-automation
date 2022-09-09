@@ -2,6 +2,7 @@ import clientPage from "../../pages/report/client.page";
 import { replaceEntersWithLineBreak } from "../../../utils/string.utils";
 import BaseActionsExt from "../base/base.actions.ext";
 import { numberWithCommas } from "../../../utils/numbers.utils";
+import routesUtils from "../../utils/routes.utils";
 
 class ClientActions extends BaseActionsExt<typeof clientPage> {
     enterIntendedUser(textToType: string = null, edit = true, save = true, revert = false) {
@@ -52,7 +53,9 @@ class ClientActions extends BaseActionsExt<typeof clientPage> {
     }
 
     clickAddClientButton() {
-        clientPage.addClientButton.click();
+        clientPage.addNewClient.click();
+        this.submitSaveChangesModal()
+            .waitForUrl(routesUtils.organizationNewClient);
         return this;
     }
 

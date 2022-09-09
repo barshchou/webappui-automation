@@ -50,7 +50,8 @@ const routes =  {
     renovation: "/renovations",
     reviewExport: "/review-and-export",
     organizationInfo: "/organization-info",
-    commercialCompGroupsDiscussion: "/commercial-comp-groups-discussion"
+    commercialCompGroupsDiscussion: "/commercial-comp-groups-discussion",
+    organizationNewClient: "/organization-new-client"
 } as const;
 
 export default routes;
