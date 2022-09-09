@@ -1,5 +1,5 @@
 import { Report } from '../../../../actions';
-import testData from "../../../../fixtures/not_full_reports/report/client/QA-6538-42.fixture";
+import testData from "../../../../fixtures/not_full_reports/report/client/QA-6538-42_6766.fixture";
 import { createReport } from "../../../../actions/base/baseTest.actions";
 import { _NavigationSection } from "../../../../actions/base";
 import { normalizeText } from '../../../../../utils/string.utils';
@@ -13,7 +13,7 @@ describe("Verify the functionality of the Add Additional Client",
             _NavigationSection.navigateToClientPage();
         });
 
-        it("[QA-6538]", () => {
+        it("[QA-6538_6766]", () => {
             cy.stepInfo("2. Verify that the 'Add Additional Client' button is displayed and disabled");
             Report._Client.Page.addAdditionalClientBtn.should("be.disabled");
 

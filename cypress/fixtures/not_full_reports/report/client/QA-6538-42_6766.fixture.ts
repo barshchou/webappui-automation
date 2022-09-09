@@ -30,7 +30,7 @@ const identificationOfTheClientText = {
 };
 
 export default {
-    reportCreationData: ReportDataCreator.getReportData("6538-42"),
+    reportCreationData: ReportDataCreator.getReportData("6538-42_6766"),
     intendedUser: Enums.PAGES_TEXTBOX_NAMES.intendedUser,
     identificationOfTheClient: Enums.PAGES_TEXTBOX_NAMES.identificationOfTheClient,
     clientNames,
