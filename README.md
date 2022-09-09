@@ -63,13 +63,11 @@ There are several main folders of these project:
 ### Setup <a id="setup"></a>
 1. Clone repo
 2. Install packages. Run `npm i`
-3. Add `cypress.env.json` file to the root of project with following format:
-```json
-{
-  "USERNAME": "value", 
-  "PASSWORD": "value"
-}
-```
+3. Create `cypress.env.json` file in the root of project and fill it with value of `Github/Cypress/webapp-e2e-secrets` from AWS Secret Manager. 
+
+
+After this - you will be ready to go to the [Usage](#usage) section
+
 ## Contributing <a id="contributing"></a>
 ### Development flow <a id="development_flow"></a>
 
