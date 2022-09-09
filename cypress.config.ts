@@ -99,6 +99,12 @@ export default defineConfig({
                 }
             });
 
+            on("task", {
+                async copyReportToArchive(report: string) {
+                    return await fsUtil._copyReportToArchive(report);
+                }
+            });
+
             on('after:spec', (spec) => {
                 if (spec.name.includes('export')) {
                     fsUtil._deleteFolder("cypress/downloads");

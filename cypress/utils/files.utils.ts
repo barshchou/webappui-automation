@@ -1,6 +1,6 @@
 import { sync } from "glob";
 import { convertToHtml } from "mammoth";
-import { existsSync, writeFileSync, rmdir } from "fs";
+import { existsSync, writeFileSync, readFileSync, rmdir, mkdirSync } from "fs";
 
 /**
  * Get relative path to the file (report docx file or converted html in our case)
@@ -29,6 +29,18 @@ const _getFilePath = async (_reportName: string, _docxHtml: string, currentTime 
 const _convertDocxToHtml = async (report: string): Promise<null> => {
     let result = await convertToHtml({ path: report });
     writeFileSync(`${report}.html`, result.value);
+    return null;
+};
+
+const _copyReportToArchive = async (report: string): Promise<null> => {
+    let dir = "cypress/archive";
+    if (!existsSync(dir)) {
+        mkdirSync(dir, 0o744);
+    }
+    let result = await convertToHtml({ path: report });
+    let newPath = report.replace("downloads", "archive");
+    writeFileSync(newPath, readFileSync(report));
+    writeFileSync(`${newPath}.html`, result.value);
     return null;
 };
 
@@ -72,5 +84,6 @@ export default {
     _waitForFileExists,
     _convertDocxToHtml,
     _getFilePath,
-    _deleteFolder
+    _deleteFolder,
+    _copyReportToArchive
 };

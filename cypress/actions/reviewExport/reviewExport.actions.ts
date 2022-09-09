@@ -66,6 +66,7 @@ class ReviewExportActions extends BaseActionsExt<typeof reviewExportPage> {
             cy.log(<string>file);
             cy.task("waitForFileExists", file);
             cy.task("convertDocxToHtml", file);
+            cy.task("copyReportToArchive", file);
         });
         return this;
     }
