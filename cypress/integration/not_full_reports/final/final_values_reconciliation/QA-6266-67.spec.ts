@@ -1,9 +1,7 @@
-import { Sales, Final } from '../../../../actions/index';
 import testData from "../../../../fixtures/not_full_reports/final/final_values_reconciliation/QA-6266-67.fixture";
 import { createReport } from "../../../../actions/base/baseTest.actions";
-import NavigationSection from "../../../../actions/base/navigationSection.actions";
-import Property from "../../../../actions/property/property.manager";
-import { Income } from "../../../../actions";
+import { _NavigationSection } from '../../../../actions/base';
+import { Income, Property, Sales, Final } from "../../../../actions";
 
 // TODO: Test fails due to bug: https://bowery.atlassian.net/browse/WEB-6862
 describe(`As Is, As Stabilized, Market Value is calculated correctly on Reconciliation card for AsStabilized report`,
@@ -15,30 +13,30 @@ describe(`As Is, As Stabilized, Market Value is calculated correctly on Reconcil
             cy.stepInfo(`2. Set square foot analysis and value for it; 
                         set commercial and residential units; 
                         set commercial units SF`);
-            NavigationSection.navigateToPropertySummary();
-            Property.Summary.selectBasisSquareFootAnalysis(testData.basisForSquareFootAnalysis)
+            _NavigationSection.navigateToPropertySummary();
+            Property._Summary.selectBasisSquareFootAnalysis(testData.basisForSquareFootAnalysis)
                 .fillBasisSquareFootAnalysis(testData.squareFootAnalysisArea)
                 .enterNumberOfCommercialUnits(testData.commercialUnits)
                 .enterNumberOfResUnits(testData.residentialUnits);
-            NavigationSection.navigateToCommercialUnits();
-            Property.CommercialUnits.enterListUnitSF(testData.commercialUnitsSF, testData.commercialUnits);
+            _NavigationSection.navigateToCommercialUnits();
+            Property._CommercialUnits.enterListUnitSF(testData.commercialUnitsSF, testData.commercialUnits);
 
             cy.stepInfo(`3. Fill commercial units with valid values`);
-            NavigationSection.navigateToCommercialInPlaceRentRoll();
+            _NavigationSection.navigateToCommercialInPlaceRentRoll();
             testData.commercialMonthlyRent.forEach((commercialUnitRent, index) => {
                 Income._CommercialManager.InPlaceRentRoll.chooseLeaseStatusByRowNumber(testData.leaseStatus, index)
                     .enterRentPerSFAnnuallyByRowNumber(commercialUnitRent, index);
             });
 
             cy.stepInfo(`4. Fill residential units with valid values`);
-            NavigationSection.navigateToResInPlaceRentRoll();
+            _NavigationSection.navigateToResInPlaceRentRoll();
             testData.residentialMonthlyRent.forEach((residentialUnitRent, index) => {
                 Income._Residential.InPlaceRentRoll.enterLeaseStatusByRowNumber(testData.leaseStatus, index)
                     .enterMonthlyRentByRowNumber(residentialUnitRent, index);
             });
 
             cy.stepInfo(`5. Set Cap Rate value`);
-            NavigationSection.navigateToCapRateConclusion();
+            _NavigationSection.navigateToCapRateConclusion();
             Income._CapRateConclusion.enterConclusionSectionConcludedCapRate(testData.capRate)
                 .setRoundingFactorValueAlias();
 
@@ -65,17 +63,17 @@ describe(`As Is, As Stabilized, Market Value is calculated correctly on Reconcil
                     testData.valueConclusionKeyAsStabilized, testData.rentLossTypeUndetermined);
 
             cy.stepInfo(`8. Navigate to Sales -> Value Conclusion page and set Concluded value per SF`);
-            NavigationSection.navigateToSalesValueConclusion();
+            _NavigationSection.navigateToSalesValueConclusion();
             Sales._ValueConclusion.enterSaleValueConclusion(testData.concludedValuePerSf);
 
             cy.stepInfo(`9. Set final values into cy._map`);
-            Sales._ValueConclusion.setMarketValueFinal(testData.valueConclusionAsStabilized)
+            Sales._ValueConclusion.setMarketValueFinal(testData.valueConclusionAsIs)
                 .setMarketValueFinal(testData.valueConclusionAsIs);
         });
 
         it("[QA-6266][QA-6267]", () => {
             cy.stepInfo(`10. Navigate to Final -> Final Values Reconciliation. Check 'Sales' value approach.`);
-            NavigationSection.navigateToFinalValuesReconciliation();
+            _NavigationSection.navigateToFinalValuesReconciliation();
             Final._FinalValuesReconciliation.checkFinalValueApproachRadio(testData.finalValueApproachSales);
 
             //Before verifying final values they should be set in map from Value Conclusion page
@@ -84,7 +82,7 @@ describe(`As Is, As Stabilized, Market Value is calculated correctly on Reconcil
             As Stabilized (Final Value column) or calculated with correct formula Prospective Market Value As 
             Stabilized  = rounded [Selected basis for Square Foot Analysis (Property > Summary page) * 
             input Concluded Value per SF (Sales>Value Conclusion page)]`);
-            Final._FinalValuesReconciliation.verifySalesComparisonApproach(testData.valueConclusionAsStabilized)
+            Final._FinalValuesReconciliation.verifySalesComparisonApproach(testData.valueConclusionAsIs)
                 .verifySalesComparisonApproach(testData.valueConclusionAsIs);
 
             cy.stepInfo(`12. Prospective Market Value As Stabilized in Final Value Opinion > Conclusion column 
@@ -92,7 +90,7 @@ describe(`As Is, As Stabilized, Market Value is calculated correctly on Reconcil
             or calculated with correct formula Prospective Market Value As Stabilized = 
             rounded [Selected basis for Square Foot Analysis (Property>Summary page) * input Concluded 
             Value per SF (Sales>Value Conclusion page)]`);
-            Final._FinalValuesReconciliation.verifyFinalValueOpinion(testData.valueConclusionAsStabilized)
+            Final._FinalValuesReconciliation.verifyFinalValueOpinion(testData.valueConclusionAsIs)
                 .verifyFinalValueOpinion(testData.valueConclusionAsIs);
         });
     });

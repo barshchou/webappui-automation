@@ -62,6 +62,16 @@ class FinalValuesReconciliationActions extends BaseActionsExt<typeof finalValues
         return this;
     }
 
+    
+    /**
+     * Checks Sales Comparison Approach value in Reconciliation -> Estimated Values table against
+     * Final Market Value calculated on Value Conclusion page.
+     * 
+     * Final Market Value should be set to map before verifying.
+     * 
+     * @param conclusionValueName Value conclusion name to check appropriate value 
+     * in table (As Is, As Stabilized, As Complete).
+     */
     verifySalesComparisonApproach(conclusionValueName: BoweryReports.ValueConclusionName): 
     FinalValuesReconciliationActions {
         let key = conclusionValueName != Enums.VALUE_CONCLUSION_NAME.asIs 
@@ -78,6 +88,15 @@ class FinalValuesReconciliationActions extends BaseActionsExt<typeof finalValues
         return this;
     }
 
+    /**
+     * Checks Prospective Market value in Final Value Opinion table with selected 'Sales' option against
+     * Final Market Value calculated on Value Conclusion page.
+     * 
+     * Final Market Value should be set to map before verifying.
+     * 
+     * @param conclusionValueName Value conclusion name to check appropriate value 
+     * in table (As Is, As Stabilized, As Complete).
+     */
     verifyFinalValueOpinion(conclusionValueName: BoweryReports.ValueConclusionName): FinalValuesReconciliationActions {
         let key = conclusionValueName != Enums.VALUE_CONCLUSION_NAME.asIs 
             ? conclusionValueName == Enums.VALUE_CONCLUSION_NAME.asStabilized 

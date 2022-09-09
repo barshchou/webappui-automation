@@ -1,9 +1,7 @@
-import { Sales, Final } from '../../../../actions/index';
 import testData from "../../../../fixtures/not_full_reports/final/final_values_reconciliation/QA-6268-70.fixture";
 import { createReport } from "../../../../actions/base/baseTest.actions";
-import NavigationSection from "../../../../actions/base/navigationSection.actions";
-import Property from "../../../../actions/property/property.manager";
-import { Income } from "../../../../actions";
+import { _NavigationSection } from '../../../../actions/base';
+import { Income, Property, Sales, Final } from "../../../../actions";
 
 // TODO: Test fails due to bug: https://bowery.atlassian.net/browse/WEB-6862
 describe(`As Is, As Stabilized, As Completed Market Value is calculated correctly on Reconciliation card 
@@ -16,36 +14,36 @@ describe(`As Is, As Stabilized, As Completed Market Value is calculated correctl
         cy.stepInfo(`2. Set square foot analysis and value for it; 
                         set commercial and residential units; 
                         set commercial units SF`);
-        NavigationSection.navigateToPropertySummary();
-        Property.Summary.selectBasisSquareFootAnalysis(testData.basisForSquareFootAnalysis)
+        _NavigationSection.navigateToPropertySummary();
+        Property._Summary.selectBasisSquareFootAnalysis(testData.basisForSquareFootAnalysis)
             .fillBasisSquareFootAnalysis(testData.squareFootAnalysisArea)
             .enterNumberOfCommercialUnits(testData.commercialUnits)
             .enterNumberOfResUnits(testData.residentialUnits);
-        NavigationSection.navigateToCommercialUnits();
-        Property.CommercialUnits.enterListUnitSF(testData.commercialUnitsSF, testData.commercialUnits);
+        _NavigationSection.navigateToCommercialUnits();
+        Property._CommercialUnits.enterListUnitSF(testData.commercialUnitsSF, testData.commercialUnits);
 
         cy.stepInfo(`3. Set Gut Renovation budget`);
-        NavigationSection.navigateToRenovation();
-        Property.Renovations.chooseRenovationByValue(testData.gutRenovation)
+        _NavigationSection.navigateToRenovation();
+        Property._Renovations.chooseRenovationByValue(testData.gutRenovation)
             .clickTotalButton()
             .fillTotalTable(testData.renovationPeriod, testData.renovationTotal);
 
         cy.stepInfo(`4. Fill commercial units with valid values`);
-        NavigationSection.navigateToCommercialInPlaceRentRoll();
+        _NavigationSection.navigateToCommercialInPlaceRentRoll();
         testData.commercialMonthlyRent.forEach((commercialUnitRent, index) => {
             Income._CommercialManager.InPlaceRentRoll.chooseLeaseStatusByRowNumber(testData.leaseStatus, index)
                 .enterRentPerSFAnnuallyByRowNumber(commercialUnitRent, index);
         });
 
         cy.stepInfo(`5. Fill residential units with valid values`);
-        NavigationSection.navigateToResInPlaceRentRoll();
+        _NavigationSection.navigateToResInPlaceRentRoll();
         testData.residentialMonthlyRent.forEach((residentialUnitRent, index) => {
             Income._Residential.InPlaceRentRoll.enterLeaseStatusByRowNumber(testData.leaseStatus, index)
                 .enterMonthlyRentByRowNumber(residentialUnitRent, index);
         });
 
         cy.stepInfo(`6. Set Cap Rate value`);
-        NavigationSection.navigateToCapRateConclusion();
+        _NavigationSection.navigateToCapRateConclusion();
         Income._CapRateConclusion.enterConclusionSectionConcludedCapRate(testData.capRate)
             .setRoundingFactorValueAlias();
 
@@ -95,7 +93,7 @@ describe(`As Is, As Stabilized, As Completed Market Value is calculated correctl
             .enterAsCompleteLessBuyoutCost(testData.lessBuyoutCost);
 
         cy.stepInfo(`11. Navigate to Sales -> Value Conclusion page and set Concluded value per SF`);
-        NavigationSection.navigateToSalesValueConclusion();
+        _NavigationSection.navigateToSalesValueConclusion();
         Sales._ValueConclusion.enterSaleValueConclusion(testData.concludedValuePerSf);
 
         cy.stepInfo(`12. Set final values into cy._map`);
@@ -107,7 +105,7 @@ describe(`As Is, As Stabilized, As Completed Market Value is calculated correctl
 
     it("[QA-6270][QA-6269][QA-6268]", () => {
         cy.stepInfo(`13. Navigate to Final -> Final Values Reconciliation. Check 'Sales' value approach.`);
-        NavigationSection.navigateToFinalValuesReconciliation();
+        _NavigationSection.navigateToFinalValuesReconciliation();
         Final._FinalValuesReconciliation.checkFinalValueApproachRadio(testData.finalValueApproachSales);
 
         //Before verifying final values they should be set in map from Value Conclusion page
