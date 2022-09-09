@@ -24,22 +24,31 @@ describe(`Verify the "Linked" chips dropdown in the new narrative component for 
                     options 'Gross Building Area', 'Building Name', 'Property Type', 'Residential Unit Count', 
                     'Commercial Unit Count', 'Street Address', 'Street Name', 'Site Area', 'Year Built', 
                     'Block', 'Lot', 'Concluded Cap Rate', 'Zones', 'Condition'.`); 
-        Report._Client.activateTextAreaInput( Report._Client.Page.intendedUserTextBox);
+        Report._Client.activateTextAreaInput(
+            Report._Client.Page.formCommentTextBox(testData.intendedUserCommentaryTitle)
+        );
         testData.chips.forEach(chip => {
-            Report._Client.enterIntendedUser(`=${chip.typeSuggestValue}`, false, false, false)
-                .clickNarrativeSuggestions(chip.suggestionName);
-            Report._Client.verifyCommentaryContainsText(chip.verifySuggest, testData.intendedUserCommentaryTitle);
+            Report._Client.Page.formCommentTextBox(testData.intendedUserCommentaryTitle)
+                .type(`=${chip.typeSuggestValue}`);
+            Report._Client.clickNarrativeSuggestions(chip.suggestionName)
+                .verifyFormCommentTextBoxText(testData.intendedUserCommentaryTitle, chip.verifySuggest);
         });
-        Report._Client.activateTextAreaInput( Report._Client.Page.identificationOfClientTextBox);
+        Report._Client.activateTextAreaInput(
+            Report._Client.Page.formCommentTextBox(testData.identificationOfTheClientCommentaryTitle));
         testData.chips.forEach(chip => {
-            Report._Client.enterIdentificationOfTheClient(`=${chip.typeSuggestValue}`, false, false, false)
-                .clickNarrativeSuggestions(chip.suggestionName, 1);
-            Report._Client.verifyCommentaryContainsText(chip.verifySuggest, 
-                testData.identificationOfTheClientCommentaryTitle);
+            Report._Client.Page.formCommentTextBox(testData.identificationOfTheClientCommentaryTitle)
+                .type(`=${chip.typeSuggestValue}`);
+            Report._Client.clickNarrativeSuggestions(chip.suggestionName, 1)
+                .verifyFormCommentTextBoxText(testData.identificationOfTheClientCommentaryTitle, chip.verifySuggest);
         });
         Report._Client.inactivateTextAreaInput();
 
-        cy.stepInfo(`3. Download report`);
+        cy.stepInfo("3. Verify chip style");
+        testData.chipNames.forEach(chip => {
+            Report._Client.verifyStyleInDefaultChip(chip);
+        });
+
+        cy.stepInfo(`4. Download report`);
         _NavigationSection.openReviewAndExport();
         ReviewExport.generateDocxReport().waitForReportGenerated()
             .downloadAndConvertDocxReport(testData.reportCreationData.reportNumber);
