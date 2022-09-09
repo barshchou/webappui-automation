@@ -176,12 +176,23 @@ export default class BaseActionsExt<T extends BasePage> extends BaseActions {
      * Method for typing values into input which re-renders on every char typed into there.
      * Can be useful for such inputs as `commercialUnitsPage.commercialUnitsSFInputs`
      */
-    setValueIntoNumberInput(elemAlias: string, value: string | number, index = 0) {
+    setValueIntoNumberInput(elemAlias: string, value: string | number, index = 0): this {
         cy.get(`@${elemAlias}`).eq(index).should("be.enabled").focus().clear();
         (""+value).split("").forEach(n => {
             cy.get(`@${elemAlias}`).eq(index).focus().type(`${n}`);
             cy.wait(100);
         });
+        return this;
+    }
+
+    verifyStyleInDefaultChip(chip: string, color = "rgb(210, 65, 65)", backgroundColor = "rgb(255, 233, 233)"): this {
+        this.Page.getDefaultCommentChip(chip).should("have.css", "color", color)
+            .and("have.css", "background-color", backgroundColor);
+        return this;
+    }
+
+    clickCloseIcon(): this {
+        this.Page.CloseIcon.click();
         return this;
     }
 }
