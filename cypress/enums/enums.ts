@@ -96,6 +96,7 @@ import expenseHistoryDataProviderEnum from "./expense/expenseHistoryDataProvider
 import expenseItemBasisOfComparisonEnum from "./expense/expenseItemBasisOfComparison.enum";
 import exportTitlesEnum from "./exportTitles.enum";
 import compStatusValuesEnum from "./findComps/compStatusValues.enum";
+import coverPageLocatorNamesEnum from "./coverPageLocatorNames.enum";
 
 export default {
     TEMPLATE_TYPE: templateTypesEnum,
@@ -195,5 +196,6 @@ export default {
     EXPENSE_DATA_PROVIDER: expenseHistoryDataProviderEnum,
     EXPENSE_ITEM_BASIS_OF_COMPARISON: expenseItemBasisOfComparisonEnum,
     EXPORT_TITLES: exportTitlesEnum,
-    COMP_STATUS_VALUES: compStatusValuesEnum
+    COMP_STATUS_VALUES: compStatusValuesEnum,
+    COVER_PAGE_LOCATOR_NAMES: coverPageLocatorNamesEnum
 };
