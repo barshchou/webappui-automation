@@ -54,14 +54,9 @@ const _waitForFileExists = async (filePath: string, currentTime = 0, timeout = 6
 };
 
 const _deleteFolder = async (_folderName: string): Promise<null> => {
-    // eslint-disable-next-line no-console
-    console.log('deleting folder %s', _folderName);
-
     await new Promise((resolve, reject) => {
         rmdir(_folderName, { maxRetries: 10, recursive: true }, (err) => {
             if (err) {
-                // eslint-disable-next-line no-console
-                console.error(err);
                 return reject(err);
             }
             resolve(null);
