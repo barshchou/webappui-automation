@@ -127,7 +127,7 @@ describe(`[QA-5095] Selected expenses forecast is exported to Estimated Operatin
                                 in Estimated Operating Expense section`);
                     cy.visit(<string>file);
                     cy.contains(testData.exportSectionName).scrollIntoView();
-                    cy.xpath(`//h4[text()='${testData.fuelForecastName}']/following-sibling::p`)
+                    cy.xpath(`//h4[text()='${testData.fuelForecastName}']/following-sibling::p`).eq(0)
                         .should("include.text", 
                             `$${numberWithCommas(testData.fuelForecastPerRoom.forecast.toFixed(2))}`)
                         .should("include.text", testData.perRoomTitle);

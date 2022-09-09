@@ -93,6 +93,18 @@ export default defineConfig({
                 }
             });
 
+            on("task", {
+                async deleteFolder(folderName: string) {
+                    return await fsUtil._deleteFolder(folderName);
+                }
+            });
+
+            on('after:spec', (spec) => {
+                if (spec.name.includes('export')) {
+                    fsUtil._deleteFolder("cypress/downloads");
+                }
+            });
+
             return config;
         },
         excludeSpecPattern: '*.studio.*',

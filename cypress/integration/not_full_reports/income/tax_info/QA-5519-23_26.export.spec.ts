@@ -48,7 +48,7 @@ describe("Check that rows added in the app are displayed in Tax Info --> Tax Lia
             cy.task("getFilePath", { _reportName: testData.reportCreationData.reportNumber, _docxHtml: "html" })
                 .then(file => {
                     cy.log(<string>file);
-                    cy.stepInfo("8. Verify rows added in export export");
+                    cy.stepInfo("8. Verify rows added in export");
                     cy.visit(<string>file);
                     cy.contains(testData.rowNames.additional).should("exist");
                     cy.contains(testData.rowNames.special).should("exist");
