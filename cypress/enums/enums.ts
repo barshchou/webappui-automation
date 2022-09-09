@@ -97,6 +97,7 @@ import expenseItemBasisOfComparisonEnum from "./expense/expenseItemBasisOfCompar
 import exportTitlesEnum from "./exportTitles.enum";
 import compStatusValuesEnum from "./findComps/compStatusValues.enum";
 import sectionsToIncludeInExport from "./sectionsToIncludeInExport.enum";
+import finalValueApproachEnum from "./final/finalValuesReconciliation/finalValueApproach.enum";
 
 export default {
     TEMPLATE_TYPE: templateTypesEnum,
@@ -197,5 +198,6 @@ export default {
     EXPENSE_ITEM_BASIS_OF_COMPARISON: expenseItemBasisOfComparisonEnum,
     EXPORT_TITLES: exportTitlesEnum,
     COMP_STATUS_VALUES: compStatusValuesEnum,
-    SECTIONS_TO_INCLUDE_IN_EXPORT: sectionsToIncludeInExport
+    SECTIONS_TO_INCLUDE_IN_EXPORT: sectionsToIncludeInExport,
+    FINAL_VALUES_APPROACH: finalValueApproachEnum
 };

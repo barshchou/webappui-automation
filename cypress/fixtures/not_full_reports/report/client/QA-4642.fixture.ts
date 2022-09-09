@@ -3,20 +3,25 @@ import { BoweryReports } from "../../../../types/boweryReports.type";
 import chipsDataCreator from "../../../data_creator/chipsData.creator";
 import ReportDataCreator from "../../../data_creator/reportData.creator";
 
-const _buildingName = 'Test Building Name QA-4642';
+const buildingName = 'Test Building Name QA-4642';
 
-const _chipsOptions: BoweryReports.ChipsCreationOptions = {
-    buildingName: _buildingName,
+const chipsOptions: BoweryReports.ChipsCreationOptions = {
+    buildingName: buildingName,
 };
+
+const chipNames = [ "Client Organization", "Client Company" ];
 
 export default {
     reportCreationData: ReportDataCreator.getReportData("4642", {
         conclusionValue: Enums.VALUE_CONCLUSION_TYPE.AS_COMPLETE,
         incomeValue: Enums.INCOME_TYPE.both
     }),
-    chips: chipsDataCreator.getChipsData(_chipsOptions, Enums.VALUE_CONCLUSION_TYPE.AS_COMPLETE),
-    buildingName: _buildingName,
+    chips: chipsDataCreator.getChipsData(chipsOptions, Enums.VALUE_CONCLUSION_TYPE.AS_COMPLETE),
+    buildingName,
     identificationOfTheClientSection: Enums.EXPORT_TITLES.identificationOfTheClient,
     intendedUseSection: Enums.EXPORT_TITLES.intendedUseAndUser,
+    intendedUser: Enums.PAGES_TEXTBOX_NAMES.intendedUser,
+    identificationOfTheClient: Enums.PAGES_TEXTBOX_NAMES.identificationOfTheClient,
+    chipNames,
     sectionToExport: [ Enums.SECTIONS_TO_INCLUDE_IN_EXPORT.introduction ]
 };

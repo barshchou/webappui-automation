@@ -18,23 +18,29 @@ describe("Verify the Client Guidelines Discussion on the page",
                         'Current Commercial Unit Count', 'As Complete Commercial Unit Count', 
                         'Street Address', 'Street Name', 'Site Area', 'Year Built', 'Block', 
                         'Lot', 'Concluded Cap Rate', 'Zones', 'CurrentCondition', 'As Stabilized Condition'`);
-            Report._Client.activateTextAreaInput(Report._Client.Page.intendedUserTextBox);
+            Report._Client.activateTextAreaInput(Report._Client.Page.formCommentTextBox(testData.intendedUser));
             testData.chips.forEach(chip => {
-                Report._Client
-                    .enterIntendedUserTextBox(`=${chip.typeSuggestValue}`)
-                    .clickNarrativeSuggestions(chip.suggestionName)
-                    .verifyIntendedUserTextBox(chip.verifySuggest);
+                Report._Client.Page.formCommentTextBox(testData.intendedUser).type(`=${chip.typeSuggestValue}`);
+                Report._Client.clickNarrativeSuggestions(chip.suggestionName)
+                    .verifyFormCommentTextBoxText(testData.intendedUser, chip.verifySuggest);
             });
-            Report._Client.activateTextAreaInput(Report._Client.Page.identificationOfClientTextBox);
+            Report._Client.activateTextAreaInput(Report._Client.Page
+                .formCommentTextBox(testData.identificationOfTheClient));
             testData.chips.forEach(chip => {
-                Report._Client
-                    .enterIdentificationOfTheClientTextBox(`=${chip.typeSuggestValue}`)
-                    .clickNarrativeSuggestions(chip.suggestionName, 1)
-                    .verifyIdentificationOfTheClientTextBox(chip.verifySuggest);
+                Report._Client.Page.formCommentTextBox(testData.identificationOfTheClient)
+                    .type(`=${chip.typeSuggestValue}`);
+                Report._Client.clickNarrativeSuggestions(chip.suggestionName, 1)
+                    .verifyFormCommentTextBoxText(testData.identificationOfTheClient,
+                        chip.verifySuggest);
             });
             Report._Client.inactivateTextAreaInput();
+
+            cy.stepInfo("3. Verify chip style");
+            testData.chipNames.forEach(chip => {
+                Report._Client.verifyStyleInDefaultChip(chip);
+            });
     
-            cy.stepInfo(`3. Download report`);
+            cy.stepInfo(`4. Download report`);
             _NavigationSection.openReviewAndExport(true);
             ReviewExport.selectSectionsToIncludeInExport(testData.sectionToExport)
                 .generateDocxReport().waitForReportGenerated()

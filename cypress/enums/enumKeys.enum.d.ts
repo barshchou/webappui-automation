@@ -73,3 +73,5 @@ export type ExpenseItemBasisOfComparison = keyof typeof Enums.EXPENSE_ITEM_BASIS
 export type ExportTitlesKeys = keyof typeof Enums.EXPORT_TITLES
 export type CompStatusValues = keyof typeof Enums.COMP_STATUS_VALUES
 export type SectionsToIncludeInExportKeys = keyof typeof Enums.SECTIONS_TO_INCLUDE_IN_EXPORT
+export type PagesTexboxNamesKeys = keyof typeof Enums.PAGES_TEXTBOX_NAMES
+export type FinalValuesApproach = keyof typeof Enums.FINAL_VALUES_APPROACH
