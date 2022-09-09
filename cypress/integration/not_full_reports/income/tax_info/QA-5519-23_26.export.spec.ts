@@ -5,8 +5,7 @@ import { Income, ReviewExport } from '../../../../actions';
 import launchDarklyApi from "../../../../api/launchDarkly.api";
 
 // TODO: [QA-6606] Incorrect Tax liability (total) formula calculation
-describe("[QA-5519-23_26] Check that rows added in the app are displayed in Tax Info --> Tax Liability",
-
+describe("Check that rows added in the app are displayed in Tax Info --> Tax Liability", 
     { tags: [ "@check_export", "@income", "@tax_info" ] }, () => {
     
         it("[QA-5519-23_26]", () => {
@@ -49,7 +48,7 @@ describe("[QA-5519-23_26] Check that rows added in the app are displayed in Tax 
             cy.task("getFilePath", { _reportName: testData.reportCreationData.reportNumber, _docxHtml: "html" })
                 .then(file => {
                     cy.log(<string>file);
-                    cy.stepInfo("8. Verify rows added in export");
+                    cy.stepInfo("8. Verify rows added in export export");
                     cy.visit(<string>file);
                     cy.contains(testData.rowNames.additional).should("exist");
                     cy.contains(testData.rowNames.special).should("exist");

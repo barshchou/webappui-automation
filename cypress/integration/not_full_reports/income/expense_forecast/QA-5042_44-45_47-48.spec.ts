@@ -69,7 +69,7 @@ describe(`[QA-5042] [QA-5044] [QA-5045] [QA-5047] [QA-5048]
         Income._ExpenseForecastActions.Page.addCustomExpenseCategorySaveButton.click();
         Income._ExpenseForecastActions.Page.forecastItemCardFull(testData.firstCustomCategory.name, true)
             .should('exist');
-        Income._ExpenseForecastActions.Page.forecastItemCardFull(Enums.EXPENSE_FORECAST_ITEMS.replacementsAndReserves)
+        Income._ExpenseForecastActions.Page.forecastItemCardFull(Enums.EXPENSE_CELL.replacementsAndReserves)
             .then(el => cy.wrap(el[0].offsetTop).as('coordinatesReplacementCard'));
         Income._ExpenseForecastActions.Page.forecastItemCardFull(testData.firstCustomCategory.name, true)
             .then(el => cy.wrap(el[0].offsetTop).as('coordinatesCustomCard'));

@@ -6,7 +6,6 @@ import testData from
 
 describe(`[Income -> Residential -> Rent Comps -> Map] Saved filter values after page refreshing`,
     { tags: [ "@income", "@residential", "@rent_comps" ] }, () => {
-
         before("Login, create report, prepare data", () => {
             createReport(testData.reportCreationData);
 
