@@ -51,6 +51,7 @@ const routes =  {
     reviewExport: "/review-and-export",
     organizationInfo: "/organization-info",
     commercialCompGroupsDiscussion: "/commercial-comp-groups-discussion",
+    finalValuesReconciliation: "/final-values-and-reconciliation",
     subjectPropertyData: "/subject-property"
 } as const;
 

@@ -142,6 +142,8 @@ class NavigationSection extends BasePage {
 
     get helpAndResourcesButton() { return cy.get(`[aria-label="Help & Resources"]`); }
 
+    get finalValuesReconciliationButton() { return cy.get(`#final-values-and-reconciliation`); }
+
     get dataCollectionsIcon() { return cy.get("#data-collections svg"); }
 
     get subjectPropertyDataDropdown() { return cy.get("#subjectProperty"); }

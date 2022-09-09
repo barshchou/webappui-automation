@@ -517,6 +517,15 @@ class NavigationSectionActions extends BaseActionsExt<typeof navigationSectionPa
         return this;
     }
 
+    navigateToFinalValuesReconciliation(): NavigationSectionActions {
+        this.clickFinalButton()
+            .clickFinalValuesReconciliation()
+            .submitSaveChangesModal()
+            .verifyProgressBarNotExist()
+            .waitForUrl(routesUtils.finalValuesReconciliation);
+        return this;
+    }
+
     private clickCommercialMenuIfClosed(): NavigationSectionActions {
         navigationSectionPage.commercialIncomeArrow.then(el => {
             if (!el.hasClass("expanded")) {
@@ -922,6 +931,11 @@ class NavigationSectionActions extends BaseActionsExt<typeof navigationSectionPa
 
     clickContentManagementSystem(): NavigationSectionActions {
         navigationSectionPage.contentManagementSystemButton.click();
+        return this;
+    }
+
+    clickFinalValuesReconciliation(): NavigationSectionActions {
+        navigationSectionPage.finalValuesReconciliationButton.click();
         return this;
     }
 

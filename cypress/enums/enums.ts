@@ -96,6 +96,7 @@ import expenseHistoryDataProviderEnum from "./expense/expenseHistoryDataProvider
 import expenseItemBasisOfComparisonEnum from "./expense/expenseItemBasisOfComparison.enum";
 import exportTitlesEnum from "./exportTitles.enum";
 import compStatusValuesEnum from "./findComps/compStatusValues.enum";
+import finalValueApproachEnum from "./final/finalValuesReconciliation/finalValueApproach.enum";
 import subjectPropertyDataSectionsEnum from "./subjectPropertyDataSections.enum";
 
 export default {
@@ -197,5 +198,6 @@ export default {
     EXPENSE_ITEM_BASIS_OF_COMPARISON: expenseItemBasisOfComparisonEnum,
     EXPORT_TITLES: exportTitlesEnum,
     COMP_STATUS_VALUES: compStatusValuesEnum,
+    FINAL_VALUES_APPROACH: finalValueApproachEnum,
     SUBJECT_PROPERTY_DATA_SECTIONS: subjectPropertyDataSectionsEnum
 };

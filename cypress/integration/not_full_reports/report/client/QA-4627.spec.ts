@@ -3,7 +3,7 @@ import { Organization, PreviewEdit } from '../../../../actions';
 import { Report } from "../../../../actions";
 import { _NavigationSection } from "../../../../actions/base";
 import { createReport } from "../../../../actions/base/baseTest.actions";
-import enums from '../../../../enums/enums';
+import Enums from '../../../../enums/enums';
 import testData from '../../../../fixtures/not_full_reports/report/client/QA-4627.fixture';
 import { conditionalDescribe } from "../../../checkIsProd.utils";
 
@@ -13,7 +13,7 @@ conditionalDescribe("Verify the functionality of the Client field.",
         beforeEach("Restore state. Create report", () => {
             loginAction();
             cy.stepInfo(`Clean up state before tests run. Delete existing user.`);
-            _NavigationSection.navigateToProfileOrganization(enums.MENU_LINKS.organization);
+            _NavigationSection.navigateToProfileOrganization(Enums.MENU_LINKS.organization);
             Organization._OrganizationActions.openOrganizationClientsPage();
             Organization._OrganizationClientsActions.deleteClientIfExists(testData.textToType);
 
@@ -49,7 +49,7 @@ conditionalDescribe("Verify the functionality of the Client field.",
             cy.stepInfo(`6. Verify the Client Company is displayed in the Intended User and 
             Identification of the Client section as a chip and to the Client Guidelines Discussion - 
             GC (if the Client has Company added on the Organization > Clients page).`);
-            Report._Client.Page.identificationOfClientTextBox.should("contain.text", testData.companyName);
+            Report._Client.verifyFormCommentTextBoxText(testData.identificationOfTheClient, testData.companyName);
 
             cy.stepInfo(`7. Proceed to the Preview & Edit > Cover page and verify that 
             the Client from the previous step is displayed in the REQUESTED BY section.`);

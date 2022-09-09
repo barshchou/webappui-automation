@@ -231,6 +231,14 @@ export namespace BoweryReports {
     export type ExpenseCardNames = typeof Enums.EXPENSES_CARD_NAMES[KeyInfo.ExpenseCardName]
 
     export namespace FindComps {
+        export type CompsData = {
+            gbaValue?: number
+            yearBuilt?: string,
+            floors?: number,
+            commercialUnits?: number,
+            commercialArea?: number,
+            compType?: ComparableTypes
+        }
         export type SalePeriodValues = typeof Enums.SALE_PERIOD_VALUES[KeyInfo.SalePeriodValues]
         export type SelectedComparablesSortType = typeof Enums.SORT_VALUES[KeyInfo.SortValues]
         export type ConditionValueType = typeof Enums.CONDITION_VALUES[KeyInfo.ConditionValues]
@@ -269,6 +277,10 @@ export namespace BoweryReports {
     export type ExpenseDataProvider = typeof Enums.EXPENSE_DATA_PROVIDER[KeyInfo.ExpenseDataProvider]
     export type ExpenseItemBasisOfComparison = typeof
         Enums.EXPENSE_ITEM_BASIS_OF_COMPARISON[KeyInfo.ExpenseItemBasisOfComparison]
+
+    export type PagesTexboxNamesType = typeof Enums.PAGES_TEXTBOX_NAMES[KeyInfo.PagesTexboxNamesKeys]
+
+    export type FinalValuesApproach = typeof Enums.FINAL_VALUES_APPROACH[KeyInfo.FinalValuesApproach]
 
     export type SubjectPropertyDataSections = typeof
         Enums.SUBJECT_PROPERTY_DATA_SECTIONS[KeyInfo.SubjectPropertyDataSections]
