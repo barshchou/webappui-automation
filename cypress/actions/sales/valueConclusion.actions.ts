@@ -10,6 +10,7 @@ import capRateConclusionKeys from '../../utils/mapKeys/income/capRateConclusion/
 import Enums from "../../enums/enums";
 import adjustedPricesKeys from '../../utils/mapKeys/sales/adjustedComps/adjustedPrices.keys';
 import { _saveDataInFile } from '../../support/commands';
+import valueConclusionKeys from '../../utils/mapKeys/sales/valueConclusion.keys';
 
 class ValueConclusionActions extends BaseActionsExt<typeof valueConclusionPage> {
 
@@ -628,6 +629,22 @@ class ValueConclusionActions extends BaseActionsExt<typeof valueConclusionPage> 
             valueConclusionPage.headerSalesValue.invoke('text').should('include', finalValue);
         });
         
+        return this;
+    }
+
+    /**
+     * Save Market Final Value into variable for further purpose 
+     * @param conclusionValueName Value Conclusion to distinguish type of Market Final Value type
+     */
+    setMarketValueFinal(conclusionValueName: BoweryReports.ValueConclusionName): ValueConclusionActions {
+        valueConclusionPage.finalValueCell(conclusionValueName).invoke('text').then(finalValue => {
+            let key = conclusionValueName != Enums.VALUE_CONCLUSION_NAME.asIs 
+                ? conclusionValueName == Enums.VALUE_CONCLUSION_NAME.asStabilized 
+                    ? valueConclusionKeys.asStabilizedFinalAmount
+                    : valueConclusionKeys.asCompleteFinalAmount
+                : valueConclusionKeys.asIsMarketFinalAmount;
+            cy._mapSet(key, finalValue);
+        });
         return this;
     }
 }
