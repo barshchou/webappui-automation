@@ -53,6 +53,9 @@ const _waitForFileExists = async (filePath: string, currentTime = 0, timeout = 6
     return _waitForFileExists(filePath, currentTime + 1000, timeout);
 };
 
+/**
+ * @description Deleting specific folder. 
+ */
 const _deleteFolder = async (_folderName: string): Promise<null> => {
     await new Promise((resolve, reject) => {
         rmdir(_folderName, { maxRetries: 10, recursive: true }, (err) => {
