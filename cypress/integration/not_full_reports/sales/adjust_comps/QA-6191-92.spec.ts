@@ -20,7 +20,7 @@ describe(`Other Adjustment section cell values validation`,
             NavigationSection.navigateToAdjustComps();
 
             cy.stepInfo(`3. Verify that SF is static name of first row`);
-            Sales._AdjustComps.Page.getAdjustmentArrow(testData.adjustmentName).click();
+            Sales._AdjustComps.expandAdjustmentDetails(testData.adjustmentName);
             Sales._AdjustComps.Page.getAdjustmentExpansionCellLabel(testData.otherAdjustmentRowLabel)
                 .should('have.text', Enums.OTHER_ADJUSTMENTS_EXPANSION_ROWS.sf);
             Sales._AdjustComps.Page.getAdjustmentExpansionCellValue(testData.otherAdjustmentRowLabel)

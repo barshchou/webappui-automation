@@ -40,8 +40,8 @@ export default class BasePage {
 
     get modalWindow() { return cy.get("[role='dialog']"); }
 
-    get selectorDraggableElement() {
-        return '[data-react-beautiful-dnd-drag-handle="0"]';
+    selectorDraggableElement(draggableIndex = 0) {
+        return `[data-react-beautiful-dnd-drag-handle="${draggableIndex}"]`;
     } 
 
     get saveButtonGlobal() { return cy.xpath("//button[@type='submit']"); }
@@ -61,6 +61,14 @@ export default class BasePage {
     formRevertToOriginalBtn(index = 0) {
         return cy.xpath("//button[.='Revert to Original']")
             .eq((index !== 0) ? index : 0);
+    }
+
+    formRevertToOriginalBtnBySectionName(name: string) {
+        return cy.xpath(`//*[.='${name}']//following::button[.='Revert to Original'][1]`);
+    }
+
+    commentaryUserPromptBySectionName(name: string) {
+        return cy.xpath(`//*[.='${name}']//following::span[.='Type = to quick select report data.'][1]`);
     }
 
     formCancelButton(index = 0) {
@@ -86,4 +94,6 @@ export default class BasePage {
     formCommentTextBox(name: string) {
         return cy.xpath(`//*[.='${name}']//following::*[@data-slate-editor][1]`);
     }
+
+    getDefaultCommentChip(chipName: string) { return cy.get(`[aria-label='${chipName}']`); }
 }

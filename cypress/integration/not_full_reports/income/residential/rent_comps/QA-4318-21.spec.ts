@@ -5,14 +5,14 @@ import Income from "../../../../../actions/income/income.manager";
 import AddCompFormPage from "../../../../../pages/income/residential/rent_comps/addCompForm.page";
 
 describe(`Verify the UI elements of Add New Rent Comp overlay on Rent Comps page 
-                when Unit type of search is selected`, () => {
-
+        when Unit type of search is selected`, 
+{ tags:[ "@income", "@commercial", "@in_place_rent_roll" ] }, () => {
     beforeEach("Login, create report", () => {
         createReport(testData.reportCreationData);
     });
 
-    it("Test body", () => {
-        NavigationSection.navigateToRentComps();
+    it("[QA-4318-21]", () => {
+        NavigationSection.navigateToResidentialRentComps();
         Income.Residential.RentComps.BaseActions.openAddNewComparableForm(testData.formData.address);
         AddCompFormPage.formHeader.should("exist");
         AddCompFormPage.propAddressField.should("have.text", testData.formData.address);

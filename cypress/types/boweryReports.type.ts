@@ -189,6 +189,11 @@ export namespace BoweryReports {
         taxYear: number
     }
 
+    export type ProjectedTaxesSectionsKeys = keyof typeof Enums.PROJECTED_TAXES_SECTIONS
+    export type ProjectedTaxesSectionsValues = typeof Enums.PROJECTED_TAXES_SECTIONS[KeyInfo.ProjectedTaxesSectionsKeys]
+    export type ProjectedTaxesInputsNamesValues = 
+        typeof Enums.PROJECTED_TAXES_INPUTS[KeyInfo.ProjectedTaxesInputsNamesKeys]
+
     export type UnitType = keyof typeof Enums.UNIT_TYPE
     export type SourceOfInformation = typeof Enums.SOURCE_OF_INFORMATION[KeyInfo.SourceOfInformationKeys]
     export type Amenities = keyof typeof Enums.AMENITIES
@@ -226,11 +231,20 @@ export namespace BoweryReports {
     export type ExpenseCardNames = typeof Enums.EXPENSES_CARD_NAMES[KeyInfo.ExpenseCardName]
 
     export namespace FindComps {
+        export type CompsData = {
+            gbaValue?: number
+            yearBuilt?: string,
+            floors?: number,
+            commercialUnits?: number,
+            commercialArea?: number,
+            compType?: ComparableTypes
+        }
         export type SalePeriodValues = typeof Enums.SALE_PERIOD_VALUES[KeyInfo.SalePeriodValues]
         export type SelectedComparablesSortType = typeof Enums.SORT_VALUES[KeyInfo.SortValues]
         export type ConditionValueType = typeof Enums.CONDITION_VALUES[KeyInfo.ConditionValues]
         export type ComparableTypes = typeof Enums.COMPARABLE_TYPES[KeyInfo.ComparableTypes]
         export type SaleStatusType = typeof Enums.SALE_STATUSES[KeyInfo.SaleStatuses]
+        export type CompStatusValues = typeof Enums.COMP_STATUS_VALUES[KeyInfo.CompStatusValues]
     }
     
     export type CalculationType = typeof Enums.CALCULATION_TYPE[KeyInfo.CalculationType]
@@ -263,4 +277,8 @@ export namespace BoweryReports {
     export type ExpenseDataProvider = typeof Enums.EXPENSE_DATA_PROVIDER[KeyInfo.ExpenseDataProvider]
     export type ExpenseItemBasisOfComparison = typeof
         Enums.EXPENSE_ITEM_BASIS_OF_COMPARISON[KeyInfo.ExpenseItemBasisOfComparison]
+
+    export type PagesTexboxNamesType = typeof Enums.PAGES_TEXTBOX_NAMES[KeyInfo.PagesTexboxNamesKeys]
+    
+    export type FinalValuesApproach = typeof Enums.FINAL_VALUES_APPROACH[KeyInfo.FinalValuesApproach]
 }

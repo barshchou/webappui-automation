@@ -8,6 +8,8 @@ import { BoweryReports } from "../../types/boweryReports.type";
 import { _saveDataInFile } from "../../support/commands";
 import Enums from "../../enums/enums";
 
+type AdjustmentName = BoweryReports.SalesAdjustmentGrid.AdjustmentName;
+
 class AdjustCompsActions extends BaseActionsExt<typeof adjustCompsPage> {
     /**
      * Checks whether name string in cell Cumulative Price Per *basis* is bold   
@@ -175,9 +177,8 @@ class AdjustCompsActions extends BaseActionsExt<typeof adjustCompsPage> {
      * Verify that Trended Price per selected @param {string} basis adjusted based on
      * Net Market adjustment total value
      */
-    verifyTrendedPricePerBasis(
-        comparablesAdjustments: number[], basis: string, index = 0, isEmpty = false
-    ): AdjustCompsActions {
+    verifyTrendedPricePerBasis(comparablesAdjustments: number[], basis: string, index = 0, isEmpty = false): 
+    AdjustCompsActions {
         adjustCompsPage.viewMarketDetails.click();
         adjustCompsPage.getPricePerBasisValue(basis).should("be.visible");
         adjustCompsPage.getPricePerBasisValue(basis).invoke("text").then(pricePerUnitText => {
@@ -249,8 +250,8 @@ class AdjustCompsActions extends BaseActionsExt<typeof adjustCompsPage> {
         return this;
     }
 
-    clickViewAdjustmentDetails(): AdjustCompsActions {
-        adjustCompsPage.viewAdjustmentDetails.click();
+    expandAdjustmentDetails(adjustmentName: AdjustmentName): AdjustCompsActions {
+        adjustCompsPage.getAdjustmentArrow(adjustmentName).click();
         return this;
     }
 
@@ -275,7 +276,7 @@ class AdjustCompsActions extends BaseActionsExt<typeof adjustCompsPage> {
     }
 
     enterMarketConditionAdjustment(value: string | number): AdjustCompsActions {
-        adjustCompsPage.marketConditionAdjustmentInput.type(`${value}`).should("have.value", value);
+        adjustCompsPage.marketConditionAdjustmentInput.type(`${value}`).should('have.attr', 'value', value);
         adjustCompsPage.applyMarketConditionAdjustmentButton.click();
         return this;
     }

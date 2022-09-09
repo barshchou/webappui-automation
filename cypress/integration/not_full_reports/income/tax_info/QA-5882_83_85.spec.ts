@@ -4,10 +4,11 @@ import { _NavigationSection } from "../../../../actions/base";
 import { Income, Property } from '../../../../actions/index';
 import launchDarklyApi from "../../../../api/launchDarkly.api";
 
-describe(`[QA-5882_83_85] Square Foot row in Tax Liability grid is displayed according to 
-        selected Basis for Square Foot Analysis`, () => {
+describe(`Square Foot row in Tax Liability grid is displayed according to 
+selected Basis for Square Foot Analysis`, 
+{ tags: [ "@income", "@tax_info", "@feature_flag" ] }, () => {
 
-    it("Test body", { tags: [ "@income", "@tax_info", "@feature_flag" ] }, () => {
+    it("[QA-5882_83_85]", () => {
         cy.stepInfo("1. Create report");
         launchDarklyApi.setFeatureFlagForUser(testData.featureFlagKey, testData.onFeatureFlag);
         createReport(testData.reportCreationData);

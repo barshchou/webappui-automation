@@ -1,7 +1,6 @@
 import Enums from "../../../../enums/enums";
 import ReportDataCreator from "../../../data_creator/reportData.creator";
 import chipsDataCreator from '../../../data_creator/chipsData.creator';
-import enums from '../../../../enums/enums';
 import { BoweryReports } from "../../../../types/boweryReports.type";
 
 export const reportCreationFixture = () => {
@@ -12,18 +11,25 @@ export const reportCreationFixture = () => {
     });
 };
 
-const _buildingName = 'Test Building Name QA-4718';
+const buildingName = 'Test Building Name QA-4718';
 
-const _chipsOptions: BoweryReports.ChipsCreationOptions = {
-    buildingName: _buildingName,
+const chipsOptions: BoweryReports.ChipsCreationOptions = {
+    buildingName,
 };
+
+const chipNames = [
+    "Interest Appraised As Is Market Value Selection",
+    "Interest Appraised As Stabilized Selection",
+    "Interest Appraised"
+];
 
 export default {
     reportCreationData: reportCreationFixture(),
-    chips: chipsDataCreator.getChipsData(_chipsOptions, enums.VALUE_CONCLUSION_TYPE.AS_STABILIZED),
-    buildingName: _buildingName,
-    propertyRightsAppraisedCommentaryTitle: "Property Rights Appraised",
-    definitionOfMarketValueCommentaryTitle: "Definition of Market Value",
+    chips: chipsDataCreator.getChipsData(chipsOptions, Enums.VALUE_CONCLUSION_TYPE.AS_STABILIZED),
+    buildingName,
+    propertyRightsAppraisedTitle: Enums.PAGES_TEXTBOX_NAMES.propertyRightsAppraised,
+    definitionOfMarketValueTitle: Enums.PAGES_TEXTBOX_NAMES.definitionOfMarketValue,
     propertyRightsSection: Enums.EXPORT_TITLES.propertyRightsAppraised,
-    definitionOfMarketValueSection: Enums.EXPORT_TITLES.definitionOfMarketValue
+    definitionOfMarketValueSection: Enums.EXPORT_TITLES.definitionOfMarketValue,
+    chipNames
 };
