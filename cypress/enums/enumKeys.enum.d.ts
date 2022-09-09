@@ -75,4 +75,5 @@ export type CompStatusValues = keyof typeof Enums.COMP_STATUS_VALUES
 export type CompPropertiesPathsInDatabase =  keyof typeof Enums.COMP_PROPERTIES_PATHS_DB.compPropertyPathsInDB
 export type CompSaleStatusInDatabase =  keyof typeof Enums.COMP_PROPERTIES_PATHS_DB.saleStatusValuesInDB
 export type CompSaleConditionInDatabase =  keyof typeof Enums.COMP_PROPERTIES_PATHS_DB.saleConditionValuesInDB
- 
+export type PagesTexboxNamesKeys = keyof typeof Enums.PAGES_TEXTBOX_NAMES
+export type FinalValuesApproach = keyof typeof Enums.FINAL_VALUES_APPROACH
