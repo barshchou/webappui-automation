@@ -25,7 +25,7 @@ describe(`As Is Market Value is calculated correctly on Reconciliation card for 
             _NavigationSection.navigateToSalesValueConclusion();
             Sales._ValueConclusion.enterSaleValueConclusion(testData.concludedValuePerSf);
 
-            cy.stepInfo(`5. Set final values into cy._map`);
+            cy.stepInfo(`5. Save 'Final Market Value' for further checks`);
             Sales._ValueConclusion.setMarketValueFinal(testData.valueConclusionAsIs);
         });
 

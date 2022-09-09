@@ -539,6 +539,10 @@ class ValueConclusionActions extends BaseActionsExt<typeof valueConclusionPage> 
         return this;
     }
 
+    /**
+     * Save Market Final Value into variable for further purpose 
+     * @param conclusionValueName Value Conclusion to distinguish type of Market Final Value type
+     */
     setMarketValueFinal(conclusionValueName: BoweryReports.ValueConclusionName): ValueConclusionActions {
         valueConclusionPage.finalValueCell(conclusionValueName).invoke('text').then(finalValue => {
             let key = conclusionValueName != Enums.VALUE_CONCLUSION_NAME.asIs 
