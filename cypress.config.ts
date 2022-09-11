@@ -105,11 +105,13 @@ export default defineConfig({
                 }
             });
 
-            on('after:spec', (spec) => {
-                if (spec.name.includes('export')) {
-                    fsUtil._deleteFolder("cypress/downloads");
-                }
-            });
+            /*
+             * on('after:spec', (spec) => {
+             *     if (spec.name.includes('export')) {
+             *         fsUtil._deleteFolder("cypress/downloads");
+             *     }
+             * });
+             */
 
             return config;
         },
