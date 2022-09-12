@@ -10,8 +10,6 @@ class UnitInspectionPage extends BasePage {
     getDropdownOptionByValue(value: string) { return cy.get(`li[data-value='${value}']`); }
 
     getRowInUnitInspectionTable(row: string | number) { return cy.get(`*[data-qa="units[${row}]"]`); }
-
-    getConditionValue(row = 0) { return cy.get("[data-qa='condition-cell']").eq(row); }
 }
 
 export default new UnitInspectionPage();

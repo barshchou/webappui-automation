@@ -2,11 +2,10 @@ import testData from "../../../../fixtures/not_full_reports/income/expense_forec
 import { _NavigationSection } from "../../../../actions/base";
 import { Income } from "../../../../actions";
 import { createReport } from "../../../../actions/base/baseTest.actions";
-import Enums from "../../../../enums/enums";
 
 describe(`[QA-5052] Appraiser's Forecast of Custom Expense Forecast is included 
 in Total Operating Expenses calculation`,
-{ tags:[ "@income", "@expense_forecast", "@snapshot_tests" ] }, () => {
+{ tags:[ "@fix", "@income", "@expense_forecast", "@snapshot_tests" ] }, () => {
     beforeEach("Login, create report", () => {
         createReport(testData.reportCreationData);
     });
@@ -27,8 +26,7 @@ in Total Operating Expenses calculation`,
         Income._ExpenseForecastActions.enterForecastItemForecast(testData.secondCustomCategory, true, 1);
         
         cy.stepInfo(`[QA-5052] => 4. Verify total expenses calculation and commentary`);
-        Income._ExpenseForecastActions.verifyFormCommentTextBoxText(Enums.PAGES_TEXTBOX_NAMES.totalOperatingExpenses,
-            testData.commentaryTotalExpenses.generatedPerSF)
+        Income._ExpenseForecastActions.verifyTOECommentary(testData.commentaryTotalExpenses.generatedPerSF)
             .verifyTotalForecast();
 
         cy.stepInfo(`[QA-5052] => 5. Verify if Sliding bar graphic on Total Operating Expenses card 

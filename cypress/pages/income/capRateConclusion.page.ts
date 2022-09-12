@@ -79,10 +79,9 @@ class CapRateConclusionPage extends BasePage {
 
     get asCompleteLessBuyoutCost() { return cy.get("[data-qa*='asCompleteLossItems.buyoutCost'] input[inputmode]"); }
 
-    lessMiscellaneousLossMonths(valueConclusionKey: BoweryReports.ValueConclusionKeys, 
-        lossType: BoweryReports.RentLossType) { 
-        return cy.get(`[data-qa='${valueConclusionKey}LossItems.${lossType}.renovation-period-cell'] ` + 
-            `input[type=text]`);
+    lessLaundryLossMonths(valueConclusionKey: BoweryReports.ValueConclusionKeys) { 
+        return cy.get(`[data-qa='${valueConclusionKey}LossItems.laundryRentLoss.renovation-period-cell'] ` + 
+        `input[type=text]`); 
     }
 
     get asStabilizedCommissionFeeAmount() { 
@@ -99,11 +98,6 @@ class CapRateConclusionPage extends BasePage {
 
     commercialUndeterminedRentLossAmount(valueConclusionKey: BoweryReports.ValueConclusionKeys, index = 0) {
         return cy.get(`[name="${valueConclusionKey}LossItems[${index}].amount"]`);
-    }
-
-    miscellaneousRentLossAmount(valueConclusionKey: BoweryReports.ValueConclusionKeys, 
-        lossType: BoweryReports.RentLossType) {
-        return cy.get(`[data-qa="${valueConclusionKey}LossItems.${lossType}.amount-cell"] input:not([type=hidden])`);
     }
 
     get renovationBudgetAmount() {

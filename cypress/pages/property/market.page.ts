@@ -19,16 +19,16 @@ class MarketPage extends BasePage {
     get neighborhoodYear() { return cy.get("*[name=neighborhoodYear]"); }
 
     getMarketInputByAnalysisUse(marketAnalysisUse: BoweryReports.MarketAnalysisUses) {
-        return cy.get(`[name=${marketAnalysisUse}Market]`);
+        return cy.get(`[data-qa=${marketAnalysisUse}Market-form-control] input`);
     }
 
     getSubmarketInputByAnalysisUse(marketAnalysisUse: BoweryReports.MarketAnalysisUses) {
-        return cy.get(`[name=${marketAnalysisUse}Submarket]`);
+        return cy.get(`[data-qa=${marketAnalysisUse}Submarket-form-control] input`);
     }
 
-    get marketQuarter() { return cy.get("[name=marketQuarter]"); }
+    get marketQuarter() { return cy.get("[data-qa=marketQuarter-form-control] input"); }
 
-    get marketYear() { return cy.get("[name=marketYear]"); }
+    get marketYear() { return cy.get("*[name=marketYear]"); }
 
     get pullDropboxButton() { return cy.xpath("//button[.='PULL FROM DROPBOX']"); }
 
@@ -38,14 +38,6 @@ class MarketPage extends BasePage {
 
     getMarketFileByAnalysisUse(use: BoweryReports.MarketAnalysisUses) {
         return cy.get(`[data-qa=file-selection-${use}MarketAnalysis-input] input`);
-    }
-
-    getSubmarketByAnalysisUseFileUploadButton(use: BoweryReports.MarketAnalysisUses) {
-        return cy.get(`[data-qa=file-selection-${use}SubmarketAnalysis-input] button`);
-    }
-
-    getMarketByAnalysisUseFileUploadButton(use: BoweryReports.MarketAnalysisUses) {
-        return cy.get(`[data-qa=file-selection-${use}MarketAnalysis-input] button`);
     }
 
     get exposureTimeDescription() { 
@@ -58,12 +50,8 @@ class MarketPage extends BasePage {
 
     get includeMarketTimeCheckbox() { return cy.get("[data-qa^='includeMarketingTime']"); }
 
-    getMarketAnalysisUseCheckbox(marketAnalysisUse: BoweryReports.MarketAnalysisUses) { 
-        return this.getMarketAnalysisUseCheckboxArea(marketAnalysisUse).find(`input`); 
-    }
-
-    getMarketAnalysisUseCheckboxArea(marketAnalysisUse: BoweryReports.MarketAnalysisUses) {
-        return cy.get(`[data-qa^='marketAnalysisUses.${marketAnalysisUse}']`);
+    getMarketAnalysisUseCheckbox(useValue: string) { 
+        return cy.get(`[data-qa^='marketAnalysisUses.${useValue}-checkbox'] input`); 
     }
 
     get areaEconomicAnalysisContainer() { return cy.get("[data-qa=file-selection-areaEconomicAnalysis-input]"); }

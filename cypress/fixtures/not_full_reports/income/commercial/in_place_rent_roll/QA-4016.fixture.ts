@@ -26,6 +26,5 @@ export default {
     tenantName: "Test",
     leaseDates: _leaseDates,
     annualRent: 120,
-    monthlyRent: 10,
-    exportSectionName: Enums.EXPORT_TITLES.currentCommercialRentRoll
+    monthlyRent: 10
 };

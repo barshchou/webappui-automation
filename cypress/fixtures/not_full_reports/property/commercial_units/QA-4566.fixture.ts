@@ -11,6 +11,5 @@ export default {
     }),
     numberOfCommercialUnits: 1,
     groupName: groupNameFixture,
-    useRadios: useRadiosFixture,
-    otherValue: "Other"
+    useRadios: useRadiosFixture
 };

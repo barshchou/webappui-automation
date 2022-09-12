@@ -26,19 +26,13 @@ describe("Prospective Market Value As Stabilized -> Less Laundry Rent Loss data 
                 .enterLaundryVCLossPercentage(testData.vcLossPercentage, testData.vcLossValue);
             NavigationSection.navigateToCapRateConclusion();
             Income.CapRateConclusion.enterConclusionSectionConcludedCapRate(testData.concludedCapRate)
-                .enterMiscellaneousLossMonths(testData.lossMonths, testData.valueConclusionKeyAsStabilized, 
-                    testData.rentLossTypeLaundry)
-                .enterMiscellaneousLossMonths(testData.lossMonths, testData.valueConclusionKeyAsComplete, 
-                    testData.rentLossTypeLaundry);
+                .enterLaundryLossMonths(testData.lossMonths, testData.valueConclusionKeyAsStabilized)
+                .enterLaundryLossMonths(testData.lossMonths, testData.valueConclusionKeyAsComplete);
             NavigationSection.navigateToSalesValueConclusion()
                 .verifyProgressBarNotExist();
-            Sales.ValueConclusion.verifyMiscellaneousLossMonths(testData.lossMonths, 
-                testData.valueConclusionKeyAsStabilized, testData.rentLossTypeLaundry)
-                .verifyMiscellaneousLossMonths(testData.lossMonths, 
-                    testData.valueConclusionKeyAsComplete, testData.rentLossTypeLaundry)
-                .verifyMiscellaneousLossAmount(testData.laundryLossesAmount, 
-                    testData.valueConclusionKeyAsStabilized, testData.rentLossTypeLaundry)
-                .verifyMiscellaneousLossAmount(testData.laundryLossesAmount, 
-                    testData.valueConclusionKeyAsComplete, testData.rentLossTypeLaundry);
+            Sales.ValueConclusion.verifyAsStabilizedLaundryLossMonths(testData.lossMonths)
+                .verifyAsCompleteLaundryLossMonths(testData.lossMonths)
+                .verifyAsStabilizedLaundryLossAmount(testData.laundryLossesAmount)
+                .verifyAsCompleteLaundryLossAmount(testData.laundryLossesAmount);
         });
     });

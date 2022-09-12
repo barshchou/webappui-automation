@@ -25,7 +25,7 @@ describe("Verify the Commercial Stabilized Rent Roll table on export",
             );
 
             cy.stepInfo(`3. On the Income > Commercial > In-Place Rent Roll, the “Vacant“ value is selected 
-                        in the Lease Status column for all commercial units (and some other data)`); 
+                    in the Lease Status column for all commercial units (and some other data)`); 
             _NavigationSection.navigateToCommercialInPlaceRentRoll();
             Income._CommercialManager.InPlaceRentRoll
                 .chooseListLeaseStatuses(testData.leaseStatuses, testData.numberOfCommercialUnits)
@@ -39,14 +39,16 @@ describe("Verify the Commercial Stabilized Rent Roll table on export",
             });
 
             cy.stepInfo(`4. On the Income > Commercial > Comp Groups, 
-                        a new Comp Group has been created with added Comps`); 
-            _NavigationSection.navigateToCommercialCompGroups();
+            a new Comp Group has been created with added Comps`); 
+            _NavigationSection.clickCommercialCompGroups()
+                .submitSaveChangesModal();
             Income._CommercialManager.CompGroups.addCompGroup(testData.compGroup)
                 .dragAllCommercialUnitsIntoGroup(testData.compGroup, testData.numberOfCommercialUnits);
 
             cy.stepInfo(`5. On the Income > Commercial > Rent Comps, several comps have been added for 
-                        comparison into a new Created Group from the previous step`);
-            _NavigationSection.navigateToCommercialRentComps();
+                    comparison into a new Created Group from the previous step`);
+            _NavigationSection.clickCommercialRentComps()
+                .submitSaveChangesModal();
             Income._CommercialManager.RentComps.clickManuallyAddANewCompButton()
                 .searchNewCompByAddress(testData.address);
             testData.rentCompFields.forEach(field => {
@@ -61,16 +63,18 @@ describe("Verify the Commercial Stabilized Rent Roll table on export",
                 .dragAllCommercialUnitsIntoGroup(testData.compGroup, testData.compsAmount);
 
             cy.stepInfo(`6. On the Income > Commercial > Rent Reconciliation, the Market Rent Conclusion 
-                        field is filled with any value`);
-            _NavigationSection.navigateToRentReconciliation();
+                    field is filled with any value`);
+            _NavigationSection.clickRentReconciliationButton()
+                .submitSaveChangesModal();
             Income._CommercialManager.RentReconciliation
                 .addMarketRentConclusion(numberWithCommas(testData.marketRentConclusion));
     
             cy.stepInfo(`7. Proceed to the Income > Commercial > Stabilized Rent Roll page.`);
-            _NavigationSection.navigateToCommercialStabilizedRentRoll();
+            _NavigationSection.clickCommercialStabRentRollButton()
+                .submitSaveChangesModal();
     
             cy.stepInfo(`8. Click on the Autofill Vacant Units button and verify the Rent PSF column is auto-filled 
-                        (Note: Annual and Monthly Rent columns are disabled).`);
+                    (Note: Annual and Monthly Rent columns are disabled).`);
             Income._CommercialManager.StabilizedRentRoll.clickAutoFillButton();
         
             cy.stepInfo(`9. Export the report`);
@@ -85,9 +89,9 @@ describe("Verify the Commercial Stabilized Rent Roll table on export",
                     cy.log(<string>file);
                     cy.visit(<string>file);
                     cy.stepInfo(`10. Proceed to the Income Capitalization Approach > 
-                                Income Analysis > Commercial Stabilized Rent Roll 
-                                and verify that the data are exported correctly.`);
-                    cy.contains(testData.exportSectionName).scrollIntoView()
+                    Income Analysis > Commercial Stabilized Rent Roll 
+                    and verify that the data are exported correctly.`);
+                    cy.contains("Commercial Stabilized Rent Roll").scrollIntoView()
                         .next().next().should('have.text', testData.streetName)
                         .next("table").within(() => {
                             for (let i = 0; i < testData.exportTableValues.length; i++) {

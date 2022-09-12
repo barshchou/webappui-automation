@@ -33,7 +33,7 @@ describe("Verify the Commercial Stabilized Rent Roll table",
                     Income.Commercial.InPlaceRentRoll.enterRentPerSFAnnuallyByRowNumber(rent, index);
                 }
             });
-            NavigationSection.navigateToCommercialStabilizedRentRoll()
+            NavigationSection.navigateToStabilizedRentRollInCommercial()
                 .verifyProgressBarNotExist();
             Income.Commercial.StabilizedRentRoll.clickSaveButton()
                 .verifyProgressBarNotExist();
@@ -49,12 +49,12 @@ describe("Verify the Commercial Stabilized Rent Roll table",
             ).then(file => {
                 cy.log(<string>file);
                 cy.stepInfo(`2. Go to the Commercial Stabilized Rent Roll table in the export and check:
-                            removed the leading # column; 
-                            removed the decimal place for Annual Rent, represent as a whole number;
-                            removed the decimal place for Monthly Rent, represent as a whole number.`);
+                removed the leading # column; 
+                removed the decimal place for Annual Rent, represent as a whole number;
+                removed the decimal place for Monthly Rent, represent as a whole number.`);
                 cy.visit(<string>file);
             
-                cy.contains(testData.exportSectionName).prev().scrollIntoView().within(() => {
+                cy.contains("Lease Structure").prev().scrollIntoView().within(() => {
                     cy.get("tr").eq(0).find("p").eq(0).should("not.have.text", "#");
                     
                     cy.get("tr").eq(1).find("p").eq(0).invoke("attr", "text").then(value => {
