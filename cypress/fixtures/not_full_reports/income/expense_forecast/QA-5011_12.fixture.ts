@@ -190,6 +190,5 @@ export default {
     forecastPerUnitNotIncluded: _forecastPerUnitNotIncluded,
     rentRollResUnitFixture: rentRollResidentialUnitFixture(),
     perRoomAnalysis: "Include Per Room Analysis in Report",
-    expensesForecastCardNamesArray: _expensesForecastCardNamesArray,
-    toeSectionName: Enums.PAGES_TEXTBOX_NAMES.totalOperatingExpenses
+    expensesForecastCardNamesArray: _expensesForecastCardNamesArray
 };

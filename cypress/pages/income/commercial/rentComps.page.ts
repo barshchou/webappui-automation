@@ -80,7 +80,7 @@ class CommercialRentCompsPage extends BasePage {
 
     get computedPanel() { return cy.get("[data-qa=computed-panel]"); }
 
-    get mapStarZoomButton() { return cy.get("[data-testid='StarRoundedIcon']"); }
+    get mapStarZoomButton() { return cy.get(".leaflet-control svg[role='presentation']"); }
 
     get mapDrawPolygonButton() { return cy.get("[title='Draw a polygon']"); }
 
@@ -135,7 +135,7 @@ class CommercialRentCompsPage extends BasePage {
 
     get componentErrorElement() { return cy.get("#component-error-text"); }
 
-    getEditCompButton(rowNumber = 0) { return cy.get("[data-testid='EditIcon']").parent("button").eq(rowNumber); }
+    getEditCompButton(rowNumber = 0) { return cy.get("[data-testid='EditIcon']").eq(rowNumber); }
     
     getRemoveCompButton(rowNumber = 0) { return cy.get("[data-testid='CancelIcon']").eq(rowNumber); } 
   

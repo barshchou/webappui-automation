@@ -3,7 +3,8 @@ import testData from "../../../../fixtures/not_full_reports/report/client/QA-464
 import { createReport } from "../../../../actions/base/baseTest.actions";
 import { _NavigationSection } from '../../../../actions/base';
 
-describe("Verify the Client Guidelines Discussion on the page",
+//TODO update test after test-cases updates QA-6543
+describe("Verify the Client Guidelines Discussion on the page", 
     { tags: [ "@report", "@client", "@check_export" ] }, () => {
         it("[QA-4642]",  () => {
             cy.stepInfo(`1. Proceed to the Report > Client page`);
@@ -13,34 +14,27 @@ describe("Verify the Client Guidelines Discussion on the page",
             _NavigationSection.navigateToClientPage().verifyProgressBarNotExist();
 
             cy.stepInfo(`2. Enter the “=“ and verify the "Linked" chips dropdown for both sections: 
-                        options 'Gross Building Area', 'Building Name', 'Property Type', 
-                        'Current Residential Unit Count', 'As Complete Residential Unit Count', 
-                        'Current Commercial Unit Count', 'As Complete Commercial Unit Count', 
-                        'Street Address', 'Street Name', 'Site Area', 'Year Built', 'Block', 
-                        'Lot', 'Concluded Cap Rate', 'Zones', 'CurrentCondition', 'As Stabilized Condition'`);
-            Report._Client.activateTextAreaInput(Report._Client.Page.formCommentTextBox(testData.intendedUser));
+        options 'Gross Building Area', 'Building Name', 'Property Type', 'Current Residential Unit Count', 
+        'As Complete Residential Unit Count', 'Current Commercial Unit Count', 'As Complete Commercial Unit Count', 
+        'Street Address', 'Street Name', 'Site Area', 'Year Built', 'Block', 'Lot', 'Concluded Cap Rate', 
+        'Zones', 'CurrentCondition', 'As Stabilized Condition'`);
+            Report._Client.activateTextAreaInput(Report._Client.Page.intendedUserTextBox);
             testData.chips.forEach(chip => {
-                Report._Client.Page.formCommentTextBox(testData.intendedUser).type(`=${chip.typeSuggestValue}`);
-                Report._Client.clickNarrativeSuggestions(chip.suggestionName)
-                    .verifyFormCommentTextBoxText(testData.intendedUser, chip.verifySuggest);
+                Report._Client
+                    .enterIntendedUserTextBox(`=${chip.typeSuggestValue}`)
+                    .clickNarrativeSuggestions(chip.suggestionName)
+                    .verifyIntendedUserTextBox(chip.verifySuggest);
             });
-            Report._Client.activateTextAreaInput(Report._Client.Page
-                .formCommentTextBox(testData.identificationOfTheClient));
+            Report._Client.activateTextAreaInput(Report._Client.Page.identificationOfClientTextBox);
             testData.chips.forEach(chip => {
-                Report._Client.Page.formCommentTextBox(testData.identificationOfTheClient)
-                    .type(`=${chip.typeSuggestValue}`);
-                Report._Client.clickNarrativeSuggestions(chip.suggestionName, 1)
-                    .verifyFormCommentTextBoxText(testData.identificationOfTheClient,
-                        chip.verifySuggest);
+                Report._Client
+                    .enterIdentificationOfTheClientTextBox(`=${chip.typeSuggestValue}`)
+                    .clickNarrativeSuggestions(chip.suggestionName, 1)
+                    .verifyIdentificationOfTheClientTextBox(chip.verifySuggest);
             });
             Report._Client.inactivateTextAreaInput();
-
-            cy.stepInfo("3. Verify chip style");
-            testData.chipNames.forEach(chip => {
-                Report._Client.verifyStyleInDefaultChip(chip);
-            });
     
-            cy.stepInfo(`4. Download report`);
+            cy.stepInfo(`3. Download report`);
             _NavigationSection.openReviewAndExport(true);
             ReviewExport.generateDocxReport().waitForReportGenerated()
                 .downloadAndConvertDocxReport(testData.reportCreationData.reportNumber);
@@ -54,9 +48,9 @@ describe("Verify the Client Guidelines Discussion on the page",
                     cy.visit(<string>file);
 
                     testData.chips.forEach(item => {
-                        cy.contains(testData.identificationOfTheClientSection).next().scrollIntoView()
+                        cy.contains("Identification of the Client").next().scrollIntoView()
                             .should("include.text", item.verifyExport);
-                        cy.contains(testData.intendedUseSection).next().scrollIntoView()
+                        cy.contains("Intended Use & User").next().next().scrollIntoView()
                             .should("include.text", item.verifyExport);
                     });
                 }); 

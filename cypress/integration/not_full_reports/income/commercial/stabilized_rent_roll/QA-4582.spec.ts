@@ -19,7 +19,7 @@ describe(`Verify the Unsaved changes modal functionality on the Income > Commerc
 
             cy.stepInfo(`1. Fill in the editable fields with values or/and check check-boxes or/and click 
                          the radio button and do NOT click on the Save button.`);
-            _NavigationSection.navigateToCommercialStabilizedRentRoll();
+            _NavigationSection.navigateToStabilizedRentRollInCommercial();
             Income._CommercialManager.StabilizedRentRoll.verifyThatPageIsOpened()
                 .Page.rentPerSFAnnuallyTotal.scrollIntoView();
             Income._CommercialManager.StabilizedRentRoll

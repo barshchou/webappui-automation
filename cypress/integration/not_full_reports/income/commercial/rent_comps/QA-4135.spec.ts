@@ -89,7 +89,7 @@ describe("Subject column calculations", { tags: [ "@income", "@commercial", "@re
             Income._CommercialManager.InPlaceRentRoll.pressDeleteLeaseStatusByRow(i);
         }
         cy.stepInfo("Verify that form cannot be saved");
-        Income._CommercialManager.InPlaceRentRoll.clickSaveButton(false);
+        Income._CommercialManager.InPlaceRentRoll.clickSaveButton();
         for (let i = 0; i < testData.unitsNumber; i++) {
             Income._CommercialManager.InPlaceRentRoll.verifyLeaseStatusNeedsToBeFilled(i);
         }

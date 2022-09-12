@@ -96,6 +96,5 @@ export default {
     fuelForecastName: _fuelForecastName,
     perSFTitle: _perSFTitle,
     perUnitTitle: _perUnitTitle,
-    perRoomTitle: _perRoomTitle,
-    exportSectionName: Enums.EXPORT_TITLES.estimatedOperatingExpenses
+    perRoomTitle: _perRoomTitle
 };

@@ -688,21 +688,20 @@ const comparableExpensesFixture = () => {
     };
 };
 
-const expenseForecastFixture = (): {
-    insuranceItem: BoweryReports.ForecastItem,
-    electricityItem: BoweryReports.ForecastItem,
-    fuelItem: BoweryReports.ForecastItem,
-    waterSewerItem: BoweryReports.ForecastItem,
-    repairsMaintenance: BoweryReports.ForecastItem,
-    payrollBenefits: BoweryReports.ForecastItem
-    general: BoweryReports.ForecastItem,
-    legalProf: BoweryReports.ForecastItem,
-    miscellaneous: BoweryReports.ForecastItem,
-    management: BoweryReports.ForecastItem,
-    reserves: BoweryReports.ForecastItem,
-    total: BoweryReports.ForecastItem,
-    effectiveGrossIncome: number,
-    percentOfEgi: number} => {
+const expenseForecastFixture = (): {insuranceItem: BoweryReports.ForecastItem,
+                                    electricityItem: BoweryReports.ForecastItem,
+                                    fuelItem: BoweryReports.ForecastItem,
+                                    waterSewerItem: BoweryReports.ForecastItem,
+                                    repairsMaintenance: BoweryReports.ForecastItem,
+                                    payrollBenefits: BoweryReports.ForecastItem
+                                    general: BoweryReports.ForecastItem,
+                                    legalProf: BoweryReports.ForecastItem,
+                                    miscellaneous: BoweryReports.ForecastItem,
+                                    management: BoweryReports.ForecastItem,
+                                    reserves: BoweryReports.ForecastItem,
+                                    total: BoweryReports.ForecastItem,
+                                    effectiveGrossIncome: number,
+                                    percentOfEgi: number} => {
     return {
         insuranceItem: {
             name: "insurance", basis: "unit", forecast: 350

@@ -34,7 +34,8 @@ describe(`Verify the Back button functionality on the Stabilized Rent Roll page`
                 .verifyStabilizedCommercialIncomeDiscussion(testData.commentaryAsIsOccupied);
 
             cy.stepInfo(`7. Set all units lease status to 'Vacant'.`);
-            _NavigationSection.navigateToCommercialInPlaceRentRoll();
+            _NavigationSection.clickCommercialRentRollButton()
+                .submitSaveChangesModal();
             Income._CommercialManager.InPlaceRentRoll
                 .chooseListLeaseStatuses(testData.leaseStatusVacant, testData.numberOfCommercialUnits);
 
