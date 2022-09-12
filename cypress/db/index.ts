@@ -36,11 +36,9 @@ class ComplexDatabaseModule {
             let data = await collection.find(filter, { limit:10 }).toArray();
             return data; 
         } catch (error) {
-            console.warn("Error occurred during DB connection or data retrieve");
             console.log(error);
         } finally {
             client.close();
-            console.log("Disconnected from DB");
         }
     };
 

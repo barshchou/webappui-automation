@@ -37,7 +37,7 @@ jobs:
   Not-full-reports-run-DEBUG:
     runs-on: ubuntu-latest
     timeout-minutes: 100
-    container: cypress/browsers:node16.13.2-chrome100-ff98
+    container: cypress/included:10.3.1
     permissions:
       id-token: write
       contents: read
@@ -47,20 +47,24 @@ jobs:
         containers: [1]
 
     steps:
+      - name: Configure secrets
+        if: ${{ !env.ACT }} 
+        uses: aws-actions/configure-aws-credentials@v1
+        with:
+            role-to-assume: arn:aws:iam::814827541967:role/GithubOIDC-Role-QMKR3DR5WV3B
+            aws-region: 'us-east-1'
+          
       - name: Run end-to-end tests (DEBUG, one container)
         uses: Bowery-RES/action-run-e2e-tests@latest
         with:
           github_token: ${{ secrets.GH_PERSONAL_ACCESS_TOKEN }}
-          username: ${{ secrets.USERNAME }}
-          password: ${{ secrets.PASSWORD }}
           customUrl: ${{ github.event.inputs.customUrl }}
           url: ${{ github.event.inputs.url }}
           spec_file: ${{ github.event.inputs.spec_file }}
           tags: ${{ github.event.inputs.tags }}
-          record_key: ${{ secrets.CURRENTS_RECORD_KEY }}
           ref: ${{ github.event.inputs.ref }}
+          secret_name: 'Github/Cypress/webapp-e2e-secrets'
         env:
           DD_CIVISIBILITY_AGENTLESS_ENABLED: true
-          DD_API_KEY: ${{ secrets.DD_API_KEY }}
           DD_ENV: ${{ github.event.inputs.url }}
           DD_SERVICE: 'webapp'

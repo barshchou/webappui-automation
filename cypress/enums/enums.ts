@@ -64,7 +64,6 @@ import sortValues from "./findComps/sortValues.enum";
 import conditionValues from "./findComps/propertyInformation/conditionValues.enum";
 import comparableTypes from "./findComps/propertyInformation/comparableType.enum";
 import saleStatuses from "./findComps/saleInformation/saleStatuses.enum";
-import saleCondition from "./findComps/saleInformation/saleCondition.enum";
 import fileSelectionNamesEnum from "./property/fileSelectionNames.enum";
 import discussionNamesEnum from "./property/discussionNames.enum";
 import salesAdjustmentGridDiscussionsEnum from "./adjustComps/salesAdjustmentGridDiscussions.enum";
@@ -79,11 +78,28 @@ import unitIncomeTypeEnum from "./unit/unitIncomeType.enum";
 import rentLossTypeEnum from "./rentLossType.enum";
 import dateTypeEnum from "./keyInfo/dateType.enum";
 import interestAppraisedEnum from "./keyInfo/interestAppraised.enum";
+import feasiblePropertyTypesEnum from "./property/feasiblePropertyTypes.enum";
+import highestAndBestUseCommentsEnum from "./highestAndBestUseComments.enum";
 import letterOfTransmittalEnum from "./cms/letterOfTransmittal.enum";
 import swotAnalysisEnum from "./cms/swotAnalysis.enum";
-import salesforceJobsEnum from "./salesforceJobs.enum";
+import reportTypesEnum from "./salesforceJobs/reportTypes.enum";
 import incomeCapitalizationApproachEnum from "./cms/incomeCapitalizationApproach.enum";
 import certificationEnum from "./cms/certification.enum";
+import appraiserSFEnum from "./salesforceJobs/appraiserSF.enum";
+import otherAdjustmentsExpansionRowsEnum from "./adjustComps/otherAdjustmentsExpansionRows.enum";
+import utilitiesAdjustmentsExpansionRowsEnum from "./adjustComps/utilitiesAdjustmentsExpansionRows.enum";
+import adjustmentExpansionLabelsEnum from "./sales/adjustComps/adjustmentExpansionLabels.enum";
+import projectedTaxesSectionsEnum from "./income/taxInfo/projectedTaxesSections.enum";
+import projectedTaxesInputsNamesEnum from "./income/taxInfo/projectedTaxesInputsNames.enum";
+import chipsEnum from "./chips.enum";
+import expenseHistoryDataProviderEnum from "./expense/expenseHistoryDataProvider.enum";
+import expenseItemBasisOfComparisonEnum from "./expense/expenseItemBasisOfComparison.enum";
+import exportTitlesEnum from "./exportTitles.enum";
+import compStatusValuesEnum from "./findComps/compStatusValues.enum";
+import compPropertyPathsInDB from "./compplex/compPropertiesAndValues.enum";
+import saleStatusValuesInDB from "./compplex/compPropertiesAndValues.enum";
+import saleConditionValuesInDB from "./compplex/compPropertiesAndValues.enum";
+import finalValueApproachEnum from "./final/finalValuesReconciliation/finalValueApproach.enum";
 
 export default {
     TEMPLATE_TYPE: templateTypesEnum,
@@ -149,7 +165,6 @@ export default {
     SALE_PERIOD_VALUES: salePeriodValuesEnum,
     SORT_VALUES: sortValues,
     CONDITION_VALUES: conditionValues,
-    SALE_CONDITION: saleCondition,
     COMPARABLE_TYPES: comparableTypes,
     SALE_STATUSES: saleStatuses,
     FILE_SELECTION_NAMES: fileSelectionNamesEnum,
@@ -167,9 +182,26 @@ export default {
     RENT_LOSS_TYPE: rentLossTypeEnum,
     DATE_TYPE: dateTypeEnum,
     INTEREST_APPRAISED: interestAppraisedEnum,
+    FEASIBLE_PROPERTY_TYPES: feasiblePropertyTypesEnum,
+    HIGHEST_AND_BEST_USE_COMMENTS_ENUM: highestAndBestUseCommentsEnum,
     LETTER_SECTIONS: letterOfTransmittalEnum,
     SWOT_SECTIONS: swotAnalysisEnum,
-    SALESFORCE_JOBS: salesforceJobsEnum,
+    REPORT_TYPES_SF: reportTypesEnum,
     INCOME_CAPITALIZATION_APPROACH_SECTIONS: incomeCapitalizationApproachEnum,
-    CERTIFICATION_SECTIONS: certificationEnum
+    CERTIFICATION_SECTIONS: certificationEnum,
+    APPRAISER_SF: appraiserSFEnum,
+    OTHER_ADJUSTMENTS_EXPANSION_ROWS: otherAdjustmentsExpansionRowsEnum,
+    UTILITIES_ADJUSTMENTS_EXPANSION_ROWS: utilitiesAdjustmentsExpansionRowsEnum,
+    ADJUSTMENT_EXPANSION_LABELS: adjustmentExpansionLabelsEnum,
+    PROJECTED_TAXES_SECTIONS: projectedTaxesSectionsEnum,
+    PROJECTED_TAXES_INPUTS: projectedTaxesInputsNamesEnum,
+    CHIPS: chipsEnum,
+    EXPENSE_DATA_PROVIDER: expenseHistoryDataProviderEnum,
+    EXPENSE_ITEM_BASIS_OF_COMPARISON: expenseItemBasisOfComparisonEnum,
+    EXPORT_TITLES: exportTitlesEnum,
+    COMP_STATUS_VALUES: compStatusValuesEnum,
+    FINAL_VALUES_APPROACH: finalValueApproachEnum,
+    COMP_PROPERTIES_PATHS_DB: compPropertyPathsInDB,
+    COMP_SALE_STATUS_DB: saleStatusValuesInDB,
+    COMP_SALE_CONDITION_DB: saleConditionValuesInDB
 };

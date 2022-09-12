@@ -1,3 +1,4 @@
+import { RealClickOptions } from 'cypress-real-events/commands/realClick';
 /* eslint-disable @typescript-eslint/triple-slash-reference */
 // eslint-disable-next-line multiline-comment-style
 /// <reference types="cypress-xpath" />
@@ -8,6 +9,7 @@
  */
 import BasePage from "../../pages/base/base.page";
 import BaseActions from "./base.actions";
+import { numberWithCommas } from "../../../utils/numbers.utils";
 
 export default class BaseActionsExt<T extends BasePage> extends BaseActions {
     Page: T;
@@ -90,6 +92,12 @@ export default class BaseActionsExt<T extends BasePage> extends BaseActions {
         return this;
     };
 
+    enterInSelectChipsWrapper(enterValue: string, elemIndex = 0) {
+        this.Page.getSelectChipsWrapper(elemIndex).type(`${enterValue}{enter}`);
+        cy.get(`[data-qa='${enterValue}']`).eq(elemIndex).should("exist");
+        return this;
+    }
+
     clickFormRevertToOriginalBtn(index = 0): this {
         this.Page.formRevertToOriginalBtn(index).click();
         return this;
@@ -101,10 +109,27 @@ export default class BaseActionsExt<T extends BasePage> extends BaseActions {
     }
 
     // TODO: QA-6548 Removed cy.wait() when we determine how to save changes after editing
-    enterFormCommentTextBox(name: string, text: string): this {
-        this.Page.formCommentTextBox(name).realClick({ position: "bottom" }).type(text);
-        this.Page.Header.realClick();
+    enterFormCommentTextBox(name: string, text: string, isClickHeader = true, 
+        option: RealClickOptions = { position: "bottomRight" }): this {
+        this.Page.formCommentTextBox(name).realClick({ position: option.position }).type(text);
+        if (isClickHeader) {
+            this.Page.Header.realClick();
+        }
         cy.wait(1000);
+        return this;
+    }
+
+    clearFormCommentTextBox(name: string): this {
+        this.Page.formCommentTextBox(name).realClick().realPress([ "Control", "A" ]);
+        this.Page.formCommentTextBox(name).realPress("Backspace");
+        return this;
+    }
+
+    verifyFormCommentTextBoxText(name: string, textToBe: string | number, matcher = "contain.text"): this {
+        let expectedText = typeof textToBe ===  "number"
+            ? `${numberWithCommas(textToBe)}`
+            : textToBe;
+        this.Page.formCommentTextBox(name).should(matcher, expectedText);
         return this;
     }
 
@@ -124,9 +149,50 @@ export default class BaseActionsExt<T extends BasePage> extends BaseActions {
         this.Page.formCommentTextBox(sectionName).scrollIntoView().realClick();
         this.Page.formCommentTextBox(sectionName).type(`{ESC}`);
         this.Page.formCommentTextBox(sectionName).focus();
-        this.Page.formRevertToOriginalBtn().click();
-        this.Page.formYesRevertBtn.click();
+        this.Page.formRevertToOriginalBtnBySectionName(sectionName).click({ force: true });
+        this.clickFormYesRevertButton();
         this.saveCmsSettings();
+        return this;
+    }
+
+    revertToOriginalCommentarySectionByName(name: string): this {
+        this.Page.formCommentTextBox(name).realClick();
+        this.clickRevertToOriginalButtonBySection(name)
+            .clickFormYesRevertButton();
+        return this;
+    }
+
+    clickFormYesRevertButton(): this {
+        this.Page.formYesRevertBtn.click();
+        return this;
+    }
+
+    clickRevertToOriginalButtonBySection(name: string): this {
+        this.Page.formRevertToOriginalBtnBySectionName(name).click();
+        return this;
+    }
+
+    /**
+     * Method for typing values into input which re-renders on every char typed into there.
+     * Can be useful for such inputs as `commercialUnitsPage.commercialUnitsSFInputs`
+     */
+    setValueIntoNumberInput(elemAlias: string, value: string | number, index = 0): this {
+        cy.get(`@${elemAlias}`).eq(index).should("be.enabled").focus().clear();
+        (""+value).split("").forEach(n => {
+            cy.get(`@${elemAlias}`).eq(index).focus().type(`${n}`);
+            cy.wait(100);
+        });
+        return this;
+    }
+
+    verifyStyleInDefaultChip(chip: string, color = "rgb(210, 65, 65)", backgroundColor = "rgb(255, 233, 233)"): this {
+        this.Page.getDefaultCommentChip(chip).should("have.css", "color", color)
+            .and("have.css", "background-color", backgroundColor);
+        return this;
+    }
+
+    clickCloseIcon(): this {
+        this.Page.CloseIcon.click();
         return this;
     }
 }

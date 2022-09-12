@@ -28,12 +28,12 @@ class SaleInfoFromActions {
     }
 
     setBuyerGrantee(name: string): SaleInfoFromActions {
-        this.Page.BuyerGranteeNewComp.focus().type(name, { force: true });
+        this.Page.BuyerGranteeNewComp.type(name, { force: true });
         return this;
     }
 
     setSellerGrantor(seller: string): SaleInfoFromActions {
-        this.Page.SellerGrantor.focus().type(seller, { force: true });
+        this.Page.SellerGrantor.type(seller, { force: true });
         return this;
     }
 
