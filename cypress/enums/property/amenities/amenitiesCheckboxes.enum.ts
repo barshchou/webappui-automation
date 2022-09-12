@@ -30,7 +30,8 @@ const amenitiesCheckboxes = {
     hasLoading: "building.hasLoading",
     hasStorefrontExposure: "building.hasStorefrontExposure",
     hasWarehouseSpace: "building.hasWarehouseSpace",
-    hasOutdoorSeating: "building.hasOutdoorSeating"
+    hasOutdoorSeating: "building.hasOutdoorSeating",
+    hasDriveThru: "building.hasDriveThru"
 } as const;
 
 export default Object.freeze(amenitiesCheckboxes);
