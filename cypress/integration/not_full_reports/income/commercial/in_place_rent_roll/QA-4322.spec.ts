@@ -2,7 +2,6 @@ import testData from "../../../../../fixtures/not_full_reports/income/commercial
 import NavigationSection from "../../../../../actions/base/navigationSection.actions";
 import Income from "../../../../../actions/income/income.manager";
 import { createReport } from "../../../../../actions/base/baseTest.actions";
-import { testTimeout } from "../../../../../support/timeout";
 
 describe("Verify the Basis of Rent tooltip", 
     { tags:[ "@income", "@commercial", "@in_place_rent_roll" ] }, () => {
