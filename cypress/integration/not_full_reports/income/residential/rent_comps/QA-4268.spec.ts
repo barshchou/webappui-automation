@@ -3,19 +3,18 @@ import { createReport } from "../../../../../actions/base/baseTest.actions";
 import NavigationSection from "../../../../../actions/base/navigationSection.actions";
 import Income from "../../../../../actions/income/income.manager";
 
-describe("Verify Min Rent and Max Rent text fields", 
-    { tags:[ "@income", "@commercial", "@in_place_rent_roll" ] }, () => {
-        beforeEach("Login, create report", () => {
-            createReport(testData.reportCreationData);
-        });
-
-        it("[QA-4268]", () => {
-            NavigationSection.navigateToResidentialRentComps()
-                .verifyProgressBarNotExist();
-            Income.Residential.RentComps.BaseActions.verifyUnitSelected()
-                .enterValueToInput("minRent", testData.minRentOk)
-                .enterValueToInput("minRent", testData.minRentMore2Digits)
-                .enterValueToInput("maxRent", testData.maxRentOk)
-                .enterValueToInput("maxRent", testData.maxRentMore2Digits);
-        });
+describe("Verify Min Rent and Max Rent text fields", () => {
+    beforeEach("Login, create report", () => {
+        createReport(testData.reportCreationData);
     });
+
+    it("Test body", () => {
+        NavigationSection.navigateToRentComps()
+            .verifyProgressBarNotExist();
+        Income.Residential.RentComps.BaseActions.verifyUnitSelected()
+            .enterValueToInput("minRent", testData.minRentOk)
+            .enterValueToInput("minRent", testData.minRentMore2Digits)
+            .enterValueToInput("maxRent", testData.maxRentOk)
+            .enterValueToInput("maxRent", testData.maxRentMore2Digits);
+    });
+});

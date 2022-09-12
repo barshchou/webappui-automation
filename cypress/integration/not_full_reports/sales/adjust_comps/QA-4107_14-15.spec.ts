@@ -13,7 +13,6 @@ describe("Adjusted Price per Residential Unit in Sales Adjustment Grid is calcul
             cy.stepInfo("2. Navigate to Sales > Find Comps and select comps");
             NavigationSection.navigateToFindComps();
             testData.compsToAdd.forEach(() => {
-                // TODO: [QA-6764] Update method of selecting comp and querying data needed for test 
                 Sales._FindComps.Actions.selectCompFromMap();
             });
 
@@ -37,7 +36,6 @@ describe("Adjusted Price per Residential Unit in Sales Adjustment Grid is calcul
             cy.stepInfo("2. Navigate to Sales > Find Comps and select comps");
             NavigationSection.navigateToFindComps();
             testData.compsToAdd.forEach(() => {
-                // TODO: [QA-6764] Update method of selecting comp and querying data needed for test 
                 Sales._FindComps.Actions.selectCompFromMap();
             });
 
@@ -61,7 +59,6 @@ describe("Adjusted Price per Residential Unit in Sales Adjustment Grid is calcul
             cy.stepInfo("2. Navigate to Sales > Find Comps and select comps");
             NavigationSection.navigateToFindComps();
             testData.compsToAdd.forEach(() => {
-                // TODO: [QA-6764] Update method of selecting comp and querying data needed for test 
                 Sales._FindComps.Actions.selectCompFromMap();
             });
 
@@ -75,6 +72,6 @@ describe("Adjusted Price per Residential Unit in Sales Adjustment Grid is calcul
                 .clickAddOtherAdjustmentButton()
                 .enterOtherAdjustmentByColumn(testData.comparable.otherAdjustment)
                 .enterPropertyRightsByColumn(testData.comparable.propertyRights)
-                .verifyAdjustedPriceByColumn(0);
+                .verifyAdjustedPriceByColumn(0, true);
         });
     });

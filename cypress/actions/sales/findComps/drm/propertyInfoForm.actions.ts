@@ -24,7 +24,7 @@ class PropertyInfoFormActions {
     }
             
     setCommercialUnits(units: string): PropertyInfoFormActions {
-        this.Page.createCompNumberCommercialUnits.type(units, { force: true });
+        this.Page.createCompNumberResidentialUnits.type(units, { force: true });
         return this;
     }
 
@@ -50,12 +50,6 @@ class PropertyInfoFormActions {
 
     setYearBuild(year: string): PropertyInfoFormActions {
         this.Page.yearBuiltNewComp.type(year, { force: true });
-        return this;
-    }
-
-    setCompType(compType: string): PropertyInfoFormActions {
-        this.Page.comparableTypeDropdown.click();
-        this.Page.getDropdownOption(compType).click({ force: true });
         return this;
     }
 }

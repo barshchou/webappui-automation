@@ -7,9 +7,9 @@ import { createReport } from "../../../../../actions/base/baseTest.actions";
 describe("Default selection on Stabilized Rent Roll table is the same selection made on In-Place RR page",
     { tags:[ "@income", "@residential", "@stabilized_rent_roll_summary", "@check_export" ] }, () => {
         it(`[QA-6167] Verify Rent-Controlled and Market Rate Increase values
-            [QA-6168] Verify 'Rent Controlled Increases Discussion' generated commentary`, () => {
+        [QA-6168] Verify 'Rent Controlled Increases Discussion' generated commentary`, () => {
             cy.stepInfo(`Precondition: Select any option as Basis of Square Foot Analysis 
-                        and fill in square foot field with valid numeric value.`);
+                and fill in square foot field with valid numeric value.`);
             createReport(testData.reportCreationData);
             _NavigationSection.navigateToPropertySummary();
             Property._Summary.enterNumberOfResUnits(testData.residentialUnits.length);
@@ -18,7 +18,7 @@ describe("Default selection on Stabilized Rent Roll table is the same selection 
             _NavigationSection.navigateToResInPlaceRentRoll();
 
             cy.stepInfo(`Precondition: In the Income > Residential > In-Place Rent Roll page make rent type 
-                        of at least one unit as Rent Controlled and at least one - as Market Rate`);
+                    of at least one unit as Rent Controlled and at least one - as Market Rate`);
             testData.residentialUnits.forEach((unit, index) => {
                 Income._Residential.InPlaceRentRoll.enterRentTypeCellByRowNumber(unit.rentType, index)
                     .enterMonthlyRentByRowNumber(unit.monthlyRent, index);
@@ -54,14 +54,14 @@ describe("Default selection on Stabilized Rent Roll table is the same selection 
                 cy.visit(<string>file);
 
                 cy.stepInfo(`[QA-6167] 7. Verify export to have market and 
-                            controlled rent values and commentaries `);
-                cy.xpath(`//p[.='${testData.potentialGrossSection}']//following::td[p[.='Rent Controlled']][1]`)
+                        controlled rent values and commentaries `);
+                cy.xpath("//p[.='Potential Gross Residential Income']//following::td[p[.='Rent Controlled']][1]")
                     .next().next().next().scrollIntoView().should('have.text', `${testData.rentTypeIncrease[0]}00`);
-                cy.xpath(`//p[.='${testData.potentialGrossSection}']//following::td[p[.='Market Rate']][1]`)
+                cy.xpath("//p[.='Potential Gross Residential Income']//following::td[p[.='Market Rate']][1]")
                     .next().next().next().scrollIntoView().should('have.text', `${testData.rentTypeIncrease[1]}.00000`);
 
                 cy.stepInfo(`[QA-6168] Verify the paragraph of text under Rent Controlled Increases subheader`);
-                cy.xpath(`//h4[.='${testData.rentControlledSection}']`)
+                cy.xpath("//h4[.='Rent Controlled Increases']")
                     .next().should('have.text', testData.rentControlledDiscussion);
             });
         });

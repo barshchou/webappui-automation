@@ -9,7 +9,7 @@ describe("Sales Value Conclusion Discussion -> Generated Commentary is revertibl
             createReport(testData.reportCreationData);
         });
 
-        it("[QA-4326]", () => {
+        it("Test body", () => {
             NavigationSection.navigateToSalesValueConclusion();
             Sales.ValueConclusion.verifyGeneratedCommentary(testData.commentaryData.generatedCommentary)
                 .enterNewCommentary(testData.commentaryData.newCommentary)

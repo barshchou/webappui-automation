@@ -2,7 +2,7 @@ import { navigateToCompplex } from "../../../../actions/base/baseTest.actions";
 import { Sales, CompPlex } from "../../../../actions";
 import mapKeysUtils from "../../../../utils/mapKeys.utils";
 
-describe(`[QA-5272] -> 
+describe.skip(`[QA-5272] -> 
 [Sales > Find Comps > Edit of the comp] Check that following fields are disabled in the edit mode`, 
 { tags:[ "@comp_plex_standalone" ] }, () => {
 
