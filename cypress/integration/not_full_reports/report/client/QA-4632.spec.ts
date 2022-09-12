@@ -1,6 +1,7 @@
 import { Report } from "../../../../actions";
 import { _NavigationSection } from "../../../../actions/base";
 import { createReport } from "../../../../actions/base/baseTest.actions";
+import Enums from "../../../../enums/enums";
 import testData from '../../../../fixtures/not_full_reports/report/client/QA-4632.fixture';
 
 describe.skip("Verify the Cancel button functionality for Intended User and Identification of the Client sections",
@@ -25,7 +26,9 @@ describe.skip("Verify the Cancel button functionality for Intended User and Iden
             changes with no warning message for both sections.`);
             Report._Client.Page.formCancelButton().click();
             Report._Client.Page.formCancelButton().click();
-            Report._Client.verifyIntendedUserTextBox(testData.verifyIntendedUserTextArea)
-                .verifyIdentificationOfTheClientTextBox(testData.verifyIdentificationOfTheClientTextArea);
+            Report._Client.verifyFormCommentTextBoxText(Enums.PAGES_TEXTBOX_NAMES.intendedUser,
+                testData.verifyIntendedUserTextArea)
+                .verifyFormCommentTextBoxText(Enums.PAGES_TEXTBOX_NAMES.identificationOfTheClient,
+                    testData.verifyIdentificationOfTheClientTextArea);
         });
     });

@@ -5,7 +5,7 @@ import Income from "../../../../../actions/income/income.manager";
 import { createReport } from "../../../../../actions/base/baseTest.actions";
 
 describe("Verify the Monthly Rent Total is calculated correctly in the grid.", 
-    { tags:[ "@income", "@commercial", "@in_place_rent_roll" ] }, () => {
+    { tags:[ "@income", "@commercial", "@in_place_rent_roll" ] }, () => { 
 
         beforeEach("Login, create report", () => {
             createReport(testData.reportCreationData);

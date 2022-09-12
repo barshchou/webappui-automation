@@ -1,6 +1,7 @@
 /* eslint-disable max-len */
 import ReportDataCreator from "../../../data_creator/reportData.creator";
 import { BoweryAutomation } from "../../../../types/boweryAutomation.type";
+import Enums from "../../../../enums/enums";
 
 const _reportCreationData: BoweryAutomation.ReportCreationData = ReportDataCreator.getReportData("4477");
 const _title = "Definition of Market Value";
@@ -15,5 +16,6 @@ const _definitionOfMarketValueList: string[] = [
 export default {
     reportCreationData: _reportCreationData,
     title: _title,
-    definitionOfMarketValueList: _definitionOfMarketValueList
+    definitionOfMarketValueList: _definitionOfMarketValueList,
+    exportSectionName: Enums.EXPORT_TITLES.definitionOfMarketValue
 };

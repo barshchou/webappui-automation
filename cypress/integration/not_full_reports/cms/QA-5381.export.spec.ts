@@ -45,11 +45,12 @@ conditionalDescribe("Verify the page and fields available on it",
                     cy.visit(<string>file);
 
                     cy.stepInfo(`5. Verify commentary text in exported report`);
-                    cy.xpath(`//h1[.='Certification']`).scrollIntoView().next().next().find("li").then($li => {
-                        const reportSectionText = $li.toArray().map(li => li.innerHTML)
-                            .slice(0, testData.textsArray.length);
-                        expect(testData.textsArray).to.deep.eq(reportSectionText); 
-                    });
+                    cy.xpath(`//h1[.='${testData.exportSection}']`).scrollIntoView()
+                        .next().next().find("li").then($li => {
+                            const reportSectionText = $li.toArray().map(li => li.innerHTML)
+                                .slice(0, testData.textsArray.length);
+                            expect(testData.textsArray).to.deep.eq(reportSectionText); 
+                        });
                 });
         });
 

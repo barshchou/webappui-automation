@@ -476,7 +476,8 @@ class RentCompsActions extends BaseActionsExt<typeof rentCompsPage> {
     }
 
     verifyComparableUncategorizedDefaultCellsByRow(rowIndex: number, rentCompData: Readonly<{bedrooms: number | string,
-    rooms: number | string, monthly: string | number, sourceInfoCheck: string, address: string}>): RentCompsActions {
+        rooms: number | string, monthly: string | number, sourceInfoCheck: string, address: string}>): 
+        RentCompsActions {
         rentCompsPage.uncategorizedTable.find(rentCompsPage.getCategoryRowByIndexLocator(rowIndex)).then(row => {
             this.verifyCompRowDefaultCells(row, rentCompData, rowIndex);
         });
@@ -532,7 +533,7 @@ class RentCompsActions extends BaseActionsExt<typeof rentCompsPage> {
     }
 
     verifyUncategorizedSquareFootageCells(index: number, rentCompData: Readonly<{squareFootage: number | string,
-                                            rentPSF: number | string}>): RentCompsActions {
+        rentPSF: number | string}>): RentCompsActions {
         rentCompsPage.uncategorizedTable.find(rentCompsPage.getCategoryRowByIndexLocator(index)).then(row => {
             this.verifyRentPsfSfCompRowCells(row, rentCompData);
         });
@@ -552,7 +553,7 @@ class RentCompsActions extends BaseActionsExt<typeof rentCompsPage> {
 
     private verifyCompRowDefaultCells(JQueryRowElement: JQuery<HTMLElement>, 
         rentCompData: Readonly<{bedrooms: number | string, rooms: number | string, monthly: string | number, 
-        sourceInfoCheck: string, address: string}>, rowIndex: number): RentCompsActions {
+            sourceInfoCheck: string, address: string}>, rowIndex: number): RentCompsActions {
         this.verifyCellExist(JQueryRowElement, rentCompsPage.moveCellLocator);
         this.verifyCellText(JQueryRowElement, rentCompsPage.indexCellLocator, `${rowIndex + 1}`);
         this.verifyCellText(JQueryRowElement, rentCompsPage.unitAddressLocator, rentCompData.address);
