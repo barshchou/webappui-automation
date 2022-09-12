@@ -8,17 +8,40 @@ const reportCreationData: BoweryAutomation.ReportCreationData = ReportDataCreato
     conclusionValue: Enums.VALUE_CONCLUSION_TYPE.AS_COMPLETE
 });
 
-const filePath = "not_full_reports/CostarExport_3Contract_3Listing_3Date.csv";
+const filePath = "test_files/CostarExport 5161.csv";
 const sortSalesCompsDateSold = Enums.SORT_VALUES.dateSold;
 const salePeriodValue = Enums.SALE_PERIOD_VALUES.lastThreeMonths;
 
+const arrayOfCompsForAdditionFromMap1 = [
+    {
+        address: "116 Cooper Street"
+    },
+    {
+        address: "1715 Lexington Avenue"
+    },
+    {
+        address: "1074 Fulton Street"
+    },
+    {
+        address: "31-83 34 Street"
+    },
+];
+const arrayOfCompsForAdditionFromMap2 = [
+    {
+        address: "168 North 10 Street"
+    },
+    {
+        address: "151 Freeman Street"
+    }
+];
+
 const comparableFixtureManual = {
-    address1: "388 Greenwich Street, New York, NY",
-    address2: "388 Broome Street, New York, NY",
-    address3: "33 Area Place, Staten Island, NY",
-    address4: "383 Madison Avenue, New York, NY",
-    address5: "345 Park Avenue, New York, NY",
-    address6: "225 Liberty Street, New York, NY",
+    address1: "388 Greenwich Street, New York, NY, USA",
+    address2: "388 Broome Street, New York, NY, USA",
+    address3: "30 Hudson Yards, New York, NY, USA",
+    address4: "383 Madison Avenue, New York, NY, USA",
+    address5: "345 Park Avenue, New York, NY, USA",
+    address6: "225 Liberty Street, New York, NY, USA",
     condition: Enums.CONDITION_VALUES.shell,
     comparableType: Enums.COMPARABLE_TYPES.multifamily,
     units: {
@@ -64,6 +87,8 @@ const arrayOfCompsForManualAddition = [
 ];
 
 export default {
+    arrayOfCompsForAdditionFromMap1,
+    arrayOfCompsForAdditionFromMap2,
     comparableFixtureManual,
     reportCreationData,
     sortSalesCompsDateSold,

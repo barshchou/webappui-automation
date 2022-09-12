@@ -50,20 +50,18 @@ describe("Pro Forma page table Miscellaneous Loss",
                 .addParkingVCLossPercentage(testData.parkingVcLossTypeRadio, testData.parkingVCLoss);
 
             cy.stepInfo(`7. Go to Income → Miscellaneous → Laundry and fill in all necessary values`); 
-            _NavigationSection.clickLaundryButton()
-                .submitSaveChangesModal();
+            _NavigationSection.navigateToLaundry();
             Income._MiscellaneousManager.Laundry.enterLaundryIncome(testData.laundryIncome)
                 .enterLaundryVCLossPercentage(testData.laundryVCLoss, testData.laundryVcLossTypeRadio);
 
             cy.stepInfo(`8. Go to Income → Miscellaneous → Storage and fill in all necessary values`); 
-            _NavigationSection.clickStorageButton()
-                .submitSaveChangesModal();
+            _NavigationSection.navigateToStorage();
+
             Income._MiscellaneousManager.Storage.addStorageIncome(testData.storageIncome)
                 .enterStorageVCLossPercentage(testData.storageVCLoss, testData.storageVcLossTypeRadio);
 
             cy.stepInfo(`9. Go to Income → Miscellaneous → Other and fill in all necessary values`); 
-            _NavigationSection.clickOtherButton()
-                .submitSaveChangesModal();
+            _NavigationSection.navigateToOther();
             Income._MiscellaneousManager.Other.addOtherIncome(testData.otherIncomeItem);
 
             cy.saveLocalStorage();

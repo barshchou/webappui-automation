@@ -5,6 +5,7 @@ import testData from "../../../fixtures/not_full_reports/cms/QA-6401.fixture";
 import launchDarklyApi from '../../../api/launchDarkly.api';
 import { conditionalDescribe } from "../../checkIsProd.utils";
 import { _CmsBaseActions, _SWOTAnalysis } from '../../../actions/cms';
+import { normalizeText } from "../../../../utils/string.utils";
 
 conditionalDescribe("[6401] Verify possibility to edit text", 
     { tags:[ "@cms", "@check_export", "@feature_flag" ] }, () => {
@@ -19,7 +20,8 @@ conditionalDescribe("[6401] Verify possibility to edit text",
             _CmsBaseActions.openSWOTAnalysisPage();
 
             cy.stepInfo(`2. Make some changes with any text item`);
-            _SWOTAnalysis.updateSectionDiscussion(testData.sectionName, 0, testData.textUpdate[0], true);
+            _SWOTAnalysis.updateSectionDiscussion(testData.sectionName, 0, testData.textUpdate[0], true)
+                .saveCmsSettings();
 
             cy.stepInfo('3. Create a new report and open it. Navigate to Final > SWOT Analysis ');
             createReport(testData.reportCreationData);
@@ -30,11 +32,6 @@ conditionalDescribe("[6401] Verify possibility to edit text",
             _NavigationSection.openReviewAndExport();
             ReviewExport.generateDocxReport().waitForReportGenerated()
                 .downloadAndConvertDocxReport(testData.reportCreationData.reportNumber);
-
-            cy.stepInfo('5. Revert commentary to original');
-            _NavigationSection.navigateToContentManagementSystem();
-            _CmsBaseActions.openSWOTAnalysisPage();
-            _SWOTAnalysis.updateSectionDiscussion(testData.sectionName, 0, testData.defaultText[0], true);
         });
 
         it('Check export', () => {
@@ -45,14 +42,23 @@ conditionalDescribe("[6401] Verify possibility to edit text",
                     cy.stepInfo("5. Verify commentary text in exported report");
                     let sectionName = testData.sectionName.charAt(0).toUpperCase() + testData.sectionName.slice(1);
                     cy.contains(sectionName).scrollIntoView().next().find("li").then($li => {
-                        const reportSectionText = $li.toArray().map(li => li.innerHTML);
+                        const reportSectionText = $li.toArray().map(li => normalizeText(li.innerHTML));
                         expect(testData.textUpdate).to.deep.eq(reportSectionText);
                     });
                 });
         });
 
-        after('Remove feature flag', () => {
+        afterEach('Revert commentary to original and remove feature flags', () => {
+            cy.stepInfo('Revert commentary to original');
+            if (!Cypress.currentTest.title.includes("Check export")) {
+                loginAction();
+                _NavigationSection.navigateToContentManagementSystem();
+                _CmsBaseActions.openSWOTAnalysisPage();
+                _SWOTAnalysis.updateSectionDiscussion(testData.sectionName, 0, testData.defaultText[0], true)
+                    .saveCmsSettings();
+            }
 
+            cy.stepInfo('Remove feature flags');
             launchDarklyApi.removeUserTarget(testData.reportTextEditorFlagKey);
             launchDarklyApi.removeUserTarget(testData.swotAnalysisFlagKey);
         });

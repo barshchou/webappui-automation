@@ -5,7 +5,6 @@ import {
     getNumberFromDollarNumberWithCommas
 } from "../../../utils/numbers.utils";
 import BaseActionsExt from "../base/base.actions.ext";
-import { uppercaseFirstLetterEachWord } from "../../../utils/string.utils";
 import { BoweryReports } from "../../types/boweryReports.type";
 import enums from "../../enums/enums";
 import { Alias } from "../../utils/alias.utils";
@@ -96,8 +95,8 @@ class ProFormaActions extends BaseActionsExt<typeof proFormaPage> {
     }
 
     verifyCustomCategoryName(categoryName: string): ProFormaActions {
-        let textToBe = uppercaseFirstLetterEachWord(categoryName).toString();
-        proFormaPage.getCustomCategoryIncomeCell(categoryName).first().invoke('text').should('deep.include', textToBe);
+        proFormaPage.getCustomCategoryIncomeCell(categoryName).first().invoke('text')
+            .should('deep.include', categoryName);
         return this;
     }
 

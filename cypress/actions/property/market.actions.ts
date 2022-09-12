@@ -170,15 +170,19 @@ class MarketActions extends BaseActionsExt<typeof marketPage> {
     }
 
     checkUncheckMarketAnalysisUseCheckbox(use: BoweryReports.MarketAnalysisUses, isCheck = true): MarketActions {
-        this.verifyMarketAnalysisUseCheckboxState(use, !isCheck);
-        marketPage.getMarketAnalysisUseCheckbox(use).click();
-        this.verifyMarketAnalysisUseCheckboxState(use, isCheck);
+        marketPage.getMarketAnalysisUseCheckboxArea(use).invoke('attr', 'data-qa').then(dataQA => {
+            let isChecked = dataQA.includes("checked");
+            if (isCheck != isChecked) {
+                marketPage.getMarketAnalysisUseCheckbox(use).click();
+                this.verifyMarketAnalysisUseCheckboxState(use, isCheck);
+            }
+        });
         return this;
     }
 
-    verifyAreaEconomicAnalysisHasFile(textToContain = this.finalDocumentNamePart): MarketActions {
+    verifyAreaEconomicAnalysisHasFile(textToContain = this.finalDocumentNamePart, isExist = false): MarketActions {
         marketPage.areaEconomicAnalysisFile.invoke("attr", "value").then(fileName => {
-            expect(isStringContainSubstring(fileName, textToContain)).to.be.true;
+            expect(isStringContainSubstring(fileName, textToContain)).to.be.eq(isExist);
         });
         return this;
     }
@@ -276,6 +280,30 @@ class MarketActions extends BaseActionsExt<typeof marketPage> {
             { subjectType: 'drag-n-drop' }
         );
         marketPage.getUploadFileButton().click();
+        marketPage.insertFileButton.click();
+        return this;
+    }
+
+    uploadMarketSubmarketByAnalysisUseFile(use: BoweryReports.MarketAnalysisUses, 
+        fileName: string, isMarket = true): MarketActions {
+        isMarket ? marketPage.getMarketByAnalysisUseFileUploadButton(use).click()
+            : marketPage.getSubmarketByAnalysisUseFileUploadButton(use).click();
+
+        let aliasFileUpload = "aliasFileUpload";
+        cy.intercept('POST', '/api/files/upload**').as(aliasFileUpload);
+
+        marketPage.fileDropZone.attachFile(
+            `test_files/${fileName}`,
+            { subjectType: 'drag-n-drop' }
+        );
+
+        marketPage.getUploadFileButton().click();
+
+        cy.wait(`@${aliasFileUpload}`).then(({ response }) => {
+            expect(response.statusCode).equal(201);
+            cy.log("fileUpload resolved");
+        });
+
         marketPage.insertFileButton.click();
         return this;
     }
