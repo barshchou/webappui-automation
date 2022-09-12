@@ -1,7 +1,7 @@
 import { Property } from "../../../../actions";
 import { _NavigationSection } from "../../../../actions/base";
 import { createReport } from "../../../../actions/base/baseTest.actions";
-import testData from '../../../../fixtures/not_full_reports/property/amenities/QA-4665_71_73_76_81_82_6740.fixture';
+import testData from '../../../../fixtures/not_full_reports/property/amenities/QA-4665_71_73_76_81_82_6740-41.fixture';
 
 describe("Verify the display of the Amenities page", { tags:[ "@property", "@amenities" ] }, () => {
     before("Login, create report", () => {
