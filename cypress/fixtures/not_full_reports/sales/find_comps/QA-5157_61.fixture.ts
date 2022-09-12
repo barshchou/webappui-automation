@@ -11,6 +11,10 @@ const reportCreationData: BoweryAutomation.ReportCreationData = ReportDataCreato
 const filePath = "test_files/CostarExport 5161.csv";
 const sortSalesCompsDateSold = Enums.SORT_VALUES.dateSold;
 const salePeriodValue = Enums.SALE_PERIOD_VALUES.lastThreeMonths;
+const compProperty = Enums.COMP_PROPERTIES_PATHS_DB.compPropertyPathsInDB.saleStatus;
+const compStatusContract = Enums.COMP_PROPERTIES_PATHS_DB.saleStatusValuesInDB.inContract;
+const compStatusDate = Enums.COMP_PROPERTIES_PATHS_DB.saleStatusValuesInDB.date;
+const compStatusListing = Enums.COMP_PROPERTIES_PATHS_DB.saleStatusValuesInDB.listing;
 
 const arrayOfCompsForAdditionFromMap1 = [
     {
@@ -94,5 +98,9 @@ export default {
     sortSalesCompsDateSold,
     salePeriodValue,
     filePath,
-    arrayOfCompsForManualAddition
+    arrayOfCompsForManualAddition,
+    compProperty,
+    compStatusContract,
+    compStatusDate,
+    compStatusListing
 };
