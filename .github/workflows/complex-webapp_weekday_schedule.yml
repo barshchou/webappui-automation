@@ -36,5 +36,5 @@ jobs:
         env:
           DD_CIVISIBILITY_AGENTLESS_ENABLED: true
           DD_ENV: 'dev'
-          DD_SERVICE: 'webapp' 
+          DD_SERVICE: 'webapp'
           
