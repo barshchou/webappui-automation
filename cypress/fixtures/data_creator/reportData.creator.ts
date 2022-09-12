@@ -4,7 +4,7 @@ import { BoweryReports } from "../../types/boweryReports.type";
 let ReportCreationData = function (address: string, isSalesForcePull = false, 
     number: string, templateValue: string, incomeValue: string, conclusionValue: string) {
     this.address = address;
-    this.isSalesForcePull = isSalesForcePull;
+    this.isSalesForcePull = isSalesForcePull,
     this.reportNumber = number;
     this.templateValue = templateValue;
     this.incomeValue = incomeValue;

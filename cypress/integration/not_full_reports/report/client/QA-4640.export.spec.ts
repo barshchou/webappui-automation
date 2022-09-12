@@ -3,11 +3,11 @@ import { _NavigationSection } from "../../../../actions/base";
 import { createReport } from "../../../../actions/base/baseTest.actions";
 import testData from '../../../../fixtures/not_full_reports/report/client/QA-4640.fixture';
 
-describe(`Verify the "Linked" chips dropdown in the new narrative component for As Is and As Stabilized 
-        report for Intended User and Identification of the Client sections`,
+describe(`[QA-4640] Verify the "Linked" chips dropdown in the new narrative component for As Is and As Stabilized 
+    report for Intended User and Identification of the Client sections`,
 { tags:[ "@report", "@client", "@check_export" ] }, () => {
 
-    it("[QA-4640]", () => {
+    it("Test body", () => {
         cy.stepInfo(`Login, create report`);
         createReport(testData.reportCreationData);
 
@@ -20,34 +20,26 @@ describe(`Verify the "Linked" chips dropdown in the new narrative component for 
             .verifyProgressBarNotExist();
 
         cy.stepInfo(`2. Enter the “=“ and verify the "Linked" chips dropdown for Intended User and 
-                    Identification of the Client sections.: 
-                    options 'Gross Building Area', 'Building Name', 'Property Type', 'Residential Unit Count', 
-                    'Commercial Unit Count', 'Street Address', 'Street Name', 'Site Area', 'Year Built', 'Block', 
-                    'Lot', 'Concluded Cap Rate', 'Zones', 'Condition'.`);
+        Identification of the Client sections.: 
+        options 'Gross Building Area', 'Building Name', 'Property Type', 'Residential Unit Count', 
+        'Commercial Unit Count', 'Street Address', 'Street Name', 'Site Area', 'Year Built', 'Block', 
+        'Lot', 'Concluded Cap Rate', 'Zones', 'Condition'.`);
+        Report._Client.activateTextAreaInput(Report._Client.Page.intendedUserTextBox);
         testData.chips.forEach(chip => {
-            Report._Client.activateTextAreaInput(
-                Report._Client.Page.formCommentTextBox(testData.intendedUserCommentaryTitle))
-                .Page.formCommentTextBox(testData.intendedUserCommentaryTitle)
-                .type(`=${chip.typeSuggestValue}`);
-            Report._Client.clickNarrativeSuggestions(chip.suggestionName)
-                .verifyFormCommentTextBoxText(testData.intendedUserCommentaryTitle, chip.verifySuggest);
+            Report._Client.enterIntendedUser(`=${chip.typeSuggestValue}`, false, false, false)
+                .clickNarrativeSuggestions(chip.suggestionName);
+            Report._Client.verifyCommentaryContainsText(chip.verifySuggest, testData.intendedUserCommentaryTitle);
         });
-        Report._Client.activateTextAreaInput(
-            Report._Client.Page.formCommentTextBox(testData.identificationOfTheClientCommentaryTitle));
+        Report._Client.activateTextAreaInput(Report._Client.Page.identificationOfClientTextBox);
         testData.chips.forEach(chip => {
-            Report._Client.Page.formCommentTextBox(testData.identificationOfTheClientCommentaryTitle)
-                .type(`=${chip.typeSuggestValue}`);
-            Report._Client.clickNarrativeSuggestions(chip.suggestionName, 1)
-                .verifyFormCommentTextBoxText(testData.identificationOfTheClientCommentaryTitle, chip.verifySuggest);
+            Report._Client.enterIdentificationOfTheClient(`=${chip.typeSuggestValue}`, false, false, false)
+                .clickNarrativeSuggestions(chip.suggestionName, 1);
+            Report._Client.verifyCommentaryContainsText(chip.verifySuggest, 
+                testData.identificationOfTheClientCommentaryTitle);
         });
         Report._Client.inactivateTextAreaInput();
 
-        cy.stepInfo("3. Verify chip style");
-        testData.chipNames.forEach(chip => {
-            Report._Client.verifyStyleInDefaultChip(chip);
-        });
-
-        cy.stepInfo("4. Download report");
+        cy.stepInfo("3. Download report");
         _NavigationSection.openReviewAndExport();
         ReviewExport.generateDocxReport().waitForReportGenerated()
             .downloadAndConvertDocxReport(testData.reportCreationData.reportNumber);
@@ -57,13 +49,13 @@ describe(`Verify the "Linked" chips dropdown in the new narrative component for 
         cy.task("getFilePath", { _reportName: testData.reportCreationData.reportNumber, _docxHtml: "html" })
             .then(file => {
                 cy.log(<string>file);
-                cy.stepInfo("5. Verify the linked chips on export for both sections:");
+                cy.stepInfo("6. Verify the linked chips on export for both sections:");
                 cy.visit(<string>file);
 
                 testData.chips.forEach(item => {
-                    cy.contains(testData.identificationOfTheClientSection).next().scrollIntoView()
+                    cy.contains("Identification of the Client").next().scrollIntoView()
                         .should("include.text", item.verifyExport);
-                    cy.contains(testData.intendedUseSection).next().scrollIntoView()
+                    cy.contains("Intended Use & User").next().next().scrollIntoView()
                         .should("include.text", item.verifyExport);
                 });
             }); 

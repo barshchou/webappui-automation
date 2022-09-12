@@ -8,7 +8,7 @@ jobs:
   Smoke-tests-run-daily:
     runs-on: ubuntu-latest
     timeout-minutes: 20
-    container: cypress/included:10.3.1
+    container: cypress/browsers:node16.13.2-chrome100-ff98
     permissions:
       id-token: write
       contents: read
@@ -18,22 +18,18 @@ jobs:
         containers: [1, 2, 3, 4, 5, 6, 7, 8]
 
     steps:
-      - name: Configure secrets
-        if: ${{ !env.ACT }} 
-        uses: aws-actions/configure-aws-credentials@v1
-        with:
-            role-to-assume: arn:aws:iam::814827541967:role/GithubOIDC-Role-QMKR3DR5WV3B
-            aws-region: 'us-east-1'
-            
       - name: Run smoke end-to-end tests daily with Currents dev
         uses: Bowery-RES/action-run-e2e-tests@latest
         with:
           github_token: ${{ secrets.GH_PERSONAL_ACCESS_TOKEN }}
+          username: ${{ secrets.USERNAME }}
+          password: ${{ secrets.PASSWORD }}
           url: prod
           spec_file: cypress/integration/**
           tags: grep=,grepTags=@smoke,burn=
-          secret_name: 'Github/Cypress/webapp-e2e-secrets'
+          record_key: ${{ secrets.CURRENTS_RECORD_KEY }}
         env:
           DD_CIVISIBILITY_AGENTLESS_ENABLED: true
+          DD_API_KEY: ${{ secrets.DD_API_KEY }}
           DD_ENV: ${{ github.event.inputs.url }}
           DD_SERVICE: 'webapp'

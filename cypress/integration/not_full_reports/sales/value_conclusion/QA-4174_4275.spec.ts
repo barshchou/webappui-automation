@@ -37,9 +37,8 @@ describe(`[QA-4174] Prospective Market Value As Stabilized is calculated with co
             Sales.ValueConclusion.enterSaleValueConclusion(testData.valueConclusion)
                 .verifyBasisSFAnalysisTableCellText(Object.values(Enums.BASIS_SQUARE_FOOT_ANALYSIS_TEXTS)[index])
                 .verifyBasisForAnalysisAmount(testData.basisSFAnalysisValues[index])
-                .verifyProspectiveMarketValueAmount(testData.valueConclusionAsStabilized, 
-                    testData.basisSFAnalysisValues[index] * testData.valueConclusion)
-                .verifyProspectiveMarketValueFinal(testData.valueConclusionAsStabilized, testData.finalValues[index]);
+                .verifyAsStabilizedAmount(testData.basisSFAnalysisValues[index] * testData.valueConclusion)
+                .verifyAsStabilizedFinalValue(testData.finalValues[index]);
         });
     });
 });

@@ -6,11 +6,11 @@ import { BoweryAutomation } from "../../../../types/boweryAutomation.type";
 const _reportCreationData: BoweryAutomation.ReportCreationData = ReportDataCreator.getReportData("4258_59");
 
 const _marketResearch: BoweryReports.MarketResearch = {
-    neighborhoodValue: "Binghamton",
-    marketArea: "Bronx County",
+    neighborhoodValue: "Albany",
+    marketArea: "Orange County",
     state: "NY",
-    macroMarket: "NY-Binghamton",
-    submarket: "NY-Binghamton",
+    macroMarket: "NY-Albany",
+    submarket: "NY-Greater Troy",
     quarter: getQuarter(getTodayDateString(), true, 2),
     dateOfValuation: getTodayDateString(),
     marketDate: getTodayDateString()
