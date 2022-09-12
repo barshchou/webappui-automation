@@ -21,5 +21,4 @@ export default {
     salesCompsAddresses: "salesCompsAddresses",
     salesCompsIds:"salesCompsIds",
     allOperatingExpensesValues: "allOperatingExpensesValues",
-    arrayOfCompsFromDB: "arrayOfCompsFromDB"
 };

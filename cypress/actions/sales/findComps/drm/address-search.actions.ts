@@ -50,9 +50,10 @@ class AddressSearchActions {
         cy.wait(`@${Alias.gql.SearchTransactionsByAddresses}`, { timeout:30000 }).then(({ response }) => {
             expect(response.statusCode).equal(200);
             let compsArrayList = response.body.data.searchTransactionsByAddresses;
-            let focusCompIndex = compsArrayList.findIndex(i => i.id === compId);
+            let focusCompIndex = compsArrayList.findIndex(comp => comp.id === compId);
             cy.log(`List of comps`, compsArrayList);
             cy.log(`Index of necessary comp is ${focusCompIndex}`);
+            //If comp wasn't found, then focusCompIndex will be equal -1. The assertion error will be thrown.
             expect(focusCompIndex).to.be.above(-1);
             findCompsPage.loadingModalSpinner.should('not.exist');
             this.Page.selectCompButton(focusCompIndex).click();  
@@ -68,11 +69,8 @@ class AddressSearchActions {
      */
     addCompByParameter (compIndex: number, compProperty: CompPlex.AddressSearch.CompPropertyInDB,
         compPropertyValue: string) { 
-        ComplexDatabaseModule.getCompsArrayFromDb(compProperty, compPropertyValue).then(data => {
-            cy.log(`Array of comps in database`, <string>data);
-            cy._mapSet(mapKeysUtils.arrayOfCompsFromDB, data);
-        });
-        cy._mapGet(mapKeysUtils.arrayOfCompsFromDB).then(dataArray => {
+        ComplexDatabaseModule.getCompsArrayFromDb(compProperty, compPropertyValue).then(dataArray => {
+            cy.log(`Array of comps in database`, <string>dataArray);
             let comp = dataArray[compIndex];
             let { address: { flatValue }, id } = <any>comp;
             let compAddress = flatValue;
@@ -80,6 +78,7 @@ class AddressSearchActions {
             cy.log(`Address of necessary comp is ${compAddress}, and its id is ${compId}`);
             this.addCompViaAddressSearchById(compAddress, compId);
         } ); 
+    
         return this;
     }
 
