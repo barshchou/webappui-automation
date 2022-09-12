@@ -12,7 +12,6 @@ describe("Verify the Basis of Rent tooltip",
         });
 
         it("Test body", () => {
-            testTimeout(2000);
             NavigationSection.navigateToCommercialInPlaceRentRoll();
             Income.Commercial.InPlaceRentRoll.verifyBasisOfRentTooltip();
         });
