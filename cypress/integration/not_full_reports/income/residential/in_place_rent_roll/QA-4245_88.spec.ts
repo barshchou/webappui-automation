@@ -7,8 +7,13 @@ import { Property, Income } from "../../../../../actions";
 describe("Verify the Monthly Total row in the grid", 
     { tags:[ "@income", "@residential", "@in_place_rent_roll" ] }, () => {
         
-        beforeEach("Login, create report", () => {
+        before("Login, create report", () => {
             createReport(testData.reportCreationData);
+            cy.saveLocalStorage();
+        });
+
+        beforeEach(() => {
+            cy.restoreLocalStorage();
         });
 
         it("[QA-4245]", () => {

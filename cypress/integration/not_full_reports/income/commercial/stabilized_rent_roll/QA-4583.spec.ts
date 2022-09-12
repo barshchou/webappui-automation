@@ -16,7 +16,9 @@ describe(`Verify the Back button functionality on the Stabilized Rent Roll page`
             Property._Summary.enterNumberOfCommercialUnits(testData.numberOfCommercialUnits);
 
             cy.stepInfo(` 1. Navigate to Commercial Stabilized Rent Roll page`);
-            _NavigationSection.navigateToCommercialStabilizedRentRoll()
+            _NavigationSection.clickIncomeApproachButton()
+                .clickCommercialArrow()
+                .navigateToStabilizedRentRollInCommercial()
                 .verifyProgressBarNotExist()
                 .clickSaveButton()
                 .verifyProgressBarNotExist();

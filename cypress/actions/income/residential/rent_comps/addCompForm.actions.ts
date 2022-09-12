@@ -236,7 +236,7 @@ class AddCompFormActions extends BaseActionsExt<typeof addCompFormPage> {
         bathrooms: number; 
         id?: string; 
         sourceInfoCheck?: string;
-    }): AddCompFormActions {
+     }): AddCompFormActions {
         this.enterMonthlyRent(compData.monthly)
             .enterDate(compData.date)
             .enterSquareFootage(compData.footage)

@@ -6,14 +6,15 @@ import { createReport } from "../../../../../actions/base/baseTest.actions";
 
 describe("Verify the display of the Unit grid with the added comparable unit on the '$ Rent Comps' page", 
     { tags:[ "@income", "@residential", "@rent_comps" ] }, () => {
+
         beforeEach("Login action", () => {
             createReport(tesData.reportCreationData);
         });
 
-        it("[QA-4342] Uncategorized table with default columns", () => {
+        it("Uncategorized table with default columns", () => {
             NavigationSection.navigateToResInPlaceRentRoll();
             Income.Residential.InPlaceRentRoll.checkCheckboxByLabel(tesData.includePerRoomCheckbox);
-            NavigationSection.navigateToResidentialRentComps();
+            NavigationSection.openRentCompsInResidential();
             Income.Residential.RentComps.BaseActions.verifyUnitSelected()
                 .selectComparableByAddress(tesData.uncategorizedData.compData.address)
                 .checkDisplaySquareFootageForCompsCheckbox()
@@ -30,25 +31,25 @@ describe("Verify the display of the Unit grid with the added comparable unit on 
                 .verifyUncategorizedSquareFootageCells(0, tesData.uncategorizedData.compData);
         });
 
-        it("[QA-4342] Developers forecast test", () => {
+        it("Developers forecast test", () => {
             NavigationSection.navigateToResInPlaceRentRoll();
             Income.Residential.InPlaceRentRoll.checkCheckboxByLabel(tesData.uncategorizedData.devForecastLabel);
-            NavigationSection.navigateToResidentialRentComps();
+            NavigationSection.openRentCompsInResidential();
             Income.Residential.RentComps.BaseActions.verifyUnitSelected()
                 .selectComparableByAddress(tesData.uncategorizedData.compData.address)
                 .verifyUncategorizedSubjectDevForecast(tesData.uncategorizedData.devForecastText);
         });
 
-        it("[QA-4342] Bathrooms column test", () => {
+        it("Bathrooms column test", () => {
             NavigationSection.navigateToResInPlaceRentRoll();
             Income.Residential.InPlaceRentRoll.checkCheckboxByLabel(tesData.uncategorizedData.bathroomsLabel);
-            NavigationSection.navigateToResidentialRentComps();
+            NavigationSection.openRentCompsInResidential();
             Income.Residential.RentComps.BaseActions.verifyUnitSelected()
                 .selectComparableByAddress(tesData.uncategorizedData.compData.address)
                 .verifyUncategorizedBathroomsRowCell(0, tesData.uncategorizedData.compData.bathrooms);
         });
 
-        it("[QA-4342] Bedrooms category, subject market rate test", () => {
+        it("Bedrooms category, subject market rate test", () => {
             NavigationSection.navigateToResInPlaceRentRoll();
             Income.Residential.InPlaceRentRoll.goToPropSummaryWithSaveSaveClickFirst();
             Property.Summary.enterNumberOfResUnits(tesData.bedroomCategory.numberOfUnits)
@@ -56,7 +57,7 @@ describe("Verify the display of the Unit grid with the added comparable unit on 
             Income.Residential.InPlaceRentRoll.enterBedroomsNumberByRowNumber(tesData.bedroomCategory.bedroomsNumber)
                 .enterRentTypeCellByRowNumber(tesData.bedroomCategory.rentType)
                 .checkCheckboxByLabel(tesData.includePerRoomCheckbox);
-            NavigationSection.navigateToResidentialRentComps();
+            NavigationSection.openRentCompsInResidential();
             Income.Residential.RentComps.BaseActions.verifyUnitSelected()
                 .verifyProgressBarNotExist()
                 .selectComparableByAddress(tesData.bedroomCategory.compData.address)

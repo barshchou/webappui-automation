@@ -10,8 +10,7 @@ const _dateOfValuationFixture: BoweryReports.KeyInfoDateType = {
 export default {
     reportCreationData: ReportDataCreator.getReportData("5350_5706", { incomeValue: Enums.INCOME_TYPE.both }),
     marketConditionAdjustment: 2,
-    // TODO: Dates are hardcoded, need to query data from selected comps after [QA-6755] implementation
-    addressDates: [ new Date(2022, 1, 1), new Date(2021, 10, 1) ],
+    addressDates: [ new Date(2022, 2, 2), new Date(2022, 3, 1) ],
     dateOfValue: new Date(2022, 1, 15),
     valuationDateFixture: _dateOfValuationFixture,
     comparablesAdjustments: {

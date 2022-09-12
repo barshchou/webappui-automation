@@ -2,12 +2,6 @@ import enums from "../../enums/enums";
 import { BoweryReports } from "../../types/boweryReports.type";
 import { numberWithCommas } from "../../../utils/numbers.utils";
 
-interface IBaseChip {
-    suggestionName: BoweryReports.ChipsType
-    typeSuggestValue: string
-    verifySuggest: string | number
-    verifyExport: string | number
-}
 class Chips {
 
     private _numberOfCommercialUnits: number;
@@ -136,28 +130,28 @@ class Chips {
         return this.build(valueConclusion);
     }
 
-    baseChip(): IBaseChip[] {
+    baseChip() {
         return [
             {
-                suggestionName: enums.CHIPS.block,
+                suggestionName: 'Block',
                 typeSuggestValue: 'Bloc',
                 verifySuggest: this._block,
                 verifyExport: this._block
             }, 
             {
-                suggestionName: enums.CHIPS.buildingName,
+                suggestionName: 'Building Name',
                 typeSuggestValue: 'Buildin',
                 verifySuggest: this._buildingName,
                 verifyExport: this._buildingName
             }, 
             {
-                suggestionName: enums.CHIPS.concludedCapRate,
+                suggestionName: 'Concluded Cap Rate',
                 typeSuggestValue: 'Conclude',
                 verifySuggest: '0%',
                 verifyExport: 'Conclude'
             }, 
             {
-                suggestionName: enums.CHIPS.foreclosureSale,
+                suggestionName: 'Foreclosure Sale',
                 typeSuggestValue: 'Foreclosur',
                 verifySuggest: "The above transaction reflects a foreclosure sale of the property. " + 
                 "Typically in a foreclosure sale, the buyer assumes all encumbrances on the site, " + 
@@ -167,7 +161,7 @@ class Chips {
                 verifyExport: 'foreclosure sale'
             }, 
             {
-                suggestionName: enums.CHIPS.sheriffsSale,
+                suggestionName: 'Sheriff\'s Sale',
                 typeSuggestValue: 'Sherri',
                 verifySuggest: "The above transaction reflects a Sheriff's sale of the property. Typically in a " +
                 "Sheriff’s sale, the buyer assumes all encumbrances on the site, including any outstanding mortgage "+
@@ -181,43 +175,43 @@ class Chips {
                 "requested from the owner; however, not provided."
             },
             {
-                suggestionName: enums.CHIPS.grossBuildingArea,
+                suggestionName: 'Gross Building Area',
                 typeSuggestValue: 'Gros',
                 verifySuggest: this._grossBuildingArea,
                 verifyExport: this._grossBuildingArea
             }, 
             {
-                suggestionName: enums.CHIPS.siteArea,
+                suggestionName: 'Site Area',
                 typeSuggestValue: 'Sit',
                 verifySuggest: this._siteArea,
                 verifyExport: this._siteArea
             }, 
             {
-                suggestionName: enums.CHIPS.streetAddress,
+                suggestionName: 'Street Address',
                 typeSuggestValue: 'Street',
                 verifySuggest: this._streetAddress,
                 verifyExport: this._streetAddress
             },
             {
-                suggestionName: enums.CHIPS.lot,
+                suggestionName: 'Lot',
                 typeSuggestValue: 'Lo',
                 verifySuggest: this._lotValue,
                 verifyExport: this._lotValue
             },  
             {
-                suggestionName: enums.CHIPS.streetName,
+                suggestionName: 'Street Name',
                 typeSuggestValue: 'Stree',
                 verifySuggest: this._streetName,
                 verifyExport: this._streetName
             }, 
             {
-                suggestionName: enums.CHIPS.unchangedRenovations,
+                suggestionName: 'Unchanged Renovations',
                 typeSuggestValue: 'Unchange',
                 verifySuggest: 'Upon renovation, the subject unit count and gross building area will remain unchanged.',
                 verifyExport: 'Upon renovation, the subject unit count and gross building area will remain unchanged.'
             },
             {
-                suggestionName: enums.CHIPS.zone,
+                suggestionName: 'Zone(s)',
                 typeSuggestValue: 'Zone',
                 verifySuggest: 'R8',
                 verifyExport: 'R8'
@@ -225,40 +219,40 @@ class Chips {
         ];
     }
 
-    baseChipsAsCompleted = (): IBaseChip[] => {
+    baseChipsAsCompleted = () => {
         return [
             {
-                suggestionName: enums.CHIPS.currentResidentialUnitCount,
+                suggestionName: 'Current Residential Unit Count',
                 typeSuggestValue: 'Residential',
                 verifySuggest: this._numberOfResidentialUnits,
                 verifyExport: this._numberOfResidentialUnits
             },
             {
-                suggestionName: enums.CHIPS.currentCommercialUnitCount,
+                suggestionName: 'Current Commercial Unit Count',
                 typeSuggestValue: 'Commercial',
                 verifySuggest: this._numberOfCommercialUnits,
                 verifyExport: this._numberOfCommercialUnits
             },
             {
-                suggestionName: enums.CHIPS.currentCondition,
+                suggestionName: 'Current Condition',
                 typeSuggestValue: 'Condition',
                 verifySuggest: 'in  condition',
                 verifyExport: 'in  condition'
             },
             {
-                suggestionName: enums.CHIPS.asCompleteResidentialUnitCount,
+                suggestionName: 'As Complete Residential Unit Count',
                 typeSuggestValue: 'Residential',
                 verifySuggest: this._currentNumberOfResidentialUnits,
                 verifyExport: this._currentNumberOfResidentialUnits
             },
             {
-                suggestionName: enums.CHIPS.asCompleteCommercialUnitCount,
+                suggestionName: 'As Complete Commercial Unit Count',
                 typeSuggestValue: 'Commercial',
                 verifySuggest: this._currentNumberOfCommercialUnits,
                 verifyExport: this._currentNumberOfCommercialUnits
             },
             {
-                suggestionName: enums.CHIPS.asStabilizedCondition,
+                suggestionName: 'As Stabilized Condition',
                 typeSuggestValue: 'Conditio',
                 verifySuggest: 'in  condition',
                 verifyExport: 'condition'
@@ -266,22 +260,22 @@ class Chips {
         ];
     };
     
-    baseChipsAsIsAsStabilized = (): IBaseChip[] => {
+    baseChipsAsIsAsStabilized = () => {
         return [
             {
-                suggestionName: enums.CHIPS.residentialUnitCount,
+                suggestionName: 'Residential Unit Count',
                 typeSuggestValue: 'Residentia',
                 verifySuggest: this._numberOfResidentialUnits,
                 verifyExport: this._numberOfResidentialUnits
             },
             {
-                suggestionName: enums.CHIPS.commercialUnitCount,
+                suggestionName: 'Commercial Unit Count',
                 typeSuggestValue: 'Commerci',
                 verifySuggest: this._numberOfCommercialUnits,
                 verifyExport: this._numberOfCommercialUnits
             },
             {
-                suggestionName: enums.CHIPS.condition,
+                suggestionName: 'Condition',
                 typeSuggestValue: 'Conditio',
                 verifySuggest: 'in  condition',
                 verifyExport: 'condition'
