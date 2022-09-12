@@ -52,6 +52,7 @@ const routes =  {
     organizationInfo: "/organization-info",
     commercialCompGroupsDiscussion: "/commercial-comp-groups-discussion",
     finalValuesReconciliation: "/final-values-and-reconciliation",
+    organizationNewClient: "/organization-new-client",
     subjectPropertyData: "/subject-property"
 } as const;
 

@@ -3,37 +3,12 @@ import { Alias } from "../../utils/alias.utils";
 import BaseActionsExt from "./base.actions.ext";
 import mapKeysUtils from "../../utils/mapKeys.utils";
 import routesUtils from "../../utils/routes.utils";
-import { Utils } from "../../types/utils.type";
 import stabilizedRentRollPage from "../../pages/income/commercial/stabilizedRentRoll.page";
 import rentRollPage from "../../pages/income/commercial/rentRoll.page";
 import { BoweryReports } from "../../types/boweryReports.type";
 import Enums from "../../enums/enums";
 
 class NavigationSectionActions extends BaseActionsExt<typeof navigationSectionPage> {
-    
-    waitForUrl(route: Utils.Routes | string) {
-        cy.url().should("include", route);
-        return this;
-    }
-
-    submitSaveChangesModal(saveChanges = true): NavigationSectionActions {
-        cy.get("body").then($body => {
-            if ($body.text().includes("You have unsaved changes")) {
-                cy.get("[data-qa=form-confirm-dialog]").invoke('prop', 'hidden').then($prop => {
-                    cy.log(`${$prop}`);
-                    if ($prop == false) {
-                        if (saveChanges) { 
-                            this.clickYesButton(); 
-                        } else {
-                            this.clickNoButton();
-                        }
-                    }
-                });
-            }
-        });
-        return this;
-    }
-
     openReviewAndExport(isNewReport = true): NavigationSectionActions {
         let reportAlias = "docxReportAsync";
         cy.intercept({
