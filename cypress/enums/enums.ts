@@ -89,6 +89,9 @@ import appraiserSFEnum from "./salesforceJobs/appraiserSF.enum";
 import otherAdjustmentsExpansionRowsEnum from "./adjustComps/otherAdjustmentsExpansionRows.enum";
 import utilitiesAdjustmentsExpansionRowsEnum from "./adjustComps/utilitiesAdjustmentsExpansionRows.enum";
 import adjustmentExpansionLabelsEnum from "./sales/adjustComps/adjustmentExpansionLabels.enum";
+import amenitiesCheckboxesEnum from "./property/amenities/amenitiesCheckboxes.enum";
+import amenitiesUploadsEnum from "./property/amenities/amenitiesUploads.enum";
+import amenitiesInputsEnum from "./property/amenities/amenitiesInputs.enum";
 import projectedTaxesSectionsEnum from "./income/taxInfo/projectedTaxesSections.enum";
 import projectedTaxesInputsNamesEnum from "./income/taxInfo/projectedTaxesInputsNames.enum";
 import chipsEnum from "./chips.enum";
@@ -190,6 +193,9 @@ export default {
     OTHER_ADJUSTMENTS_EXPANSION_ROWS: otherAdjustmentsExpansionRowsEnum,
     UTILITIES_ADJUSTMENTS_EXPANSION_ROWS: utilitiesAdjustmentsExpansionRowsEnum,
     ADJUSTMENT_EXPANSION_LABELS: adjustmentExpansionLabelsEnum,
+    AMENITIES_CHECKBOXES: amenitiesCheckboxesEnum,
+    AMENITIES_UPLOADS: amenitiesUploadsEnum,
+    AMENITIES_INPUTS: amenitiesInputsEnum,
     PROJECTED_TAXES_SECTIONS: projectedTaxesSectionsEnum,
     PROJECTED_TAXES_INPUTS: projectedTaxesInputsNamesEnum,
     CHIPS: chipsEnum,
