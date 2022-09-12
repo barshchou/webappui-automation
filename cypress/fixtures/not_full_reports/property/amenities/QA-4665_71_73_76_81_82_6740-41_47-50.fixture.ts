@@ -56,11 +56,16 @@ const uploadValues = [
         specName: "[QA-6749]",
         checkboxName: Enums.AMENITIES_CHECKBOXES.hasOutdoorSeating,
         uploadName: Enums.AMENITIES_UPLOADS.outdoorSeating
+    },
+    {
+        specName: "[QA-6750]",
+        checkboxName: Enums.AMENITIES_CHECKBOXES.hasDriveThru,
+        uploadName: Enums.AMENITIES_UPLOADS.outdoorSeating
     }
 ];
 
 export default {
-    reportCreationData: ReportDataCreator.getReportData("4665_71_73_76_81_82_6740-41_47-48", {
+    reportCreationData: ReportDataCreator.getReportData("4665_71_73_76_81_82_6740-41_47-50", {
         templateValue: Enums.TEMPLATE_TYPE.freddieMac,
         incomeValue: Enums.INCOME_TYPE.both,
         conclusionValue: Enums.VALUE_CONCLUSION_TYPE.AS_COMPLETE,
