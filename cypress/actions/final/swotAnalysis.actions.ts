@@ -1,7 +1,6 @@
 import swotAnalysisPage from "../../pages/final/swotAnalysis.page";
 import { _saveDataInFile } from "../../support/commands";
 import BaseActionsExt from "../base/base.actions.ext";
-import { normalizeText } from "../../../utils/string.utils";
 
 class SwotAnalysisActions extends BaseActionsExt<typeof swotAnalysisPage> {
     
@@ -26,7 +25,7 @@ class SwotAnalysisActions extends BaseActionsExt<typeof swotAnalysisPage> {
         textToBe: Array<string>, 
         fileName = "section-text.txt"): SwotAnalysisActions {
         swotAnalysisPage.getSectionTexts(sectionName).then($textarea => {
-            const sectionTexts =  $textarea.toArray().map(el => normalizeText(el.innerHTML));
+            const sectionTexts =  $textarea.toArray().map(el => el.innerHTML);
             expect(textToBe).to.deep.eq(sectionTexts);
             _saveDataInFile(sectionTexts, fileName);
         });

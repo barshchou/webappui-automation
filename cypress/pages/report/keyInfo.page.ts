@@ -39,18 +39,51 @@ class KeyInfoPage extends BasePage {
 
     get modalUploadButton() { return cy.get("*[data-qa='upload-btn']"); }
 
+    get textBoxPropertyRightsAppraised() {
+        return cy.xpath("//*[contains(text(), 'Property Rights Appraised')]//following::*[@data-slate-editor][1]");
+    }
+
+    get wrapperLetterOfTransmittalPurpose() { 
+        return cy.get("*[data-qa='letterOfTransmittalPurpose-generated-comment-wrapper']"); 
+    }
+
     get jobNumberTextInput() { return cy.get("*[data-qa='job-number-text-input'] input"); }
+
+    get wrapperDefinitionOfMarketValue() { return cy.get("*[data-qa='definition-of-market-value-tile']"); }
+    
+    textBoxDefinitionOfMarketValue(index = 1) { 
+        return cy.xpath(`//*[contains(@data-qa, 'definition-of-market-value-tile')]` + 
+        `//following::*[@data-slate-editor][${index}]`); 
+    }
+
+    get tooltipDefinitionOfMarketValue() { return cy.get("*[role='tooltip']"); }
 
     get uploadFilesButton() { return cy.xpath("//button[text() = 'Upload Files']"); }
 
     get narrativeSuggestionsList() { return cy.get("[data-qa='narrative-suggestions-list'] > ul"); }
 
-    get definitionOfMarketValue() { 
-        return cy.xpath("//*[contains(@data-qa, 'definition-of-market-value-tile')]" + 
-            "//*[contains(text(), 'The following')]"); 
+    iconDefinitionOfMarketValue(index = 1) { 
+        return cy.xpath(`//*[contains(@data-qa, 'definition-of-market-value-tile')]` + 
+        `//following::*[@data-icon='info-circle'][${index}]`); 
     }
 
     get inputToCheckMyDateIsDifferent() { return cy.get("*[data-qa='isDifferentDateOfValuation']"); }
+
+    get propertyRightsAppraisedFormEditButton() { 
+        return cy.xpath("//h6[.='Property Rights Appraised']//following::button[1]"); 
+    }
+
+    get definitionOfMarketValueFormEditButton() { 
+        return cy.xpath("//h6[.='Definition of Market Value']//following::button[1]"); 
+    }
+    
+    commentaryText(commentaryTitle: string) { 
+        return cy.xpath(`//h6[.='${commentaryTitle}']//following::div[@data-slate-editor][1]`); 
+    }
+
+    userPrompt () {
+        return cy.xpath(`//span[.='Type = to quick select report data.']`);
+    }
 }
 
 export default new KeyInfoPage();

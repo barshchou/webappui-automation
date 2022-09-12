@@ -41,9 +41,8 @@ class FindCompsPage extends BasePage {
     get csvInput() { return cy.get("[data-qa=file-input]"); }
 
     getSelectCompFromMapButtonByAddress(address) {
-        return cy.get('[data-qa="sales-comp-item"]')
-            .contains(`${address}`).parent().parent()
-            .find('[data-qa="sales-comp-item-add-btn"]');
+        return cy.get('[data-qa="sales-comp-item"]').contains(`${address}`).parent()
+            .parent().find('[data-qa="sales-comp-item-add-btn"]');
     }
 
     /**
@@ -64,13 +63,25 @@ class FindCompsPage extends BasePage {
     }
 
     getRemoveSelectedCompButtonByAddress(address: string) {
-        return cy.contains("td", address).siblings("td[data-qa=selected-comp-actions]")
-            .find('[data-qa="selected-comp-remove-btn"]');
+        return this.salesComparablesTable.contains(address).parent('tr').find('[data-qa="selected-comp-remove-btn"]');
     }
 
+    //TODO Add data-qa attr for details button
+    detailsButtonByAddress(address: string) {
+        return this.salesComparablesTable.contains(address).parent('tr').find('[data-qa="selected-comp-actions"]')
+            .contains('button', 'Details');
+    }
+
+    //TODO change after data-qa addition
     getRemoveDeletedCompButtonByAddress(address: string) {
-        return cy.contains("td", address).siblings("td[data-qa=removed-comp-actions]")
-            .find('[data-qa="removed-comp-remove-btn"]');
+        return cy.contains('Removed Comps').parent().parent().contains(address)
+            .parent().find('[data-qa="removed-comp-remove-btn"]');
+    }
+
+    //TODO change after data-qa addition
+    addRemovedCompButtonByAddress(address: string) {
+        return cy.contains('Removed Comps').parent().parent().contains(address)
+            .parent().find('[data-testid="AddCircleIcon"]');
     }
 
     getRemoveCompFromMapButtonByAddress(address: string) {
@@ -109,15 +120,19 @@ class FindCompsPage extends BasePage {
     }
 
     get createCompSearchResults() {
-        return cy.get("[data-qa=search-result-form] tbody tr");
+        return cy.get("[data-qa=search-result-form] tbody tr", { timeout: 60000 });
     }
 
     get createNewCompButton() { return cy.contains("Create New"); }
 
     get newCompSaveAndCloseButton() { return cy.get('[data-qa="Save & Close"]'); }
 
+    get salesComparablesTable() {
+        return cy.get('[data-qa="selected-sales-comps-table"]');
+    }
+
     get addressSalesComparablesTable() {
-        return cy.get('[data-qa="selected-sales-comps-table"] [data-qa="address"]');
+        return this.salesComparablesTable.get('[data-qa="address"]');
     }
 
     get sortSalesCompsSelectList() {
@@ -133,7 +148,7 @@ class FindCompsPage extends BasePage {
     }
 
     get salesCompsDateSold() {
-        return cy.get('[data-qa="sale-date"]');
+        return cy.get('[data-qa="selected-sales-comps-table"]').find('[data-qa="sale-date"]');
     }
 
     get loadingModalCSV() {
@@ -141,7 +156,7 @@ class FindCompsPage extends BasePage {
     }
 
     get resetAllButton() {
-        return cy.contains('RESET ALL');
+        return cy.get('[data-qa="reset-all-btn"]');
     }
 
     get loadingModalSpinner() {
@@ -149,14 +164,10 @@ class FindCompsPage extends BasePage {
     }
 
     get filterSalePeriod() {
-        return cy.get('[data-qa="filter-completedInPeriod"]');
+        return cy.get('[data-qa="filter-sale-period"]');
     }
 
-    get compStatusFilter() {
-        return cy.get("[data-qa=filter-statuses]");
-    }
-
-    filterOptionValue(value: string) {
+    filterSalePeriodValue(value: string) {
         return cy.get(`[role="option"][data-value="${value}"]`);
     }
 
@@ -175,6 +186,10 @@ class FindCompsPage extends BasePage {
     get jobSearchTab() {
         return cy.get('[data-qa="job-tab"]');
     }
+
+    get reportIdInput() {
+        return cy.get('input[placeholder="Find a specific Report ID"]');
+    }
     
     get selectedForReportTitle() {
         return this.importCompModal.contains("Selected for report");
@@ -182,14 +197,6 @@ class FindCompsPage extends BasePage {
 
     get sfNewComp() {
         return cy.get('[title="SF"]');
-    }
-
-    compEditButton(index = 0) {
-        return this.getSelectedComparable(index).xpath(`//button[.='Details']`).eq(index);
-    }
-
-    get saveCompProperty() {
-        return cy.get(`[class="ant-modal-footer"]`, { includeShadowDom: true }).find("button").eq(1);
     }
 }
 
@@ -199,7 +206,7 @@ class FindCompsPage extends BasePage {
  */
 // eslint-disable-next-line @typescript-eslint/no-empty-interface
 interface FindCompsPage extends PropertyInformationForm, SaleInformationForm, SalesCompsDetailsForm, 
-    JobSearchPage, AddressSearchPage { }
+JobSearchPage, AddressSearchPage { }
 applyMixins(FindCompsPage, [ PropertyInformationForm, SaleInformationForm, SalesCompsDetailsForm, 
     JobSearchPage, AddressSearchPage ]);
 

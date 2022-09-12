@@ -12,7 +12,7 @@ conditionalDescribe("Property Conditions tests", { tags: [ "@residential", "@ren
     "@full_building_comps", "@property_conditions" ] }, () => {
     beforeEach("Create report, navigate to Property Conditions", () => {
         createReport(testData.reportCreationData);
-        _NavigationSection.navigateToResidentialRentComps();
+        _NavigationSection.navigateToRentComps();
         cy.stepInfo("1. Add comparable, click edit button");
         Income._Residential.RentComps.BaseActions.changeToBuildingSearch()
             .clickAddRemoveBuildingCompByAddress(testData.compAddress)

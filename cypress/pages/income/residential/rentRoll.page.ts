@@ -22,7 +22,7 @@ class InPlaceRentRollPage extends ResidentialRentRollSharedPage {
 
     get uploadCSVLink() { return cy.xpath("//a[text()='Upload a CSV file.']"); }
 
-    get uploadFileButton() { return cy.xpath("//*[@placeholder='Choose a File']"); }
+    get uploadFileButton() { return cy.xpath("//*[@placeholder='Choose a File']//following::*[@role='presentation']"); }
 
     get uploadFileInput() { return cy.get("*[data-qa='file-input']"); }
 
@@ -38,8 +38,8 @@ class InPlaceRentRollPage extends ResidentialRentRollSharedPage {
 
     get rentRollAppraiserCommentary() { return cy.get("[name='currentRentRollDiscussion.additionalCommentary']"); }
 
-    get infoIcon() { 
-        return cy.xpath("//*[text()='Current Rent Roll Discussion']/following::*[@data-testid='InfoOutlinedIcon']"); 
+    infoIcon(index = 1) { 
+        return cy.xpath(`//*[text()='Current Rent Roll Discussion']//following::*[@role='presentation'][${index}]`); 
     }
 
 }

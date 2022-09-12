@@ -1,7 +1,6 @@
 import { Report } from "../../../../actions";
 import { _NavigationSection } from "../../../../actions/base";
 import { createReport } from "../../../../actions/base/baseTest.actions";
-import Enums from "../../../../enums/enums";
 import testData from '../../../../fixtures/not_full_reports/report/client/QA-4626.fixture';
 
 describe("Verify the display of the Client page.", { tags:[ "@report", "@client" ] }, () => {
@@ -9,7 +8,7 @@ describe("Verify the display of the Client page.", { tags:[ "@report", "@client"
         createReport(testData.reportCreationData);
     });
 
-    it("[QA-4626]", () => {
+    it("Test body", () => {
         cy.stepInfo("1. Proceed to the Report > Client page.");
         _NavigationSection.navigateToClientPage();
 
@@ -22,15 +21,13 @@ describe("Verify the display of the Client page.", { tags:[ "@report", "@client"
             Client Guidelines Discussion section`);
         Report._Client.verifyProgressBarNotExist()
             .Page.clientTitle.should("be.visible");
-        Report._Client.Page.alertMessage.should("include.text", testData.alertMessage);
-        Report._Client.Page.warningAddBtn.should("be.visible");
+
+        Report._Client.Page.warningMessage.should("be.visible");
         Report._Client.Page.clientNameField.should("be.visible");
         Report._Client.Page.clientFileNumberField.should("be.visible");
         Report._Client.Page.nycbApplicationNumber.should("be.visible");
-        Report._Client.Page.formCommentTextBox(Enums.PAGES_TEXTBOX_NAMES.intendedUser).should("be.visible");
-        Report._Client.Page.formCommentTextBox(Enums.PAGES_TEXTBOX_NAMES.identificationOfTheClient)
-            .should("be.visible");
-        Report._Client.Page.formCommentTextBox(Enums.PAGES_TEXTBOX_NAMES.clientGuidelinesDiscussion)
-            .should("be.visible");
+        Report._Client.Page.intendedUserTextBox.should("be.visible");
+        Report._Client.Page.identificationOfClientTextBox.should("be.visible");
+        Report._Client.Page.clientGuidelinesCommentary.should("be.visible");
     });
 });

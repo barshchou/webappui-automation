@@ -20,6 +20,5 @@ export default {
      */
     compsToAdd: [ 0, 1 ],
     aliasCompsBefore,
-    memoTestDataFile,
-    statusesToCheck: [ Enums.COMP_STATUS_VALUES.confirmed, Enums.COMP_STATUS_VALUES.verified ]
+    memoTestDataFile
 };

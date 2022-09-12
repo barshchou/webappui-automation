@@ -13,7 +13,7 @@ describe("Verify the functionality of the Frontage radio button",
             createReport(testData.reportCreationData);
             _NavigationSection.navigateToPropertySummary();
             Property._Summary.enterNumberOfCommercialUnits(testData.numberOfCommercialUnits);
-            _NavigationSection.navigateToCommercialCompGroups();
+            _NavigationSection.navigateToCompGroups();
             Income._CommercialManager.CompGroups.addCompGroup(testData.compGroup);
         });
 

@@ -57,7 +57,7 @@ describe("Verify that critical pages are opening", { tags: [ "@smoke" ] }, () =>
     });
 
     it("Residential Rent Comps", () => {
-        _NavigationSection.navigateToResidentialRentComps();
+        _NavigationSection.navigateToRentComps();
         Income._Residential.RentComps.BaseActions.Page.pageTitle
             .should("have.text", _IncomeTitles._Residential.RENT_COMPS);
     });

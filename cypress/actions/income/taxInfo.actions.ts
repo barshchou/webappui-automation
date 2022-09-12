@@ -10,35 +10,51 @@ import taxInfoKeys from "../../utils/mapKeys/income/tax_Info/taxInfoKeys";
 class TaxInfoActions extends BaseActionsExt<typeof taxInfoPage> {
 
     checkBasisByValue(value: string): this {
-        taxInfoPage.basisRadioButton(value).click();
+        taxInfoPage.basisRadio.check(value);
         taxInfoPage.getVerifyBasisRadioInput(value).should("exist");
         return this;
     }
 
     enterTaxableAssessedLandValue(value: number): this {
         const valueToBe = `$${numberWithCommas(value.toFixed(2))}`;
-        this.typeInAgTable(taxInfoPage.landActualInput, `${value}`);
+        taxInfoPage.landActualInput.realClick().realClick()
+            .scrollIntoView()
+            .focus().type("something")
+            .clear()
+            .realType(`${value}{enter}`);
         taxInfoPage.landActualInput.should('have.text', valueToBe);
         return this;
     }
 
     enterTransitionalLandValue(value: number): TaxInfoActions {
         const valueToBe = `$${numberWithCommas(value.toFixed(2))}`;
-        this.typeInAgTable(taxInfoPage.landTransitional, `${value}`);
+        taxInfoPage.landTransitional.realClick().realClick()
+            .scrollIntoView()
+            .focus().type("something")
+            .clear()
+            .realType(`${value}{enter}`);
         taxInfoPage.landTransitional.should('have.text', valueToBe);
         return this;
     }
 
     enterTaxableAssessedBuildingValue(value: number): this {
         const valueToBe = `$${numberWithCommas(value.toFixed(2))}`;
-        this.typeInAgTable(taxInfoPage.buildingActualInput, `${value}`);
+        taxInfoPage.buildingActualInput.realClick().realClick()
+            .scrollIntoView()
+            .focus().type("something")
+            .clear()
+            .realType(`${value}{enter}`);
         taxInfoPage.buildingActualInput.should('have.text', valueToBe);
         return this;
     }
 
     enterTransitionalBuildingValue(value: number): TaxInfoActions {
         const valueToBe = `$${numberWithCommas(value.toFixed(2))}`;
-        this.typeInAgTable(taxInfoPage.buildingTransitionalInput, `${value}`);
+        taxInfoPage.buildingTransitionalInput.realClick().realClick()
+            .scrollIntoView()
+            .focus().type("something")
+            .clear()
+            .realType(`${value}{enter}`);
         taxInfoPage.buildingTransitionalInput.should('have.text', valueToBe);
         return this;
     }
@@ -177,21 +193,8 @@ class TaxInfoActions extends BaseActionsExt<typeof taxInfoPage> {
         return this;
     }
 
-    checkProjectedIncludeCheckbox(check = true): this {
-        taxInfoPage.projectedIncludeInExportCheckbox.invoke('attr', 'value').then(status => {
-            if (status !== `${check}`) {
-                taxInfoPage.projectedIncludeInExportCheckbox.click().should('have.value', `${check}`);
-            }
-        });
-        return this;
-    }
-
-    checkProjectedSectionCheckbox(sectionName: BoweryReports.ProjectedTaxesSectionsKeys, check = true): this {
-        taxInfoPage.projectedIncludeSectionCheckbox(sectionName).invoke('attr', 'value').then(status => {
-            if (status !== `${check}`) {
-                taxInfoPage.projectedIncludeSectionCheckbox(sectionName).click().should('have.value', `${check}`);
-            }
-        });
+    checkProjectedIncludeCheckbox(): this {
+        taxInfoPage.projectedIncludeInExportCheckbox.check().should("have.value", "true");
         return this;
     }
 
@@ -363,7 +366,7 @@ class TaxInfoActions extends BaseActionsExt<typeof taxInfoPage> {
     }
 
     verifyTaxCalculationTooltip(tooltipToBe: string): this {
-        taxInfoPage.taxCalculationDiscussionTooltip.should("have.text", tooltipToBe);
+        taxInfoPage.taxCalculationDiscussionTooltip.should("exist").should("have.attr", "aria-label", tooltipToBe);
         return this;
     }
 
@@ -451,9 +454,10 @@ class TaxInfoActions extends BaseActionsExt<typeof taxInfoPage> {
                 const sumAssessments = assessments.reduce((a, b) => a + b);
                 taxInfoPage.getTaxLiabilityRowValue("Taxable Assessed Value").invoke("text")
                     .then(taxAssessedText => {
+                        const allTaxAssessedNumber = sumAssessments +
+                            getNumberFromDollarNumberWithCommas(taxAssessedText);
                         const taxLiabilityTotalToBe =
-                            `$${numberWithCommas((getNumberFromDollarNumberWithCommas(taxAssessedText) 
-                                * taxRatesPercent + sumAssessments).toFixed(2))}`;
+                            `$${numberWithCommas((allTaxAssessedNumber * taxRatesPercent).toFixed(2))}`;
                         taxInfoPage.getTaxLiabilityRowValue("Tax Liability (Total)")
                             .should("have.text", taxLiabilityTotalToBe);
                     });
@@ -482,38 +486,6 @@ class TaxInfoActions extends BaseActionsExt<typeof taxInfoPage> {
                 }
             });
         });
-        return this;
-    }
-
-    verifyTaxLiabilityOnProjectedTab(squareFootAnalysisArea: number, 
-        sectionName: BoweryReports.ProjectedTaxesSectionsValues): TaxInfoActions {
-        taxInfoPage.taxLiabilityTotalOnProjectedTab(sectionName).invoke('text').then(taxTotal => {
-            let taxTotalPerSfAdjusted = getNumberFromDollarNumberWithCommas(taxTotal) / squareFootAnalysisArea;
-            taxInfoPage.taxLiabilityTotalPerSfOnProjectedTab(sectionName)
-                .should('have.text', `$${numberWithCommas(taxTotalPerSfAdjusted.toFixed(2))}`);
-        });
-        return this;
-    }
-
-    verifyTaxLiabilityOnSummaryTab(squareFootAnalysisArea: number, 
-        sectionName: BoweryReports.ProjectedTaxesSectionsValues): TaxInfoActions {
-        taxInfoPage.taxLiabilityTotalOnSummaryTab(sectionName).invoke('text').then(taxTotal => {
-            let taxTotalPerSfAdjusted = getNumberFromDollarNumberWithCommas(taxTotal) / squareFootAnalysisArea;
-            taxInfoPage.taxLiabilityTotalPerSfOnSummaryTab(sectionName)
-                .should('have.text', `$${numberWithCommas(taxTotalPerSfAdjusted.toFixed(2))}`);
-        });
-        return this;
-    }
-
-    enterItemValueOnProjectedTab(inputName: BoweryReports.ProjectedTaxesInputsNamesValues, value: string ): 
-    TaxInfoActions {
-        this.typeInAgTable(taxInfoPage.projectedTaxesIncludedInputs(inputName), value);
-        this.verifyProjectInputs(value, inputName);
-        return this;
-    }
-
-    verifyProjectInputs(valueToBe: string, inputName: BoweryReports.ProjectedTaxesInputsNamesValues): TaxInfoActions {
-        taxInfoPage.projectedTaxesIncludedInputs(inputName).should("have.text", valueToBe);
         return this;
     }
 }

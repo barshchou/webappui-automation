@@ -65,8 +65,7 @@ function verifyTOECommentGenerated(grossBuildingArea: number, resUnits = 0, room
     cy.get(`@${Alias.expenseForecastAliases.sumPerSFInComment}`).then(sumPerSFInComment => {
         cy.get(`@${Alias.expenseForecastAliases.sumPerUnitInComment}`).then(sumPerUnitInComment => {
             let textToBe = commentariesFixture(String(sumPerSFInComment), String(sumPerUnitInComment)).generated;
-            Income._ExpenseForecastActions.verifyFormCommentTextBoxText(
-                Enums.PAGES_TEXTBOX_NAMES.totalOperatingExpenses, textToBe);
+            Income._ExpenseForecastActions.verifyTOECommentary(textToBe);
         });
     });
     return this;

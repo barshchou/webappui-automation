@@ -32,7 +32,7 @@ describe("[QA-4022] A hard coded sentence is updated on the Organization page",
                     cy.log(<string>file);
                     cy.visit(<string>file);
                     cy.stepInfo("4. Verify commentary text in exported report");
-                    cy.contains(testData.exportSectionName).next().should('have.text', testData.commentary);
+                    cy.contains("Mortgage Component").next().should('have.text', testData.commentary);
                 });
         });
     });
