@@ -21,7 +21,7 @@ describe(`Verify the Save button functionality on the Stabilized Rent Roll page`
                 .chooseCheckBoxesIsInspectedFromList(testData.isInspected);
 
             cy.stepInfo(`1. Verify the Save button is displayed on the Stabilized Rent Roll page `);
-            Base._NavigationSection.clickIncomeApproachButton().navigateToStabilizedRentRollInCommercial();
+            Base._NavigationSection.navigateToCommercialStabilizedRentRoll();
             Income._CommercialManager.StabilizedRentRoll.verifyThatPageIsOpened()
                 .Page.SaveBtn.scrollIntoView().should('exist');
 

@@ -5,7 +5,7 @@ import { Income, Property } from "../../../../../actions";
 
 describe("Verify the Commercial Stabilized Rent Roll table", 
     { tags: [ "@income", "@commercial", "@stabilized_rent_roll" ] }, () => {
-        
+         
         beforeEach("Login, create report", () => {
             cy.stepInfo(`1. The mixed report is created and several commercial units are added`);
             createReport(testData.reportCreationData);
@@ -25,15 +25,13 @@ describe("Verify the Commercial Stabilized Rent Roll table",
 
             cy.stepInfo(`4. On the Income > Commercial > Comp Groups, 
             a new Comp Group has been created with added Comps`); 
-            _NavigationSection.clickCommercialCompGroups()
-                .submitSaveChangesModal();
+            _NavigationSection.navigateToCommercialCompGroups();
             Income._CommercialManager.CompGroups.addCompGroup(testData.compGroup)
                 .dragAllCommercialUnitsIntoGroup(testData.compGroup, testData.numberOfCommercialUnits);
 
             cy.stepInfo(`5. On the Income > Commercial > Rent Comps, several comps have been added for 
                     comparison into a new Created Group from the previous step`);
-            _NavigationSection.clickCommercialRentComps()
-                .submitSaveChangesModal();
+            _NavigationSection.navigateToCommercialRentComps();
             Income._CommercialManager.RentComps.clickManuallyAddANewCompButton().
                 searchNewCompByAddress(testData.address);
             testData.rentCompFields.forEach(field => {
@@ -49,15 +47,13 @@ describe("Verify the Commercial Stabilized Rent Roll table",
 
             cy.stepInfo(`6. On the Income > Commercial > Rent Reconciliation, the Market Rent Conclusion 
                     field is filled with any value`);
-            _NavigationSection.clickRentReconciliationButton()
-                .submitSaveChangesModal();
+            _NavigationSection.navigateToRentReconciliation();
             Income._CommercialManager.RentReconciliation.addMarketRentConclusion(testData.marketRentConclusion);
         });
 
         it("[QA-4607]", () => {
             cy.stepInfo(`7. Proceed to the Income > Commercial > Stabilized Rent Roll page.`);
-            _NavigationSection.clickCommercialStabRentRollButton()
-                .submitSaveChangesModal();
+            _NavigationSection.navigateToCommercialStabilizedRentRoll();
     
             cy.stepInfo(`8. Click on the Autofill Vacant Units button and verify the Rent PSF column is auto-filled 
                     (Note: Annual and Monthly Rent columns are disabled).

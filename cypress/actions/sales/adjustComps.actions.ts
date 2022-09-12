@@ -8,6 +8,8 @@ import { BoweryReports } from "../../types/boweryReports.type";
 import { _saveDataInFile } from "../../support/commands";
 import Enums from "../../enums/enums";
 
+type AdjustmentName = BoweryReports.SalesAdjustmentGrid.AdjustmentName;
+
 class AdjustCompsActions extends BaseActionsExt<typeof adjustCompsPage> {
     /**
      * Checks whether name string in cell Cumulative Price Per *basis* is bold   
@@ -173,11 +175,10 @@ class AdjustCompsActions extends BaseActionsExt<typeof adjustCompsPage> {
 
     /**
      * Verify that Trended Price per selected @param {string} basis adjusted based on
-     *Net Market adjustment total value
+     * Net Market adjustment total value
      */
-    verifyTrendedPricePerBasis(
-        comparablesAdjustments: number[], basis: string, index = 0, isEmpty = false
-    ): AdjustCompsActions {
+    verifyTrendedPricePerBasis(comparablesAdjustments: number[], basis: string, index = 0, isEmpty = false): 
+    AdjustCompsActions {
         adjustCompsPage.viewMarketDetails.click();
         adjustCompsPage.getPricePerBasisValue(basis).should("be.visible");
         adjustCompsPage.getPricePerBasisValue(basis).invoke("text").then(pricePerUnitText => {
@@ -198,7 +199,7 @@ class AdjustCompsActions extends BaseActionsExt<typeof adjustCompsPage> {
             cy.log("Cumulative Price Per Unit is: " + adjustedTrendedPriceText);
             _saveDataInFile(`$${numberWithCommas(Math.round(pricePerBasisNumber))}`, `${Cypress.spec.name}.txt`);
             adjustCompsPage.cellCumulativePriceValue.eq(index)
-                .should("have.text", isEmpty ? "" : adjustedTrendedPriceText);
+                .should("have.text", isEmpty ? "$0.00" : adjustedTrendedPriceText);
         });
             
         return this;
@@ -249,8 +250,8 @@ class AdjustCompsActions extends BaseActionsExt<typeof adjustCompsPage> {
         return this;
     }
 
-    clickViewAdjustmentDetails(): AdjustCompsActions {
-        adjustCompsPage.viewAdjustmentDetails.click();
+    expandAdjustmentDetails(adjustmentName: AdjustmentName): AdjustCompsActions {
+        adjustCompsPage.getAdjustmentArrow(adjustmentName).click();
         return this;
     }
 
@@ -275,7 +276,7 @@ class AdjustCompsActions extends BaseActionsExt<typeof adjustCompsPage> {
     }
 
     enterMarketConditionAdjustment(value: string | number): AdjustCompsActions {
-        adjustCompsPage.marketConditionAdjustmentInput.type(`${value}`).should("have.value", value);
+        adjustCompsPage.marketConditionAdjustmentInput.type(`${value}`).should('have.attr', 'value', value);
         adjustCompsPage.applyMarketConditionAdjustmentButton.click();
         return this;
     }
@@ -314,6 +315,32 @@ class AdjustCompsActions extends BaseActionsExt<typeof adjustCompsPage> {
                 :   `$${numberWithCommas(pricePerUnit.toFixed(2))}`;
             adjustCompsPage.getExpandMarketAdjustmentSubjectRow("Price per Unit").should("have.text", pricePerUnitToBe);
         });
+        return this;
+    }
+
+    verifyExpandMarketAdjustmentPricePerSF(calculationUnit: BoweryReports.SalesAdjustmentGrid.CalculationUnits, 
+        area: number): AdjustCompsActions {
+        this.checkCalculationUnitsRadio(calculationUnit);
+        adjustCompsPage.getExpandMarketAdjustmentSubjectRow("Sale Price").invoke("text").then(salePrice => {
+            const salePriceNumber = getNumberFromDollarNumberWithCommas(salePrice);
+            const pricePerSf = salePriceNumber / area;
+            const pricePerSfAdjusted = (Math.round(pricePerSf * 1000)) / 1000;
+            const pricePerSfToBe = `$${numberWithCommas(pricePerSfAdjusted.toFixed(2))}`;
+            adjustCompsPage.getExpandMarketAdjustmentSubjectRow("Price per SF").should("have.text", pricePerSfToBe);
+        });
+        return this;
+    }
+
+    verifyCommercialAreaSf(incomeValue: BoweryReports.IncomeTypes, squareFootAnalysis: number,
+        areaSf: number[], index = 0): AdjustCompsActions {
+        this.Page.getAdjustmentExpansionCellValue(Enums.ADJUSTMENT_EXPANSION_LABELS.commercialAreaRatio, index)
+            .invoke('text').then(commercialAreaSf => {
+                let commercialArea = areaSf.reduce((prev, next) => prev + next);
+                let calculatedPercent = incomeValue === Enums.INCOME_TYPE.residential 
+                    ? '0%'
+                    : `${commercialArea / squareFootAnalysis * 100}%`;
+                expect(commercialAreaSf).to.be.eq(`${calculatedPercent}`);
+            });
         return this;
     }
 }

@@ -1,8 +1,6 @@
 import siteDescriptionPage from "../../pages/property/siteDescription.page";
 import { numberWithCommas } from "../../../utils/numbers.utils";
 import BaseActionsExt from "../base/base.actions.ext";
-import { BoweryReports } from "../../types/boweryReports.type";
-
 class SiteDescriptionActions extends BaseActionsExt<typeof siteDescriptionPage> {
 
     editTransportationDiscussionCommentary(newCommentary: string): SiteDescriptionActions {
@@ -68,12 +66,6 @@ class SiteDescriptionActions extends BaseActionsExt<typeof siteDescriptionPage> 
                 cy.wrap(elements[i]).should("have.text", textToCheck);
             }
         });
-        return this;
-    }
-    
-    verifyGeneratedCommentary(discussion: BoweryReports.PropertyDiscussion, textToBe: string): SiteDescriptionActions {
-        siteDescriptionPage.getGeneratedCommentary(discussion)
-            .should("have.text", textToBe);
         return this;
     }
 }
