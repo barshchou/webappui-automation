@@ -25,7 +25,8 @@ const amenitiesCheckboxes = {
     hasPrivateRoofArea: "unit.hasPrivateRoofArea",
     hasPrivateDeck: "unit.hasPrivateDeck",
     hasPrivateBackyard: "unit.hasPrivateBackyard",
-    hasOtherUnitAmenity: "unit.hasOtherUnitAmenity"
+    hasOtherUnitAmenity: "unit.hasOtherUnitAmenity",
+    hasCourtyard: "building.hasCourtyard"
 } as const;
 
 export default Object.freeze(amenitiesCheckboxes);

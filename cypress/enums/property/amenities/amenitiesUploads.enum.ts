@@ -6,7 +6,8 @@ const amenitiesUploads = {
     gym: "gym",
     pool: "pool",
     recreationRoom: "recreationRoom",
-    commonLoungeSpace: "commonLoungeSpace"
+    commonLoungeSpace: "commonLoungeSpace",
+    courtyard: "courtyard"
 } as const;
 
 export default Object.freeze(amenitiesUploads);
