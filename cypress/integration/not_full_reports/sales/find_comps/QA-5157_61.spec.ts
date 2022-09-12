@@ -39,12 +39,24 @@ conditionalDescribe(`[QA-5157] [QA-5161] [Sales > Find Comps] "Date Sold" sortin
                     (comps added via map search )`);
 
         Sales._FindComps.AddressSearch.openAddressSearchTab()
-            .addCompByParameter(0, testData.compProperty, testData.compStatusDate)
-            .addCompByParameter(1, testData.compProperty, testData.compStatusDate)
-            .addCompByParameter(0, testData.compProperty, testData.compStatusContract)
-            .addCompByParameter(1, testData.compProperty, testData.compStatusContract)
-            .addCompByParameter(0, testData.compProperty, testData.compStatusListing)
-            .addCompByParameter(1, testData.compProperty, testData.compStatusListing);       
+            .addCompViaAddressSearch('225 Liberty Street, New York, NY');
+
+
+
+
+        /*
+         * TODO find a way to add comps from map more precisely
+         *  Sales._FindComps.resetAllFilters()
+         *      .selectFilterSalePeriodValue(testData.salePeriodValue)
+         *      .selectCompFromMap()
+         *      .selectCompFromMap()
+         *      .selectCompFromMap()
+         *      .selectCompFromMap();
+         *  Sales._FindComps.resetAllFilters()
+         *      .selectCompFromMap()
+         *      .selectCompFromMap();
+         */
+       
         Sales._FindComps.checkSalesCompSortedByDateSold();
         cy.pause();
 
