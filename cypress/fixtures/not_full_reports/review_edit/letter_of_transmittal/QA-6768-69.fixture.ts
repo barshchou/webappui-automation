@@ -1,3 +1,4 @@
+import Enums from "../../../../enums/enums";
 import ReportDataCreator from "../../../data_creator/reportData.creator";
 
 const inputValues = [
@@ -28,6 +29,7 @@ const inputValues = [
 ];
 
 export default {
+    reportFreddieMac: ReportDataCreator.getReportData("6769", { templateValue: Enums.TEMPLATE_TYPE.freddieMac }),
     reportCreationData: ReportDataCreator.getReportData("6768"),
     inputValues
 };

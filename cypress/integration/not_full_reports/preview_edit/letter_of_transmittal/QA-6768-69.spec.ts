@@ -1,10 +1,38 @@
 import { PreviewEdit, Report, ReviewExport } from '../../../../actions';
 import { _NavigationSection } from '../../../../actions/base';
 import { createReport } from '../../../../actions/base/baseTest.actions';
-import testData from "../../../../fixtures/not_full_reports/review_edit/letter_of_transmittal/QA-6768.fixture";
+import testData from "../../../../fixtures/not_full_reports/review_edit/letter_of_transmittal/QA-6768-69.fixture";
 
 describe('Verify the display of the multiple clients on the Letter of Transmittal',
     { tags: [ "@preview_edit", "@letter_of_transmittal", "@check_export" ] }, () => {
+
+        it("[QA-6769]", () => {
+            cy.stepInfo("1. Login, create a report with freddie mac");
+            createReport(testData.reportFreddieMac);
+
+            cy.stepInfo("2. Navigate to Report > Client page");
+            _NavigationSection.navigateToClientPage();
+
+            cy.stepInfo("3. Fill the Client field, Client File Number and NYCB Application Number three times");
+            testData.inputValues.forEach((value, index) => {
+                Report._Client.enterClientName(value.clientName, index)
+                    .enterClientFileNumber(value.clientFileNumber, index)
+                    .enterNycbApplicationNumber(value.nycbNumber, index)
+                    .clickAddAdditionalClientBtn();
+            });
+
+            cy.stepInfo("4. Navigate to Report > Client page");
+            _NavigationSection.navigateToLetterOfTransmittal();
+
+            cy.stepInfo(`5. Client 1, Client 2, Client 3 and Client 4 are displayed and separated by a comma in the 1 
+                        point before “Freddie Mac“`);
+            testData.inputValues.forEach(value => {
+                PreviewEdit._LetterOfTransmittal.verifyTextInFormContainer(value.clientName)
+                    .verifyTextInFormContainer(value.clientFileNumber)
+                    .verifyTextInFormContainer(value.organization);
+                PreviewEdit._LetterOfTransmittal.Page.countList.should("include.text", value.organization);
+            });
+        });
 
         it("[QA-6768]", () => {
             cy.stepInfo("1. Login, create a report");
