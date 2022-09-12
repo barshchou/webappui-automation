@@ -357,11 +357,6 @@ class TaxInfoActions extends BaseActionsExt<typeof taxInfoPage> {
         return this;
     }
 
-    verifyTaxCalculationCommentary(commToBe: string): this {
-        taxInfoPage.taxCalculationDiscussionCommentary.should("exist").should("have.text", commToBe);
-        return this;
-    }
-
     verifyTaxCalculationTooltip(tooltipToBe: string): this {
         taxInfoPage.taxCalculationDiscussionTooltip.should("have.text", tooltipToBe);
         return this;
