@@ -3,6 +3,7 @@ import { createReport } from "../../../../actions/base/baseTest.actions";
 import NavigationSection from "../../../../actions/base/navigationSection.actions";
 import { Sales, Report } from "../../../../actions";
 
+// TODO: [QA-6755] AQA - Update QA-5350 test to select comps and query data from response/db  
 describe("Calculation of Market Condition adjustment", 
     { tags: [ "@adjust_comps", "@sales" ] }, () => {
 
@@ -10,10 +11,8 @@ describe("Calculation of Market Condition adjustment",
             createReport(testData.reportCreationData);
         });
 
-        it("Test body", () => {
+        it("[QA-5350_5706]", () => {
             cy.stepInfo(`1. Report > Key Info and fill the Date of Valuation`);
-            NavigationSection.clickReportButton().navigateToReportInformation()
-                .submitSaveChangesModal();
             Report._KeyInfo.enterDateByType(testData.valuationDateFixture);
     
             cy.stepInfo(`2. Navigate to the Sales > Find Comps and add a few Sales Comp`);

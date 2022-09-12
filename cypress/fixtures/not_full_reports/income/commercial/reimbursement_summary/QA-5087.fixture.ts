@@ -48,5 +48,9 @@ export default {
     percentOfTotal: _percentOfTotal,
     utilitiesCombinedExpenseOption: Enums.UTILITY_EXPENSES.combinedAll,
     vcLossPercent: 30,
-    useValue: "undetermined"
+    useValue: "undetermined",
+    commercialExpenseSection: Enums.EXPORT_TITLES.commercialExpenseReimbursement,
+    potentialGrossSection: Enums.EXPORT_TITLES.potentialGrossCommercialRent,
+    commercialVacancySection: Enums.EXPORT_TITLES.commercialVacancyAndCollectionLoss,
+    stabilizedIncomeSection: Enums.EXPORT_TITLES.stabilizedIncomeAndExpenses
 };

@@ -7,15 +7,14 @@ import RentCompsPage from "../../../../../pages/income/residential/rent_comps/re
 const reportCreationData = ReportDataCreator.getReportData("4332");
 
 describe(`Verify that display of results in the Map section on Rent Comps page 
-                when the Unit type of search is selected`, 
+        when the Unit type of search is selected`, 
 { tags:[ "@income", "@rent_comps", "@residential", "@flaky" ] }, () => {
-
     beforeEach("Login, create report", () => {
         createReport(reportCreationData);
     });
 
-    it("Test body", () => {
-        NavigationSection.navigateToRentComps()
+    it("[QA-4332]", () => {
+        NavigationSection.navigateToResidentialRentComps()
             .verifyProgressBarNotExist();
         Income.Residential.RentComps.BaseActions.verifyLoadingDoesNotExist()
             .verifyPhotosExistAndNavigateByPhotos(1);

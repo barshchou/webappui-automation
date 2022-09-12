@@ -186,7 +186,7 @@ export const createPayload = (reportCreationData: BoweryAutomation.ReportCreatio
         valid: true,
         valueConclusionType: reportCreationData.conclusionValue,
         yearBuilt: 1910,
-        zip: 10016,
+        zip: "10016",
         _id: userID
     };
 };

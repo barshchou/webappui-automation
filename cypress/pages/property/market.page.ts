@@ -19,16 +19,16 @@ class MarketPage extends BasePage {
     get neighborhoodYear() { return cy.get("*[name=neighborhoodYear]"); }
 
     getMarketInputByAnalysisUse(marketAnalysisUse: BoweryReports.MarketAnalysisUses) {
-        return cy.get(`[data-qa=${marketAnalysisUse}Market-form-control] input`);
+        return cy.get(`[name=${marketAnalysisUse}Market]`);
     }
 
     getSubmarketInputByAnalysisUse(marketAnalysisUse: BoweryReports.MarketAnalysisUses) {
-        return cy.get(`[data-qa=${marketAnalysisUse}Submarket-form-control] input`);
+        return cy.get(`[name=${marketAnalysisUse}Submarket]`);
     }
 
-    get marketQuarter() { return cy.get("[data-qa=marketQuarter-form-control] input"); }
+    get marketQuarter() { return cy.get("[name=marketQuarter]"); }
 
-    get marketYear() { return cy.get("*[name=marketYear]"); }
+    get marketYear() { return cy.get("[name=marketYear]"); }
 
     get pullDropboxButton() { return cy.xpath("//button[.='PULL FROM DROPBOX']"); }
 
@@ -38,6 +38,14 @@ class MarketPage extends BasePage {
 
     getMarketFileByAnalysisUse(use: BoweryReports.MarketAnalysisUses) {
         return cy.get(`[data-qa=file-selection-${use}MarketAnalysis-input] input`);
+    }
+
+    getSubmarketByAnalysisUseFileUploadButton(use: BoweryReports.MarketAnalysisUses) {
+        return cy.get(`[data-qa=file-selection-${use}SubmarketAnalysis-input] button`);
+    }
+
+    getMarketByAnalysisUseFileUploadButton(use: BoweryReports.MarketAnalysisUses) {
+        return cy.get(`[data-qa=file-selection-${use}MarketAnalysis-input] button`);
     }
 
     get exposureTimeDescription() { 
@@ -50,8 +58,12 @@ class MarketPage extends BasePage {
 
     get includeMarketTimeCheckbox() { return cy.get("[data-qa^='includeMarketingTime']"); }
 
-    getMarketAnalysisUseCheckbox(useValue: string) { 
-        return cy.get(`[data-qa^='marketAnalysisUses.${useValue}-checkbox'] input`); 
+    getMarketAnalysisUseCheckbox(marketAnalysisUse: BoweryReports.MarketAnalysisUses) { 
+        return this.getMarketAnalysisUseCheckboxArea(marketAnalysisUse).find(`input`); 
+    }
+
+    getMarketAnalysisUseCheckboxArea(marketAnalysisUse: BoweryReports.MarketAnalysisUses) {
+        return cy.get(`[data-qa^='marketAnalysisUses.${marketAnalysisUse}']`);
     }
 
     get areaEconomicAnalysisContainer() { return cy.get("[data-qa=file-selection-areaEconomicAnalysis-input]"); }

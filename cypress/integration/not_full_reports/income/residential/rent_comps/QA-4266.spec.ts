@@ -4,32 +4,33 @@ import NavigationSection from "../../../../../actions/base/navigationSection.act
 import Income from "../../../../../actions/income/income.manager";
 import RentCompsPage from "../../../../../pages/income/residential/rent_comps/rentComps.page";
 
-describe("Verify the UI controls of the Map filter section when Unit type of search is selected", () => {
-    beforeEach("Login, create report", () => {
-        createReport(testData.reportCreationData);
-    });
+describe("Verify the UI controls of the Map filter section when Unit type of search is selected", 
+    { tags:[ "@income", "@commercial", "@in_place_rent_roll" ] }, () => {
+        beforeEach("Login, create report", () => {
+            createReport(testData.reportCreationData);
+        });
 
-    it("Test body", () => {
-        NavigationSection.navigateToRentComps()
-            .verifyProgressBarNotExist();
-        Income.Residential.RentComps.BaseActions.verifyUnitSelected();
-        RentCompsPage.unitTypesWrapper.should("exist");
-        RentCompsPage.numberOfBedroomsArrowButton.should("exist");
-        RentCompsPage.amenitiesArrowButton.should("exist");
-        RentCompsPage.minRentInput.should("exist");
-        RentCompsPage.maxRentInput.should("exist");
-        RentCompsPage.sourceOfInfoArrow.should("exist");
-        RentCompsPage.maxSquareFeet.should("exist");
-        RentCompsPage.minSquareFeet.should("exist");
-        RentCompsPage.minDateValueInput.should("exist");
-        RentCompsPage.maxDateValueInput.should("exist");
-        RentCompsPage.resetFiltersButton.should("exist");
-        const fieldName = "minRent";
-        Income.Residential.RentComps.BaseActions.enterValueToInput(fieldName, testData.minRentOk)
-            .clickResetFiltersButton()
-            .verifyEnteredValueToInput(fieldName);
-        RentCompsPage.numberOfFoundResults.should("exist").should("contain.text", "Results Found");
-        RentCompsPage.sortByDropdown.should("exist");
-        RentCompsPage.zoomInButton.should("exist");
+        it("[QA-4266]", () => {
+            NavigationSection.navigateToResidentialRentComps()
+                .verifyProgressBarNotExist();
+            Income.Residential.RentComps.BaseActions.verifyUnitSelected();
+            RentCompsPage.unitTypesWrapper.should("exist");
+            RentCompsPage.numberOfBedroomsArrowButton.should("exist");
+            RentCompsPage.amenitiesArrowButton.should("exist");
+            RentCompsPage.minRentInput.should("exist");
+            RentCompsPage.maxRentInput.should("exist");
+            RentCompsPage.sourceOfInfoArrow.should("exist");
+            RentCompsPage.maxSquareFeet.should("exist");
+            RentCompsPage.minSquareFeet.should("exist");
+            RentCompsPage.minDateValueInput.should("exist");
+            RentCompsPage.maxDateValueInput.should("exist");
+            RentCompsPage.resetFiltersButton.should("exist");
+            const fieldName = "minRent";
+            Income.Residential.RentComps.BaseActions.enterValueToInput(fieldName, testData.minRentOk)
+                .clickResetFiltersButton()
+                .verifyEnteredValueToInput(fieldName);
+            RentCompsPage.numberOfFoundResults.should("exist").should("contain.text", "Results Found");
+            RentCompsPage.sortByDropdown.should("exist");
+            RentCompsPage.zoomInButton.should("exist");
+        });
     });
-});
