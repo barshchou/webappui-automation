@@ -8,12 +8,9 @@ import mapKeysUtils from "../../../../utils/mapKeys.utils";
 /*
  * TODO: https://bowery.atlassian.net/browse/QA-6383 Update test spec after test case update
  * Test is skipped as it's outdated. Import modal moved to another place.
- * 
- * TODO: outdated test case, see QA-4175 for more details
- * Related task for update/removal - QA-6598
  */
 describe.skip("Verify the Comps can be added by entering the existing Report ID in the modal", 
-    { tags:[ "@fix", "@comp_plex", "@sales", "@find_comps" ] }, () => {
+    { tags:[ "@comp_plex", "@sales", "@find_comps" ] }, () => {
         beforeEach("Login, create report", () => {
             createReport(fixture.reportCreationData);
         });
@@ -35,12 +32,12 @@ describe.skip("Verify the Comps can be added by entering the existing Report ID 
                 NavigationSection.navigateToFindComps(true);
                 Sales.FindComps.clickImportComparableButton()
                 // eslint-disable-next-line @typescript-eslint/no-explicit-any
-                    .enterReportToSearchComp(<any>reportId);
+                    .JobSearch.enterReportToSearchComp(<any>reportId);
             });
-            Sales.FindComps.Actions.clickSearchButton()
-                .checkSingleSalesCompsByEventId()
+            Sales.FindComps.JobSearch.clickSearchButton();
+            Sales.FindComps.checkSingleSalesCompsByEventId()
                 .selectAllCompsForImport()
                 .checkSelectedSingleSalesComps()
-                .clickImportCompsFromReportButton();
+                .JobSearch.clickImportCompsFromReportButton();
         });
     });

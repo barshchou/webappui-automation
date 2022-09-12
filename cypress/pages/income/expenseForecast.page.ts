@@ -20,10 +20,15 @@ class ExpenseForecastPage extends BasePage {
      * If card is custom - locator gets forecast card name and 
      * changes it (according to the rule from webapp) for qa-data attribute 
      */
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
     forecastItemCardFull(forecastItem: string, custom = false) {
-        return !custom ? cy.get(`[data-qa='${forecastItem}-forecast-item']`) :
-            cy.get(`[data-qa=${Cypress._.camelCase(Cypress._.toLower(Cypress._
-                .replace(forecastItem, "&", "And")))}-forecast-item]`);
+        return cy.get(`[data-qa='${forecastItem}-forecast-item']`);
+        /*
+         * TODO: Replace with current approach when we get proper custom categories names data-qa attr
+         * return !custom ? cy.get(`[data-qa='${forecastItem}-forecast-item']`) :
+         *     cy.get(`[data-qa=${Cypress._.camelCase(Cypress._.toLower(Cypress._
+         *         .replace(forecastItem, "&", "And")))}-forecast-item]`);
+         */
     }
 
     forecastItemCard(item: string, custom = false) {
@@ -89,8 +94,9 @@ class ExpenseForecastPage extends BasePage {
         return cy.xpath(`//*[@data-qa="${forecastItem}-forecast-item"]//following::*[.='Modified'][2]`); 
     }
 
-    getExpenseCommentaryRevertToOriginal(forecastItem: string) {
-        return cy.xpath(`//*[@data-qa="${forecastItem}-forecast-item"]//following::button[.='Revert to Original'][1]`);
+    getExpenseCommentaryRevertToOriginal(forecastItem: string, index = 1) {
+        return cy.xpath(
+            `//*[@data-qa="${forecastItem}-forecast-item"]//following::button[.='Revert to Original'][${index}]`);
     }
 
     getCheckboxIncludeInProForma(forecastItem: string) { 
@@ -117,16 +123,6 @@ class ExpenseForecastPage extends BasePage {
 
     get appraisersTotalForecast() { return cy.get("[data-qa=appraisers-total-conclusion]"); }
 
-    get toeCommentary() { return cy.xpath("//*[.='TOTAL OPERATING EXPENSES']//following::div[@data-slate-editor]"); }
-
-    get toeCommentaryEditButton() { return cy.xpath("//*[.='TOTAL OPERATING EXPENSES']//following::button[.='Edit']"); }
-
-    get toeCommentarySaveButton() { 
-        return cy.xpath("//*[.='TOTAL OPERATING EXPENSES']//following::button[.='Save'][1]"); 
-    }
-
-    get toeCommentaryModified() { return cy.xpath("//*[.='TOTAL OPERATING EXPENSES']//following::*[.='Modified']"); }
-
     get toeAppraisersForecastValueLine() {
         return cy.xpath("//*[.='TOTAL OPERATING EXPENSES']" + 
         "//following::div[@data-qa='appraisers-forecast-values-line']");
@@ -145,8 +141,6 @@ class ExpenseForecastPage extends BasePage {
     get titleOfAddCustomExpenseCategoryModal() { 
         return cy.get('[role=dialog]').contains('Add Custom Expense Category'); 
     }
-
-    get addCustomExpenseCategoryInput() { return cy.get('input[placeholder="Enter Custom Expense..."]'); }
 
     get addCustomExpenseCategoryFieldset() { 
         return cy.get('[data-qa="autosuggest-text-input-field"]').find('fieldset'); 
@@ -170,7 +164,7 @@ class ExpenseForecastPage extends BasePage {
         return this.forecastItemCardFull(forecastItem, custom).find('[data-testid="EditIcon"]');
     }
 
-    get newCategoryExpenseName() { return cy.get('[data-qa="expenseName-form-control"] input'); }
+    get newCategoryExpenseName() { return cy.get('[name=expenseName]'); }
 
     get electricityCardText() { 
         return cy.xpath("//span[@data-qa='electricity.includeInProForma-checked']/following-sibling::span"); 

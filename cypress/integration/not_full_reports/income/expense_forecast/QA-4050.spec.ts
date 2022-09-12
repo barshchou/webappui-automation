@@ -2,7 +2,9 @@ import testData from "../../../../fixtures/not_full_reports/income/expense_forec
 import NavigationSection from "../../../../actions/base/navigationSection.actions";
 import Income from "../../../../actions/income/income.manager";
 import { createReport } from "../../../../actions/base/baseTest.actions";
+import Enums from "../../../../enums/enums";
 
+// TODO: Test fails due to bug: https://bowery.atlassian.net/browse/WEB-6818
 describe(`Verify that Generated Commentary for Total Operating Expenses is updated on the Expense Forecast page`, 
     { tags: [ "@income", "@expense_forecast" ] }, () => {
 
@@ -41,8 +43,11 @@ describe(`Verify that Generated Commentary for Total Operating Expenses is updat
                 .verifyToePerUnitByColumnIndex();
             NavigationSection.navigateToExpenseForecast();
             Income.ExpenseForecast.enterForecastItemForecast(testData.expenseForecastInsurance)
-                .verifyTOECommentary(testData.commentaries.generated)
-                .editTOECommentary(testData.commentaries.edited)
-                .verifyTOECommentary(testData.commentaries.edited);
+                .verifyFormCommentTextBoxText(Enums.PAGES_TEXTBOX_NAMES.totalOperatingExpenses,
+                    testData.commentaries.generated)
+                .clearFormCommentTextBox(Enums.PAGES_TEXTBOX_NAMES.totalOperatingExpenses)
+                .enterFormCommentTextBox(Enums.PAGES_TEXTBOX_NAMES.totalOperatingExpenses, testData.commentaries.edited)
+                .verifyFormCommentTextBoxText(Enums.PAGES_TEXTBOX_NAMES.totalOperatingExpenses,
+                    testData.commentaries.edited);
         });
     });

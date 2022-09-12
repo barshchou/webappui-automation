@@ -1,18 +1,27 @@
+import { loginAction } from './../../../../actions/base/baseTest.actions';
 import { Organization, PreviewEdit } from '../../../../actions';
 import { Report } from "../../../../actions";
 import { _NavigationSection } from "../../../../actions/base";
 import { createReport } from "../../../../actions/base/baseTest.actions";
-import enums from '../../../../enums/enums';
+import Enums from '../../../../enums/enums';
 import testData from '../../../../fixtures/not_full_reports/report/client/QA-4627.fixture';
 import { conditionalDescribe } from "../../../checkIsProd.utils";
 
-conditionalDescribe("[QA-4627] Verify the functionality of the Client field.", 
+// TODO: Test fails on Cover Page. [QA-6751] Check test after WEB-5721 implementation
+conditionalDescribe("Verify the functionality of the Client field.", 
     { tags:[ "@report", "@client" ] }, () => {
-        beforeEach("Login, create report", () => {
+        beforeEach("Restore state. Create report", () => {
+            loginAction();
+            cy.stepInfo(`Clean up state before tests run. Delete existing user.`);
+            _NavigationSection.navigateToProfileOrganization(Enums.MENU_LINKS.organization);
+            Organization._OrganizationActions.openOrganizationClientsPage();
+            Organization._OrganizationClientsActions.deleteClientIfExists(testData.textToType);
+
+            cy.stepInfo(`Create report.`);
             createReport(testData.reportCreationData);
         });
 
-        it("Test body", () => {
+        it("[QA-4627]", () => {
             cy.stepInfo(`1. Proceed to the Report > Client page.`);
             _NavigationSection.navigateToClientPage();
 
@@ -40,7 +49,7 @@ conditionalDescribe("[QA-4627] Verify the functionality of the Client field.",
             cy.stepInfo(`6. Verify the Client Company is displayed in the Intended User and 
             Identification of the Client section as a chip and to the Client Guidelines Discussion - 
             GC (if the Client has Company added on the Organization > Clients page).`);
-            Report._Client.Page.identificationOfClientTextBox.should("contain.text", testData.companyName);
+            Report._Client.verifyFormCommentTextBoxText(testData.identificationOfTheClient, testData.companyName);
 
             cy.stepInfo(`7. Proceed to the Preview & Edit > Cover page and verify that 
             the Client from the previous step is displayed in the REQUESTED BY section.`);
@@ -55,8 +64,10 @@ conditionalDescribe("[QA-4627] Verify the functionality of the Client field.",
             cy.stepInfo(`9. Proceed to the Preview & Edit > Introduction page and verify 
             that the Client Company is displayed in the IDENTIFICATION OF THE CLIENT and INTENDED USE & USER sections 
             (if the Client has Company added on the Organization > Clients page).`);
-            _NavigationSection.navigateToProfileOrganization(enums.MENU_LINKS.organization);
-            Organization._OrganizationActions.openOrganizationClientsPage();
-            Organization._OrganizationClientsActions.deleteClient(testData.textToType);
+            _NavigationSection.navigateToIntroduction();
+            PreviewEdit._Introduction.Page.getIntroductionCommentaryItem(testData.intendedUseAndUser)
+                .should('include.text', testData.companyName);
+            PreviewEdit._Introduction.Page.getIntroductionCommentaryItem(testData.identificationOfTheClient)
+                .should('include.text', testData.companyName);
         });
     });

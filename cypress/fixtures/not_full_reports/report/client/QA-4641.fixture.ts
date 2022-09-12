@@ -1,6 +1,5 @@
 import Enums from "../../../../enums/enums";
 import ReportDataCreator from "../../../data_creator/reportData.creator";
-import enums from '../../../../enums/enums';
 import chipsDataCreator from '../../../data_creator/chipsData.creator';
 import { BoweryReports } from "../../../../types/boweryReports.type";
 
@@ -10,17 +9,22 @@ const reportCreationFixture = () => {
         conclusionValue: Enums.VALUE_CONCLUSION_TYPE.AS_STABILIZED });
 };
 
-const _buildingName = 'Test Building Name QA-4641';
+const buildingName = 'Test Building Name QA-4641';
 
-const _chipsOptions: BoweryReports.ChipsCreationOptions = {
-    buildingName: _buildingName,
+const chipsOptions: BoweryReports.ChipsCreationOptions = {
+    buildingName: buildingName,
 };
+
+const chipNames = [ "Client Organization", "Client Company" ];
 
 export default {
     reportCreationData: reportCreationFixture(),
     textToType: "=",
-    chips: chipsDataCreator.getChipsData(_chipsOptions, enums.VALUE_CONCLUSION_TYPE.AS_STABILIZED),
-    buildingName: _buildingName,
-    intendedUserCommentaryTitle: "Intended User",
-    identificationOfTheClientCommentaryTitle: "Identification of the Client"
+    chips: chipsDataCreator.getChipsData(chipsOptions, Enums.VALUE_CONCLUSION_TYPE.AS_STABILIZED),
+    buildingName: buildingName,
+    intendedUserCommentaryTitle: Enums.PAGES_TEXTBOX_NAMES.intendedUser,
+    identificationOfTheClientCommentaryTitle:  Enums.PAGES_TEXTBOX_NAMES.identificationOfTheClient,
+    identificationOfTheClientSection: Enums.EXPORT_TITLES.identificationOfTheClient,
+    intendedUseSection: Enums.EXPORT_TITLES.intendedUseAndUser,
+    chipNames
 };

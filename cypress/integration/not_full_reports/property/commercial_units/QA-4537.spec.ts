@@ -3,13 +3,13 @@ import { createReport } from "../../../../actions/base/baseTest.actions";
 import { _NavigationSection } from "../../../../actions/base";
 import { Income, Property } from "../../../../actions";
 
-describe("[QA-4537] Verify the Commercial Unit # SF field functionality",
+describe("Verify the Commercial Unit # SF field functionality",
     { tags:[ "@property", "@commercial_units" ] }, () => {
         beforeEach("Login, create report", () => {
             createReport(testData.reportCreationData);
         });
 
-        it("Test body", () => {
+        it("[QA-4537]", () => {
             cy.stepInfo(`1. Proceed to the Property > Commercial Units page.`);
             _NavigationSection.navigateToPropertySummary();
             Property._Summary.enterNumberOfCommercialUnits(testData.numberOfCommercialUnits);
@@ -17,7 +17,7 @@ describe("[QA-4537] Verify the Commercial Unit # SF field functionality",
             cy.stepInfo(`2. Enter any value in the Commercial Unit # SF field (e.g. 300) and save the changes.`);
             _NavigationSection.navigateToCommercialUnits();
             testData.sfValues.forEach((value, index) => {
-                Property._CommercialUnits.Page.commercialUnitsSFInputs.eq(index).type(`${value}`);
+                Property._CommercialUnits.enterUnitSFByUnitIndex(value, index);
             });
     
             cy.stepInfo(`3. Proceed to the Income > Commercial > In-Place Rent Roll page and 
@@ -32,7 +32,7 @@ describe("[QA-4537] Verify the Commercial Unit # SF field functionality",
             cy.stepInfo(`4. Proceed to the Income > Commercial > Stabilized Rent Roll 
             and verify that the value from step 2 
             is displayed in the SF column of the Commercial Stabilized Rent Roll Table.`);
-            _NavigationSection.openCommercialStabilizedRentRollInCommercial();
+            _NavigationSection.navigateToCommercialStabilizedRentRoll();
             Income._CommercialManager.StabilizedRentRoll.verifySFCells(testData.sfValues);
 
             cy.stepInfo(`5. Move back to the Property > Commercial Units page, remove the value 

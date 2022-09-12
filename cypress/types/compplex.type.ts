@@ -1,8 +1,8 @@
 /* eslint-disable @typescript-eslint/no-namespace */
-
+import * as KeyInfo from './../enums/enumKeys.enum.d';
 import enums from "../enums/enums";
 
-const { _jobSearch, _propertyInfoEnum, _saleInfoEnum } = enums.COMPPLEX_ENUM;
+const { _jobSearch, _propertyInfoEnum, _saleInfoEnum, _addressSearch } = enums.COMPPLEX_ENUM;
 
 // Keys lies here due to QA-6470. It is not done yet.
 namespace Keys {
@@ -17,7 +17,7 @@ export namespace CompPlex {
     }
     export namespace SaleInfo {
         export type SaleStatus = typeof enums.COMPPLEX_ENUM
-        ._saleInfoEnum[Keys.SaleStatus]  
+            ._saleInfoEnum[Keys.SaleStatus]  
         export type SaleCondition = typeof enums.SALE_CONDITION[Keys.SaleCondition]
     }
 
@@ -33,9 +33,18 @@ export namespace CompPlex {
 
         export type JobFilter = Partial<_JobFilter>
         export type JobFilterKeys = keyof JobFilter
-        export type FilterMinMax = Partial<{min: number, max: number}> 
+        export type FilterMinMax = Partial<{ 
+            [keys in keyof typeof _jobSearch.minMaxInputs]: number;
+        }>
         export type SalePeriod = keyof typeof _jobSearch.salePeriod 
         export type PropertyType = keyof typeof _jobSearch.propertyType
         export type NumberFilters = keyof typeof _jobSearch.numberFilters
+    }
+
+    export namespace AddressSearch {
+        export type CompPropertyInDB = typeof _addressSearch.
+            compPropertyPathsInDB[KeyInfo.CompPropertiesPathsInDatabase]
+        export type CompSaleStatusInDB =  typeof _addressSearch.saleStatusValuesInDB
+        export type CompSaleConditionInDB = typeof _addressSearch.saleConditionValuesInDB
     }
 }

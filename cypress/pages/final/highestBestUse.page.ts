@@ -1,3 +1,4 @@
+import { BoweryReports } from "../../types/boweryReports.type";
 import BasePage from "../base/base.page";
 
 class HighestBestUsePage extends BasePage {
@@ -75,6 +76,10 @@ class HighestBestUsePage extends BasePage {
     get localCheckbox() { return cy.get("[data-qa^=local-checkbox] input"); }
 
     get regionalCheckbox() { return cy.get("[data-qa^=regional-checkbox] input"); }
+
+    getHighestAndBestUseComment(typeAs: BoweryReports.HighestAndBestUseComments) { 
+        return cy.get(`[data-qa$='${typeAs}.commentary-generated-text']`); 
+    }
 }
 
 export default new HighestBestUsePage();

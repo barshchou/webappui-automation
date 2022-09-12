@@ -1,8 +1,13 @@
-import { numberWithCommas } from '../../../../../utils/numbers.utils';
 import testData from "../../../../fixtures/not_full_reports/property/commercial_units/QA-4538_39_41.fixture";
 import { createReport } from "../../../../actions/base/baseTest.actions";
 import { _NavigationSection } from "../../../../actions/base";
 import { Property } from "../../../../actions";
+import { numberWithCommas } from "../../../../../utils/numbers.utils";
+import { Alias } from "../../../../utils/alias.utils";
+
+const { commercialUnitsSFInputs } = Alias.pageElements.commercialUnits;
+
+Cypress.config('numTestsKeptInMemory', 0);
 
 describe("[Property > Commercial Units > Commercial Unit SF] Commercial Units page validation tests",
     { tags:[ "@property", "@commercial_units" ] }, () => {
@@ -25,10 +30,18 @@ describe("[Property > Commercial Units > Commercial Unit SF] Commercial Units pa
             cy.stepInfo(`2. Verify the Commercial Unit # SF field is editable by entering 
                     any value (text field, whole numbers, but numbers greater than 999 
                     are automatically separated by a comma).`);
+
+            Property._CommercialUnits.Page.commercialUnitsSFInputs.as(commercialUnitsSFInputs);
+
             testData.sfValues.forEach((value, index) => {
-                Property._CommercialUnits.Page.commercialUnitsSFInputs.eq(index)
-                    .type(`${value}`)
-                    .should('have.value', `${numberWithCommas(value)}`);
+                Property._CommercialUnits.Actions.setValueIntoNumberInput(
+                    commercialUnitsSFInputs,
+                    value, 
+                    index
+                );
+                    
+                Property._CommercialUnits.Page.commercialUnitsSFInputs
+                    .eq(index).should('have.value', `${numberWithCommas(value)}`);
             });
 
             cy.stepInfo(`3. Try to enter text / special symbols  -it's not allowed.`);
@@ -44,10 +57,13 @@ describe("[Property > Commercial Units > Commercial Unit SF] Commercial Units pa
                 .should('have.value', testData.copyPasteValue);
 
             cy.stepInfo(`5. Verify the long values and save - the page shouldn't crush.`);
-            Property._CommercialUnits.Page.commercialUnitsSFInputs.first()
-                .clear()
-                .type(testData.longValue)
-                .should('have.value', `${numberWithCommas(testData.longValue)}`);
+            Property._CommercialUnits.Actions.setValueIntoNumberInput(
+                commercialUnitsSFInputs,
+                testData.longValue
+            );
+
+            Property._CommercialUnits.Page
+                .commercialUnitsSFInputs.first().should('have.value', `${numberWithCommas(testData.longValue)}`);
 
             cy.stepInfo(`6. Try to leave an empty Commercial Unit # SF field - no validation, the page can be saved.`);
             Property._CommercialUnits.Page.commercialUnitsSFInputs.first()
@@ -76,15 +92,11 @@ describe("[Property > Commercial Units > Commercial Unit SF] Commercial Units pa
         });
 
         it('[QA-4541] Verify the Commercial Unit SF Discussion tooltip', () => {
-            cy.stepInfo(`2. Hover the Commercial Unit SF Discussion tooltip.`);
-            Property._CommercialUnits.Page.commercialUnitSfDiscussionTooltip
-                .trigger('mouseover');
-        
-            cy.stepInfo(`3. Verify the following text is displayed: 
+            cy.stepInfo(`Verify the following text is displayed: 
                     "The following generated text will appear in the Description of Improvements of your report.`);
-            Property._CommercialUnits.Page.tooltip
+            Property._CommercialUnits.Page.commercialUnitSfDiscussionTipText
                 .invoke("text").then(text => {
-                    expect(text).to.be.equal(testData.commercialUnitSFDiscussionTooltipText);
+                    expect(text).to.be.equal(testData.commercialUnitSFDiscussionTipText);
                 });
         });
     });

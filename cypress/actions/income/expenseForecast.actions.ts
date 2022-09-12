@@ -287,26 +287,10 @@ class ExpenseForecastActions extends BaseActionsExt<typeof expenseForecastPage> 
         return this;
     }
 
-    verifyTOECommentary(textToBe: string): ExpenseForecastActions {
-        expenseForecastPage.toeCommentary.should("contain.text", textToBe);
-        return this;
-    }
-
     verifyForecastCommentary(textToBe: string, forecastItem: BoweryReports.ForecastItem, 
         index = 1): ExpenseForecastActions {
         expenseForecastPage.getExpenseCommentary(this.getItemNameForAverage(forecastItem.name), index)
             .should("contain.text", textToBe);
-        return this;
-    }
-
-    editTOECommentary(newText: string, isWithClear = false): ExpenseForecastActions {
-        expenseForecastPage.toeCommentaryEditButton.click();
-        if (isWithClear) {
-            expenseForecastPage.toeCommentary.clear();
-        }
-        expenseForecastPage.toeCommentary.type(newText);
-        expenseForecastPage.toeCommentarySaveButton.click();
-        expenseForecastPage.toeCommentaryModified.should("exist");
         return this;
     }
 
@@ -327,10 +311,10 @@ class ExpenseForecastActions extends BaseActionsExt<typeof expenseForecastPage> 
         index = 1): ExpenseForecastActions {
         let item = this.getItemNameForAverage(forecastItem.name);
         this.activateTextAreaInput((this.Page.getExpenseCommentary(item,  index)));
-        this.Page.getExpenseCommentaryRevertToOriginal(item).click();
+        this.Page.getExpenseCommentaryRevertToOriginal(item, index).click();
         this.verifyProgressBarNotExist();
         expenseForecastPage.formYesRevertBtn.click();
-        expenseForecastPage.getExpenseCommentarySaveButton(item, index).click();
+        expenseForecastPage.getExpenseCommentarySaveButton(item).click();
         return this;
     }
 
@@ -342,9 +326,10 @@ class ExpenseForecastActions extends BaseActionsExt<typeof expenseForecastPage> 
 
     addCustomExpenseCategory(categoryName: string): ExpenseForecastActions {
         expenseForecastPage.createNewCategoryButton.click();
-        expenseForecastPage.newCategoryExpenseName.clear().type(categoryName);
+        expenseForecastPage.newCategoryExpenseName.clear().type(`${categoryName}{downArrow}{enter}`);
         this.Page.formSaveBtn(1).click();
         this.verifyProgressBarNotExist();
+        expenseForecastPage.forecastItemCardFull(categoryName).should("exist");
         return this;
     }
 

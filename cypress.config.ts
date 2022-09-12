@@ -1,6 +1,7 @@
 import { defineConfig } from 'cypress';
 import { addMatchImageSnapshotPlugin } from '@simonsmith/cypress-image-snapshot/plugin';
 import api from "./cypress/api";
+import db from "./cypress/db";
 import fsUtil from "./cypress/utils/files.utils";
 import grepFilterPlugin from "cypress-grep/src/plugin";
 import ddTracePlugin from "dd-trace/ci/cypress/plugin";
@@ -90,6 +91,12 @@ export default defineConfig({
                     // eslint-disable-next-line no-console
                     console.log(message);
                     return null;
+                }
+            });
+
+            on("task", {
+                async retrieveDataFromDb({ dbUrl, dbName, compPropertyPathInDB, compPropertyValueInDB }) {
+                    return await db.retrieveDataFromDb(dbUrl, dbName, compPropertyPathInDB, compPropertyValueInDB);
                 }
             });
 

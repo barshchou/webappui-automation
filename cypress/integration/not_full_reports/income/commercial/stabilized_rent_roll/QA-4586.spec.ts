@@ -27,7 +27,7 @@ describe("[QA-4586] Verify the Commercial Stabilized Rent Roll table",
             }
 
             cy.stepInfo(`Add new comp group and add commercial units into it`);
-            _NavigationSection.navigateToCompGroups();
+            _NavigationSection.navigateToCommercialCompGroups();
             Income._CommercialManager.CompGroups
                 .addCompGroup(testData.compGroup)
                 .dragAllCommercialUnitsIntoGroup(testData.compGroup, testData.numberOfCommercialUnits);
