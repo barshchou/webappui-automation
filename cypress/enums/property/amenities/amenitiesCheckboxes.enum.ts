@@ -16,7 +16,14 @@ const amenitiesCheckboxes = {
     hasPool: "building.hasPool",
     hasRecreationRoom: "building.hasRecreationRoom",
     hasCommonLoungeSpace: "building.hasCommonLoungeSpace",
-    hasOnSiteSuperintendent: "building.hasOnSiteSuperintendent", 
+    hasOnSiteSuperintendent: "building.hasOnSiteSuperintendent",
+    hasCourtyard: "building.hasCourtyard",
+    hasLoading: "building.hasLoading",
+    hasStorefrontExposure: "building.hasStorefrontExposure",
+    hasWarehouseSpace: "building.hasWarehouseSpace",
+    hasOutdoorSeating: "building.hasOutdoorSeating",
+    hasDriveThru: "building.hasDriveThru",
+    hasOtherAmenities: "building.hasOtherAmenities",
     hasNoUnitAmenities: "hasNoUnitAmenities",
     hasWasherDryer: "unit.hasWasherDryer",
     hasPrivatePatio: "unit.hasPrivatePatio",
@@ -26,12 +33,6 @@ const amenitiesCheckboxes = {
     hasPrivateDeck: "unit.hasPrivateDeck",
     hasPrivateBackyard: "unit.hasPrivateBackyard",
     hasOtherUnitAmenity: "unit.hasOtherUnitAmenity",
-    hasCourtyard: "building.hasCourtyard",
-    hasLoading: "building.hasLoading",
-    hasStorefrontExposure: "building.hasStorefrontExposure",
-    hasWarehouseSpace: "building.hasWarehouseSpace",
-    hasOutdoorSeating: "building.hasOutdoorSeating",
-    hasDriveThru: "building.hasDriveThru"
 } as const;
 
 export default Object.freeze(amenitiesCheckboxes);
