@@ -10,46 +10,42 @@ and Identification of the Client sections`,
         createReport(testData.reportCreationData);
     });
 
-    it("[QA-4633]", () => {
+    it("Test body", () => {
         cy.stepInfo(`1. Click on the Edit button on the Report > Client page for Intended User section.`);
         _NavigationSection.navigateToClientPage();
         Report._Client.verifyProgressBarNotExist()
-            .activateTextAreaInput(Report._Client.Page.formCommentTextBox(testData.intendedUser));
+            .activateTextAreaInput(Report._Client.Page.intendedUserTextBox);
 
-        cy.stepInfo(`2. Verify that the Revert to Original button is displayed, but it's disabled`);
-        Report._Client.Page.formRevertToOriginalBtnBySectionName(testData.intendedUser)
-            .should("be.visible").and("be.disabled");
+        cy.stepInfo(`2. Verify that the Revert to Original button is displayed`);
+        Report._Client.Page.formRevertToOriginalBtn().should("be.visible");
 
         cy.stepInfo(`3. Edit comment and verify that the Revert to Original button becomes enabled`);
-        Report._Client.enterFormCommentTextBox(testData.intendedUser, testData.textToType, false)
+        Report._Client.enterIntendedUserTextBox(testData.textToType)
             .clickNarrativeSuggestions(testData.verifySuggestion);
-        Report._Client.Page.formRevertToOriginalBtnBySectionName(testData.intendedUser)
-            .should("be.enabled");
+        Report._Client.Page.formRevertToOriginalBtn().should("be.enabled");
 
         cy.stepInfo(`4. Click on the Revert to Original button and verify the 'Changes will be lost modal' 
         is displayed`);
-        Report._Client.revertToOriginalCommentarySectionByName(testData.intendedUser)
-            .verifyFormCommentTextBoxText(testData.intendedUser, testData.verifyIntendedUserTextArea);
+        Report._Client.Page.formRevertToOriginalBtn().click();
+        Report._Client.Page.formYesRevertBtn.click();
+        Report._Client.verifyIntendedUserTextBox(testData.verifyIntendedUserTextArea);
            
         cy.stepInfo(`5. Click on the Edit button on the Report > Client page for 
                      Identification of the Client section.`);
-        Report._Client.activateTextAreaInput(Report._Client.Page
-            .formCommentTextBox(testData.identificationOfTheClient));
+        Report._Client.activateTextAreaInput(Report._Client.Page.identificationOfClientTextBox);
 
-        cy.stepInfo(`6. Verify that the Revert to Original button is displayed, but it's disabled`);
-        Report._Client.Page.formRevertToOriginalBtnBySectionName(testData.identificationOfTheClient)
-            .should("be.visible").and("be.disabled");
+        cy.stepInfo(`6. Verify that the Revert to Original button is displayed`);
+        Report._Client.Page.formRevertToOriginalBtn(1).should("be.visible");
 
         cy.stepInfo(`7. Edit comment and verify that the Revert to Original button becomes enabled`);
-        Report._Client.enterFormCommentTextBox(testData.identificationOfTheClient, testData.textToType, false)
+        Report._Client.enterIdentificationOfTheClientTextBox(testData.textToType)
             .clickNarrativeSuggestions(testData.verifySuggestion, 1);
-        Report._Client.Page.formRevertToOriginalBtnBySectionName(testData.identificationOfTheClient)
-            .should("be.enabled");
+        Report._Client.Page.formRevertToOriginalBtn(1).should("be.enabled");
 
         cy.stepInfo(`8. Click on the Revert to Original button and verify the 'Changes will be lost modal' 
         is displayed`);
-        Report._Client.revertToOriginalCommentarySectionByName(testData.identificationOfTheClient)
-            .verifyFormCommentTextBoxText(testData.identificationOfTheClient, 
-                testData.verifyIdentificationOfTheClientTextArea);
+        Report._Client.Page.formRevertToOriginalBtn(1).click();
+        Report._Client.Page.formYesRevertBtn.click();
+        Report._Client.verifyIdentificationOfTheClientTextBox(testData.verifyIdentificationOfTheClientTextArea);  
     });
 });

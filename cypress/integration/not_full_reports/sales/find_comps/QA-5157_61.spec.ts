@@ -13,6 +13,7 @@ conditionalDescribe(`[QA-5157] [QA-5161] [Sales > Find Comps] "Date Sold" sortin
                      for sales comps + sorting is applied correctly`,
 { tags: [ "@sales", "@find_comps", "@comp_plex" ] }, () => {
     before("Login, create report", () => {
+        Cypress.config('numTestsKeptInMemory', 0);
         createReport(testData.reportCreationData);
         cy.saveLocalStorage();
     });
@@ -29,7 +30,6 @@ conditionalDescribe(`[QA-5157] [QA-5161] [Sales > Find Comps] "Date Sold" sortin
         Sales._FindComps.Page.sortSalesCompsSelectValue.should('contain', testData.sortSalesCompsDateSold);
     });
 
-    // TODO: [QA-6820] Refactor 'Reset All' filter to some more specific.
     it("[QA-5161] [Sales > Find Comps] 'Date Sold' sorting is applied correctly to selected comps", () => {
         cy.stepInfo(`1.Verify that when "Date Sold" option in Sort dropdown is selected 
                     comps are sorted in the next order:
@@ -57,6 +57,7 @@ conditionalDescribe(`[QA-5157] [QA-5161] [Sales > Find Comps] "Date Sold" sortin
         cy.reload();
         testData.arrayOfCompsForManualAddition.forEach(comp => {
             addCompWithStatus(comp.address, comp.status);
+            Sales._FindComps.verifyAddedCompAddress(comp.address);
         });
         Sales._FindComps.checkSalesCompSortedByDateSold();
 
@@ -82,9 +83,9 @@ conditionalDescribe(`[QA-5157] [QA-5161] [Sales > Find Comps] "Date Sold" sortin
         // TODO this is hardcode! uncomment line above and delete these below after comp-plex import fixes!
 
         cy.reload();
-        Sales._FindComps.openJobSearchTab()
-            .JobSearch.addNewCompViaReportId('61892ce7044194001c6349c9');
-        Sales._FindComps.openCompSearchTab()
+        Sales._FindComps
+            .addNewCompViaReportId('61892ce7044194001c6349c9')
+            .openCompSearchTab()
             .checkSalesCompSortedByDateSold();
 
         cy.stepInfo(`4.Verify that when "Date Sold" option in Sort dropdown 
@@ -93,8 +94,6 @@ conditionalDescribe(`[QA-5157] [QA-5161] [Sales > Find Comps] "Date Sold" sortin
                     - Listing
                     - date sold from most to least recent 
                     (comps added via uploaded from CSV )`);
-        // TODO add more complex csv
-
         cy.reload();
         Sales._FindComps.uploadComps(testData.filePath)
             .verifyUploadCompsSucceeded()

@@ -35,12 +35,11 @@ describe(`[QA-5011] [Income>Expense forecast] Unselected existing expense card i
                 Income._ProFormaActions.Page.categoryCellTotal(element).should('not.exist');
             });
             _NavigationSection.navigateToExpenseForecast();
-            Income._ExpenseForecastActions.verifyFormCommentTextBoxText(testData.toeSectionName,
-                testData.commentaries.generated);
+            Income._ExpenseForecastActions.verifyTOECommentary(testData.commentaries.generated);
             Income._ExpenseForecastActions.Page.toeAppraisersForecastValueLine
                 .should('contain', testData.forecastPSFnotIncluded);
             Income._ExpenseForecastActions.chooseForecastItemBasis(testData.expenseForecastTotalFixture('unit'))
-                .verifyFormCommentTextBoxText(testData.toeSectionName, testData.commentaries.generated);
+                .verifyTOECommentary(testData.commentaries.generated);
             Income._ExpenseForecastActions.Page.toeAppraisersForecastValueLine
                 .should('contain', testData.forecastPerUnitNotIncluded);
             Income._ExpenseForecastActions.chooseForecastItemBasis(testData.expenseForecastTotalFixture('sf'));
@@ -57,12 +56,11 @@ describe(`[QA-5011] [Income>Expense forecast] Unselected existing expense card i
                 Income._ProFormaActions.Page.categoryCellTotal(element).should('not.exist');
             });
             _NavigationSection.navigateToExpenseForecast();
-            Income._ExpenseForecastActions.verifyFormCommentTextBoxText(testData.toeSectionName,
-                testData.commentaries.generated);
+            Income._ExpenseForecastActions.verifyTOECommentary(testData.commentaries.generated);
             Income._ExpenseForecastActions.Page.toeAppraisersForecastValueLine
                 .should('contain', testData.forecastPSFnotIncluded);
             Income._ExpenseForecastActions.chooseForecastItemBasis(testData.expenseForecastTotalFixture('unit'))
-                .verifyFormCommentTextBoxText(testData.toeSectionName, testData.commentaries.generated);
+                .verifyTOECommentary(testData.commentaries.generated);
             Income._ExpenseForecastActions.Page.toeAppraisersForecastValueLine
                 .should('contain', testData.forecastPerUnitNotIncluded);
             Income._ExpenseForecastActions.chooseForecastItemBasis(testData.expenseForecastTotalFixture('sf'));
@@ -77,12 +75,11 @@ describe(`[QA-5011] [Income>Expense forecast] Unselected existing expense card i
                 Income._ProFormaActions.Page.categoryCellTotal(element).should('not.exist');
             });
             _NavigationSection.navigateToExpenseForecast();
-            Income._ExpenseForecastActions.verifyFormCommentTextBoxText(testData.toeSectionName,
-                testData.commentaries.generated);
+            Income._ExpenseForecastActions.verifyTOECommentary(testData.commentaries.generated);
             Income._ExpenseForecastActions.Page.toeAppraisersForecastValueLine
                 .should('contain', testData.forecastPSFnotIncluded);
             Income._ExpenseForecastActions.chooseForecastItemBasis(testData.expenseForecastTotalFixture('unit'))
-                .verifyFormCommentTextBoxText(testData.toeSectionName, testData.commentaries.generated);
+                .verifyTOECommentary(testData.commentaries.generated);
             Income._ExpenseForecastActions.Page.toeAppraisersForecastValueLine
                 .should('contain', testData.forecastPerUnitNotIncluded);
             Income._ExpenseForecastActions.chooseForecastItemBasis(testData.expenseForecastTotalFixture('sf'));
@@ -99,12 +96,11 @@ describe(`[QA-5011] [Income>Expense forecast] Unselected existing expense card i
                 Income._ProFormaActions.Page.categoryCellTotal(element).should('not.exist');
             });
             _NavigationSection.navigateToExpenseForecast();
-            Income._ExpenseForecastActions.verifyFormCommentTextBoxText(testData.toeSectionName,
-                testData.commentaries.generated);
+            Income._ExpenseForecastActions.verifyTOECommentary(testData.commentaries.generated);
             Income._ExpenseForecastActions.Page.toeAppraisersForecastValueLine
                 .should('contain', testData.forecastPSFnotIncluded);
             Income._ExpenseForecastActions.chooseForecastItemBasis(testData.expenseForecastTotalFixture('unit'))
-                .verifyFormCommentTextBoxText(testData.toeSectionName, testData.commentaries.generated);
+                .verifyTOECommentary(testData.commentaries.generated);
             Income._ExpenseForecastActions.Page.toeAppraisersForecastValueLine
                 .should('contain', testData.forecastPerUnitNotIncluded);
             Income._ExpenseForecastActions.chooseForecastItemBasis(testData.expenseForecastTotalFixture('sf'));
@@ -121,12 +117,11 @@ describe(`[QA-5011] [Income>Expense forecast] Unselected existing expense card i
                 Income._ProFormaActions.Page.categoryCellTotal(element).should('not.exist');
             });
             _NavigationSection.navigateToExpenseForecast();
-            Income._ExpenseForecastActions.verifyFormCommentTextBoxText(testData.toeSectionName,
-                testData.commentaries.generated);
+            Income._ExpenseForecastActions.verifyTOECommentary(testData.commentaries.generated);
             Income._ExpenseForecastActions.Page.toeAppraisersForecastValueLine
                 .should('contain', testData.forecastPSFnotIncluded);
             Income._ExpenseForecastActions.chooseForecastItemBasis(testData.expenseForecastTotalFixture('unit'))
-                .verifyFormCommentTextBoxText(testData.toeSectionName, testData.commentaries.generated);
+                .verifyTOECommentary(testData.commentaries.generated);
             Income._ExpenseForecastActions.Page.toeAppraisersForecastValueLine
                 .should('contain', testData.forecastPerUnitNotIncluded);
             Income._ExpenseForecastActions.chooseForecastItemBasis(testData.expenseForecastTotalFixture('sf'));
@@ -143,13 +138,11 @@ describe(`[QA-5011] [Income>Expense forecast] Unselected existing expense card i
                 Income._ProFormaActions.Page.categoryCellTotal(element).should('not.exist');
             });
             _NavigationSection.navigateToExpenseForecast();
-            Income._ExpenseForecastActions.verifyFormCommentTextBoxText(testData.toeSectionName,
-                testData.commentaries.generated);
+            Income._ExpenseForecastActions.verifyTOECommentary(testData.commentaries.generated);
             Income._ExpenseForecastActions.Page.toeAppraisersForecastValueLine
                 .should('contain', testData.forecastPSFnotIncluded);
             Income._ExpenseForecastActions.chooseForecastItemBasis(testData.expenseForecastTotalFixture('unit'))
-                .verifyFormCommentTextBoxText(testData.toeSectionName,
-                    testData.commentaries.generated);
+                .verifyTOECommentary(testData.commentaries.generated);
             Income._ExpenseForecastActions.Page.toeAppraisersForecastValueLine
                 .should('contain', testData.forecastPerUnitNotIncluded);
             Income._ExpenseForecastActions.chooseForecastItemBasis(testData.expenseForecastTotalFixture('sf'));

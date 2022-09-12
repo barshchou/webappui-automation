@@ -4,17 +4,15 @@ import NavigationSection from "../../../../actions/base/navigationSection.action
 import { Report, PreviewEdit, Base } from "../../../../actions";
 import { replaceEntersWithSpaces } from "../../../../../utils/string.utils";
 
-// TODO: Test fails. Recheck after bug fix https://bowery.atlassian.net/browse/WEB-6821
 describe("Verify the Appraiser Commentary field", 
     { tags: [ "@report", "@client" ] }, () => {
         beforeEach("Login, create report", () => {
             createReport(testData.reportCreationData);
         });
 
-        it("[QA-4646]", () => {
+        it("Test body", () => {
             NavigationSection.navigateToClientPage();
-            Report._Client
-                .enterFormCommentTextBox(testData.textBoxName, testData.textToType, true, { position: "center" });
+            Report._Client.enterAppraiserCommentary(testData.textToType);
             Base._NavigationSection.navigateToLetterOfTransmittal();
             PreviewEdit._LetterOfTransmittal.verifyPreviewButtonSelected();
             cy.contains(replaceEntersWithSpaces(testData.textToType)).should("exist");

@@ -8,7 +8,7 @@ const _copyPasteValue = '12,345';
 const _longValue = '1111111111111111111111111111111111111111111111';
 const _grossLeasableAreaTooltipText = 
     'This value will be deducted from the GBA to determine the Residential Gross Leasable Area.';
-const _commercialUnitSFDiscussionTipText = 
+const _commercialUnitSFDiscussionTooltipText = 
     'The following generated text will appear in the Description of Improvements of your report.';
 
 const _reportCreationData: BoweryAutomation.ReportCreationData = ReportDataCreator.getReportData("4538_39_41", {
@@ -20,7 +20,7 @@ export default {
     specialSymbols: _specialSymbols,
     copyPasteValue: _copyPasteValue,
     grossLeasableAreaTooltipText: _grossLeasableAreaTooltipText,
-    commercialUnitSFDiscussionTipText: _commercialUnitSFDiscussionTipText,
+    commercialUnitSFDiscussionTooltipText: _commercialUnitSFDiscussionTooltipText,
     longValue: _longValue,
     numberOfCommercialUnits: _numberOfCommercialUnits,
     sfValues: [ 3333, 4444, 5555 ]

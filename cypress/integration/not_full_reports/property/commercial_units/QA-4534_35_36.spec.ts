@@ -28,7 +28,7 @@ describe("[Verify the functionality of the link to the Property > Summary page",
 
             cy.stepInfo(`4. Click on the arrows.`);
             Property._CommercialUnits.Page.iconExchangeComUnits.click();
-            _NavigationSection.submitSaveChangesModal();
+            Property._CommercialUnits.clickYesButton();
 
             cy.stepInfo(`5. Verify that the Property > Summary page is displayed.`);
             Property._Summary.Page.headerSection.should("be.visible");

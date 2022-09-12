@@ -1,4 +1,3 @@
-import Enums from "../../../../enums/enums";
 import ReportDataCreator from "../../../data_creator/reportData.creator";
 
 const reportCreationFixture = () => {
@@ -7,6 +6,5 @@ const reportCreationFixture = () => {
 
 export default {
     reportCreationData: reportCreationFixture(),
-    pdfFileName: "test_files/Upload_PDF_File.pdf",
-    exportSectionName: Enums.EXPORT_TITLES.letterOfEngagement
+    pdfFileName: "not_full_reports/Upload_PDF_File.pdf",
 };
