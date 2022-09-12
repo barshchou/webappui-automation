@@ -1,6 +1,6 @@
 const imageType = {
-    interiorImages: "interior-images",
-    exteriorImages: "exterior-images",
+    interiorImages: "Interior Images",
+    exteriorImages: "Exterior Images",
 } as const;
 
 export default Object.freeze(imageType);

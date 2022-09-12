@@ -4,10 +4,10 @@ import { Property, Sales } from "../../../../actions";
 import { _NavigationSection as NavigationSection } from "../../../../actions/base";
 import { createReport } from "../../../../actions/base/baseTest.actions";
 
-describe("Check the reference 'Condition' line in the Sales Adjustment Grid", 
+describe("[QA-4606] Check the reference 'Condition' line in the Sales Adjustment Grid", 
     { tags: [ "@adjust_comps", "@sales" ] }, () => {
         testData.conclusionValue.forEach((conclusion, index) => {
-            it(`[QA-4606] Created ${conclusion} report`, () => {
+            it(`Created ${conclusion} report`, () => {
                 cy.stepInfo(`Login, create report`);
                 cy.stepInfo(`1. Create Report #${index + 1}`);
                 createReport(createReportData(conclusion));
@@ -30,7 +30,7 @@ describe("Check the reference 'Condition' line in the Sales Adjustment Grid",
 
                 cy.stepInfo(`5. Verify that the subject column displays the subject 
                 property condition as set in Property > Property Description > Site Description`);
-                Sales._AdjustComps.expandAdjustmentDetails(testData.adjustmentName)
+                Sales._AdjustComps.clickViewAdjustmentDetails()
                     .verifyExistValueInOtherAdjustmentDetails(testData.propertyCondition);
             }); 
         });

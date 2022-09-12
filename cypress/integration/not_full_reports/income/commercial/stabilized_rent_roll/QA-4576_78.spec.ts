@@ -20,8 +20,10 @@ describe("[QA-4576][QA-4578] Verify the display of the Stabilized Rent Roll page
                     are > 0 Commercial Units with Comp Groups.`);
 
             Base._NavigationSection.navigateToPropertySummary();
-            Property._Summary.enterNumberOfCommercialUnits(0);
-            _NavigationSection.navigateToCommercialStabilizedRentRoll();
+            Property._Summary.enterNumberOfCommercialUnits(0).clickSaveButton();
+            Base._NavigationSection.clickIncomeApproachButton()
+                .clickCommercialArrow().clickCommercialStabRentRollButton().clickYesButton()
+                .verifyProgressBarNotExist();
 
             Income._CommercialManager.StabilizedRentRoll.Actions.matchElementSnapshot(
                 stabilizedRentRollPage.stabilizedRRPanel,
@@ -64,9 +66,10 @@ describe("[QA-4576][QA-4578] Verify the display of the Stabilized Rent Roll page
             );
 
             cy.stepInfo(`[QA-4576][QA-4578] Add comp group and a new comp`);
-            _NavigationSection.navigateToCommercialCompGroups();
+            _NavigationSection.openCompGroupsInCommercial();
             Income._CommercialManager.CompGroups.Actions.addCompGroup(testData.compGroup);
-            _NavigationSection.navigateToCommercialRentComps();
+            _NavigationSection.clickCommercialRentComps()
+                .submitSaveChangesModal();
             Income._CommercialManager.RentComps.clickManuallyAddANewCompButton().
                 searchNewCompByAddress(testData.comparableFirst.address);
             testData.rentCompFields.forEach(field => {
@@ -87,12 +90,14 @@ describe("[QA-4576][QA-4578] Verify the display of the Stabilized Rent Roll page
             Income._CommercialManager.RentComps.dragAllCommercialUnitsIntoGroup(testData.compGroup);
 
             cy.stepInfo(`Navigate to Reconciliation and add market reconciliation`);
-            _NavigationSection.navigateToRentReconciliation();
+            _NavigationSection.clickRentReconciliationButton()
+                .submitSaveChangesModal();
             Income._CommercialManager.RentReconciliation.addMarketRentConclusion(testData.marketRentConclusion);
 
             cy.stepInfo(`3. Verify the display of the Stabilized Rent Roll page 
                     if there are > 0 Commercial Units with Comp Groups.`);
-            _NavigationSection.navigateToCommercialStabilizedRentRoll();
+            _NavigationSection.clickCommercialStabRentRollButton()
+                .submitSaveChangesModal();
             Income._CommercialManager.StabilizedRentRoll.verifyCommercialCompGroupHeaderDisplayed()
                 .verifyCommercialCompGroupForecastRentDisplayed(testData.marketRentConclusion)
                 .verifyCommercialCompGroupDisplayed(testData.compGroup);

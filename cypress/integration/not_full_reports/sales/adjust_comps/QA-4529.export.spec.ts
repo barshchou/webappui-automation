@@ -9,7 +9,7 @@ import { Sales, ReviewExport } from "../../../../actions";
  */
 // TODO: Update this test case with new comps selection
 describe.skip("Check custom Utilities adjustment", 
-    { tags:[ "@sales", "@adjust_comps", "@check_export" ] }, () => {
+    { tags:[ "@fix", "@sales", "@adjust_comps", "@check_export" ] }, () => {
         it("Verify custom utilities adjustments on UI and prepare report for export", () => {
             createReport(testData.reportCreationData);
 
@@ -82,10 +82,10 @@ describe.skip("Check custom Utilities adjustment",
             cy.task("getFilePath", { _reportName: testData.reportCreationData.reportNumber, _docxHtml: "html" })
                 .then(file => {
                     cy.stepInfo(`6. Verify that other utilities adjustments are added to 
-                                Comparable Sales Adjustment Grid `);
+                    Comparable Sales Adjustment Grid `);
                     cy.log(<string>file);
                     cy.visit(<string>file);
-                    cy.contains(testData.exportSectionName).next().scrollIntoView()
+                    cy.contains("Comparable Sales Adjustment Grid").next().scrollIntoView()
                         .find("tr").contains("Utility").parent().parent().within((element) => {
                             cy.wrap(element).find("td").eq(2).find("p")
                                 .should("have.text", `${testData.comparableFirst.otherUtilityAdjustment}%`);
@@ -94,7 +94,7 @@ describe.skip("Check custom Utilities adjustment",
                         });
 
                     cy.stepInfo(`7. Verify that generated commentaries contain valid other utilities adjustments`);
-                    cy.contains(testData.exportSectionName).next().next().next().scrollIntoView()
+                    cy.contains("Comparable Sales Adjustment Grid").next().next().next().scrollIntoView()
                         .find("tr").contains("Utility").parent().parent().within((element) => {
                             cy.wrap(element).find("td").eq(1).find("p").eq(2)
                                 .should("have.text", `${testData.otherUtilitiesCommentaries}`);
