@@ -20,8 +20,7 @@ component added through "=" for the 'Unchanged Renovation'
         _NavigationSection.navigateToCommercialUnits();
 
         cy.stepInfo("1. Proceed to the Income > Commercial > Stabilized Rent Roll page.");
-        _NavigationSection.clickIncomeApproachButton()
-            .clickCommercialArrow().navigateToStabilizedRentRollInCommercial().verifyProgressBarNotExist();
+        _NavigationSection.navigateToCommercialStabilizedRentRoll().verifyProgressBarNotExist();
 
         cy.stepInfo(`2. [QA-4587] Verify the following text is displayed: 
         "The following generated text will appear in the Income Approach section of your report.".`);

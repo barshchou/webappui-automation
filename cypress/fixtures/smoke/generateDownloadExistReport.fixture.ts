@@ -1,3 +1,4 @@
+import Enums from "../../enums/enums";
 import { BoweryAutomation } from "../../types/boweryAutomation.type";
 import ReportDataCreator from "../data_creator/reportData.creator";
 
@@ -7,7 +8,7 @@ const _password = Cypress.env("PASSWORD");
 
 export default {
     reportCreationData: _reportCreationData,
-    textToVerifyInReport: "Summary of Salient Facts & Conclusions",
+    textToVerifyInReport: Enums.EXPORT_TITLES.summaryOfSalientFactsAndConclusions,
     username: _username,
     password: _password
 };

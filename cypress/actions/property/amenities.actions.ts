@@ -5,7 +5,7 @@ import BaseActionsExt from "../base/base.actions.ext";
 class AmenitiesActions extends BaseActionsExt<typeof amenitiesPage> {
 
     addParkingPlaces(numberOfPlaces: number): AmenitiesActions {
-        amenitiesPage.hasParkingCheckbox.check().should("have.value", "true");
+        this.checkParkingCheckbox();
         amenitiesPage.parkingSpacesNumberField.clear().type(`${numberOfPlaces}`);
         if (isDecimal(numberOfPlaces)) {
             numberOfPlaces = cutDecimalPartToNumberOfDigits(numberOfPlaces, 0);
@@ -22,20 +22,46 @@ class AmenitiesActions extends BaseActionsExt<typeof amenitiesPage> {
         return this;
     }
 
-    checkLaundryRoomCheckbox(): AmenitiesActions {
-        amenitiesPage.laundryCheckbox.should("have.value", "false").check().should("have.value", "true");
+    checkLaundryRoomCheckbox(check = true): AmenitiesActions {
+        amenitiesPage.laundryCheckbox.invoke('attr', 'value').then(status => {
+            status != `${check}` 
+                ? amenitiesPage.laundryCheckbox.click().should('have.value', `${check}`) 
+                : null;
+        });
         return this;
     }
 
-    checkStorageCheckbox(): AmenitiesActions {
-        amenitiesPage.storageCheckbox.should("have.value", "false").check().should("have.value", "true");
+    checkStorageCheckbox(check = true): AmenitiesActions {
+        amenitiesPage.storageCheckbox.invoke('attr', 'value').then(status => {
+            status != `${check}` 
+                ? amenitiesPage.storageCheckbox.click().should('have.value', `${check}`) 
+                : null;
+        });
+        return this;
+    }
+
+    checkOtherCheckbox(check = true): AmenitiesActions {
+        amenitiesPage.otherUnitAmenitiesCheckbox.invoke('attr', 'value').then(status => {
+            status != `${check}` 
+                ? amenitiesPage.otherUnitAmenitiesCheckbox.click().should('have.value', `${check}`) 
+                : null;
+        });
+        return this;
+    }
+
+    checkParkingCheckbox(check = true): AmenitiesActions {
+        amenitiesPage.hasParkingCheckbox.invoke('attr', 'value').then(status => {
+            status != `${check}` 
+                ? amenitiesPage.hasParkingCheckbox.click().should('have.value', `${check}`) 
+                : null;
+        });
         return this;
     }
 
     addStorageUnits(units: number): AmenitiesActions {
         this.checkStorageCheckbox();
-        amenitiesPage.storageUnitsTextField.clear().type(`${units}`);
-        amenitiesPage.storageUnitsTextField.should("have.value", units);
+        amenitiesPage.storageUnitsTextField.clear().type(`${units}`)
+            .should("have.value", units);
         return this;
     }
 }

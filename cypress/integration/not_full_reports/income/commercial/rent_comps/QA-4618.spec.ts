@@ -15,13 +15,12 @@ describe("Verify entered Use is displayed in Selected Rent Comps table",
         it("[QA-4618]", () => {
             cy.stepInfo(`2. On the Income > Commercial > 
                         Comp Groups, a new Comp Group has been created with added Comps`); 
-            _NavigationSection.navigateToCompGroups();
+            _NavigationSection.navigateToCommercialCompGroups();
             Income._CommercialManager.CompGroups.addCompGroup(testData.compGroup);
 
             cy.stepInfo(`3. On the Income > Commercial > Rent Comps, comp has been added with Other -> 
                         Use-Other added text field`);
-            _NavigationSection.clickCommercialRentComps()
-                .submitSaveChangesModal();
+            _NavigationSection.navigateToCommercialRentComps();
             Income._CommercialManager.RentComps.clickManuallyAddANewCompButton().
                 searchNewCompByAddress(testData.address);
             testData.rentCompFields.forEach(field => {
@@ -38,8 +37,7 @@ describe("Verify entered Use is displayed in Selected Rent Comps table",
 
             cy.stepInfo(`4. Navigate to Comp Group Discussion page and verify the entered use appears 
                         under use Commercial Comp Groups Discussion page`);
-            _NavigationSection.clickCommercialCompGroupsDiscussion()
-                .submitSaveChangesModal();
+            _NavigationSection.navigateToCommercialCompGroupsDiscussion();
             Income._CommercialManager.CompGroupsDiscussion.verifyCompGroupUnitValue(testData.compGroup, columns.use, 
                 testData.otherUse);
         });
