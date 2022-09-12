@@ -2,8 +2,8 @@
 import { findCompsPage } from "../../../../pages/sales/findComps.page";
 import { Alias } from '../../../../utils/alias.utils';
 import ComplexDatabaseModule from "../../../../../cypress/db/index";
-import mapKeysUtils from "../../../../utils/mapKeys.utils";
 import { CompPlex } from "../../../../types/compplex.type";
+import findCompsActions from "../findComps.actions";
 
 class AddressSearchActions {
     Page: typeof findCompsPage;
@@ -55,7 +55,7 @@ class AddressSearchActions {
             cy.log(`Index of necessary comp is ${focusCompIndex}`);
             //If comp wasn't found, then focusCompIndex will be equal -1. The assertion error will be thrown.
             expect(focusCompIndex).to.be.above(-1);
-            findCompsPage.loadingModalSpinner.should('not.exist');
+            findCompsActions.verifySpinnerNotExist();
             this.Page.selectCompButton(focusCompIndex).click();  
         });
         return this;

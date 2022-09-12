@@ -47,6 +47,16 @@ class FindCompsActions extends BaseActionsExt<typeof findCompsPage> {
         return addressSearchActions;
     }
 
+    verifySpinnerExist(): FindCompsActions {
+        findCompsPage.loadingModalSpinner.should("exist");
+        return this;
+    }
+
+    verifySpinnerNotExist(): FindCompsActions {
+        findCompsPage.loadingModalSpinner.should("not.exist");
+        return this;
+    }
+
     addExistingComparable(address: string): FindCompsActions {
         this.clickCreateCompButton()
             .enterCompAddressToSearch(address)
@@ -133,8 +143,8 @@ class FindCompsActions extends BaseActionsExt<typeof findCompsPage> {
         findCompsPage.compStatusFilter.click();
         statuses.forEach(status => {
             findCompsPage.filterOptionValue(status).click();
-            findCompsPage.loadingModalSpinner.should("exist");
-            findCompsPage.loadingModalSpinner.should("not.exist");
+            this.verifySpinnerExist()
+                .verifySpinnerNotExist();
             findCompsPage.compStatusFilter.children("input").should("contain.value", status);
         });
         findCompsPage.compStatusFilter.realClick();
@@ -143,12 +153,12 @@ class FindCompsActions extends BaseActionsExt<typeof findCompsPage> {
 
     resetAllFilters(): FindCompsActions {
         findCompsPage.resetAllButton.click();
-        findCompsPage.loadingModalSpinner.should('exist');
+        this.verifySpinnerExist()
         /*
          * TODO add cy.wait(@${Alias.gql.SearchSalesTransactions}, { timeout: 180000 }) but with option, when this alias
          * is clearable (for multiply action using)
          */
-        findCompsPage.loadingModalSpinner.should('not.exist');
+            .verifySpinnerNotExist();
         return this;
     }
 
