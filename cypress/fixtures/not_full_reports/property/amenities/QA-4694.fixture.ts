@@ -21,7 +21,7 @@ export default {
     reportCreationData: ReportDataCreator.getReportData("4694"),
     enterValue: "Lorem Ipsum is simply dummy text he leap into. 1234567890:?;№!@#$%^&*(){}<>",
     numberValue: 10,
-    imagePath: "not_full_reports/Laundry_Room.png",
+    imagePath: "not_full_reports/test_files/Laundry_Room.png",
     withoutAdditionalCheckboxes,
     allUploadInputs,
     unitInputs,

@@ -14,20 +14,20 @@ describe("Verify the display of the Amenities page", { tags:[ "@property", "@ame
         _NavigationSection.navigateToPropertyAmenities();
     });
 
-    it("[QA-4662-64-84]", () => {
+    it("[QA-4662-64_84]", () => {
         cy.stepInfo("2. Verify the following elements are displayed on the page by default");
         testData.withoutAdditionalCheckboxes.forEach(name => {
             Property._Amenities.Page.getElementCheckbox(name).should("exist");
         });
 
-        cy.stepInfo("3. Check The subject property has no building amenities and verify not exist checkboxes");
+        cy.stepInfo("3. Check the subject property has no building amenities and verify not exist checkboxes");
         Property._Amenities.checkHasNoBuildingAmenities();
         testData.buildingCheckboxes.forEach(name => {
             Property._Amenities.Page.getElementCheckbox(name).should("not.exist");
         });
         Property._Amenities.checkHasNoBuildingAmenities(false);
 
-        cy.stepInfo("4. Check The subject property has no unit amenities and verify not exist checkboxes");
+        cy.stepInfo("4. Check the subject property has no unit amenities and verify not exist checkboxes");
         Property._Amenities.checkHasNoUnitAmenities();
         testData.unitCheckboxes.forEach(name => {
             Property._Amenities.Page.getElementCheckbox(name).should("not.exist");
@@ -77,7 +77,7 @@ describe("Verify the display of the Amenities page", { tags:[ "@property", "@ame
 
         cy.stepInfo("8. Proceed to the Property > Parking page and verify that the value entered");
         _NavigationSection.navigateToParking();
-        Income._MiscellaneousManager.Parking.Page.parkingTable.children().then(elems => {
+        Income._MiscellaneousManager.Parking.Page.parkingTableElements.then(elems => {
             expect(elems.length).to.eq( testData.parkingValue);
         });
         Income._MiscellaneousManager.Parking.Page.generatedCommentaryText(
@@ -106,7 +106,7 @@ describe("Verify the display of the Amenities page", { tags:[ "@property", "@ame
 
         cy.stepInfo("7. Verify not valid of Shared Outdoor Space field");
         Property._Amenities.Page.getAmenitiesInput(testData.otherOutdoorSpace).clear().blur();
-        cy.contains("Required").should("exist");
+        Property._Amenities.Page.requiredLabel.should("exist");
     });
 
     it("[QA-4670]", () => {
@@ -120,7 +120,7 @@ describe("Verify the display of the Amenities page", { tags:[ "@property", "@ame
 
         cy.stepInfo("4. Verify not valid of Shared Outdoor Space field");
         Property._Amenities.Page.getAmenitiesInput(testData.otherDoorman).clear().blur();
-        cy.contains("Required").should("exist");
+        Property._Amenities.Page.requiredLabel.should("exist");
         Property._Amenities.Page.getAmenitiesInput(testData.otherDoorman).type(testData.testValue)
             .should("have.value", testData.testValue);
     });

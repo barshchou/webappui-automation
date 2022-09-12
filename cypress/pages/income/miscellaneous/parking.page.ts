@@ -14,6 +14,8 @@ class ParkingPage extends BasePage {
     get parkingVCLossPercentage() { return cy.get("[name='parkingVCLossPercentage']"); }
 
     get parkingTable() { return cy.get("[data-qa='parking-spaces-table-body']"); }
+
+    get parkingTableElements() { return this.parkingTable.children(); }
 }
 
 export default new ParkingPage();

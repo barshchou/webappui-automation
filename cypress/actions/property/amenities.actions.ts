@@ -83,7 +83,6 @@ class AmenitiesActions extends BaseActionsExt<typeof amenitiesPage> {
         const action = check ? amenitiesPage.getElementCheckbox(name).check() 
             : amenitiesPage.getElementCheckbox(name).uncheck();
         action.should("have.value", `${check}`);
-        action;
         return this;
     }
 
@@ -92,10 +91,13 @@ class AmenitiesActions extends BaseActionsExt<typeof amenitiesPage> {
         return this;
     }
 
-    rotateImageByName(name: string, index = 0): AmenitiesActions {
-        amenitiesPage.getRotateUploadedImageBtnByName(name, index).click({ force: true });
+    rotateImageByName(name: string, countRotate = 1, index = 0): AmenitiesActions {
+        for (let i = 0; i < countRotate; i++) {
+            amenitiesPage.getRotateUploadedImageBtnByName(name, index).click({ force: true });
+        }
+        const degreeRotation = countRotate * 90;
         amenitiesPage.getUploadedImageByName(name, index).invoke("css", "background-image").then(text => {
-            expect(text).to.include("vikas-real-estate/image/upload/w_300,a_90");
+            expect(text).to.include(`vikas-real-estate/image/upload/w_300,a_${degreeRotation}`);
         });
         return this;
     }
