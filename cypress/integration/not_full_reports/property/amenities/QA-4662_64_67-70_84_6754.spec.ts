@@ -2,7 +2,7 @@ import { Income, Property } from "../../../../actions";
 import { _NavigationSection } from "../../../../actions/base";
 import { createReport } from "../../../../actions/base/baseTest.actions";
 import Enums from "../../../../enums/enums";
-import testData from '../../../../fixtures/not_full_reports/property/amenities/QA-4662_64_67-70_84.fixture';
+import testData from '../../../../fixtures/not_full_reports/property/amenities/QA-4662_64_67-70_84_6754.fixture';
 
 describe("Verify the display of the Amenities page", { tags:[ "@property", "@amenities" ] }, () => {
 
@@ -68,11 +68,11 @@ describe("Verify the display of the Amenities page", { tags:[ "@property", "@ame
         Property._Amenities.removeImageByName(testData.parking);
         
         cy.stepInfo("6. Verify not valid of Parking Spaces field");
-        Property._Amenities.enterAmenitiesValidationInput("parkingSpaceCount", 2500, testData.parkingValueMore)
-            .enterAmenitiesValidationInput("parkingSpaceCount", 2500, testData.testValue);
+        Property._Amenities.enterAmenitiesValidationInput(testData.parkingSpaceCount, 2500, testData.parkingValueMore)
+            .enterAmenitiesValidationInput(testData.parkingSpaceCount, 2500, testData.testValue);
 
         cy.stepInfo("7. Verify valid value entered in the Number of Storage Units field");
-        Property._Amenities.enterAmenitiesValidationInput("parkingSpaceCount", 2500, testData.parkingValue)
+        Property._Amenities.enterAmenitiesValidationInput(testData.parkingSpaceCount, 2500, testData.parkingValue)
             .verifyProgressBarNotExist();
 
         cy.stepInfo("8. Proceed to the Property > Parking page and verify that the value entered");
@@ -123,5 +123,23 @@ describe("Verify the display of the Amenities page", { tags:[ "@property", "@ame
         Property._Amenities.Page.requiredLabel.should("exist");
         Property._Amenities.Page.getAmenitiesInput(testData.otherDoorman).type(testData.testValue)
             .should("have.value", testData.testValue);
+    });
+
+    it("[QA-6754]", () => {
+        cy.stepInfo("2. Check Other checkbox");
+        Property._Amenities.checkCheckboxByName(Enums.AMENITIES_CHECKBOXES.hasOtherAmenities);
+
+        cy.stepInfo("3. Upload photo");
+        Property._Amenities.uploadImageByName(testData.otherAmenities, testData.imagePath);
+
+        cy.stepInfo("4. Verify functionality of the Rotate button on the uploaded photo");
+        Property._Amenities.rotateImageByName(testData.otherAmenities);
+
+        cy.stepInfo("5. Verify functionality of the Delete button on the uploaded photo");
+        Property._Amenities.removeImageByName(testData.otherAmenities);
+        
+        cy.stepInfo("6. Verify not valid of Shared Outdoor Space field");
+        Property._Amenities.Page.getAmenitiesInput(testData.otherBuildingAmenity).clear().blur();
+        Property._Amenities.Page.requiredLabel.should("exist");
     });
 });

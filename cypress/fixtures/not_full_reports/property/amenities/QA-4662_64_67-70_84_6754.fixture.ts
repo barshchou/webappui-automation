@@ -26,7 +26,11 @@ const doormanRadios = [
 ];
 
 export default {
-    reportCreationData: ReportDataCreator.getReportData("4662_64_67-70_84"),
+    reportCreationData: ReportDataCreator.getReportData("4662_64_67-70_84_6754", {
+        templateValue: Enums.TEMPLATE_TYPE.freddieMac,
+        incomeValue: Enums.INCOME_TYPE.both,
+        conclusionValue: Enums.VALUE_CONCLUSION_TYPE.AS_COMPLETE,
+    }),
     withoutAdditionalCheckboxes,
     buildingCheckboxes,
     unitCheckboxes,
@@ -39,8 +43,11 @@ export default {
     generatedCommentName,
     parking: Enums.AMENITIES_UPLOADS.parking,
     outdoorSpace: Enums.AMENITIES_UPLOADS.outdoorSpace,
+    otherAmenities: Enums.AMENITIES_UPLOADS.otherAmenities,
     otherOutdoorSpace: "building.otherOutdoorSpace",
     otherDoorman: "building.otherDoorman",
+    otherBuildingAmenity: "building.otherBuildingAmenity",
+    parkingSpaceCount: "building.parkingSpaceCount",
     sharedOutdoorSpaceCheckboxes,
     doormanRadios
 };
