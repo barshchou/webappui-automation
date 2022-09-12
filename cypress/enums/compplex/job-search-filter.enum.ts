@@ -28,14 +28,8 @@ const numberFilters = {
     capRate:"capRate"
 } as const;
 
-const minMaxInputs = {
-    min: "min",
-    max: "max"
-} as const;
-
 export default {
     salePeriod,
     propertyType,
-    numberFilters,
-    minMaxInputs
+    numberFilters
 };

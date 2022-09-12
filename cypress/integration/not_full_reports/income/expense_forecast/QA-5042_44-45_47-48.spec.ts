@@ -39,24 +39,34 @@ describe(`[QA-5042] [QA-5044] [QA-5045] [QA-5047] [QA-5048]
                          * There are two buttons on the right bottom:
                          * "Cancel" button and "Save" button`);
         Income._ExpenseForecastActions.Page.titleOfAddCustomExpenseCategoryModal.should('exist');
-        Income._ExpenseForecastActions.Page.newCategoryExpenseName.should('exist');
+        Income._ExpenseForecastActions.Page.addCustomExpenseCategoryInput.should('exist');
         Income._ExpenseForecastActions.Page.addCustomExpenseCategoryCancelButton.should('exist');
         Income._ExpenseForecastActions.Page.addCustomExpenseCategorySaveButton.should('exist');
     });
 
     it("[QA-5045]", () => {
+        cy.stepInfo(`1. Verify Category Name field is required on "Add New Expense Category" modal `);
+        Income._ExpenseForecastActions.Page.addCustomExpenseCategoryInput.invoke('prop', 'validationMessage')
+            .should('equal', testData.validationMessage);
 
-        cy.stepInfo(`1. Verify "Save" button is disabled if Category Name field is empty and 
+        cy.stepInfo(`2. Verify "Save" button is disabled if Category Name field is empty and 
         user can not new expense with the empty field`);
-        Income._ExpenseForecastActions.Page.newCategoryExpenseName.should('be.empty');
+        Income._ExpenseForecastActions.Page.addCustomExpenseCategoryInput.should('be.empty');
         Income._ExpenseForecastActions.Page.addCustomExpenseCategorySaveButton
             .should('be.disabled').click({ force: true });
         Income._ExpenseForecastActions.Page.titleOfAddCustomExpenseCategoryModal.should('exist');
 
-        cy.stepInfo(`2. Verify "Save" button is enabled if Category Name field is filled 
+        cy.stepInfo(`3. Verify if user click on the empty field and then clicks outside the field → 
+        the field is highlighted with red and “Category name is required” warning appears under the field`);
+        Income._ExpenseForecastActions.Page.addCustomExpenseCategoryInput.click().blur();
+        Income._ExpenseForecastActions.Page.addCustomExpenseCategoryWarning.should('exist');
+        Income._ExpenseForecastActions.Page.addCustomExpenseCategoryFieldset
+            .should('have.css', 'border-color', testData.redColor);
+
+        cy.stepInfo(`4. Verify "Save" button is enabled if Category Name field is filled 
         with valid data (the field is free-text.`);
-        Income._ExpenseForecastActions.Page.newCategoryExpenseName.click()
-            .type(`${testData.customCategoryNameValidation.name}{downArrow}{enter}`);
+        Income._ExpenseForecastActions.Page.addCustomExpenseCategoryInput.click()
+            .type(testData.customCategoryNameValidation.name);
         Income._ExpenseForecastActions.Page.addCustomExpenseCategorySaveButton.should('be.enabled');
     });
 
@@ -64,12 +74,12 @@ describe(`[QA-5042] [QA-5044] [QA-5045] [QA-5047] [QA-5048]
         cy.stepInfo(`1. Verify after clicking Save button  on the “Add New Expense Category” modal 
         with the filled "Category Name" field -> a new card is added to the bottom of the 
         page underneath “Replacement Reserves” and below Total Operating Expenses card`);
-        Income._ExpenseForecastActions.Page.newCategoryExpenseName.clear()
-            .type(`${testData.firstCustomCategory.name}{downArrow}{enter}`);
+        Income._ExpenseForecastActions.Page.addCustomExpenseCategoryInput.clear()
+            .type(testData.firstCustomCategory.name);
         Income._ExpenseForecastActions.Page.addCustomExpenseCategorySaveButton.click();
         Income._ExpenseForecastActions.Page.forecastItemCardFull(testData.firstCustomCategory.name, true)
             .should('exist');
-        Income._ExpenseForecastActions.Page.forecastItemCardFull(Enums.EXPENSE_CELL.replacementsAndReserves)
+        Income._ExpenseForecastActions.Page.forecastItemCardFull(Enums.EXPENSE_FORECAST_ITEMS.replacementsAndReserves)
             .then(el => cy.wrap(el[0].offsetTop).as('coordinatesReplacementCard'));
         Income._ExpenseForecastActions.Page.forecastItemCardFull(testData.firstCustomCategory.name, true)
             .then(el => cy.wrap(el[0].offsetTop).as('coordinatesCustomCard'));
@@ -90,9 +100,8 @@ describe(`[QA-5042] [QA-5044] [QA-5045] [QA-5047] [QA-5048]
             .editCustomExpenseCategoryButton(testData.firstCustomCategory.name, true).click();
         Income._ExpenseForecastActions.Page.editCustomExpenseCategoryCancelButton.click();
         Income._ExpenseForecastActions.Page.createNewCategoryButton.click();
-        Income._ExpenseForecastActions.Page.newCategoryExpenseName.invoke('val').should('be.empty');
-        Income._ExpenseForecastActions.Page.newCategoryExpenseName
-            .type(`${testData.secondCustomCategory.name}{downArrow}{enter}`);
+        Income._ExpenseForecastActions.Page.addCustomExpenseCategoryInput.invoke('val').should('be.empty');
+        Income._ExpenseForecastActions.Page.addCustomExpenseCategoryInput.type(testData.secondCustomCategory.name);
         Income._ExpenseForecastActions.Page.addCustomExpenseCategorySaveButton.click();
         Income._ExpenseForecastActions.Page.forecastItemCardFull(testData.secondCustomCategory.name, true)
             .should('exist');
@@ -140,8 +149,7 @@ describe(`[QA-5042] [QA-5044] [QA-5045] [QA-5047] [QA-5048]
                 cy.wrap(inputs.length).as('cardsNumberBeforeCancel');
             });
         Income._ExpenseForecastActions.Page.createNewCategoryButton.click();
-        Income._ExpenseForecastActions.Page.newCategoryExpenseName
-            .type(`${testData.thirdCustomCategory.name}{downArrow}{enter}`);
+        Income._ExpenseForecastActions.Page.addCustomExpenseCategoryInput.type(testData.thirdCustomCategory.name);
         Income._ExpenseForecastActions.Page.addCustomExpenseCategoryCancelButton.click();
         Income._ExpenseForecastActions.Page.allForecastsInputs
             .then(inputs => {
@@ -163,10 +171,9 @@ describe(`[QA-5042] [QA-5044] [QA-5045] [QA-5047] [QA-5048]
         cy.stepInfo(`3. Verify  if user clicks on Cancel button with filled Category Name and opens 
         “Add New Expense Category” modal again-> Category Name field is empty. no previous data is displayed there`);
         Income._ExpenseForecastActions.Page.createNewCategoryButton.click();
-        Income._ExpenseForecastActions.Page.newCategoryExpenseName
-            .type(`${testData.thirdCustomCategory.name}{downArrow}{enter}`);
+        Income._ExpenseForecastActions.Page.addCustomExpenseCategoryInput.type(testData.thirdCustomCategory.name);
         Income._ExpenseForecastActions.Page.addCustomExpenseCategoryCancelButton.click();
         Income._ExpenseForecastActions.Page.createNewCategoryButton.click();
-        Income._ExpenseForecastActions.Page.newCategoryExpenseName.invoke('val').should('be.empty');
+        Income._ExpenseForecastActions.Page.addCustomExpenseCategoryInput.invoke('val').should('be.empty');
     });
 });

@@ -35,5 +35,4 @@ export default {
     reportTextEditorFlagKey: Enums.FEATURE_FLAG_KEYS.reportTextEdit,
     swotAnalysisFlagKey: Enums.FEATURE_FLAG_KEYS.swotAnalysis,
     featureFlagEnable: 0,
-    exportSectionName: Enums.EXPORT_TITLES.incomeCapitalizationApproach
 };

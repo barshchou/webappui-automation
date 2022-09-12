@@ -35,7 +35,7 @@ describe("Verify the Square Footage column in the grid",
             _NavigationSection.navigateToResInPlaceRentRoll();
         
             cy.stepInfo("5. Verify the Tooltip text");
-            Income._Residential.InPlaceRentRoll.Page.infoIcon.trigger('mouseover');
+            Income._Residential.InPlaceRentRoll.Page.infoIcon().realHover();
             Income._Residential.InPlaceRentRoll.verifyTooltipExist(testData.tooltipText);
 
             cy.stepInfo("6. Verify generate comments");    

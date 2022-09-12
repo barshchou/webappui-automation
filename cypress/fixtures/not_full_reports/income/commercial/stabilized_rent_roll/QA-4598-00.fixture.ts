@@ -43,5 +43,4 @@ export default {
     grossBuildingArea: _grossBuildingArea,
     siteArea: _siteArea,
     buildingName: _buildingName,
-    exportSectionName: enums.EXPORT_TITLES.commercialStabilizedRentRoll
 };

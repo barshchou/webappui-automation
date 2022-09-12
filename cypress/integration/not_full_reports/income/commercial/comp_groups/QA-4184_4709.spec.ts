@@ -30,7 +30,7 @@ describe("Verify Comps Groups table",
             is selected on Commercial In-Place Rent Roll page -> Label "Rent per SF" is changed to -> 
             "Rent Per SF/Month" and "Rent PSF/Month" column displays correct values pulled 
             from In-Place Rent Roll page`);
-            NavigationSection.navigateToCommercialCompGroups();
+            NavigationSection.navigateToCompGroups();
             Income.Commercial.CompGroups.addCompGroup(testData.compGroupName)
                 .verifyCompGroupRentLabel()
                 .verifyCompGroupRentLabel(testData.compGroupName);

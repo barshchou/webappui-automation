@@ -6,7 +6,7 @@ import { Income } from "../../../../../actions";
 import { createReport } from "../../../../../actions/base/baseTest.actions";
 
 describe("Verify the Annual Rent column in the grid", 
-    { tags:[ "@income", "@commercial", "@in_place_rent_roll" ] }, () => { 
+    { tags:[ "@income", "@commercial", "@in_place_rent_roll" ] }, () => {
 
         beforeEach("Create report, prepare table", () => {
             createReport(testData.reportCreationData);

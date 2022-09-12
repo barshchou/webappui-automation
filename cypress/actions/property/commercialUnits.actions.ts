@@ -5,9 +5,6 @@ import { cutDecimalPartToNumberOfDigits,
 import BaseActionsExt from "../base/base.actions.ext";
 import { BoweryReports } from "../../types/boweryReports.type";
 import { normalizeText } from "../../../utils/string.utils";
-import { Alias } from "../../utils/alias.utils";
-
-const { commercialUnitsSFInputs } = Alias.pageElements.commercialUnits;
 
 class CommercialUnitsActions extends BaseActionsExt<typeof commercialUnitsPage> {
 
@@ -21,9 +18,9 @@ class CommercialUnitsActions extends BaseActionsExt<typeof commercialUnitsPage> 
         return this;
     }
 
-    verifyImageHasRotated(category: BoweryReports.ImageType, rotateIndex: number): CommercialUnitsActions {
-        commercialUnitsPage.getCommercialUnitImage(category)
-            .invoke("attr", "style").then(style => {
+    verifyImageHasRotated(rotateIndex: number): CommercialUnitsActions {
+        commercialUnitsPage.commercialUnitImage
+            .last().invoke("attr", "style").then(style => {
                 expect(style).includes(`w_256,a_${90 * rotateIndex}`);
             });
         return this;
@@ -32,18 +29,17 @@ class CommercialUnitsActions extends BaseActionsExt<typeof commercialUnitsPage> 
     /**
      *NOTE: Rotates last image
      */
-    rotateImage(category: BoweryReports.ImageType, index = 0): CommercialUnitsActions {
-        commercialUnitsPage.getIconRotateImage(category, index).click({ force: true });
+    rotateImage(): CommercialUnitsActions {
+        commercialUnitsPage.iconRotateImage.last().click({ force: true });
         return this;
     }
 
-    uploadImages(category: BoweryReports.ImageType, pathToFile: string, 
+    uploadImages(imageType: BoweryReports.ImageType, pathToFile: string, 
         inputMethod: "drag-n-drop" | "input"): CommercialUnitsActions {
         let aliasImageUpload = "aliasImageUpload";
         cy.intercept("POST", "/imageUpload").as(aliasImageUpload);
-
-        this.Page.getImageCategoryImageUpload(category).attachFile(pathToFile, { subjectType: inputMethod });
-
+        cy.contains(imageType).next().find('input[type="file"]')
+            .attachFile(pathToFile, { subjectType: inputMethod });
         cy.wait(`@${aliasImageUpload}`).then(({ response }) => {
             expect(response.statusCode).equal(200);
             cy.log("imageUpload resolved");
@@ -57,15 +53,15 @@ class CommercialUnitsActions extends BaseActionsExt<typeof commercialUnitsPage> 
     }
 
     private clickRadioOrCheckbox(group: BoweryReports.CommercialUnits.Groups,
-        value: BoweryReports.CommercialUnits.GroupsValues): CommercialUnitsActions {
-        commercialUnitsPage.getRadioButtonByValueAndUnitIndex(group, value).click();
+        value: BoweryReports.CommercialUnits.GroupsValues, index = 0): CommercialUnitsActions {
+        commercialUnitsPage.getRadioButtonByValueAndUnitIndex(group, value, index).click();
         return this;
     }
 
     clickRadioButtonByValueAndUnitIndex(group: BoweryReports.CommercialUnits.Groups,
         value: BoweryReports.CommercialUnits.GroupsValues, index = 0): CommercialUnitsActions {
-        this.clickRadioOrCheckbox(group, value)
-            .verifyRadioIsChecked(group, value);
+        this.clickRadioOrCheckbox(group, value, index)
+            .verifyRadioIsChecked(group, value, index);
         if (value === "other") {
             commercialUnitsPage.getOtherFieldByGroup(group, index).should("exist")
                 .should("have.attr", "required");
@@ -76,8 +72,8 @@ class CommercialUnitsActions extends BaseActionsExt<typeof commercialUnitsPage> 
     clickCheckboxToUncheck(group: BoweryReports.CommercialUnits.Groups, 
         value: BoweryReports.CommercialUnits.GroupsValues,
         index = 0): CommercialUnitsActions {
-        this.clickRadioOrCheckbox(group, value)
-            .verifyRadioIsNotChecked(group, value);
+        this.clickRadioOrCheckbox(group, value, index)
+            .verifyRadioIsNotChecked(group, value, index);
         if (value === "other") {
             commercialUnitsPage.getOtherFieldByGroup(group, index).should("not.exist");
         }
@@ -85,15 +81,15 @@ class CommercialUnitsActions extends BaseActionsExt<typeof commercialUnitsPage> 
     }
 
     verifyRadioIsChecked(group: BoweryReports.CommercialUnits.Groups, 
-        value: BoweryReports.CommercialUnits.GroupsValues): CommercialUnitsActions {
-        commercialUnitsPage.getRadioButtonByValueAndUnitIndex(group, value).parent()
+        value: BoweryReports.CommercialUnits.GroupsValues, index = 0): CommercialUnitsActions {
+        commercialUnitsPage.getRadioButtonByValueAndUnitIndex(group, value, index).parent()
             .should("have.class", "Mui-checked");
         return this;
     }
 
     verifyRadioIsNotChecked(group: BoweryReports.CommercialUnits.Groups, 
-        value: BoweryReports.CommercialUnits.GroupsValues): CommercialUnitsActions {
-        commercialUnitsPage.getRadioButtonByValueAndUnitIndex(group, value).parent()
+        value: BoweryReports.CommercialUnits.GroupsValues, index = 0): CommercialUnitsActions {
+        commercialUnitsPage.getRadioButtonByValueAndUnitIndex(group, value, index).parent()
             .should("not.have.class", "Mui-checked");
         return this;
     }
@@ -103,11 +99,8 @@ class CommercialUnitsActions extends BaseActionsExt<typeof commercialUnitsPage> 
         if (isHasDecimalPartMoreNumberOfDigits(squareFeet)) {
             squareFeetToBe = cutDecimalPartToNumberOfDigits(squareFeet);
         }
-        commercialUnitsPage.commercialUnitsSFInputs.as(commercialUnitsSFInputs);
-
-        this.Actions.setValueIntoNumberInput(commercialUnitsSFInputs, squareFeet, index);
-
-        commercialUnitsPage.commercialUnitsSFInputs.eq(index).should("have.value", numberWithCommas(squareFeetToBe));
+        commercialUnitsPage.commercialUnitsSFInputs.eq(index).clear().type(`${squareFeet}`)
+            .should("have.value", squareFeetToBe);
         return this;
     }
 

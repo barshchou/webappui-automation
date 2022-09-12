@@ -39,27 +39,23 @@ export const Alias = {
         SearchTransactionsByAddresses: _gqlAlias(gqlOperationNames.searchTransactionsByAddresses)
     }, 
     pageElements:{
-        commercialUnits:{
-            commercialUnitsSFInputs:"commercialUnits.commercialUnitsSFInputs"
-        },
         compPlex:{
-            conditionDropdown: "conditionDropdown",
-            getDropdownOption: "getDropdownOption",
-            errorMessage: "errorMessage",
-            newCompContinueButton: "newCompContinueButton",
-            createCompNumberCommercialUnits: "createCompNumberCommercialUnits",
-            comparableTypeDropdown: "comparableTypeDropdown",
-            createCompNumberResidentialUnits: "createCompNumberResidentialUnits",
-            commercialAreaNewComp: "commercialAreaNewComp",
-            netRentableAreaNewComp: "netRentableAreaNewComp",
-            averageUnitSizeNewComp: "averageUnitSizeNewComp",
-            internalNotesTextArea: "internalNotesTextArea",
-            appraiserCommentaryTextArea: "appraiserCommentaryTextArea",
-            siteAreaNewComp: "siteAreaNewComp",
-            yearBuiltNewComp: "yearBuiltNewComp",
-            floorsNewComp: "floorsNewComp",
-            gbaNewComp: "gbaNewComp",
-            contractPrice: "contractPrice"
+            conditionDropdown:"conditionDropdown",
+            getDropdownOption:"getDropdownOption",
+            errorMessage:"errorMessage",
+            newCompContinueButton:"newCompContinueButton",
+            createCompNumberCommercialUnits:"createCompNumberCommercialUnits",
+            comparableTypeDropdown:"comparableTypeDropdown",
+            createCompNumberResidentialUnits:"createCompNumberResidentialUnits",
+            commercialAreaNewComp:"commercialAreaNewComp",
+            netRentableAreaNewComp:"netRentableAreaNewComp",
+            averageUnitSizeNewComp:"averageUnitSizeNewComp",
+            internalNotesTextArea:"internalNotesTextArea",
+            appraiserCommentaryTextArea:"appraiserCommentaryTextArea",
+            siteAreaNewComp:"siteAreaNewComp",
+            yearBuiltNewComp:"yearBuiltNewComp",
+            floorsNewComp:"floorsNewComp",
+            gbaNewComp:"gbaNewComp",
         }
     },
     expenseForecastAliases: {

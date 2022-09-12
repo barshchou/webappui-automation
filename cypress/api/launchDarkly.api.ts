@@ -7,9 +7,9 @@ import { Utils } from "../types/utils.type";
  * @param environmentKey Environment name in Launch Darkly for requests
  */
 interface IConfig {
-    apiKey: string,
-    projectKey: string,
-    environmentKey: Utils.EnvLaunchDarklyType
+  apiKey: string,
+  projectKey: string,
+  environmentKey: Utils.EnvLaunchDarklyType
 }
 
 type Methods = "GET" | "PATCH"

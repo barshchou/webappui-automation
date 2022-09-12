@@ -4,8 +4,9 @@ import { _NavigationSection } from "../../../../actions/base";
 import { Property } from "../../../../actions";
 import Enums from "../../../../enums/enums";
 
+
 describe("Verify area analysis pull from dropbox", { tags: [ "@property", "@market" ] }, () => {
-    
+
     beforeEach("Login, create report", () => {
         createReport(testData.reportCreationData);
     });

@@ -4,14 +4,14 @@ import NavigationSection from "../../../../../actions/base/navigationSection.act
 import Income from "../../../../../actions/income/income.manager";
 
 describe(`Verify Sort By drop-down field for results sorting on Map filter section on Rent Comps page 
-        when Unit search type is selected`, 
-{ tags:[ "@income", "@commercial", "@in_place_rent_roll" ] }, () => {
+                when Unit search type is selected`, () => {
+
     beforeEach("Login, create report", () => {
         createReport(testData.reportCreationData);
     });
 
-    it("[QA-4276]", () => {
-        NavigationSection.navigateToResidentialRentComps()
+    it("Test body", () => {
+        NavigationSection.navigateToRentComps()
             .verifyProgressBarNotExist();
         testData.sortByOptions.forEach(option => {
             Income.Residential.RentComps.BaseActions.selectSortByOptionByValue(option);

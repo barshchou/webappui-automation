@@ -1,15 +1,18 @@
 import { Sales } from "../../../../actions";
-import { navigateToCompplex } from "../../../../actions/base/baseTest.actions";
+import { salesInterceptions } from "../../../../actions/base/baseTest.actions";
+import { Alias } from "../../../../utils/alias.utils";
 import testData from "../../../../fixtures/comp_plex/sales/find_comps/QA-6356.fixture";
 
-describe(`[QA-6356] [Sales > Find Comps > Job Search > Filters] 
+describe.skip(`[QA-6356] [Sales > Find Comps > Job Search > Filters] 
 Check that ID cards show correct data based on chosen filters`, {
     tags: [ "@comp_plex_standalone" ] }, () => {
     beforeEach(() => {
-        navigateToCompplex();
+        salesInterceptions();
+        cy.visit("/index.html");
     });
 
     it("[QA-6356] Check whether setup in Filters matches the data in Job Card", () => {
+        cy.wait(`@${Alias.gql.SearchSalesTransactions}`);
         cy.stepInfo(`1. Go to Sales > Find Comps > Job Search`);
         Sales._FindComps.openJobSearchTab();
 
