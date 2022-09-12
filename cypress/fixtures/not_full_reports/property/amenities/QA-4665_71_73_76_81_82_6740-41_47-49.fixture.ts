@@ -51,6 +51,11 @@ const uploadValues = [
         specName: "[QA-6748]",
         checkboxName: Enums.AMENITIES_CHECKBOXES.hasWarehouseSpace,
         uploadName: Enums.AMENITIES_UPLOADS.warehouseSpace
+    },
+    {
+        specName: "[QA-6749]",
+        checkboxName: Enums.AMENITIES_CHECKBOXES.hasOutdoorSeating,
+        uploadName: Enums.AMENITIES_UPLOADS.outdoorSeating
     }
 ];
 
