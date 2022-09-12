@@ -36,6 +36,6 @@ const uploadValues = [
 
 export default {
     reportCreationData: ReportDataCreator.getReportData("4665_71_73_76_81_82"),
-    imagePath: "not_full_reports/Laundry_Room.png",
+    imagePath: "test_files/Laundry_Room.png",
     uploadValues
 };

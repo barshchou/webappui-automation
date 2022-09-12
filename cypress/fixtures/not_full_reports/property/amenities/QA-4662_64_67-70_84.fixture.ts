@@ -30,7 +30,7 @@ export default {
     withoutAdditionalCheckboxes,
     buildingCheckboxes,
     unitCheckboxes,
-    imagePath: "not_full_reports/Laundry_Room.png",
+    imagePath: "test_files/Laundry_Room.png",
     storageValue: 1000,
     storageValueMore: 1001,
     parkingValueMore: 2501,
