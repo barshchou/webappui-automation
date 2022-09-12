@@ -73,5 +73,9 @@ export default {
     sortSalesCompsDateSold,
     salePeriodValue,
     filePath,
-    arrayOfCompsForManualAddition
+    arrayOfCompsForManualAddition,
+    compProperty,
+    compStatusContract,
+    compStatusDate,
+    compStatusListing
 };
