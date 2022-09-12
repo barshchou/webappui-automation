@@ -29,7 +29,8 @@ const inputValues = [
 ];
 
 export default {
-    reportFreddieMac: ReportDataCreator.getReportData("6770", { templateValue: Enums.TEMPLATE_TYPE.freddieMac }),
+    reportFreddieMac: ReportDataCreator.getReportData("6770_6816", { templateValue: Enums.TEMPLATE_TYPE.freddieMac }),
     inputValues,
-    locatorContains: "The report is for the use and benefit of, and may be relied upon by"
+    locatorContains: "The report is for the use and benefit of, and may be relied upon by",
+    formCommentName: Enums.PAGES_TEXTBOX_NAMES.clientGuidelinesDiscussion
 };
