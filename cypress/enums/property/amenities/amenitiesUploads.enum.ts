@@ -8,7 +8,8 @@ const amenitiesUploads = {
     recreationRoom: "recreationRoom",
     commonLoungeSpace: "commonLoungeSpace",
     courtyard: "courtyard",
-    loading: "loading"
+    loading: "loading",
+    storefrontExposure: "storefrontExposure"
 } as const;
 
 export default Object.freeze(amenitiesUploads);
