@@ -1,4 +1,4 @@
-name: WebApp+Comp-plex scheduled run on dev
+name: WebApp + Comp-plex scheduled run on dev
 
 on:
   schedule:
@@ -25,7 +25,7 @@ jobs:
             role-to-assume: arn:aws:iam::814827541967:role/GithubOIDC-Role-QMKR3DR5WV3B
             aws-region: 'us-east-1'
 
-      - name: Run every weekday WebApp+Comp-plex end-to-end tests with Currents dev
+      - name: Run every weekday WebApp + Comp-plex end-to-end tests with Currents dev
         uses: Bowery-RES/action-run-e2e-tests@latest
         with:
           github_token: ${{ secrets.GH_PERSONAL_ACCESS_TOKEN }}
