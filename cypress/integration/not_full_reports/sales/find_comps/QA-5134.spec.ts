@@ -18,6 +18,7 @@ describe(`Check when "custom" dropdown is selected user can drag&drop comps`,
 
             cy.stepInfo(`1. User navigates to SalesComps Search page `);
             _NavigationSection.navigateToFindComps();
+            Sales._FindComps.zoomInAndResetFilters();
         
             cy.stepInfo(`2. User selects n-first comps from map`);
             testData.compsToAdd.forEach(() => {

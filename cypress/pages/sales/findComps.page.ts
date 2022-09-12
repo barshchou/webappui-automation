@@ -190,6 +190,10 @@ class FindCompsPage extends BasePage {
     get saveCompProperty() {
         return cy.get(`[class="ant-modal-footer"]`, { includeShadowDom: true }).find("button").eq(1);
     }
+
+    get zoomInButton() { return cy.get(`.leaflet-control-zoom-in`).eq(0); }
+
+    get loadingModal() { return cy.get("*[data-qa='loading-modal']"); }
 }
 
 /**
