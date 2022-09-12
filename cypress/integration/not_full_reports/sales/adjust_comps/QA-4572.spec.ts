@@ -9,7 +9,7 @@ import ReviewExport from "../../../../actions/reviewExport/reviewExport.actions"
  * for sales comps selection by address
  */
 describe.skip("Check custom adjustment", 
-    { tags: [ "@adjust_comps", "@sales" ] }, () => {
+    { tags: [ "@fix", "@adjust_comps", "@sales" ] }, () => {
         
         beforeEach("Login, create report", () => {
             createReport(testData.reportCreationData);

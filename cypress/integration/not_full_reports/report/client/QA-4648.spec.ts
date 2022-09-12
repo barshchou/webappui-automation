@@ -16,14 +16,15 @@ describe("[QA-4648] Verify the Save button functionality on the Report > Client 
                 .Page.formSaveBtn().should('be.visible');
 
             cy.stepInfo(`2. Fill in the editable fields with values and click on the Save button.`);
-            Report._Client.enterFormCommentTextBox(testData.intendedUser, testData.textToType, false)
+            Report._Client.activateTextAreaInput(Report._Client.Page.intendedUserTextBox)
+                .enterIntendedUserTextBox(testData.textToType)
                 .clickNarrativeSuggestions(testData.verifyListValue)
-                .enterFormCommentTextBox(testData.identificationOfTheClient, testData.textToType, false)
+                .activateTextAreaInput(Report._Client.Page.identificationOfClientTextBox)
+                .enterIdentificationOfTheClientTextBox(testData.textToType)
                 .clickNarrativeSuggestions(testData.verifyListValue, 1)
                 .inactivateTextAreaInput()
-                .verifyFormCommentTextBoxText(testData.intendedUser, testData.verifyAreaValue)
-                .verifyFormCommentTextBoxText(testData.identificationOfTheClient,
-                    testData.verifyAreaValue);
+                .verifyIntendedUserTextBox(testData.verifyAreaValue)
+                .verifyIdentificationOfTheClientTextBox(testData.verifyAreaValue);
             //Saving without cy.wait() impossible, because cypress interaction with buttons is to fast
             cy.wait(500);           
 
@@ -32,9 +33,7 @@ describe("[QA-4648] Verify the Save button functionality on the Report > Client 
             Report._Client.clickSaveButton()
                 .verifyProgressBarNotExist();
             cy.reload();
-            Report._Client.verifyFormCommentTextBoxText(testData.intendedUser,
-                testData.verifyAreaValue)
-                .verifyFormCommentTextBoxText(testData.identificationOfTheClient,
-                    testData.verifyAreaValue);
+            Report._Client.verifyIntendedUserTextBox(testData.verifyAreaValue)
+                .verifyIdentificationOfTheClientTextBox(testData.verifyAreaValue);
         });
     });

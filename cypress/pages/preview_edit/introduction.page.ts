@@ -26,8 +26,5 @@ class IntroductionPage extends BasePage {
         return cy.xpath(`//*[contains(text(), '${title}')]/following::ul[1]`).children();
     }
 
-    getIntroductionCommentaryItem(title: string) {
-        return cy.xpath(`//h6[.="${title}"]/following::p`);
-    }
 }
 export default new IntroductionPage();

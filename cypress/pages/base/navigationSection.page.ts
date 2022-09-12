@@ -125,10 +125,6 @@ class NavigationSection extends BasePage {
 
     get contentManagementSystemButton() { return cy.get(`[data-qa="linkToCms"] div`); }
 
-    get highestAndBestUseButton() { return cy.get("#highest-and-best-use"); }
-
-    get zoningButton() { return cy.get("#zoning"); }
-    
     get cmsGlobalIcon() { return cy.get('[aria-label="Global"]'); }
 
     get mapMakerButton() { return cy.get(`[data-qa="openMapMakerBtn"]`); }
@@ -140,8 +136,6 @@ class NavigationSection extends BasePage {
     get whatsNewButton() { return cy.get(`[aria-label="What's New"]`); }
 
     get helpAndResourcesButton() { return cy.get(`[aria-label="Help & Resources"]`); }
-
-    get finalValuesReconciliationButton() { return cy.get(`#final-values-and-reconciliation`); }
 }
 
 export default new NavigationSection();

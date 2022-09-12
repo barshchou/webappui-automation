@@ -24,7 +24,7 @@ describe("Verify the calculation field values",
  
             cy.stepInfo('2. Add any Comp Group (Income > Commercial > Comp Groups)');
             cy.stepInfo('3. Move tenants to created Comp Group (Income > Commercial > Comp Groups)');
-            _NavigationSection.navigateToCommercialCompGroups();
+            _NavigationSection.openCompGroupsInCommercial();
             Income._CommercialManager.CompGroups
                 .addCompGroup(testData.compGroupName)
                 .dragAllCommercialUnitsIntoGroup(testData.compGroupName, testData.unitsNumber);

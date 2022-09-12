@@ -1,4 +1,3 @@
-import { loginAction } from './../../../actions/base/baseTest.actions';
 import { _HomePage } from '../../../actions/base';
 import { createReport } from '../../../actions/base/baseTest.actions';
 import { PreviewEdit, ReviewExport } from '../../../actions';
@@ -40,6 +39,11 @@ conditionalDescribe("[QA-4727] Verify possibility to edit text",
             _NavigationSection.openReviewAndExport();
             ReviewExport.generateDocxReport().waitForReportGenerated()
                 .downloadAndConvertDocxReport(testData.reportCreationData.reportNumber);
+
+            cy.stepInfo('5. Revert commentary to original');
+            _NavigationSection.navigateToContentManagementSystem();
+            _CmsBaseActions.openLetterOfTransmittalPage()
+                .revertSectionToOriginal(testData.sectionName);
         });
 
         it('Check export', () => {
@@ -52,16 +56,8 @@ conditionalDescribe("[QA-4727] Verify possibility to edit text",
                 });
         });
 
-        afterEach('Revert commentary to original and remove feature flags', () => {
-            cy.stepInfo('Revert commentary to original');
-            if (!Cypress.currentTest.title.includes("Check export")) {
-                loginAction();
-                _NavigationSection.navigateToContentManagementSystem();
-                _CmsBaseActions.openLetterOfTransmittalPage()
-                    .revertSectionToOriginal(testData.sectionName);
-            }
+        after('Remove feature flag', () => {
 
-            cy.stepInfo('Remove feature flags');
             launchDarklyApi.removeUserTarget(testData.reportTextEditorFlagKey);
             launchDarklyApi.removeUserTarget(testData.swotAnalysisFlagKey);
         });

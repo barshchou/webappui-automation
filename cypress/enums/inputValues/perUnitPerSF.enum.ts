@@ -1,6 +1,6 @@
 const perUnitPerSF = {
     perUnit: "Per Unit",
-    perSF: "PSF"
+    perSF: "Per SF",
 } as const;
 
 export default Object.freeze(perUnitPerSF);

@@ -13,7 +13,8 @@ class SWOTAnalysisActions extends BaseActionsExt<typeof swotAnalysisPage> {
 
     verifySWOTInputText(sectionName: string, expectedText: string, index = 0): 
     SWOTAnalysisActions {
-        swotAnalysisPage.swotAnalysisSectionTextArea(sectionName, index).should("contain.text", expectedText);
+        swotAnalysisPage.swotAnalysisSectionTextArea(sectionName, index).invoke('text')
+            .should('deep.equal', expectedText);
         return this;
     }
 
@@ -23,6 +24,7 @@ class SWOTAnalysisActions extends BaseActionsExt<typeof swotAnalysisPage> {
         text: string, 
         clear = false): SWOTAnalysisActions {
         this.editSectionDiscussionText(sectionName, index, text, clear);
+        this.saveCmsSettings();
         return this;
     }
 
