@@ -60,7 +60,7 @@ const uploadValues = [
     {
         specName: "[QA-6750]",
         checkboxName: Enums.AMENITIES_CHECKBOXES.hasDriveThru,
-        uploadName: Enums.AMENITIES_UPLOADS.outdoorSeating
+        uploadName: Enums.AMENITIES_UPLOADS.driveThru
     }
 ];
 
