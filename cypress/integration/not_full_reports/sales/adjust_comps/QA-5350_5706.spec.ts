@@ -17,7 +17,8 @@ describe("Calculation of Market Condition adjustment",
     
             cy.stepInfo(`2. Navigate to the Sales > Find Comps and add a few Sales Comp`);
             NavigationSection.navigateToFindComps();
-            Sales._FindComps.selectCompFromMap()
+            Sales._FindComps.zoomInAndResetFilters()
+                .selectCompFromMap()
                 .selectCompFromMap(-1);
     
             cy.stepInfo(`3. Open Adjust comps page, and copy paste value into Market Condition Adjustment field`);
