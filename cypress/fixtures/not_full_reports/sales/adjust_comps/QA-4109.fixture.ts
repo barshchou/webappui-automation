@@ -16,6 +16,5 @@ export default {
     calculationUnits: Enums.CALCULATION_UNITS.psf,
     basis:"Price per SF",
     exportSectionName: Enums.EXPORT_TITLES.cumulativePricePerSf,
-    compGbaInput: 300,
     contractPrice: 150000
 };

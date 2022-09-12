@@ -52,5 +52,11 @@ class PropertyInfoFormActions {
         this.Page.yearBuiltNewComp.type(year, { force: true });
         return this;
     }
+
+    setCompType(compType: string): PropertyInfoFormActions {
+        this.Page.comparableTypeDropdown.click();
+        this.Page.getDropdownOption(compType).click({ force: true });
+        return this;
+    }
 }
 export default new PropertyInfoFormActions(findCompsPage);
