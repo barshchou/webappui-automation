@@ -13,8 +13,6 @@ class ClientPage extends BasePage {
 
     get nycbApplicationNumber() { return cy.get("[name=applicationNumber]"); }
 
-    get addClientButton() { return cy.xpath("//a[.='Add']"); }
-
     get appraiserCommentary() { return cy.get("[name='clientGuidelinesDiscussion.additionalCommentary']"); }
 
     // TODO: [QA-6858] Add data-qa attribute for tooltip
@@ -33,7 +31,7 @@ class ClientPage extends BasePage {
 
     chipModified(index?: number) { return cy.get('[ui="indicator"]').eq((index !== 0) ? index : 0); }
 
-    get addNewClient() { return cy.xpath("//*[@data-qa='callout-btn']//child::*[@target='_self']"); }
+    get addNewClient() { return cy.xpath("//*[@data-qa='callout-btn']"); }
 }
 
 export default new ClientPage();
