@@ -191,6 +191,16 @@ class FindCompsPage extends BasePage {
     get saveCompProperty() {
         return cy.get(`[class="ant-modal-footer"]`, { includeShadowDom: true }).find("button").eq(1);
     }
+
+    //TODO Add data-qa attr for details button
+    detailsButtonByAddress(address: string) {
+        return this.salesComparablesTable.contains(address).parent('tr').find('[data-qa="selected-comp-actions"]')
+            .contains('button', 'Details');
+    }
+
+    get salesComparablesTable() {
+        return cy.get('[data-qa="selected-sales-comps-table"]');
+    }
 }
 
 /**
