@@ -7,7 +7,7 @@ const _numberOfCommercialUnits = 3;
 const _numberOfResidentialUnits = 5;
 const _landTaxAssessedValue = 999999;
 const _buildingTaxAssessedValue = 456450;
-const _taxPercent = 10.755;
+const _taxPercent = 10.646;
 
 const _totalRealEstateTax = ((_landTaxAssessedValue + _buildingTaxAssessedValue) * _taxPercent) / 100;
 const _totalRealEstateTaxPerSf = _totalRealEstateTax / _grossBuildingArea;
