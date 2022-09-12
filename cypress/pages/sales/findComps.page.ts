@@ -5,6 +5,7 @@ import JobSearchPage from "./comp_plex/job-search.page";
 import PropertyInformationForm from "./comp_plex/propertyInfo.page";
 import SalesCompsDetailsForm from "./comp_plex/salesCompDetails.page";
 import SaleInformationForm from "./comp_plex/salesInfo.page";
+import AddressSearchPage from "./comp_plex/address-search.page";
 
 class FindCompsPage extends BasePage {
     get propertyDescReadingBtn() {
@@ -167,7 +168,7 @@ class FindCompsPage extends BasePage {
         return cy.get('[data-qa="comp-tab"]');
     }
 
-    get adressSearchTab() {
+    get addressSearchTab() {
         return cy.get('[data-qa="address-tab"]');
     }
 
@@ -201,7 +202,9 @@ class FindCompsPage extends BasePage {
  * the expected mixins with the same name as your base
  */
 // eslint-disable-next-line @typescript-eslint/no-empty-interface
-interface FindCompsPage extends PropertyInformationForm, SaleInformationForm, SalesCompsDetailsForm, JobSearchPage { }
-applyMixins(FindCompsPage, [ PropertyInformationForm, SaleInformationForm, SalesCompsDetailsForm, JobSearchPage ]);
+interface FindCompsPage extends PropertyInformationForm, SaleInformationForm, SalesCompsDetailsForm, 
+    JobSearchPage, AddressSearchPage { }
+applyMixins(FindCompsPage, [ PropertyInformationForm, SaleInformationForm, SalesCompsDetailsForm, 
+    JobSearchPage, AddressSearchPage ]);
 
 export const findCompsPage = new FindCompsPage();

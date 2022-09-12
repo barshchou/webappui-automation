@@ -14,6 +14,7 @@ import mapKeysUtils from "../../../utils/mapKeys.utils";
 import { BoweryReports } from "../../../types/boweryReports.type";
 import { isDateHasCorrectFormat } from "../../../../utils/date.utils";
 import jobSearchActions from "./drm/job-search.actions";
+import addressSearchActions from "./drm/address-search.actions";
 import Enums from "../../../enums/enums";
 
 const { compPlex } = Alias.pageElements;
@@ -40,6 +41,20 @@ class FindCompsActions extends BaseActionsExt<typeof findCompsPage> {
 
     get JobSearch() {
         return jobSearchActions;
+    }
+
+    get AddressSearch() {
+        return addressSearchActions;
+    }
+
+    verifySpinnerExist(): FindCompsActions {
+        findCompsPage.loadingModalSpinner.should("exist");
+        return this;
+    }
+
+    verifySpinnerNotExist(): FindCompsActions {
+        findCompsPage.loadingModalSpinner.should("not.exist");
+        return this;
     }
 
     addExistingComparable(address: string): FindCompsActions {
@@ -128,8 +143,8 @@ class FindCompsActions extends BaseActionsExt<typeof findCompsPage> {
         findCompsPage.compStatusFilter.click();
         statuses.forEach(status => {
             findCompsPage.filterOptionValue(status).click();
-            findCompsPage.loadingModalSpinner.should("exist");
-            findCompsPage.loadingModalSpinner.should("not.exist");
+            this.verifySpinnerExist()
+                .verifySpinnerNotExist();
             findCompsPage.compStatusFilter.children("input").should("contain.value", status);
         });
         findCompsPage.compStatusFilter.realClick();
@@ -138,12 +153,12 @@ class FindCompsActions extends BaseActionsExt<typeof findCompsPage> {
 
     resetAllFilters(): FindCompsActions {
         findCompsPage.resetAllButton.click();
-        findCompsPage.loadingModalSpinner.should('exist');
+        this.verifySpinnerExist()
         /*
          * TODO add cy.wait(@${Alias.gql.SearchSalesTransactions}, { timeout: 180000 }) but with option, when this alias
          * is clearable (for multiply action using)
          */
-        findCompsPage.loadingModalSpinner.should('not.exist');
+            .verifySpinnerNotExist();
         return this;
     }
 
