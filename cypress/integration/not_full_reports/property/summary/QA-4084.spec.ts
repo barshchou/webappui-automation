@@ -33,7 +33,7 @@ describe("[QA-4084] Check the Census Tract field", { tags: [ "@property", "@summ
 
         cy.stepInfo("5. Fill in value using incorrect format and try to Save");
         Property._Summary.Page.censusTractField.clear().type(testData.incorrectValue);
-        Property._Summary.clickSaveButton();
+        Property._Summary.clickSaveButton(false);
         Property._Summary.Page.censusTractFieldValidationText(testData.validationText).should("be.visible");
     });
 });

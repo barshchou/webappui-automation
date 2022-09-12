@@ -4,14 +4,13 @@ import { createReport } from "../../../../actions/base/baseTest.actions";
 import { _NavigationSection } from "../../../../actions/base";
 import { Report } from "../../../../actions";
 
-describe("[QA-4069] Check the helper text for Provided Documents)",
+describe("Check the helper text for Provided Documents)",
     { tags: [ "@report", "@key_info", "@check_export" ] }, () => {
-        it("Test body", () => {
+        it("[QA-4069]", () => {
             cy.stepInfo(`1. Create report`);
             createReport(testData.reportCreationData);
-
+            
             cy.stepInfo(`2. Go to Report → Key Info → Engagement tab and upload files`);
-            _NavigationSection.navigateToReportInformation();
             Report._KeyInfo.uploadFile(testData.pdfFileName);
 
             _NavigationSection.openReviewAndExport();
@@ -26,7 +25,7 @@ describe("[QA-4069] Check the helper text for Provided Documents)",
                     cy.visit(<string>file);
                     
                     cy.stepInfo(`3. Verify uploaded file in following the Rent Roll & Financial Statements`);
-                    cy.contains("Letter of Engagement").next().scrollIntoView().should("be.visible");
+                    cy.contains(testData.exportSectionName).next().scrollIntoView().should("be.visible");
                 }); 
         });
     });

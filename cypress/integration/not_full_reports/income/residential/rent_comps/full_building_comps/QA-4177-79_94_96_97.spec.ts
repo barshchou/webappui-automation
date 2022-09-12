@@ -14,7 +14,7 @@ conditionalDescribe("Base Itemized Unit Info table tests", { tags: [ "@residenti
 
     before("Create report, navigate to unit mix", () => {
         createReport(testData.reportCreationData);
-        _NavigationSection.navigateToRentComps();
+        _NavigationSection.navigateToResidentialRentComps();
         cy.stepInfo("1. Add comparable, open FullBuildingComps form, open UnitMix tab");
         Income._Residential.RentComps.BaseActions.changeToBuildingSearch()
             .clickAddRemoveBuildingCompByAddress(testData.compAddress)

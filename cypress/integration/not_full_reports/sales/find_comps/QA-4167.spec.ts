@@ -19,7 +19,7 @@ describe("[QA-4167] Verify the Appraiser Commentary field", { tags: [ "@sales", 
         _NavigationSection.navigateToFindComps();
 
         Sales._FindComps.Actions
-            .openAddNewComparableFormSearchResult(testData.compAddress, 1)
+            .openAddNewComparableFormSearchResult(testData.compAddress)
             .selectDropdownOptionNewComp(Sales._FindComps.Page.conditionDropdown, testData.condition);
         Sales._FindComps.Actions.PropertyInfo.setCommercialUnits(`${testData.units.numberOfUnits}`)
             .setCommercialArea(`${testData.units.grossArea}`)

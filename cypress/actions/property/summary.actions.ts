@@ -70,9 +70,9 @@ class SummaryActions extends BaseActionsExt<typeof summaryPage> {
     }
 
     verifySiteDetails(siteDetails: Readonly<{
-            streetAddress: string; censusTract: string; streetName: string; buildingDescriptor: string;
-            identifierType: string; identifier: string;
-        }>): this {
+        streetAddress: string; censusTract: string; streetName: string; buildingDescriptor: string;
+        identifierType: string; identifier: string;
+    }>): this {
         this.verifyStreetAddress(siteDetails.streetAddress)
             .verifyCensusTract(siteDetails.censusTract)
             .verifyStreetName(siteDetails.streetName)

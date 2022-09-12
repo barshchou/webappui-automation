@@ -11,7 +11,7 @@ conditionalDescribe("Comp summary tests", { tags: [ "@residential", "@rent_comps
 
     before("Create report, navigate to page", () => {
         createReport(testData.reportCreationData);
-        _NavigationSection.navigateToRentComps();
+        _NavigationSection.navigateToResidentialRentComps();
         cy.stepInfo("1. Add comparable, click edit button, open comp summary");
         Income._Residential.RentComps.BaseActions.changeToBuildingSearch()
             .clickAddRemoveBuildingCompByAddress(testData.compAddress)

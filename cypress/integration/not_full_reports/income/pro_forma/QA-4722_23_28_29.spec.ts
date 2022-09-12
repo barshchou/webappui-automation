@@ -5,6 +5,7 @@ import { _NavigationSection } from "../../../../actions/base";
 import { Property } from '../../../../actions';
 import { Income } from "../../../../actions";
 
+// TODO: Fix and update this spec after https://bowery.atlassian.net/browse/WEB-6720 bug fix
 describe("Potential Real Estate Tax Reimbursement", 
     { tags:[ "@income", "@pro_forma" ] }, () => {
     
@@ -33,8 +34,7 @@ describe("Potential Real Estate Tax Reimbursement",
         
             cy.stepInfo(`3. Go to Income → Reimbursement Summary and add Real Estate Taxes 
             Reimbursement for commercial units`); 
-            _NavigationSection.clickCommercialReimbursementSummaryButton()
-                .submitSaveChangesModal();
+            _NavigationSection.navigateToCommercialReimbursementSummary();
             Income._CommercialManager.ReimbursementSummary.addNewCommercialReimbursement(
                 testData.expenseType, testData.expenseTypeCellName, 
                 testData.reimbursementType, testData.knownInformation)
