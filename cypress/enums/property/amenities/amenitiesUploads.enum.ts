@@ -10,7 +10,8 @@ const amenitiesUploads = {
     courtyard: "courtyard",
     loading: "loading",
     storefrontExposure: "storefrontExposure",
-    warehouseSpace: "warehouseSpace"
+    warehouseSpace: "warehouseSpace",
+    outdoorSeating: "outdoorSeating"
 } as const;
 
 export default Object.freeze(amenitiesUploads);
