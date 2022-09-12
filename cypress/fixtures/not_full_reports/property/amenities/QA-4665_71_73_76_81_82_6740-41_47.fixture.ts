@@ -41,11 +41,16 @@ const uploadValues = [
         specName: "[QA-6741]",
         checkboxName: Enums.AMENITIES_CHECKBOXES.hasLoading,
         uploadName: Enums.AMENITIES_UPLOADS.loading
+    },
+    {
+        specName: "[QA-6747]",
+        checkboxName: Enums.AMENITIES_CHECKBOXES.hasStorefrontExposure,
+        uploadName: Enums.AMENITIES_UPLOADS.storefrontExposure
     }
 ];
 
 export default {
-    reportCreationData: ReportDataCreator.getReportData("4665_71_73_76_81_82_6740-41", {
+    reportCreationData: ReportDataCreator.getReportData("4665_71_73_76_81_82_6740-41_47", {
         templateValue: Enums.TEMPLATE_TYPE.freddieMac,
         incomeValue: Enums.INCOME_TYPE.both,
         conclusionValue: Enums.VALUE_CONCLUSION_TYPE.AS_COMPLETE,
