@@ -13,8 +13,7 @@ describe(`[QA-5272] ->
     it(`[QA-5272] -> Check that following fields are disabled in the edit mode`,
         { tags: "@comp-plex-standalone" }, () => {
             // ernst: we can use any address for comp since any comp suite
-            Sales._FindComps.zoomInAndResetFilters()
-                .selectCompFromMap();
+            Sales._FindComps.selectCompFromMap();
             cy._mapGet(mapKeysUtils.salesCompsAddresses).then(
                 addr => CompPlex.Page.getSalesCompDetails(addr.pop()).click()
             );

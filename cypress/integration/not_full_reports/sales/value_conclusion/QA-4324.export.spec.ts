@@ -14,7 +14,7 @@ conditionalDescribe("Sales Value Conclusion Discussion Generated Commentary has 
 
             cy.stepInfo(`2. Go to Sales → Find Comps and select some comps`);
             _NavigationSection.navigateToFindComps();
-            Sales._FindComps.zoomInAndResetFilters();
+            Sales._FindComps.resetAllFilters();
             for (let comp = 0; comp < testData.compsAmount; comp++) {
                 Sales._FindComps.selectCompFromMap(comp)
                     .openCompForEdit(comp)

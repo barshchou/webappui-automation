@@ -14,8 +14,7 @@ describe("[QA-4974] Verify sections of Sales Adjustment Grid",
         it("Test body", () => {
             cy.stepInfo("1. Add several comps in the Sales > Find Comps page");
             NavigationSection.navigateToFindComps();
-            Sales._FindComps.zoomInAndResetFilters()
-                .selectCompFromMap()
+            Sales._FindComps.selectCompFromMap()
                 .selectCompFromMap(-1);
         
             cy.stepInfo("2. Verify sections of Sales Adjustment Grid");

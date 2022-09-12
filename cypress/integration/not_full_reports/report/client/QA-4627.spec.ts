@@ -7,6 +7,7 @@ import Enums from '../../../../enums/enums';
 import testData from '../../../../fixtures/not_full_reports/report/client/QA-4627.fixture';
 import { conditionalDescribe } from "../../../checkIsProd.utils";
 
+// TODO: Test fails on Cover Page. [QA-6751] Check test after WEB-5721 implementation
 conditionalDescribe("Verify the functionality of the Client field.", 
     { tags:[ "@report", "@client" ] }, () => {
         beforeEach("Restore state. Create report", () => {
@@ -30,7 +31,7 @@ conditionalDescribe("Verify the functionality of the Client field.",
                 .enterClientName("Debbie Gerstner");
 
             cy.stepInfo(`3. Proceed to the Organization > Create New Client page and create a new client, save it.`);
-            Report._Client.clickAddClientButton();
+            Report._Client.Page.addNewClient.click();
             Organization._CreateNewClient.createNewClient(testData.clientCreationData);
 
             cy.stepInfo(`4. Proceed to the Report > Client page and verify that a newly created client is 

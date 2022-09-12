@@ -13,8 +13,7 @@ describe("Check Condition Discussion",
 
                 cy.stepInfo("1. Navigate to Find comps page and add a sales comps");
                 _NavigationSection.navigateToFindComps();
-                Sales._FindComps.zoomInAndResetFilters()
-                    .selectCompFromMap();
+                Sales._FindComps.selectCompFromMap();
 
                 cy.stepInfo("2. Navigate to Adjust Comps");
                 _NavigationSection.navigateToAdjustComps();

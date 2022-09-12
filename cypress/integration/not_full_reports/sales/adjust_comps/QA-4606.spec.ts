@@ -14,8 +14,7 @@ describe("Check the reference 'Condition' line in the Sales Adjustment Grid",
 
                 cy.stepInfo(`2. Add Comp`);
                 NavigationSection.navigateToFindComps();
-                Sales._FindComps.zoomInAndResetFilters()
-                    .selectCompFromMap();
+                Sales._FindComps.selectCompFromMap();
 
                 cy.stepInfo(`3. Navigate Property > Property Description > Site Description and 
                 verify As Is General Property Condition`);

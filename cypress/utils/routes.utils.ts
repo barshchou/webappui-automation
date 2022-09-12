@@ -51,8 +51,7 @@ const routes =  {
     reviewExport: "/review-and-export",
     organizationInfo: "/organization-info",
     commercialCompGroupsDiscussion: "/commercial-comp-groups-discussion",
-    finalValuesReconciliation: "/final-values-and-reconciliation",
-    organizationNewClient: "/organization-new-client"
+    finalValuesReconciliation: "/final-values-and-reconciliation"
 } as const;
 
 export default routes;

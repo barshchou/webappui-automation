@@ -2,7 +2,6 @@ import enums from "../../../../enums/enums";
 import { findCompsPage } from "../../../../pages/sales/findComps.page";
 import { CompPlex } from "../../../../types/compplex.type";
 import { Alias } from "../../../../utils/alias.utils";
-import findCompsActions from "../findComps.actions";
 
 const { numberFilters, salePeriod, propertyType, minMaxInputs } = enums.COMPPLEX_ENUM._jobSearch;
 
@@ -211,7 +210,7 @@ class JobSearchActions {
          * We need cy.wait here, because after gql response spinner sometimes may appear later
          */
         cy.wait(1000);
-        findCompsActions.verifySpinnerNotExist();
+        findCompsPage.loadingModalSpinner.should('not.exist');
         /** 
          * We need cy.wait here, because after spinner some of the comp 
          * icons still in process of rendering their position on the map (so are non-clickable)
@@ -220,11 +219,11 @@ class JobSearchActions {
         this.Page.selectCompsIconOnMap.eq(iconIndex).click();
         this.Page.jobCard.should("be.visible");
         /**
-         * We need cy.wait + .verifySpinnerNotExist() here, because after 
+         * We need cy.wait + loadingModalSpinner.should('not.exist') here, because after 
          * selectCompsIconOnMap.eq(iconIndex).click() gql response may be executed, may be not.
          */
         cy.wait(1000);
-        findCompsActions.verifySpinnerNotExist();
+        findCompsPage.loadingModalSpinner.should('not.exist');
         cy.get(`@${Alias.gql.SearchJobs}`).as(Alias.jobSearch.jobCardComp);
         // ernst: after job-card became visible - we need retrieve all necessary comp data for further manipulations
         this.retrieveJobCardData(Alias.jobSearch.jobCardComp, Alias.jobSearch.selectedCompData);

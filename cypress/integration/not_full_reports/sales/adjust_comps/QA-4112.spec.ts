@@ -12,8 +12,7 @@ describe("Total Utility Adjustments in Sales Adjustment Grid is calculated with 
         it("Test body", () => {
             cy.stepInfo(`1. Navigate to Find comps page and add a sales comps`);
             _NavigationSection.navigateToFindComps();
-            Sales._FindComps.zoomInAndResetFilters()
-                .selectCompFromMap();
+            Sales._FindComps.selectCompFromMap();
 
             cy.stepInfo(`2. Open Adjust comps page, add all types of utilities adjustment and  
                     Verify Total Utility Adjustments in Total Footer = 

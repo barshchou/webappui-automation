@@ -22,7 +22,7 @@ describe("Create report test, open Find Comps, check if map is loaded", { tags: 
         Report._KeyInfo.Page.Header.should("contain.text", headerToContain);
         Base._NavigationSection.navigateToFindComps()
             .verifyProgressBarNotExist();
-        Sales._FindComps.zoomInAndResetFilters(4)
+        Sales._FindComps.resetAllFilters()
             .selectCompFromMap();
     });
 });
