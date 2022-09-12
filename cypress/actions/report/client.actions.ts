@@ -1,7 +1,6 @@
 import clientPage from "../../pages/report/client.page";
 import { replaceEntersWithLineBreak } from "../../../utils/string.utils";
 import BaseActionsExt from "../base/base.actions.ext";
-import routesUtils from "../../utils/routes.utils";
 
 class ClientActions extends BaseActionsExt<typeof clientPage> {
     verifyInputChangesToBeUnsaved(clientFileNumber: string): ClientActions {
@@ -25,9 +24,7 @@ class ClientActions extends BaseActionsExt<typeof clientPage> {
     }
 
     clickAddClientButton() {
-        clientPage.addNewClient.click();
-        this.submitSaveChangesModal()
-            .waitForUrl(routesUtils.organizationNewClient);
+        clientPage.addClientButton.click();
         return this;
     }
 

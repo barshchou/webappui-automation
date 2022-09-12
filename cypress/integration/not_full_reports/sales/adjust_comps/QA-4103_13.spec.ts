@@ -9,8 +9,7 @@ describe("Net Property Adjustments in Sales Adjustment Grid is calculated with c
         before("Login, create report", () => {
             createReport(testData.reportCreationData);
             NavigationSection.navigateToFindComps();
-            Sales._FindComps.zoomInAndResetFilters()
-                .selectCompFromMap()
+            Sales._FindComps.selectCompFromMap()
                 .clickSaveButton();
             cy.saveLocalStorage();
         });

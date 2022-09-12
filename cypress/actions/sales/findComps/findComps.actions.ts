@@ -47,16 +47,6 @@ class FindCompsActions extends BaseActionsExt<typeof findCompsPage> {
         return addressSearchActions;
     }
 
-    verifySpinnerExist(): FindCompsActions {
-        findCompsPage.loadingModalSpinner.should("exist");
-        return this;
-    }
-
-    verifySpinnerNotExist(): FindCompsActions {
-        findCompsPage.loadingModalSpinner.should("not.exist");
-        return this;
-    }
-
     addExistingComparable(address: string): FindCompsActions {
         this.clickCreateCompButton()
             .enterCompAddressToSearch(address)
@@ -143,8 +133,8 @@ class FindCompsActions extends BaseActionsExt<typeof findCompsPage> {
         findCompsPage.compStatusFilter.click();
         statuses.forEach(status => {
             findCompsPage.filterOptionValue(status).click();
-            this.verifySpinnerExist()
-                .verifySpinnerNotExist();
+            findCompsPage.loadingModalSpinner.should("exist");
+            findCompsPage.loadingModalSpinner.should("not.exist");
             findCompsPage.compStatusFilter.children("input").should("contain.value", status);
         });
         findCompsPage.compStatusFilter.realClick();
@@ -153,12 +143,12 @@ class FindCompsActions extends BaseActionsExt<typeof findCompsPage> {
 
     resetAllFilters(): FindCompsActions {
         findCompsPage.resetAllButton.click();
-        this.verifySpinnerExist()
+        findCompsPage.loadingModalSpinner.should('exist');
         /*
          * TODO add cy.wait(@${Alias.gql.SearchSalesTransactions}, { timeout: 180000 }) but with option, when this alias
          * is clearable (for multiply action using)
          */
-            .verifySpinnerNotExist();
+        findCompsPage.loadingModalSpinner.should('not.exist');
         return this;
     }
 
@@ -501,22 +491,6 @@ class FindCompsActions extends BaseActionsExt<typeof findCompsPage> {
 
     openCompSaleInfoForEdit(): FindCompsActions {
         findCompsPage.SaleInfoEditBtn.click();
-        return this;
-    }
-
-    zoomInAndResetFilters(zoomCount = 3): FindCompsActions {
-        this.clickZoomInButton(zoomCount)
-            .resetAllFilters();
-        return this;
-    }
-
-    clickZoomInButton(clickCount = 1): FindCompsActions {
-        for (let index = 0; index < clickCount; index++) {
-            findCompsPage.zoomInButton.click();
-        }
-        
-        findCompsPage.loadingModalSpinner.should('exist');
-        findCompsPage.loadingModalSpinner.should('not.exist');
         return this;
     }
 }

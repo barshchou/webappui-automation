@@ -17,7 +17,6 @@ describe("Verify Grid is calculated with correct formula",
         it("[QA-4108]", () => {
             cy.stepInfo(`1. Navigate to Sales > Find comps and select address`);
             _NavigationSection.navigateToFindComps();
-            Sales._FindComps.zoomInAndResetFilters();
             testData.compsToAdd.forEach(() => {
                 Sales._FindComps.Actions.selectCompFromMap();
             });
