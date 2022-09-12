@@ -493,12 +493,6 @@ class FindCompsActions extends BaseActionsExt<typeof findCompsPage> {
         findCompsPage.SaleInfoEditBtn.click();
         return this;
     }
-
-    openDetailsModal(address: string): FindCompsActions {
-        this.Page.detailsButtonByAddress(address).should('exist').click();
-        this.Page.propertyInfoEditBtn.should('exist');
-        return this;
-    }
 }
 
 export default new FindCompsActions(findCompsPage);
@@ -525,5 +519,4 @@ const _scrollAndSearchComp = (compAddress: string) => {
             return;
         }
     });
-    
 };
