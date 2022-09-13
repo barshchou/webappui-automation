@@ -10,6 +10,7 @@ describe("Neighborhood field is prefilled from the information in Salesforce",
             createReport(testData.reportData);
         });
 
+        // TODO: Fail this test. Bug WEB-6823
         it("[QA-4821-22]", () => {
             cy.stepInfo("2. Proceed to the Property > Market");
             _NavigationSection.navigateToPropertyMarket();

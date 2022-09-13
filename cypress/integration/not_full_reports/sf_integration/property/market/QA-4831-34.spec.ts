@@ -6,6 +6,7 @@ import { createReport } from "../../../../../actions/base/baseTest.actions";
 describe("Neighborhood and Area fields are prefilled from Salesforce",
     { tags: [ "@property", "@market", "@salesforce" ] }, () => {
 
+        // TODO: Fail test QA-4833. Bug WEB-6823
         testData.reportFixtures.forEach(report => {
             it(`${report.specName}`, () => {
                 cy.stepInfo("1. Login and create SF report");
