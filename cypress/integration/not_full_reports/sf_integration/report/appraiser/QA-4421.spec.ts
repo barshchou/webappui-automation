@@ -1,10 +1,10 @@
 import { _NavigationSection } from '../../../../../actions/base';
 import { createReport } from '../../../../../actions/base/baseTest.actions';
 import { Report } from '../../../../../actions';
-import testData from "../../../../../fixtures/not_full_reports/sf_integration/report/appraiser/QA-4463.fixture";
+import testData from "../../../../../fixtures/not_full_reports/sf_integration/report/appraiser/QA-4421.fixture";
 
 describe(`Verify that the Lead Appraisers are sorted alphabetically by the Last name in the Full Name dropdown 
-        of the Lead Appraiser`, { tags: [ "@report", "@appraiser", "@salesforce" ] }, () => {
+        of the Lead Appraiser`, { tags: [ "@report", "@appraiser" ] }, () => {
 
     beforeEach("Login, create report", () => {
         createReport(testData.reportData);
