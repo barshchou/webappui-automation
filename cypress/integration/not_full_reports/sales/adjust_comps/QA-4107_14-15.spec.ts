@@ -12,11 +12,11 @@ describe("Adjusted Price per Residential Unit in Sales Adjustment Grid is calcul
 
             cy.stepInfo("2. Navigate to Sales > Find Comps and select comps");
             NavigationSection.navigateToFindComps();
-            Sales._FindComps.zoomInAndResetFilters();
-            testData.compsToAdd.forEach(() => {
-                // TODO: [QA-6764] Update method of selecting comp and querying data needed for test 
-                Sales._FindComps.Actions.selectCompFromMap();
-            });
+            for (let i = 1; i < 3; i++) {
+                Sales._FindComps.AddressSearch.openAddressSearchTab()
+                    .addCompByParameter(i, testData.compProperty, testData.compStatusDate);
+            }
+
 
             cy.stepInfo("3. Navigate to Sales > Adjust Comps > Sales Adjustment Grid");
             NavigationSection.navigateToAdjustComps();
@@ -38,10 +38,10 @@ describe("Adjusted Price per Residential Unit in Sales Adjustment Grid is calcul
             cy.stepInfo("2. Navigate to Sales > Find Comps and select comps");
             NavigationSection.navigateToFindComps();
             Sales._FindComps.zoomInAndResetFilters();
-            testData.compsToAdd.forEach(() => {
-                // TODO: [QA-6764] Update method of selecting comp and querying data needed for test 
-                Sales._FindComps.Actions.selectCompFromMap();
-            });
+            for (let i = 1; i < 3; i++) {
+                Sales._FindComps.AddressSearch.openAddressSearchTab()
+                    .addCompByParameter(i, testData.compProperty, testData.compStatusDate);
+            }
 
             cy.stepInfo("3. Navigate to Sales > Adjust Comps > Sales Adjustment Grid");
             NavigationSection.navigateToAdjustComps();
@@ -62,11 +62,10 @@ describe("Adjusted Price per Residential Unit in Sales Adjustment Grid is calcul
 
             cy.stepInfo("2. Navigate to Sales > Find Comps and select comps");
             NavigationSection.navigateToFindComps();
-            Sales._FindComps.zoomInAndResetFilters();
-            testData.compsToAdd.forEach(() => {
-                // TODO: [QA-6764] Update method of selecting comp and querying data needed for test 
-                Sales._FindComps.Actions.selectCompFromMap();
-            });
+            for (let i = 1; i < 3; i++) {
+                Sales._FindComps.AddressSearch.openAddressSearchTab()
+                    .addCompByParameter(i, testData.compProperty, testData.compStatusDate);
+            }
 
             cy.stepInfo("3. Navigate to Sales > Adjust Comps > Sales Adjustment Grid");
             NavigationSection.navigateToAdjustComps();
