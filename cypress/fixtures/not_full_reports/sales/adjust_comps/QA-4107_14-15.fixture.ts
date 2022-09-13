@@ -20,7 +20,6 @@ export default {
     reportCreationData: ReportDataCreator.getReportData("4114-15"),
     calculationUnits: [ Enums.CALCULATION_UNITS.psf, Enums.CALCULATION_UNITS.perResidentialUnits ],
     comparable: Object.freeze(comparableFixture()),
-    compsToAdd: [ 0, 1 ],
     compProperty,
     compStatusContract,
     compStatusDate,
