@@ -26,9 +26,9 @@ class MarketPage extends BasePage {
         return cy.get(`[name="${marketAnalysisUse}Submarket"]`);
     }
 
-    get marketQuarter() { return cy.get("[data-qa=marketQuarter-form-control] input"); }
+    get marketQuarter() { return cy.get("[name=marketQuarter]"); }
 
-    get marketYear() { return cy.get("*[name=marketYear]"); }
+    get marketYear() { return cy.get("[name=marketYear]"); }
 
     get pullDropboxButton() { return cy.xpath("//button[.='PULL FROM DROPBOX']"); }
 
@@ -63,7 +63,7 @@ class MarketPage extends BasePage {
     }
 
     getMarketAnalysisUseCheckboxArea(marketAnalysisUse: BoweryReports.MarketAnalysisUses) {
-        return cy.get(`[data-qa^='marketAnalysisUses.${marketAnalysisUse}-checkbox']`); 
+        return cy.get(`[data-qa^='marketAnalysisUses.${marketAnalysisUse}']`);
     }
 
     get areaEconomicAnalysisContainer() { return cy.get("[data-qa=file-selection-areaEconomicAnalysis-input]"); }

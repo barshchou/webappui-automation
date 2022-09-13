@@ -6,11 +6,11 @@ const reportCreationFixture = () => {
 
 const inspectorName = "Robocop Inspector";
 
-const certificationInspectionComment = "Brandon Gollotti has not made a personal inspection of the" + 
-" property that is the subject of this report.";
+const certificationInspectionComment = `Brandon Gollotti has not made a personal inspection of the` + 
+` property  that is the subject of this report.`;
 
 const certificationAssistanceComment = `Robocop Automation and ${inspectorName} provided significant` + 
-" real property appraisal assistance to  the person signing this certification.";
+` real property appraisal assistance to  the person signing this certification.`;
 
 
 export default {

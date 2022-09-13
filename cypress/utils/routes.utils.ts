@@ -52,7 +52,10 @@ const routes =  {
     organizationInfo: "/organization-info",
     subjectPropertySiteDetails: "/subject-property#site-details",
     subjectPropertyDescription: "/subject-property#property-description",
-    subjectPropertyHistory: "/subject-property#property-history"
+    subjectPropertyHistory: "/subject-property#property-history",
+    commercialCompGroupsDiscussion: "/commercial-comp-groups-discussion",
+    finalValuesReconciliation: "/final-values-and-reconciliation",
+    organizationNewClient: "/organization-new-client"
 } as const;
 
 export default routes;

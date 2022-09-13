@@ -14,6 +14,8 @@ import mapKeysUtils from "../../../utils/mapKeys.utils";
 import { BoweryReports } from "../../../types/boweryReports.type";
 import { isDateHasCorrectFormat } from "../../../../utils/date.utils";
 import jobSearchActions from "./drm/job-search.actions";
+import addressSearchActions from "./drm/address-search.actions";
+import Enums from "../../../enums/enums";
 
 const { compPlex } = Alias.pageElements;
 
@@ -39,6 +41,20 @@ class FindCompsActions extends BaseActionsExt<typeof findCompsPage> {
 
     get JobSearch() {
         return jobSearchActions;
+    }
+
+    get AddressSearch() {
+        return addressSearchActions;
+    }
+
+    verifySpinnerExist(): FindCompsActions {
+        findCompsPage.loadingModalSpinner.should("exist");
+        return this;
+    }
+
+    verifySpinnerNotExist(): FindCompsActions {
+        findCompsPage.loadingModalSpinner.should("not.exist");
+        return this;
     }
 
     addExistingComparable(address: string): FindCompsActions {
@@ -127,8 +143,8 @@ class FindCompsActions extends BaseActionsExt<typeof findCompsPage> {
         findCompsPage.compStatusFilter.click();
         statuses.forEach(status => {
             findCompsPage.filterOptionValue(status).click();
-            findCompsPage.loadingModalSpinner.should("exist");
-            findCompsPage.loadingModalSpinner.should("not.exist");
+            this.verifySpinnerExist()
+                .verifySpinnerNotExist();
             findCompsPage.compStatusFilter.children("input").should("contain.value", status);
         });
         findCompsPage.compStatusFilter.realClick();
@@ -137,12 +153,12 @@ class FindCompsActions extends BaseActionsExt<typeof findCompsPage> {
 
     resetAllFilters(): FindCompsActions {
         findCompsPage.resetAllButton.click();
-        findCompsPage.loadingModalSpinner.should('exist');
+        this.verifySpinnerExist()
         /*
          * TODO add cy.wait(@${Alias.gql.SearchSalesTransactions}, { timeout: 180000 }) but with option, when this alias
          * is clearable (for multiply action using)
          */
-        findCompsPage.loadingModalSpinner.should('not.exist');
+            .verifySpinnerNotExist();
         return this;
     }
 
@@ -412,24 +428,54 @@ class FindCompsActions extends BaseActionsExt<typeof findCompsPage> {
         return this;
     }
     
-    updateCompGba(gbaValue: number, yearBuilt = "1970"): FindCompsActions {
+    updateCompPropertyInfo(params: BoweryReports.FindComps.CompsData = { 
+        gbaValue: 300, 
+        yearBuilt: "1970", 
+        floors: 10, 
+        commercialUnits: 5, 
+        commercialArea: 1500,
+        compType: Enums.COMPARABLE_TYPES.mixedUse
+    }): FindCompsActions {
         this.openCompPropertyInfoForEdit();
+        this.PropertyInfo.setCompType(params.compType);
         findCompsPage.gbaNewComp.as(compPlex.gbaNewComp);
         findCompsPage.yearBuiltNewComp.as(compPlex.yearBuiltNewComp);
+        findCompsPage.floorsNewComp.as(compPlex.floorsNewComp);
+
+        if (params.compType === Enums.COMPARABLE_TYPES.mixedUse) {
+            findCompsPage.commercialAreaNewComp.as(compPlex.commercialAreaNewComp);
+            findCompsPage.createCompNumberCommercialUnits.as(compPlex.createCompNumberCommercialUnits);
+        }
 
         this.clearNumericInputNewComp(compPlex.gbaNewComp);
         cy.get(`@${compPlex.gbaNewComp}`).focus();
-        cy.get(`@${compPlex.gbaNewComp}`).realType(`{enter}${gbaValue}`, { pressDelay: 45, delay: 50 });
+        cy.get(`@${compPlex.gbaNewComp}`).realType(`{enter}${params.gbaValue}`, { pressDelay: 45, delay: 50 });
         this.clearNumericInputNewComp(compPlex.yearBuiltNewComp);
         cy.get(`@${compPlex.yearBuiltNewComp}`).realClick();
-        cy.get(`@${compPlex.yearBuiltNewComp}`).realType(`{enter}${yearBuilt}`, { pressDelay: 45, delay: 50 });
+        cy.get(`@${compPlex.yearBuiltNewComp}`).realType(`{enter}${params.yearBuilt}`, { pressDelay: 45, delay: 50 });
+        this.clearNumericInputNewComp(compPlex.floorsNewComp);
+        cy.get(`@${compPlex.floorsNewComp}`).realClick();
+        cy.get(`@${compPlex.floorsNewComp}`).realType(`{enter}${params.floors}`, { pressDelay: 45, delay: 50 });
+
+        if (params.compType === Enums.COMPARABLE_TYPES.mixedUse) {
+            this.clearNumericInputNewComp(compPlex.createCompNumberCommercialUnits);
+            cy.get(`@${compPlex.createCompNumberCommercialUnits}`).realClick();
+            cy.get(`@${compPlex.createCompNumberCommercialUnits}`)
+                .realType(`{enter}${params.commercialUnits}`, { pressDelay: 45, delay: 50 });
+            this.clearNumericInputNewComp(compPlex.commercialAreaNewComp);
+            cy.get(`@${compPlex.commercialAreaNewComp}`).focus();
+            cy.get(`@${compPlex.commercialAreaNewComp}`)
+                .realType(`{enter}${params.commercialArea}`, { pressDelay: 45, delay: 50 });
+        }
+
         findCompsPage.PropertyInfoDoneBtn.click();
         
         return this;
     }
 
-    updateContractPrice(price: number): FindCompsActions {
+    updateSaleInfoPrice(price: number, saleStatus = Enums.COMPPLEX_ENUM._saleInfoEnum.underContract): FindCompsActions {
         this.openCompSaleInfoForEdit();
+        this.SaleInfo.setSaleStatus(saleStatus);
         findCompsPage.contractPriceInput.as(compPlex.contractPrice);
         this.clearNumericInputNewComp(compPlex.contractPrice);
         cy.get(`@${compPlex.contractPrice}`).focus();
@@ -456,6 +502,22 @@ class FindCompsActions extends BaseActionsExt<typeof findCompsPage> {
 
     openCompSaleInfoForEdit(): FindCompsActions {
         findCompsPage.SaleInfoEditBtn.click();
+        return this;
+    }
+
+    zoomInAndResetFilters(zoomCount = 3): FindCompsActions {
+        this.clickZoomInButton(zoomCount)
+            .resetAllFilters();
+        return this;
+    }
+
+    clickZoomInButton(clickCount = 1): FindCompsActions {
+        for (let index = 0; index < clickCount; index++) {
+            findCompsPage.zoomInButton.click();
+        }
+        
+        findCompsPage.loadingModalSpinner.should('exist');
+        findCompsPage.loadingModalSpinner.should('not.exist');
         return this;
     }
 }

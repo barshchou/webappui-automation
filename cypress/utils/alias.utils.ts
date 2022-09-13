@@ -13,7 +13,8 @@ export const gqlOperationNames = {
     findSingleSalesComp: "findSingleSalesComp",
     updateJob: "updateJob",
     findTransactionsByIdsAndVersions: "findTransactionsByIdsAndVersions",
-    searchJobs:"searchJobs"
+    searchJobs:"searchJobs",
+    searchTransactionsByAddresses: "searchTransactionsByAddresses",
 };
 
 export const Alias = {
@@ -34,7 +35,8 @@ export const Alias = {
         FindSingleSalesComp:_gqlAlias(gqlOperationNames.findSingleSalesComp),
         UpdateJob:_gqlAlias(gqlOperationNames.updateJob),
         FindTransactionsByIdsAndVersions:_gqlAlias(gqlOperationNames.findTransactionsByIdsAndVersions),
-        SearchJobs:_gqlAlias(gqlOperationNames.searchJobs)
+        SearchJobs:_gqlAlias(gqlOperationNames.searchJobs),
+        SearchTransactionsByAddresses: _gqlAlias(gqlOperationNames.searchTransactionsByAddresses)
     }, 
     pageElements:{
         commercialUnits:{

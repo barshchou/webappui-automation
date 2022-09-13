@@ -4,8 +4,8 @@ import NavigationSection from "../../../../../actions/base/navigationSection.act
 import Income from "../../../../../actions/income/income.manager";
 
 describe(`Verify on checking the 'Display square footage for comps?' checkbox 2 columns appears in the grids 
-                of comparable unit groups on 'Rent Comps' page (Unit type of search is selected)`, () => {
-
+of comparable unit groups on 'Rent Comps' page (Unit type of search is selected)`, 
+{ tags:[ "@income", "@commercial", "@in_place_rent_roll" ] }, () => {
     beforeEach("Login, create report", () => {
         createReport(testData.reportCreationData);
     });

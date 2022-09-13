@@ -76,7 +76,8 @@ class AppraiserActions extends BaseActionsExt<typeof appraiserPage> {
 
     verifyCertificationInspectionCommentary(): AppraiserActions {
         appraiserPage.getAllNamesWithCheckPersonallyInspectedReportCheckboxes(true).each(item => {
-            appraiserPage.certificationInspectionText.should("include.text", item.text());
+            appraiserPage.formCommentTextBox(Enums.PAGES_TEXTBOX_NAMES.certificationInspection)
+                .should("include.text", item.text());
         });
         return this;
     }
@@ -94,7 +95,7 @@ class AppraiserActions extends BaseActionsExt<typeof appraiserPage> {
 
     interceptAppraisersRequest() {
         cy._mapGet(mapKeysUtils.reportId).then(reportId => {
-            cy.intercept("GET", `/report/${reportId}`).as(Alias.reportId);
+            cy.intercept("PATCH", `/report/${reportId}`).as(Alias.reportId);
         });
     }
 

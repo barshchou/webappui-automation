@@ -3,35 +3,10 @@ import { Alias } from "../../utils/alias.utils";
 import BaseActionsExt from "./base.actions.ext";
 import mapKeysUtils from "../../utils/mapKeys.utils";
 import routesUtils from "../../utils/routes.utils";
-import { Utils } from "../../types/utils.type";
 import stabilizedRentRollPage from "../../pages/income/commercial/stabilizedRentRoll.page";
 import rentRollPage from "../../pages/income/commercial/rentRoll.page";
 
 class NavigationSectionActions extends BaseActionsExt<typeof navigationSectionPage> {
-    
-    waitForUrl(route: Utils.Routes) {
-        cy.url().should("include", route);
-        return this;
-    }
-
-    submitSaveChangesModal(saveChanges = true): NavigationSectionActions {
-        cy.get("body").then($body => {
-            if ($body.text().includes("You have unsaved changes")) {
-                cy.get("[data-qa=form-confirm-dialog]").invoke('prop', 'hidden').then($prop => {
-                    cy.log(`${$prop}`);
-                    if ($prop == false) {
-                        if (saveChanges) { 
-                            this.clickYesButton(); 
-                        } else {
-                            this.clickNoButton();
-                        }
-                    }
-                });
-            }
-        });
-        return this;
-    }
-
     openReviewAndExport(isNewReport = true): NavigationSectionActions {
         let reportAlias = "docxReportAsync";
         cy.intercept({
@@ -259,6 +234,15 @@ class NavigationSectionActions extends BaseActionsExt<typeof navigationSectionPa
             .clickCommercialRentComps()
             .submitSaveChangesModal()
             .waitForUrl(routesUtils.commercialRentComps);
+        return this;
+    }
+
+    navigateToCommercialCompGroupsDiscussion(): NavigationSectionActions {
+        this.clickIncomeApproachButton()
+            .clickCommercialMenuIfClosed()
+            .clickCommercialCompGroupsDiscussion()
+            .submitSaveChangesModal()
+            .waitForUrl(routesUtils.commercialCompGroupsDiscussion);
         return this;
     }
 
@@ -499,6 +483,15 @@ class NavigationSectionActions extends BaseActionsExt<typeof navigationSectionPa
             .submitSaveChangesModal()
             .verifyProgressBarNotExist()
             .waitForUrl(routesUtils.renovation);
+        return this;
+    }
+
+    navigateToFinalValuesReconciliation(): NavigationSectionActions {
+        this.clickFinalButton()
+            .clickFinalValuesReconciliation()
+            .submitSaveChangesModal()
+            .verifyProgressBarNotExist()
+            .waitForUrl(routesUtils.finalValuesReconciliation);
         return this;
     }
 
@@ -897,6 +890,11 @@ class NavigationSectionActions extends BaseActionsExt<typeof navigationSectionPa
 
     clickContentManagementSystem(): NavigationSectionActions {
         navigationSectionPage.contentManagementSystemButton.click();
+        return this;
+    }
+
+    clickFinalValuesReconciliation(): NavigationSectionActions {
+        navigationSectionPage.finalValuesReconciliationButton.click();
         return this;
     }
 

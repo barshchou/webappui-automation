@@ -12,10 +12,11 @@ conditionalDescribe("Adjusted Price per SF in Sales Adjustment Grid is calculate
             createReport(testData.reportCreationData);
 
             NavigationSection.navigateToFindComps();
-            Sales.FindComps.selectCompFromMap()
+            Sales.FindComps.zoomInAndResetFilters()
+                .selectCompFromMap()
                 .openCompForEdit()
-                .updateCompGba(testData.compGbaInput)
-                .updateContractPrice(testData.contractPrice)
+                .updateCompPropertyInfo()
+                .updateSaleInfoPrice(testData.contractPrice)
                 .saveCompChanges();
         
             NavigationSection.navigateToAdjustComps();

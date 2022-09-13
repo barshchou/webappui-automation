@@ -16,8 +16,9 @@ const pagesTextboxNames = {
     locationDescriptionExport: "Location Description Export",
     siteDetails: "Site Details",
     asIsBuildingDescription: "As Is Building Description",
-    propertyHistoricalInformation: "Property Historical Information"
-
+    propertyHistoricalInformation: "Property Historical Information",
+    certificationInspection: "Certification Inspection",
+    clientGuidelinesDiscussion: "Client Guidelines Discussion"
 } as const;
 
 export default Object.freeze(pagesTextboxNames);
