@@ -3,7 +3,7 @@ import Enums from "../../../../enums/enums";
 import { BoweryReports } from "../../../../types/boweryReports.type";
 import { BoweryAutomation } from "../../../../types/boweryAutomation.type";
 
-const _grossBuildingArea = 5000;
+const buildingArea = 5000;
 const _numberOfCommercialUnits = 3;
 const _numberOfResidentialUnits = 5;
 const _unitSf = [ 100000, 120000, 145000 ];
@@ -31,7 +31,7 @@ const _annualReimbursementTotal = () => {
     return total;
 };
 
-const _reimbursementPerSf = _annualReimbursementTotal() / _grossBuildingArea;
+const _reimbursementPerSf = _annualReimbursementTotal() / buildingArea;
 const _reimbursementPerUnit = _annualReimbursementTotal() / _numberOfResidentialUnits;
 
 const _reportCreationData: BoweryAutomation.ReportCreationData = ReportDataCreator.getReportData("4501-03", {
@@ -42,7 +42,7 @@ const _leaseStatuses: Array<BoweryReports.LeaseStatus> = [ "Occupied", "Occupied
 
 export default {
     reportCreationData: _reportCreationData,
-    grossBuildingArea: _grossBuildingArea,
+    buildingArea: buildingArea,
     numberOfResidentialUnits: _numberOfResidentialUnits,
     numberOfCommercialUnits: _numberOfCommercialUnits,
     listOfUnitsSF: _unitSf,
@@ -56,5 +56,11 @@ export default {
     reimbursementPerSf: _reimbursementPerSf,
     reimbursementPerUnit: _reimbursementPerUnit,
     expenseTypeCellName: _expenseTypeCellName,
-    reimbursementType: _reimbursementType
+    reimbursementType: _reimbursementType,
+    basisSquareFootAnalysis: {
+        gba: Enums.BASIS_SQUARE_FOOT_ANALYSIS.grossBuildingArea, 
+        gla: Enums.BASIS_SQUARE_FOOT_ANALYSIS.grossLeasableArea,
+        nla: Enums.BASIS_SQUARE_FOOT_ANALYSIS.netLeasableArea,
+        nra: Enums.BASIS_SQUARE_FOOT_ANALYSIS.netRentableArea
+    }
 };
