@@ -18,7 +18,6 @@ describe("Total Utility Adjustments in Sales Adjustment Grid is calculated with 
                     .addCompByParameter(i, testData.compProperty, testData.compStatusDate);
                 Sales._FindComps.Page.getSelectedComparable(i-1).should('be.visible');
             }
-            
 
             cy.stepInfo(`2. Go to Adjust Comps page`);
             _NavigationSection.navigateToAdjustComps();
