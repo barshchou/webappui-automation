@@ -12,7 +12,7 @@ describe("[QA-4102_06] -> Total Utility Adjustments in Sales Adjustment Grid is 
             // test case note: According to Ira - we're allow to add one comp
             cy.stepInfo(`2. Precondition: Add several comps in the Sales > Find Sales Comparables page`);
             _NavigationSection.navigateToFindComps();
-            Sales._FindComps.selectCompFromMapByAddress(testData.compAddress);
+            Sales._FindComps.selectCompFromMap();
 
             cy.stepInfo(`3. Precondition: Open Sales > Adjust Comps page`);
             _NavigationSection.navigateToAdjustComps();
