@@ -2,8 +2,7 @@ import testData from "../../../../fixtures/not_full_reports/sales/adjust_comps/Q
 import { createReport } from "../../../../actions/base/baseTest.actions";
 import NavigationSection from "../../../../actions/base/navigationSection.actions";
 import { Sales, Report } from "../../../../actions";
-
-// TODO: [QA-6755] AQA - Update QA-5350 test to select comps and query data from response/db  
+ 
 describe("Calculation of Market Condition adjustment", 
     { tags: [ "@adjust_comps", "@sales" ] }, () => {
 
@@ -17,9 +16,10 @@ describe("Calculation of Market Condition adjustment",
     
             cy.stepInfo(`2. Navigate to the Sales > Find Comps and add a few Sales Comp`);
             NavigationSection.navigateToFindComps();
-            Sales._FindComps.zoomInAndResetFilters()
-                .selectCompFromMap()
-                .selectCompFromMap(-1);
+            for (let i = 1; i < 3; i++) {
+                Sales._FindComps.AddressSearch.openAddressSearchTab()
+                    .addCompByParameter(i, testData.compProperty, testData.compStatusDate);
+            }
     
             cy.stepInfo(`3. Open Adjust comps page, and copy paste value into Market Condition Adjustment field`);
             NavigationSection.navigateToAdjustComps();

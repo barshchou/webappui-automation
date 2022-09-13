@@ -6,7 +6,7 @@ import { createReport } from "../../../../actions/base/baseTest.actions";
 describe("Adjusted Price per Residential Unit in Sales Adjustment Grid is calculated with correct formula", 
     { tags: [ "@adjust_comps", "@sales" ] }, () => {
 
-        it("[QA-4107]", () => {
+        it.skip("[QA-4107]", () => {
             cy.stepInfo("1. Login, create report");
             createReport(testData.reportMixedCreationData);
 
@@ -16,7 +16,6 @@ describe("Adjusted Price per Residential Unit in Sales Adjustment Grid is calcul
                 Sales._FindComps.AddressSearch.openAddressSearchTab()
                     .addCompByParameter(i, testData.compProperty, testData.compStatusDate);
             }
-
 
             cy.stepInfo("3. Navigate to Sales > Adjust Comps > Sales Adjustment Grid");
             NavigationSection.navigateToAdjustComps();
@@ -31,13 +30,12 @@ describe("Adjusted Price per Residential Unit in Sales Adjustment Grid is calcul
                 .verifyAdjustedPriceByColumn();
         });
 
-        it("[QA-4114]", () => {
+        it.skip("[QA-4114]", () => {
             cy.stepInfo("1. Login, create report");
             createReport(testData.reportCreationData);
 
             cy.stepInfo("2. Navigate to Sales > Find Comps and select comps");
             NavigationSection.navigateToFindComps();
-            Sales._FindComps.zoomInAndResetFilters();
             for (let i = 1; i < 3; i++) {
                 Sales._FindComps.AddressSearch.openAddressSearchTab()
                     .addCompByParameter(i, testData.compProperty, testData.compStatusDate);

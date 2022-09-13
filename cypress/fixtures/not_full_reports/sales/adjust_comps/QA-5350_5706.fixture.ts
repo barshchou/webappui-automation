@@ -7,6 +7,11 @@ const _dateOfValuationFixture: BoweryReports.KeyInfoDateType = {
     date: "01-15-2022"
 };
 
+const compProperty = Enums.COMP_PROPERTIES_PATHS_DB.compPropertyPathsInDB.saleStatus;
+const compStatusContract = Enums.COMP_PROPERTIES_PATHS_DB.saleStatusValuesInDB.inContract;
+const compStatusDate = Enums.COMP_PROPERTIES_PATHS_DB.saleStatusValuesInDB.date;
+const compStatusListing = Enums.COMP_PROPERTIES_PATHS_DB.saleStatusValuesInDB.listing;
+
 export default {
     reportCreationData: ReportDataCreator.getReportData("5350_5706", { incomeValue: Enums.INCOME_TYPE.both }),
     marketConditionAdjustment: 2,
@@ -23,5 +28,9 @@ export default {
     tooltipText: "For As Is properties this will calculate a market condition adjustment based " + 
     "on (Subject Date of Value - Comp Date of Sale) / 365 x % Market Condition Adjustment. For Stabilized " + 
     "properties, this will calculate a market condition adjustment based on (Subject Date " + 
-    "of Stabilization - Comp Date of Sale) / 365 x % Market Condition Adjustment." 
+    "of Stabilization - Comp Date of Sale) / 365 x % Market Condition Adjustment.",
+    compProperty,
+    compStatusContract,
+    compStatusDate,
+    compStatusListing
 };
