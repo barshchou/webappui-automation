@@ -16,8 +16,8 @@ describe("Neighborhood and Area fields are prefilled from Salesforce",
                 _NavigationSection.navigateToPropertyMarket();
     
                 cy.stepInfo("3. Verify Neighborhood and Area fields are prefilled from Salesforce");
-                Property._Market.Page.neighborhood.should("have.value", report.neighborhood);
-                Property._Market.Page.area.should("have.value", report.area);
+                Property._Market.Page.neighborhoodInput.should("have.value", report.neighborhood);
+                Property._Market.Page.areaInput.should("have.value", report.area);
             });
         });
     });
