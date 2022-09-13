@@ -17,7 +17,7 @@ const salePeriodValue = Enums.SALE_PERIOD_VALUES.lastThreeMonths;
 const radioButtonSaleConditionArms = Enums.SALE_CONDITION.armsLength;
 const radioButtonSaleConditionNonArms = Enums.SALE_CONDITION.nonArmsLength;
 const filePath = "not_full_reports/CostarExport_3Contract_3Listing_3Date.csv";
-const filePath2Comps = "not_full_reports/CostarExport 3Comps.csv";
+const filePath2Comps = "not_full_reports/CostarExport_3Comps.csv";
 
 const comparableFixture = {
     address1: "Sanford Avenue, Queens",
