@@ -16,7 +16,7 @@ describe("Neighborhood field is prefilled from the information in Salesforce",
             _NavigationSection.navigateToPropertyMarket();
 
             cy.stepInfo("3. Verify the Neighborhood, Area in the webapp matches Neighborhood, Area in the Salesforce");
-            Property._Market.Page.neighborhood.should("have.value", testData.neighborhood);
-            Property._Market.Page.area.should("have.value", testData.area);
+            Property._Market.Page.neighborhood.should("have.value", testData.neighborhoodValue);
+            Property._Market.Page.area.should("have.value", testData.areaValue);
         });
     });

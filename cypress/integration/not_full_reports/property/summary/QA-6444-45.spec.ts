@@ -4,7 +4,7 @@ import { _NavigationSection } from "../../../../actions/base";
 import { Property } from "../../../../actions";
 import launchDarklyApi from "../../../../api/launchDarkly.api";
 
-describe("Edit Data button and redirects to Data Collection>Subject Property Data",
+describe("Edit Data button and redirects to Data Collection > Subject Property Data",
     { tags: [ "@property", "@market" ] }, () => {
     
         before("Login, create report", () => {

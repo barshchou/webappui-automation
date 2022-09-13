@@ -3,6 +3,6 @@ import Enums from "../../../../../enums/enums";
 
 export default {
     reportData: ReportDataCreator.getReportData(Enums.MARKET_RESEARCH_TYPES.withNeighborhoodAndArea, {}, true),
-    neighborhood: "Gravesend",
-    area: "Kings County"
+    neighborhoodValue: "Gravesend",
+    areaValue: "Kings County"
 };

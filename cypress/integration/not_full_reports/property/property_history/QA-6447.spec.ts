@@ -7,10 +7,9 @@ import launchDarklyApi from "../../../../api/launchDarkly.api";
 describe(`Edit Data button in Property History Information section redirects to Data Collection 
         > Subject Property Data > Property History Information`, { tags: [ "@property", "@property_history" ] }, () => {
     
-    before("Login, create report", () => {
+    beforeEach("Login, create report", () => {
         launchDarklyApi.setFeatureFlagForUser(testData.featureFlagKey, testData.onFeatureFlag);
         createReport(testData.reportCreationData);
-        cy.saveLocalStorage();
     });
 
     it("[QA-6447]", () => {
