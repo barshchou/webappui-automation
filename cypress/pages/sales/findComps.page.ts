@@ -109,7 +109,7 @@ class FindCompsPage extends BasePage {
     }
 
     get createCompSearchResults() {
-        return cy.get("[data-qa=search-result-form] tbody tr");
+        return cy.get("[data-qa=search-result-form] tbody tr", { timeout: 60000 });
     }
 
     get createNewCompButton() { return cy.contains("Create New"); }
@@ -133,7 +133,7 @@ class FindCompsPage extends BasePage {
     }
 
     get salesCompsDateSold() {
-        return cy.get('[data-qa="sale-date"]');
+        return cy.get('[data-qa="selected-sales-comps-table"]').find('[data-qa="sale-date"]');
     }
 
     get loadingModalCSV() {
@@ -141,14 +141,14 @@ class FindCompsPage extends BasePage {
     }
 
     get resetAllButton() {
-        return cy.contains('RESET ALL');
+        return cy.get('[data-qa="reset-all-btn"]');
     }
 
     get loadingModalSpinner() {
         return cy.get('[data-qa="loading-modal"] [data-icon="spinner"]', { timeout: 60000 });
     }
 
-    get filterSalePeriod() {
+    get filterSalePeriod() {   //('[data-qa="filter-sale-period"]'); ?
         return cy.get('[data-qa="filter-completedInPeriod"]');
     }
 
@@ -195,6 +195,21 @@ class FindCompsPage extends BasePage {
     get zoomInButton() { return cy.get(`.leaflet-control-zoom-in`).eq(0); }
 
     get loadingModal() { return cy.get("*[data-qa='loading-modal']"); }
+
+    //Add data-qa attr for details button
+    detailsButtonByAddress(address: string) {
+        return this.salesComparablesTable.contains(address).parent('tr').find('[data-qa="selected-comp-actions"]')
+            .contains('button', 'Details');
+    }
+
+    addRemovedCompButtonByAddress(address: string) {
+        return cy.contains('Removed Comps').parent().parent().contains(address)
+            .parent().find('[data-testid="AddCircleIcon"]');
+    }
+
+    get salesComparablesTable() {
+        return cy.get('[data-qa="selected-sales-comps-table"]');
+    }
 }
 
 /**

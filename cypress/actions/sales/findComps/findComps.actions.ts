@@ -16,6 +16,7 @@ import { isDateHasCorrectFormat } from "../../../../utils/date.utils";
 import jobSearchActions from "./drm/job-search.actions";
 import addressSearchActions from "./drm/address-search.actions";
 import Enums from "../../../enums/enums";
+import salesCompDetailsActions from "./drm/salesCompDetails.actions";
 
 const { compPlex } = Alias.pageElements;
 
@@ -45,6 +46,10 @@ class FindCompsActions extends BaseActionsExt<typeof findCompsPage> {
 
     get AddressSearch() {
         return addressSearchActions;
+    }
+
+    get SalesCompDetails() {
+        return salesCompDetailsActions;
     }
 
     verifySpinnerExist(): FindCompsActions {
@@ -517,6 +522,17 @@ class FindCompsActions extends BaseActionsExt<typeof findCompsPage> {
         
         findCompsPage.loadingModalSpinner.should('exist');
         findCompsPage.loadingModalSpinner.should('not.exist');
+        return this;
+    }
+
+    openDetailsModal(address: string): FindCompsActions {
+        this.Page.detailsButtonByAddress(address).should('exist').click();
+        this.Page.propertyInfoEditBtn.should('exist');
+        return this;
+    }
+
+    addDeletedCompByAddress(address: string): FindCompsActions {
+        findCompsPage.addRemovedCompButtonByAddress(address).should("exist").click();
         return this;
     }
 }

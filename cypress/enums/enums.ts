@@ -100,6 +100,7 @@ import compPropertyPathsInDB from "./compplex/compPropertiesAndValues.enum";
 import saleStatusValuesInDB from "./compplex/compPropertiesAndValues.enum";
 import saleConditionValuesInDB from "./compplex/compPropertiesAndValues.enum";
 import finalValueApproachEnum from "./final/finalValuesReconciliation/finalValueApproach.enum";
+import saleCondition from "./findComps/saleInformation/saleCondition.enum";
 
 export default {
     TEMPLATE_TYPE: templateTypesEnum,
@@ -203,5 +204,6 @@ export default {
     FINAL_VALUES_APPROACH: finalValueApproachEnum,
     COMP_PROPERTIES_PATHS_DB: compPropertyPathsInDB,
     COMP_SALE_STATUS_DB: saleStatusValuesInDB,
-    COMP_SALE_CONDITION_DB: saleConditionValuesInDB
+    COMP_SALE_CONDITION_DB: saleConditionValuesInDB,
+    SALE_CONDITION: saleCondition,
 };
