@@ -17,6 +17,7 @@ describe.skip("Verify the Comps can be added by entering the existing Report ID 
 
         it("Test body", () => {
             NavigationSection.navigateToFindComps();
+            Sales.FindComps.zoomInAndResetFilters();
             fixture.compsNumber.forEach(() => {
                 Sales.FindComps.selectCompFromMap();
             });
