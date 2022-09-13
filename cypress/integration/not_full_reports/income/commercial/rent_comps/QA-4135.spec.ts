@@ -18,7 +18,7 @@ describe("Subject column calculations", { tags: [ "@income", "@commercial", "@re
 
     beforeEach(() => {
         cy.restoreLocalStorage();
-        _NavigationSection.openPageByVisit(_IncomeRoutes._CommercialRoutes._InPlaceRentRoll);
+        _NavigationSection.openPageByUrl(_IncomeRoutes._CommercialRoutes._InPlaceRentRoll);
     });
 
     it("All units are occupied and have rent PSF filled in", () => {

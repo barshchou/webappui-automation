@@ -36,7 +36,7 @@ describe(`[QA-4186] Unit of Measure on Commercial Unit Details modal is defaulte
         it(`[QA-4185][QA-4186] with ${measure} rent type`, () => {
             if (measure !== "per square foot per month") {
                 cy.stepInfo(`Open commercial in-place rent roll page, choose ${measure} basis of rent`);
-                _NavigationSection.openPageByVisit(_IncomeRoutes._CommercialRoutes._InPlaceRentRoll);
+                _NavigationSection.openPageByUrl(_IncomeRoutes._CommercialRoutes._InPlaceRentRoll);
                 Income._CommercialManager.InPlaceRentRoll.clickBasisOfRentTabByUnitMeasure(measure);
                 _NavigationSection.navigateToCommercialRentComps();
             }

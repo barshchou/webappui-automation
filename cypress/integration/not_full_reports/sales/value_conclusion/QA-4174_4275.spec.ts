@@ -22,7 +22,7 @@ describe(`[QA-4174] Prospective Market Value As Stabilized is calculated with co
     Object.values(Enums.BASIS_SQUARE_FOOT_ANALYSIS).forEach(( value, index) => {
         it(`Test with ${value} Basis for Square Foot Analysis`, () => {
             cy.stepInfo(`1. Navigate to Property -> Summary, select ${value} basis and enter it's value`);
-            _NavigationSection.openPageByVisit(routesUtils.subjectPropertyData);
+            _NavigationSection.openPageByUrl(routesUtils.subjectPropertyData);
             DataCollections._SubjectPropertyData.selectBasisSquareFootAnalysis(value);
             if (value === Enums.BASIS_SQUARE_FOOT_ANALYSIS.grossBuildingArea) {
                 DataCollections._SubjectPropertyData.enterGrossBuildingArea(testData.basisSFAnalysisValues[index]);

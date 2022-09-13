@@ -545,7 +545,7 @@ class NavigationSectionActions extends BaseActionsExt<typeof navigationSectionPa
      * which is opened in moment of method call
      * @param pageRoute The route to specific page, pages routes are contained in pages_routes enums directory
      */
-    openPageByVisit(pageRoute: string): NavigationSectionActions {
+    openPageByUrl(pageRoute: string): NavigationSectionActions {
         const baseUrl = Cypress.config().baseUrl;
         const routeToPaste = pageRoute.startsWith("/") ? pageRoute.replace("/", "") : pageRoute;
         cy._mapGet(mapKeysUtils.reportId).then(reportId => {
