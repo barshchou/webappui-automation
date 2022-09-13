@@ -312,8 +312,8 @@ class CapRateConclusionActions extends BaseActionsExt<typeof capRateConclusionPa
             cy.log(`Entrepreneur Profit: ${entrepreneurLoss}`);
 
             // Round calculated value
-            let prospectiveValue = Math.round((allAsStabilizedLossesAliases.asStabilizedAmount - allRentLosses -
-                entrepreneurLoss) / 10) * 10;
+            let prospectiveValue = Math.floor((allAsStabilizedLossesAliases.asStabilizedAmount - allRentLosses -
+                entrepreneurLoss));
             cy.log(`Prospective Value As Complete: ${prospectiveValue}`);
 
             let expectedProspectiveValueAsComplete = prospectiveValue < 0
@@ -349,8 +349,8 @@ class CapRateConclusionActions extends BaseActionsExt<typeof capRateConclusionPa
             cy.log(`Entrepreneur Profit: ${entrepreneurLoss}`);
 
             // Round calculated value
-            let marketValueAsIs = Math.round((allAsCompleteLossesAliases.asCompleteAmount - allRentLosses -
-                entrepreneurLoss) / 10) * 10;
+            let marketValueAsIs = Math.ceil((allAsCompleteLossesAliases.asCompleteAmount - allRentLosses -
+                entrepreneurLoss));
             cy.log(`Market Value As Is: ${marketValueAsIs}`);
 
             let expectedMarketValueAsIs = marketValueAsIs < 0
