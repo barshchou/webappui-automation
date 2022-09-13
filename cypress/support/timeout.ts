@@ -12,12 +12,12 @@ global.timers = new Map();
  
 /**
  * Stops the current Cypress test if it takes longer than the provided timeout
- * @param {number} ms Test timeout in milliseconds
+ * @param ms Test timeout in milliseconds. Default - 10 min
  * @example
  *  // stop and fail the test if it runs for longer than 120 seconds
  *  testTimeout(120000)
  */
-export function testTimeout (ms: number, test = null) {
+export function testTimeout (ms = 600000, test = null) {
     /*
      * get the current test reference using
      * the cy.state() magic method
