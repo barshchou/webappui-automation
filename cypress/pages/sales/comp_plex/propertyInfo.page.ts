@@ -10,11 +10,11 @@ export default class PropertyInformationForm {
     }
 
     get PropertyInfoCancelBtn() {
-        return cy.get('[data-qa="property-info-cancel-btn"]');
+        return cy.get('[data-qa="info-cancel-btn"]');
     }
 
     get PropertyInfoDoneBtn() {
-        return cy.get('[data-qa="property-info-done-btn"]');
+        return cy.get('[data-qa="info-done-btn"]');
     }
 
     get conditionDropdown() {
