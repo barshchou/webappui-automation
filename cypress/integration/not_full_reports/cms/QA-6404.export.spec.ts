@@ -8,7 +8,7 @@ import { conditionalDescribe } from "../../checkIsProd.utils";
 import { _CmsBaseActions } from '../../../actions/cms';
 
 conditionalDescribe("[QA-6404] Verify possibility to edit text", 
-    { tags:[ "@cms", "@check_export", "@feature_flag" ] }, () => {
+    { tags:[ "@cms", "@check_export", "@feature_flag", "@fix" ] }, () => {
         it('Update static text in Settings and verify changes on a corresponding pages', () => {
             cy.stepInfo('Preconditions: Set Launch Darkly flag to see Report Copy Editor section. Create a report');
             launchDarklyApi.setFeatureFlagForUser(testData.reportTextEditorFlagKey, testData.featureFlagEnable)

@@ -6,7 +6,7 @@ import { createReport } from "../../../../../actions/base/baseTest.actions";
 import launchDarklyApi from '../../../../../api/launchDarkly.api';
 
 describe("As Stabilized Market Value Per is calculated with correct formula in Cap Rate Conclusion Summary Table", 
-    { tags:[ "@income", "@commercial", "@cap_rate_conclusion", "@feature_flag" ] }, () => {
+    { tags:[ "@income", "@commercial", "@cap_rate_conclusion", "@feature_flag", "@fix" ] }, () => {
         beforeEach("Login, create report", () => {
             cy.stepInfo(`1. Set feature flag and create report`);
             launchDarklyApi.setFeatureFlagForUser(testData.enableFlexibleGbaAnalysis, testData.onFeatureFlag);

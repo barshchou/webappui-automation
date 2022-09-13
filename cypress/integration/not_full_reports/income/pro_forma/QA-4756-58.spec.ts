@@ -8,7 +8,7 @@ import proFormaTypes from "../../../../enums/proFormaTypes.enum";
 import launchDarklyApi from '../../../../api/launchDarkly.api';
 
 describe("Pro Forma Page validation Operating Expenses -> Real Estate Taxes", 
-    { tags:[ "@income", "@pro_forma", "@feature_flag" ] }, () => { 
+    { tags:[ "@income", "@pro_forma", "@feature_flag", "@fix" ] }, () => { 
     
         before("Login, create report, prepare data", () => {
             launchDarklyApi.setFeatureFlagForUser(testData.featureFlagKey, testData.onFeatureFlag);

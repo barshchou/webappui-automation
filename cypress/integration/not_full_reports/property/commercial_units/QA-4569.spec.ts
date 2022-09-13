@@ -4,7 +4,7 @@ import { _NavigationSection } from "../../../../actions/base";
 import { Property } from "../../../../actions";
 
 describe("[QA-4569] Verify the Unsaved changes modal functionality on the Commercial Units page",
-    { tags:[ "@property", "@commercial_units" ] }, () => {
+    { tags:[ "@property", "@commercial_units", "@fix" ] }, () => {
         beforeEach("Login, create report", () => {
             createReport(testData.reportCreationData);
         });
