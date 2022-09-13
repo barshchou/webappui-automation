@@ -5,16 +5,16 @@ import { _NavigationSection } from "../../../../actions/base";
 import { Property } from '../../../../actions';
 import { Income } from "../../../../actions";
 
-// TODO: Fix and update this spec after https://bowery.atlassian.net/browse/WEB-6720 bug fix
 describe("Potential Real Estate Tax Reimbursement", 
     { tags:[ "@income", "@pro_forma" ] }, () => {
     
         before("Login, create report, prepare data", () => {
             cy.stepInfo(`1. Create new report or open the report which is already created. 
-                    Make sure that there is at least three commercial units.`);
+                    Make sure that there is at least three commercial units.
+                    Set square foot analysis basis to GBA and fill area`);
             createReport(testData.reportCreationData);
             _NavigationSection.navigateToPropertySummary();
-            Property._Summary.enterGrossBuildingArea(testData.grossBuildingArea)
+            Property._Summary.enterGrossBuildingArea(testData.buildingArea)
                 .enterNumberOfResUnits(testData.numberOfResidentialUnits)
                 .enterNumberOfCommercialUnits(testData.numberOfCommercialUnits);
 
@@ -72,7 +72,7 @@ describe("Potential Real Estate Tax Reimbursement",
                     V/C Loss @ X% is calculated by formula: 
                     Real Estate Taxes Reimbursement V/C Loss @ X% → PSF [Total/GBA Value]`);
             Income._ProFormaActions.verifyResidentialVCLossPerSF(
-                testData.expenseType, testData.grossBuildingArea);
+                testData.expenseType, testData.buildingArea);
         });
 
         it("[QA-4729]", () => {

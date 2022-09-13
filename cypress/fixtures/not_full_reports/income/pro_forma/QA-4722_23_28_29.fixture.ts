@@ -3,7 +3,7 @@ import Enums from "../../../../enums/enums";
 import {  BoweryReports } from "../../../../types/boweryReports.type";
 import { BoweryAutomation } from "../../../../types/boweryAutomation.type";
 
-const _grossBuildingArea = 5000;
+const _buildingArea = 5000;
 const _numberOfCommercialUnits = 3;
 const _numberOfResidentialUnits = 2;
 const _commercialUnitSf = [ 100000, 120000, 145000 ];
@@ -33,7 +33,7 @@ const _annualReimbursementTotal = () => {
 };
 
 const _reimbursementLossTotal = (_annualReimbursementTotal() * _reimbursementVcLoss) / 100;
-const _reimbursementLossPerSf = _reimbursementLossTotal / _grossBuildingArea;
+const _reimbursementLossPerSf = _reimbursementLossTotal / _buildingArea;
 const _reimbursementLossPerUnit = _reimbursementLossTotal / _numberOfResidentialUnits;
 
 const _reportCreationData: BoweryAutomation.ReportCreationData = ReportDataCreator.getReportData("4722_23_28_29", {
@@ -44,7 +44,7 @@ const _leaseStatuses: Array<BoweryReports.LeaseStatus> = [ "Occupied", "Occupied
 
 export default {
     reportCreationData: _reportCreationData,
-    grossBuildingArea: _grossBuildingArea,
+    buildingArea: _buildingArea,
     numberOfResidentialUnits: _numberOfResidentialUnits,
     numberOfCommercialUnits: _numberOfCommercialUnits,
     listOfUnitsSF: _commercialUnitSf,
@@ -59,5 +59,11 @@ export default {
     reimbursementVcLoss: _reimbursementVcLoss,
     reimbursementLossTotal: _reimbursementLossTotal,
     reimbursementLossPerSf: _reimbursementLossPerSf,
-    reimbursementLossPerUnit: _reimbursementLossPerUnit
+    reimbursementLossPerUnit: _reimbursementLossPerUnit,
+    basisSquareFootAnalysis: {
+        gba: Enums.BASIS_SQUARE_FOOT_ANALYSIS.grossBuildingArea, 
+        gla: Enums.BASIS_SQUARE_FOOT_ANALYSIS.grossLeasableArea,
+        nla: Enums.BASIS_SQUARE_FOOT_ANALYSIS.netLeasableArea,
+        nra: Enums.BASIS_SQUARE_FOOT_ANALYSIS.netRentableArea
+    }
 };
