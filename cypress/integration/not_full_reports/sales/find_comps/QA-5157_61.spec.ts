@@ -29,7 +29,6 @@ conditionalDescribe(`[QA-5157] [QA-5161] [Sales > Find Comps] "Date Sold" sortin
         Sales._FindComps.Page.sortSalesCompsSelectValue.should('contain', testData.sortSalesCompsDateSold);
     });
 
-    // TODO: [QA-6820] Refactor 'Reset All' filter to some more specific.
     it("[QA-5161] [Sales > Find Comps] 'Date Sold' sorting is applied correctly to selected comps", () => {
         cy.stepInfo(`1.Verify that when "Date Sold" option in Sort dropdown is selected 
                     comps are sorted in the next order:
@@ -39,14 +38,13 @@ conditionalDescribe(`[QA-5157] [QA-5161] [Sales > Find Comps] "Date Sold" sortin
                     (comps added via map search )`);
 
         Sales._FindComps.AddressSearch.openAddressSearchTab()
-            .addCompByParameter(0, testData.compProperty, testData.compStatusDate)
             .addCompByParameter(1, testData.compProperty, testData.compStatusDate)
+            .addCompByParameter(2, testData.compProperty, testData.compStatusDate)
             .addCompByParameter(0, testData.compProperty, testData.compStatusContract)
             .addCompByParameter(1, testData.compProperty, testData.compStatusContract)
             .addCompByParameter(0, testData.compProperty, testData.compStatusListing)
             .addCompByParameter(1, testData.compProperty, testData.compStatusListing);       
         Sales._FindComps.checkSalesCompSortedByDateSold();
-        cy.pause();
 
         cy.stepInfo(`2.Verify that when "Date Sold" option in Sort dropdown is selected 
                     comps are sorted in the next order:
