@@ -20,19 +20,17 @@ describe("Verify the functionality of the Frontage radio button",
         
             cy.stepInfo(`2. Verify the Frontage contains the following radio buttons: Small, Medium, Large, Other.`);
             cy.contains("Frontage").should("exist");
-            testData.useRadios.forEach((radio, index) => {
+            testData.useRadios.forEach(radio => {
                 Property.CommercialUnits.clickRadioButtonByValueAndUnitIndex(testData.groupName, radio);
                 if (radio === Enums.COMMERCIAL_UNITS_FRONTAGE_VALUES.other) {
                     Property.CommercialUnits.enterOtherValueByGroupName(testData.groupName, testData.otherValue);
                 }
                 Property.CommercialUnits.clickSaveContinueButton();
                 NavigationSection.verifyProgressBarNotExist();
-                if (index === 0) {
-                    NavigationSection.goBackWithSave();
-                } else {
-                    NavigationSection.goBack();
-                }
-                cy.stepInfo(`4. Verify that each radio button can be selected and saved.`);
+                // Fix this step after resolving https://bowery.atlassian.net/browse/WEB-5394
+                NavigationSection.goBackWithSave();
+
+                cy.stepInfo(`3. Verify that each radio button can be selected and saved.`);
                 Property.CommercialUnits.verifyRadioIsChecked(testData.groupName, radio);
             });
         });
