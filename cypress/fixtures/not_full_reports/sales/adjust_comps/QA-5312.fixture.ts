@@ -13,9 +13,18 @@ const _numberOfSalesComps = [ 0, 1 ];
 const _adjustmentName: BoweryReports.SalesAdjustmentGrid.AdjustmentName = salesadjustmentgridEnum.marketAdjustment;
 const _rowName: BoweryReports.SalesAdjustmentGrid.RowsMarketAdjustment = rowsMarketadjustmentEnum.propertyDescription;
 
+const compProperty = Enums.COMP_PROPERTIES_PATHS_DB.compPropertyPathsInDB.saleStatus;
+const compStatusContract = Enums.COMP_PROPERTIES_PATHS_DB.saleStatusValuesInDB.inContract;
+const compStatusDate = Enums.COMP_PROPERTIES_PATHS_DB.saleStatusValuesInDB.date;
+const compStatusListing = Enums.COMP_PROPERTIES_PATHS_DB.saleStatusValuesInDB.listing;
+
 export default {
     reportCreationData: _reportCreationData,
     numberOfSalesComps:_numberOfSalesComps,
     adjustmentName: _adjustmentName,
-    rowName: _rowName
+    rowName: _rowName,
+    compProperty,
+    compStatusContract,
+    compStatusDate,
+    compStatusListing
 };

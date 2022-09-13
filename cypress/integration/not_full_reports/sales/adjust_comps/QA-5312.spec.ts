@@ -13,11 +13,12 @@ describe("Total Utility Adjustments in Sales Adjustment Grid is calculated with 
         it("[QA-5312]", () => {
             cy.stepInfo("1. Navigate to Find comps page and add a sales comps");
             _NavigationSection.navigateToFindComps();
-            Sales._FindComps.zoomInAndResetFilters();
-            testData.numberOfSalesComps.forEach((index) => {
-                Sales._FindComps.selectCompFromMap();
-                Sales._FindComps.Page.getSelectedComparable(index).should('be.visible');
-            });
+            for (let i = 1; i < 3; i++) {
+                Sales._FindComps.AddressSearch.openAddressSearchTab()
+                    .addCompByParameter(i, testData.compProperty, testData.compStatusDate);
+                Sales._FindComps.Page.getSelectedComparable(i-1).should('be.visible');
+            }
+            
 
             cy.stepInfo(`2. Go to Adjust Comps page`);
             _NavigationSection.navigateToAdjustComps();
