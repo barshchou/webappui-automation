@@ -24,10 +24,6 @@ conditionalDescribe("[QA-6404] Verify possibility to edit text",
                 testData.textUpdate, true)
                 .verifyModifiedLabel(testData.sectionName);
 
-            /*
-             *  TODO: [QA-6362] Generated report doesn't have update Compliance Paragraph discussion, need to
-             * think about timeout.
-             */
             cy.stepInfo('3. Export report');
             _NavigationSection.returnToHomePage();
             _HomePage.openReportByName(testData.reportCreationData.reportNumber);
