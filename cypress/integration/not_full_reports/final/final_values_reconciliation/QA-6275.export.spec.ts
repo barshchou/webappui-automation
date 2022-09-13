@@ -132,7 +132,7 @@ describe(`Sales Comparison Approach is exported correctly to Final Value Conclus
                 cy.readFile(`${pathSpecData()}${Cypress.spec.name}.txt`).then(text => { 
                     cy.log(`As Is Market Value ${JSON.parse(text)[2]}`);
                     cy.log(`As Stabilized ${JSON.parse(text)[1]}`);
-                    cy.log(`As Complete ${JSON.parse(text)[1]}`);
+                    cy.log(`As Complete ${JSON.parse(text)[0]}`);
 
                     testData.valueConclusions.forEach((valueConclusion, index) => {
                         cy.xpath(`//h3[.='Value Conclusion']/following-sibling::p[.='Final Value Conclusion'][1]`)
