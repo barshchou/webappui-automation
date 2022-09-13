@@ -43,8 +43,8 @@ export default {
     concludedValuePerSf: 1532.98,
     finalValueApproachSales: Enums.FINAL_VALUES_APPROACH.sales,
     valueConclusions: [  
-        'Prospective Market Value As Complete',
-        'Prospective Market Value As Stabilized', 
-        'As Is Market Value',
+        Enums.VALUE_CONCLUSION_MARKET_VALUE_NAMES.prospectiveMarketValueAsCompleted,
+        Enums.VALUE_CONCLUSION_MARKET_VALUE_NAMES.prospectiveMarketValueAsStabilized,
+        Enums.VALUE_CONCLUSION_MARKET_VALUE_NAMES.asIsMarketValue,
     ]
 };

@@ -74,3 +74,4 @@ export type ExportTitlesKeys = keyof typeof Enums.EXPORT_TITLES
 export type CompStatusValues = keyof typeof Enums.COMP_STATUS_VALUES
 export type PagesTexboxNamesKeys = keyof typeof Enums.PAGES_TEXTBOX_NAMES
 export type FinalValuesApproach = keyof typeof Enums.FINAL_VALUES_APPROACH
+export type ValueConclusionMarketValueNames = keyof typeof Enums.VALUE_CONCLUSION_MARKET_VALUE_NAMES

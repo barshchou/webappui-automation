@@ -141,7 +141,8 @@ describe(`Sales Comparison Approach is exported correctly to Final Value Conclus
                                     .parent('td')
                                     .parent('tr')
                                     .within(() => {
-                                        cy.get('td').last().should('have.text', `${JSON.parse(text)[index]}`);
+                                        cy.get('td').last().scrollIntoView()
+                                            .should('have.text', `${JSON.parse(text)[index]}`);
                                     });
                             });
                     });
