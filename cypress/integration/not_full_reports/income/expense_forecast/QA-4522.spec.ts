@@ -4,7 +4,7 @@ import { Income } from "../../../../actions";
 import { createReport } from "../../../../actions/base/baseTest.actions";
 
 describe(`Comparable Min, Max, Avg values for Water & Sewer Per Unit are correctly calculated and displayed`,
-    { tags:[ "@income", "@expense_forecast", "@snapshot_tests", "@fix" ] }, () => {
+    { tags:[ "@income", "@expense_forecast", "@snapshot_tests" ] }, () => {
 
         beforeEach("Login, create report", () => {
             createReport(testData.reportCreationData);

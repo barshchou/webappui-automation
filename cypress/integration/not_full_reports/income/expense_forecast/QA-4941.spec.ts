@@ -6,7 +6,7 @@ import Income from "../../../../actions/income/income.manager";
 import tableExpenseHistoryCellNames from "../../../../../cypress/enums/expense/expenseHistoryTableRows.enum";
 
 describe("Historical expense Fuel Per SF is correctly calculated and displayed",
-    { tags: [ "@snapshot_tests", "@income", "@expense_forecast", "@fix" ] }, () => {
+    { tags: [ "@snapshot_tests", "@income", "@expense_forecast" ] }, () => {
         
         beforeEach("Login, create report", () => {
             createReport(testData.reportCreationData);

@@ -5,7 +5,7 @@ import Property from "../../../../actions/property/property.manager";
 import Enums from "../../../../enums/enums";
 
 describe("Verify the functionality of the Frontage radio button", 
-    { tags: [ "@property", "@commercial_units", "@fix" ] }, () => {
+    { tags: [ "@property", "@commercial_units" ] }, () => {
         
         beforeEach("Login, create report", () => {
             cy.stepInfo(`Preconditions: The mixed report is created and several commercial units are added.`);

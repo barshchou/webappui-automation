@@ -4,7 +4,7 @@ import { createReport } from "../../../../actions/base/baseTest.actions";
 import testData from '../../../../fixtures/not_full_reports/report/client/QA-4628.fixture';
 
 describe("Verify the functionality of the Client File Number field", 
-    { tags:[ "@report", "@client", "@fix" ] }, () => {
+    { tags:[ "@report", "@client" ] }, () => {
         beforeEach("Login, create report", () => {
             createReport(testData.reportCreationData);
         });

@@ -4,7 +4,7 @@ import { _NavigationSection } from "../../../../../actions/base";
 import { Income, Property } from "../../../../../actions";
 
 describe("Verify the Commercial Stabilized Rent Roll table", 
-    { tags: [ "@income", "@commercial", "@stabilized_rent_roll", "@fix" ] }, () => {
+    { tags: [ "@income", "@commercial", "@stabilized_rent_roll" ] }, () => {
          
         beforeEach("Login, create report", () => {
             cy.stepInfo(`1. The mixed report is created and several commercial units are added`);
