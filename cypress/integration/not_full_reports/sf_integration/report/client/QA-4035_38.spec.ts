@@ -24,7 +24,7 @@ describe(`Verify that the Client field is pre-filled on the WebApp with the date
             .downloadAndConvertDocxReport(`JOB-${testData.reportCreationData.reportNumber}_462`);
     });
 
-    it.only("Check export", () => {
+    it("Check export", () => {
         cy.task("getFilePath",
             { _reportName: `${testData.reportCreationData.reportNumber}_462`, _docxHtml: "html" }
         ).then(file => {
