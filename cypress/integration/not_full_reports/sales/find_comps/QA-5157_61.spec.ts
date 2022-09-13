@@ -91,8 +91,6 @@ conditionalDescribe(`[QA-5157] [QA-5161] [Sales > Find Comps] "Date Sold" sortin
                     - Listing
                     - date sold from most to least recent 
                     (comps added via uploaded from CSV )`);
-        // TODO add more complex csv
-
         cy.reload();
         Sales._FindComps.uploadComps(testData.filePath)
             .verifyUploadCompsSucceeded()
