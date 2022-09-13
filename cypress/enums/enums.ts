@@ -89,6 +89,9 @@ import appraiserSFEnum from "./salesforceJobs/appraiserSF.enum";
 import otherAdjustmentsExpansionRowsEnum from "./adjustComps/otherAdjustmentsExpansionRows.enum";
 import utilitiesAdjustmentsExpansionRowsEnum from "./adjustComps/utilitiesAdjustmentsExpansionRows.enum";
 import adjustmentExpansionLabelsEnum from "./sales/adjustComps/adjustmentExpansionLabels.enum";
+import amenitiesCheckboxesEnum from "./property/amenities/amenitiesCheckboxes.enum";
+import amenitiesUploadsEnum from "./property/amenities/amenitiesUploads.enum";
+import amenitiesInputsEnum from "./property/amenities/amenitiesInputs.enum";
 import projectedTaxesSectionsEnum from "./income/taxInfo/projectedTaxesSections.enum";
 import projectedTaxesInputsNamesEnum from "./income/taxInfo/projectedTaxesInputsNames.enum";
 import chipsEnum from "./chips.enum";
@@ -96,6 +99,9 @@ import expenseHistoryDataProviderEnum from "./expense/expenseHistoryDataProvider
 import expenseItemBasisOfComparisonEnum from "./expense/expenseItemBasisOfComparison.enum";
 import exportTitlesEnum from "./exportTitles.enum";
 import compStatusValuesEnum from "./findComps/compStatusValues.enum";
+import compPropertyPathsInDB from "./compplex/compPropertiesAndValues.enum";
+import saleStatusValuesInDB from "./compplex/compPropertiesAndValues.enum";
+import saleConditionValuesInDB from "./compplex/compPropertiesAndValues.enum";
 import finalValueApproachEnum from "./final/finalValuesReconciliation/finalValueApproach.enum";
 import valueConclusionMarketValueNamesEnum from "./sales/value_conclusion/valueConclusionMarketValueNames.enum";
 
@@ -191,6 +197,9 @@ export default {
     OTHER_ADJUSTMENTS_EXPANSION_ROWS: otherAdjustmentsExpansionRowsEnum,
     UTILITIES_ADJUSTMENTS_EXPANSION_ROWS: utilitiesAdjustmentsExpansionRowsEnum,
     ADJUSTMENT_EXPANSION_LABELS: adjustmentExpansionLabelsEnum,
+    AMENITIES_CHECKBOXES: amenitiesCheckboxesEnum,
+    AMENITIES_UPLOADS: amenitiesUploadsEnum,
+    AMENITIES_INPUTS: amenitiesInputsEnum,
     PROJECTED_TAXES_SECTIONS: projectedTaxesSectionsEnum,
     PROJECTED_TAXES_INPUTS: projectedTaxesInputsNamesEnum,
     CHIPS: chipsEnum,
@@ -199,5 +208,8 @@ export default {
     EXPORT_TITLES: exportTitlesEnum,
     COMP_STATUS_VALUES: compStatusValuesEnum,
     FINAL_VALUES_APPROACH: finalValueApproachEnum,
+    COMP_PROPERTIES_PATHS_DB: compPropertyPathsInDB,
+    COMP_SALE_STATUS_DB: saleStatusValuesInDB,
+    COMP_SALE_CONDITION_DB: saleConditionValuesInDB,
     VALUE_CONCLUSION_MARKET_VALUE_NAMES: valueConclusionMarketValueNamesEnum
 };
