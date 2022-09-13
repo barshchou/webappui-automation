@@ -395,7 +395,13 @@ class TaxInfoActions extends BaseActionsExt<typeof taxInfoPage> {
      */
     enterRowTaxLiabilityValue(rowName: string, value: number, decimalCount = 9, rowNumber = 0): TaxInfoActions {
         const initial = taxInfoPage.getTaxLiabilityRowValue(rowName).eq(rowNumber)
-            .realClick().realClick().type(`${value}{enter}`);
+            .realClick()
+            .realClick()
+            .focus()
+            .type("12345")
+            .clear()
+            .scrollIntoView()
+            .realType(`${value}{enter}`);
         if (rowName === "Additional Tax Rate") {
             initial.should("have.text", `${getNumberWithDecimalPart(value, decimalCount)}%`);
         } else {
