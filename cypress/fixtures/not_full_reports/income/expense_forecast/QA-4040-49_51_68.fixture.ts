@@ -208,13 +208,13 @@ const fuelCommentariesFixture = () => {
         "$5.00 per room which reflects investor expectations.",
         generatedElectricityAndFuelPerSf: "The tenant is responsible for in-unit electricity and cooking " + 
         "gas. The owner is responsible for common area electricity and heat. Based on the information " + 
-        "above, we have projected this expense at $10,622,205 annually.",
+        "above, we have projected this expense at $10,622,230 annually.",
         generatedElectricityAndFuelPerUnit: "The tenant is responsible for in-unit electricity and cooking gas. " + 
         "The owner is responsible for common area electricity and heat. Based on the information above, we have " + 
-        "projected this expense at $25 annually.",
+        "projected this expense at $50 annually.",
         generatedElectricityAndFuelPerRoom: "The tenant is responsible for in-unit electricity and " + 
         "cooking gas. The owner is responsible for common area electricity and heat. Based on the " + 
-        "information above, we have projected this expense at $0 annually."
+        "information above, we have projected this expense at $25 annually."
     };
 };
 
