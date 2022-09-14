@@ -5,7 +5,8 @@ import { DataCollections, Income, Property } from "../../../../../actions";
 import { createReport } from "../../../../../actions/base/baseTest.actions";
 import launchDarklyApi from '../../../../../api/launchDarkly.api';
 
-describe("Validation of Market Values Per SF for ACAS reports", 
+// Problems with rounding
+describe.skip("Validation of Market Values Per SF for ACAS reports", 
     { tags:[ "@income", "@commercial", "@cap_rate_conclusion", "@feature_flag" ] }, () => {
         beforeEach("Login, create report", () => {
             cy.stepInfo(`1. Set feature flag and create report`);

@@ -4,7 +4,7 @@ import Sales from "../../../../actions/sales/sales.manager";
 import { createReport } from "../../../../actions/base/baseTest.actions";
 
 // Check test after resolving https://bowery.atlassian.net/browse/QA-6890
-describe("Verify the functionality of the Upload Comps button", 
+describe.skip("Verify the functionality of the Upload Comps button", 
     { tags:[ "@find_comps", "@sales" ] }, () => {
         beforeEach("Login and create report", () => {
             createReport(testData.reportCreationData);

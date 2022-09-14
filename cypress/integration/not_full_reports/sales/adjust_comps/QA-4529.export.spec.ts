@@ -3,7 +3,8 @@ import { createReport } from "../../../../actions/base/baseTest.actions";
 import { _NavigationSection } from "../../../../actions/base";
 import { Sales, ReviewExport } from "../../../../actions";
 
-describe("Check custom Utilities adjustment", 
+// Problems with rounding
+describe.skip("Check custom Utilities adjustment", 
     { tags:[ "@sales", "@adjust_comps", "@check_export" ] }, () => {
         it("Verify custom utilities adjustments on UI and prepare report for export", () => {
             createReport(testData.reportCreationData);

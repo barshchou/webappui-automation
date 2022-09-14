@@ -7,7 +7,7 @@ import { reportCreationData } from
     "../../../../../fixtures/not_full_reports/income/residential/in_place_rent_roll/QA-4206_08_14.fixture";
 
 describe("[QA-4206_08_14] Verify the Developer's Forecast checkbox on the In-Place Rent Roll page", 
-    { tags:[ "@income", "@residential", "@in_place_rent_roll" ] }, () => {
+    { tags:[ "@income", "@residential", "@in_place_rent_roll", "@fix" ] }, () => {
         testData.conclusionValues.forEach(value => {
             it(`${value} test`, () => {
                 cy.stepInfo("1. Login, create report");

@@ -4,9 +4,8 @@ import { _NavigationSection } from "../../../../actions/base";
 import { Income, ReviewExport } from '../../../../actions';
 import launchDarklyApi from "../../../../api/launchDarkly.api";
 
-// TODO: [QA-6606] Incorrect Tax liability (total) formula calculation
 describe("Check that rows added in the app are displayed in Tax Info --> Tax Liability", 
-    { tags: [ "@check_export", "@income", "@tax_info" ] }, () => {
+    { tags: [ "@check_export", "@income", "@tax_info", "@fix" ] }, () => {
     
         it("[QA-5519-23_26]", () => {
             cy.stepInfo("1. Set feature flag and create report");

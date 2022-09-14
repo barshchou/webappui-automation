@@ -6,7 +6,7 @@ import { createReport } from "../../../../actions/base/baseTest.actions";
 import mapKeysUtils from "../../../../utils/mapKeys.utils";
 
 describe(`Check when "custom" dropdown is selected user can drag&drop comps`, 
-    { tags: [ "@sales", "@find_comps", "@comp_plex" ] }, () => {
+    { tags: [ "@sales", "@find_comps", "@comp_plex", "@fix" ] }, () => {
         beforeEach("Login, create report", () => {
             createReport(testData.reportCreationData);
         });

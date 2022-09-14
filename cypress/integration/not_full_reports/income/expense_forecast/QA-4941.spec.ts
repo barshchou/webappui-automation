@@ -5,7 +5,7 @@ import { _NavigationSection } from "../../../../actions/base";
 import { DataCollections, Income } from "../../../../actions";
 
 describe("Historical expense Fuel Per SF is correctly calculated and displayed",
-    { tags: [ "@snapshot_tests", "@income", "@expense_forecast" ] }, () => {
+    { tags: [ "@snapshot_tests", "@income", "@expense_forecast", "@fix" ] }, () => {
         
         beforeEach("Login, create report", () => {
             createReport(testData.reportCreationData);

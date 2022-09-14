@@ -6,7 +6,7 @@ import { ReviewExport } from '../../../../actions';
 import Enums from "../../../../enums/enums";
 
 describe(`[Assessed Value & RE Taxes] Verify the 'Tax Calculation Discussion' generated commentary 
-        is displayed on the Tax Info page.`, { tags: [ "@check_export", "@income", "@tax_info" ] }, () => {
+        is displayed on the Tax Info page.`, { tags: [ "@check_export", "@income", "@tax_info", "@fix" ] }, () => {
 
     it("Test body", () => {
         createReport(testData.reportCreationData);

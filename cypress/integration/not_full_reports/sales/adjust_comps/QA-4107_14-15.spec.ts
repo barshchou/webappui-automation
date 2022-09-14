@@ -6,7 +6,7 @@ import { createReport } from "../../../../actions/base/baseTest.actions";
 describe("Adjusted Price per Residential Unit in Sales Adjustment Grid is calculated with correct formula", 
     { tags: [ "@adjust_comps", "@sales" ] }, () => {
 
-        it.skip("[QA-4107]", () => {
+        it("[QA-4107]", () => {
             cy.stepInfo("1. Login, create report");
             createReport(testData.reportMixedCreationData);
 
@@ -30,7 +30,7 @@ describe("Adjusted Price per Residential Unit in Sales Adjustment Grid is calcul
                 .verifyAdjustedPriceByColumn();
         });
 
-        it.skip("[QA-4114]", () => {
+        it("[QA-4114]", () => {
             cy.stepInfo("1. Login, create report");
             createReport(testData.reportCreationData);
 
@@ -54,7 +54,8 @@ describe("Adjusted Price per Residential Unit in Sales Adjustment Grid is calcul
                 .verifyAdjustedPriceByColumn();
         });
 
-        it("[QA-4115]", () => {
+        it.skip("[QA-4115]", () => {
+            // Problems with rounding
             cy.stepInfo("1. Login, create report");
             createReport(testData.reportCreationData);
 

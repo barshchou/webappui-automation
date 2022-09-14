@@ -4,7 +4,7 @@ import { _NavigationSection } from "../../../../actions/base";
 import { Sales } from "../../../../actions";
 
 describe("Total Utility Adjustments in Sales Adjustment Grid is calculated with correct formula", 
-    { tags:[ "@sales", "@adjust_comps", ] }, () => {
+    { tags:[ "@sales", "@adjust_comps", "@fix" ] }, () => {
 
         beforeEach("Login, create report", () => {
             createReport(testData.reportCreationData);

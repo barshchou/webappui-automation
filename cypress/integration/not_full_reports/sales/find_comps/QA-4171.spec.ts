@@ -4,7 +4,7 @@ import Sales from "../../../../actions/sales/sales.manager";
 import { createReport } from "../../../../actions/base/baseTest.actions";
 
 describe("Selected Comparables table. Verify the functionality of Remove button", 
-    { tags:[ "@find_comps", "@sales" ] }, () => {
+    { tags:[ "@find_comps", "@sales", "@fix" ] }, () => {
         beforeEach("Login, create report", () => {
             createReport(testData.reportCreationData);
         });
