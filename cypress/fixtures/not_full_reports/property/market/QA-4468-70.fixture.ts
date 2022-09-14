@@ -1,16 +1,16 @@
 import { BoweryReports } from "../../../../types/boweryReports.type";
 import ReportDataCreator from "../../../data_creator/reportData.creator";
-import enums from "../../../../enums/enums";
+import Enums from "../../../../enums/enums";
 
 const reportCreationFixture = () => {
-    return ReportDataCreator.getReportData("4470");
+    return ReportDataCreator.getReportData("4468-70");
 };
 
 const _marketAnalysisUses: BoweryReports.MarketAnalysisUses[] = [
-    enums.MARKET_ANALYSIS_USES.multifamily,
-    enums.MARKET_ANALYSIS_USES.retail,
-    enums.MARKET_ANALYSIS_USES.office,
-    enums.MARKET_ANALYSIS_USES.industrial
+    Enums.MARKET_ANALYSIS_USES.multifamily,
+    Enums.MARKET_ANALYSIS_USES.retail,
+    Enums.MARKET_ANALYSIS_USES.office,
+    Enums.MARKET_ANALYSIS_USES.industrial
 ];
 
 export default {
