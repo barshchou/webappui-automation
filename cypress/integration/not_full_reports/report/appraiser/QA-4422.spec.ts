@@ -1,9 +1,9 @@
-import { _NavigationSection } from '../../../../../actions/base';
-import { createReport } from '../../../../../actions/base/baseTest.actions';
-import { Organization, Report } from '../../../../../actions';
-import testData from "../../../../../fixtures/not_full_reports/sf_integration/report/appraiser/QA-4422.fixture";
-import { conditionalDescribe } from '../../../../checkIsProd.utils';
-import Enums from '../../../../../enums/enums';
+import { _NavigationSection } from '../../../../actions/base';
+import { createReport } from '../../../../actions/base/baseTest.actions';
+import { Organization, Report } from '../../../../actions';
+import testData from "../../../../fixtures/not_full_reports/report/appraiser/QA-4422.fixture";
+import { conditionalDescribe } from '../../../checkIsProd.utils';
+import Enums from '../../../../enums/enums';
 
 conditionalDescribe(`Verify that the newly created Lead Appraiser will be sorted alphabetically by the Last 
         name in the Full Name dropdown`, { tags: [ "@report", "@appraiser" ] }, () => {
