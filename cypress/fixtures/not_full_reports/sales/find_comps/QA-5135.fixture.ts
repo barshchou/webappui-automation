@@ -19,7 +19,7 @@ export default {
     /**
      * Number of sales comps which will be added for test
      */
-    compsToAdd: [ 0, 1 ],
+    compsToAdd: 2,
     compProperty,
     compStatusContract,
     compStatusDate,
