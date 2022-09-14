@@ -1,8 +1,8 @@
-import { _NavigationSection } from '../../../../../actions/base';
-import { createReport } from '../../../../../actions/base/baseTest.actions';
-import { Organization, Report } from '../../../../../actions';
-import testData from "../../../../../fixtures/not_full_reports/sf_integration/report/appraiser/QA-4423.fixture";
-import Enums from '../../../../../enums/enums';
+import { _NavigationSection } from '../../../../actions/base';
+import { createReport } from '../../../../actions/base/baseTest.actions';
+import { Organization, Report } from '../../../../actions';
+import testData from "../../../../fixtures/not_full_reports/report/appraiser/QA-4423.fixture";
+import Enums from '../../../../enums/enums';
 
 describe(`Verify that the alphabetical sorting by the Last Name in the Full Name dropdown doesn't affect 
         the selected by default Lead Appraiser`, { tags: [ "@report", "@appraiser" ] }, () => {

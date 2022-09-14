@@ -7,7 +7,8 @@ const appraisersSF = {
     appraiserLead: "2100013420",
     appraiser: "2100014529",
     reviewer2: "2200019374",
-    emptyTeam: "2200019013"
+    emptyTeam: "2200019013",
+    inspector: "2100011369"
 } as const;
 
 export default Object.freeze(appraisersSF);

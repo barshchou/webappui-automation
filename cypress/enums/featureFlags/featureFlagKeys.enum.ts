@@ -6,7 +6,8 @@ const featureFlagKeys = {
     enableFlexibleGbaAnalysis: "enable-flexible-gba-analysis",
     retailReports: "retail-reports",
     cmsNavigation: "cms-navigation",
-    showSubjectPropertyData: "form_dataCollections.subjectProperty"
+    showSubjectPropertyData: "form_dataCollections.subjectProperty",
+    prefillInspectorFromSalesforce: "prefill-inspector-from-salesforce"
 } as const;
 
 export default Object.freeze(featureFlagKeys);
