@@ -38,7 +38,7 @@ class FindCompsPage extends BasePage {
 
     get importCompModal() { return cy.get('[class="ant-modal-content"]'); }
 
-    get csvInput() { return cy.get("[data-qa=file-input]"); }
+    get csvInput() { return cy.get('input[accept=".csv"]'); }
 
     getSelectCompFromMapButtonByAddress(address) {
         return cy.get('[data-qa="sales-comp-item"]')
@@ -136,8 +136,8 @@ class FindCompsPage extends BasePage {
         return cy.get('[data-qa="sale-date"]');
     }
 
-    get loadingModalCSV() {
-        return cy.get('[data-qa="loading-modal"] [data-icon="file-upload"]', { timeout: 60000 });
+    get csvUploadDoneButton() { 
+        return cy.get('[data-qa="upload-csv-complete"]', { timeout: 60000 });
     }
 
     get resetAllButton() {
