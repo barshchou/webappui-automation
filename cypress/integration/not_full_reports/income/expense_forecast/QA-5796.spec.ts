@@ -1,6 +1,6 @@
 import testData from "../../../../fixtures/not_full_reports/income/expense_forecast/QA-5796.fixture";
 import { createReport } from "../../../../actions/base/baseTest.actions";
-import { Property, Income } from "../../../../actions";
+import { DataCollections, Income } from "../../../../actions";
 import { _NavigationSection } from "../../../../actions/base";
 
 describe(`Per SF Appraiser's Forecast value for Fuel is correctly converted to Per SF value`,
@@ -12,8 +12,8 @@ describe(`Per SF Appraiser's Forecast value for Fuel is correctly converted to P
         it(`[QA-5796]`, () => {
             cy.stepInfo(`Pre-condition: Fill in Residential Units and Square Foot Analysis 
             on Property > Summary form`);
-            _NavigationSection.navigateToPropertySummary();
-            Property._Summary.enterNumberOfResUnits(testData.buildingDescription.numberOfUnits)
+            _NavigationSection.navigateToSubjectPropertyData();
+            DataCollections._SubjectPropertyData.enterNumberOfResUnits(testData.buildingDescription.numberOfUnits)
                 .selectBasisSquareFootAnalysis(testData.basisSquareFootAnalysis)
                 .fillBasisSquareFootAnalysis(testData.buildingDescription.grossArea);
 
