@@ -1,8 +1,7 @@
 import testData from "../../../../../fixtures/not_full_reports/income/residential/in_place_rent_roll/QA-4524.fixture";
 import { createReport } from "../../../../../actions/base/baseTest.actions";
-import NavigationSection from "../../../../../actions/base/navigationSection.actions";
-import Property from "../../../../../actions/property/property.manager";
-import Income from "../../../../../actions/income/income.manager";
+import { _NavigationSection } from "../../../../../actions/base";
+import { DataCollections, Income } from "../../../../../actions";
 
 describe(`Verify that if the Outdoor Space value is selected, the proper 
     group can be created on the Unit Groups and Rent Comps pages`, 
@@ -13,25 +12,25 @@ describe(`Verify that if the Outdoor Space value is selected, the proper
     });
 
     it("Test body", () => {
-        NavigationSection.navigateToPropertySummary();
-        Property.Summary.enterNumberOfResUnits(testData.numberOfUnits);
-        NavigationSection.navigateToResInPlaceRentRoll();
-        Income.Residential.InPlaceRentRoll.enterRentTypeCellByRowNumber(testData.rentType)
+        _NavigationSection.navigateToSubjectPropertyData();
+        DataCollections._SubjectPropertyData.enterNumberOfResUnits(testData.numberOfUnits);
+        _NavigationSection.navigateToResInPlaceRentRoll();
+        Income._Residential.InPlaceRentRoll.enterRentTypeCellByRowNumber(testData.rentType)
             .checkCheckboxByLabelAndVerify(testData.labelAndColumn, testData.labelAndColumn);
         testData.spaceOptions.forEach((option, index) => {
-            Income.Residential.InPlaceRentRoll.enterOutdoorSpaceByOptionByRow(option)
+            Income._Residential.InPlaceRentRoll.enterOutdoorSpaceByOptionByRow(option)
                 .clickSaveContinueButton();
             if (index === 0) {
-                Income.Residential.UnitGroups.checkCompGroupRadio(testData.radioValue)
+                Income._Residential.UnitGroups.checkCompGroupRadio(testData.radioValue)
                     .clickChangeButton();
             }
             cy.contains(getOutdoorSpaceGroupByOption(option)).should("exist");
-            Income.Residential.UnitGroups.clickSaveContinueButton();
-            NavigationSection.verifyProgressBarNotExist();
+            Income._Residential.UnitGroups.clickSaveContinueButton();
+            _NavigationSection.verifyProgressBarNotExist();
             cy.contains(getOutdoorSpaceGroupByOption(option)).should("exist");
-            Income.Residential.RentComps.BaseActions.clickSaveButton()
+            Income._Residential.RentComps.BaseActions.clickSaveButton()
                 .verifyProgressBarNotExist();
-            NavigationSection.navigateToResInPlaceRentRoll();
+            _NavigationSection.navigateToResInPlaceRentRoll();
         });
     });
 });

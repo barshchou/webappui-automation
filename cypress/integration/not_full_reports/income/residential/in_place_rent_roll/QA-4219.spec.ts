@@ -1,9 +1,8 @@
 import testData from "../../../../../fixtures/not_full_reports/income/residential/in_place_rent_roll/QA-4219.fixture";
 import { createReport } from "../../../../../actions/base/baseTest.actions";
 import ReportDataCreator from "../../../../../fixtures/data_creator/reportData.creator";
-import NavigationSection from "../../../../../actions/base/navigationSection.actions";
-import Income from "../../../../../actions/income/income.manager";
-import Property from "../../../../../actions/property/property.manager";
+import { _NavigationSection } from "../../../../../actions/base";
+import { DataCollections, Income } from "../../../../../actions";
 
 const reportCreationData = ReportDataCreator.getReportData("4219");
 
@@ -15,12 +14,12 @@ describe("Verify the # column in the grid",
         });
 
         it("Test body", () => {
-            NavigationSection.navigateToResInPlaceRentRoll();
-            Income.Residential.InPlaceRentRoll.verifyColumnExist(testData.columnName)
+            _NavigationSection.navigateToResInPlaceRentRoll();
+            Income._Residential.InPlaceRentRoll.verifyColumnExist(testData.columnName)
                 .verifyNumberOfNumberCells();
-            NavigationSection.navigateToPropertySummary();
-            Property.Summary.enterNumberOfResUnits(testData.numberOfUnits);
-            NavigationSection.navigateToResInPlaceRentRoll();
-            Income.Residential.InPlaceRentRoll.verifyNumberOfNumberCells(testData.numberOfUnits);
+            _NavigationSection.navigateToSubjectPropertyData();
+            DataCollections._SubjectPropertyData.enterNumberOfResUnits(testData.numberOfUnits);
+            _NavigationSection.navigateToResInPlaceRentRoll();
+            Income._Residential.InPlaceRentRoll.verifyNumberOfNumberCells(testData.numberOfUnits);
         });
     });

@@ -1,4 +1,4 @@
-import { Income, Property } from "../../../../../actions";
+import { DataCollections, Income, Property } from "../../../../../actions";
 import { _NavigationSection } from "../../../../../actions/base";
 import { createReport } from "../../../../../actions/base/baseTest.actions";
 import testData from "../../../../../fixtures/not_full_reports/income/commercial/stabilized_rent_roll/QA-4582.fixture";
@@ -11,8 +11,8 @@ describe(`Verify the Unsaved changes modal functionality on the Income > Commerc
 
         it("Test body", () => {
             cy.stepInfo(`Precondition: Navigate to Summary page and add commercial units.`);
-            _NavigationSection.navigateToPropertySummary();
-            Property._Summary.enterNumberOfCommercialUnits(testData.numberOfCommercialUnits);
+            _NavigationSection.navigateToSubjectPropertyData();
+            DataCollections._SubjectPropertyData.enterNumberOfCommercialUnits(testData.numberOfCommercialUnits);
             _NavigationSection.navigateToCommercialInPlaceRentRoll();
             Income._CommercialManager.InPlaceRentRoll
                 .chooseListLeaseStatuses(testData.leaseStatuses, testData.numberOfCommercialUnits);
@@ -34,10 +34,9 @@ describe(`Verify the Unsaved changes modal functionality on the Income > Commerc
 
             cy.stepInfo(`3. Click on the Yes button and verify that the changes are saved 
             on the Stabilized Rent Roll page.`);
-            _NavigationSection.clickYesButton();
+            _NavigationSection.submitSaveChangesModal();
             Property._Summary.verifyThatPageIsOpened();
-            _NavigationSection.clickIncomeApproachButton().clickCommercialArrow()
-                .clickCommercialStabRentRollButton().verifyUnsavedChangesModal().clickYesButton();
+            _NavigationSection.navigateToCommercialStabilizedRentRoll();
             Income._CommercialManager.StabilizedRentRoll
                 .verifyThatPageIsOpened()
                 .verifyListRentPsfAnnually(testData.leaseStatuses, testData.rentToBe)
@@ -57,10 +56,9 @@ describe(`Verify the Unsaved changes modal functionality on the Income > Commerc
 
             cy.stepInfo(`5. Click on the No button and verify that the changes 
             are NOT saved on the Stabilized Rent Roll page.`);
-            _NavigationSection.clickNoButton();
+            _NavigationSection.submitSaveChangesModal(false);
             Property._Summary.verifyThatPageIsOpened();
-            _NavigationSection.clickIncomeApproachButton().clickCommercialArrow().
-                clickCommercialStabRentRollButton().verifyUnsavedChangesModal().clickYesButton();
+            _NavigationSection.navigateToCommercialStabilizedRentRoll();
             Income._CommercialManager.StabilizedRentRoll
                 .verifyThatPageIsOpened()
                 .verifyListRentPsfAnnually(testData.leaseStatuses, testData.rentToBe)

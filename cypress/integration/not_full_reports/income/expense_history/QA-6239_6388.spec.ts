@@ -1,7 +1,7 @@
 import testData from "../../../../fixtures/not_full_reports/income/expense_history/QA-6239_6388.fixture";
 import { createReport } from "../../../../actions/base/baseTest.actions";
 import { _NavigationSection } from "../../../../actions/base";
-import { Income, Property } from "../../../../actions";
+import { Income, DataCollections } from "../../../../actions";
 import Enums from "../../../../enums/enums";
 import { toCamelCase, toLowerCaseFirstLetterInString } from "../../../../../utils/string.utils";
 
@@ -10,8 +10,8 @@ describe("Verify that the user can display historical expense values on a PSF ba
     
         beforeEach("Create report, enter gba value", () => {
             createReport(testData.reportCreationData);
-            _NavigationSection.navigateToPropertySummary();
-            Property._Summary.enterGrossBuildingArea(testData.gba);
+            _NavigationSection.navigateToSubjectPropertyData();
+            DataCollections._SubjectPropertyData.enterGrossBuildingArea(testData.gba);
         });
 
         it("[QA-6239_6388] Test body", () => {
@@ -76,8 +76,8 @@ describe("Verify that the user can display historical expense values on a PSF ba
             });
 
             cy.stepInfo("6. Verify cells with empty GBA");
-            _NavigationSection.navigateToPropertySummary();
-            Property._Summary.enterGrossBuildingArea(0);
+            _NavigationSection.navigateToSubjectPropertyData();
+            DataCollections._SubjectPropertyData.enterGrossBuildingArea(0);
             _NavigationSection.navigateToExpenseHistory();
             Income._ExpenseHistory
                 .verifyIssueTextByColIndex("-", Enums.EXPENSE_HISTORY_TABLE_ROWS.grossRevenue)

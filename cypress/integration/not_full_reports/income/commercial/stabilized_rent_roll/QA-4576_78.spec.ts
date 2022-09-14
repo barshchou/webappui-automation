@@ -1,9 +1,7 @@
-/// <reference types="cypress-grep" />
-
-import testData from 
+import testData from
     "../../../../../fixtures/not_full_reports/income/commercial/stabilized_rent_roll/QA-4576_78.fixture";
 import { createReport } from "../../../../../actions/base/baseTest.actions";
-import { Base, Property, Income } from "../../../../../actions";
+import { Property, Income, DataCollections } from "../../../../../actions";
 import { _NavigationSection } from "../../../../../actions/base";
 import { getTodayDateString } from "../../../../../../utils/date.utils";
 import stabilizedRentRollPage from "../../../../../pages/income/commercial/stabilizedRentRoll.page";
@@ -19,8 +17,8 @@ describe("[QA-4576][QA-4578] Verify the display of the Stabilized Rent Roll page
             cy.stepInfo(`1. Verify the display of the Stabilized Rent Roll page if there 
                     are > 0 Commercial Units with Comp Groups.`);
 
-            Base._NavigationSection.navigateToPropertySummary();
-            Property._Summary.enterNumberOfCommercialUnits(0);
+            _NavigationSection.navigateToSubjectPropertyData();
+            DataCollections._SubjectPropertyData.enterNumberOfCommercialUnits(0);
             _NavigationSection.navigateToCommercialStabilizedRentRoll();
 
             Income._CommercialManager.StabilizedRentRoll.Actions.matchElementSnapshot(
@@ -32,9 +30,9 @@ describe("[QA-4576][QA-4578] Verify the display of the Stabilized Rent Roll page
             cy.stepInfo(`2. Verify the display of the Stabilized Rent Roll page 
                     if there are > 0 Commercial Units without Comp Groups.`);
 
-            Base._NavigationSection.navigateToPropertySummary();
-            Property._Summary.enterNumberOfCommercialUnits(testData.numberOfCommercialUnits);
-            Base._NavigationSection.navigateToCommercialUnits();
+            _NavigationSection.navigateToSubjectPropertyData();
+            DataCollections._SubjectPropertyData.enterNumberOfCommercialUnits(testData.numberOfCommercialUnits);
+            _NavigationSection.navigateToCommercialUnits();
             Property._CommercialUnits.enterListUnitSF(testData.listOfUnitsSF, testData.numberOfCommercialUnits);
             for (let i = 0; i < testData.numberOfCommercialUnits; i++) {
                 Property._CommercialUnits.clickCommercialUnitTabByIndex(i)
@@ -52,12 +50,7 @@ describe("[QA-4576][QA-4578] Verify the display of the Stabilized Rent Roll page
                     .verifyLeaseDateByRowNumber("Expiry", testData.occupiedLease, 
                         "in-place", getTodayDateString("/"), index);
             }
-            Income._CommercialManager.InPlaceRentRoll
-                .clickSaveButton();
-
-            Base._NavigationSection
-                .clickCommercialStabRentRollButton()
-                .verifyProgressBarNotExist();
+            _NavigationSection.navigateToCommercialStabilizedRentRoll();
             Income._CommercialManager.StabilizedRentRoll.Actions.matchElementSnapshot(
                 stabilizedRentRollPage.stabilizedRRPanel,
                 testData.snapshotNames.stabilizedRRPanelSeveralUnits,

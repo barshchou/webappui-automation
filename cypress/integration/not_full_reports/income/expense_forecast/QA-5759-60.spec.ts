@@ -1,8 +1,7 @@
 import testData from "../../../../fixtures/not_full_reports/income/expense_forecast/QA-5759-60.fixture";
 import { createReport } from "../../../../actions/base/baseTest.actions";
 import { _NavigationSection } from "../../../../actions/base";
-import { Property } from "../../../../actions";
-import { Income } from "../../../../actions";
+import { Income, DataCollections } from "../../../../actions";
 
 describe(`[QA-5759] [QA-5760] Appraiser's Forecast value for Payroll&Benefits  
 is correctly converted to Per SF/Unit value`,
@@ -19,13 +18,13 @@ is correctly converted to Per SF/Unit value`,
     it(`[QA-5759] Per SF Appraiser's Forecast value for Payroll&Benefits 
     is correctly converted to Per Unit value`, () => {
         cy.stepInfo(`Precondition: Go to Property > Summary, add residential units and gross building area`);
-        _NavigationSection.navigateToPropertySummary();
-        Property._Summary.enterNumberOfResUnits(testData.buildingDescription.numberOfUnits)
+        _NavigationSection.navigateToSubjectPropertyData();
+        DataCollections._SubjectPropertyData.enterNumberOfResUnits(testData.buildingDescription.numberOfUnits)
             .enterGrossBuildingArea(testData.buildingDescription.grossArea);
 
         cy.stepInfo(`1. Go to Expense Forecast and make sure that Per SF radio button 
         is selected for Payroll&Benefits card`);
-        _NavigationSection.Actions.navigateToExpenseForecast();
+        _NavigationSection.navigateToExpenseForecast();
         Income._ExpenseForecastActions.chooseForecastItemBasis(testData.expenseForecastPayrollBenefitsFixture('sf'))
             .verifyForecastItemBasis(testData.expenseForecastPayrollBenefitsFixture('sf'));
 
@@ -42,7 +41,7 @@ is correctly converted to Per SF/Unit value`,
     is correctly converted to Per SF value`, () => {
         cy.stepInfo(`1. Go to Expense Forecast and make sure that Per Unit radio button 
         is selected for Payroll&Benefits card`);
-        _NavigationSection.Actions.navigateToExpenseForecast();
+        _NavigationSection.navigateToExpenseForecast();
         Income._ExpenseForecastActions.chooseForecastItemBasis(testData.expenseForecastPayrollBenefitsFixture('unit'))
             .verifyForecastItemBasis(testData.expenseForecastPayrollBenefitsFixture('unit'));
 

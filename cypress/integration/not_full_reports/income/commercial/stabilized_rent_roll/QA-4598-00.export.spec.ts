@@ -1,5 +1,5 @@
 import { numberWithCommas } from "../../../../../../utils/numbers.utils";
-import { Income, Property, ReviewExport } from "../../../../../actions";
+import { DataCollections, Income, ReviewExport } from "../../../../../actions";
 import { _NavigationSection } from "../../../../../actions/base";
 import { createReport } from "../../../../../actions/base/baseTest.actions";
 import testData from 
@@ -14,8 +14,8 @@ new narrative component added through "=" in the Generated Commentary on the Sta
         cy.stepInfo(`Preconditions: The mixed report is created and several commercial units are added.`);
         createReport(testData.reportCreationDataAsIs);
 
-        _NavigationSection.navigateToPropertySummary();
-        Property._Summary.enterNumberOfCommercialUnits(testData.numberOfCommercialUnits)
+        _NavigationSection.navigateToSubjectPropertyData();
+        DataCollections._SubjectPropertyData.enterNumberOfCommercialUnits(testData.numberOfCommercialUnits)
             .enterNumberOfResUnits(testData.numberOfResidentialUnits)
             .enterGrossBuildingArea(testData.grossBuildingArea)
             .enterSiteArea(testData.siteArea)
@@ -64,8 +64,8 @@ new narrative component added through "=" in the Generated Commentary on the Sta
         cy.stepInfo(`Preconditions: The mixed report is created and several commercial units are added.`);
         createReport(testData.reportCreationDataAsStabilized);
 
-        _NavigationSection.navigateToPropertySummary();
-        Property._Summary.enterNumberOfCommercialUnits(testData.numberOfCommercialUnits)
+        _NavigationSection.navigateToSubjectPropertyData();
+        DataCollections._SubjectPropertyData.enterNumberOfCommercialUnits(testData.numberOfCommercialUnits)
             .enterNumberOfResUnits(testData.numberOfResidentialUnits)
             .enterGrossBuildingArea(testData.grossBuildingArea)
             .enterSiteArea(testData.siteArea)
@@ -115,8 +115,8 @@ new narrative component added through "=" in the Generated Commentary on the Sta
         cy.stepInfo(`Preconditions: The mixed report is created and several commercial units are added.`);
         createReport(testData.reportCreationDataAsComplete);
 
-        _NavigationSection.navigateToPropertySummary();
-        Property._Summary.enterNumberOfCommercialUnits(testData.numberOfCommercialUnits)
+        _NavigationSection.navigateToSubjectPropertyData();
+        DataCollections._SubjectPropertyData.enterNumberOfCommercialUnits(testData.numberOfCommercialUnits)
             .enterNumberOfResUnits(testData.numberOfResidentialUnits)
             .enterCurrentNumberOfResUnits(testData.currentNumberOfResidentialUnits)
             .enterCurrentNumberOfCommercialUnits(testData.currentNumberOfCommercialUnits)

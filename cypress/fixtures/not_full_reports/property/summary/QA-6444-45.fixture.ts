@@ -1,6 +1,6 @@
 import ReportDataCreator from "../../../data_creator/reportData.creator";
 import Enums from "../../../../enums/enums";
-import routesUtils from "../../../../utils/routes.utils";
+import subjectPropertyDataRouts from "../../../../utils/subject_property_data_routs.utils";
 
 const reportCreationFixture = () => {
     return ReportDataCreator.getReportData("6444-45");
@@ -9,19 +9,18 @@ const reportCreationFixture = () => {
 const sections = [
     {
         specName: "[QA-6444]",
-        sectionName: Enums.PAGES_TEXTBOX_NAMES.siteDetails,
-        route: routesUtils.subjectPropertySiteDetails
+        sectionName: Enums.EDIT_ON_SUBJECT_PROPERTY_SECTIONS.siteDetails,
+        route: subjectPropertyDataRouts.siteDetails
     },
     {
         specName: "[QA-6445]",
-        sectionName: Enums.PAGES_TEXTBOX_NAMES.asIsBuildingDescription,
-        route: routesUtils.subjectPropertyDescription
+        sectionName: Enums.EDIT_ON_SUBJECT_PROPERTY_SECTIONS.asIsBuildingDescription,
+        route: subjectPropertyDataRouts.propertyDescription
     }
 ];
 
 export default {
     reportCreationData: reportCreationFixture(),
-    featureFlagKey: Enums.FEATURE_FLAG_KEYS.showSubjectPropertyData,
     onFeatureFlag: 0,
     offFeatureFlag: 1,
     sections

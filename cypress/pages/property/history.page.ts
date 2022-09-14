@@ -1,8 +1,6 @@
 import BasePage from "../base/base.page";
 
 class HistoryPage extends BasePage {
-    get currentOwnerField() { return cy.get("*[name='currentOwner']"); }
-
     get isUnderContractCheckbox() { return cy.get("*[data-qa=isUnderContract] input"); }
 
     get buyerField() { return cy.get("*[name='contractDetails.grantee']"); }
