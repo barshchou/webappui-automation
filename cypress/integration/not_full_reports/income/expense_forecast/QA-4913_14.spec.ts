@@ -1,7 +1,7 @@
 import testData from "../../../../fixtures/not_full_reports/income/expense_forecast/QA-4913_14.fixture";
 import { createReport } from "../../../../actions/base/baseTest.actions";
 import { _NavigationSection } from "../../../../actions/base";
-import { Property } from "../../../../actions";
+import { DataCollections } from "../../../../actions";
 import { Income } from "../../../../actions";
 
 describe("Appraiser's Forecast value for Water & Sewer is correctly converted to Per SF/Unit value", 
@@ -9,10 +9,11 @@ describe("Appraiser's Forecast value for Water & Sewer is correctly converted to
         
         before("Login, create report", () => {
             createReport(testData.reportCreationData);
-            _NavigationSection.navigateToPropertySummary();
-            Property._Summary.enterNumberOfResUnits(testData.units)
+            _NavigationSection.navigateToSubjectPropertyData();
+            DataCollections._SubjectPropertyData.enterNumberOfResUnits(testData.units)
                 .enterGrossBuildingArea(testData.grossBuildingArea)
-                .clickSaveButton();
+                .clickSaveButton()
+                .verifyProgressBarNotExist();
             cy.saveLocalStorage();
         });
 
@@ -23,7 +24,7 @@ describe("Appraiser's Forecast value for Water & Sewer is correctly converted to
         it("[QA-4814]", () => {
             cy.stepInfo(`1. Go to Expense Forecast and make sure that Per Unit radio button 
             is selected for Water & Sewer card`);
-            _NavigationSection.Actions.navigateToExpenseForecast();
+            _NavigationSection.navigateToExpenseForecast();
             Income._ExpenseForecastActions.chooseForecastItemBasis(testData.expenseForecastWaterAndSewer(
                 testData.basisUnit))
                 .verifyForecastItemBasis(testData.expenseForecastWaterAndSewer(testData.basisUnit));
@@ -42,7 +43,7 @@ describe("Appraiser's Forecast value for Water & Sewer is correctly converted to
         it("[QA-4813]", () => {
             cy.stepInfo(`1. Go to Expense Forecast and make sure that Per Unit radio button 
             is selected for Water & Sewer card`);
-            _NavigationSection.Actions.navigateToExpenseForecast();
+            _NavigationSection.navigateToExpenseForecast();
             Income._ExpenseForecastActions.chooseForecastItemBasis(testData.expenseForecastWaterAndSewer(
                 testData.basisSF))
                 .verifyForecastItemBasis(testData.expenseForecastWaterAndSewer(testData.basisSF));

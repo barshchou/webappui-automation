@@ -2,15 +2,15 @@ import testData from "../../../../../fixtures/not_full_reports/income/commercial
 import NavigationSection from "../../../../../actions/base/navigationSection.actions";
 import Income from "../../../../../actions/income/income.manager";
 import { createReport } from "../../../../../actions/base/baseTest.actions";
-import { Property } from "../../../../../actions";
+import { DataCollections } from "../../../../../actions";
 
 describe("Verify Comps Groups table", 
     { tags:[ "@income", "@commercial", "@in_place_rent_roll" ] }, () => {
         
         beforeEach("Login, create report, add commercial units", () => {
             createReport(testData.reportCreationData);
-            NavigationSection.navigateToPropertySummary();
-            Property._Summary.enterNumberOfCommercialUnits(testData.monthlyRentList.length);
+            NavigationSection.navigateToSubjectPropertyData();
+            DataCollections._SubjectPropertyData.enterNumberOfCommercialUnits(testData.monthlyRentList.length);
         });
 
         it("[QA-4184][QA-4709]", () => {

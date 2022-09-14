@@ -1,7 +1,7 @@
 import testData from "../../../../fixtures/not_full_reports/property/commercial_units/QA-4538_39_41.fixture";
 import { createReport } from "../../../../actions/base/baseTest.actions";
 import { _NavigationSection } from "../../../../actions/base";
-import { Property } from "../../../../actions";
+import { DataCollections, Property } from "../../../../actions";
 import { numberWithCommas } from "../../../../../utils/numbers.utils";
 import { Alias } from "../../../../utils/alias.utils";
 
@@ -15,8 +15,8 @@ describe("[Property > Commercial Units > Commercial Unit SF] Commercial Units pa
             createReport(testData.reportCreationData);
 
             cy.stepInfo("1. Proceed to the Property > Commercial Units page.");
-            _NavigationSection.navigateToPropertySummary();
-            Property._Summary.enterNumberOfCommercialUnits(testData.numberOfCommercialUnits);
+            _NavigationSection.navigateToSubjectPropertyData();
+            DataCollections._SubjectPropertyData.enterNumberOfCommercialUnits(testData.numberOfCommercialUnits);
             _NavigationSection.navigateToCommercialUnits();
 
             cy.saveLocalStorage();
@@ -34,7 +34,7 @@ describe("[Property > Commercial Units > Commercial Unit SF] Commercial Units pa
             Property._CommercialUnits.Page.commercialUnitsSFInputs.as(commercialUnitsSFInputs);
 
             testData.sfValues.forEach((value, index) => {
-                Property._CommercialUnits.Actions.setValueIntoNumberInput(
+                Property._CommercialUnits.setValueIntoNumberInput(
                     commercialUnitsSFInputs,
                     value, 
                     index
@@ -57,7 +57,7 @@ describe("[Property > Commercial Units > Commercial Unit SF] Commercial Units pa
                 .should('have.value', testData.copyPasteValue);
 
             cy.stepInfo(`5. Verify the long values and save - the page shouldn't crush.`);
-            Property._CommercialUnits.Actions.setValueIntoNumberInput(
+            Property._CommercialUnits.setValueIntoNumberInput(
                 commercialUnitsSFInputs,
                 testData.longValue
             );

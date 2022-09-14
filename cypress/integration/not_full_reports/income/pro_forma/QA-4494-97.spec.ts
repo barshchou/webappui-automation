@@ -1,6 +1,6 @@
 import testData from "../../../../fixtures/not_full_reports/income/pro_forma/QA-4494-97.fixture";
 import { createReport } from "../../../../actions/base/baseTest.actions";
-import { Income, Property } from "../../../../actions";
+import { Income, DataCollections } from "../../../../actions";
 import { _NavigationSection } from "../../../../actions/base";
 import Enums from "../../../../enums/income/incomeTypesCellNames.enum";
 import proFormaTypes from "../../../../enums/proFormaTypes.enum";
@@ -13,8 +13,8 @@ describe("[QA-4494] [QA-4495] [QA-4496] [QA-4497] [Income -> Pro Forma] Potentia
             createReport(testData.reportCreationData);
 
             cy.stepInfo(`2. Go to Property → Summary and add residential units`);
-            _NavigationSection.navigateToPropertySummary();
-            Property._Summary.enterNumberOfResUnits(testData.resUnits)
+            _NavigationSection.navigateToSubjectPropertyData();
+            DataCollections._SubjectPropertyData.enterNumberOfResUnits(testData.resUnits)
                 .enterGrossBuildingArea(testData.grossBuildingArea);
 
             cy.stepInfo(`3. Go to Income → Residential → In-Place Rent Roll 
