@@ -5,7 +5,7 @@ import SalesTitlesEnum from "./salesTitles.enum";
 import finalTitlesEnum from "./finalTitles.enum";
 import previewEditTitlesEnum from "./previewEditTitles.enum";
 import cmsTitlesEnum from "./cmsTitles.enum";
-import dataCollectionsTitlesEnum from "./dataCollectionsTitles.enum";
+import dataCollectionsTitlesEnum from "./data_collections_titles.enum";
 
 export const _ReportTitles = reportTitlesEnum;
 export const _PropertyTitles = propertyTitlesEnum;

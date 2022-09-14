@@ -1,5 +1,5 @@
 import BaseActionsExt from "../base/base.actions.ext";
-import subjectPropertyDataPage from "../../pages/data_collections/subjectPropertyData.page";
+import subjectPropertyDataPage from "../../pages/data_collections/subject_property_data.page";
 import { BoweryReports } from "../../types/boweryReports.type";
 import {
     cutDecimalPartToNumberOfDigits,

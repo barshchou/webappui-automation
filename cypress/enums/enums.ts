@@ -103,7 +103,7 @@ import compPropertyPathsInDB from "./compplex/compPropertiesAndValues.enum";
 import saleStatusValuesInDB from "./compplex/compPropertiesAndValues.enum";
 import saleConditionValuesInDB from "./compplex/compPropertiesAndValues.enum";
 import finalValueApproachEnum from "./final/finalValuesReconciliation/finalValueApproach.enum";
-import subjectPropertyDataSectionsEnum from "./subjectPropertyDataSections.enum";
+import subjectPropertyDataSectionsEnum from "./subject_property_data_sections.enum";
 
 export default {
     TEMPLATE_TYPE: templateTypesEnum,
