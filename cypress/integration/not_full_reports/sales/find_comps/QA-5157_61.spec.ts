@@ -92,7 +92,6 @@ conditionalDescribe(`[QA-5157] [QA-5161] [Sales > Find Comps] "Date Sold" sortin
                     (comps added via uploaded from CSV )`);
         cy.reload();
         Sales._FindComps.uploadComps(testData.filePath)
-            .verifyUploadCompsSucceeded()
             .checkSalesCompSortedByDateSold();
     });
 });

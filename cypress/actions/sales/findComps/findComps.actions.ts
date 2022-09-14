@@ -123,15 +123,17 @@ class FindCompsActions extends BaseActionsExt<typeof findCompsPage> {
 
     uploadComps(filePath: string): FindCompsActions {
         findCompsPage.csvInput.attachFile(getUploadFixture(filePath));
+        this.verifyUploadCompsSucceeded();
+        findCompsPage.csvUploadDoneButton.click();
+        findCompsPage.salesCompsDateSold.should(($compsDateList) => {
+            expect($compsDateList.length).to.be.above(1);
+        });
         return this;
     }
 
     verifyUploadCompsSucceeded(): FindCompsActions {
-        findCompsPage.loadingModalCSV.should('exist');
-        findCompsPage.loadingModalCSV.should('not.exist');
-        findCompsPage.salesCompsDateSold.should(($compsDateList) => {
-            expect($compsDateList.length).to.be.above(1);
-        });
+        findCompsPage.csvUploadDoneButton.should('exist').should('not.be.enabled');
+        findCompsPage.csvUploadDoneButton.should('be.enabled');
         return this;
     }
 
