@@ -42,6 +42,14 @@ class NavigationSectionActions extends BaseActionsExt<typeof navigationSectionPa
         return this;
     }
 
+    navigateToPropertyHistory(): NavigationSectionActions {
+        this.clickPropertyButton()
+            .clickPropertyHistory()
+            .submitSaveChangesModal()
+            .waitForUrl(routesUtils.propertyHistory);
+        return this;
+    }
+
     navigateToUnitInspection(): NavigationSectionActions {
         this.clickFinalButton()
             .clickUnitInspectionButton()
