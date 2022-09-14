@@ -51,7 +51,7 @@ jobs:
   Not-full-reports-run:
     runs-on: ubuntu-latest
     timeout-minutes: 180
-    container: cypress/included:10.3.1
+    container: cypress/included:10.8.0
     needs: concurrency
     permissions:
       id-token: write
