@@ -45,7 +45,7 @@
     "@typescript-eslint/eslint-plugin": "^5.17.0",
     "@typescript-eslint/parser": "^5.17.0",
     "axios": "^0.27.2",
-    "cypress": "^10.3.1",
+    "cypress": "^10.8.0",
     "cypress-file-upload": "^5.0.8",
     "cypress-grep": "^3.0.2",
     "cypress-iframe": "^1.0.1",
