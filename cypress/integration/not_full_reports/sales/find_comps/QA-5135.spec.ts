@@ -22,6 +22,9 @@ describe(`[Sales > Find Comps] Check the comps order when "custom" dropdown is c
                     .addCompByParameter(i, testData.compProperty, testData.compStatusDate);
             }
 
+            Sales._FindComps.verifyComparablesNumber(testData.compsToAdd.length)
+                .saveAddedCompsAddressesToMap();
+
             cy.stepInfo(`3. When a comp gets added, it gets automatically added to the bottom`);
             Sales._FindComps.checkSalesCompAddedToList();
         
