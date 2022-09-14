@@ -13,7 +13,6 @@ class ClientActions extends BaseActionsExt<typeof clientPage> {
 
     enterClientName(name: string, index = 0): ClientActions {
         clientPage.getClientNameField(index).clear().type(name).type("{enter}");
-        clientPage.getClientNameField(index).should("have.value", name);
         return this;
     }
     
@@ -152,6 +151,7 @@ class ClientActions extends BaseActionsExt<typeof clientPage> {
 
     clickAddNewClient(): ClientActions {
         clientPage.addNewClient.click();
+        this.submitSaveChangesModal();
         return this;
     }
 }

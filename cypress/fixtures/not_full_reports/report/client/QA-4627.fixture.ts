@@ -10,5 +10,5 @@ export default {
     companyName: "Test Company & CO",
     identificationOfTheClient: Enums.INTRODUCTION_TEXTBOX_NAMES.identificationOfTheClient, 
     intendedUseAndUser: Enums.INTRODUCTION_TEXTBOX_NAMES.intendedUseAndUser,
-    applicationNumber:  Enums.COVER_PAGE_LOCATOR_NAMES.applicationNumber
+    clientName:  Enums.COVER_PAGE_LOCATOR_NAMES.clientName
 };

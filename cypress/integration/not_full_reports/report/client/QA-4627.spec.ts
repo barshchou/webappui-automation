@@ -53,7 +53,7 @@ conditionalDescribe("Verify the functionality of the Client field.",
             cy.stepInfo(`7. Proceed to the Preview & Edit > Cover page and verify that 
             the Client from the previous step is displayed in the REQUESTED BY section.`);
             _NavigationSection.navigateToCoverPage();
-            PreviewEdit._CoverPage.Page.getRequestedRow(testData.applicationNumber)
+            PreviewEdit._CoverPage.Page.getRequestedRow(testData.clientName)
                 .should("have.text", testData.textToType);
 
             cy.stepInfo(`8. Proceed to the Preview & Edit > Letter of Transmittal page and 
