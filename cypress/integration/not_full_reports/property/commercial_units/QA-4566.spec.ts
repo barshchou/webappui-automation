@@ -27,8 +27,8 @@ describe("Verify the functionality of the Frontage radio button",
                 }
                 Property._CommercialUnits.clickSaveContinueButton();
                 _NavigationSection.verifyProgressBarNotExist();
-                _NavigationSection.goBack()
-                    .submitSaveChangesModal();
+                _NavigationSection.goBack();
+                _NavigationSection.submitSaveChangesModal();
                 cy.stepInfo(`4. Verify that each radio button can be selected and saved.`);
                 Property._CommercialUnits.verifyRadioIsChecked(testData.groupName, radio);
             });
