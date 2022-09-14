@@ -647,6 +647,15 @@ class ValueConclusionActions extends BaseActionsExt<typeof valueConclusionPage> 
         });
         return this;
     }
+
+    clickIncomeDeductionCheckbox(check = true): ValueConclusionActions {
+        valueConclusionPage.incomeDeductionCheckbox.invoke('prop', 'checked').then(prop => {
+            if (prop !== check) {
+                valueConclusionPage.incomeDeductionCheckbox.click();
+            }
+        });
+        return this;
+    }
 }
 
 export default new ValueConclusionActions(valueConclusionPage);

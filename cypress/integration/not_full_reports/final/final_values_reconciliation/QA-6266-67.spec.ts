@@ -66,7 +66,7 @@ describe(`As Is, As Stabilized, Market Value is calculated correctly on Reconcil
             _NavigationSection.navigateToSalesValueConclusion();
             Sales._ValueConclusion.enterSaleValueConclusion(testData.concludedValuePerSf);
 
-            cy.stepInfo(`5. Save 'Final Market Value' for further checks`);
+            cy.stepInfo(`9. Save 'Final Market Value' for further checks`);
             Sales._ValueConclusion.setMarketValueFinal(testData.valueConclusionAsIs)
                 .setMarketValueFinal(testData.valueConclusionAsIs);
         });
