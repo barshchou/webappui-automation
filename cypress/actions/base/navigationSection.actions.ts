@@ -7,6 +7,8 @@ import stabilizedRentRollPage from "../../pages/income/commercial/stabilizedRent
 import rentRollPage from "../../pages/income/commercial/rentRoll.page";
 import { BoweryReports } from "../../types/boweryReports.type";
 import Enums from "../../enums/enums";
+import subjectPropertyDataRouts from "../../utils/subject_property_data_routs.utils";
+import { toCamelCase } from "../../../utils/string.utils";
 
 class NavigationSectionActions extends BaseActionsExt<typeof navigationSectionPage> {
     openReviewAndExport(isNewReport = true): NavigationSectionActions {
@@ -483,12 +485,13 @@ class NavigationSectionActions extends BaseActionsExt<typeof navigationSectionPa
     navigateToSubjectPropertyData(section: BoweryReports.SubjectPropertyDataSections = Enums
         .SUBJECT_PROPERTY_DATA_SECTIONS.siteDetails, isSubmitChanges = true
     ): NavigationSectionActions {
+        const routeToBe = subjectPropertyDataRouts[toCamelCase(section.replaceAll("-", " "))];
         this.clickDataCollectionsIcon()
             .clickSubjectPropertyDataMenuIfClosed()
             .clickSubjectPropertyDataSectionAnchor(section)
             .submitSaveChangesModal(isSubmitChanges)
             .verifyProgressBarNotExist()
-            .waitForUrl(`${routesUtils.subjectPropertyData}#${section}`);
+            .waitForUrl(routeToBe);
         return this;
     }
 

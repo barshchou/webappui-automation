@@ -11,6 +11,7 @@
 import Enums from "../enums/enums";
 import * as KeyInfo from '../enums/enumKeys.enum';
 import routesUtils from "../utils/routes.utils";
+import subjectPropertyDataRouts from "../utils/subject_property_data_routs.utils";
 
 export namespace Utils {
     type _GraphQLRequest = {
@@ -27,5 +28,7 @@ export namespace Utils {
 
     type _Routes = keyof typeof routesUtils
 
-    export type Routes = typeof routesUtils[_Routes]
+    type _SubjectPropertyDataRoutes = keyof typeof subjectPropertyDataRouts
+
+    export type Routes = typeof routesUtils[_Routes] | typeof subjectPropertyDataRouts[_SubjectPropertyDataRoutes]
 }
