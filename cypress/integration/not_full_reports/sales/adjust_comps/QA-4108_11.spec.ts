@@ -4,7 +4,7 @@ import { _NavigationSection } from "../../../../actions/base";
 import { Sales } from "../../../../actions";
 
 describe("Verify Grid is calculated with correct formula", 
-    { tags:[ "@sales", "@adjust_comps", "@fix" ] }, () => {
+    { tags:[ "@sales", "@adjust_comps" ] }, () => {
         before("Login, create report", () => {
             createReport(testData.reportCreationData);
             cy.saveLocalStorage();

@@ -7,7 +7,7 @@ import { pathSpecData } from "../../../../../utils/fixtures.utils";
 import valueConclusionKeys from "../../../../utils/mapKeys/sales/valueConclusion.keys";
 
 describe(`Sales Comparison Approach is exported correctly to Final Value Conclusion table`,
-    { tags:[ "@final", "@final_values_reconciliation", "@fix" ] }, () => {
+    { tags:[ "@final", "@final_values_reconciliation" ] }, () => {
         it("[QA-6275]", () => {
             cy.stepInfo(`1. Create report`);
             createReport(testData.reportCreationData);

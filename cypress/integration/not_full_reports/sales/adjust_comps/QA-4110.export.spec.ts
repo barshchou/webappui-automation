@@ -4,7 +4,7 @@ import { _NavigationSection } from "../../../../actions/base";
 import { ReviewExport, Sales } from "../../../../actions";
 
 describe("Total Utility Adjustments in Sales Adjustment Grid is calculated with correct formula", 
-    { tags:[ "@sales", "@adjust_comps", "@check_export", "@fix" ] }, () => {
+    { tags:[ "@sales", "@adjust_comps", "@check_export" ] }, () => {
 
         it("Test body", () => {
             createReport(testData.reportCreationData);

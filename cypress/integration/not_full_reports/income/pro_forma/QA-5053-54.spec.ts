@@ -7,7 +7,7 @@ import { numberWithCommas } from "../../../../../utils/numbers.utils";
 import launchDarklyApi from "../../../../api/launchDarkly.api";
 
 describe("Pro Forma -> Expenses", 
-    { tags:[ "@income", "@pro_forma", "@feature_flag", "@fix" ] }, () => {
+    { tags:[ "@income", "@pro_forma", "@feature_flag" ] }, () => {
 
         before("Login, create report", () => {
             launchDarklyApi.setFeatureFlagForUser(testData.featureFlagKey, testData.onFeatureFlag);

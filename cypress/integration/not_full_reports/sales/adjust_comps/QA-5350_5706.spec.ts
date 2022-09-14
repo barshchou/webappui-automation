@@ -4,7 +4,7 @@ import NavigationSection from "../../../../actions/base/navigationSection.action
 import { Sales, Report } from "../../../../actions";
  
 describe("Calculation of Market Condition adjustment", 
-    { tags: [ "@adjust_comps", "@sales", "@fix" ] }, () => {
+    { tags: [ "@adjust_comps", "@sales" ] }, () => {
 
         beforeEach("Login, create report", () => {
             createReport(testData.reportCreationData);
