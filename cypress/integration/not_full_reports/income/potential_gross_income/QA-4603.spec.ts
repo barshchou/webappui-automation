@@ -1,8 +1,7 @@
 import testData from "../../../../fixtures/not_full_reports/income/potential_gross_income/QA-4603.fixture";
 import { createReport } from "../../../../actions/base/baseTest.actions";
-import NavigationSection from "../../../../actions/base/navigationSection.actions";
-import Property from "../../../../actions/property/property.manager";
-import Income from "../../../../actions/income/income.manager";
+import { _NavigationSection } from "../../../../actions/base";
+import { DataCollections, Income, Property } from "../../../../actions";
 
 describe("Commercial V/C Loss Discussion Generated Commentary", 
     { tags:[ "@income", "@potential_gross_income" ] }, () => {
@@ -12,16 +11,16 @@ describe("Commercial V/C Loss Discussion Generated Commentary",
         });
 
         it("Test body", () => {
-            NavigationSection.navigateToPropertySummary();
-            Property.Summary.enterNumberOfCommercialUnits(testData.numberOfCommercialUnits);
-            NavigationSection.navigateToCommercialUnits();
-            Property.CommercialUnits.enterListUnitSF(testData.listOfUnitsSF, testData.numberOfCommercialUnits);
-            NavigationSection.navigateToCommercialInPlaceRentRoll();
-            Income.Commercial.InPlaceRentRoll.chooseListLeaseStatuses(testData.leaseStatuses, 
+            _NavigationSection.navigateToSubjectPropertyData();
+            DataCollections._SubjectPropertyData.enterNumberOfCommercialUnits(testData.numberOfCommercialUnits);
+            _NavigationSection.navigateToCommercialUnits();
+            Property._CommercialUnits.enterListUnitSF(testData.listOfUnitsSF, testData.numberOfCommercialUnits);
+            _NavigationSection.navigateToCommercialInPlaceRentRoll();
+            Income._CommercialManager.InPlaceRentRoll.chooseListLeaseStatuses(testData.leaseStatuses,
                 testData.numberOfCommercialUnits)
                 .enterListPerSF(testData.leaseStatuses, testData.rentsPsf);
-            NavigationSection.navigateToPotentialGrossIncome();
-            Income.PotentialGrossIncome.enterCommercialVCLossPercentage(testData.vcLossPercentage, testData.useValue)
+            _NavigationSection.navigateToPotentialGrossIncome();
+            Income._PotentialGrossIncome.enterCommercialVCLossPercentage(testData.vcLossPercentage, testData.useValue)
                 .enterSubjectAreaCommercialVacancy(testData.vacancyRate, testData.useValue)
                 .checkCommercialSubjectSuitabilityByValue(testData.useValue, testData.subjectSuitabilityValue)
                 .verifyCommercialVCLossCommentaryContain(testData.vcLossPercentage.toFixed(2))

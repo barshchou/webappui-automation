@@ -1,8 +1,7 @@
 import testData from "../../../../../fixtures/not_full_reports/income/residential/rent_comps/QA-4339.fixture";
 import { createReport } from "../../../../../actions/base/baseTest.actions";
-import NavigationSection from "../../../../../actions/base/navigationSection.actions";
-import Income from "../../../../../actions/income/income.manager";
-import Property from "../../../../../actions/property/property.manager";
+import { _NavigationSection } from "../../../../../actions/base";
+import { DataCollections, Income } from "../../../../../actions";
 
 describe(`Verify clicking Add Unit button on Add New Rent Comp overlay is adding the unit to the appropriate group 
 of comparable units on the Rent Comps page (Unit type of search is selected)`,
@@ -12,16 +11,16 @@ of comparable units on the Rent Comps page (Unit type of search is selected)`,
     });
 
     it("[QA-4339]", () => {
-        NavigationSection.navigateToPropertySummary();
-        Property.Summary.enterNumberOfResUnits(testData.numberOfUnits);
-        NavigationSection.navigateToResInPlaceRentRoll();
-        Income.Residential.InPlaceRentRoll.enterAllEqualRentTypeCells(testData.rentType)
+        _NavigationSection.navigateToSubjectPropertyData();
+        DataCollections._SubjectPropertyData.enterNumberOfResUnits(testData.numberOfUnits);
+        _NavigationSection.navigateToResInPlaceRentRoll();
+        Income._Residential.InPlaceRentRoll.enterAllEqualRentTypeCells(testData.rentType)
             .enterBedroomsNumberByRowNumber(testData.numberOfBedrooms)
             .checkCheckboxByLabel(testData.includePerRoomCheckbox);
-        NavigationSection.navigateToResidentialRentComps();
-        Income.Residential.RentComps.BaseActions.verifyUnitSelected()
+        _NavigationSection.navigateToResidentialRentComps();
+        Income._Residential.RentComps.BaseActions.verifyUnitSelected()
             .openAddNewComparableForm(testData.formData.address);
-        Income.Residential.RentComps.AddForm.enterUnitNumber(testData.formData.unitNumber)
+        Income._Residential.RentComps.AddForm.enterUnitNumber(testData.formData.unitNumber)
             .selectUnitTypeAndVerify(testData.formData.unitType)
             .enterMonthlyRent(testData.formData.monthly)
             .enterDate()
@@ -34,6 +33,6 @@ of comparable units on the Rent Comps page (Unit type of search is selected)`,
             .checkListOfCheckboxesByQa(testData.formData.amenitiesQaAttr)
             .clickUnitAmenitiesDropdown()
             .clickSubmitCompButton();
-        Income.Residential.RentComps.BaseActions.verifyComparableBedroomTableByNumber(0, testData.formData);
+        Income._Residential.RentComps.BaseActions.verifyComparableBedroomTableByNumber(0, testData.formData);
     });
 });

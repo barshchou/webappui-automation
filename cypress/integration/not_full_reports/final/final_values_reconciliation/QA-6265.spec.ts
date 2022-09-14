@@ -1,15 +1,15 @@
 import testData from "../../../../fixtures/not_full_reports/final/final_values_reconciliation/QA-6265.fixture";
 import { createReport } from "../../../../actions/base/baseTest.actions";
 import { _NavigationSection } from '../../../../actions/base';
-import { Income, Property, Sales, Final } from "../../../../actions";
+import { Income, Property, Sales, Final, DataCollections } from "../../../../actions";
 
 describe(`As Is Market Value is calculated correctly on Reconciliation card for AsIs report`,
     { tags:[ "@final", "@final_values_reconciliation" ] }, () => {
         beforeEach("Login, create report", () => {
             cy.stepInfo(`1. Login, create report. Fill summary data.`);
             createReport(testData.reportCreationData);
-            _NavigationSection.navigateToPropertySummary();
-            Property._Summary.enterNumberOfResUnits(testData.numberOfUnits)
+            _NavigationSection.navigateToSubjectPropertyData();
+            DataCollections._SubjectPropertyData.enterNumberOfResUnits(testData.numberOfUnits)
                 .selectBasisSquareFootAnalysis(testData.squareFootBasis)
                 .fillBasisSquareFootAnalysis(testData.squareFootAnalysisArea);
 

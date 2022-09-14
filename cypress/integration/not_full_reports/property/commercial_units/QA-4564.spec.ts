@@ -1,7 +1,7 @@
 import testData from "../../../../fixtures/not_full_reports/property/commercial_units/QA-4564.fixture";
 import { createReport } from "../../../../actions/base/baseTest.actions";
 import { _NavigationSection } from "../../../../actions/base";
-import { Property } from "../../../../actions";
+import { DataCollections, Property } from "../../../../actions";
 
 describe("Verify the functionality of the Facade radio button", 
     { tags: [ "@property", "@commercial_units" ] }, () => {
@@ -12,8 +12,8 @@ describe("Verify the functionality of the Facade radio button",
 
         it("Test body", () => {
             cy.stepInfo(`1. Navigate to property summary and enter number of commercial units`);
-            _NavigationSection.navigateToPropertySummary();
-            Property._Summary.enterNumberOfCommercialUnits(testData.numberOfCommercialUnits);
+            _NavigationSection.navigateToSubjectPropertyData();
+            DataCollections._SubjectPropertyData.enterNumberOfCommercialUnits(testData.numberOfCommercialUnits);
             cy.stepInfo(`2. Navigate to commercial units and verify functionality of the Facade radio`);
             _NavigationSection.navigateToCommercialUnits();
             cy.stepInfo(`3. Verify the Facade contains the following radio buttons: 

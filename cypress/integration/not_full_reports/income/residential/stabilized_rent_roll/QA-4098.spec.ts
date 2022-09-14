@@ -1,4 +1,4 @@
-import { Income, Property } from '../../../../../actions';
+import { Income, DataCollections } from '../../../../../actions';
 import { _NavigationSection } from '../../../../../actions/base';
 import testData from "../../../../../fixtures/not_full_reports/income/residential/stabilized_rent_roll/QA-4098.fixture";
 import { createReport } from "../../../../../actions/base/baseTest.actions";
@@ -11,8 +11,8 @@ describe("Default selection on Stabilized Rent Roll table is the same selection 
 
         it("Test body", () => {
             cy.stepInfo("Precondition: Fill all needed variables");
-            _NavigationSection.navigateToPropertySummary();
-            Property._Summary.enterNumberOfResUnits(testData.residentialUnits.length);
+            _NavigationSection.navigateToSubjectPropertyData();
+            DataCollections._SubjectPropertyData.enterNumberOfResUnits(testData.residentialUnits.length);
 
             _NavigationSection.navigateToResInPlaceRentRoll();
             Income._Residential.InPlaceRentRoll.verifyTotalAnnualRent()

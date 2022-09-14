@@ -2,7 +2,7 @@ import testData from "../../../../fixtures/not_full_reports/income/expense_histo
 import { createReport } from "../../../../actions/base/baseTest.actions";
 import { _NavigationSection } from "../../../../actions/base";
 import Enums from "../../../../enums/enums";
-import { Income, Property } from "../../../../actions";
+import { Income, DataCollections } from "../../../../actions";
 
 describe(`Expense History Discussion for reports is generated correctly according to 
                selected Basis for Square Foot Analysis`, { tags: [ "@income", "@expense_history" ] }, () => {
@@ -15,10 +15,10 @@ describe(`Expense History Discussion for reports is generated correctly accordin
             Object.values(Enums.BASIS_SQUARE_FOOT_ANALYSIS).forEach((basis, index) => {
                 
                 cy.stepInfo(`1. Navigate to Property -> Summary and select ${basis} basis square foot analysis`);
-                _NavigationSection.navigateToPropertySummary();
-                Property._Summary.selectBasisSquareFootAnalysis(basis);
+                _NavigationSection.navigateToSubjectPropertyData();
+                DataCollections._SubjectPropertyData.selectBasisSquareFootAnalysis(basis);
                 if (basis !== Enums.BASIS_SQUARE_FOOT_ANALYSIS.grossBuildingArea) {
-                    Property._Summary.fillBasisSquareFootAnalysis(testData.basisArea);
+                    DataCollections._SubjectPropertyData.fillBasisSquareFootAnalysis(testData.basisArea);
                 }
                 
                 cy.stepInfo("2. Navigate to Expense history page");

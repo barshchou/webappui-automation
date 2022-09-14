@@ -1,8 +1,7 @@
-import { Property } from '../../../../actions/index';
 import testData from "../../../../fixtures/not_full_reports/income/tax_info/QA-5901-04.fixture";
 import { createReport } from "../../../../actions/base/baseTest.actions";
 import { _NavigationSection } from "../../../../actions/base";
-import { Income } from '../../../../actions';
+import { DataCollections, Income } from '../../../../actions';
 import launchDarklyApi from "../../../../api/launchDarkly.api";
 import { numberWithCommas } from '../../../../../utils/numbers.utils';
 
@@ -15,8 +14,8 @@ describe(`Tax Liability (PSF) for Projected tab sections is calculated correctly
         createReport(testData.reportCreationData);
 
         cy.stepInfo(`2. Basis for Square Foot Analysis should be selected and filled on Property > Summary form`);
-        _NavigationSection.navigateToPropertySummary();
-        Property._Summary.selectBasisSquareFootAnalysis(testData.gbaAnalysisBasis)
+        _NavigationSection.navigateToSubjectPropertyData();
+        DataCollections._SubjectPropertyData.selectBasisSquareFootAnalysis(testData.gbaAnalysisBasis)
             .fillBasisSquareFootAnalysis(testData.squareFootAnalysisArea);
 
         cy.stepInfo(`3. Navigate to Income -> Tax Info and select PSF radio button in Concluded Liability Basis`);

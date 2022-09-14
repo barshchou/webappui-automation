@@ -3,6 +3,7 @@ import homepagePage from "../../pages/base/homepage.page";
 import { BoweryAutomation } from "../../types/boweryAutomation.type";
 import { BoweryReports } from "../../types/boweryReports.type";
 import BaseActionsExt from "./base.actions.ext";
+import { _DataCollectionsTitles } from "../../enums/pages_titles";
 
 class HomepageActions extends BaseActionsExt<typeof homepagePage> {
 
@@ -88,7 +89,7 @@ class HomepageActions extends BaseActionsExt<typeof homepagePage> {
 
     clickCreateReportButton(): HomepageActions {
         homepagePage.createReportButton.should("not.be.disabled").click();
-        homepagePage.keyInfoBlock.should("be.visible");
+        this.Page.pageTitle.should("have.text", _DataCollectionsTitles.subjectPropertyData);
 
         return this;
     }

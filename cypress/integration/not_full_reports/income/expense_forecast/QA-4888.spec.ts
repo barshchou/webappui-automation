@@ -1,6 +1,6 @@
 import testData from "../../../../fixtures/not_full_reports/income/expense_forecast/QA-4888.fixture";
 import { createReport } from "../../../../actions/base/baseTest.actions";
-import { Property, Income } from "../../../../actions";
+import { Income, DataCollections } from "../../../../actions";
 import { _NavigationSection } from "../../../../actions/base";
 import tableExpenseHistoryCellNames from "../../../../../cypress/enums/expense/expenseHistoryTableRows.enum";
 
@@ -13,35 +13,35 @@ describe("Historical expense Electricity Per Unit is correctly calculated and di
 
         it("Test body", () => {
             cy.stepInfo(`1. Pre-condition: Residential Units should be filled in on Property > Summary form`);
-            _NavigationSection.navigateToPropertySummary();
-            Property._Summary.enterNumberOfResUnits(testData.buildingDescription.numberOfUnits);
+            _NavigationSection.navigateToSubjectPropertyData();
+            DataCollections._SubjectPropertyData.enterNumberOfResUnits(testData.buildingDescription.numberOfUnits);
 
             cy.stepInfo(`2. Go to Income > Expense History`);
-            _NavigationSection.Actions.navigateToExpenseHistory();
+            _NavigationSection.navigateToExpenseHistory();
 
             cy.stepInfo(`3. Add columns for all types of Expense Period: 
             Actual, Actual T12, Annualized Historical and Projection + 
             Fill in Electricity field for all added columns and save changes`);
             testData.periods.forEach((per) => {
-                Income._ExpenseHistory.Actions.selectExpensePeriod(per.expensePeriodType)
+                Income._ExpenseHistory.selectExpensePeriod(per.expensePeriodType)
                     .enterExpenseYear(per.year)
                     .clickAddExpenseYearButton()
                     .enterIssueByColIndex(per.electricity, tableExpenseHistoryCellNames.electricity, 0);
             });
             testData.periodsMonth.forEach((per) => {
-                Income._ExpenseHistory.Actions.selectExpensePeriod(per.expensePeriodType)
+                Income._ExpenseHistory.selectExpensePeriod(per.expensePeriodType)
                     .enterExpenseMonth(per.month)
                     .enterExpenseYear(per.year)
                     .clickAddExpenseYearButton()
                     .enterIssueByColIndex(per.electricity, tableExpenseHistoryCellNames.electricity, 0);
             });
-            Income._ExpenseHistory.Actions.verifyAverageTable();
+            Income._ExpenseHistory.verifyAverageTable();
 
             cy.stepInfo(`4. Go to Expense Forecast and make sure that Per Unit radio button 
             is selected for Electricity  card`);
-            _NavigationSection.Actions.navigateToExpenseForecast();
-            Income._ExpenseForecastActions.chooseForecastItemBasis(testData.actualElectricityItem);
-            Income._ExpenseForecastActions.Actions.verifyForecastItemBasis(testData.actualElectricityItem);
+            _NavigationSection.navigateToExpenseForecast();
+            Income._ExpenseForecastActions.chooseForecastItemBasis(testData.actualElectricityItem)
+                .verifyForecastItemBasis(testData.actualElectricityItem);
 
             cy.stepInfo(`4.1 Check historical expenses values for Electricity card. 
             They should be calculated for each expense type as: 
