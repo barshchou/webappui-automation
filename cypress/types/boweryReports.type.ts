@@ -224,6 +224,9 @@ export namespace BoweryReports {
     export type ExportTitles = typeof Enums.EXPORT_TITLES[KeyInfo.ExportTitlesKeys];
 
     export type PropertyConditions = typeof Enums.PROPERTY_CONDITIONS[KeyInfo.PropertyConditions];
+    export type AmenitiesCheckboxes = typeof Enums.AMENITIES_CHECKBOXES[KeyInfo.AmenitiesCheckboxesKeys]
+    export type AmenitiesUploads = typeof Enums.AMENITIES_UPLOADS[KeyInfo.AmenitiesUploadsKeys] 
+    export type AmenitiesInputs = typeof Enums.AMENITIES_INPUTS[KeyInfo.AmenitiesInputsKeys]
 
     export type PropertyConditionsRadios = keyof typeof Enums.PROPERTY_CONDITIONS_RADIOS;
     export type BondTickers = typeof Enums.BOND_TYPES[KeyInfo.BondTypes]
@@ -231,6 +234,14 @@ export namespace BoweryReports {
     export type ExpenseCardNames = typeof Enums.EXPENSES_CARD_NAMES[KeyInfo.ExpenseCardName]
 
     export namespace FindComps {
+        export type CompsData = {
+            gbaValue?: number
+            yearBuilt?: string,
+            floors?: number,
+            commercialUnits?: number,
+            commercialArea?: number,
+            compType?: ComparableTypes
+        }
         export type SalePeriodValues = typeof Enums.SALE_PERIOD_VALUES[KeyInfo.SalePeriodValues]
         export type SelectedComparablesSortType = typeof Enums.SORT_VALUES[KeyInfo.SortValues]
         export type ConditionValueType = typeof Enums.CONDITION_VALUES[KeyInfo.ConditionValues]
@@ -273,4 +284,8 @@ export namespace BoweryReports {
     export type CoverPageLocatorNamesType = typeof Enums.COVER_PAGE_LOCATOR_NAMES[
         KeyInfo.CoverPageLocatorNames
     ]
+    
+    export type PagesTexboxNamesType = typeof Enums.PAGES_TEXTBOX_NAMES[KeyInfo.PagesTexboxNamesKeys]
+    
+    export type FinalValuesApproach = typeof Enums.FINAL_VALUES_APPROACH[KeyInfo.FinalValuesApproach]
 }

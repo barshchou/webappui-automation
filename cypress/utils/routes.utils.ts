@@ -50,7 +50,12 @@ const routes =  {
     renovation: "/renovations",
     reviewExport: "/review-and-export",
     organizationInfo: "/organization-info",
-    commercialCompGroupsDiscussion: "/commercial-comp-groups-discussion"
+    subjectPropertySiteDetails: "/subject-property#site-details",
+    subjectPropertyDescription: "/subject-property#property-description",
+    subjectPropertyHistory: "/subject-property#property-history",
+    commercialCompGroupsDiscussion: "/commercial-comp-groups-discussion",
+    finalValuesReconciliation: "/final-values-and-reconciliation",
+    organizationNewClient: "/organization-new-client"
 } as const;
 
 export default routes;

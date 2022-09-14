@@ -65,6 +65,7 @@ class PropertySummaryPage extends BasePage {
     }
 
     get basisSquareFootAnalysisArea() { return cy.get('[name="basisForSFAnalysisValue"]'); }
+
 }
 
 export default new PropertySummaryPage();

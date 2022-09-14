@@ -3,6 +3,8 @@ import BasePage from "../base/base.page";
 class FinalValuesReconciliationPage extends BasePage {
     get perUnitCheckbox() { return cy.get("[data-qa^='unitOfComparison.perUnit-checkbox'] input"); }
 
+    get perSfCheckbox() { return cy.get(`[data-qa^='unitOfComparison.psf-checkbox'] input`); }
+
     get incomeStabilizedDate() { return cy.get("[data-qa=incomeApproachAsStablilized-date]"); }
 
     get incomeCompleteDate() { return cy.get("[data-qa=incomeApproachAsComplete-date]"); }
@@ -24,6 +26,14 @@ class FinalValuesReconciliationPage extends BasePage {
     get finalValueAsCompleteDate() { return cy.get("[data-qa=asComplete-date]"); }
 
     get finalValueAsIsDate() { return cy.get("[data-qa=asIs-date]"); }
+
+    salesComparisonApproachValue(valueConclusion: string) { 
+        return cy.get(`[data-qa="salesApproach${valueConclusion}-conclusion"]`);
+    }
+
+    finalValueOpinion(valueConclusion: string) {
+        return cy.get(`[data-qa="${valueConclusion}-conclusion"]`);
+    }
 }
 
 export default new FinalValuesReconciliationPage();

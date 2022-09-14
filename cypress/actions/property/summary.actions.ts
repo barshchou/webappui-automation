@@ -187,6 +187,11 @@ class SummaryActions extends BaseActionsExt<typeof summaryPage> {
             .should('have.value', `${numberWithCommas(area)}`);
         return this;
     }
+
+    clickEditDataBySectionName(name: string): SummaryActions {
+        summaryPage.getEditIconBySectionName(name).click();
+        return this;
+    }
 }
 
 export default new SummaryActions(summaryPage);

@@ -1,36 +1,11 @@
 import clientPage from "../../pages/report/client.page";
 import { replaceEntersWithLineBreak } from "../../../utils/string.utils";
 import BaseActionsExt from "../base/base.actions.ext";
+import routesUtils from "../../utils/routes.utils";
+import Enums from "../../enums/enums";
 import { numberWithCommas } from "../../../utils/numbers.utils";
 
 class ClientActions extends BaseActionsExt<typeof clientPage> {
-    enterIntendedUser(textToType: string = null, edit = true, save = true, revert = false) {
-        if (edit === true) { clientPage.formEditBtn().click(); }
-        clientPage.intendedUserTextBox.invoke("text")
-            .then(text => {
-                clientPage.intendedUserTextBox.focus().type(textToType ?? text);
-            });
-        if (save === true) { clientPage.formSaveBtn().click(); }
-        if (revert === true) {
-            clientPage.formRevertToOriginalBtn().click();
-            clientPage.formYesRevertBtn.click();
-        }
-        return this;
-    }
-
-    enterIdentificationOfTheClient(textToType: string = null, edit = true, save = true, revert = false) {
-        if (edit === true) { clientPage.formEditBtn().click(); }
-        clientPage.identificationOfClientTextBox.invoke("text").then(text => {
-            clientPage.identificationOfClientTextBox.focus().type(textToType ?? text);
-        });
-        if (save === true) { clientPage.formSaveBtn().click(); }
-        if (revert === true) {
-            clientPage.formRevertToOriginalBtn().click();
-            clientPage.formYesRevertBtn.click();
-        }
-        return this;
-    }
-
     verifyInputChangesToBeUnsaved(clientFileNumber: string, index = 0): ClientActions {
         clientPage.getClientFileNumberField(index).should("have.value", clientFileNumber);
         return this;
@@ -55,7 +30,9 @@ class ClientActions extends BaseActionsExt<typeof clientPage> {
     }
 
     clickAddClientButton() {
-        clientPage.addClientButton.click();
+        clientPage.addNewClient.click();
+        this.submitSaveChangesModal()
+            .waitForUrl(routesUtils.organizationNewClient);
         return this;
     }
 
@@ -68,13 +45,6 @@ class ClientActions extends BaseActionsExt<typeof clientPage> {
     verifyGuidelineTooltip() {
         clientPage.guidelinesTooltip.should("exist");
         clientPage.tooltip.should("not.exist");
-        clientPage.guidelinesTooltip.trigger("mouseover");
-        clientPage.tooltip.should("exist");
-        return this;
-    }
-
-    verifyClientGuidelinesCommentary(commentary: string): ClientActions {
-        clientPage.clientGuidelinesCommentary.should("have.text", commentary);
         return this;
     }
 
@@ -98,16 +68,6 @@ class ClientActions extends BaseActionsExt<typeof clientPage> {
         return this;
     } 
 
-    enterIntendedUserTextBox(textToType: string): ClientActions {
-        clientPage.intendedUserTextBox.type(textToType);
-        return this;
-    }
-
-    enterIdentificationOfTheClientTextBox(textToType: string): ClientActions {
-        clientPage.identificationOfClientTextBox.type(textToType);
-        return this;
-    }
-
     clickNarrativeSuggestions(verifyListValue: string, numberLists = 0): ClientActions {
         clientPage.narrativeSuggestionsList.eq(numberLists).contains(verifyListValue).dblclick({ force: true });
         return this;
@@ -120,22 +80,26 @@ class ClientActions extends BaseActionsExt<typeof clientPage> {
     }
 
     verifyIntendedUserTextBox(verifyAreaValue: string | number): ClientActions {
-        clientPage.intendedUserTextBox.should("contain.text", `${verifyAreaValue}`);
+        clientPage.formCommentTextBox(Enums.PAGES_TEXTBOX_NAMES.intendedUser)
+            .should("contain.text", `${verifyAreaValue}`);
         return this;
     }
 
     verifyIdentificationOfTheClientTextBox(verifyAreaValue: string | number): ClientActions {
-        clientPage.identificationOfClientTextBox.should("contain.text", `${verifyAreaValue}`);
+        clientPage.formCommentTextBox(Enums.PAGES_TEXTBOX_NAMES.identificationOfTheClient)
+            .should("contain.text", `${verifyAreaValue}`);
         return this;
     }
 
     verifyNotContainIntendedUserTextBox(verifyAreaValue: string): ClientActions {
-        clientPage.intendedUserTextBox.should("not.contain.text", verifyAreaValue);
+        clientPage.formCommentTextBox(Enums.PAGES_TEXTBOX_NAMES.intendedUser)
+            .should("not.contain.text", verifyAreaValue);
         return this;
     }
 
     verifyNotContainIdentificationOfTheClientTextBox(verifyAreaValue: string): ClientActions {
-        clientPage.identificationOfClientTextBox.should("not.contain.text", verifyAreaValue);
+        clientPage.formCommentTextBox(Enums.PAGES_TEXTBOX_NAMES.identificationOfTheClient)
+            .should("not.contain.text", verifyAreaValue);
         return this;
     }
 

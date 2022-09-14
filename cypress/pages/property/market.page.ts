@@ -10,25 +10,25 @@ class MarketPage extends BasePage {
     
     get marketingTimeMax() { return cy.get("*[name='marketingTime.max']"); }
 
-    get neighborhood() { return cy.xpath("//label[.='Neighborhood']//following::input[1]"); }
+    get neighborhoodInput() { return cy.xpath("//label[.='Neighborhood']//following::input[1]"); }
 
-    get area() { return cy.xpath("//label[.='Area']//following::input[1]"); }
+    get areaInput() { return cy.xpath("//label[.='Area']//following::input[1]"); }
 
     get marketState() { return cy.xpath("//label[.='State']//following::input[1]"); }
 
     get neighborhoodYear() { return cy.get("*[name=neighborhoodYear]"); }
 
     getMarketInputByAnalysisUse(marketAnalysisUse: BoweryReports.MarketAnalysisUses) {
-        return cy.get(`[data-qa=${marketAnalysisUse}Market-form-control] input`);
+        return cy.get(`[name="${marketAnalysisUse}Market"]`);
     }
 
     getSubmarketInputByAnalysisUse(marketAnalysisUse: BoweryReports.MarketAnalysisUses) {
-        return cy.get(`[data-qa=${marketAnalysisUse}Submarket-form-control] input`);
+        return cy.get(`[name="${marketAnalysisUse}Submarket"]`);
     }
 
-    get marketQuarter() { return cy.get("[data-qa=marketQuarter-form-control] input"); }
+    get marketQuarter() { return cy.get("[name=marketQuarter]"); }
 
-    get marketYear() { return cy.get("*[name=marketYear]"); }
+    get marketYear() { return cy.get("[name=marketYear]"); }
 
     get pullDropboxButton() { return cy.xpath("//button[.='PULL FROM DROPBOX']"); }
 
@@ -63,7 +63,7 @@ class MarketPage extends BasePage {
     }
 
     getMarketAnalysisUseCheckboxArea(marketAnalysisUse: BoweryReports.MarketAnalysisUses) {
-        return cy.get(`[data-qa^='marketAnalysisUses.${marketAnalysisUse}-checkbox']`); 
+        return cy.get(`[data-qa^='marketAnalysisUses.${marketAnalysisUse}']`);
     }
 
     get areaEconomicAnalysisContainer() { return cy.get("[data-qa=file-selection-areaEconomicAnalysis-input]"); }
