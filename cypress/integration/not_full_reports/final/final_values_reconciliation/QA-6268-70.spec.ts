@@ -96,7 +96,7 @@ describe(`As Is, As Stabilized, As Completed Market Value is calculated correctl
         _NavigationSection.navigateToSalesValueConclusion();
         Sales._ValueConclusion.enterSaleValueConclusion(testData.concludedValuePerSf);
 
-        cy.stepInfo(`5. Save 'Final Market Value' for further checks`);
+        cy.stepInfo(`12. Save 'Final Market Value' for further checks`);
         Sales._ValueConclusion.setMarketValueFinal(testData.valueConclusionAsComplete)
             .setMarketValueFinal(testData.valueConclusionAsStabilized)
             .setMarketValueFinal(testData.valueConclusionAsIs);

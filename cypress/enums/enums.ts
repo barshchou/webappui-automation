@@ -104,6 +104,7 @@ import compPropertyPathsInDB from "./compplex/compPropertiesAndValues.enum";
 import saleStatusValuesInDB from "./compplex/compPropertiesAndValues.enum";
 import saleConditionValuesInDB from "./compplex/compPropertiesAndValues.enum";
 import finalValueApproachEnum from "./final/finalValuesReconciliation/finalValueApproach.enum";
+import valueConclusionMarketValueNamesEnum from "./sales/value_conclusion/valueConclusionMarketValueNames.enum";
 import subjectPropertyDataSectionsEnum from "./subject_property_data_sections.enum";
 import editOnSubjectPropertySectionsEnum from "./edit_on_subject_property_sections.enum";
 
@@ -214,6 +215,7 @@ export default {
     COMP_PROPERTIES_PATHS_DB: compPropertyPathsInDB,
     COMP_SALE_STATUS_DB: saleStatusValuesInDB,
     COMP_SALE_CONDITION_DB: saleConditionValuesInDB,
+    VALUE_CONCLUSION_MARKET_VALUE_NAMES: valueConclusionMarketValueNamesEnum,
     SUBJECT_PROPERTY_DATA_SECTIONS: subjectPropertyDataSectionsEnum,
     EDIT_ON_SUBJECT_PROPERTY_SECTIONS: editOnSubjectPropertySectionsEnum
 };
