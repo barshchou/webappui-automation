@@ -287,4 +287,7 @@ export namespace BoweryReports {
 
     export type SubjectPropertyDataSections = typeof
         Enums.SUBJECT_PROPERTY_DATA_SECTIONS[KeyInfo.SubjectPropertyDataSections]
+
+    export type EditOnSubjectPropertySections = typeof
+        Enums.EDIT_ON_SUBJECT_PROPERTY_SECTIONS[KeyInfo.EditOnSubjectPropertySections]
 }

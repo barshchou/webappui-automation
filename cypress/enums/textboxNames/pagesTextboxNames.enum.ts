@@ -14,9 +14,6 @@ const pagesTextboxNames = {
     totalOperatingExpenses: "TOTAL OPERATING EXPENSES",
     letterOfTransmittalPurpose: "Letter of Transmittal Purpose",
     locationDescriptionExport: "Location Description Export",
-    siteDetails: "Site Details",
-    asIsBuildingDescription: "As Is Building Description",
-    propertyHistoricalInformation: "Property Historical Information",
     certificationInspection: "Certification Inspection",
     clientGuidelinesDiscussion: "Client Guidelines Discussion"
 } as const;

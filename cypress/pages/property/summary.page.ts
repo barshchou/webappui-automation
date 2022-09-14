@@ -11,8 +11,6 @@ class PropertySummaryPage extends BasePage {
 
     get buildingDescriptor() { return cy.get("[name=buildingDescriptor]"); }
 
-    get editBuildingDescriptionPropertyDataButton() { return cy.get("[data-qa=building-description-section-tile] a"); }
-
     get numberResidentialUnits() {
         return cy.get("[data-qa=building-description-section-tile]").find("p").contains("Residential Units");
     }

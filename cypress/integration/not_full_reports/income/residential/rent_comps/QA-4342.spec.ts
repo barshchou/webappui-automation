@@ -2,6 +2,7 @@ import tesData from "../../../../../fixtures/not_full_reports/income/residential
 import { createReport } from "../../../../../actions/base/baseTest.actions";
 import { _NavigationSection } from "../../../../../actions/base";
 import { DataCollections, Income, Property } from "../../../../../actions";
+import Enums from "../../../../../enums/enums";
 
 describe("Verify the display of the Unit grid with the added comparable unit on the '$ Rent Comps' page", 
     { tags:[ "@income", "@residential", "@rent_comps" ] }, () => {
@@ -50,7 +51,9 @@ describe("Verify the display of the Unit grid with the added comparable unit on 
         it("[QA-4342] Bedrooms category, subject market rate test", () => {
             _NavigationSection.navigateToResInPlaceRentRoll();
             Income._Residential.InPlaceRentRoll.goToPropSummaryWithSaveSaveClickFirst();
-            Property._Summary.goToEditBuildingDescriptionSubjectPropertyData();
+            Property._Summary
+                .clickEditDataBySectionName(Enums.EDIT_ON_SUBJECT_PROPERTY_SECTIONS.asIsBuildingDescription)
+                .submitSaveChangesModal();
             DataCollections._SubjectPropertyData.enterNumberOfResUnits(tesData.bedroomCategory.numberOfUnits);
             _NavigationSection.navigateToResInPlaceRentRoll();
             Income._Residential.InPlaceRentRoll.enterBedroomsNumberByRowNumber(tesData.bedroomCategory.bedroomsNumber)

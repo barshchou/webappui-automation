@@ -1,8 +1,5 @@
 import summaryPage from "../../pages/property/summary.page";
 import BaseActionsExt from "../base/base.actions.ext";
-import { _NavigationSection } from "../base";
-import routesUtils from "../../utils/routes.utils";
-import Enums from "../../enums/enums";
 import { numberWithCommas } from "../../../utils/numbers.utils";
 
 class SummaryActions extends BaseActionsExt<typeof summaryPage> {
@@ -29,15 +26,6 @@ class SummaryActions extends BaseActionsExt<typeof summaryPage> {
         return this;
     }
 
-    goToEditBuildingDescriptionSubjectPropertyData(isSaveChanges = true): SummaryActions {
-        summaryPage.editBuildingDescriptionPropertyDataButton.click();
-        _NavigationSection.submitSaveChangesModal(isSaveChanges)
-            .verifyProgressBarNotExist()
-            .waitForUrl(`${routesUtils.subjectPropertyData}#${Enums
-                .SUBJECT_PROPERTY_DATA_SECTIONS.propertyDescription}`);
-        return this;
-    }
-
     verifyNumberOfCommercialUnits(numberToBe: number | string): SummaryActions {
         summaryPage.numberCommercialUnits.should("contain.text", numberToBe);
         return this;
@@ -61,11 +49,6 @@ class SummaryActions extends BaseActionsExt<typeof summaryPage> {
     verifyGrossBuildingArea(gbaToBe: number | string): SummaryActions {
         const textToContain = typeof gbaToBe === "string" ? gbaToBe : numberWithCommas(gbaToBe);
         summaryPage.grossBuildingArea.should("contain.text", textToContain);
-        return this;
-    }
-
-    clickEditDataBySectionName(name: string): SummaryActions {
-        summaryPage.getEditIconBySectionName(name).click();
         return this;
     }
 }

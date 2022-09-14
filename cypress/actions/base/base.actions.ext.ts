@@ -11,6 +11,7 @@ import BasePage from "../../pages/base/base.page";
 import BaseActions from "./base.actions";
 import { numberWithCommas } from "../../../utils/numbers.utils";
 import { Utils } from '../../types/utils.type';
+import { BoweryReports } from "../../types/boweryReports.type";
 
 export default class BaseActionsExt<T extends BasePage> extends BaseActions {
     Page: T;
@@ -217,6 +218,11 @@ export default class BaseActionsExt<T extends BasePage> extends BaseActions {
                 });
             }
         });
+        return this;
+    }
+
+    clickEditDataBySectionName(name: BoweryReports.EditOnSubjectPropertySections): this {
+        this.Page.getEditIconBySectionName(name).click();
         return this;
     }
 }

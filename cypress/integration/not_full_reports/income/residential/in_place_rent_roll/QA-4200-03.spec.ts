@@ -3,6 +3,7 @@ import testData from
 import { createReport } from "../../../../../actions/base/baseTest.actions";
 import { _NavigationSection } from "../../../../../actions/base";
 import { DataCollections, Income, Property } from "../../../../../actions";
+import Enums from "../../../../../enums/enums";
 
 describe("Verify the Import manager functionality", 
     { tags:[ "@income", "@residential", "@in_place_rent_roll" ] }, () => {
@@ -31,7 +32,8 @@ describe("Verify the Import manager functionality",
             Income._Residential.InPlaceRentRoll.uploadFile(testData.xlsxFileName, testData.numberOfUnits)
                 .goToPropSummaryWithSaveLeavingFirst();
             Property._Summary.verifyThatPageIsOpened()
-                .goToEditBuildingDescriptionSubjectPropertyData();
+                .clickEditDataBySectionName(Enums.EDIT_ON_SUBJECT_PROPERTY_SECTIONS.asIsBuildingDescription)
+                .submitSaveChangesModal();
             DataCollections._SubjectPropertyData.enterNumberOfResUnits(testData.numberOfUnitsToChange);
             _NavigationSection.navigateToResInPlaceRentRoll();
 

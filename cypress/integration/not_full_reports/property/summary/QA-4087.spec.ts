@@ -3,6 +3,7 @@ import { createReport } from "../../../../actions/base/baseTest.actions";
 import { _NavigationSection } from "../../../../actions/base";
 import { DataCollections, Property } from "../../../../actions";
 import Enums from "../../../../enums/enums";
+import subjectPropertyDataRouts from "../../../../utils/subject_property_data_routs.utils";
 
 describe("[QA-4087] Verify validation of the Residential Units and Commercial Units fields.",
     { tags: [ "@property", "@summary", "@data_collections", "@subject_property_data", "@property_description" ] },
@@ -19,7 +20,10 @@ describe("[QA-4087] Verify validation of the Residential Units and Commercial Un
             _NavigationSection.navigateToPropertySummary();
 
             cy.stepInfo("2. Click edit Edit Data button for Building Description, apply changes");
-            Property._Summary.goToEditBuildingDescriptionSubjectPropertyData();
+            Property._Summary
+                .clickEditDataBySectionName(Enums.EDIT_ON_SUBJECT_PROPERTY_SECTIONS.asCompleteBuildingDescription)
+                .submitSaveChangesModal()
+                .waitForUrl(subjectPropertyDataRouts.propertyDescription);
 
             cy.stepInfo(`3. Verify validation of the Residential Units and Commercial Units fields. 
             The Numbers in these fields should be limited to 5000 units. 
