@@ -57,10 +57,10 @@ export default {
     reimbursementPerUnit: _reimbursementPerUnit,
     expenseTypeCellName: _expenseTypeCellName,
     reimbursementType: _reimbursementType,
-    basisSquareFootAnalysis: {
-        gba: Enums.BASIS_SQUARE_FOOT_ANALYSIS.grossBuildingArea, 
-        gla: Enums.BASIS_SQUARE_FOOT_ANALYSIS.grossLeasableArea,
-        nla: Enums.BASIS_SQUARE_FOOT_ANALYSIS.netLeasableArea,
-        nra: Enums.BASIS_SQUARE_FOOT_ANALYSIS.netRentableArea
-    }
+    basisSquareFootAnalysis: [ 
+        Enums.BASIS_SQUARE_FOOT_ANALYSIS.grossBuildingArea, 
+        Enums.BASIS_SQUARE_FOOT_ANALYSIS.grossLeasableArea,
+        Enums.BASIS_SQUARE_FOOT_ANALYSIS.netRentableArea,
+        Enums.BASIS_SQUARE_FOOT_ANALYSIS.netLeasableArea,
+    ]
 };
