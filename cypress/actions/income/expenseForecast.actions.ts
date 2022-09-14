@@ -109,23 +109,42 @@ class ExpenseForecastActions extends BaseActionsExt<typeof expenseForecastPage> 
     }
 
     verifyForecastItemBasisMoney(forecastItem: ForecastItem, currentDescription: BuildingDescription,
-        forecastEgi?: string): ExpenseForecastActions {
+        forecastEgi?: string, rooms = 2): ExpenseForecastActions {
+        let perRoom = false;
         let forecastToBe;
+        let textToBe: string;
+        let textPerRoom: string;
+
         if (forecastEgi) {
             forecastToBe = forecastEgi;
         } else {
             forecastToBe = forecastItem.forecast;
         }
-        let textToBe;
+        
         if (forecastItem.basis === "unit") {
             textToBe = `Per SF: $${numberWithCommas((forecastToBe /
                 (currentDescription.grossArea / currentDescription.numberOfUnits)).toFixed(2))}`;
-        } else {
+        } else if (forecastItem.basis === "sf") {
             textToBe = `Per Unit: $${numberWithCommas(Math.round(forecastToBe *
                 currentDescription.grossArea / currentDescription.numberOfUnits))}`;
+        } else {
+            perRoom = true;
+            textPerRoom = `Per Unit: $${numberWithCommas(Math.round(forecastToBe *
+                rooms / currentDescription.numberOfUnits))}`;
+            textToBe = `Per SF: $${numberWithCommas((forecastToBe * rooms 
+                / currentDescription.grossArea).toFixed(2))}`;
         }
-        expenseForecastPage.getForecastItemBasisMoneyValue(this.getItemNameForAverage(forecastItem.name))
+        
+        if (forecastItem.basis === "room") {
+            expenseForecastPage
+                .getForecastItemBasisMoneyValue(this.getItemNameForAverage(forecastItem.name), undefined, perRoom)
+                .should("have.text", textPerRoom);
+        } 
+
+        expenseForecastPage
+            .getForecastItemBasisMoneyValue(this.getItemNameForAverage(forecastItem.name))
             .should("have.text", textToBe);
+        
         return this;
     }
 

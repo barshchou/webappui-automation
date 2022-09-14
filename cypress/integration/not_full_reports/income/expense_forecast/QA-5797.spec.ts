@@ -17,17 +17,24 @@ describe(`Per SF Appraiser's Forecast value for Fuel is correctly converted to P
                 .selectBasisSquareFootAnalysis(testData.basisSquareFootAnalysis)
                 .fillBasisSquareFootAnalysis(testData.buildingDescription.grossArea);
 
-            cy.stepInfo(`1. Go to Expense Forecast and make sure that Per SF radio button 
+            cy.stepInfo(`Pre-condition: Fill rooms for residential units`);
+            _NavigationSection.navigateToResInPlaceRentRoll();
+            Income._Residential.InPlaceRentRoll.checkCheckboxByLabel(testData.perRoomAnalysis);
+            for (let unit = 0; unit < testData.buildingDescription.numberOfUnits; unit++) {
+                Income._Residential.InPlaceRentRoll.enterRoomsNumberByRowNumber(testData.rooms, unit);
+            }
+
+            cy.stepInfo(`1. Go to Expense Forecast and make sure that Per Room radio button 
             is selected for Fuel card`);
             _NavigationSection.navigateToExpenseForecast();
             Income._ExpenseForecastActions.chooseForecastItemBasis(testData.fuelPerRoomItem);
 
             cy.stepInfo(`2. Fill in Appraiser's Forecast field for Fuel card`);
             Income._ExpenseForecastActions.enterForecastItemForecast(testData.fuelPerRoomItem);
-            
-            cy.stepInfo(`3. Verify that Per Unit value below this field is calculated as: 
+
+            cy.stepInfo(`3. Verify that Per Unit and Per SF values below this field are calculated as: 
             PSF Appraiser's Forecast * selected Basis for Square Foot Analysis / # of Residential Units`);
             Income._ExpenseForecastActions.verifyForecastItemBasisMoney(testData.fuelPerRoomItem, 
-                testData.buildingDescription);
+                testData.buildingDescription, undefined, testData.allRoomsNumber);
         });
     });

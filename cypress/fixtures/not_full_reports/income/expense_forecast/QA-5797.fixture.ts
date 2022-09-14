@@ -9,14 +9,20 @@ const _fuelPerRoomItem: BoweryReports.ForecastItem = {
     forecast: 1234
 };
 
+const _rooms = 2;
+const _units = 3;
+
 const _buildingDescription: BoweryReports.BuildingDescription = {
     grossArea: 2300,
-    numberOfUnits: 3,
+    numberOfUnits: _units,
 };
 
 export default {
     reportCreationData: ReportDataCreator.getReportData("5797"),
     basisSquareFootAnalysis: Enums.BASIS_SQUARE_FOOT_ANALYSIS.grossLeasableArea,
     fuelPerRoomItem: _fuelPerRoomItem,
-    buildingDescription: _buildingDescription
+    buildingDescription: _buildingDescription,
+    perRoomAnalysis: "Include Per Room Analysis in Report",
+    rooms: _rooms,
+    allRoomsNumber: _rooms * _units
 };
