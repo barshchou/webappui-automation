@@ -63,6 +63,11 @@ class SummaryActions extends BaseActionsExt<typeof summaryPage> {
         summaryPage.grossBuildingArea.should("contain.text", textToContain);
         return this;
     }
+
+    clickEditDataBySectionName(name: string): SummaryActions {
+        summaryPage.getEditIconBySectionName(name).click();
+        return this;
+    }
 }
 
 export default new SummaryActions(summaryPage);

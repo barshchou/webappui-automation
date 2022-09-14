@@ -29,12 +29,12 @@ class MarketActions extends BaseActionsExt<typeof marketPage> {
 
 
     enterNeighborhood(neighborhood: string): MarketActions {
-        marketPage.neighborhood.clear().type(neighborhood).type("{enter}").should("have.value", neighborhood);
+        marketPage.neighborhoodInput.clear().type(neighborhood).type("{enter}").should("have.value", neighborhood);
         return this;
     }
 
     enterArea(area: string): MarketActions {
-        marketPage.area.clear().type(area).type("{enter}").should("have.value", area);
+        marketPage.areaInput.clear().type(area).type("{enter}").should("have.value", area);
         return this;
     }
 

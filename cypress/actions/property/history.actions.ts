@@ -32,6 +32,11 @@ class HistoryActions extends BaseActionsExt<typeof historyPage> {
         historyPage.contractPrice.clear().type(`${contractPrice}`).should("have.value", textToBe);
         return this;
     }
+
+    clickEditDataBySectionName(name: string): HistoryActions {
+        historyPage.getEditIconBySectionName(name).click();
+        return this;
+    }
 }
 
 export default new HistoryActions(historyPage);

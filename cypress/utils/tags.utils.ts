@@ -57,8 +57,9 @@ export enum Tag {
     source_information = "@source_information",
     expense_history = "@expense_history",
     cms = "@cms",
-    final_values_reconciliation = "final_values_reconciliation",
     data_collections = "@data_collections",
     subject_property_data = "@subject_property_data",
-    property_description = "@property_description"
+    property_description = "@property_description",
+    property_history = "@property_history",
+    final_values_reconciliation = "@final_values_reconciliation"
 }
