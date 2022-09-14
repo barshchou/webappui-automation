@@ -8,7 +8,7 @@ const reportData = [
         mather: "not.exist"
     },
     {
-        specName: "[QA-4437]",
+        specName: "[QA-4437-38]",
         stateFeatureFlag: 0,
         mather: "exist"
     }
