@@ -3,9 +3,9 @@ import { BoweryReports } from "../../../../types/boweryReports.type";
 import expensesForecastCardNamesEnum from "../../../../enums/expense/expensesForecastCardNames.enum";
 import Enums from "../../../../enums/enums";
 
-const _fuelPerSfItem: BoweryReports.ForecastItem = {
+const _fuelPerUnitItem: BoweryReports.ForecastItem = {
     name: expensesForecastCardNamesEnum.fuel,
-    basis: Enums.UNIT_SF.sf,
+    basis: Enums.UNIT_SF.unit,
     forecast: 1234
 };
 
@@ -15,8 +15,8 @@ const _buildingDescription: BoweryReports.BuildingDescription = {
 };
 
 export default {
-    reportCreationData: ReportDataCreator.getReportData("5795"),
+    reportCreationData: ReportDataCreator.getReportData("5796"),
     basisSquareFootAnalysis: Enums.BASIS_SQUARE_FOOT_ANALYSIS.grossLeasableArea,
-    fuelPerSfItem: _fuelPerSfItem,
+    fuelPerUnitItem: _fuelPerUnitItem,
     buildingDescription: _buildingDescription
 };
