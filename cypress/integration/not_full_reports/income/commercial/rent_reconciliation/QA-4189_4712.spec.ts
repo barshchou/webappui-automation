@@ -2,7 +2,7 @@ import testData from
     "../../../../../fixtures/not_full_reports/income/commercial/rent_reconciliation/QA-4189_4712.fixture";
 import { createReport } from "../../../../../actions/base/baseTest.actions";
 import { _NavigationSection } from "../../../../../actions/base";
-import { Income, Property } from "../../../../../actions";
+import { DataCollections, Income } from "../../../../../actions";
 import { _map } from "../../../../../support/commands";
 import mapKeysUtils from "../../../../../utils/mapKeys.utils";
 
@@ -12,8 +12,8 @@ describe("Rent is displayed on the same basis that is selected on In-Place rent 
         beforeEach("Create report", () => {
             createReport(testData.reportCreationData);
             cy.stepInfo("Preconditions: Navigate to property summary, enter number of commercial units");
-            _NavigationSection.navigateToPropertySummary();
-            Property._Summary.enterNumberOfCommercialUnits(testData.unitsNumber);
+            _NavigationSection.navigateToSubjectPropertyData();
+            DataCollections._SubjectPropertyData.enterNumberOfCommercialUnits(testData.unitsNumber);
         });
 
         it("[QA-4189] [QA-4712] Rent is displayed on the same basis that is selected on In-Place rent roll", () => {

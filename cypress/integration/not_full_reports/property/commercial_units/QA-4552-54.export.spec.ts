@@ -1,5 +1,5 @@
 import { numberWithCommas } from "../../../../../utils/numbers.utils";
-import { Property, ReviewExport } from "../../../../actions";
+import { DataCollections, Property, ReviewExport } from "../../../../actions";
 import { _NavigationSection } from "../../../../actions/base";
 import { createReport } from "../../../../actions/base/baseTest.actions";
 import testData from "../../../../fixtures/not_full_reports/property/commercial_units/QA-4549-54.fixture";
@@ -12,8 +12,8 @@ describe(`[QA-4552][QA-4553][QA-4554] Verify the "Linked" chips dropdown in the 
             cy.stepInfo(`Preconditions: The mixed report is created and several commercial units are added.`);
             createReport(testData.reportCreationDataAsIs);
 
-            _NavigationSection.navigateToPropertySummary();
-            Property._Summary.enterNumberOfCommercialUnits(testData.numberOfCommercialUnits)
+            _NavigationSection.navigateToSubjectPropertyData();
+            DataCollections._SubjectPropertyData.enterNumberOfCommercialUnits(testData.numberOfCommercialUnits)
                 .enterNumberOfResUnits(testData.numberOfResidentialUnits)
                 .enterGrossBuildingArea(testData.grossBuildingArea)
                 .enterSiteArea(testData.siteArea)
@@ -61,8 +61,8 @@ describe(`[QA-4552][QA-4553][QA-4554] Verify the "Linked" chips dropdown in the 
             cy.stepInfo(`Preconditions: The mixed report is created and several commercial units are added.`);
             createReport(testData.reportCreationDataAsIs);
 
-            _NavigationSection.navigateToPropertySummary();
-            Property._Summary.enterNumberOfCommercialUnits(testData.numberOfCommercialUnits)
+            _NavigationSection.navigateToSubjectPropertyData();
+            DataCollections._SubjectPropertyData.enterNumberOfCommercialUnits(testData.numberOfCommercialUnits)
                 .enterNumberOfResUnits(testData.numberOfResidentialUnits)
                 .enterGrossBuildingArea(testData.grossBuildingArea)
                 .enterSiteArea(testData.siteArea)
@@ -110,8 +110,8 @@ describe(`[QA-4552][QA-4553][QA-4554] Verify the "Linked" chips dropdown in the 
             cy.stepInfo(`Preconditions: The mixed report is created and several commercial units are added.`);
             createReport(testData.reportCreationDataAsIs);
 
-            _NavigationSection.navigateToPropertySummary();
-            Property._Summary.enterNumberOfCommercialUnits(testData.numberOfCommercialUnits)
+            _NavigationSection.navigateToSubjectPropertyData();
+            DataCollections._SubjectPropertyData.enterNumberOfCommercialUnits(testData.numberOfCommercialUnits)
                 .enterNumberOfResUnits(testData.numberOfResidentialUnits)
                 .enterGrossBuildingArea(testData.grossBuildingArea)
                 .enterSiteArea(testData.siteArea)

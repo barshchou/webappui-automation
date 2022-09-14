@@ -1,6 +1,6 @@
 import testData from "../../../../fixtures/not_full_reports/income/expense_forecast/QA-4519.fixture";
 import { createReport } from "../../../../actions/base/baseTest.actions";
-import { Property, Income } from "../../../../actions";
+import { Income, DataCollections } from "../../../../actions";
 import { _NavigationSection } from "../../../../actions/base";
 import tableExpenseHistoryCellNames from "../../../../enums/expense/expenseHistoryTableRows.enum";
 
@@ -11,8 +11,8 @@ describe("Historical expense Insurance Per SF is correctly calculated and displa
             createReport(testData.reportCreationData);
 
             cy.stepInfo("1. Pre-condition: Residential Units should be filled in on Property > Summary form");
-            _NavigationSection.navigateToPropertySummary();
-            Property._Summary.enterNumberOfResUnits(testData.buildingDescription.numberOfUnits)
+            _NavigationSection.navigateToSubjectPropertyData();
+            DataCollections._SubjectPropertyData.enterNumberOfResUnits(testData.buildingDescription.numberOfUnits)
                 .enterGrossBuildingArea(testData.buildingDescription.grossArea);
 
             cy.stepInfo("2. Go to Income > Expense History");

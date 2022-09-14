@@ -1,8 +1,7 @@
-/// <reference types="cypress-grep" />
-
 import testData from "../../../../../fixtures/not_full_reports/income/commercial/stabilized_rent_roll/QA-4581.fixture";
-import { Base, Property, Income } from "../../../../../actions";
+import { Income, DataCollections } from "../../../../../actions";
 import { createReport } from "../../../../../actions/base/baseTest.actions";
+import { _NavigationSection } from "../../../../../actions/base";
 
 describe("Verify the Save & Continue button functionality on the Stabilized Rent Roll page:", 
     { tags: [ "@income", "@commercial", "@stabilized_rent_roll" ] }, () => {
@@ -13,16 +12,17 @@ describe("Verify the Save & Continue button functionality on the Stabilized Rent
 
         it("Test body", () => { 
             cy.stepInfo(` 1. Report creation and several commercial units addition `);
-            Base._NavigationSection.navigateToPropertySummary();
-            Property._Summary.enterNumberOfCommercialUnits(testData.buildingDescription.numberOfUnits);
+            _NavigationSection.navigateToSubjectPropertyData();
+            DataCollections._SubjectPropertyData
+                .enterNumberOfCommercialUnits(testData.buildingDescription.numberOfUnits);
 
-            Base._NavigationSection.navigateToCommercialInPlaceRentRoll();
+            _NavigationSection.navigateToCommercialInPlaceRentRoll();
             Income._CommercialManager.InPlaceRentRoll
                 .chooseListLeaseStatuses(testData.leaseStatuses, testData.numberOfCommercialUnits)
                 .chooseCheckBoxesIsInspectedFromList(testData.isInspected);
 
             cy.stepInfo(` 2. Verify the Save & Continue button is displayed on the Stabilized Rent Roll page `);
-            Base._NavigationSection.navigateToCommercialStabilizedRentRoll();
+            _NavigationSection.navigateToCommercialStabilizedRentRoll();
             Income._CommercialManager.StabilizedRentRoll.verifyThatPageIsOpened()
                 .Page.SaveAndContinueBtn.scrollIntoView().should('exist');
 
@@ -35,11 +35,8 @@ describe("Verify the Save & Continue button functionality on the Stabilized Rent
             cy.stepInfo(` 4. Verify that the changes are saved and the user is redirected to the 
             next page (Income > Miscellaneous > Laundry). `);
             Income._MiscellaneousManager.Laundry.verifyThatPageIsOpened();
-            Base._NavigationSection.clickIncomeApproachButton()
-                .clickCommercialArrow().clickCommercialStabRentRollButton();
+            _NavigationSection.navigateToCommercialStabilizedRentRoll();
             Income._CommercialManager.StabilizedRentRoll
                 .verifyListRentPsfAnnually(testData.leaseStatuses, testData.rentToBe);
-
-            cy.stepInfo(` 4. Delete report`);
         });
     });

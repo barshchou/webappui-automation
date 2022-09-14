@@ -1,7 +1,7 @@
 import testData from "../../../../fixtures/not_full_reports/property/commercial_units/QA-4534_35_36.fixture";
 import { createReport } from "../../../../actions/base/baseTest.actions";
 import { _NavigationSection } from "../../../../actions/base";
-import { Property } from "../../../../actions";
+import { DataCollections, Property } from "../../../../actions";
 
 describe("[Verify the functionality of the link to the Property > Summary page",
     { tags:[ "@property", "@commercial_units" ] }, () => {
@@ -16,8 +16,8 @@ describe("[Verify the functionality of the link to the Property > Summary page",
 
         it("[QA-4534] Test body", () => {
             cy.stepInfo(`1. Proceed to the Property > Commercial Units page.`);
-            _NavigationSection.navigateToPropertySummary();
-            Property._Summary.enterNumberOfCommercialUnits(testData.numberOfCommercialUnits.first);
+            _NavigationSection.navigateToSubjectPropertyData();
+            DataCollections._SubjectPropertyData.enterNumberOfCommercialUnits(testData.numberOfCommercialUnits.first);
             _NavigationSection.navigateToCommercialUnits();
         
             cy.stepInfo(`2. Hover the arrows near No. of Commercial Units label.`);
@@ -36,8 +36,8 @@ describe("[Verify the functionality of the link to the Property > Summary page",
 
         it("[QA-4535] Test body", () => {
             cy.stepInfo(`1. Proceed to the Property > Commercial Units page.`);
-            _NavigationSection.navigateToPropertySummary();
-            Property._Summary.enterNumberOfCommercialUnits(testData.numberOfCommercialUnits.first);
+            _NavigationSection.navigateToSubjectPropertyData();
+            DataCollections._SubjectPropertyData.enterNumberOfCommercialUnits(testData.numberOfCommercialUnits.first);
             _NavigationSection.navigateToCommercialUnits();
         
             cy.stepInfo(`2. Verify that the No. of Commercial Units field is disabled and the number of Commercial Units
@@ -48,8 +48,8 @@ describe("[Verify the functionality of the link to the Property > Summary page",
 
             cy.stepInfo(`3. Proceed to the Property > Summary page, change the Number of 
             Commercial Units and save the changes.`);
-            _NavigationSection.navigateToPropertySummary();
-            Property._Summary.enterNumberOfCommercialUnits(testData.numberOfCommercialUnits.second);
+            _NavigationSection.navigateToSubjectPropertyData();
+            DataCollections._SubjectPropertyData.enterNumberOfCommercialUnits(testData.numberOfCommercialUnits.second);
 
             cy.stepInfo(`4. Proceed back to the Property > Commercial Units page.`);
             _NavigationSection.navigateToCommercialUnits();
@@ -69,8 +69,8 @@ describe("[Verify the functionality of the link to the Property > Summary page",
 
             cy.stepInfo(`3. Proceed to the Property > Summary page and enter any value 
             in the Commercial Units field (e.g. 3), save the changes.`);
-            _NavigationSection.navigateToPropertySummary();
-            Property._Summary.enterNumberOfCommercialUnits(testData.numberOfCommercialUnits.first);
+            _NavigationSection.navigateToSubjectPropertyData();
+            DataCollections._SubjectPropertyData.enterNumberOfCommercialUnits(testData.numberOfCommercialUnits.first);
 
             cy.stepInfo(`4. Move back to the Property > Commercial Units page and verify that the Commercial Unit 1 SF, 
             Commercial Unit 2 SF, Commercial Unit 3 SF fields are displayed.`);
@@ -81,8 +81,8 @@ describe("[Verify the functionality of the link to the Property > Summary page",
 
             cy.stepInfo(`5. Proceed to the Property > Summary page again and enter “0“ 
             in the Commercial Units field, save the changes.`);
-            _NavigationSection.navigateToPropertySummary();
-            Property._Summary.enterNumberOfCommercialUnits(testData.numberOfCommercialUnits.third);
+            _NavigationSection.navigateToSubjectPropertyData();
+            DataCollections._SubjectPropertyData.enterNumberOfCommercialUnits(testData.numberOfCommercialUnits.third);
 
             cy.stepInfo(`6. Move back to the Property > Commercial Units and verify that 
             the Commercial Unit # SF field is NOT displayed.`);

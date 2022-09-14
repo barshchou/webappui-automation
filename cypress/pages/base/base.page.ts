@@ -96,7 +96,7 @@ export default class BasePage {
     }
 
     getEditIconBySectionName(name: string) { 
-        return cy.xpath(`//*[contains(text(), '${name}')]/following::*[@data-testid='LaunchIcon'][1]`); 
+        return cy.xpath(`(//*[contains(text(), '${name}')]/following::*[@data-testid='LaunchIcon'])[1]`);
     }
     
     generatedCommentaryText(name: string) {

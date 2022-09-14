@@ -1,7 +1,7 @@
 import testData from "../../../../../fixtures/not_full_reports/income/commercial/stabilized_rent_roll/QA-4586.fixture";
 import { createReport } from "../../../../../actions/base/baseTest.actions";
 import { _NavigationSection } from "../../../../../actions/base";
-import { Property } from "../../../../../actions";
+import { DataCollections, Property } from "../../../../../actions";
 import { Income } from "../../../../../actions";
 
 describe("[QA-4586] Verify the Commercial Stabilized Rent Roll table", 
@@ -17,8 +17,8 @@ describe("[QA-4586] Verify the Commercial Stabilized Rent Roll table",
 
             cy.stepInfo(`Proceed to the Property > Commercial Units and fill the Commercial Unit # SF field 
                     and select the Use* radio button (e.g. Retail), save it.`);
-            _NavigationSection.navigateToPropertySummary();
-            Property._Summary.enterNumberOfCommercialUnits(testData.numberOfCommercialUnits);
+            _NavigationSection.navigateToSubjectPropertyData();
+            DataCollections._SubjectPropertyData.enterNumberOfCommercialUnits(testData.numberOfCommercialUnits);
             _NavigationSection.navigateToCommercialUnits();
             Property._CommercialUnits.enterListUnitSF(testData.listOfUnitsSF, testData.numberOfCommercialUnits);
             for (let i = 0; i < testData.numberOfCommercialUnits; i++) {

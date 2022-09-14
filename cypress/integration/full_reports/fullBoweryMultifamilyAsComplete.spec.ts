@@ -11,6 +11,7 @@ import proFormaTypesEnum from "../../enums/proFormaTypes.enum";
 import tableExpenseHistoryCellNames from "../../../cypress/enums/expense/expenseHistoryTableRows.enum";
 import { loginAction } from "../../actions/base/baseTest.actions";
 import Enums from "../../enums/enums";
+import { DataCollections } from "../../actions";
 
 describe.skip("Full bowery way, multifamily as complete report", { tags: [ "@full_report" ] }, () => {
     it("Test", () => {
@@ -23,23 +24,21 @@ describe.skip("Full bowery way, multifamily as complete report", { tags: [ "@ful
             .uploadFile(testData.keyInfoEngagementData.engagementFileName);
         NavigationSection.navigateToClientPage();
         Report.Client.enterClientName(testData.clientData.clientName);
-        NavigationSection.navigateToPropertySummary();
-        Property.Summary.verifySiteDetails(testData.siteDetails)
+        NavigationSection.navigateToSubjectPropertyData();
+        DataCollections._SubjectPropertyData.verifySiteDetails(testData.siteDetails)
             .enterYearBuilt(testData.siteDetails.yearBuilt)
             .enterSiteArea(testData.siteDetails.siteArea)
             .fillAsCompleteBuildingDescription(testData.asCompleteDescription)
-            .clickWalkUpTypeButtons()
             .fillCurrentBuildDescription(testData.currentDescription)
-            .editAsCompleteExport(testData.asCompleteDescription.asCompleteExportText)
-            .clickSaveContinueButton();
+            .enterCurrentOwner(testData.owner.name);
+        NavigationSection.navigateToPropertyMarket();
         Property.Market.verifyTimeOnMarket(testData.timeOnMarket)
             .fillMarketResearch(testData.marketResearch, Enums.MARKET_ANALYSIS_USES.multifamily, false)
             .enterMarketQuarter(testData.marketResearch.quarter)
             .clickPullFromDropbox()
             .verifyMarketByAnalysisUseHasFile(Enums.MARKET_ANALYSIS_USES.multifamily)
             .clickSaveContinueButton();
-        Property.History.enterCurrentOwner(testData.owner.name)
-            .checkIsUnderContractCheckbox()
+        Property.History.checkIsUnderContractCheckbox()
             .enterContractDetails(testData.contractDetails)
             .clickSaveContinueButton();
         Property.Description.selectGeneralPropertyCondition(testData.siteInspection.generalPropertyCondition)
@@ -98,8 +97,7 @@ describe.skip("Full bowery way, multifamily as complete report", { tags: [ "@ful
             .uploadTaxMap(testData.propertyMaps.taxMapFile)
             .captureSubjectMap()
             .clickSaveContinueButton();
-        Property.Photos.uploadPhotosBySectionName(testData.facadePhotos)
-            .uploadPhotosBySectionName(testData.subjectPhotos)
+        Property.Photos.uploadPhotosBySectionName(testData.subjectPhotos)
             .uploadPhotosBySectionName(testData.exteriorEntrancePhotos)
             .uploadPhotosBySectionName(testData.stairwayPhotos)
             .uploadPhotosBySectionName(testData.hallwayPhotos)

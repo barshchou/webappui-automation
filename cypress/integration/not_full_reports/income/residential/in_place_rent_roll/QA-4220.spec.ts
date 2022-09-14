@@ -1,4 +1,4 @@
-import { Property, Income, Final } from '../../../../../actions';
+import { DataCollections, Income, Final } from '../../../../../actions';
 import { _NavigationSection } from '../../../../../actions/base';
 import testData from "../../../../../fixtures/not_full_reports/income/residential/in_place_rent_roll/QA-4220.fixture";
 import { createReport } from "../../../../../actions/base/baseTest.actions";
@@ -9,8 +9,8 @@ describe("Verify the # column in the grid",
         beforeEach("Login, create report", () => {
             createReport(testData.reportCreationData);
             cy.stepInfo("Preconditions: Several Residential Units are added on the Property > Summary page");
-            _NavigationSection.navigateToPropertySummary();
-            Property._Summary.enterNumberOfResUnits(testData.numberOfUnits);
+            _NavigationSection.navigateToSubjectPropertyData();
+            DataCollections._SubjectPropertyData.enterNumberOfResUnits(testData.numberOfUnits);
         });
 
         it("Test body", () => {
