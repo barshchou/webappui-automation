@@ -4,6 +4,7 @@ import { createReport } from "../../../../actions/base/baseTest.actions";
 import launchDarklyApi from "../../../../api/launchDarkly.api";
 import { Income, Sales, DataCollections } from "../../../../actions";
 
+// ToDo: Test fails due to problem with rounding: https://bowery.atlassian.net/browse/QA-6954
 describe("Adjusted Price per Residential Unit in Sales Adjustment Grid is calculated with correct formula", 
     { tags: [ "@adjust_comps", "@sales", "@feature_flag" ] }, () => {
 
@@ -37,8 +38,8 @@ describe("Adjusted Price per Residential Unit in Sales Adjustment Grid is calcul
             cy.stepInfo(`5. Navigate to Sales>Find Comps page and add at least one Sale Comp with 
             filled Sale Price, GBA (or selected Basis of Comparison), Residential/Commercial units , save the page`);
             _NavigationSection.navigateToFindComps();
-            Sales._FindComps.zoomInAndResetFilters()
-                .selectCompFromMap();
+            Sales._FindComps.AddressSearch.openAddressSearchTab()
+                .addCompByParameter(1, testData.compProperty, testData.compStatusDate);
             _NavigationSection.navigateToAdjustComps();
             Sales._AdjustComps.expandAdjustmentDetails(testData.adjustmentName)
                 .verifyExpandMarketAdjustmentPricePerUnit(testData.calculationUnits[0], testData.numberUnits)

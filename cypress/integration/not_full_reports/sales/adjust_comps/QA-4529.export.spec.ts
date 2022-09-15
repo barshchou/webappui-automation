@@ -3,20 +3,18 @@ import { createReport } from "../../../../actions/base/baseTest.actions";
 import { _NavigationSection } from "../../../../actions/base";
 import { Sales, ReviewExport } from "../../../../actions";
 
-/**
- * ernst: we need either select first two comparables or refactor method 
- * for sales comps selection by address
- */
-// TODO: Update this test case with new comps selection
-describe.skip("Check custom Utilities adjustment", 
+// ToDo: Test fails due to problem with rounding: https://bowery.atlassian.net/browse/QA-6954
+describe("Check custom Utilities adjustment", 
     { tags:[ "@sales", "@adjust_comps", "@check_export" ] }, () => {
         it("Verify custom utilities adjustments on UI and prepare report for export", () => {
             createReport(testData.reportCreationData);
 
             cy.stepInfo(`1. Navigate to Find comps page and add a couple of sales comps`);
             _NavigationSection.navigateToFindComps();
-            Sales._FindComps.selectCompFromMapByAddress(testData.comparableFirst.address)
-                .selectCompFromMapByAddress(testData.comparableSecond.address);
+            for (let i = 1; i < 3; i++) {
+                Sales._FindComps.AddressSearch.openAddressSearchTab()
+                    .addCompByParameter(i, testData.compProperty, testData.compStatusDate);
+            }
 
             cy.stepInfo(`2. Open Adjust comps page, verify custom utilities adjustment row can be added and deleted`);
             _NavigationSection.navigateToAdjustComps();
