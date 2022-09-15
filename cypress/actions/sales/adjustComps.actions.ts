@@ -7,6 +7,7 @@ import BaseActionsExt from "../base/base.actions.ext";
 import { BoweryReports } from "../../types/boweryReports.type";
 import { _saveDataInFile } from "../../support/commands";
 import Enums from "../../enums/enums";
+import capRateConclusionKeys from "../../utils/mapKeys/income/capRateConclusion/capRateConclusion.keys";
 
 type AdjustmentName = BoweryReports.SalesAdjustmentGrid.AdjustmentName;
 
@@ -341,6 +342,18 @@ class AdjustCompsActions extends BaseActionsExt<typeof adjustCompsPage> {
                     : `${commercialArea / squareFootAnalysis * 100}%`;
                 expect(commercialAreaSf).to.be.eq(`${calculatedPercent}`);
             });
+        return this;
+    }
+
+    verifyExpandMarketAdjustmentSalePrice(calculationUnit: BoweryReports.SalesAdjustmentGrid.CalculationUnits): 
+    AdjustCompsActions {
+        this.checkCalculationUnitsRadio(calculationUnit);
+        cy._mapGet(capRateConclusionKeys.asStabilizedAmount).then(salePrice => {
+            let adjustedPrice = numberWithCommas(salePrice);
+            adjustCompsPage.getExpandMarketAdjustmentSubjectRow("Sale Price")
+                .should("include.text", `$${adjustedPrice}`);
+        });
+        
         return this;
     }
 }
