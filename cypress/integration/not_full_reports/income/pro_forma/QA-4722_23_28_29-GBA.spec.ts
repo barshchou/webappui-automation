@@ -31,7 +31,7 @@ describe("Potential Real Estate Tax Reimbursement",
                 Income._CommercialManager.InPlaceRentRoll.enterRentPerSFAnnuallyByRowNumber(rent, index);
             });
         
-            cy.stepInfo(`3. Go to Income → Reimbursement Summary and add Real Estate Taxes 
+            cy.stepInfo(`4. Go to Income → Reimbursement Summary and add Real Estate Taxes 
             Reimbursement for commercial units`); 
             _NavigationSection.navigateToCommercialReimbursementSummary();
             Income._CommercialManager.ReimbursementSummary.addNewCommercialReimbursement(
