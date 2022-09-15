@@ -15,7 +15,7 @@ describe(`Sales Comparison Approach is exported correctly to Final Value Conclus
             cy.stepInfo(`2. Set square foot analysis and value for it; 
                         set commercial and residential units; 
                         set commercial units SF`);
-            _NavigationSection.navigateToPropertySummary();
+            _NavigationSection.navigateToSubjectPropertyData();
             DataCollections._SubjectPropertyData.selectBasisSquareFootAnalysis(testData.basisForSquareFootAnalysis)
                 .fillBasisSquareFootAnalysis(testData.squareFootAnalysisArea)
                 .enterNumberOfCommercialUnits(testData.commercialUnits)
