@@ -1,30 +1,31 @@
+import { reportCreationFixture } from './../../../../fixtures/not_full_reports/report/key_info/QA-4697.fixture';
 import { Report } from "../../../../actions";
 import { createReport } from "../../../../actions/base/baseTest.actions";
-import testData from '../../../../fixtures/not_full_reports/report/key_info/QA-4695.fixture';
-import Enums from "../../../../enums/enums";
+import testData from '../../../../fixtures/not_full_reports/report/key_info/QA-4697.fixture';
+import { _NavigationSection } from '../../../../actions/base';
+import { normalizeText } from '../../../../../utils/string.utils';
 
 describe("Verify the functionality of the Interest Appraised radio buttons section",
     { tags:[ "@report", "@key_info" ] }, () => {
-        beforeEach("Login, create report", () => {
-            createReport(testData.reportCreationData);
-        });
 
-        it("[QA-4697]", () => {
-            cy.stepInfo("1. Verify the following elements are displayed on the page.");
-            Report._KeyInfo.verifyElementIsVisible(Report._KeyInfo.Page.keyInfoTitle)
-                .verifyElementIsVisible(Report._KeyInfo.Page.purposeDropdown)
-                .verifyElementIsVisible(Report._KeyInfo.Page.asIsMarketInterestsGroup)
-                .verifyElementIsVisible(Report._KeyInfo.Page.asCompleteInterestsGroup)
-                .verifyElementIsVisible(Report._KeyInfo.Page.asStabilizedInterestsGroup)
-                .verifyElementIsVisible(Report._KeyInfo.Page
-                    .formCommentTextBox(Enums.PAGES_TEXTBOX_NAMES.letterOfTransmittalPurpose))
-                .verifyElementIsVisible(Report._KeyInfo.Page.getDateInputByQA('dueDate'))
-                .verifyElementIsVisible(Report._KeyInfo.Page.getDateInputByQA('dateOfValuation'))
-                .verifyElementIsVisible(Report._KeyInfo.Page.getDateInputByQA('inspectionDate'))
-                .verifyElementIsVisible(Report._KeyInfo.Page.inputToCheckUpload)
-                .verifyElementIsVisible(Report._KeyInfo.Page.jobNumberTextInput)
-                .verifyElementIsVisible(Report._KeyInfo.Page.uploadFilesButton)
-                .verifyElementIsVisible(Report._KeyInfo.Page
-                    .formCommentTextBox(Enums.PAGES_TEXTBOX_NAMES.definitionOfMarketValue));
+        testData.dataFixture.forEach(data => {
+            it(`[QA-4697] ${data.conclusionValue}`, () => {
+                cy.stepInfo("Login, create report");
+                createReport(reportCreationFixture(data.conclusionValue));
+
+                cy.stepInfo("1. Proceed to the Report > Key Info page");
+                _NavigationSection.navigateToReportKeyInfo();
+
+                cy.stepInfo("2. Verify the radio buttons are NOT selected by default");
+                Report._KeyInfo.verifyAllInterestAppraisedNotChecked(data.reportInclude);
+
+                cy.stepInfo("3. Verify the radio buttons are selected by default");
+                Report._KeyInfo.checkAllInterestAppraisedByValues(data.interestAppraised);
+
+                cy.stepInfo("4. Verify that the radio button selection affects the Generated Commentary");
+                Report._KeyInfo.Page.formCommentTextBox(testData.propertyRightsAppraised).invoke("text").then(text => {
+                    expect(normalizeText(text)).to.be.include(data.commentToBe);
+                });
+            });
         });
     });
