@@ -45,7 +45,7 @@ describe("Potential Real Estate Tax Reimbursement",
 
         beforeEach("Restore local storage", () => {
             cy.restoreLocalStorage();
-            _NavigationSection.navigateToPropertySummary();
+            _NavigationSection.navigateToSubjectPropertyData();
         });
 
         testData.basisSquareFootAnalysis.forEach(basis => {
