@@ -385,6 +385,12 @@ class ExpenseHistoryActions extends BaseActionsExt<typeof expenseHistoryPage> {
         });
         return this;
     }
+
+    clearCustomCategoryInput(): ExpenseHistoryActions {
+        expenseHistoryPage.closeIcon.click();
+        expenseHistoryPage.newCategoryNameInput.should("be.empty");
+        return this;
+    }
 }
 
 export default new ExpenseHistoryActions(expenseHistoryPage);

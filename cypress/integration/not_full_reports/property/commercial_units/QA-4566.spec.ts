@@ -20,18 +20,15 @@ describe("Verify the functionality of the Frontage radio button",
         
             cy.stepInfo(`2. Verify the Frontage contains the following radio buttons: Small, Medium, Large, Other.`);
             cy.contains("Frontage").should("exist");
-            testData.useRadios.forEach((radio, index) => {
+            testData.useRadios.forEach(radio => {
                 Property._CommercialUnits.clickRadioButtonByValueAndUnitIndex(testData.groupName, radio);
                 if (radio === Enums.COMMERCIAL_UNITS_FRONTAGE_VALUES.other) {
                     Property._CommercialUnits.enterOtherValueByGroupName(testData.groupName, testData.otherValue);
                 }
                 Property._CommercialUnits.clickSaveContinueButton();
                 _NavigationSection.verifyProgressBarNotExist();
-                if (index === 0) {
-                    _NavigationSection.goBackWithSave();
-                } else {
-                    _NavigationSection.goBack();
-                }
+                _NavigationSection.goBack();
+                _NavigationSection.submitSaveChangesModal();
                 cy.stepInfo(`4. Verify that each radio button can be selected and saved.`);
                 Property._CommercialUnits.verifyRadioIsChecked(testData.groupName, radio);
             });
