@@ -1,6 +1,6 @@
 import { sync } from "glob";
 import { convertToHtml } from "mammoth";
-import { existsSync, writeFileSync, readFileSync, rmdir, mkdirSync } from "fs";
+import { existsSync, writeFileSync, rmdir } from "fs";
 
 /**
  * Get relative path to the file (report docx file or converted html in our case)
