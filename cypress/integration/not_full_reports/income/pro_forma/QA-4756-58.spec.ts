@@ -6,6 +6,7 @@ import { DataCollections, Income } from "../../../../actions";
 import proFormaTypes from "../../../../enums/proFormaTypes.enum";
 import launchDarklyApi from '../../../../api/launchDarkly.api';
 
+// ToDo: https://bowery.atlassian.net/browse/QA-6956
 describe("Pro Forma Page validation Operating Expenses -> Real Estate Taxes", 
     { tags:[ "@income", "@pro_forma", "@feature_flag" ] }, () => { 
     
