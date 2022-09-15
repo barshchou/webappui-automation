@@ -19,7 +19,7 @@ const comparableFixture2 = {
     address: "121 East 69 Street"
 };
 const comparableFixture3 = {
-    address: "176 Waverly Place"
+    address: "176 Waverly"
 };
 const comparableFixture4 = {
     address: "303 Park Ave."
@@ -28,7 +28,7 @@ const comparableFixture5 = {
     address: "116 Cooper Street"
 };
 const comparableFixture6 = {
-    address: "1074 Fulton Street"
+    address: "1074 Fulton"
 };
 const comparableFixture7 = {
     address: "20 Bordi Ln."
@@ -37,7 +37,7 @@ const comparableFixture8 = {
     address: "264 Jefferson Street"
 };
 const comparableFixture9 = {
-    address: "108 East 30 Street"
+    address: "108 E 30th"
 };
 
 const arrayOfAllComps = [
