@@ -98,22 +98,19 @@ conditionalDescribe(`[QA-5157] [QA-5161] [Sales > Find Comps] "Date Sold" sortin
 });
 
 function addCompWithStatus(address: string, saleStatus: string) {
-    Sales._FindComps
-        .openAddNewComparableFormSearchResult(address)
+    Sales._FindComps.openAddNewComparableFormSearchResult(address)
         .selectDropdownOptionNewComp(Sales._FindComps.Page.conditionDropdown,
             testData.comparableFixtureManual.condition)
         .selectDropdownOptionNewComp(Sales._FindComps.Page.comparableTypeDropdown,
             testData.comparableFixtureManual.comparableType);
-    Sales._FindComps
-        .PropertyInfo.setResidentialUnits(`${testData.comparableFixtureManual.units.numberOfUnits}`)
+    Sales._FindComps.PropertyInfo.setResidentialUnits(`${testData.comparableFixtureManual.units.numberOfUnits}`)
         .setSiteArea(`${testData.comparableFixtureManual.siteArea}`)
         .setFloor(`${testData.comparableFixtureManual.floors}`);
     Sales._FindComps.clickAddNewCompContinueButton()
         .SaleInfo.setBuyerGrantee(testData.comparableFixtureManual.saleInfo.buyer)
         .setSellerGrantor(testData.comparableFixtureManual.saleInfo.seller)
         .selectSaleDate('random');
-    Sales._FindComps
-        .selectDropdownOptionNewComp(Sales._FindComps.Page.SaleStatusDropdown, saleStatus)
+    Sales._FindComps.selectDropdownOptionNewComp(Sales._FindComps.Page.SaleStatusDropdown, saleStatus)
         .clickAddNewCompContinueButton()
         .clickAddNewCompSaveAndCloseButton();
     return this;

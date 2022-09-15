@@ -196,7 +196,7 @@ class FindCompsPage extends BasePage {
 
     get loadingModal() { return cy.get("*[data-qa='loading-modal']"); }
 
-    //Add data-qa attr for details button
+    //TODO Add data-qa attr for details button https://bowery.atlassian.net/browse/QA-6952
     detailsButtonByAddress(address: string) {
         return this.salesComparablesTable.contains(address).parent('tr').find('[data-qa="selected-comp-actions"]')
             .contains('button', 'Details');
