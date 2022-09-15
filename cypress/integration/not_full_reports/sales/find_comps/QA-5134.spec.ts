@@ -18,12 +18,12 @@ describe(`Check when "custom" dropdown is selected user can drag&drop comps`,
 
             cy.stepInfo(`1. User navigates to SalesComps Search page `);
             _NavigationSection.navigateToFindComps();
-            Sales._FindComps.zoomInAndResetFilters();
         
             cy.stepInfo(`2. User selects n-first comps from map`);
-            testData.compsToAdd.forEach(() => {
-                Sales._FindComps.Actions.selectCompFromMap();
-            });
+            for (let i = 1; i < 3; i++) {
+                Sales._FindComps.AddressSearch.openAddressSearchTab()
+                    .addCompByParameter(i, testData.compProperty, testData.compStatusDate);
+            }
 
             cy.stepInfo(`3. When sort for Selected Comparables set to "Sale Date",
                     then user unable to sort selected comparables by drag-and-drop`);
