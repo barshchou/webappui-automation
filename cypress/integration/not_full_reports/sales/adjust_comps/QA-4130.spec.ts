@@ -4,8 +4,8 @@ import { createReport } from "../../../../actions/base/baseTest.actions";
 import launchDarklyApi from "../../../../api/launchDarkly.api";
 import { Income, Sales, DataCollections } from "../../../../actions";
 
-// Problems with rounding
-describe.skip("Adjusted Price per Residential Unit in Sales Adjustment Grid is calculated with correct formula", 
+// ToDo: Test fails due to problem with rounding: https://bowery.atlassian.net/browse/QA-6954
+describe("Adjusted Price per Residential Unit in Sales Adjustment Grid is calculated with correct formula", 
     { tags: [ "@adjust_comps", "@sales", "@feature_flag" ] }, () => {
 
         beforeEach("Login, create report", () => {

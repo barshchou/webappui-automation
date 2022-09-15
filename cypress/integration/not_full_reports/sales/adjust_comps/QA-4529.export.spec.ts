@@ -3,8 +3,8 @@ import { createReport } from "../../../../actions/base/baseTest.actions";
 import { _NavigationSection } from "../../../../actions/base";
 import { Sales, ReviewExport } from "../../../../actions";
 
-// Problems with rounding
-describe.skip("Check custom Utilities adjustment", 
+// ToDo: Test fails due to problem with rounding: https://bowery.atlassian.net/browse/QA-6954
+describe("Check custom Utilities adjustment", 
     { tags:[ "@sales", "@adjust_comps", "@check_export" ] }, () => {
         it("Verify custom utilities adjustments on UI and prepare report for export", () => {
             createReport(testData.reportCreationData);

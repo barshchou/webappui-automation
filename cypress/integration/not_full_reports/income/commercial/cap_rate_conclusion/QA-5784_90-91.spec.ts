@@ -5,8 +5,8 @@ import { DataCollections, Income, Property } from "../../../../../actions";
 import { createReport } from "../../../../../actions/base/baseTest.actions";
 import launchDarklyApi from '../../../../../api/launchDarkly.api';
 
-// Problems with rounding
-describe.skip("Validation of Market Values Per SF for ACAS reports", 
+// ToDo: Test fails due to problem with rounding: https://bowery.atlassian.net/browse/QA-6954
+describe("Validation of Market Values Per SF for ACAS reports", 
     { tags:[ "@income", "@commercial", "@cap_rate_conclusion", "@feature_flag" ] }, () => {
         beforeEach("Login, create report", () => {
             cy.stepInfo(`1. Set feature flag and create report`);

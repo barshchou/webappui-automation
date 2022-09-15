@@ -311,9 +311,9 @@ class CapRateConclusionActions extends BaseActionsExt<typeof capRateConclusionPa
             let entrepreneurLoss = allRentLosses * allAsStabilizedLossesAliases.entrepreneurProfit / 100;
             cy.log(`Entrepreneur Profit: ${entrepreneurLoss}`);
 
-            // Round calculated value
-            let prospectiveValue = Math.floor((allAsStabilizedLossesAliases.asStabilizedAmount - allRentLosses -
-                entrepreneurLoss));
+            // ToDo: Fix this rounding after resolving https://bowery.atlassian.net/browse/QA-6954
+            let prospectiveValue = Math.round((allAsStabilizedLossesAliases.asStabilizedAmount - allRentLosses -
+                entrepreneurLoss) / 10) * 10;
             cy.log(`Prospective Value As Complete: ${prospectiveValue}`);
 
             let expectedProspectiveValueAsComplete = prospectiveValue < 0
@@ -348,9 +348,9 @@ class CapRateConclusionActions extends BaseActionsExt<typeof capRateConclusionPa
             let entrepreneurLoss = allRentLosses * allAsCompleteLossesAliases.entrepreneurProfit / 100;
             cy.log(`Entrepreneur Profit: ${entrepreneurLoss}`);
 
-            // Round calculated value
-            let marketValueAsIs = Math.ceil((allAsCompleteLossesAliases.asCompleteAmount - allRentLosses -
-                entrepreneurLoss));
+            // ToDo: Fix this rounding after resolving https://bowery.atlassian.net/browse/QA-6954
+            let marketValueAsIs = Math.round((allAsCompleteLossesAliases.asCompleteAmount - allRentLosses -
+                entrepreneurLoss) / 10) * 10;
             cy.log(`Market Value As Is: ${marketValueAsIs}`);
 
             let expectedMarketValueAsIs = marketValueAsIs < 0

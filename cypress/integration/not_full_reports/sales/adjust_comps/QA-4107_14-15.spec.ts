@@ -54,8 +54,8 @@ describe("Adjusted Price per Residential Unit in Sales Adjustment Grid is calcul
                 .verifyAdjustedPriceByColumn();
         });
 
-        it.skip("[QA-4115]", () => {
-            // Problems with rounding
+        // ToDo: Test fails due to problem with rounding: https://bowery.atlassian.net/browse/QA-6954
+        it("[QA-4115]", () => {
             cy.stepInfo("1. Login, create report");
             createReport(testData.reportCreationData);
 

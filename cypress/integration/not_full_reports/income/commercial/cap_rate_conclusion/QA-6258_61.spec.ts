@@ -5,7 +5,7 @@ import { DataCollections, Income, Property } from "../../../../../actions";
 import { createReport } from "../../../../../actions/base/baseTest.actions";
 import launchDarklyApi from '../../../../../api/launchDarkly.api';
 
-// Problems with rounding
+// ToDo: Test fails due to problem with rounding: https://bowery.atlassian.net/browse/QA-6954
 describe.skip("Validation of Market Values Amount and Per SF for AS STABILIZED reports", 
     { tags:[ "@income", "@commercial", "@cap_rate_conclusion", "@feature_flag" ] }, () => {
         beforeEach("Login, create report", () => {
