@@ -19,6 +19,7 @@ describe(`Check the order of comps in the export when 'custom' dropdown is chose
 
             cy.stepInfo(`1. User navigates to SalesComps Search page `);
             _NavigationSection.navigateToFindComps();
+            Sales._FindComps.zoomInAndResetFilters();
 
             Sales._FindComps.resetAllFilters()
                 .selectFilterCompStatusValue(testData.statusesToCheck)

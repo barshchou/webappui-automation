@@ -1,6 +1,6 @@
 import testData from "../../../../fixtures/not_full_reports/income/pro_forma/QA-4995.fixture";
 import { createReport } from "../../../../actions/base/baseTest.actions";
-import { Property, Income } from "../../../../actions";
+import { DataCollections, Income } from "../../../../actions";
 import { _NavigationSection } from "../../../../actions/base";
 import proFormaTypesEnum from "../../../../enums/proFormaTypes.enum";
 import { numberWithCommas } from "../../../../../utils/numbers.utils";
@@ -12,8 +12,8 @@ describe("[QA-4995] Verify that combined utilities expenses is enabled on the Pr
             createReport(testData.reportCreationData);
 
             cy.stepInfo(`1. Pre-condition: Residential Units should be filled in on Property > Summary form`);
-            _NavigationSection.navigateToPropertySummary();
-            Property._Summary.enterNumberOfResUnits(testData.buildingDescription.numberOfUnits)
+            _NavigationSection.navigateToSubjectPropertyData();
+            DataCollections._SubjectPropertyData.enterNumberOfResUnits(testData.buildingDescription.numberOfUnits)
                 .enterGrossBuildingArea(testData.buildingDescription.grossArea);
 
             cy.stepInfo(`2. Navigate to Expense Forecast page and set expenses for Fuel, 
@@ -38,9 +38,9 @@ describe("[QA-4995] Verify that combined utilities expenses is enabled on the Pr
                     of Electricity and Fuel which reflects the Total, PSF, 
                     and per unit forecasted values for the Utilities expense.`);
             _NavigationSection.navigateToProForma();
-            Income._ProFormaActions.verifyExpensesCombined(testData.expenseModeElectricityFuel);
-            Income._ProFormaActions.verifyCategoryTotal(
-                `$${numberWithCommas(Math.round(testData.totalElectricityAndFuel))}`, proFormaTypesEnum.utilities)
+            Income._ProFormaActions.verifyExpensesCombined(testData.expenseModeElectricityFuel)
+                .verifyCategoryTotal(
+                    `$${numberWithCommas(Math.round(testData.totalElectricityAndFuel))}`, proFormaTypesEnum.utilities)
                 .verifyCategoryTotal(
                     `$${numberWithCommas(Math.round(testData.totalWater))}`, proFormaTypesEnum.waterAndSewer);
 
@@ -57,9 +57,10 @@ describe("[QA-4995] Verify that combined utilities expenses is enabled on the Pr
                     the Utilities line item instead of Electricity, Fuel, and Water & Sewer line items which 
                     reflects the Total, PSF, and per unit forecasted values for the Utilities expense.`);
             _NavigationSection.navigateToProForma();
-            Income._ProFormaActions.verifyExpensesCombined(testData.expenseModeElectricityFuelWater);
-            Income._ProFormaActions.verifyCategoryTotal(
-                `$${numberWithCommas(Math.round(testData.totalElectricityFuelWater))}`, proFormaTypesEnum.utilities);
+            Income._ProFormaActions.verifyExpensesCombined(testData.expenseModeElectricityFuelWater)
+                .verifyCategoryTotal(
+                    `$${numberWithCommas(Math.round(testData.totalElectricityFuelWater))}`, 
+                    proFormaTypesEnum.utilities);
 
             cy.stepInfo(`9. Navigate to Expense History and Set Expense mode: Broken Out`);
             _NavigationSection.navigateToExpenseHistory();
@@ -69,9 +70,9 @@ describe("[QA-4995] Verify that combined utilities expenses is enabled on the Pr
                     If Broken Out on Income > Expense History: 
                     no change from current behavior, Electricity, Fuel, and Water & Sewer line items all appear`);
             _NavigationSection.navigateToProForma();
-            Income._ProFormaActions.verifyExpensesCombined(testData.expenseModeBrokenOut);
-            Income._ProFormaActions.verifyCategoryTotal(
-                `$${numberWithCommas(Math.round(testData.totalElectricity))}`, proFormaTypesEnum.electricity)
+            Income._ProFormaActions.verifyExpensesCombined(testData.expenseModeBrokenOut)
+                .verifyCategoryTotal(
+                    `$${numberWithCommas(Math.round(testData.totalElectricity))}`, proFormaTypesEnum.electricity)
                 .verifyCategoryTotal(`$${numberWithCommas(Math.round(testData.totalFuel))}`, 
                     proFormaTypesEnum.fuel)
                 .verifyCategoryTotal(`$${numberWithCommas(Math.round(testData.totalWater))}`, 

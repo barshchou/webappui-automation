@@ -5,7 +5,7 @@ class OrganizationUsersPage extends BasePage {
 
     get confirmDelete() { return cy.get('[data-qa=form-confirm-submit-btn]'); }
 
-    get successModal() { return cy.xpath("//*[contains(text(), 'Success')]", { timeout: 30000 }); }
+    get successModal() { return cy.xpath("//*[contains(text(), 'Success')]", { timeout: 60000 }); }
 
     get successModalCloseButton() { return cy.xpath("//*[contains(text(), 'Success')]//following::button[1]"); }
 

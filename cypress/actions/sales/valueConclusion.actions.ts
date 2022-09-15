@@ -8,6 +8,9 @@ import BaseActionsExt from "../base/base.actions.ext";
 import { BoweryReports } from "../../types/boweryReports.type";
 import capRateConclusionKeys from '../../utils/mapKeys/income/capRateConclusion/capRateConclusion.keys';
 import Enums from "../../enums/enums";
+import adjustedPricesKeys from '../../utils/mapKeys/sales/adjustedComps/adjustedPrices.keys';
+import { _saveDataInFile } from '../../support/commands';
+import valueConclusionKeys from '../../utils/mapKeys/sales/valueConclusion.keys';
 
 class ValueConclusionActions extends BaseActionsExt<typeof valueConclusionPage> {
 
@@ -64,6 +67,94 @@ class ValueConclusionActions extends BaseActionsExt<typeof valueConclusionPage> 
             .verifyAdjustedPriceAvg(adjustedPrices.avg)
             .verifyAdjustedPriceMax(adjustedPrices.max)
             .verifyAdjustedPriceMedian(adjustedPrices.median);
+        return this;
+    }
+
+    setAdjustedPriceMinToMap(): ValueConclusionActions {
+        valueConclusionPage.adjustedPriceMin.invoke('text').then(priceMin => {
+            cy._mapSet(adjustedPricesKeys.adjustedPriceMin, priceMin);
+        });
+        
+        return this;
+    }
+
+    setAdjustedPriceMaxToMap(): ValueConclusionActions {
+        valueConclusionPage.adjustedPriceMax.invoke('text').then(priceMax => {
+            cy._mapSet(adjustedPricesKeys.adjustedPriceMax, priceMax);
+        });
+        
+        return this;
+    }
+
+    setAdjustedPriceAverageToMap(): ValueConclusionActions {
+        valueConclusionPage.adjustedPriceAvg.invoke('text').then(priceAverage => {
+            cy._mapSet(adjustedPricesKeys.adjustedPriceAverage, priceAverage);
+        });
+        
+        return this;
+    }
+
+    setAdjustedPriceMedianToMap(): ValueConclusionActions {
+        valueConclusionPage.adjustedPriceMedian.invoke('text').then(priceMedian => {
+            cy._mapSet(adjustedPricesKeys.adjustedPriceMedian, priceMedian);
+        });
+        
+        return this;
+    }
+
+    setAdjustedPricesToMap(): ValueConclusionActions {
+        this.setAdjustedPriceMinToMap()
+            .setAdjustedPriceMaxToMap()
+            .setAdjustedPriceAverageToMap()
+            .setAdjustedPriceMedianToMap();
+        return this;
+    }
+
+    getAllAdjustedPricesAliases(): ValueConclusionActions {
+        this.setAdjustedPricesToMap();
+        interface IAllAdjustedPricesAliases {
+            adjustedPriceMin?: number
+            adjustedPriceMax?: number
+            adjustedPriceAverage?: number
+            adjustedPriceMedian?: number
+        }
+
+        let allAdjustedPricesAliases: IAllAdjustedPricesAliases = {};
+
+        cy._mapGet(adjustedPricesKeys.adjustedPriceMin)
+            .then(adjustedPriceMin => allAdjustedPricesAliases.adjustedPriceMin = adjustedPriceMin);
+        cy._mapGet(adjustedPricesKeys.adjustedPriceMax)
+            .then(adjustedPriceMax => allAdjustedPricesAliases.adjustedPriceMax = adjustedPriceMax);
+        cy._mapGet(adjustedPricesKeys.adjustedPriceAverage)
+            .then(adjustedPriceAverage => allAdjustedPricesAliases.adjustedPriceAverage = adjustedPriceAverage);
+        cy._mapGet(adjustedPricesKeys.adjustedPriceMedian)
+            .then(adjustedPriceMedian => allAdjustedPricesAliases.adjustedPriceMedian = adjustedPriceMedian);
+        
+
+        cy._mapSet(adjustedPricesKeys.adjustedPricesAll, allAdjustedPricesAliases);
+
+        return this;
+    }
+
+    verifyGeneratedCommentaryCalculated(): ValueConclusionActions {
+        this.setAdjustedPricesToMap()
+            .getAllAdjustedPricesAliases();
+        cy._mapGet(adjustedPricesKeys.adjustedPricesAll).then(adjustedPrices => {
+            valueConclusionPage.saleValueConclusion.invoke('attr', 'value').then(concludedValuePerSf => {
+                let concludedValuePerSfAdjusted = 
+                    numberWithCommas(getNumberFromDollarNumberWithCommas(concludedValuePerSf).toFixed(2));
+                let commentary = 
+                `After adjustments, the comparable sales exhibited a range between ` + 
+                `${adjustedPrices.adjustedPriceMin} per square foot and ${adjustedPrices.adjustedPriceMax} ` + 
+                `per square foot with an average of ${adjustedPrices.adjustedPriceAverage} per square foot ` + 
+                `and a median of ${adjustedPrices.adjustedPriceMedian} per square foot. Thus, considering the ` + 
+                `elements of comparison noted above, our opinion of market value ` + 
+                `is $${concludedValuePerSfAdjusted} per square foot.`;
+                valueConclusionPage.valueConclusionDiscussionCommentary.should('have.text', commentary);
+                _saveDataInFile(commentary, `${Cypress.spec.name}.txt`);
+            });
+        });
+        
         return this;
     }
 
@@ -169,9 +260,12 @@ class ValueConclusionActions extends BaseActionsExt<typeof valueConclusionPage> 
         return this;
     }
 
-    enterNewCommentary(commentary: string): this {
+    enterNewCommentary(commentary: string, clearText = true): this {
         valueConclusionPage.editCommentaryButton.click();
-        valueConclusionPage.commentaryInput.clear().type(commentary).should("have.text", commentary);
+        if (clearText) {
+            valueConclusionPage.commentaryInput.clear();
+        }
+        valueConclusionPage.commentaryInput.type(commentary).should("include.text", commentary);
         return this;
     }
 
@@ -535,6 +629,31 @@ class ValueConclusionActions extends BaseActionsExt<typeof valueConclusionPage> 
             valueConclusionPage.headerSalesValue.invoke('text').should('include', finalValue);
         });
         
+        return this;
+    }
+
+    /**
+     * Save Market Final Value into variable for further purpose 
+     * @param conclusionValueName Value Conclusion to distinguish type of Market Final Value type
+     */
+    setMarketValueFinal(conclusionValueName: BoweryReports.ValueConclusionName): ValueConclusionActions {
+        valueConclusionPage.finalValueCell(conclusionValueName).invoke('text').then(finalValue => {
+            let key = conclusionValueName != Enums.VALUE_CONCLUSION_NAME.asIs 
+                ? conclusionValueName == Enums.VALUE_CONCLUSION_NAME.asStabilized 
+                    ? valueConclusionKeys.asStabilizedFinalAmount
+                    : valueConclusionKeys.asCompleteFinalAmount
+                : valueConclusionKeys.asIsMarketFinalAmount;
+            cy._mapSet(key, finalValue);
+        });
+        return this;
+    }
+
+    clickIncomeDeductionCheckbox(check = true): ValueConclusionActions {
+        valueConclusionPage.incomeDeductionCheckbox.invoke('prop', 'checked').then(prop => {
+            if (prop !== check) {
+                valueConclusionPage.incomeDeductionCheckbox.click();
+            }
+        });
         return this;
     }
 }

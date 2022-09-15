@@ -15,7 +15,8 @@ const pagesTextboxNames = {
     letterOfTransmittalPurpose: "Letter of Transmittal Purpose",
     locationDescriptionExport: "Location Description Export",
     certificationInspection: "Certification Inspection",
-    clientGuidelinesDiscussion: "Client Guidelines Discussion"
+    clientGuidelinesDiscussion: "Client Guidelines Discussion",
+    taxCalculationDiscussion: "Tax Calculation Discussion"
 } as const;
 
 export default Object.freeze(pagesTextboxNames);

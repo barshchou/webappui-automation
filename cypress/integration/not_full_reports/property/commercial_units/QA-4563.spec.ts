@@ -1,7 +1,7 @@
 import testData from "../../../../fixtures/not_full_reports/property/commercial_units/QA-4563.fixture";
 import { createReport } from "../../../../actions/base/baseTest.actions";
 import { _NavigationSection } from "../../../../actions/base";
-import { Property } from "../../../../actions";
+import { DataCollections, Property } from "../../../../actions";
 
 describe("Verify the functionality of the Grade checkbox", 
     { tags: [ "@property", "@commercial_units" ] }, () => {
@@ -11,8 +11,8 @@ describe("Verify the functionality of the Grade checkbox",
         });
 
         it("Test body", () => {
-            _NavigationSection.navigateToPropertySummary();
-            Property._Summary.enterNumberOfCommercialUnits(testData.numberOfCommercialUnits);
+            _NavigationSection.navigateToSubjectPropertyData();
+            DataCollections._SubjectPropertyData.enterNumberOfCommercialUnits(testData.numberOfCommercialUnits);
             _NavigationSection.navigateToCommercialUnits();
             testData.gradeValues.forEach(value => {
                 Property._CommercialUnits.verifyRadioIsNotChecked(testData.groupName, value);

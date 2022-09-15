@@ -10,6 +10,8 @@ import { RealClickOptions } from 'cypress-real-events/commands/realClick';
 import BasePage from "../../pages/base/base.page";
 import BaseActions from "./base.actions";
 import { numberWithCommas } from "../../../utils/numbers.utils";
+import { Utils } from '../../types/utils.type';
+import { BoweryReports } from "../../types/boweryReports.type";
 
 export default class BaseActionsExt<T extends BasePage> extends BaseActions {
     Page: T;
@@ -176,12 +178,51 @@ export default class BaseActionsExt<T extends BasePage> extends BaseActions {
      * Method for typing values into input which re-renders on every char typed into there.
      * Can be useful for such inputs as `commercialUnitsPage.commercialUnitsSFInputs`
      */
-    setValueIntoNumberInput(elemAlias: string, value: string | number, index = 0) {
+    setValueIntoNumberInput(elemAlias: string, value: string | number, index = 0): this {
         cy.get(`@${elemAlias}`).eq(index).should("be.enabled").focus().clear();
         (""+value).split("").forEach(n => {
             cy.get(`@${elemAlias}`).eq(index).focus().type(`${n}`);
             cy.wait(100);
         });
+        return this;
+    }
+
+    verifyStyleInDefaultChip(chip: string, color = "rgb(210, 65, 65)", backgroundColor = "rgb(255, 233, 233)"): this {
+        this.Page.getDefaultCommentChip(chip).should("have.css", "color", color)
+            .and("have.css", "background-color", backgroundColor);
+        return this;
+    }
+
+    clickCloseIcon(): this {
+        this.Page.CloseIcon.click();
+        return this;
+    }
+
+    waitForUrl(route: Utils.Routes) {
+        cy.url().should("include", route);
+        return this;
+    }
+
+    submitSaveChangesModal(saveChanges = true): this {
+        cy.get("body").then($body => {
+            if ($body.text().includes("You have unsaved changes")) {
+                cy.get("[data-qa=form-confirm-dialog]").invoke('prop', 'hidden').then($prop => {
+                    cy.log(`${$prop}`);
+                    if ($prop == false) {
+                        if (saveChanges) { 
+                            this.clickYesButton(); 
+                        } else {
+                            this.clickNoButton();
+                        }
+                    }
+                });
+            }
+        });
+        return this;
+    }
+
+    clickEditDataBySectionName(name: BoweryReports.EditOnSubjectPropertySections): this {
+        this.Page.getEditIconBySectionName(name).click();
         return this;
     }
 }

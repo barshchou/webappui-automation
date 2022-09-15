@@ -1,7 +1,7 @@
 import testData from "../../../../../fixtures/not_full_reports/income/commercial/stabilized_rent_roll/QA-4607.fixture";
 import { createReport } from "../../../../../actions/base/baseTest.actions";
 import { _NavigationSection } from "../../../../../actions/base";
-import { Income, Property } from "../../../../../actions";
+import { DataCollections, Income, Property } from "../../../../../actions";
 
 describe("Verify the Commercial Stabilized Rent Roll table", 
     { tags: [ "@income", "@commercial", "@stabilized_rent_roll" ] }, () => {
@@ -9,8 +9,8 @@ describe("Verify the Commercial Stabilized Rent Roll table",
         beforeEach("Login, create report", () => {
             cy.stepInfo(`1. The mixed report is created and several commercial units are added`);
             createReport(testData.reportCreationData);
-            _NavigationSection.navigateToPropertySummary();
-            Property._Summary.enterGrossBuildingArea(testData.grossBuildingArea)
+            _NavigationSection.navigateToSubjectPropertyData();
+            DataCollections._SubjectPropertyData.enterGrossBuildingArea(testData.grossBuildingArea)
                 .enterNumberOfCommercialUnits(testData.numberOfCommercialUnits);
 
             cy.stepInfo(`2. On the Property Commercial Unit, the Commercial Unit # SF is filled by any value`); 

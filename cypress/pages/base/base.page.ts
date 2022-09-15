@@ -94,4 +94,14 @@ export default class BasePage {
     formCommentTextBox(name: string) {
         return cy.xpath(`//*[.='${name}']//following::*[@data-slate-editor][1]`);
     }
+
+    getEditIconBySectionName(name: string) { 
+        return cy.xpath(`(//*[contains(text(), '${name}')]/following::*[@data-testid='LaunchIcon'])[1]`);
+    }
+    
+    generatedCommentaryText(name: string) {
+        return cy.get(`[data-qa='${name}.commentary-generated-text']`);
+    }
+    
+    getDefaultCommentChip(chipName: string) { return cy.get(`[aria-label='${chipName}']`); }
 }

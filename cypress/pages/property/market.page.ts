@@ -10,20 +10,20 @@ class MarketPage extends BasePage {
     
     get marketingTimeMax() { return cy.get("*[name='marketingTime.max']"); }
 
-    get neighborhood() { return cy.xpath("//label[.='Neighborhood']//following::input[1]"); }
+    get neighborhoodInput() { return cy.xpath("//label[.='Neighborhood']//following::input[1]"); }
 
-    get area() { return cy.xpath("//label[.='Area']//following::input[1]"); }
+    get areaInput() { return cy.xpath("//label[.='Area']//following::input[1]"); }
 
     get marketState() { return cy.xpath("//label[.='State']//following::input[1]"); }
 
     get neighborhoodYear() { return cy.get("*[name=neighborhoodYear]"); }
 
     getMarketInputByAnalysisUse(marketAnalysisUse: BoweryReports.MarketAnalysisUses) {
-        return cy.get(`[name=${marketAnalysisUse}Market]`);
+        return cy.get(`[name="${marketAnalysisUse}Market"]`);
     }
 
     getSubmarketInputByAnalysisUse(marketAnalysisUse: BoweryReports.MarketAnalysisUses) {
-        return cy.get(`[name=${marketAnalysisUse}Submarket]`);
+        return cy.get(`[name="${marketAnalysisUse}Submarket"]`);
     }
 
     get marketQuarter() { return cy.get("[name=marketQuarter]"); }

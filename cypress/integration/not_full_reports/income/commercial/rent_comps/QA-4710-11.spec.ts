@@ -1,6 +1,6 @@
-import { Property, Income } from '../../../../../actions';
+import { Income, DataCollections } from '../../../../../actions';
 import testData from "../../../../../fixtures/not_full_reports/income/commercial/rent_comps/QA-4710-11.fixture";
-import NavigationSection from "../../../../../actions/base/navigationSection.actions";
+import { _NavigationSection } from "../../../../../actions/base";
 import { createReport } from "../../../../../actions/base/baseTest.actions";
 
 describe("Dropdown 'Filters' - 'Sort by' section display and count values", 
@@ -8,20 +8,20 @@ describe("Dropdown 'Filters' - 'Sort by' section display and count values",
 
         beforeEach("Login, create report and add Commercial units", () => {
             createReport(testData.reportCreationData);
-            NavigationSection.navigateToPropertySummary();
-            Property._Summary.enterNumberOfCommercialUnits(testData.commercialUnits);
+            _NavigationSection.navigateToSubjectPropertyData();
+            DataCollections._SubjectPropertyData.enterNumberOfCommercialUnits(testData.commercialUnits);
         });
 
         it("Test body", () => {
             cy.stepInfo("1. Go to Income>Commercial >In-Place Rent Roll and Select “Per Square Foot Per Month” tab");
-            NavigationSection.navigateToCommercialInPlaceRentRoll();
+            _NavigationSection.navigateToCommercialInPlaceRentRoll();
             Income._CommercialManager.InPlaceRentRoll.clickPerSquareFootPerMonthButton();
             testData.leaseStatuses.forEach((status, index) => {
                 Income._CommercialManager.InPlaceRentRoll.chooseLeaseStatusByRowNumber(status, index);
             });
 
             cy.stepInfo("2. Go to Income > Residential > Rent Comps, add comp and click edit");
-            NavigationSection.navigateToCommercialRentComps();
+            _NavigationSection.navigateToCommercialRentComps();
             Income._CommercialManager.RentComps.openMap()
                 .verifyProgressBarNotExist()
                 .verifyFiltersDropdownExist()

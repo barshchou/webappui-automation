@@ -1,10 +1,11 @@
 import { _NavigationSection } from '../../../../../actions/base';
 import testData from 
     "../../../../../fixtures/not_full_reports/income/commercial/cap_rate_conclusion/QA-6262.fixture";
-import { Income, Property } from "../../../../../actions";
+import { Income, DataCollections, Property } from "../../../../../actions";
 import { createReport } from "../../../../../actions/base/baseTest.actions";
 import launchDarklyApi from '../../../../../api/launchDarkly.api';
 
+// ToDo: Test fails due to problem with rounding: https://bowery.atlassian.net/browse/QA-6954
 describe("As Is Market Value is calculated with correct formula in Cap Rate Conclusion Summary Table", 
     { tags:[ "@income", "@commercial", "@cap_rate_conclusion", "@feature_flag" ] }, () => {
         beforeEach("Login, create report", () => {
@@ -15,8 +16,8 @@ describe("As Is Market Value is calculated with correct formula in Cap Rate Conc
             cy.stepInfo(`2. Set square foot analysis and value for it; 
             set commercial and residential units; 
             set commercial units SF`);
-            _NavigationSection.navigateToPropertySummary();
-            Property._Summary.selectBasisSquareFootAnalysis(testData.basisForSquareFootAnalysis)
+            _NavigationSection.navigateToSubjectPropertyData();
+            DataCollections._SubjectPropertyData.selectBasisSquareFootAnalysis(testData.basisForSquareFootAnalysis)
                 .fillBasisSquareFootAnalysis(testData.squareFootAnalysisArea)
                 .enterNumberOfCommercialUnits(testData.commercialUnits)
                 .enterNumberOfResUnits(testData.residentialUnits);

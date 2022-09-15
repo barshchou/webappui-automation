@@ -1,5 +1,5 @@
 import { createReport } from "../../../../../actions/base/baseTest.actions";
-import { Property, Income } from "../../../../../actions";
+import { Property, Income, DataCollections } from "../../../../../actions";
 import { _NavigationSection } from "../../../../../actions/base";
 import testData from "../../../../../fixtures/not_full_reports/income/commercial/reimbursement_summary/QA-4993.fixture";
 
@@ -10,8 +10,8 @@ describe(`Verify that the user can reimburse based on a Utilities expense and th
     beforeEach('Create and setup report', () => {
         cy.stepInfo(`Preconditions: 1. Create a mixed-use report and add commercial units`);
         createReport(testData.reportCreationData);
-        _NavigationSection.navigateToPropertySummary();
-        Property._Summary.enterGrossBuildingArea(testData.grossBuildingArea)
+        _NavigationSection.navigateToSubjectPropertyData();
+        DataCollections._SubjectPropertyData.enterGrossBuildingArea(testData.grossBuildingArea)
             .enterNumberOfCommercialUnits(testData.numberOfCommercialUnits);
         _NavigationSection.navigateToCommercialUnits();
         Property._CommercialUnits.enterListUnitSF(testData.commercialUnits.unitsSF, 

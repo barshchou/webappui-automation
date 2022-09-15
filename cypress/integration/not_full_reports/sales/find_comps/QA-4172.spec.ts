@@ -3,6 +3,7 @@ import NavigationSection from "../../../../actions/base/navigationSection.action
 import Sales from "../../../../actions/sales/sales.manager";
 import { createReport } from "../../../../actions/base/baseTest.actions";
 
+// ToDo: Test fails due to https://bowery.atlassian.net/browse/QA-6890
 describe("Verify the functionality of the Upload Comps button", 
     { tags:[ "@find_comps", "@sales" ] }, () => {
         beforeEach("Login and create report", () => {
