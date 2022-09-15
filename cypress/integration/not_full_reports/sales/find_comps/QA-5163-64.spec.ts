@@ -21,8 +21,7 @@ conditionalDescribe(`[QA-5163] [QA-5164] [Sales > Find Comps] "Date Sold" sortin
 
         cy.stepInfo(`2. Add sales comps via .CSV`);
         Sales._FindComps.uploadComps(testData.filePath)
-            .verifyUploadCompsSucceeded();
-        Sales._FindComps.Page.sortSalesCompsSelectValue.should('contain', testData.sortSalesCompsDateSold);
+            .Page.sortSalesCompsSelectValue.should('contain', testData.sortSalesCompsDateSold);
         Sales._FindComps.checkSalesCompSortedByDateSold();
 
         cy.stepInfo(`3. Check comps order when user changes 'Sale status'`);
@@ -85,7 +84,6 @@ conditionalDescribe(`[QA-5163] [QA-5164] [Sales > Find Comps] "Date Sold" sortin
             
         cy.stepInfo(`2. Add comps via CSV `);
         Sales._FindComps.uploadComps(testData.filePath2Comps)
-            .verifyUploadCompsSucceeded()
             .checkSalesCompSortedByDateSold();
             
         cy.stepInfo(`2. Verify "Date Sold" sorting is selected for sales comps + a comps exist in table`);

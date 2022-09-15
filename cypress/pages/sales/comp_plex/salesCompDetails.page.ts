@@ -20,10 +20,6 @@ export default class SalesCompsDetailsForm {
             .as(compPlex.appraiserCommentaryTextArea);
     }
 
-    get saleInfoEditBtn() {
-        return cy.get('[data-icon="pencil"]').eq(1).parent().contains('EDIT');
-    }
-
     get saveChangesBtn() {
         return cy.get('[class="ant-modal-footer"]').contains('button', 'SAVE CHANGES');
     }

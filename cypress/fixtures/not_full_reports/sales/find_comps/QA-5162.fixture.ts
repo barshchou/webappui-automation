@@ -10,7 +10,7 @@ const reportCreationData: BoweryAutomation.ReportCreationData = ReportDataCreato
 const sortSalesCompsDateSold = Enums.SORT_VALUES.dateSold;
 const sortSalesCompsCustom = Enums.SORT_VALUES.custom;
 const salePeriodValue = Enums.SALE_PERIOD_VALUES.lastThreeMonths;
-const filePath = "not_full_reports/CostarExport_3Contract_3Listing_3Date.csv";
+const filePath = "test_files/CostarExport_3Contract_3Listing_3Date.csv";
 
 const comparableFixture1 = {
     address: "Sanford Avenue, Queens"
