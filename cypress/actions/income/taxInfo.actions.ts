@@ -357,11 +357,6 @@ class TaxInfoActions extends BaseActionsExt<typeof taxInfoPage> {
         return this;
     }
 
-    verifyTaxCalculationCommentary(commToBe: string): this {
-        taxInfoPage.taxCalculationDiscussionCommentary.should("exist").should("have.text", commToBe);
-        return this;
-    }
-
     verifyTaxCalculationTooltip(tooltipToBe: string): this {
         taxInfoPage.taxCalculationDiscussionTooltip.should("have.text", tooltipToBe);
         return this;
@@ -400,7 +395,14 @@ class TaxInfoActions extends BaseActionsExt<typeof taxInfoPage> {
      */
     enterRowTaxLiabilityValue(rowName: string, value: number, decimalCount = 9, rowNumber = 0): TaxInfoActions {
         const initial = taxInfoPage.getTaxLiabilityRowValue(rowName).eq(rowNumber)
-            .realClick().realClick().type(`${value}{enter}`);
+            .realClick()
+            .realClick()
+            .type("12345")
+            .clear()
+            .scrollIntoView()
+            .realClick()
+            .realClick()
+            .type(`${value}{enter}`);
         if (rowName === "Additional Tax Rate") {
             initial.should("have.text", `${getNumberWithDecimalPart(value, decimalCount)}%`);
         } else {

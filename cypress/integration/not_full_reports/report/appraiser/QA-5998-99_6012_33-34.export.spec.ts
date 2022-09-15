@@ -5,6 +5,7 @@ import testData from "../../../../fixtures/not_full_reports/report/appraiser/QA-
 import Enums from '../../../../enums/enums';
 import { normalizeText } from '../../../../../utils/string.utils';
 
+// ToDo: Export error https://bowery.atlassian.net/browse/WEB-6739
 describe("Add Appraiser / Inspector button functionality", 
     { tags:[ "@report", "@appraiser", "@check_export" ] }, () => {
 
@@ -44,7 +45,7 @@ describe("Add Appraiser / Inspector button functionality",
             ReviewExport.generateDocxReport().waitForReportGenerated()
                 .downloadAndConvertDocxReport(testData.reportCreationData.reportNumber);
         });
-        // Export error https://bowery.atlassian.net/browse/WEB-6739
+
         it('Check export', () => {
             cy.task("getFilePath", { _reportName: testData.reportCreationData.reportNumber, _docxHtml: "html" })
                 .then(file => {

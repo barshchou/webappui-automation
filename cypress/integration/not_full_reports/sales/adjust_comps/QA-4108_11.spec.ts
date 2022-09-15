@@ -4,7 +4,7 @@ import { _NavigationSection } from "../../../../actions/base";
 import { Sales } from "../../../../actions";
 
 describe("Verify Grid is calculated with correct formula", 
-    { tags:[ "@sales", "@adjust_comps", ] }, () => {
+    { tags:[ "@sales", "@adjust_comps" ] }, () => {
         before("Login, create report", () => {
             createReport(testData.reportCreationData);
             cy.saveLocalStorage();
@@ -17,10 +17,10 @@ describe("Verify Grid is calculated with correct formula",
         it("[QA-4108]", () => {
             cy.stepInfo(`1. Navigate to Sales > Find comps and select address`);
             _NavigationSection.navigateToFindComps();
-            Sales._FindComps.zoomInAndResetFilters();
-            testData.compsToAdd.forEach(() => {
-                Sales._FindComps.Actions.selectCompFromMap();
-            });
+            for (let i = 1; i < 3; i++) {
+                Sales._FindComps.AddressSearch.openAddressSearchTab()
+                    .addCompByParameter(i, testData.compProperty, testData.compStatusDate);
+            }
 
             cy.stepInfo(`2. Navigate to Sales > Adjust Comps > Sales Adjustment Grid`);
             _NavigationSection.navigateToAdjustComps();
