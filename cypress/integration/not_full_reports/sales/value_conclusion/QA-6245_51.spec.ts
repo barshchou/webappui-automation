@@ -1,10 +1,8 @@
 import testData from "../../../../fixtures/not_full_reports/sales/value_conclusion/QA-6245.fixture";
 import { createReport } from "../../../../actions/base/baseTest.actions";
-import NavigationSection from "../../../../actions/base/navigationSection.actions";
-import Property from "../../../../actions/property/property.manager";
-import Sales from "../../../../actions/sales/sales.manager";
-import { Income } from "../../../../actions";
+import { DataCollections, Income, Property, Sales } from "../../../../actions";
 import launchDarklyApi from "../../../../api/launchDarkly.api";
+import { _NavigationSection } from "../../../../actions/base";
 
 describe(`Prospective Market Value As Complete is calculated with correct formula`,
     { tags:[ "@sales", "@value_conclusion" ] }, () => {
@@ -17,30 +15,30 @@ describe(`Prospective Market Value As Complete is calculated with correct formul
             cy.stepInfo(`2. Set square foot analysis and value for it; 
                         set commercial and residential units; 
                         set commercial units SF`);
-            NavigationSection.navigateToPropertySummary();
-            Property.Summary.selectBasisSquareFootAnalysis(testData.basisForSquareFootAnalysis)
+            _NavigationSection.navigateToSubjectPropertyData();
+            DataCollections._SubjectPropertyData.selectBasisSquareFootAnalysis(testData.basisForSquareFootAnalysis)
                 .fillBasisSquareFootAnalysis(testData.squareFootAnalysisArea)
                 .enterNumberOfCommercialUnits(testData.commercialUnits)
                 .enterNumberOfResUnits(testData.residentialUnits);
-            NavigationSection.navigateToCommercialUnits();
-            Property.CommercialUnits.enterListUnitSF(testData.commercialUnitsSF, testData.commercialUnits);
+            _NavigationSection.navigateToCommercialUnits();
+            Property._CommercialUnits.enterListUnitSF(testData.commercialUnitsSF, testData.commercialUnits);
 
             cy.stepInfo(`3. Fill commercial units with valid values`);
-            NavigationSection.navigateToCommercialInPlaceRentRoll();
+            _NavigationSection.navigateToCommercialInPlaceRentRoll();
             testData.commercialMonthlyRent.forEach((commercialUnitRent, index) => {
                 Income._CommercialManager.InPlaceRentRoll.chooseLeaseStatusByRowNumber(testData.leaseStatus, index)
                     .enterRentPerSFAnnuallyByRowNumber(commercialUnitRent, index);
             });
 
             cy.stepInfo(`4. Fill residential units with valid values`);
-            NavigationSection.navigateToResInPlaceRentRoll();
+            _NavigationSection.navigateToResInPlaceRentRoll();
             testData.residentialMonthlyRent.forEach((residentialUnitRent, index) => {
                 Income._Residential.InPlaceRentRoll.enterLeaseStatusByRowNumber(testData.leaseStatus, index)
                     .enterMonthlyRentByRowNumber(residentialUnitRent, index);
             });
 
             cy.stepInfo(`5. Set Cap Rate value`);
-            NavigationSection.navigateToCapRateConclusion();
+            _NavigationSection.navigateToCapRateConclusion();
             Income._CapRateConclusion.enterConclusionSectionConcludedCapRate(testData.capRate)
                 .setRoundingFactorValueAlias();
 
@@ -72,21 +70,21 @@ describe(`Prospective Market Value As Complete is calculated with correct formul
                         As Is Market Value (Amount) = Prospective Market Value As Stabilized (Amount) - 
                         Less Residential Rent Loss - Less Commercial Rent Loss - 
                         Less Undetermined Commercial Rent Loss - Less Commission Fee - Less Entrepreneurial Profit*`);
-            NavigationSection.navigateToSalesValueConclusion();
-            Sales.ValueConclusion.enterSaleValueConclusion(testData.concludedValuePerSf)
+            _NavigationSection.navigateToSalesValueConclusion();
+            Sales._ValueConclusion.enterSaleValueConclusion(testData.concludedValuePerSf)
                 .verifyProspectiveMarketValueAsIsAsCompleteCalculated(testData.valueConclusionKeyAsStabilized, 
                     testData.valueConclusionAsIs);
             
             cy.stepInfo(`9. Verify that As Is Market Value (Final Value) rounded correctly according to selection 
                         in “Round to nearest” on Income>Cap Rate Conclusion page`);
-            Sales.ValueConclusion.verifyFinalValueCalculated(testData.valueConclusionAsIs);
+            Sales._ValueConclusion.verifyFinalValueCalculated(testData.valueConclusionAsIs);
 
             /*
              * Please refer to 6242, 6248 tests for other parts of QA-6251 test
              */
             cy.stepInfo(`[QA-6251] 10. Verify Sales Value in Header is displayed based on selected Basis for 
                         Square Foot Analysis and pulled from Sales > Value Conclusion page`);
-            Sales.ValueConclusion.clickSaveButton().verifyProgressBarNotExist();
-            Sales.ValueConclusion.verifyHeaderSalesValue(testData.valueConclusionAsStabilized);
+            Sales._ValueConclusion.clickSaveButton().verifyProgressBarNotExist();
+            Sales._ValueConclusion.verifyHeaderSalesValue(testData.valueConclusionAsStabilized);
         });
     });

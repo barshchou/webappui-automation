@@ -2,8 +2,7 @@ import { numberWithCommas } from '../../../../../utils/numbers.utils';
 import testData from "../../../../fixtures/not_full_reports/income/pro_forma/QA-4730_33_37_40-43_48-52.fixture";
 import { createReport } from "../../../../actions/base/baseTest.actions";
 import { _NavigationSection } from "../../../../actions/base";
-import { Property } from '../../../../actions';
-import { Income } from "../../../../actions";
+import { DataCollections, Income, Property } from "../../../../actions";
 
 describe("Pro Forma page table Miscellaneous Loss", 
     { tags:[ "@income", "@pro_forma" ] }, () => {
@@ -12,8 +11,8 @@ describe("Pro Forma page table Miscellaneous Loss",
             cy.stepInfo(`1. Create new report or open the report which is already created. 
                     Make sure that there is at least three commercial units.`);
             createReport(testData.reportCreationData);
-            _NavigationSection.navigateToPropertySummary();
-            Property._Summary.enterGrossBuildingArea(testData.grossBuildingArea)
+            _NavigationSection.navigateToSubjectPropertyData();
+            DataCollections._SubjectPropertyData.enterGrossBuildingArea(testData.grossBuildingArea)
                 .enterNumberOfResUnits(testData.numberOfResidentialUnits)
                 .enterNumberOfCommercialUnits(testData.numberOfCommercialUnits);
 
@@ -57,6 +56,7 @@ describe("Pro Forma page table Miscellaneous Loss",
             cy.stepInfo(`8. Go to Income → Miscellaneous → Storage and fill in all necessary values`); 
             _NavigationSection.navigateToStorage();
 
+            _NavigationSection.navigateToStorage();
             Income._MiscellaneousManager.Storage.addStorageIncome(testData.storageIncome)
                 .enterStorageVCLossPercentage(testData.storageVCLoss, testData.storageVcLossTypeRadio);
 

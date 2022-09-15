@@ -1,8 +1,8 @@
 import testData from "../../../../fixtures/not_full_reports/income/pro_forma/QA-5053-54.fixture";
 import { createReport } from "../../../../actions/base/baseTest.actions";
-import { Income, Property } from "../../../../actions";
+import { Income, DataCollections } from "../../../../actions";
 import { _NavigationSection } from "../../../../actions/base";
-import enums from "../../../../enums/enums";
+import Enums from "../../../../enums/enums";
 import { numberWithCommas } from "../../../../../utils/numbers.utils";
 import launchDarklyApi from "../../../../api/launchDarkly.api";
 
@@ -15,8 +15,8 @@ describe("Pro Forma -> Expenses",
             cy.stepInfo(`1. Create new report or open the report which is already created. 
                     Make sure that there is at least three commercial units.`);
             createReport(testData.reportCreationData);
-            _NavigationSection.navigateToPropertySummary();
-            Property._Summary.enterGrossBuildingArea(testData.grossBuildingArea)
+            _NavigationSection.navigateToSubjectPropertyData();
+            DataCollections._SubjectPropertyData.enterGrossBuildingArea(testData.grossBuildingArea)
                 .enterNumberOfResUnits(testData.numberOfResidentialUnits)
                 .enterNumberOfCommercialUnits(testData.numberOfCommercialUnits);
 
@@ -39,7 +39,8 @@ describe("Pro Forma -> Expenses",
             Income._TaxInfo.switchIncludeTransitionalCheckbox(false)
                 .enterTaxableAssessedLandValue(testData.landTaxAssessedValue)
                 .enterTaxableAssessedBuildingValue(testData.buildingTaxAssessedValue)
-                .clickSaveButton();
+                .clickSaveButton()
+                .verifyProgressBarNotExist();
 
             cy.saveLocalStorage();
         });
@@ -59,25 +60,25 @@ describe("Pro Forma -> Expenses",
                 .verifyCategoryTotal(`$${numberWithCommas(Math.round(testData.totalCustomCategory))}`, 
                     testData.customCategoryMix.name)
                 .verifyCategoryTotal(`$${numberWithCommas(Math.round(testData.reserversTotal))}`, 
-                    enums.PRO_FORMA_TYPES.replacementsAndReserves)
+                    Enums.PRO_FORMA_TYPES.replacementsAndReserves)
                 .verifyCategoryTotal(`$${numberWithCommas(Math.round(testData.waterAndSewerTotal))}`, 
-                    enums.PRO_FORMA_TYPES.waterAndSewer)
+                    Enums.PRO_FORMA_TYPES.waterAndSewer)
                 .verifyCategoryTotal(`$${numberWithCommas(Math.round(testData.fuelTotal))}`, 
-                    enums.PRO_FORMA_TYPES.fuel)
+                    Enums.PRO_FORMA_TYPES.fuel)
                 .verifyCategoryTotal(`$${numberWithCommas(Math.round(testData.totalToe))}`, 
-                    enums.PRO_FORMA_TYPES.totalOperatingExpenses)
+                    Enums.PRO_FORMA_TYPES.totalOperatingExpenses)
                 .verifyCategoryTotal(`$${numberWithCommas(Math.round(testData.totalToeNetRe))}`, 
-                    enums.PRO_FORMA_TYPES.totalOperatingExpensesExTaxes)
+                    Enums.PRO_FORMA_TYPES.totalOperatingExpensesExTaxes)
                 .verifyCategoryTotal(`-$${numberWithCommas(Math.round(testData.netOperationIncome))}`, 
-                    enums.PRO_FORMA_TYPES.netOperatingIncome);
+                    Enums.PRO_FORMA_TYPES.netOperatingIncome);
         });
 
         it("[QA-5053] Custom Expense Forecast is displayed in Operating Expenses grid on Pro Forma", () => {
             cy.stepInfo(`4. On Pro Forma page verify  there is validation for each custom expense 
                     forecast to capitalize the first letter of each word`);
-            Income._ProFormaActions.verifyCustomCategoryName(testData.customCategoryFirstCapital.name);
-            Income._ProFormaActions.verifyCustomCategoryName(testData.customCategoryAllCapitals.name);
-            Income._ProFormaActions.verifyCustomCategoryName(testData.customCategoryMix.name);
+            Income._ProFormaActions.verifyCustomCategoryName(testData.customCategoryFirstCapital.name)
+                .verifyCustomCategoryName(testData.customCategoryAllCapitals.name)
+                .verifyCustomCategoryName(testData.customCategoryMix.name);
         });
 
         after(() => {

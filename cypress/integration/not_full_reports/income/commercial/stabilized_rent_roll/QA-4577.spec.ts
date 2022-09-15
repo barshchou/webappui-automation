@@ -1,4 +1,4 @@
-import { Income, Property } from "../../../../../actions";
+import { DataCollections, Income } from "../../../../../actions";
 import { _NavigationSection } from "../../../../../actions/base";
 import { createReport } from "../../../../../actions/base/baseTest.actions";
 import testData from "../../../../../fixtures/not_full_reports/income/commercial/stabilized_rent_roll/QA-4577.fixture";
@@ -11,8 +11,8 @@ describe("Verify the functionality of the Frontage radio button",
             cy.stepInfo(`Preconditions: The mixed report is created and several commercial units are added.
                     Comp group is created.`);
             createReport(testData.reportCreationData);
-            _NavigationSection.navigateToPropertySummary();
-            Property._Summary.enterNumberOfCommercialUnits(testData.numberOfCommercialUnits);
+            _NavigationSection.navigateToSubjectPropertyData();
+            DataCollections._SubjectPropertyData.enterNumberOfCommercialUnits(testData.numberOfCommercialUnits);
             _NavigationSection.navigateToCommercialCompGroups();
             Income._CommercialManager.CompGroups.addCompGroup(testData.compGroup);
         });
@@ -34,7 +34,7 @@ describe("Verify the functionality of the Frontage radio button",
 
             cy.stepInfo(`4. Click on the arrows`);
             Income._CommercialManager.RentReconciliation.Page.arrowCommercialRentReconciliation.click();
-            Income._CommercialManager.StabilizedRentRoll.Actions.clickYesButton()
+            _NavigationSection.submitSaveChangesModal()
                 .verifyProgressBarNotExist();
         
             cy.stepInfo(`5. Verify that the Income > Commercial > Rent Reconciliation page is displayed.`);

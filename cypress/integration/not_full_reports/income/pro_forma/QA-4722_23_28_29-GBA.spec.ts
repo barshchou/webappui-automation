@@ -2,8 +2,7 @@ import { numberWithCommas } from '../../../../../utils/numbers.utils';
 import testData from "../../../../fixtures/not_full_reports/income/pro_forma/QA-4722_23_28_29.fixture";
 import { createReport } from "../../../../actions/base/baseTest.actions";
 import { _NavigationSection } from "../../../../actions/base";
-import { Property } from '../../../../actions';
-import { Income } from "../../../../actions";
+import { DataCollections, Income, Property } from "../../../../actions";
 
 describe("Potential Real Estate Tax Reimbursement", 
     { tags:[ "@income", "@pro_forma" ] }, () => {
@@ -13,8 +12,8 @@ describe("Potential Real Estate Tax Reimbursement",
                     Make sure that there is at least three commercial units.
                     Set square foot analysis basis to GBA and fill area`);
             createReport(testData.reportCreationData);
-            _NavigationSection.navigateToPropertySummary();
-            Property._Summary.enterGrossBuildingArea(testData.buildingArea)
+            _NavigationSection.navigateToSubjectPropertyData();
+            DataCollections._SubjectPropertyData.enterGrossBuildingArea(testData.grossBuildingArea)
                 .enterNumberOfResUnits(testData.numberOfResidentialUnits)
                 .enterNumberOfCommercialUnits(testData.numberOfCommercialUnits);
 

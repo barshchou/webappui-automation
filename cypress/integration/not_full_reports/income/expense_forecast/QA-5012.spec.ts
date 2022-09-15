@@ -1,6 +1,6 @@
 import testData from "../../../../fixtures/not_full_reports/income/expense_forecast/QA-5011_12.fixture";
 import { _NavigationSection } from "../../../../actions/base";
-import { Income, Property } from "../../../../actions";
+import { DataCollections, Income } from "../../../../actions";
 import { createReport } from "../../../../actions/base/baseTest.actions";
 
 describe(`[QA-5012] [Income>Expense forecast] Unselected existing expense card is not included in calculation`,
@@ -18,8 +18,8 @@ describe(`[QA-5012] [Income>Expense forecast] Unselected existing expense card i
         it("Preconditions", () => {
 
             cy.stepInfo(`1. Go to Property > Summary and add residential and commercial units`);
-            _NavigationSection.navigateToPropertySummary();
-            Property._Summary.enterNumberOfResUnits(testData.numberOfResidentialUnits)
+            _NavigationSection.navigateToSubjectPropertyData();
+            DataCollections._SubjectPropertyData.enterNumberOfResUnits(testData.numberOfResidentialUnits)
                 .enterNumberOfCommercialUnits(testData.numberOfCommercialUnits)
                 .enterGrossBuildingArea(testData.buildingDescription.grossArea);
 
@@ -122,12 +122,12 @@ describe(`[QA-5012] [Income>Expense forecast] Unselected existing expense card i
         data left in the forecast, this data is not included in calculations on Pro forma and Expense forecast page 
         (Per Room measure for Fuel + Full Appraiser's forecasts)`, () => {
 
-            Income._ExpenseForecastActions.chooseForecastItemBasis(testData.expenseForecastFuelFixture('room'));
-            Income._ExpenseForecastActions.totalSumForecastPSFAllCards(
-                testData.buildingDescription.grossArea,
-                testData.numberOfResidentialUnits,
-                testData.rentRollResUnitFixture.rooms
-            )
+            Income._ExpenseForecastActions.chooseForecastItemBasis(testData.expenseForecastFuelFixture('room'))
+                .totalSumForecastPSFAllCards(
+                    testData.buildingDescription.grossArea,
+                    testData.numberOfResidentialUnits,
+                    testData.rentRollResUnitFixture.rooms
+                )
                 .totalSumForecastPerUnitAllCards(
                     testData.buildingDescription.grossArea,
                     testData.numberOfResidentialUnits,
