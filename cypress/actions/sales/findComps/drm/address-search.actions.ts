@@ -55,9 +55,6 @@ class AddressSearchActions {
             cy.log(`Index of necessary comp is ${focusCompIndex}`);
             //If comp wasn't found, then focusCompIndex will be equal -1. The assertion error will be thrown.
             expect(focusCompIndex).to.be.above(-1);
-
-            // findCompsActions.verifySpinnerNotExist();
-            
             this.Page.selectCompButton(focusCompIndex).should('exist').click();  
         });
         return this;
