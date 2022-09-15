@@ -1,4 +1,3 @@
-import { _DataCollectionsTitles } from './../../enums/pages_titles/index';
 import { createReport } from "../../actions/base/baseTest.actions";
 import tesData from "../../fixtures/smoke/createReport.fixture";
 import { Base, DataCollections, Sales } from "../../actions";
