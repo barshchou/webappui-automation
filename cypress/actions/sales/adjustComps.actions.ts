@@ -149,6 +149,7 @@ class AdjustCompsActions extends BaseActionsExt<typeof adjustCompsPage> {
             const trendedNumber = getNumberFromDollarNumberWithCommas(trendedText);
             adjustCompsPage.netPropertyAdjustmentsCells.eq(index).invoke("text").then(netAdjText => {
                 const netAdjNumber = Number(netAdjText.replace("%", ""));
+                // ToDo: Fix this rounding after resolving https://bowery.atlassian.net/browse/QA-6954
                 const adjustedPriceToBe = trendedNumber + (trendedNumber * (netAdjNumber / 100));
                 let adjustedPriceText: string;
                 if (adjustedPriceToBe < 0) {
@@ -310,6 +311,7 @@ class AdjustCompsActions extends BaseActionsExt<typeof adjustCompsPage> {
             const decimalPart = (pricePerUnit.toString().split(".")[1]);
             cy.log("decimalPart.charAt(2)", decimalPart.charAt(2));
             cy.log("test", Number(decimalPart.substring(0, 3)));
+            // ToDo: Fix this rounding after resolving https://bowery.atlassian.net/browse/QA-6954
             const pricePerUnitToBe = (decimalPart.charAt(2) === "5") ? 
                 `$${numberWithCommas(Math.round(pricePerUnit) + '.' + Number(decimalPart.substring(0, 2)))}`
                 :   `$${numberWithCommas(pricePerUnit.toFixed(2))}`;
@@ -324,6 +326,7 @@ class AdjustCompsActions extends BaseActionsExt<typeof adjustCompsPage> {
         adjustCompsPage.getExpandMarketAdjustmentSubjectRow("Sale Price").invoke("text").then(salePrice => {
             const salePriceNumber = getNumberFromDollarNumberWithCommas(salePrice);
             const pricePerSf = salePriceNumber / area;
+            // ToDo: Fix this rounding after resolving https://bowery.atlassian.net/browse/QA-6954
             const pricePerSfAdjusted = (Math.round(pricePerSf * 1000)) / 1000;
             const pricePerSfToBe = `$${numberWithCommas(pricePerSfAdjusted.toFixed(2))}`;
             adjustCompsPage.getExpandMarketAdjustmentSubjectRow("Price per SF").should("have.text", pricePerSfToBe);
