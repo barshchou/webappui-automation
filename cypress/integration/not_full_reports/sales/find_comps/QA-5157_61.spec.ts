@@ -36,7 +36,7 @@ conditionalDescribe(`[QA-5157] [QA-5161] [Sales > Find Comps] "Date Sold" sortin
                     - In-Contract at the top
                     - Listing
                     - date sold from most to least recent 
-                    (comps added via map search )`);
+                    (comps added via address search)`);
         Sales._FindComps.AddressSearch.openAddressSearchTab()
             .addCompByParameter(1, testData.compProperty, testData.compStatusDate)
             .addCompByParameter(4, testData.compProperty, testData.compStatusDate)
