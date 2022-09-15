@@ -1,7 +1,7 @@
 import testData from "../../../../fixtures/not_full_reports/final/final_values_reconciliation/QA-6275.fixture";
 import { createReport } from "../../../../actions/base/baseTest.actions";
 import { _NavigationSection } from '../../../../actions/base';
-import { Income, Property, Sales, Final, ReviewExport } from "../../../../actions";
+import { Income, Property, Sales, Final, ReviewExport, DataCollections } from "../../../../actions";
 import { _saveDataInFile } from "../../../../support/commands";
 import { pathSpecData } from "../../../../../utils/fixtures.utils";
 import valueConclusionKeys from "../../../../utils/mapKeys/sales/valueConclusion.keys";
@@ -16,7 +16,7 @@ describe(`Sales Comparison Approach is exported correctly to Final Value Conclus
                         set commercial and residential units; 
                         set commercial units SF`);
             _NavigationSection.navigateToPropertySummary();
-            Property._Summary.selectBasisSquareFootAnalysis(testData.basisForSquareFootAnalysis)
+            DataCollections._SubjectPropertyData.selectBasisSquareFootAnalysis(testData.basisForSquareFootAnalysis)
                 .fillBasisSquareFootAnalysis(testData.squareFootAnalysisArea)
                 .enterNumberOfCommercialUnits(testData.commercialUnits)
                 .enterNumberOfResUnits(testData.residentialUnits);
