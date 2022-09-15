@@ -5,6 +5,10 @@ import mapKeysUtils from "../../utils/mapKeys.utils";
 import routesUtils from "../../utils/routes.utils";
 import stabilizedRentRollPage from "../../pages/income/commercial/stabilizedRentRoll.page";
 import rentRollPage from "../../pages/income/commercial/rentRoll.page";
+import { BoweryReports } from "../../types/boweryReports.type";
+import Enums from "../../enums/enums";
+import subjectPropertyDataRouts from "../../utils/subject_property_data_routs.utils";
+import { toCamelCase } from "../../../utils/string.utils";
 
 class NavigationSectionActions extends BaseActionsExt<typeof navigationSectionPage> {
     openReviewAndExport(isNewReport = true): NavigationSectionActions {
@@ -486,6 +490,19 @@ class NavigationSectionActions extends BaseActionsExt<typeof navigationSectionPa
         return this;
     }
 
+    navigateToSubjectPropertyData(section: BoweryReports.SubjectPropertyDataSections = Enums
+        .SUBJECT_PROPERTY_DATA_SECTIONS.siteDetails, isSubmitChanges = true
+    ): NavigationSectionActions {
+        const routeToBe = subjectPropertyDataRouts[toCamelCase(section.replaceAll("-", " "))];
+        this.clickDataCollectionsIcon()
+            .clickSubjectPropertyDataMenuIfClosed()
+            .clickSubjectPropertyDataSectionAnchor(section)
+            .submitSaveChangesModal(isSubmitChanges)
+            .verifyProgressBarNotExist()
+            .waitForUrl(routeToBe);
+        return this;
+    }
+
     navigateToFinalValuesReconciliation(): NavigationSectionActions {
         this.clickFinalButton()
             .clickFinalValuesReconciliation()
@@ -525,15 +542,25 @@ class NavigationSectionActions extends BaseActionsExt<typeof navigationSectionPa
         return this;
     }
 
+    clickSubjectPropertyDataMenuIfClosed(): NavigationSectionActions {
+        navigationSectionPage.subjectPropertyDataDropdown.then(el => {
+            if (!el.hasClass("expanded")) {
+                navigationSectionPage.subjectPropertyDataDropdown.click();
+            }
+        });
+        return this;
+    }
+
     /**
      * @description Opens specific page by url, that contains id of current report, 
      * which is opened in moment of method call
      * @param pageRoute The route to specific page, pages routes are contained in pages_routes enums directory
      */
-    openPageByVisit(pageRoute: string): NavigationSectionActions {
+    openPageByUrl(pageRoute: string): NavigationSectionActions {
         const baseUrl = Cypress.config().baseUrl;
+        const routeToPaste = pageRoute.startsWith("/") ? pageRoute.replace("/", "") : pageRoute;
         cy._mapGet(mapKeysUtils.reportId).then(reportId => {
-            cy.visit(`${baseUrl}/report/${reportId}/${pageRoute}`);
+            cy.visit(`${baseUrl}/report/${reportId}/${routeToPaste}`);
         });
 
         return this;
@@ -895,6 +922,17 @@ class NavigationSectionActions extends BaseActionsExt<typeof navigationSectionPa
 
     clickFinalValuesReconciliation(): NavigationSectionActions {
         navigationSectionPage.finalValuesReconciliationButton.click();
+        return this;
+    }
+
+    clickDataCollectionsIcon(): NavigationSectionActions {
+        navigationSectionPage.dataCollectionsIcon.click();
+        return this;
+    }
+
+    clickSubjectPropertyDataSectionAnchor(section: BoweryReports.SubjectPropertyDataSections
+    ): NavigationSectionActions {
+        navigationSectionPage.getSubjectPropertyDataSectionAnchor(section).click();
         return this;
     }
 

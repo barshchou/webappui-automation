@@ -2,8 +2,9 @@ import { _NavigationSection } from '../../../../actions/base';
 import testData from "../../../../fixtures/not_full_reports/sales/adjust_comps/QA-4130.fixture";
 import { createReport } from "../../../../actions/base/baseTest.actions";
 import launchDarklyApi from "../../../../api/launchDarkly.api";
-import { Income, Sales, Property } from "../../../../actions";
+import { Income, Sales, DataCollections } from "../../../../actions";
 
+// ToDo: Test fails due to problem with rounding: https://bowery.atlassian.net/browse/QA-6954
 describe("Adjusted Price per Residential Unit in Sales Adjustment Grid is calculated with correct formula", 
     { tags: [ "@adjust_comps", "@sales", "@feature_flag" ] }, () => {
 
@@ -15,9 +16,9 @@ describe("Adjusted Price per Residential Unit in Sales Adjustment Grid is calcul
 
         it("[QA-4130]", () => {
             cy.stepInfo(`2. Navigate to Property > Summary page and fill Residential Units and Commercial Units`);
-            _NavigationSection.navigateToPropertySummary();
+            _NavigationSection.navigateToSubjectPropertyData();
 
-            Property._Summary.enterNumberOfCommercialUnits(testData.numberUnits)
+            DataCollections._SubjectPropertyData.enterNumberOfCommercialUnits(testData.numberUnits)
                 .enterNumberOfResUnits(testData.numberUnits);
 
             cy.stepInfo(`3. Fill in Income > In-Place Rent Roll table for both Residential 
@@ -37,8 +38,8 @@ describe("Adjusted Price per Residential Unit in Sales Adjustment Grid is calcul
             cy.stepInfo(`5. Navigate to Sales>Find Comps page and add at least one Sale Comp with 
             filled Sale Price, GBA (or selected Basis of Comparison), Residential/Commercial units , save the page`);
             _NavigationSection.navigateToFindComps();
-            Sales._FindComps.zoomInAndResetFilters()
-                .selectCompFromMap();
+            Sales._FindComps.AddressSearch.openAddressSearchTab()
+                .addCompByParameter(1, testData.compProperty, testData.compStatusDate);
             _NavigationSection.navigateToAdjustComps();
             Sales._AdjustComps.expandAdjustmentDetails(testData.adjustmentName)
                 .verifyExpandMarketAdjustmentPricePerUnit(testData.calculationUnits[0], testData.numberUnits)

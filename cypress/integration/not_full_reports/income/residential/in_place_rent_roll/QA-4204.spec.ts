@@ -1,8 +1,7 @@
 import testData from "../../../../../fixtures/not_full_reports/income/residential/in_place_rent_roll/QA-4204.fixture";
 import { createReport } from "../../../../../actions/base/baseTest.actions";
-import NavigationSection from "../../../../../actions/base/navigationSection.actions";
-import Property from "../../../../../actions/property/property.manager";
-import Income from "../../../../../actions/income/income.manager";
+import { _NavigationSection } from "../../../../../actions/base";
+import { DataCollections, Income, Property } from "../../../../../actions";
 
 describe(" Verify the Number of Residential Units section on the In-Place Rent Roll page", 
     { tags:[ "@income", "@residential", "@in_place_rent_roll" ] }, () => {
@@ -12,12 +11,12 @@ describe(" Verify the Number of Residential Units section on the In-Place Rent R
         });
 
         it("Test body", () => {
-            NavigationSection.navigateToPropertySummary();
-            Property.Summary.enterNumberOfResUnits(testData.numberOfUnits);
-            NavigationSection.navigateToResInPlaceRentRoll();
-            Income.Residential.InPlaceRentRoll.enterAllEqualRentTypeCells(testData.rentType)
+            _NavigationSection.navigateToSubjectPropertyData();
+            DataCollections._SubjectPropertyData.enterNumberOfResUnits(testData.numberOfUnits);
+            _NavigationSection.navigateToResInPlaceRentRoll();
+            Income._Residential.InPlaceRentRoll.enterAllEqualRentTypeCells(testData.rentType)
                 .verifyNumberOfResidentialUnits(testData.numberOfUnits)
                 .goToPropSummaryWithSaveLeavingFirst();
-            Property.Summary.verifyThatPageIsOpened();
+            Property._Summary.verifyThatPageIsOpened();
         });
     });

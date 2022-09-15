@@ -1,7 +1,7 @@
 import testData from "../../../../../fixtures/not_full_reports/income/commercial/stabilized_rent_roll/QA-4608.fixture";
 import { createReport } from "../../../../../actions/base/baseTest.actions";
 import { _NavigationSection } from "../../../../../actions/base";
-import { Income, Property, ReviewExport } from "../../../../../actions";
+import { DataCollections, Income, Property, ReviewExport } from "../../../../../actions";
 import { numberWithCommas } from "../../../../../../utils/numbers.utils";
 
 describe("Verify the Commercial Stabilized Rent Roll table on export", 
@@ -10,8 +10,8 @@ describe("Verify the Commercial Stabilized Rent Roll table on export",
         it("Test body", () => {
             cy.stepInfo(`1. The mixed report is created and several commercial units are added`);
             createReport(testData.reportCreationData);
-            _NavigationSection.navigateToPropertySummary();
-            Property._Summary.enterNumberOfCommercialUnits(testData.numberOfCommercialUnits);
+            _NavigationSection.navigateToSubjectPropertyData();
+            DataCollections._SubjectPropertyData.enterNumberOfCommercialUnits(testData.numberOfCommercialUnits);
 
             cy.stepInfo(`2. On the Property Commercial Unit, the Commercial Unit # SF is filled by any value`); 
             _NavigationSection.navigateToCommercialUnits();

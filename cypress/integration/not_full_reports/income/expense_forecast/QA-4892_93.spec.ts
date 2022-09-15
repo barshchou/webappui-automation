@@ -1,6 +1,6 @@
 import testData from "../../../../fixtures/not_full_reports/income/expense_forecast/QA-4892_93.fixture";
 import { createReport } from "../../../../actions/base/baseTest.actions";
-import { Income, Property } from "../../../../actions";
+import { DataCollections, Income } from "../../../../actions";
 import { _NavigationSection } from "../../../../actions/base";
 
 describe("Appraiser's Forecast value for Electricity is correctly converted to Per SF/Per Unit value", 
@@ -8,10 +8,11 @@ describe("Appraiser's Forecast value for Electricity is correctly converted to P
 
         before("Login, create report", () => {
             createReport(testData.reportCreationData);
-            _NavigationSection.navigateToPropertySummary();
-            Property._Summary.enterNumberOfResUnits(testData.units)
+            _NavigationSection.navigateToSubjectPropertyData();
+            DataCollections._SubjectPropertyData.enterNumberOfResUnits(testData.units)
                 .enterGrossBuildingArea(testData.grossBuildingArea)
-                .clickSaveButton();
+                .clickSaveButton()
+                .verifyProgressBarNotExist();
             cy.saveLocalStorage();
         });
 
@@ -43,7 +44,7 @@ describe("Appraiser's Forecast value for Electricity is correctly converted to P
         
             cy.stepInfo(`1. Go to Expense Forecast and make sure that Per SF radio button 
             is selected for Electricity card`);
-            _NavigationSection.Actions.navigateToExpenseForecast();
+            _NavigationSection.navigateToExpenseForecast();
             Income._ExpenseForecastActions.chooseForecastItemBasis(testData.expenseForecastElectricity(
                 testData.basisSF))
                 .verifyForecastItemBasis(testData.expenseForecastElectricity(testData.basisSF));

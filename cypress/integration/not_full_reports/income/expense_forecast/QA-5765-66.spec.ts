@@ -1,8 +1,7 @@
 import testData from "../../../../fixtures/not_full_reports/income/expense_forecast/QA-5765-66.fixture";
 import { createReport } from "../../../../actions/base/baseTest.actions";
 import { _NavigationSection } from "../../../../actions/base";
-import { Property } from "../../../../actions";
-import { Income } from "../../../../actions";
+import { Income, DataCollections } from "../../../../actions";
 
 describe(`[QA-5765] [QA-5766] Appraiser's Forecast value for Miscellaneous is correctly converted to Per SF/Unit value`,
     { tags: [ "@income", "@expense_forecast" ] }, () => {
@@ -18,13 +17,13 @@ describe(`[QA-5765] [QA-5766] Appraiser's Forecast value for Miscellaneous is co
         it(`[QA-5765] Per Unit Appraiser's Forecast value for Miscellaneous 
         is correctly converted to Per SF value`, () => {
             cy.stepInfo(`Precondition: Go to Property > Summary, add residential units and gross building area`);
-            _NavigationSection.navigateToPropertySummary();
-            Property._Summary.enterNumberOfResUnits(testData.buildingDescription.numberOfUnits)
+            _NavigationSection.navigateToSubjectPropertyData();
+            DataCollections._SubjectPropertyData.enterNumberOfResUnits(testData.buildingDescription.numberOfUnits)
                 .enterGrossBuildingArea(testData.buildingDescription.grossArea);
 
             cy.stepInfo(`1. Go to Expense Forecast and make sure that Per Unit radio button 
             is selected for Miscellaneous card`);
-            _NavigationSection.Actions.navigateToExpenseForecast();
+            _NavigationSection.navigateToExpenseForecast();
             Income._ExpenseForecastActions.chooseForecastItemBasis(testData.expenseForecastMiscellaneousFixture('unit'))
                 .verifyForecastItemBasis(testData.expenseForecastMiscellaneousFixture('unit'));
 
@@ -42,7 +41,7 @@ describe(`[QA-5765] [QA-5766] Appraiser's Forecast value for Miscellaneous is co
         is correctly converted to Per Unit value`, () => {
             cy.stepInfo(`1. Go to Expense Forecast and make sure that Per SF radio button 
             is selected for Miscellaneous card`);
-            _NavigationSection.Actions.navigateToExpenseForecast();
+            _NavigationSection.navigateToExpenseForecast();
             Income._ExpenseForecastActions.chooseForecastItemBasis(testData.expenseForecastMiscellaneousFixture('sf'))
                 .verifyForecastItemBasis(testData.expenseForecastMiscellaneousFixture('sf'));
 

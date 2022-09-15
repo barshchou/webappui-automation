@@ -1,6 +1,6 @@
 import testData from "../../../../fixtures/not_full_reports/income/expense_forecast/QA-4521.fixture";
 import { createReport } from "../../../../actions/base/baseTest.actions";
-import { Property, Income } from "../../../../actions";
+import { Income, DataCollections } from "../../../../actions";
 import { _NavigationSection } from "../../../../actions/base";
 import tableExpenseHistoryCellNames from "../../../../../cypress/enums/expense/expenseHistoryTableRows.enum";
 
@@ -12,8 +12,8 @@ describe("Historical expense Insurance Per Unit is correctly calculated and disp
 
         it("Test body", () => {
             cy.stepInfo(`Pre-condition: Residential Units should be filled in on Property > Summary form`);
-            _NavigationSection.navigateToPropertySummary();
-            Property._Summary.enterNumberOfResUnits(testData.buildingDescription.numberOfUnits);
+            _NavigationSection.navigateToSubjectPropertyData();
+            DataCollections._SubjectPropertyData.enterNumberOfResUnits(testData.buildingDescription.numberOfUnits);
 
             cy.stepInfo(`1. Go to Income > Expense History`);
             _NavigationSection.Actions.navigateToExpenseHistory();

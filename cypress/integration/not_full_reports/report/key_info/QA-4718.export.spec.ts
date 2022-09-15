@@ -1,4 +1,4 @@
-import { Property, ReviewExport } from '../../../../actions';
+import { DataCollections, ReviewExport } from '../../../../actions';
 import { Report } from "../../../../actions";
 import { _NavigationSection } from "../../../../actions/base";
 import { createReport } from "../../../../actions/base/baseTest.actions";
@@ -12,8 +12,8 @@ describe(`Verify the "Linked" chips dropdown in the new narrative component for
         createReport(testData.reportCreationData);
 
         cy.stepInfo(`Precondition: Set building name`);
-        _NavigationSection.navigateToPropertySummary();
-        Property._Summary.enterBuildingName(testData.buildingName);
+        _NavigationSection.navigateToSubjectPropertyData();
+        DataCollections._SubjectPropertyData.enterBuildingName(testData.buildingName);
 
         cy.stepInfo(`1. Proceed to the Report > Key Info page.`);
         _NavigationSection.navigateToReportKeyInfo();
