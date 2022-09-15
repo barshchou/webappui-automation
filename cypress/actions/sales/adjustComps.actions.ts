@@ -349,9 +349,8 @@ class AdjustCompsActions extends BaseActionsExt<typeof adjustCompsPage> {
     AdjustCompsActions {
         this.checkCalculationUnitsRadio(calculationUnit);
         cy._mapGet(capRateConclusionKeys.asStabilizedAmount).then(salePrice => {
-            let adjustedPrice = numberWithCommas(salePrice);
             adjustCompsPage.getExpandMarketAdjustmentSubjectRow("Sale Price")
-                .should("include.text", `$${adjustedPrice}`);
+                .should("include.text", `$${numberWithCommas(salePrice)}`);
         });
         
         return this;

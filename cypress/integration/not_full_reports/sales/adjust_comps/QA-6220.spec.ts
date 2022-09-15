@@ -33,7 +33,7 @@ describe(`Sale Price is pulled correctly according to selected Basis for Square 
             with valid numeric value, so Prospective Market Value As Stabilized (not rounded) 
             is calculated (after saving this value should be displayed in header as Income Value)`);
             _NavigationSection.navigateToCapRateConclusion();
-            Income._CapRateConclusion.enterConclusionSectionConcludedCapRate(testData.concludedCapRate)
+            Income._CapRateConclusion.enterConclusionSectionConcludedCapRate(testData.concludedCapRate);
 
             cy.stepInfo(`5. Save to As Stabilized amount for further use in test`);
             Income._CapRateConclusion.setAmountAlias(testData.valueConclusionAsStabilized);
