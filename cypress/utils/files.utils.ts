@@ -32,18 +32,6 @@ const _convertDocxToHtml = async (report: string): Promise<null> => {
     return null;
 };
 
-const _copyReportToArchive = async (report: string): Promise<null> => {
-    let dir = "cypress/archive";
-    if (!existsSync(dir)) {
-        mkdirSync(dir, 0o744);
-    }
-    let result = await convertToHtml({ path: report });
-    let newPath = report.replace("downloads", "archive");
-    writeFileSync(newPath, readFileSync(report));
-    writeFileSync(`${newPath}.html`, result.value);
-    return null;
-};
-
 /**
  * @description Waiting recursively file to exist. If file exists - return Promise<true>.
  * If not - resolve Promise with timeout for 1 second (this is our interval for checks),
@@ -84,6 +72,5 @@ export default {
     _waitForFileExists,
     _convertDocxToHtml,
     _getFilePath,
-    _deleteFolder,
-    _copyReportToArchive
+    _deleteFolder
 };

@@ -99,20 +99,6 @@ export default defineConfig({
                     return await fsUtil._deleteFolder(folderName);
                 }
             });
-
-            on("task", {
-                async copyReportToArchive(report: string) {
-                    return await fsUtil._copyReportToArchive(report);
-                }
-            });
-
-            /*
-             * on('after:spec', (spec) => {
-             *     if (spec.name.includes('export')) {
-             *         fsUtil._deleteFolder("cypress/downloads");
-             *     }
-             * });
-             */
             
             on("task", {
                 async retrieveDataFromDb({ dbUrl, dbName, compPropertyPathInDB, compPropertyValueInDB }) {
