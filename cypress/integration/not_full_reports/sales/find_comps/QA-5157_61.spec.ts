@@ -13,6 +13,7 @@ conditionalDescribe(`[QA-5157] [QA-5161] [Sales > Find Comps] "Date Sold" sortin
                      for sales comps + sorting is applied correctly`,
 { tags: [ "@sales", "@find_comps", "@comp_plex" ] }, () => {
     before("Login, create report", () => {
+        Cypress.config('numTestsKeptInMemory', 0);
         createReport(testData.reportCreationData);
         cy.saveLocalStorage();
     });
@@ -38,7 +39,7 @@ conditionalDescribe(`[QA-5157] [QA-5161] [Sales > Find Comps] "Date Sold" sortin
                     (comps added via map search )`);
         Sales._FindComps.AddressSearch.openAddressSearchTab()
             .addCompByParameter(1, testData.compProperty, testData.compStatusDate)
-            .addCompByParameter(2, testData.compProperty, testData.compStatusDate)
+            .addCompByParameter(4, testData.compProperty, testData.compStatusDate)
             .addCompByParameter(0, testData.compProperty, testData.compStatusContract)
             .addCompByParameter(1, testData.compProperty, testData.compStatusContract)
             .addCompByParameter(0, testData.compProperty, testData.compStatusListing)
