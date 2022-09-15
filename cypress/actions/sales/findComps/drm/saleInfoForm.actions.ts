@@ -48,7 +48,7 @@ class SaleInfoFromActions {
     }
     
     saveChangesOnDone(): SaleInfoFromActions {
-        this.Page.doneButton.should('be.enabled').focus().click();
+        this.Page.SaleInfoDoneBtn.should('be.enabled').focus().click();
         return this;
     }
 

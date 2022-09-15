@@ -352,13 +352,13 @@ class JobSearchActions {
 
     clickSearchButton() {
         findCompsPage.searchButton.should('exist')
-            .should('be.enabled').click();
+            .click({ force:true });
         return this;
     }
     
     clickSelectCompsIconOnMap(index = 0) {
         findCompsPage.selectCompsIconOnMap.should('exist');
-        findCompsPage.selectCompsIconOnMap.eq(index).click();
+        findCompsPage.selectCompsIconOnMap.eq(index).click({ force:true });
         findCompsPage.selectCompsButton.should('exist');
         return this;
     }
