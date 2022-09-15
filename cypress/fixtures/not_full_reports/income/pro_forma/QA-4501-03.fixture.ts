@@ -42,7 +42,7 @@ const _leaseStatuses: Array<BoweryReports.LeaseStatus> = [ "Occupied", "Occupied
 
 export default {
     reportCreationData: _reportCreationData,
-    buildingArea: buildingArea,
+    buildingArea,
     numberOfResidentialUnits: _numberOfResidentialUnits,
     numberOfCommercialUnits: _numberOfCommercialUnits,
     listOfUnitsSF: _unitSf,

@@ -33,7 +33,7 @@ describe("Potential Real Estate Tax Reimbursement",
                 Income._CommercialManager.InPlaceRentRoll.enterRentPerSFAnnuallyByRowNumber(rent, index);
             });
         
-            cy.stepInfo(`3. Go to Income → Reimbursement Summary and add Real Estate Taxes 
+            cy.stepInfo(`4. Go to Income → Reimbursement Summary and add Real Estate Taxes 
             Reimbursement for commercial units`); 
             _NavigationSection.navigateToCommercialReimbursementSummary();
             Income._CommercialManager.ReimbursementSummary.addNewCommercialReimbursement(
@@ -52,7 +52,7 @@ describe("Potential Real Estate Tax Reimbursement",
         });
 
         it("[QA-4722]", () => {
-            cy.stepInfo(`4. The value in the Less Real Estate Taxes Reimbursement 
+            cy.stepInfo(`5. The value in the Less Real Estate Taxes Reimbursement 
                     V/C Loss @ X% is taken from Income → Commercial → Reimbursement Summary → V/C Loss % cell`);
             Income._ProFormaActions.verifyResidentialVCLossLabel(
                 testData.expenseType, 
@@ -60,7 +60,7 @@ describe("Potential Real Estate Tax Reimbursement",
         });
 
         it("[QA-4723]", () => {
-            cy.stepInfo(`4. The value in the Less Real Estate Taxes Reimbursement 
+            cy.stepInfo(`5. The value in the Less Real Estate Taxes Reimbursement 
                     V/C Loss @ X% is taken from Income → Commercial → Reimbursement Summary → 
                     Gross V/C Loss cell`);
             Income._ProFormaActions.verifyResidentialVCLossTotal(
@@ -69,7 +69,7 @@ describe("Potential Real Estate Tax Reimbursement",
         });
 
         it("[QA-4728]", () => {
-            cy.stepInfo(`4. The value in the Less Real Estate Taxes Reimbursement 
+            cy.stepInfo(`5. The value in the Less Real Estate Taxes Reimbursement 
                     V/C Loss @ X% is calculated by formula: 
                     Real Estate Taxes Reimbursement V/C Loss @ X% → PSF [Total/GBA Value]`);
             Income._ProFormaActions.verifyResidentialVCLossPerSF(
@@ -77,7 +77,7 @@ describe("Potential Real Estate Tax Reimbursement",
         });
 
         it("[QA-4729]", () => {
-            cy.stepInfo(`4. The value in the Less Real Estate Taxes Reimbursement 
+            cy.stepInfo(`5. The value in the Less Real Estate Taxes Reimbursement 
                     V/C Loss @ X% → Per Unit is calculated by the formula: Total / # of Residential Units`);
             Income._ProFormaActions.verifyResidentialVCLossPerUnit(
                 testData.expenseType, testData.numberOfResidentialUnits);
