@@ -1,4 +1,4 @@
-import { Income, Property } from "../../../../../actions"; 
+import { DataCollections, Income } from "../../../../../actions";
 import { _NavigationSection } from "../../../../../actions/base";
 import { createReport } from "../../../../../actions/base/baseTest.actions";
 import testData from "../../../../../fixtures/not_full_reports/income/commercial/stabilized_rent_roll/QA-4588.fixture";
@@ -10,8 +10,8 @@ describe(`Verify the Back button functionality on the Stabilized Rent Roll page`
             createReport(testData.reportCreationDataAsIs);
 
             cy.stepInfo(`2. Navigate to Summary and set commercial units number`);
-            _NavigationSection.navigateToPropertySummary();
-            Property._Summary.enterNumberOfCommercialUnits(testData.numberOfCommercialUnits);
+            _NavigationSection.navigateToSubjectPropertyData();
+            DataCollections._SubjectPropertyData.enterNumberOfCommercialUnits(testData.numberOfCommercialUnits);
 
             cy.stepInfo(`3. Set unit lease status to mixed ('Occupied + Vacant')`);
             _NavigationSection.navigateToCommercialInPlaceRentRoll();
@@ -49,8 +49,8 @@ describe(`Verify the Back button functionality on the Stabilized Rent Roll page`
             createReport(testData.reportCreationDataAsStabilized);
 
             cy.stepInfo(`2. Navigate to Summary and set commercial units number`);
-            _NavigationSection.navigateToPropertySummary();
-            Property._Summary.enterNumberOfCommercialUnits(testData.numberOfCommercialUnits);
+            _NavigationSection.navigateToSubjectPropertyData();
+            DataCollections._SubjectPropertyData.enterNumberOfCommercialUnits(testData.numberOfCommercialUnits);
 
             cy.stepInfo(`3. Set unit lease status to mixed ('Occupied + Vacant')`);
             _NavigationSection.navigateToCommercialInPlaceRentRoll();
@@ -88,8 +88,8 @@ describe(`Verify the Back button functionality on the Stabilized Rent Roll page`
             createReport(testData.reportCreationDataAsComplete);
 
             cy.stepInfo(`2. Navigate to Summary and set commercial units number`);
-            _NavigationSection.navigateToPropertySummary();
-            Property._Summary.enterNumberOfCommercialUnits(testData.numberOfCommercialUnits);
+            _NavigationSection.navigateToSubjectPropertyData();
+            DataCollections._SubjectPropertyData.enterNumberOfCommercialUnits(testData.numberOfCommercialUnits);
 
             cy.stepInfo(`3. Set unit lease status to mixed ('Occupied + Vacant')`);
             _NavigationSection.navigateToCommercialInPlaceRentRoll();

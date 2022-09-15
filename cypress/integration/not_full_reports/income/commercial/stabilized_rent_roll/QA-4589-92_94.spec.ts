@@ -1,4 +1,4 @@
-import { Income, Property } from "../../../../../actions";
+import { DataCollections, Income } from "../../../../../actions";
 import { _NavigationSection } from "../../../../../actions/base";
 import { createReport } from "../../../../../actions/base/baseTest.actions";
 import testData from 
@@ -11,12 +11,11 @@ describe(`Verify the commentary functionality`,
             createReport(testData.reportCreationData);
 
             cy.stepInfo("Precondition: Navigate to Summary page and set commercial units");
-            _NavigationSection.navigateToPropertySummary();
-            Property._Summary.enterNumberOfCommercialUnits(testData.numberOfCommercialUnits);
+            _NavigationSection.navigateToSubjectPropertyData();
+            DataCollections._SubjectPropertyData.enterNumberOfCommercialUnits(testData.numberOfCommercialUnits);
 
             cy.stepInfo("Precondition: Proceed to the Income > Commercial > Stabilized Rent Roll page.");
-            _NavigationSection.navigateToCommercialUnits()
-                .navigateToCommercialStabilizedRentRoll()
+            _NavigationSection.navigateToCommercialStabilizedRentRoll()
                 .verifyProgressBarNotExist();
 
             cy.saveLocalStorage();

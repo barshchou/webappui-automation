@@ -9,11 +9,9 @@ class ClientPage extends BasePage {
 
     get clientNameField() { return cy.get("*[name=client]"); }
 
-    get clientFileNumberField() { return cy.get('[name="clientFileNumber"]'); }
+    get clientFileNumberField() { return cy.get('[name$="clientFileNumber"]'); }
 
-    get nycbApplicationNumber() { return cy.get("[name=applicationNumber]"); }
-
-    get addClientButton() { return cy.xpath("//a[.='Add']"); }
+    get nycbApplicationNumber() { return cy.get("[name$=applicationNumber]"); }
 
     get appraiserCommentary() { return cy.get("[name='clientGuidelinesDiscussion.additionalCommentary']"); }
 
@@ -33,7 +31,7 @@ class ClientPage extends BasePage {
 
     chipModified(index?: number) { return cy.get('[ui="indicator"]').eq((index !== 0) ? index : 0); }
 
-    get addNewClient() { return cy.xpath("//*[@data-qa='callout-btn']//child::*[@target='_self']"); }
+    get addNewClient() { return cy.xpath("//*[@data-qa='callout-btn']"); }
 }
 
 export default new ClientPage();

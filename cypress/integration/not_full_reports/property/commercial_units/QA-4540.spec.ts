@@ -1,5 +1,5 @@
 import testData from "../../../../fixtures/not_full_reports/property/commercial_units/QA-4540.fixture";
-import { Base, Property } from "../../../../actions";
+import { DataCollections, Property } from "../../../../actions";
 import { createReport } from "../../../../actions/base/baseTest.actions";
 import { _NavigationSection } from "../../../../actions/base";
 
@@ -10,8 +10,8 @@ describe("Verify the functionality of the Ceiling Height radio button",
 
             cy.stepInfo(`1. Report creation and several commercial units addition`);
             createReport(testData.reportCreationData);
-            Base._NavigationSection.navigateToPropertySummary();
-            Property._Summary.enterNumberOfCommercialUnits(testData.numberOfCommercialUnits);
+            _NavigationSection.navigateToSubjectPropertyData();
+            DataCollections._SubjectPropertyData.enterNumberOfCommercialUnits(testData.numberOfCommercialUnits);
         });
 
         it("Test body", () => {

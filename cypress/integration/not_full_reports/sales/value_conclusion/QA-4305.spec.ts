@@ -1,9 +1,7 @@
 import testData from "../../../../fixtures/not_full_reports/sales/value_conclusion/QA-4305.fixture";
 import { createReport } from "../../../../actions/base/baseTest.actions";
-import NavigationSection from "../../../../actions/base/navigationSection.actions";
-import Property from "../../../../actions/property/property.manager";
-import Income from "../../../../actions/income/income.manager";
-import Sales from "../../../../actions/sales/sales.manager";
+import { _NavigationSection } from "../../../../actions/base";
+import { DataCollections, Income, Sales } from "../../../../actions";
 
 describe("Prospective Market Value As Stabilized -> Less Commission Fee data is pulled from Cap Rate Conclusion",
     { tags:[ "@sales", "@value_conclusion" ] }, () => {
@@ -12,14 +10,14 @@ describe("Prospective Market Value As Stabilized -> Less Commission Fee data is 
         });
 
         it("Test body", () => {
-            NavigationSection.navigateToPropertySummary();
-            Property.Summary.enterNumberOfResUnits(testData.numberOfUnits);
-            NavigationSection.navigateToResInPlaceRentRoll();
-            Income.Residential.InPlaceRentRoll.enterRentTypeCellByRowNumber(testData.rentType);
-            NavigationSection.navigateToCapRateConclusion();
-            Income.CapRateConclusion.enterAsStabilizedCommissionFeeAmount(testData.commissionFee);
-            NavigationSection.navigateToSalesValueConclusion()
+            _NavigationSection.navigateToSubjectPropertyData();
+            DataCollections._SubjectPropertyData.enterNumberOfResUnits(testData.numberOfUnits);
+            _NavigationSection.navigateToResInPlaceRentRoll();
+            Income._Residential.InPlaceRentRoll.enterRentTypeCellByRowNumber(testData.rentType);
+            _NavigationSection.navigateToCapRateConclusion();
+            Income._CapRateConclusion.enterAsStabilizedCommissionFeeAmount(testData.commissionFee);
+            _NavigationSection.navigateToSalesValueConclusion()
                 .verifyProgressBarNotExist();
-            Sales.ValueConclusion.verifyAsStabilizedCommissionFeeAmount(testData.commissionFee);
+            Sales._ValueConclusion.verifyAsStabilizedCommissionFeeAmount(testData.commissionFee);
         });
     });

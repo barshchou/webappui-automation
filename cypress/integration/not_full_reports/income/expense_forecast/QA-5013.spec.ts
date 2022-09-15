@@ -1,6 +1,6 @@
 import testData from "../../../../fixtures/not_full_reports/income/expense_forecast/QA-5013_25.fixture";
 import { _NavigationSection } from "../../../../actions/base";
-import { Income, Property } from "../../../../actions";
+import { DataCollections, Income } from "../../../../actions";
 import { createReport } from "../../../../actions/base/baseTest.actions";
 
 describe(`[QA-5013] [Income>Expense forecast] Selected expense card is displayed in certain places`,
@@ -18,8 +18,8 @@ describe(`[QA-5013] [Income>Expense forecast] Selected expense card is displayed
 
         it("Precondition", () => {
             cy.stepInfo(`1. Go to Property > Summary and add residential and commercial units`);
-            _NavigationSection.navigateToPropertySummary();
-            Property._Summary.enterNumberOfResUnits(testData.numberOfResidentialUnits)
+            _NavigationSection.navigateToSubjectPropertyData();
+            DataCollections._SubjectPropertyData.enterNumberOfResUnits(testData.numberOfResidentialUnits)
                 .enterNumberOfCommercialUnits(testData.numberOfCommercialUnits)
                 .enterGrossBuildingArea(testData.buildingDescription.grossArea);
 

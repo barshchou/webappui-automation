@@ -1,13 +1,10 @@
-import { numberWithCommas } from './../../../../../utils/numbers.utils';
+import { numberWithCommas } from '../../../../../utils/numbers.utils';
 import testData from "../../../../fixtures/not_full_reports/sales/value_conclusion/QA-4316.fixture";
 import { createReport } from "../../../../actions/base/baseTest.actions";
-import NavigationSection from "../../../../actions/base/navigationSection.actions";
-import Property from "../../../../actions/property/property.manager";
-import Income from "../../../../actions/income/income.manager";
-import Sales from "../../../../actions/sales/sales.manager";
-import { Report, ReviewExport } from '../../../../actions';
+import { DataCollections, Income, Property, Report, ReviewExport, Sales } from '../../../../actions';
 import { _saveDataInFile } from "../../../../support/commands";
 import { pathSpecData } from "../../../../../utils/fixtures.utils";
+import { _NavigationSection } from "../../../../actions/base";
 
 describe(`Prospective Market Value As Stabilized -> Less Other Rent Loss data is pulled from Cap Rate Conclusion`,
     { tags:[ "@sales", "@value_conclusion" ] }, () => {
@@ -20,55 +17,55 @@ describe(`Prospective Market Value As Stabilized -> Less Other Rent Loss data is
             Report._KeyInfo.enterDateByType(testData.valuationDateFixture);
 
             cy.stepInfo(`3. Go to Property → Summary and set the number of Residential and Commercial Units`);
-            NavigationSection.navigateToPropertySummary();
-            Property.Summary.enterNumberOfResUnits(testData.numberOfUnits)
+            _NavigationSection.navigateToSubjectPropertyData();
+            DataCollections._SubjectPropertyData.enterNumberOfResUnits(testData.numberOfUnits)
                 .enterNumberOfCommercialUnits(testData.commercialUnits);
 
             cy.stepInfo(`4. Go to Property → Amenities page and check check-boxes for Laundry Room, Storage Units, 
                         Parking and Other. For Storage Units and Parking fill in Number of 
                         Storage Units and Parking Spaces`);
-            NavigationSection.navigateToPropertyAmenities();
-            Property.Amenities.checkOtherCheckbox()
+            _NavigationSection.navigateToPropertyAmenities();
+            Property._Amenities.checkOtherCheckbox()
                 .checkLaundryRoomCheckbox()
                 .addStorageUnits(testData.storageUnits)
                 .addParkingPlaces(testData.parkingPlaces);
 
             cy.stepInfo(`5. Go to Income → In-Place Rent Roll page and fill in values into the table`);
-            NavigationSection.navigateToResInPlaceRentRoll();
-            Income.Residential.InPlaceRentRoll.enterBedroomsNumberByRowNumber(testData.bedrooms)
+            _NavigationSection.navigateToResInPlaceRentRoll();
+            Income._Residential.InPlaceRentRoll.enterBedroomsNumberByRowNumber(testData.bedrooms)
                 .enterRentTypeCellByRowNumber(testData.rentType)
                 .enterLeaseStatusByRowNumber(testData.leaseStatus)
                 .enterMonthlyRentByRowNumber(testData.residentialMonthlyRent);
 
             cy.stepInfo(`6. Go to Income → Laundry and fill in Laundry Income and Laundry V/C Loss (%) values`);
-            NavigationSection.navigateToLaundry();
-            Income.Miscellaneous.Laundry.enterLaundryIncome(testData.laundryIncome)
+            _NavigationSection.navigateToLaundry();
+            Income._MiscellaneousManager.Laundry.enterLaundryIncome(testData.laundryIncome)
                 .enterLaundryVCLossPercentage(testData.vcLossPercentage, testData.vcLossValue);
 
             cy.stepInfo(`7. Go to Income → Storage and fill in Storage Income and Storage V/C Loss (%) values`);
-            NavigationSection.navigateToStorage();
-            Income.Miscellaneous.Storage.addStorageIncome(testData.storageIncome)
+            _NavigationSection.navigateToStorage();
+            Income._MiscellaneousManager.Storage.addStorageIncome(testData.storageIncome)
                 .enterStorageVCLossPercentage(testData.storageVCLoss, testData.storageVcLossTypeRadio);
 
             cy.stepInfo(`8. Go to Income → Parking and fill in values to the Parking Income table and 
                         the value to the Parking Vacancy and Collection Loss Percentage`);
-            NavigationSection.navigateToParking();
-            Income.Miscellaneous.Parking.addMonthlyRents(testData.monthlyRents)
+            _NavigationSection.navigateToParking();
+            Income._MiscellaneousManager.Parking.addMonthlyRents(testData.monthlyRents)
                 .addParkingVCLossPercentage(testData.parkingVcLossTypeRadio, testData.parkingVCLoss);
 
             cy.stepInfo(`9. Fill in the values in the Income → Miscellaneous → Parking`);
-            NavigationSection.navigateToOther();
-            Income.Miscellaneous.Other.addOtherIncome(testData.otherIncomeItem);
+            _NavigationSection.navigateToOther();
+            Income._MiscellaneousManager.Other.addOtherIncome(testData.otherIncomeItem);
 
             cy.stepInfo(`10. Go to Income → Cap Rate Conclusion and fill in the value into Appraiser's 
                         Conclusion field, fill in the values into the Time period and Amount columns 
                         for Lesses, click Save button`);
-            NavigationSection.navigateToCapRateConclusion();
-            Income.CapRateConclusion.enterConclusionSectionConcludedCapRate(testData.concludedCapRate);
+            _NavigationSection.navigateToCapRateConclusion();
+            Income._CapRateConclusion.enterConclusionSectionConcludedCapRate(testData.concludedCapRate);
             let rentLossAsStabilizedArray = [];
             let rentLossAsCompleteArray = [];
             testData.miscRentLosses.forEach(rentLoss => {
-                Income.CapRateConclusion
+                Income._CapRateConclusion
                     .enterMiscellaneousLossMonths(testData.lossMonths, testData.valueConclusionKeyAsStabilized, 
                         rentLoss.rentLossType)
                     .enterMiscellaneousLossMonths(testData.lossMonths, testData.valueConclusionKeyAsComplete, 
@@ -94,11 +91,11 @@ describe(`Prospective Market Value As Stabilized -> Less Other Rent Loss data is
 
             cy.stepInfo(`11. Go to Sales → Value Conclusion and fill in the value into Sales Value Conclusion Table → 
                         Concluded Value Per SF raw → Amount column`);
-            NavigationSection.navigateToSalesValueConclusion();
-            Sales.ValueConclusion.enterSaleValueConclusion(testData.concludedValuePerSf);
+            _NavigationSection.navigateToSalesValueConclusion();
+            Sales._ValueConclusion.enterSaleValueConclusion(testData.concludedValuePerSf);
 
             cy.stepInfo(`12. Go to Settings&Report, generate report and download it`);
-            NavigationSection.openReviewAndExport();
+            _NavigationSection.openReviewAndExport();
             ReviewExport.selectSectionsToIncludeInExport(testData.sectionToExport)
                 .generateDocxReport().waitForReportGenerated()
                 .downloadAndConvertDocxReport(testData.reportCreationData.reportNumber);

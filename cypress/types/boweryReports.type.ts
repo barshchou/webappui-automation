@@ -227,6 +227,9 @@ export namespace BoweryReports {
         Enums.SECTIONS_TO_INCLUDE_IN_EXPORT[KeyInfo.SectionsToIncludeInExportKeys];
 
     export type PropertyConditions = typeof Enums.PROPERTY_CONDITIONS[KeyInfo.PropertyConditions];
+    export type AmenitiesCheckboxes = typeof Enums.AMENITIES_CHECKBOXES[KeyInfo.AmenitiesCheckboxesKeys]
+    export type AmenitiesUploads = typeof Enums.AMENITIES_UPLOADS[KeyInfo.AmenitiesUploadsKeys] 
+    export type AmenitiesInputs = typeof Enums.AMENITIES_INPUTS[KeyInfo.AmenitiesInputsKeys]
 
     export type PropertyConditionsRadios = keyof typeof Enums.PROPERTY_CONDITIONS_RADIOS;
     export type BondTickers = typeof Enums.BOND_TYPES[KeyInfo.BondTypes]
@@ -282,6 +285,12 @@ export namespace BoweryReports {
         Enums.EXPENSE_ITEM_BASIS_OF_COMPARISON[KeyInfo.ExpenseItemBasisOfComparison]
 
     export type PagesTexboxNamesType = typeof Enums.PAGES_TEXTBOX_NAMES[KeyInfo.PagesTexboxNamesKeys]
-    
+
     export type FinalValuesApproach = typeof Enums.FINAL_VALUES_APPROACH[KeyInfo.FinalValuesApproach]
+
+    export type SubjectPropertyDataSections = typeof
+        Enums.SUBJECT_PROPERTY_DATA_SECTIONS[KeyInfo.SubjectPropertyDataSections]
+
+    export type EditOnSubjectPropertySections = typeof
+        Enums.EDIT_ON_SUBJECT_PROPERTY_SECTIONS[KeyInfo.EditOnSubjectPropertySections]
 }

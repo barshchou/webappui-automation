@@ -3,7 +3,7 @@ import { reportCreationData } from
 import { _NavigationSection } from '../../../../../actions/base';
 import testData from "../../../../../fixtures/not_full_reports/income/residential/in_place_rent_roll/QA-4210.fixture";
 import { createReport } from "../../../../../actions/base/baseTest.actions";
-import { Income, Property, ReviewExport } from "../../../../../actions";
+import { DataCollections, Income, ReviewExport } from "../../../../../actions";
 
 describe("Verify the Developer's Forecast checkbox on the In-Place Rent Roll page", 
     { tags:[ "@income", "@residential", "@in_place_rent_roll", "@check_export" ] }, () => {
@@ -12,8 +12,8 @@ describe("Verify the Developer's Forecast checkbox on the In-Place Rent Roll pag
             it(`Test №${i + 1} Check the Summarize current rent roll checkbox`, () => {
                 cy.stepInfo("Login, create report");
                 createReport(reportCreationData(i));
-                _NavigationSection.navigateToPropertySummary();
-                Property._Summary.enterNumberOfResUnits(testData.residentialUnits.length);
+                _NavigationSection.navigateToSubjectPropertyData();
+                DataCollections._SubjectPropertyData.enterNumberOfResUnits(testData.residentialUnits.length);
     
                 cy.stepInfo("1. Navigate to Income > Residential > In-Place Rent Roll");
                 _NavigationSection.navigateToResInPlaceRentRoll();

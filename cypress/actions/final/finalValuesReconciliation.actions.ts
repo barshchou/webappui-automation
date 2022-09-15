@@ -6,8 +6,22 @@ import Enums from "../../enums/enums";
 
 class FinalValuesReconciliationActions extends BaseActionsExt<typeof finalValuesPage> {
 
-    checkPerUnitCheckbox(): FinalValuesReconciliationActions {
-        finalValuesPage.perUnitCheckbox.check().should("have.value", "true");
+    checkPerUnitCheckbox(check = true): FinalValuesReconciliationActions {
+        finalValuesPage.perUnitCheckbox.invoke('prop', 'checked').then(prop => {
+            if (prop !==  check) {
+                finalValuesPage.perUnitCheckbox.click();
+            }
+        });
+        return this;
+    }
+
+    checkPerSfCheckbox(check = true): FinalValuesReconciliationActions {
+        finalValuesPage.perSfCheckbox.invoke('prop', 'checked').then(prop => {
+            if (prop !==  check) {
+                finalValuesPage.perSfCheckbox.click();
+            }
+        });
+        
         return this;
     }
 

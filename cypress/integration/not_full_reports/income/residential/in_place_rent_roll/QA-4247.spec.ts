@@ -1,6 +1,6 @@
 import { createReportData } from 
     '../../../../../fixtures/not_full_reports/income/residential/in_place_rent_roll/QA-4247.fixture';
-import { Property, Income } from '../../../../../actions';
+import { DataCollections, Income } from '../../../../../actions';
 import { _NavigationSection } from '../../../../../actions/base';
 import testData from "../../../../../fixtures/not_full_reports/income/residential/in_place_rent_roll/QA-4247.fixture";
 import { createReport } from "../../../../../actions/base/baseTest.actions";
@@ -30,8 +30,8 @@ describe("Verify the Square Footage column in the grid",
 
 
             cy.stepInfo("4. Add Residential Units");
-            _NavigationSection.navigateToPropertySummary();
-            Property._Summary.enterNumberOfResUnits(testData.numberOfUnits);
+            _NavigationSection.navigateToSubjectPropertyData();
+            DataCollections._SubjectPropertyData.enterNumberOfResUnits(testData.numberOfUnits);
             _NavigationSection.navigateToResInPlaceRentRoll();
         
             cy.stepInfo("5. Verify the Tooltip text");

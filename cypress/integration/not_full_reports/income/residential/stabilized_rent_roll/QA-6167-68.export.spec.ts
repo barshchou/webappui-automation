@@ -1,4 +1,4 @@
-import { Income, Property, ReviewExport } from '../../../../../actions';
+import { Income, DataCollections, ReviewExport } from '../../../../../actions';
 import { _NavigationSection } from '../../../../../actions/base';
 // eslint-disable-next-line max-len
 import testData from "../../../../../fixtures/not_full_reports/income/residential/stabilized_rent_roll/QA-6167-68.fixture";
@@ -11,8 +11,8 @@ describe("Default selection on Stabilized Rent Roll table is the same selection 
             cy.stepInfo(`Precondition: Select any option as Basis of Square Foot Analysis 
                         and fill in square foot field with valid numeric value.`);
             createReport(testData.reportCreationData);
-            _NavigationSection.navigateToPropertySummary();
-            Property._Summary.enterNumberOfResUnits(testData.residentialUnits.length);
+            _NavigationSection.navigateToSubjectPropertyData();
+            DataCollections._SubjectPropertyData.enterNumberOfResUnits(testData.residentialUnits.length);
 
             cy.stepInfo("Precondition: Go to Income > Residential > In-Place RR");
             _NavigationSection.navigateToResInPlaceRentRoll();

@@ -2,7 +2,7 @@ import testData from
     "../../../../../fixtures/not_full_reports/income/commercial/rent_reconciliation/QA-5304_06-08.fixture";
 import { createReport } from "../../../../../actions/base/baseTest.actions";
 import { _NavigationSection } from "../../../../../actions/base";
-import { Income, Property, ReviewExport } from "../../../../../actions";
+import { DataCollections, Income, ReviewExport } from "../../../../../actions";
 
 describe(`Verify the "Lease Terms Adjustment Sub-Total"`, 
     { tags: [ "@income", "@commercial", "@rent_reconciliation", "@check_export" ] }, () => {
@@ -13,8 +13,8 @@ describe(`Verify the "Lease Terms Adjustment Sub-Total"`,
         () => {
             createReport(testData.reportCreationData);
             cy.stepInfo("Preconditions: Navigate to property summary, enter number of commercial units");
-            _NavigationSection.navigateToPropertySummary();
-            Property._Summary.enterNumberOfCommercialUnits(testData.unitsNumber);
+            _NavigationSection.navigateToSubjectPropertyData();
+            DataCollections._SubjectPropertyData.enterNumberOfCommercialUnits(testData.unitsNumber);
 
             cy.stepInfo('Preconditions: Fill in Commercial In-Place RR table');
             _NavigationSection.navigateToCommercialInPlaceRentRoll();

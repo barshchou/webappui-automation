@@ -1,4 +1,4 @@
-import { Income, Property } from "../../../../../actions";
+import { DataCollections, Income } from "../../../../../actions";
 import { _NavigationSection } from "../../../../../actions/base";
 import { createReport } from "../../../../../actions/base/baseTest.actions";
 import testData from 
@@ -15,8 +15,8 @@ component added through "=" for the 'Unchanged Renovation'
 
     it("Test body", () => {
         cy.stepInfo("Precondition: Navigate tot Summary page and add commercial units");
-        _NavigationSection.navigateToPropertySummary();
-        Property._Summary.enterNumberOfCommercialUnits(testData.numberOfCommercialUnits);
+        _NavigationSection.navigateToSubjectPropertyData();
+        DataCollections._SubjectPropertyData.enterNumberOfCommercialUnits(testData.numberOfCommercialUnits);
         _NavigationSection.navigateToCommercialUnits();
 
         cy.stepInfo("1. Proceed to the Income > Commercial > Stabilized Rent Roll page.");

@@ -1,5 +1,5 @@
 import { createReport } from "../../../../../actions/base/baseTest.actions";
-import { Property, Income, ReviewExport } from "../../../../../actions";
+import { Property, Income, ReviewExport, DataCollections } from "../../../../../actions";
 import { _NavigationSection } from "../../../../../actions/base";
 import testData from "../../../../../fixtures/not_full_reports/income/commercial/reimbursement_summary/QA-5087.fixture";
 
@@ -9,8 +9,8 @@ describe(`Verify exported report: Change export schemas and templates to enable 
         it(`[QA-5087] User changes to Broken Out utilities -> verify expense reimbursements non existence`, () => {
             cy.stepInfo(`Preconditions: 1. Create a mixed-use report and add commercial units`);
             createReport(testData.reportCreationData);
-            _NavigationSection.navigateToPropertySummary();
-            Property._Summary.enterGrossBuildingArea(testData.grossBuildingArea)
+            _NavigationSection.navigateToSubjectPropertyData();
+            DataCollections._SubjectPropertyData.enterGrossBuildingArea(testData.grossBuildingArea)
                 .enterNumberOfCommercialUnits(testData.numberOfCommercialUnits);
             _NavigationSection.navigateToCommercialUnits();
             Property._CommercialUnits

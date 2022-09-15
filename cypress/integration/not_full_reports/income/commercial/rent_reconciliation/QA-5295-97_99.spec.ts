@@ -2,7 +2,7 @@
 import testData from "../../../../../fixtures/not_full_reports/income/commercial/rent_reconciliation/QA-5295-97_99.fixture";
 import { createReport } from "../../../../../actions/base/baseTest.actions";
 import { _NavigationSection } from "../../../../../actions/base";
-import { Income, Property } from "../../../../../actions";
+import { DataCollections, Income } from "../../../../../actions";
 
 describe("Verify the calculation field values", 
     { tags: [ "@income", "@commercial", "@rent_reconciliation" ] }, () => {
@@ -10,8 +10,8 @@ describe("Verify the calculation field values",
         before("Create report", () => {
             createReport(testData.reportCreationData);
             cy.stepInfo("Preconditions: Navigate to property summary, enter number of commercial units");
-            _NavigationSection.navigateToPropertySummary();
-            Property._Summary.enterNumberOfCommercialUnits(testData.unitsNumber);
+            _NavigationSection.navigateToSubjectPropertyData();
+            DataCollections._SubjectPropertyData.enterNumberOfCommercialUnits(testData.unitsNumber);
 
             cy.stepInfo('1. Fill in Commercial In-Place RR table');
             _NavigationSection.navigateToCommercialInPlaceRentRoll();

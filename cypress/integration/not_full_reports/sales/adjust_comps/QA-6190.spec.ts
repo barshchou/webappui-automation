@@ -2,8 +2,9 @@ import { _NavigationSection } from '../../../../actions/base';
 import testData from "../../../../fixtures/not_full_reports/sales/adjust_comps/QA-6190.fixture";
 import { createReport } from "../../../../actions/base/baseTest.actions";
 import launchDarklyApi from "../../../../api/launchDarkly.api";
-import { Income, Sales, Property } from "../../../../actions";
+import { Income, Sales, DataCollections } from "../../../../actions";
 
+// ToDo: Test fails due to problem with rounding: https://bowery.atlassian.net/browse/QA-6954
 describe("Adjusted Price Per SF in Sales Adjustment Grid is calculated with correct formula", 
     { tags: [ "@adjust_comps", "@sales", "@feature_flag" ] }, () => {
         beforeEach("Login, create report", () => {
@@ -14,8 +15,8 @@ describe("Adjusted Price Per SF in Sales Adjustment Grid is calculated with corr
 
         it(`[QA-6190]`, () => {
             cy.stepInfo(`2. Navigate to Property > Summary page and fill Residential Units`);
-            _NavigationSection.navigateToPropertySummary();
-            Property._Summary.enterNumberOfResUnits(testData.numberUnits)
+            _NavigationSection.navigateToSubjectPropertyData();
+            DataCollections._SubjectPropertyData.enterNumberOfResUnits(testData.numberUnits)
                 .selectBasisSquareFootAnalysis(testData.squareFootAnalysisBasis)
                 .fillBasisSquareFootAnalysis(testData.squareFootAnalysisArea)
                 .enterGrossBuildingArea(testData.grossBuildingArea);
