@@ -34,15 +34,17 @@ describe(`Sale Price is pulled correctly according to selected Basis for Square 
             is calculated (after saving this value should be displayed in header as Income Value)`);
             _NavigationSection.navigateToCapRateConclusion();
             Income._CapRateConclusion.enterConclusionSectionConcludedCapRate(testData.concludedCapRate)
-                .setAmountAlias(testData.valueConclusionAsStabilized);
 
-            cy.stepInfo(`5. Go to Sales > Adjust Comps page`);
+            cy.stepInfo(`5. Save to As Stabilized amount for further use in test`);
+            Income._CapRateConclusion.setAmountAlias(testData.valueConclusionAsStabilized);
+
+            cy.stepInfo(`6. Go to Sales > Adjust Comps page`);
             _NavigationSection.navigateToAdjustComps();
 
-            cy.stepInfo(`6. Make sure PSF radio button  is selected as Calculation Units`);
+            cy.stepInfo(`7. Make sure PSF radio button  is selected as Calculation Units`);
             Sales._AdjustComps.checkCalculationUnitsRadio(testData.calculationUnits);
 
-            cy.stepInfo(`7. Verify Sale Price for Subject in expanded Market Adjustment section 
+            cy.stepInfo(`8. Verify Sale Price for Subject in expanded Market Adjustment section 
             is pulled as not rounded Prospective Market Value As Stabilized from Income > Cap Rate Conclusion 
             page and calculation there is based on selected BAsis for SF Analysis on Property>Summary page`);
             Sales._AdjustComps.expandAdjustmentDetails(testData.adjustmentName)
