@@ -62,26 +62,26 @@ describe("Potential Real Estate Tax Reimbursement",
                 _NavigationSection.navigateToProForma()
                     .verifyProgressBarNotExist();
 
-                cy.stepInfo(`[QA-4722] 4. The value in the Less Real Estate Taxes Reimbursement 
+                cy.stepInfo(`[QA-4722] 5. The value in the Less Real Estate Taxes Reimbursement 
                         V/C Loss @ X% is taken from Income → Commercial → Reimbursement Summary → V/C Loss % cell`);
                 Income._ProFormaActions.verifyResidentialVCLossLabel(
                     testData.expenseType, 
                     testData.reimbursementVcLoss);
 
-                cy.stepInfo(`[QA-4723] 5. The value in the Less Real Estate Taxes Reimbursement 
+                cy.stepInfo(`[QA-4723] 6. The value in the Less Real Estate Taxes Reimbursement 
                 V/C Loss @ X% is taken from Income → Commercial → Reimbursement Summary → 
                 Gross V/C Loss cell`);
                 Income._ProFormaActions.verifyResidentialVCLossTotal(
                     testData.expenseType, 
                     `-$${numberWithCommas(Math.round(testData.reimbursementLossTotal))}`);
 
-                cy.stepInfo(`[QA-4728] 6. The value in the Less Real Estate Taxes Reimbursement 
+                cy.stepInfo(`[QA-4728] 7. The value in the Less Real Estate Taxes Reimbursement 
                 V/C Loss @ X% is calculated by formula: 
                 Real Estate Taxes Reimbursement V/C Loss @ X% → PSF [Total/GBA Value]`);
                 Income._ProFormaActions.verifyResidentialVCLossPerSF(
                     testData.expenseType, testData.buildingArea);
 
-                cy.stepInfo(`[QA-4729] 7. The value in the Less Real Estate Taxes Reimbursement 
+                cy.stepInfo(`[QA-4729] 8. The value in the Less Real Estate Taxes Reimbursement 
                 V/C Loss @ X% → Per Unit is calculated by the formula: Total / # of Residential Units`);
                 Income._ProFormaActions.verifyResidentialVCLossPerUnit(
                     testData.expenseType, testData.numberOfResidentialUnits);
