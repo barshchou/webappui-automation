@@ -1,7 +1,7 @@
 import { createReport } from "../../actions/base/baseTest.actions";
 import tesData from "../../fixtures/smoke/createReport.fixture";
 import { Base, Report, Sales } from "../../actions";
-import { _DataCollectionsTitles, _ReportTitles } from "../../enums/pages_titles";
+import { _DataCollectionsTitles } from "../../enums/pages_titles";
 
 Cypress.env("report", "ui");
 Cypress.env("loginMethod", "ui");
