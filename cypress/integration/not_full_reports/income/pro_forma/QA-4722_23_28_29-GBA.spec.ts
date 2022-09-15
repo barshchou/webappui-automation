@@ -13,7 +13,7 @@ describe("Potential Real Estate Tax Reimbursement",
                     Set square foot analysis basis to GBA and fill area`);
             createReport(testData.reportCreationData);
             _NavigationSection.navigateToSubjectPropertyData();
-            DataCollections._SubjectPropertyData.enterGrossBuildingArea(testData.grossBuildingArea)
+            DataCollections._SubjectPropertyData.enterGrossBuildingArea(testData.buildingArea)
                 .enterNumberOfResUnits(testData.numberOfResidentialUnits)
                 .enterNumberOfCommercialUnits(testData.numberOfCommercialUnits);
 

@@ -14,7 +14,7 @@ describe("Potential Real Estate Tax Reimbursement",
                     Make sure that there is at least three commercial units.`);
             createReport(testData.reportCreationData);
             _NavigationSection.navigateToSubjectPropertyData();
-            DataCollections._SubjectPropertyData.enterGrossBuildingArea(testData.grossBuildingArea)
+            DataCollections._SubjectPropertyData.enterGrossBuildingArea(testData.buildingArea)
                 .enterNumberOfResUnits(testData.numberOfResidentialUnits)
                 .enterNumberOfCommercialUnits(testData.numberOfCommercialUnits);
 
@@ -52,9 +52,9 @@ describe("Potential Real Estate Tax Reimbursement",
             it(`[QA-4501][QA-4502][QA-4503] with ${basis} set`, () => {
                 cy.stepInfo(`Preconditions: Set square foot analysis basis to ${basis} and fill area`);
                 if (basis === Enums.BASIS_SQUARE_FOOT_ANALYSIS.grossBuildingArea) {
-                    Property._Summary.enterGrossBuildingArea(testData.buildingArea);
+                    DataCollections._SubjectPropertyData.enterGrossBuildingArea(testData.buildingArea);
                 } else {
-                    Property._Summary.selectBasisSquareFootAnalysis(basis)
+                    DataCollections._SubjectPropertyData.selectBasisSquareFootAnalysis(basis)
                         .fillBasisSquareFootAnalysis(testData.buildingArea);
                 }
                 cy.stepInfo(`Preconditions: Navigate to ProForma page`);
