@@ -1,5 +1,5 @@
 import testData from "../../../../fixtures/not_full_reports/property/commercial_units/QA-4561.fixture";
-import { Property } from "../../../../actions";
+import { DataCollections, Property } from "../../../../actions";
 import { createReport } from "../../../../actions/base/baseTest.actions";
 import { _NavigationSection } from "../../../../actions/base";
 
@@ -9,8 +9,8 @@ describe("Verify the functionality of the Street Type radio button",
         beforeEach("Login, create report", () => {
             cy.stepInfo(`1. Report creation and several commercial units addition`);
             createReport(testData.reportCreationData);
-            _NavigationSection.navigateToPropertySummary();
-            Property._Summary.enterNumberOfCommercialUnits(testData.numberOfCommercialUnits);
+            _NavigationSection.navigateToSubjectPropertyData();
+            DataCollections._SubjectPropertyData.enterNumberOfCommercialUnits(testData.numberOfCommercialUnits);
         });
 
         it("Test body", () => {
@@ -27,8 +27,8 @@ describe("Verify the functionality of the Street Type radio button",
 
             cy.stepInfo(`4. Verify that each radio button can be selected and saved`);
             testData.streetTypeValues.forEach(value => {
-                Property._CommercialUnits.clickRadioButtonByValueAndUnitIndex(testData.groupName, value);
-                Property._CommercialUnits.clickSaveButton()
+                Property._CommercialUnits.clickRadioButtonByValueAndUnitIndex(testData.groupName, value)
+                    .clickSaveButton()
                     .verifyProgressBarNotExist();
                 cy.reload();
                 Property._CommercialUnits.verifyRadioIsChecked(testData.groupName, value);

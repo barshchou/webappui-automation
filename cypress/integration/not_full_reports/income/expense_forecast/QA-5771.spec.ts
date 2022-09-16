@@ -1,6 +1,6 @@
 import testData from "../../../../fixtures/not_full_reports/income/expense_forecast/QA-5771.fixture";
 import { createReport } from "../../../../actions/base/baseTest.actions";
-import { Property, Income } from "../../../../actions";
+import { Income, DataCollections } from "../../../../actions";
 import { _NavigationSection } from "../../../../actions/base";
 import tableExpenseHistoryCellNames from "../../../../enums/expense/expenseHistoryTableRows.enum";
 
@@ -14,40 +14,40 @@ describe("[QA-5771] Historical expense Payroll & Benefits Per SF is correctly ca
         it("Test body", () => {
 
             cy.stepInfo("1. Pre-condition: Fill in Residential Units and GBA on Property > Summary form");
-            _NavigationSection.navigateToPropertySummary();
-            Property._Summary.enterNumberOfResUnits(testData.buildingDescription.numberOfUnits)
+            _NavigationSection.navigateToSubjectPropertyData();
+            DataCollections._SubjectPropertyData.enterNumberOfResUnits(testData.buildingDescription.numberOfUnits)
                 .enterGrossBuildingArea(testData.buildingDescription.grossArea);
 
             cy.stepInfo("2. Go to Income > Expense History");
-            _NavigationSection.Actions.navigateToExpenseHistory();
+            _NavigationSection.navigateToExpenseHistory();
 
             cy.stepInfo(`3. Add columns for all types of Expense Period: 
             Actual, Actual T12, Annualized Historical and Projection + 
             Fill in Payroll & Benefits field for all added columns and save changes`);
             testData.periods.forEach((period) => {
-                Income._ExpenseHistory.Actions.selectExpensePeriod(period.expensePeriodType)
+                Income._ExpenseHistory.selectExpensePeriod(period.expensePeriodType)
                     .enterExpenseYear(period.year)
                     .clickAddExpenseYearButton()
                     .enterIssueByColIndex(period.payrollAndBenefits, tableExpenseHistoryCellNames.payrollAndBenefits);
             });
             testData.periodsMonth.forEach((period) => {
-                Income._ExpenseHistory.Actions.selectExpensePeriod(period.expensePeriodType)
+                Income._ExpenseHistory.selectExpensePeriod(period.expensePeriodType)
                     .enterExpenseMonth(period.month)
                     .enterExpenseYear(period.year)
                     .clickAddExpenseYearButton()
                     .enterIssueByColIndex(period.payrollAndBenefits, tableExpenseHistoryCellNames.payrollAndBenefits);
             });
-            Income._ExpenseHistory.Actions.verifyAverageTable();
+            Income._ExpenseHistory.verifyAverageTable();
 
             cy.stepInfo(`4. Go to Expense Forecast and make sure that Per SF radio button 
             is selected for Payroll & Benefits card`);
-            _NavigationSection.Actions.navigateToExpenseForecast();
+            _NavigationSection.navigateToExpenseForecast();
             Income._ExpenseForecastActions.chooseForecastItemBasis(testData.actualPayrollAndBenefitsItem)
                 .verifyForecastItemBasis(testData.actualPayrollAndBenefitsItem);
 
             cy.stepInfo(`5.1 Check historical expenses values for Payroll & Benefits card. They should be calculated 
                      for each expense type as: [Expense Period type]Payroll & Benefits / GBA`);
-            Income._ExpenseForecastActions.Actions
+            Income._ExpenseForecastActions
                 .verifyForecastItemByExpensePeriodType(testData.actualPayrollAndBenefitsItem, 
                     testData.buildingDescription, "Actual")
                 .verifyForecastItemByExpensePeriodType(testData.t12PayrollAndBenefitsItem, 
@@ -62,7 +62,7 @@ describe("[QA-5771] Historical expense Payroll & Benefits Per SF is correctly ca
 
             cy.stepInfo(`5.2 Check historical expenses values for Payroll & Benefits card. 
             They should be correctly displayed on slide bars`);
-            Income._ExpenseForecastActions.Actions.matchElementSnapshot(
+            Income._ExpenseForecastActions.matchElementSnapshot(
                 Income._ExpenseForecastActions.Page.forecastItemCard(
                     Income._ExpenseForecastActions.getItemNameForAverage(
                         testData.actualPayrollAndBenefitsItem.name)), testData.payrollAndBenefitsPerSfCardSnapshotName, 

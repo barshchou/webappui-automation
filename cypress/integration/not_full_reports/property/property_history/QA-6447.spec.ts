@@ -2,13 +2,12 @@ import testData from "../../../../fixtures/not_full_reports/property/property_hi
 import { createReport } from "../../../../actions/base/baseTest.actions";
 import { _NavigationSection } from "../../../../actions/base";
 import { Property } from "../../../../actions";
-import launchDarklyApi from "../../../../api/launchDarkly.api";
+import subjectPropertyDataRouts from "../../../../utils/subject_property_data_routs.utils";
 
 describe(`Edit Data button in Property History Information section redirects to Data Collection 
         > Subject Property Data > Property History Information`, { tags: [ "@property", "@property_history" ] }, () => {
     
     beforeEach("Login, create report", () => {
-        launchDarklyApi.setFeatureFlagForUser(testData.featureFlagKey, testData.onFeatureFlag);
         createReport(testData.reportCreationData);
     });
 
@@ -22,14 +21,6 @@ describe(`Edit Data button in Property History Information section redirects to 
     
         cy.stepInfo(`3. Verify user redirects to Data Collection > Subject Property Data 
                     > Property History section`);
-        _NavigationSection.waitForUrl(testData.route);
-    });
-   
-
-    after("Remove feature flag", () => {
-        launchDarklyApi.removeUserTarget(testData.featureFlagKey);
-            
-        cy.stepInfo("4. Off subject property data");
-        launchDarklyApi.setFeatureFlagForUser(testData.featureFlagKey, testData.offFeatureFlag);
+        _NavigationSection.waitForUrl(subjectPropertyDataRouts.propertyHistory);
     });
 });

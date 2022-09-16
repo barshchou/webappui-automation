@@ -1,8 +1,7 @@
-import { Sales, ReviewExport } from '../../../../actions';
+import { Sales, ReviewExport, DataCollections } from '../../../../actions';
 import testData from "../../../../fixtures/not_full_reports/sales/value_conclusion/QA-4053_86..fixture";
 import { _NavigationSection } from "../../../../actions/base";
 import { createReport } from "../../../../actions/base/baseTest.actions";
-import { _Summary } from "../../../../actions/property";
 import { numberWithCommas } from '../../../../../utils/numbers.utils';
 
 describe(`[QA-4053] [QA-4086] The Concluded Value Per Unit is calculated correctly 
@@ -12,8 +11,8 @@ describe(`[QA-4053] [QA-4086] The Concluded Value Per Unit is calculated correct
     it("Test body", () => {
         createReport(testData.reportCreationData);
         cy.stepInfo(`Precondition: Navigate to report summary and specify amount of residential and commercial units`);
-        _NavigationSection.navigateToPropertySummary();
-        _Summary.enterNumberOfResUnits(testData.general.residentialUnits).
+        _NavigationSection.navigateToSubjectPropertyData();
+        DataCollections._SubjectPropertyData.enterNumberOfResUnits(testData.general.residentialUnits).
             enterNumberOfCommercialUnits(testData.general.commercialUnits);
         
         cy.stepInfo(`1. Proceed to the Sales > Adjust Comps page.`);
@@ -34,7 +33,7 @@ describe(`[QA-4053] [QA-4086] The Concluded Value Per Unit is calculated correct
             .verifyProspectiveMarketValueAmount(testData.valueConclusionAsIs, totalValue)
             .verifyProspectiveMarketValueAmount(testData.valueConclusionAsComplete, totalValue);
 
-        _NavigationSection.Actions.openReviewAndExport().closeUserSurveyIfExist();
+        _NavigationSection.openReviewAndExport().closeUserSurveyIfExist();
         ReviewExport.generateDocxReport()
             .downloadAndConvertDocxReport(testData.reportCreationData.reportNumber);
     });

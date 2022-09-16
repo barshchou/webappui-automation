@@ -98,7 +98,7 @@ export default class BasePage {
     getRemoveIcon(rowNumber = 0) { return cy.get("[data-testid='CancelIcon']").eq(rowNumber); }
     
     getEditIconBySectionName(name: string) { 
-        return cy.xpath(`//*[contains(text(), '${name}')]/following::*[@data-testid='LaunchIcon'][1]`); 
+        return cy.xpath(`(//*[contains(text(), '${name}')]/following::*[@data-testid='LaunchIcon'])[1]`);
     }
     
     generatedCommentaryText(name: string) {

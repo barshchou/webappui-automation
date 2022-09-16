@@ -11,11 +11,11 @@ describe("Selected Comparables table. Verify the functionality of Remove button"
 
         it("Test body", () => {
             NavigationSection.navigateToFindComps();
-            Sales.FindComps.selectCompFromMapByAddress(testData.comparable.address)
-                .verifyAddedCompAddress(testData.comparable.address)
+            Sales.FindComps.AddressSearch.openAddressSearchTab()
+                .addCompByParameter(1, testData.compProperty, testData.compStatusDate);
+            Sales.FindComps.verifyAddedCompAddress(testData.comparable.address)
                 .removeCompByAddress(testData.comparable.address)
                 .verifyCompIsInRemovedSection(testData.comparable.address)
-                .verifyCompIsInMap(testData.comparable.address)
                 .removeDeletedCompByAddress(testData.comparable.address);
         });
     });

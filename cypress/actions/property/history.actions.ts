@@ -9,11 +9,6 @@ import BaseActionsExt from "../base/base.actions.ext";
 
 class HistoryActions extends BaseActionsExt<typeof historyPage> {
 
-    enterCurrentOwner(owner: string): HistoryActions {
-        historyPage.currentOwnerField.clear().type(owner).should("have.value", owner);
-        return this;
-    }
-
     checkIsUnderContractCheckbox(): HistoryActions {
         historyPage.isUnderContractCheckbox.check().should("have.value", "true");
         return this;
@@ -35,11 +30,6 @@ class HistoryActions extends BaseActionsExt<typeof historyPage> {
         }
         const textToBe = numberWithCommas(contractPrice);
         historyPage.contractPrice.clear().type(`${contractPrice}`).should("have.value", textToBe);
-        return this;
-    }
-
-    clickEditDataBySectionName(name: string): HistoryActions {
-        historyPage.getEditIconBySectionName(name).click();
         return this;
     }
 }

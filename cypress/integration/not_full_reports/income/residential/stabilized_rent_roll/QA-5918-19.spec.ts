@@ -1,4 +1,4 @@
-import { Income, Property } from '../../../../../actions';
+import { Income, DataCollections } from '../../../../../actions';
 import { _NavigationSection } from '../../../../../actions/base';
 // eslint-disable-next-line max-len
 import testData from '../../../../../fixtures/not_full_reports/income/residential/stabilized_rent_roll/QA-5918-19.fixture';
@@ -22,12 +22,13 @@ describe("Default selection on Stabilized Rent Roll table is the same selection 
                 cy.stepInfo(`Precondition: Select any option as Basis of Square Foot Analysis 
                             and fill in square foot field with valid numeric value.
                             1. Make sure there is at least one residential unit`);
-                _NavigationSection.navigateToPropertySummary();
-                Property._Summary.enterNumberOfResUnits(testData.residentialUnits.length)
+                _NavigationSection.navigateToSubjectPropertyData();
+                DataCollections._SubjectPropertyData.enterNumberOfResUnits(testData.residentialUnits.length)
                     .selectBasisSquareFootAnalysis(testData.squareFootAnalysisFixture[index].basis);
                 if (testData.squareFootAnalysisFixture[index].basis !== 
                     enums.BASIS_SQUARE_FOOT_ANALYSIS.grossBuildingArea) {
-                    Property._Summary.fillBasisSquareFootAnalysis(testData.squareFootAnalysisFixture[index].area);
+                    DataCollections._SubjectPropertyData
+                        .fillBasisSquareFootAnalysis(testData.squareFootAnalysisFixture[index].area);
                 }
 
                 cy.stepInfo("2. Go to Income > Residential > In-Place RR");
@@ -55,12 +56,13 @@ describe("Default selection on Stabilized Rent Roll table is the same selection 
                 cy.stepInfo(`Precondition: Select any option as Basis of Square Foot Analysis 
                             and fill in square foot field with valid numeric value.
                             1. Make sure there is at least one residential unit`);
-                _NavigationSection.navigateToPropertySummary();
-                Property._Summary.enterNumberOfResUnits(testData.residentialUnits.length)
+                _NavigationSection.navigateToSubjectPropertyData();
+                DataCollections._SubjectPropertyData.enterNumberOfResUnits(testData.residentialUnits.length)
                     .selectBasisSquareFootAnalysis(testData.squareFootAnalysisFixture[index].basis);
                 if (testData.squareFootAnalysisFixture[index].basis !== 
                     enums.BASIS_SQUARE_FOOT_ANALYSIS.grossBuildingArea) {
-                    Property._Summary.fillBasisSquareFootAnalysis(testData.squareFootAnalysisFixture[index].area);
+                    DataCollections._SubjectPropertyData
+                        .fillBasisSquareFootAnalysis(testData.squareFootAnalysisFixture[index].area);
                 }
 
                 cy.stepInfo("2. Go to Income > Residential > In-Place RR");

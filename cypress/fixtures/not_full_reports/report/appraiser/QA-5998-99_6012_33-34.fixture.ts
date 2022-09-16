@@ -15,7 +15,7 @@ const appraiserName = "Matt Roman";
 const inspectorName = "Robocop Inspector";
 
 const certificationInspectionComment = `${inspectorName} has made a personal inspection of the` + 
-` property  that is the subject of this report on ${date}.Brandon Gollotti, Robocop Automation` + 
+` property  that is the subject of this report on ${date}. Brandon Gollotti, Robocop Automation` + 
 ` and ${appraiserName} have not made a personal inspection of the property  that is the subject of this report.`;
 
 const certificationAssistanceComment = `${inspectorName} provided significant real property appraisal` + 

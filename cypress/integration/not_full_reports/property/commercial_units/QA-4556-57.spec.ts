@@ -1,7 +1,7 @@
 import testData from "../../../../fixtures/not_full_reports/property/commercial_units/QA-4556-57.fixture";
 import { createReport } from "../../../../actions/base/baseTest.actions";
 import { _NavigationSection } from "../../../../actions/base";
-import { Property } from "../../../../actions"; 
+import { DataCollections, Property } from "../../../../actions";
 
 describe("Verify the functionality of the Image upload to the Interior and Exterior Images sections",
     { tags:[ "@property", "@commercial_units" ] },  () => {
@@ -9,8 +9,8 @@ describe("Verify the functionality of the Image upload to the Interior and Exter
         beforeEach("Login, create report", () => {
             cy.stepInfo(`Preconditions: The mixed report is created and several commercial units are added.`);
             createReport(testData.reportCreationData);
-            _NavigationSection.navigateToPropertySummary();
-            Property._Summary.enterNumberOfCommercialUnits(testData.numberOfCommercialUnits);
+            _NavigationSection.navigateToSubjectPropertyData();
+            DataCollections._SubjectPropertyData.enterNumberOfCommercialUnits(testData.numberOfCommercialUnits);
             _NavigationSection.navigateToCommercialUnits();
         });
 
@@ -28,14 +28,14 @@ describe("Verify the functionality of the Image upload to the Interior and Exter
                 cy.stepInfo(`# Verify that several images can be uploaded to the ${images}.`);
                 testData.inputType.forEach(inputMethod => {
                     cy.stepInfo(`2. Verify the image can be uploaded by ${inputMethod} in ${images}.`);
-                    Property._CommercialUnits.Actions
+                    Property._CommercialUnits
                         .uploadImages(images, testData.imageFile, inputMethod)
                         .verifyProgressBarNotExist();
     
                     cy.stepInfo(`# Verify the uploaded image can be rotated.`);
                     testData.imageRotations.forEach(rotateIndex => {
                         Property._CommercialUnits
-                            .Actions.rotateImage(images)
+                            .rotateImage(images)
                             .verifyProgressBarNotExist()
                             .verifyImageHasRotated(images, rotateIndex);
                     });

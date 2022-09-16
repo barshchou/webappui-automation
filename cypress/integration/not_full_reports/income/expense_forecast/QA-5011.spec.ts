@@ -1,6 +1,6 @@
 import testData from "../../../../fixtures/not_full_reports/income/expense_forecast/QA-5011_12.fixture";
 import { _NavigationSection } from "../../../../actions/base";
-import { Income, Property } from "../../../../actions";
+import { DataCollections, Income } from "../../../../actions";
 import { createReport } from "../../../../actions/base/baseTest.actions";
 
 describe(`[QA-5011] [Income>Expense forecast] Unselected existing expense card is not displayed in certain places `,
@@ -12,8 +12,8 @@ describe(`[QA-5011] [Income>Expense forecast] Unselected existing expense card i
         it("Test body", function () {
 
             cy.stepInfo(`1. Go to Property > Summary and add residential and commercial units`);
-            _NavigationSection.navigateToPropertySummary();
-            Property._Summary.enterNumberOfResUnits(testData.numberOfResidentialUnits)
+            _NavigationSection.navigateToSubjectPropertyData();
+            DataCollections._SubjectPropertyData.enterNumberOfResUnits(testData.numberOfResidentialUnits)
                 .enterNumberOfCommercialUnits(testData.numberOfCommercialUnits)
                 .enterGrossBuildingArea(testData.buildingDescription.grossArea);
 

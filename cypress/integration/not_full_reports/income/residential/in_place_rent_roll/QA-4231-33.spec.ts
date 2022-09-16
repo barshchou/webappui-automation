@@ -2,7 +2,7 @@ import testData from
     "../../../../../fixtures/not_full_reports/income/residential/in_place_rent_roll/QA-4231_33.fixture";
 import { createReport } from "../../../../../actions/base/baseTest.actions";
 import { _NavigationSection } from "../../../../../actions/base";
-import { Income, Property } from "../../../../../actions";
+import { Income, DataCollections } from "../../../../../actions";
 
 describe("In-Place Rent Roll table tests", 
     { tags:[ "@income", "@residential", "@in_place_rent_roll" ] }, () => {
@@ -13,8 +13,8 @@ describe("In-Place Rent Roll table tests",
 
         it("[QA-4231-33]", () => {
             cy.stepInfo('Preconditions: Navigate to Income -> Summary and specify amount of units');
-            _NavigationSection.navigateToPropertySummary();
-            Property._Summary.enterNumberOfResUnits(testData.residentialUnits.length);
+            _NavigationSection.navigateToSubjectPropertyData();
+            DataCollections._SubjectPropertyData.enterNumberOfResUnits(testData.residentialUnits.length);
 
             cy.stepInfo(`1. Navigate to Residential and check Per Room Analysis`);
             _NavigationSection.navigateToResInPlaceRentRoll();

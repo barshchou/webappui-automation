@@ -2,7 +2,7 @@ import { numberWithCommas } from '../../../../../utils/numbers.utils';
 import testData from "../../../../fixtures/not_full_reports/income/potential_gross_income/QA-5065.fixture";
 import { createReport } from "../../../../actions/base/baseTest.actions";
 import { _NavigationSection } from "../../../../actions/base";
-import { Property, Income } from "../../../../actions";
+import { DataCollections, Income, Property } from "../../../../actions";
 
 describe("[Income > Potential Gross Income]Support combined utility expense reimbursements", 
     { tags:[ "@income", "@potential_gross_income" ] }, () => {
@@ -15,9 +15,8 @@ describe("[Income > Potential Gross Income]Support combined utility expense reim
             cy.stepInfo(`1. Navigate to Property -> Summary and Property -> Commercial Units 
                     and verify that all needed info about commercial units is filled`);
         
-            _NavigationSection.navigateToPropertySummary();
-            Property._Summary
-                .enterGrossBuildingArea(testData.buildingDescription.grossArea)
+            _NavigationSection.navigateToSubjectPropertyData();
+            DataCollections._SubjectPropertyData.enterGrossBuildingArea(testData.buildingDescription.grossArea)
                 .enterNumberOfCommercialUnits(testData.buildingDescription.numberOfUnits);
             _NavigationSection.navigateToCommercialUnits();
             Property._CommercialUnits.enterUnitSFByUnitIndex(testData.squareFeet);
