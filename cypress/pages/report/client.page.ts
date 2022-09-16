@@ -33,10 +33,6 @@ class ClientPage extends BasePage {
 
     get addNewClient() { return cy.xpath("//*[@data-qa='callout-btn']"); }
 
-    commentaryText(commentaryTitle: string) { 
-        return cy.xpath(`//h6[.='${commentaryTitle}']//following::div[@data-slate-editor][1]`); 
-    }
-
     get addAdditionalClientBtn() { return cy.contains("Add additional client"); } 
 
     get maxClientMessage() { return cy.contains("Max of four clients allowed"); }

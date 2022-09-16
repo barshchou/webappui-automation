@@ -2,8 +2,6 @@ import clientPage from "../../pages/report/client.page";
 import { replaceEntersWithLineBreak } from "../../../utils/string.utils";
 import BaseActionsExt from "../base/base.actions.ext";
 import routesUtils from "../../utils/routes.utils";
-import Enums from "../../enums/enums";
-import { numberWithCommas } from "../../../utils/numbers.utils";
 
 class ClientActions extends BaseActionsExt<typeof clientPage> {
     verifyInputChangesToBeUnsaved(clientFileNumber: string, index = 0): ClientActions {
@@ -78,38 +76,6 @@ class ClientActions extends BaseActionsExt<typeof clientPage> {
         return this;
     }
 
-    verifyIntendedUserTextBox(verifyAreaValue: string | number): ClientActions {
-        clientPage.formCommentTextBox(Enums.PAGES_TEXTBOX_NAMES.intendedUser)
-            .should("contain.text", `${verifyAreaValue}`);
-        return this;
-    }
-
-    verifyIdentificationOfTheClientTextBox(verifyAreaValue: string | number): ClientActions {
-        clientPage.formCommentTextBox(Enums.PAGES_TEXTBOX_NAMES.identificationOfTheClient)
-            .should("contain.text", `${verifyAreaValue}`);
-        return this;
-    }
-
-    verifyNotContainIntendedUserTextBox(verifyAreaValue: string): ClientActions {
-        clientPage.formCommentTextBox(Enums.PAGES_TEXTBOX_NAMES.intendedUser)
-            .should("not.contain.text", verifyAreaValue);
-        return this;
-    }
-
-    verifyNotContainIdentificationOfTheClientTextBox(verifyAreaValue: string): ClientActions {
-        clientPage.formCommentTextBox(Enums.PAGES_TEXTBOX_NAMES.identificationOfTheClient)
-            .should("not.contain.text", verifyAreaValue);
-        return this;
-    }
-
-    verifyCommentaryContainsText(verifyAreaValue: string | number, commentaryTitle: string): ClientActions { 
-        let expectedText = typeof verifyAreaValue ===  "number" 
-            ? `${numberWithCommas(verifyAreaValue)}`
-            : verifyAreaValue;
-        this.Page.commentaryText(commentaryTitle).should("include.text", `${expectedText}`);
-        return this;
-    }
-
     clickAddAdditionalClientBtn(): ClientActions {
         clientPage.addAdditionalClientBtn.click({ force: true });
         return this;
@@ -152,6 +118,13 @@ class ClientActions extends BaseActionsExt<typeof clientPage> {
     clickAddNewClient(): ClientActions {
         clientPage.addNewClient.click();
         this.submitSaveChangesModal();
+        return this;
+    }
+
+    selectClient(enterValue: string, clientName: string, index = 0): ClientActions {
+        clientPage.getClientNameField(index).type(enterValue);
+        clientPage.getClientListItem(clientName).click();
+        clientPage.getClientNameField(index).should("have.value", clientName);
         return this;
     }
 }

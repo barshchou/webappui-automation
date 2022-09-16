@@ -40,12 +40,12 @@ conditionalDescribe("Newly created client is displayed for a Client 2, Client 3 
 
             cy.stepInfo(`6. Verify in the Client X field enter the name of the newly created client and select it`);
             for (let i = 0; i < 3; i++) {
-                Report._Client.Page.getClientNameField(i + 1).type(testData.enterAddedClient);
-                Report._Client.Page.getClientListItem(testData.addedClient).should("exist");
+                Report._Client.selectClient(testData.enterAddedClient, testData.addedClient, i + 1);
             }
 
             cy.stepInfo("7. Click Save changes button");
-            Report._Client.clickSaveButton();
+            Report._Client.clickSaveButton()
+                .verifyProgressBarNotExist();
         });
 
     });

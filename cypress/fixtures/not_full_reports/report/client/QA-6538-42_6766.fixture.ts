@@ -35,5 +35,6 @@ export default {
     identificationOfTheClient: Enums.PAGES_TEXTBOX_NAMES.identificationOfTheClient,
     clientNames,
     intendedUserText,
-    identificationOfTheClientText
+    identificationOfTheClientText,
+    matcher: "contain.text"
 };
