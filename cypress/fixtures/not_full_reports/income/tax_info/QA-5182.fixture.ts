@@ -15,8 +15,6 @@ export default {
     reportCreationData: ReportDataCreator.getReportData("5182", { address: "" }),
     title: "Tax Calculation Discussion",
     commentary: _comment,
-    featureFlagKey: Enums.FEATURE_FLAG_KEYS.flexibleTaxes,
-    onFeatureFlag: 0,
     tooltip: "The following text will appear below the Tax Liability table in your export",
     exportSectionName: Enums.EXPORT_TITLES.assessedValueAndRealEstateTaxes
 };

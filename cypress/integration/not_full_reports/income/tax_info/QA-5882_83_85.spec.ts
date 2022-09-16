@@ -2,15 +2,13 @@ import testData from "../../../../fixtures/not_full_reports/income/tax_info/QA-5
 import { createReport } from "../../../../actions/base/baseTest.actions";
 import { _NavigationSection } from "../../../../actions/base";
 import { Income, DataCollections } from '../../../../actions';
-import launchDarklyApi from "../../../../api/launchDarkly.api";
 
 describe(`Square Foot row in Tax Liability grid is displayed according to 
 selected Basis for Square Foot Analysis`,
-{ tags: [ "@income", "@tax_info", "@feature_flag" ] }, () => {
+{ tags: [ "@income", "@tax_info" ] }, () => {
 
     it("[QA-5882_83_85]", () => {
         cy.stepInfo("1. Create report");
-        launchDarklyApi.setFeatureFlagForUser(testData.featureFlagKey, testData.onFeatureFlag);
         createReport(testData.reportCreationData);
         testData.squareFootAnalysisRadios.forEach((radio, index) => {
             let normalIndex = index + 1;
@@ -33,9 +31,5 @@ selected Basis for Square Foot Analysis`,
                     .verifyPSFTaxLiability(radio);
             }            
         });
-    });
-
-    after(() => {
-        launchDarklyApi.removeUserTarget(testData.featureFlagKey);
     });
 });
