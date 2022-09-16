@@ -15,7 +15,5 @@ export default {
     reportCreationData: ReportDataCreator.getReportData("5183"),
     title: "Tax Calculation Discussion",
     commentary: _comment,
-    featureFlagKey: Enums.FEATURE_FLAG_KEYS.flexibleTaxes,
-    onFeatureFlag: 0,
     tooltip: "The following text will appear below the Tax Liability table in your export",
 };

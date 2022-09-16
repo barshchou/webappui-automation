@@ -3,14 +3,12 @@ import testData from
     "../../../../../fixtures/not_full_reports/income/commercial/cap_rate_conclusion/QA-6262.fixture";
 import { Income, DataCollections, Property } from "../../../../../actions";
 import { createReport } from "../../../../../actions/base/baseTest.actions";
-import launchDarklyApi from '../../../../../api/launchDarkly.api';
 
 // ToDo: Test fails due to problem with rounding: https://bowery.atlassian.net/browse/QA-6954
 describe("As Is Market Value is calculated with correct formula in Cap Rate Conclusion Summary Table", 
     { tags:[ "@income", "@commercial", "@cap_rate_conclusion", "@feature_flag" ] }, () => {
         beforeEach("Login, create report", () => {
             cy.stepInfo(`1. Set feature flag and create report`);
-            launchDarklyApi.setFeatureFlagForUser(testData.enableFlexibleGbaAnalysis, testData.onFeatureFlag);
             createReport(testData.reportCreationData);
 
             cy.stepInfo(`2. Set square foot analysis and value for it; 
@@ -123,9 +121,5 @@ describe("As Is Market Value is calculated with correct formula in Cap Rate Conc
             cy.stepInfo(`16. Make sure As Is Market Value (Final Value) =  As Is Market Value (Amount) 
             rounded according to “Round to nearest” value`);
             Income._CapRateConclusion.verifyFinalValueCalculated(testData.valueConclusionAsIs);
-        });
-
-        after(`Remove feature flag`, () => {
-            launchDarklyApi.removeUserTarget(testData.enableFlexibleGbaAnalysis);
         });
     });
