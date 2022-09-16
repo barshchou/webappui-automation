@@ -4,7 +4,7 @@ import { createReport } from "../../../../actions/base/baseTest.actions";
 import { ReviewExport, Sales } from "../../../../actions";
 
 describe("Generated Commentary is the same both in the Webapp and downloaded doc file", 
-    { tags: [ "@sales", "@value_conclusion", "@fix" ] }, () => {
+    { tags: [ "@sales", "@value_conclusion" ] }, () => {
         it("[QA-4329]", () => {
             cy.stepInfo(`1. Create report`);
             createReport(testData.reportCreationData);

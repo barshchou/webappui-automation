@@ -6,7 +6,7 @@ import { createReport } from "../../../../../actions/base/baseTest.actions";
 import { DataCollections, Income, ReviewExport } from "../../../../../actions";
 
 describe("Verify the Developer's Forecast checkbox on the In-Place Rent Roll page", 
-    { tags:[ "@income", "@residential", "@in_place_rent_roll", "@check_export", "@fix" ] }, () => {
+    { tags:[ "@income", "@residential", "@in_place_rent_roll", "@check_export" ] }, () => {
 
         for (let i = 0; i < 2; i++) {
             it(`Test №${i + 1} Check the Summarize current rent roll checkbox`, () => {

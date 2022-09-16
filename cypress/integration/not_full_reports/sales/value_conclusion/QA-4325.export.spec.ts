@@ -4,7 +4,7 @@ import { createReport } from "../../../../actions/base/baseTest.actions";
 import { ReviewExport, Sales } from "../../../../actions";
 
 describe("Sales Value Conclusion Discussion -> Generated Commentary is editable", 
-    { tags: [ "@sales", "@value_conclusion", "@fix" ] }, () => {
+    { tags: [ "@sales", "@value_conclusion" ] }, () => {
         it("[QA-4325]", () => {
             cy.stepInfo(`1. Create report`);
             createReport(testData.reportCreationData);

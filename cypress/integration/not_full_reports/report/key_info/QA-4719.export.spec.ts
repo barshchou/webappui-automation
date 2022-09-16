@@ -6,7 +6,7 @@ import testData from '../../../../fixtures/not_full_reports/report/key_info/QA-4
 
 describe(`Verify the "Linked" chips dropdown in the new narrative component 
         for As Is and As Stabilized report for Property Rights Appraised and Definition of Market Value sections`,
-{ tags:[ "@report", "@key_info", "@check_export", "@fix" ] }, () => {
+{ tags:[ "@report", "@key_info", "@check_export" ] }, () => {
     it("[QA-4719]", () => {
         cy.stepInfo("Login, create report");
         createReport(testData.reportCreationData);

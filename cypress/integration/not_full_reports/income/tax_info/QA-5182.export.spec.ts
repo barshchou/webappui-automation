@@ -5,7 +5,7 @@ import { ReviewExport, Income } from '../../../../actions';
 import launchDarklyApi from "../../../../api/launchDarkly.api";
 
 describe("Export column order both assessment psf and assessment per unit", 
-    { tags: [ "@check_export", "@income", "@tax_info", "@feature_flag", "@fix" ] }, () => {
+    { tags: [ "@check_export", "@income", "@tax_info", "@feature_flag" ] }, () => {
         it("[QA-5182]", () => {
             cy.stepInfo("1. Set feature flag and create report");
             launchDarklyApi.setFeatureFlagForUser(testData.featureFlagKey, testData.onFeatureFlag);

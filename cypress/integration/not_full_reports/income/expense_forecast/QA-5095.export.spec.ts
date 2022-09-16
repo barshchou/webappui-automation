@@ -6,7 +6,7 @@ import { createReport } from "../../../../actions/base/baseTest.actions";
 import { numberWithCommas } from "../../../../../utils/numbers.utils";
 
 describe(`[QA-5095] Selected expenses forecast is exported to Estimated Operating Expense section`,
-    { tags:[ "@income", "@expense_forecast", "@check_export", "@fix" ] }, () => {
+    { tags:[ "@income", "@expense_forecast", "@check_export" ] }, () => {
 
         it("Verify for each existing expense forecast and for Per SF as unit of measure", () => {
             createReport(reportCreationFixture("Per SF"));
