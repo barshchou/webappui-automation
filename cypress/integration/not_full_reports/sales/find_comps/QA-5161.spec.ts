@@ -3,10 +3,9 @@ import { _NavigationSection } from '../../../../actions/base';
 import testData from "../../../../fixtures/not_full_reports/sales/find_comps/QA-5161.fixture";
 import { createReport } from "../../../../actions/base/baseTest.actions";
 import { conditionalDescribe } from "../../../checkIsProd.utils";
-/*
- * import mapKeysUtils from "../../../../utils/mapKeys.utils";
- * import Homepage from "../../../../actions/base/homepage.actions";
- */
+import mapKeysUtils from "../../../../utils/mapKeys.utils";
+import Homepage from "../../../../actions/base/homepage.actions";
+ 
 
 conditionalDescribe(`[QA-5157] [QA-5161] [Sales > Find Comps] "Date Sold" sorting is selected by default 
                      for sales comps + sorting is applied correctly`,
@@ -18,12 +17,13 @@ conditionalDescribe(`[QA-5157] [QA-5161] [Sales > Find Comps] "Date Sold" sortin
     });
 
     it("[QA-5161] [Sales > Find Comps] 'Date Sold' sorting is applied correctly to selected comps", () => {
+        
         cy.stepInfo(`1.Verify that when "Date Sold" option in Sort dropdown is selected 
-                    comps are sorted in the next order:
-                    - In-Contract at the top
-                    - Listing
-                    - date sold from most to least recent 
-                    (comps added via address search)`);
+                      comps are sorted in the next order:
+                      - In-Contract at the top
+                      - Listing
+                      - date sold from most to least recent 
+                      (comps added via address search)`);
         Sales._FindComps.AddressSearch.openAddressSearchTab()
             .addCompByParameter(1, testData.compProperty, testData.compStatusDate)
             .addCompByParameter(4, testData.compProperty, testData.compStatusDate)
@@ -51,26 +51,20 @@ conditionalDescribe(`[QA-5157] [QA-5161] [Sales > Find Comps] "Date Sold" sortin
                     - Listing
                     - date sold from most to least recent 
                     (import from another report)`);
-        /*
-         * Sales._FindComps.clickSaveContinueButton();
-         * Sales._CreateCompMap.verifyPageOpened();
-         * cy._mapGet(mapKeysUtils.reportId).then(reportId => {
-         *     cy.log(`Current report ID is ${reportId}`);
-         *     Sales._CreateCompMap.returnToHomePage();
-         *     Homepage.verifyThatPageIsOpened()
-         *         .verifyProgressBarNotExist();
-         *     Homepage.createReport(testData.reportCreationData);
-         *     _NavigationSection.navigateToFindComps(true);
-         * Sales._FindComps.addNewCompViaReportId(<any>reportId)
-         */
-        
-        // TODO this is hardcode! uncomment line above and delete these below after comp-plex import fixes!
-
-        cy.reload();
-        Sales._FindComps.openJobSearchTab()
-            .JobSearch.addNewCompViaReportId('61892ce7044194001c6349c9');
-        Sales._FindComps.openCompSearchTab()
-            .checkSalesCompSortedByDateSold();
+        Sales._FindComps.clickSaveContinueButton();
+        Sales._CreateCompMap.verifyPageOpened();
+        cy._mapGet(mapKeysUtils.reportId).then(reportId => {
+            cy.log(`Current report ID is ${reportId}`);
+            Sales._CreateCompMap.returnToHomePage();
+            Homepage.verifyThatPageIsOpened()
+                .verifyProgressBarNotExist();
+            Homepage.createReport(testData.reportCreationData);
+            _NavigationSection.navigateToFindComps(true);
+            Sales._FindComps.openJobSearchTab()
+            // eslint-disable-next-line @typescript-eslint/no-explicit-any
+                .JobSearch.addNewCompViaReportId(<any>reportId);
+        });
+        Sales._FindComps.checkSalesCompSortedByDateSold();
 
         cy.stepInfo(`4.Verify that when "Date Sold" option in Sort dropdown 
                     is selected comps are sorted in the next order:

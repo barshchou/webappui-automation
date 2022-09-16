@@ -93,10 +93,14 @@ class FindCompsPage extends BasePage {
             .contains("SEARCH");
     }
 
-    get selectCompsButton() {
-        return cy.get("button").contains("Select Comps");
+    get selectCompsForReportButton() {
+        return cy.contains("button", "SELECT COMPS");
     }
 
+    get selectCompsButton() {
+        return cy.get('[data-qa="select-comps-btn"]');
+    }
+    
     get selectAllButton() {
         return this.importCompModal
             .contains("SELECT ALL");

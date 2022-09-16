@@ -16,29 +16,6 @@ const compStatusContract = Enums.COMP_PROPERTIES_PATHS_DB.saleStatusValuesInDB.i
 const compStatusDate = Enums.COMP_PROPERTIES_PATHS_DB.saleStatusValuesInDB.date;
 const compStatusListing = Enums.COMP_PROPERTIES_PATHS_DB.saleStatusValuesInDB.listing;
 
-const arrayOfCompsForAdditionFromMap1 = [
-    {
-        address: "116 Cooper Street"
-    },
-    {
-        address: "1715 Lexington Avenue"
-    },
-    {
-        address: "1074 Fulton Street"
-    },
-    {
-        address: "31-83 34 Street"
-    },
-];
-const arrayOfCompsForAdditionFromMap2 = [
-    {
-        address: "168 North 10 Street"
-    },
-    {
-        address: "151 Freeman Street"
-    }
-];
-
 const comparableFixtureManual = {
     address1: "388 Greenwich Street, New York, NY, USA",
     address2: "388 Broome Street, New York, NY, USA",
@@ -91,8 +68,6 @@ const arrayOfCompsForManualAddition = [
 ];
 
 export default {
-    arrayOfCompsForAdditionFromMap1,
-    arrayOfCompsForAdditionFromMap2,
     comparableFixtureManual,
     reportCreationData,
     sortSalesCompsDateSold,
