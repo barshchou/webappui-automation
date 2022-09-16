@@ -69,8 +69,9 @@ class ExpenseForecastPage extends BasePage {
 
     getForecastItemCompMax(item: string) { return cy.get(`[data-qa=${item}-forecast-item] [data-qa=comp-max]`); }
 
-    getForecastItemBasisMoneyValue(item: string, custom = false) {
-        return this.forecastItemCardFull(item, custom).find('[data-qa=basis]');
+    getForecastItemBasisMoneyValue(item: string, custom = false, perRoom = false) {
+        let index = !perRoom ? 0 : 1;
+        return this.forecastItemCardFull(item, custom).find('[data-qa=basis]').eq(index);
     }
 
     getForecastItemSlidingBarTitle(item: string, custom = false) {
