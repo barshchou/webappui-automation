@@ -3,7 +3,6 @@ import { findCompsPage } from "../../../../pages/sales/findComps.page";
 import { Alias } from '../../../../utils/alias.utils';
 import ComplexDatabaseModule from "../../../../../cypress/db/index";
 import { CompPlex } from "../../../../types/compplex.type";
-import findCompsActions from "../findComps.actions";
 
 class AddressSearchActions {
     Page: typeof findCompsPage;
