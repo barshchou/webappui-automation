@@ -1,4 +1,3 @@
-import Enums from "../../../../enums/enums";
 import ReportDataCreator from "../../../data_creator/reportData.creator";
 
 const _comment = "In July 2021, the City Council set the fiscal year 2021/22 (7/1/2021 – 6/30/2022)" +
