@@ -46,6 +46,12 @@ class AppraiserPage extends BasePage {
     get modalExternalInspectorRadio() { return cy.get("[data-qa='externalInspectorRadio'] input"); }
 
     get appraisersList() { return cy.get("[role='listbox']").children(); }
+
+    stateCertificationByAppraiserName(name: string) {
+        return cy.xpath(`//*[contains(text(), '${name}')]/following::*[@data-qa='certification']`);
+    }
+
+ 
 }
 
 export default new AppraiserPage();
