@@ -16,12 +16,23 @@ const reportCreationFixture = (): BoweryAutomation.ReportCreationData => {
     };
 };
 
+const dataFixture = [
+    {
+        specName: "[QA-6349]",
+        state: Enums.ORGANIZATION_STATE.newYork,
+        appraiserName: "Sherif Elshoubri"
+    },
+    {
+        specName: "[QA-6350]",
+        state: "None",
+        appraiserName: "Jonathan Nathanson"
+    }
+];
+
 export default {
-    reportCreationData: ReportDataCreator.getReportData("6349"),
+    reportCreationData: ReportDataCreator.getReportData("6349-50"),
     otherReport: reportCreationFixture(),
     appraiserName: "Sherif Elshoubri",
-    states: {
-        newYork: Enums.ORGANIZATION_STATE.newYork,
-        pennsylvania: Enums.ORGANIZATION_STATE.pennsylvania
-    }
+    pennsylvania: Enums.ORGANIZATION_STATE.pennsylvania,
+    dataFixture
 };
