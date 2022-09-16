@@ -1,5 +1,5 @@
 import testData from "../../../../fixtures/not_full_reports/property/commercial_units/QA-4562.fixture";
-import { Property } from "../../../../actions";
+import { DataCollections, Property } from "../../../../actions";
 import { createReport } from "../../../../actions/base/baseTest.actions";
 import { _NavigationSection } from "../../../../actions/base";
 
@@ -8,8 +8,8 @@ describe("Verify the functionality of the Floor checkbox",
 
         beforeEach("Preconditions: The mixed report is created and several commercial units are added", () => {
             createReport(testData.reportCreationData);
-            _NavigationSection.navigateToPropertySummary();
-            Property._Summary.enterNumberOfCommercialUnits(testData.numberOfCommercialUnits);
+            _NavigationSection.navigateToSubjectPropertyData();
+            DataCollections._SubjectPropertyData.enterNumberOfCommercialUnits(testData.numberOfCommercialUnits);
         });
 
         it("Test body", () => {

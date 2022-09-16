@@ -2,7 +2,7 @@ import testData from
     "../../../../../fixtures/not_full_reports/income/residential/in_place_rent_roll/QA-4245_88.fixture";
 import { createReport } from "../../../../../actions/base/baseTest.actions";
 import { _NavigationSection } from "../../../../../actions/base";
-import { Property, Income } from "../../../../../actions";
+import { DataCollections, Income } from "../../../../../actions";
 
 describe("Verify the Monthly Total row in the grid", 
     { tags:[ "@income", "@residential", "@in_place_rent_roll" ] }, () => {
@@ -13,8 +13,8 @@ describe("Verify the Monthly Total row in the grid",
 
         it("[QA-4245]", () => {
             cy.stepInfo(`1. Navigate to Property -> Summary and enter number of residential units`);
-            _NavigationSection.navigateToPropertySummary();
-            Property._Summary.enterNumberOfResUnits(testData.numberOfUnits);
+            _NavigationSection.navigateToSubjectPropertyData();
+            DataCollections._SubjectPropertyData.enterNumberOfResUnits(testData.numberOfUnits);
 
             cy.stepInfo(`2. Navigate to Income -> Residential -> In-Place Rent Roll and make sure 
             that the Monthly Total row is displayed in the grid (not editable, default = 0.00$).`);

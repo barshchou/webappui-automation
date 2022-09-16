@@ -1,10 +1,7 @@
 import testData from "../../../../fixtures/not_full_reports/sales/value_conclusion/QA-4301.fixture";
 import { createReport } from "../../../../actions/base/baseTest.actions";
-import NavigationSection from "../../../../actions/base/navigationSection.actions";
-import Property from "../../../../actions/property/property.manager";
-import Income from "../../../../actions/income/income.manager";
-import Sales from "../../../../actions/sales/sales.manager";
-
+import { _NavigationSection } from "../../../../actions/base";
+import { DataCollections, Income, Property, Sales } from "../../../../actions";
 describe("Prospective Market Value As Stabilized -> Less Laundry Rent Loss data is pulled from Cap Rate Conclusion",
     { tags:[ "@sales", "@value_conclusion" ] }, () => {
         
@@ -13,26 +10,26 @@ describe("Prospective Market Value As Stabilized -> Less Laundry Rent Loss data 
         });
 
         it("Test body", () => {
-            NavigationSection.navigateToPropertySummary();
-            Property.Summary.enterNumberOfResUnits(testData.numberOfUnits);
-            NavigationSection.navigateToPropertyAmenities();
-            Property.Amenities.checkLaundryRoomCheckbox();
-            NavigationSection.navigateToResInPlaceRentRoll();
-            Income.Residential.InPlaceRentRoll.enterBedroomsNumberByRowNumber(testData.bedrooms)
+            _NavigationSection.navigateToSubjectPropertyData();
+            DataCollections._SubjectPropertyData.enterNumberOfResUnits(testData.numberOfUnits);
+            _NavigationSection.navigateToPropertyAmenities();
+            Property._Amenities.checkLaundryRoomCheckbox();
+            _NavigationSection.navigateToResInPlaceRentRoll();
+            Income._Residential.InPlaceRentRoll.enterBedroomsNumberByRowNumber(testData.bedrooms)
                 .enterRentTypeCellByRowNumber(testData.rentType)
                 .enterLeaseStatusByRowNumber(testData.leaseStatus);
-            NavigationSection.navigateToLaundry();
-            Income.Miscellaneous.Laundry.enterLaundryIncome(testData.laundryIncome)
+            _NavigationSection.navigateToLaundry();
+            Income._MiscellaneousManager.Laundry.enterLaundryIncome(testData.laundryIncome)
                 .enterLaundryVCLossPercentage(testData.vcLossPercentage, testData.vcLossValue);
-            NavigationSection.navigateToCapRateConclusion();
-            Income.CapRateConclusion.enterConclusionSectionConcludedCapRate(testData.concludedCapRate)
+            _NavigationSection.navigateToCapRateConclusion();
+            Income._CapRateConclusion.enterConclusionSectionConcludedCapRate(testData.concludedCapRate)
                 .enterMiscellaneousLossMonths(testData.lossMonths, testData.valueConclusionKeyAsStabilized, 
                     testData.rentLossTypeLaundry)
                 .enterMiscellaneousLossMonths(testData.lossMonths, testData.valueConclusionKeyAsComplete, 
                     testData.rentLossTypeLaundry);
-            NavigationSection.navigateToSalesValueConclusion()
+            _NavigationSection.navigateToSalesValueConclusion()
                 .verifyProgressBarNotExist();
-            Sales.ValueConclusion.verifyMiscellaneousLossMonths(testData.lossMonths, 
+            Sales._ValueConclusion.verifyMiscellaneousLossMonths(testData.lossMonths,
                 testData.valueConclusionKeyAsStabilized, testData.rentLossTypeLaundry)
                 .verifyMiscellaneousLossMonths(testData.lossMonths, 
                     testData.valueConclusionKeyAsComplete, testData.rentLossTypeLaundry)

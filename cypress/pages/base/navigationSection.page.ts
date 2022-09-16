@@ -1,4 +1,5 @@
 import BasePage from "./base.page";
+import { BoweryReports } from "../../types/boweryReports.type";
 
 class NavigationSection extends BasePage {
     get reportInfoButton() { return cy.get('#report-information'); }
@@ -142,6 +143,14 @@ class NavigationSection extends BasePage {
     get helpAndResourcesButton() { return cy.get(`[aria-label="Help & Resources"]`); }
 
     get finalValuesReconciliationButton() { return cy.get(`#final-values-and-reconciliation`); }
+
+    get dataCollectionsIcon() { return cy.get("#data-collections svg"); }
+
+    get subjectPropertyDataDropdown() { return cy.get("#subjectProperty"); }
+
+    getSubjectPropertyDataSectionAnchor(section: BoweryReports.SubjectPropertyDataSections) {
+        return cy.get(`#subject-property[href$='${section}']`);
+    }
 }
 
 export default new NavigationSection();

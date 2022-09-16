@@ -17,9 +17,13 @@ describe(`[Sales > Find Comps] Check the comps order when "custom" dropdown is c
                 .Page.sortSalesCompsSelectValue.should('contain', testData.sortSalesCompsCustom);
         
             cy.stepInfo(`2. User selects n-first comps from map`);
-            testData.compsToAdd.forEach(() => {
-                Sales._FindComps.Actions.selectCompFromMap();
-            });
+            for (let i = 1; i < 3; i++) {
+                Sales._FindComps.AddressSearch.openAddressSearchTab()
+                    .addCompByParameter(i, testData.compProperty, testData.compStatusDate);
+            }
+
+            Sales._FindComps.verifyComparablesNumber(testData.compsToAdd)
+                .saveAddedCompsAddressesToMap();
 
             cy.stepInfo(`3. When a comp gets added, it gets automatically added to the bottom`);
             Sales._FindComps.checkSalesCompAddedToList();

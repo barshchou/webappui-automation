@@ -1,5 +1,5 @@
 import { createReport } from "../../../../../actions/base/baseTest.actions";
-import { Property, Income } from "../../../../../actions";
+import { Property, Income, DataCollections } from "../../../../../actions";
 import { _NavigationSection } from "../../../../../actions/base";
 import testData from 
     "../../../../../fixtures/not_full_reports/income/commercial/reimbursement_summary/QA-5989-90.fixture";
@@ -15,8 +15,8 @@ Verify Gross and Annual values for added Utilities reimbursements`,
         cy.stepInfo(`2. Select any option as basis for Square Foot Analysis and fill in Square 
                         Foot field with valid numeric value
                         3. Make sure at least one commercial unit is added on Property > Summary`);
-        _NavigationSection.navigateToPropertySummary();
-        Property._Summary.enterGrossBuildingArea(testData.grossBuildingArea)
+        _NavigationSection.navigateToSubjectPropertyData();
+        DataCollections._SubjectPropertyData.enterGrossBuildingArea(testData.grossBuildingArea)
             .enterNumberOfCommercialUnits(testData.numberOfCommercialUnits);
 
         cy.stepInfo(`4. Go to Property>Commercial Units page and fill in all Commercial 

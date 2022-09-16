@@ -1,10 +1,8 @@
 import testData from "../../../../../fixtures/not_full_reports/income/commercial/stabilized_rent_roll/QA-4015.fixture";
 import { createReport } from "../../../../../actions/base/baseTest.actions";
-import NavigationSection from "../../../../../actions/base/navigationSection.actions";
-import Property from "../../../../../actions/property/property.manager";
-import Income from "../../../../../actions/income/income.manager";
-import ReviewExport from "../../../../../actions/reviewExport/reviewExport.actions";
+import { _NavigationSection } from "../../../../../actions/base";
 import { isEndsWithDecimal } from "../../../../../utils/html.utils";
+import { DataCollections, Income, Property, ReviewExport } from "../../../../../actions";
 
 describe("Verify the Commercial Stabilized Rent Roll table",
     { tags: [ "@income", "@commercial", "@stabilized_rent_roll", "@check_export" ] }, () => {
@@ -15,30 +13,30 @@ describe("Verify the Commercial Stabilized Rent Roll table",
             cy.stepInfo(`
         1. Proceed to the Income Approach > Commercial Stabilized Rent Roll and fill all fields on the WebApp.
         `);
-            NavigationSection.navigateToPropertySummary();
-            Property.Summary.enterNumberOfCommercialUnits(testData.numberOfCommercialUnits);
-            NavigationSection.navigateToCommercialUnits();
-            Property.CommercialUnits.enterListUnitSF(testData.listOfUnitsSF, testData.numberOfCommercialUnits);
+            _NavigationSection.navigateToSubjectPropertyData();
+            DataCollections._SubjectPropertyData.enterNumberOfCommercialUnits(testData.numberOfCommercialUnits);
+            _NavigationSection.navigateToCommercialUnits();
+            Property._CommercialUnits.enterListUnitSF(testData.listOfUnitsSF, testData.numberOfCommercialUnits);
             for (let i = 0; i < testData.numberOfCommercialUnits; i++) {
-                Property.CommercialUnits.clickCommercialUnitTabByIndex(i)
+                Property._CommercialUnits.clickCommercialUnitTabByIndex(i)
                     .clickRadioButtonByValueAndUnitIndex(testData.groupName, testData.useRadios[i], i);
             }    
-            NavigationSection.navigateToCommercialInPlaceRentRoll();
-            Income.Commercial.InPlaceRentRoll
+            _NavigationSection.navigateToCommercialInPlaceRentRoll();
+            Income._CommercialManager.InPlaceRentRoll
                 .chooseListLeaseStatuses(testData.leaseStatuses, testData.numberOfCommercialUnits)
                 .enterTenantNames(testData.tenantNames, testData.leaseStatuses)
                 .verifyTenantNames(testData.tenantNames, testData.leaseStatuses);
             testData.rentsPsf.forEach((rent, index) => {
                 if (testData.leaseStatuses[index] !== "Vacant") {
-                    Income.Commercial.InPlaceRentRoll.enterRentPerSFAnnuallyByRowNumber(rent, index);
+                    Income._CommercialManager.InPlaceRentRoll.enterRentPerSFAnnuallyByRowNumber(rent, index);
                 }
             });
-            NavigationSection.navigateToCommercialStabilizedRentRoll()
+            _NavigationSection.navigateToCommercialStabilizedRentRoll()
                 .verifyProgressBarNotExist();
-            Income.Commercial.StabilizedRentRoll.clickSaveButton()
+            Income._CommercialManager.StabilizedRentRoll.clickSaveButton()
                 .verifyProgressBarNotExist();
 
-            NavigationSection.openReviewAndExport();
+            _NavigationSection.openReviewAndExport();
             ReviewExport.generateDocxReport().waitForReportGenerated()
                 .downloadAndConvertDocxReport(testData.reportCreationData.reportNumber);
         });

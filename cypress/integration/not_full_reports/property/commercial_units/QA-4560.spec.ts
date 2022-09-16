@@ -1,5 +1,5 @@
 import testData from "../../../../fixtures/not_full_reports/property/commercial_units/QA-4560.fixture";
-import { Base, Property } from "../../../../actions";
+import { DataCollections, Property } from "../../../../actions";
 import { createReport } from "../../../../actions/base/baseTest.actions";
 import { _NavigationSection } from "../../../../actions/base";
 
@@ -10,8 +10,8 @@ describe("Verify the functionality of the Location radio button",
 
             cy.stepInfo(`1. Report creation and several commercial units addition`);
             createReport(testData.reportCreationData);
-            Base._NavigationSection.navigateToPropertySummary();
-            Property._Summary.enterNumberOfCommercialUnits(testData.numberOfCommercialUnits);
+            _NavigationSection.navigateToSubjectPropertyData();
+            DataCollections._SubjectPropertyData.enterNumberOfCommercialUnits(testData.numberOfCommercialUnits);
         });
 
         it("Test body", () => {
@@ -29,8 +29,8 @@ describe("Verify the functionality of the Location radio button",
             cy.stepInfo(`4. Verify that each radio button can be selected and saved 
             and verify text field appears with other value`);
             testData.locationValues.forEach(value => {
-                Property._CommercialUnits.clickRadioButtonByValueAndUnitIndex(testData.groupName, value);
-                Property._CommercialUnits.clickSaveButton()
+                Property._CommercialUnits.clickRadioButtonByValueAndUnitIndex(testData.groupName, value)
+                    .clickSaveButton()
                     .verifyProgressBarNotExist();
                 cy.reload();
                 Property._CommercialUnits.verifyRadioIsChecked(testData.groupName, value);

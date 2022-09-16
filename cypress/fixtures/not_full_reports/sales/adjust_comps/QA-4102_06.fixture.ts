@@ -13,8 +13,14 @@ const _compAdjustments = {
     marketConditions: -30,
 };
 
-const _cumulativePricePerUnit = "$237,997";
+const _cumulativePricePerUnit = "$283,122";
 const _compAddress = "626 1 Avenue";
+
+const compProperty = Enums.COMP_PROPERTIES_PATHS_DB.compPropertyPathsInDB.saleStatus;
+const compStatusContract = Enums.COMP_PROPERTIES_PATHS_DB.saleStatusValuesInDB.inContract;
+const compStatusDate = Enums.COMP_PROPERTIES_PATHS_DB.saleStatusValuesInDB.date;
+const compStatusListing = Enums.COMP_PROPERTIES_PATHS_DB.saleStatusValuesInDB.listing;
+
 
 export default {
     reportCreationData: _reportCreationData,
@@ -26,5 +32,9 @@ export default {
     basis: "Price per Unit",
     cumulativePricePerUnit: _cumulativePricePerUnit,
     compAddress: _compAddress,
-    exportSectionName: Enums.EXPORT_TITLES.cumulativePricePerUnit
+    exportSectionName: Enums.EXPORT_TITLES.cumulativePricePerUnit,
+    compProperty,
+    compStatusContract,
+    compStatusDate,
+    compStatusListing
 };

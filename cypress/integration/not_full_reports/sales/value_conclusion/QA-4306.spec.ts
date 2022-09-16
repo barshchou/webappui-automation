@@ -1,9 +1,7 @@
 import testData from "../../../../fixtures/not_full_reports/sales/value_conclusion/QA-4306.fixture";
-import NavigationSection from "../../../../actions/base/navigationSection.actions";
-import Property from "../../../../actions/property/property.manager";
-import Income from "../../../../actions/income/income.manager";
-import Sales from "../../../../actions/sales/sales.manager";
 import { createReport } from "../../../../actions/base/baseTest.actions";
+import { _NavigationSection } from "../../../../actions/base";
+import { DataCollections, Income, Sales } from "../../../../actions";
 
 describe(`Prospective Market Value As Stabilized -> Less Entrepreneurial Profit 
                 data is pulled from Cap Rate Conclusion`, 
@@ -13,22 +11,22 @@ describe(`Prospective Market Value As Stabilized -> Less Entrepreneurial Profit
     });
 
     it("Test body", () => {
-        NavigationSection.navigateToPropertySummary();
-        Property.Summary.enterNumberOfResUnits(testData.generalData.numberOfUnits);
-        NavigationSection.navigateToResInPlaceRentRoll();
-        Income.Residential.InPlaceRentRoll.enterBedroomsNumberByRowNumber(testData.rentRollData.bedrooms)
+        _NavigationSection.navigateToSubjectPropertyData();
+        DataCollections._SubjectPropertyData.enterNumberOfResUnits(testData.generalData.numberOfUnits);
+        _NavigationSection.navigateToResInPlaceRentRoll();
+        Income._Residential.InPlaceRentRoll.enterBedroomsNumberByRowNumber(testData.rentRollData.bedrooms)
             .enterRentTypeCellByRowNumber(testData.rentRollData.rentType)
             .enterLeaseStatusByRowNumber(testData.rentRollData.leaseStatus)
             .enterMonthlyRentByRowNumber(testData.rentRollData.monthlyRent);
-        NavigationSection.navigateToCapRateConclusion();
-        Income.CapRateConclusion.enterConclusionSectionConcludedCapRate(testData.generalData.appraiserConclusion)
+        _NavigationSection.navigateToCapRateConclusion();
+        Income._CapRateConclusion.enterConclusionSectionConcludedCapRate(testData.generalData.appraiserConclusion)
             .enterLessEntrepreneurialProfit(testData.generalData.lessEntrepreneurialProfit, 
                 testData.valueConclusionKeyAsComplete)
             .enterAsCompleteLessBuyoutCost(testData.generalData.lessBuyoutCost)
             .verifyPopUpWithTitleExists(testData.generalData.lessEntrepreneurialProfitPopUp);
-        NavigationSection.navigateToSalesValueConclusion()
+        _NavigationSection.navigateToSalesValueConclusion()
             .verifyProgressBarNotExist();
-        Sales.ValueConclusion.verifyAsCompleteLessEntrepreneurialProfit(testData.generalData.lessEntrepreneurialProfit)
+        Sales._ValueConclusion.verifyAsCompleteLessEntrepreneurialProfit(testData.generalData.lessEntrepreneurialProfit)
             .verifyPopUpWithTitleExists(testData.generalData.lessEntrepreneurialProfitPopUp);
     });
 });

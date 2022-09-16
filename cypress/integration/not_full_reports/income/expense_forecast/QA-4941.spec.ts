@@ -1,9 +1,8 @@
 import testData from "../../../../fixtures/not_full_reports/income/expense_forecast/QA-4941.fixture";
 import { createReport } from "../../../../actions/base/baseTest.actions";
-import NavigationSection from "../../../../actions/base/navigationSection.actions";
-import Property from "../../../../actions/property/property.manager";
-import Income from "../../../../actions/income/income.manager";
 import tableExpenseHistoryCellNames from "../../../../../cypress/enums/expense/expenseHistoryTableRows.enum";
+import { _NavigationSection } from "../../../../actions/base";
+import { DataCollections, Income } from "../../../../actions";
 
 describe("Historical expense Fuel Per SF is correctly calculated and displayed",
     { tags: [ "@snapshot_tests", "@income", "@expense_forecast" ] }, () => {
@@ -14,14 +13,14 @@ describe("Historical expense Fuel Per SF is correctly calculated and displayed",
 
         it("Test body", () => {
             cy.stepInfo(`1. Navigate to Property -> Summary and enter gross building area`);
-            NavigationSection.navigateToPropertySummary();
-            Property.Summary.enterGrossBuildingArea(testData.buildingDescription.grossArea)
+            _NavigationSection.navigateToSubjectPropertyData();
+            DataCollections._SubjectPropertyData.enterGrossBuildingArea(testData.buildingDescription.grossArea)
                 .enterNumberOfResUnits(testData.buildingDescription.numberOfUnits);
 
             cy.stepInfo(`2. Add columns for all types of Expense Period: 
             Actual, Actual T12, Annualized Historical and Projection`);
-            NavigationSection.navigateToExpenseHistory();
-            Income.ExpenseHistory.selectExpensePeriod(testData.actual.periodValue)
+            _NavigationSection.navigateToExpenseHistory();
+            Income._ExpenseHistory.selectExpensePeriod(testData.actual.periodValue)
                 .verifyExpenseMonth(testData.actual.month, testData.actual.periodValue)
                 .enterExpenseYear(testData.actual.expenseYear)
                 .clickAddExpenseYearButton()
@@ -39,19 +38,19 @@ describe("Historical expense Fuel Per SF is correctly calculated and displayed",
                 .clickAddExpenseYearButton();
 
             cy.stepInfo(`3. Fill in Fuel field for all added columns and save changes`);
-            Income.ExpenseHistory.enterIssueByColIndex(testData.actual.fuelExpense, 
+            Income._ExpenseHistory.enterIssueByColIndex(testData.actual.fuelExpense,
                 tableExpenseHistoryCellNames.fuel, 3)
                 .enterIssueByColIndex(testData.t12.fuelExpense, tableExpenseHistoryCellNames.fuel, 2)
                 .enterIssueByColIndex(testData.historical.fuelExpense, tableExpenseHistoryCellNames.fuel, 1)
                 .enterIssueByColIndex(testData.projection.fuelExpense, tableExpenseHistoryCellNames.fuel, 0);
-            NavigationSection.navigateToExpenseForecast();
+            _NavigationSection.navigateToExpenseForecast();
 
             cy.stepInfo(`4. Go to Expense Forecast and make sure that Per SF radio button is selected for Fuel card`);
-            Income.ExpenseForecast.Actions.verifyForecastItemBasis(testData.actualFuelItem);
+            Income._ExpenseForecastActions.verifyForecastItemBasis(testData.actualFuelItem);
 
             cy.stepInfo(`5. Check historical expenses values for Fuel card. They should be calculated 
         for each expense type as: [Expense Period type]Electricity / GBA`);
-            Income.ExpenseForecast.Actions
+            Income._ExpenseForecastActions
                 .verifyForecastItemByExpensePeriodType(testData.actualFuelItem, testData.buildingDescription, "Actual")
                 .verifyForecastItemByExpensePeriodType(testData.t12FuelItem, testData.buildingDescription, "Actual T12")
                 .verifyForecastItemByExpensePeriodType(testData.historicalFuelItem, 
@@ -64,7 +63,7 @@ describe("Historical expense Fuel Per SF is correctly calculated and displayed",
 
             cy.stepInfo(`6. Check historical expenses values for Fuel card. 
             They should be correctly displayed on slide bars`);
-            Income.ExpenseForecast.Actions.matchElementSnapshot(
-                Income.ExpenseForecast.Page.fuelCard, testData.fuelCardSnapshotName, { padding: [ 10, 100 ] });
+            Income._ExpenseForecastActions.matchElementSnapshot(
+                Income._ExpenseForecastActions.Page.fuelCard, testData.fuelCardSnapshotName, { padding: [ 10, 100 ] });
         });
     });

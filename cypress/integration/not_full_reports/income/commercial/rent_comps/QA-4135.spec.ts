@@ -1,7 +1,7 @@
 import testData from "../../../../../fixtures/not_full_reports/income/commercial/rent_comps/QA-4135.fixture";
 import { createReport } from "../../../../../actions/base/baseTest.actions";
 import { _NavigationSection } from "../../../../../actions/base";
-import { Income, Property } from "../../../../../actions";
+import { DataCollections, Income } from "../../../../../actions";
 import { _IncomeRoutes } from "../../../../../enums/pages_routes";
 
 describe("Subject column calculations", { tags: [ "@income", "@commercial", "@rent_comps" ] }, () => {
@@ -9,8 +9,8 @@ describe("Subject column calculations", { tags: [ "@income", "@commercial", "@re
     before("Create report", () => {
         createReport(testData.reportCreationData);
         cy.stepInfo("Navigate to property summary, enter number of commercial units");
-        _NavigationSection.navigateToPropertySummary();
-        Property._Summary.enterNumberOfCommercialUnits(testData.unitsNumber)
+        _NavigationSection.navigateToSubjectPropertyData();
+        DataCollections._SubjectPropertyData.enterNumberOfCommercialUnits(testData.unitsNumber)
             .clickSaveButton()
             .verifyProgressBarNotExist();
         cy.saveLocalStorage();
@@ -18,7 +18,7 @@ describe("Subject column calculations", { tags: [ "@income", "@commercial", "@re
 
     beforeEach(() => {
         cy.restoreLocalStorage();
-        _NavigationSection.openPageByVisit(_IncomeRoutes._CommercialRoutes._InPlaceRentRoll);
+        _NavigationSection.openPageByUrl(_IncomeRoutes._CommercialRoutes._InPlaceRentRoll);
     });
 
     it("All units are occupied and have rent PSF filled in", () => {
