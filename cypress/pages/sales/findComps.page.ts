@@ -148,7 +148,7 @@ class FindCompsPage extends BasePage {
         return cy.get('[data-qa="loading-modal"] [data-icon="spinner"]', { timeout: 60000 });
     }
 
-    get filterSalePeriod() {   //('[data-qa="filter-sale-period"]'); ?
+    get filterSalePeriod() {
         return cy.get('[data-qa="filter-completedInPeriod"]');
     }
 
