@@ -8,7 +8,7 @@ jobs:
   Regression-run-on-staging:
     runs-on: ubuntu-latest
     timeout-minutes: 180
-    container: cypress/included:10.8.0
+    container: boweryautomation/cypress-latest-chrome-latest
     permissions:
       id-token: write
       contents: read
