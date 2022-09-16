@@ -281,7 +281,7 @@ export namespace BoweryReports {
     export type ExpenseItemBasisOfComparison = typeof
         Enums.EXPENSE_ITEM_BASIS_OF_COMPARISON[KeyInfo.ExpenseItemBasisOfComparison]
 
-    export type CoverPageLocatorNamesType = typeof Enums.COVER_PAGE_LOCATOR_NAMES[
+    export type CoverPageLocatorNames= typeof Enums.COVER_PAGE_LOCATOR_NAMES[
         KeyInfo.CoverPageLocatorNames
     ]
     
