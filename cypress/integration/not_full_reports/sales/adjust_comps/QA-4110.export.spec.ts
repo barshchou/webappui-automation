@@ -4,7 +4,7 @@ import { _NavigationSection } from "../../../../actions/base";
 import { ReviewExport, Sales } from "../../../../actions";
 
 describe("Total Utility Adjustments in Sales Adjustment Grid is calculated with correct formula", 
-    { tags:[ "@sales", "@adjust_comps", "@check_export" ] }, () => {
+    { tags:[ "@sales", "@adjust_comps", "@check_export", "@fix" ] }, () => {
 
         it("Test body", () => {
             createReport(testData.reportCreationData);
@@ -31,7 +31,7 @@ describe("Total Utility Adjustments in Sales Adjustment Grid is calculated with 
 
             cy.stepInfo(`[QA-4110] -> Generate and download this report `);
             _NavigationSection.openReviewAndExport();
-            ReviewExport.selectSectionsToIncludeInExport(testData.sectionToExport)
+            ReviewExport
                 .generateDocxReport().waitForReportGenerated()
                 .downloadAndConvertDocxReport(testData.reportCreationData.reportNumber);
         });

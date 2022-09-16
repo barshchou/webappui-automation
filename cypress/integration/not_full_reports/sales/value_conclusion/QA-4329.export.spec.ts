@@ -4,7 +4,7 @@ import { createReport } from "../../../../actions/base/baseTest.actions";
 import { ReviewExport, Sales } from "../../../../actions";
 
 describe("Generated Commentary is the same both in the Webapp and downloaded doc file", 
-    { tags: [ "@sales", "@value_conclusion" ] }, () => {
+    { tags: [ "@sales", "@value_conclusion", "@fix" ] }, () => {
         it("[QA-4329]", () => {
             cy.stepInfo(`1. Create report`);
             createReport(testData.reportCreationData);
@@ -18,7 +18,8 @@ describe("Generated Commentary is the same both in the Webapp and downloaded doc
 
             cy.stepInfo('4. Export report');
             _NavigationSection.openReviewAndExport();
-            ReviewExport.generateDocxReport().waitForReportGenerated()
+            ReviewExport.selectSectionsToIncludeInExport(testData.sectionToExport)
+                .generateDocxReport().waitForReportGenerated()
                 .downloadAndConvertDocxReport(testData.reportCreationData.reportNumber);
         });
 

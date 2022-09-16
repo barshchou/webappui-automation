@@ -7,7 +7,7 @@ import { ReviewExport, Sales } from "../../../../actions";
 
 // TODO: Remove conditional describe (due to sales comp update) when find comp approach change 
 conditionalDescribe("Sales Value Conclusion Discussion Generated Commentary has dynamic prices", 
-    { tags: [ "@sales", "@value_conclusion" ] }, () => {
+    { tags: [ "@sales", "@value_conclusion", "@fix" ] }, () => {
         it("[QA-4324]", () => {
             cy.stepInfo(`1. Create new report or open the report which is already created`);
             createReport(testData.reportCreationData);
@@ -38,7 +38,8 @@ conditionalDescribe("Sales Value Conclusion Discussion Generated Commentary has 
 
             cy.stepInfo('5. Export report');
             _NavigationSection.openReviewAndExport();
-            ReviewExport.generateDocxReport().waitForReportGenerated()
+            ReviewExport.selectSectionsToIncludeInExport(testData.sectionToExport)
+                .generateDocxReport().waitForReportGenerated()
                 .downloadAndConvertDocxReport(testData.reportCreationData.reportNumber);
         });
 

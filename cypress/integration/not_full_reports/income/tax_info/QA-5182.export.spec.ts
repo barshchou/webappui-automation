@@ -5,7 +5,7 @@ import { ReviewExport, Income } from '../../../../actions';
 import launchDarklyApi from "../../../../api/launchDarkly.api";
 
 describe("Export column order both assessment psf and assessment per unit", 
-    { tags: [ "@check_export", "@income", "@tax_info", "@feature_flag" ] }, () => {
+    { tags: [ "@check_export", "@income", "@tax_info", "@feature_flag", "@fix" ] }, () => {
         it("[QA-5182]", () => {
             cy.stepInfo("1. Set feature flag and create report");
             launchDarklyApi.setFeatureFlagForUser(testData.featureFlagKey, testData.onFeatureFlag);
@@ -20,7 +20,7 @@ describe("Export column order both assessment psf and assessment per unit",
 
             cy.stepInfo("4. Export the report");
             _NavigationSection.Actions.openReviewAndExport();
-            ReviewExport.selectSectionsToIncludeInExport(testData.sectionToExport)
+            ReviewExport
                 .generateDocxReport().waitForReportGenerated()
                 .downloadAndConvertDocxReport(testData.reportCreationData.reportNumber);
         });

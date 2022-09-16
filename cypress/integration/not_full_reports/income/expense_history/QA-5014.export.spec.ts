@@ -7,7 +7,7 @@ import Enums from "../../../../enums/enums";
 import { numberWithCommas } from "../../../../../utils/numbers.utils";
 
 describe("Verify the 'Add expense category' button is displayed on the Expense History page",
-    { tags: [ "@income", "@expense_history", "@check_export" ] }, () => {
+    { tags: [ "@income", "@expense_history", "@check_export", "@fix" ] }, () => {
 
         it("[QA-5014] Test body", () => {
             const newCategoryLocator = toCamelCase(testData.expenseCategory);
@@ -67,7 +67,7 @@ describe("Verify the 'Add expense category' button is displayed on the Expense H
 
             cy.stepInfo("9. Generate and download report");
             _NavigationSection.openReviewAndExport();
-            ReviewExport.selectSectionsToIncludeInExport(testData.sectionToExport)
+            ReviewExport
                 .generateDocxReport()
                 .waitForReportGenerated()
                 .downloadAndConvertDocxReport(testData.reportCreationData.reportNumber);

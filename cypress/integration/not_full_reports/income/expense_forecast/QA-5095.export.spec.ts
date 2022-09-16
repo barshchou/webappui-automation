@@ -6,7 +6,7 @@ import { createReport } from "../../../../actions/base/baseTest.actions";
 import { numberWithCommas } from "../../../../../utils/numbers.utils";
 
 describe(`[QA-5095] Selected expenses forecast is exported to Estimated Operating Expense section`,
-    { tags:[ "@income", "@expense_forecast", "@check_export" ] }, () => {
+    { tags:[ "@income", "@expense_forecast", "@check_export", "@fix" ] }, () => {
 
         it("Verify for each existing expense forecast and for Per SF as unit of measure", () => {
             createReport(reportCreationFixture("Per SF"));
@@ -26,7 +26,7 @@ describe(`[QA-5095] Selected expenses forecast is exported to Estimated Operatin
             cy.stepInfo("3. Save the page and generate a report");
             Income._ExpenseForecastActions.clickSaveButton();
             _NavigationSection.openReviewAndExport();
-            ReviewExport.selectSectionsToIncludeInExport(testData.sectionToExport)
+            ReviewExport
                 .generateDocxReport().waitForReportGenerated()
                 .downloadAndConvertDocxReport(reportCreationFixture("Per SF").reportNumber);
         });
@@ -71,7 +71,7 @@ describe(`[QA-5095] Selected expenses forecast is exported to Estimated Operatin
             cy.stepInfo("3. Save the page and generate a report");
             Income._ExpenseForecastActions.clickSaveButton();
             _NavigationSection.openReviewAndExport();
-            ReviewExport.selectSectionsToIncludeInExport(testData.sectionToExport)
+            ReviewExport
                 .generateDocxReport().waitForReportGenerated()
                 .downloadAndConvertDocxReport(reportCreationFixture("Per Unit").reportNumber);
 
@@ -114,7 +114,7 @@ describe(`[QA-5095] Selected expenses forecast is exported to Estimated Operatin
             cy.stepInfo("3. Save the page and generate a report");
             Income._ExpenseForecastActions.clickSaveButton();
             _NavigationSection.openReviewAndExport();
-            ReviewExport.selectSectionsToIncludeInExport(testData.sectionToExport)
+            ReviewExport
                 .generateDocxReport().waitForReportGenerated()
                 .downloadAndConvertDocxReport(reportCreationFixture("Per Room").reportNumber);
         });

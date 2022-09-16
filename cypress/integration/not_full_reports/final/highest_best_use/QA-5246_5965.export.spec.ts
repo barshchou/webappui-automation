@@ -4,7 +4,7 @@ import { createReport } from "../../../../actions/base/baseTest.actions";
 import testData from '../../../../fixtures/not_full_reports/final/highest_best_use/QA-5246_5965.fixture';
 
 describe("Verify and change to support custom types on the Highest & Best Use page.",
-    { tags: [ "@final", "@highest_best_use", "@check_export" ] }, () => {
+    { tags: [ "@final", "@highest_best_use", "@check_export", "@fix" ] }, () => {
 
         it("[QA-5965]", () => {
             cy.stepInfo("1. Login, create report");
@@ -42,7 +42,7 @@ describe("Verify and change to support custom types on the Highest & Best Use pa
             cy.stepInfo("5. Export the report");
             _NavigationSection.Actions.openReviewAndExport();
 
-            ReviewExport.selectSectionsToIncludeInExport(testData.sectionsToExport)
+            ReviewExport
                 .generateDocxReport().waitForReportGenerated()
                 .downloadAndConvertDocxReport(testData.reportCreationData.reportNumber);
         });

@@ -4,7 +4,7 @@ import { _NavigationSection } from "../../../../actions/base";
 import { ReviewExport, Sales } from "../../../../actions";
 
 describe("[QA-4102_06] -> Total Utility Adjustments in Sales Adjustment Grid is calculated with correct formula", 
-    { tags:[ "@sales", "@adjust_comps", "@check_export" ] }, () => {
+    { tags:[ "@sales", "@adjust_comps", "@check_export", "@fix" ] }, () => {
         it("Test body", () => {
             cy.stepInfo(`1. Precondition: Create a new report with Multifamily or Mixed-use income type`);
             createReport(testData.reportCreationData);
@@ -50,7 +50,7 @@ describe("[QA-4102_06] -> Total Utility Adjustments in Sales Adjustment Grid is 
 
             cy.stepInfo("9. Generate and download this report");
             _NavigationSection.openReviewAndExport();
-            ReviewExport.selectSectionsToIncludeInExport(testData.sectionToExport)
+            ReviewExport
                 .generateDocxReport().waitForReportGenerated()
                 .downloadAndConvertDocxReport(testData.reportCreationData.reportNumber);
         });

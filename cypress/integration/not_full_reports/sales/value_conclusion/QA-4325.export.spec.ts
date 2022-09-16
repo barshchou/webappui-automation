@@ -4,7 +4,7 @@ import { createReport } from "../../../../actions/base/baseTest.actions";
 import { ReviewExport, Sales } from "../../../../actions";
 
 describe("Sales Value Conclusion Discussion -> Generated Commentary is editable", 
-    { tags: [ "@sales", "@value_conclusion" ] }, () => {
+    { tags: [ "@sales", "@value_conclusion", "@fix" ] }, () => {
         it("[QA-4325]", () => {
             cy.stepInfo(`1. Create report`);
             createReport(testData.reportCreationData);
@@ -18,7 +18,8 @@ describe("Sales Value Conclusion Discussion -> Generated Commentary is editable"
 
             cy.stepInfo('4. Export report');
             _NavigationSection.openReviewAndExport();
-            ReviewExport.generateDocxReport().waitForReportGenerated()
+            ReviewExport.selectSectionsToIncludeInExport(testData.sectionToExport)
+                .generateDocxReport().waitForReportGenerated()
                 .downloadAndConvertDocxReport(testData.reportCreationData.reportNumber);
         });
 

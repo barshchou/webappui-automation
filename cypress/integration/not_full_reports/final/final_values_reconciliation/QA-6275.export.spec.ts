@@ -7,7 +7,7 @@ import { pathSpecData } from "../../../../../utils/fixtures.utils";
 import valueConclusionKeys from "../../../../utils/mapKeys/sales/valueConclusion.keys";
 
 describe(`Sales Comparison Approach is exported correctly to Final Value Conclusion table`,
-    { tags:[ "@final", "@final_values_reconciliation" ] }, () => {
+    { tags:[ "@final", "@final_values_reconciliation", "@fix" ] }, () => {
         it("[QA-6275]", () => {
             cy.stepInfo(`1. Create report`);
             createReport(testData.reportCreationData);
@@ -117,7 +117,8 @@ describe(`Sales Comparison Approach is exported correctly to Final Value Conclus
 
             cy.stepInfo("14. Export the report");
             _NavigationSection.Actions.openReviewAndExport();
-            ReviewExport.generateDocxReport().waitForReportGenerated()
+            ReviewExport.selectSectionsToIncludeInExport(testData.sectionToExport)
+                .generateDocxReport().waitForReportGenerated()
                 .downloadAndConvertDocxReport(testData.reportCreationData.reportNumber);
         });
 
