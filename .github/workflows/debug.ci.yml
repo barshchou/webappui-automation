@@ -37,7 +37,7 @@ jobs:
   Not-full-reports-run-DEBUG:
     runs-on: ubuntu-latest
     timeout-minutes: 100
-    container: pumple/automation-cypress-latest-chrome-latest
+    container: pumple/automation-chrome-latest
     permissions:
       id-token: write
       contents: read
