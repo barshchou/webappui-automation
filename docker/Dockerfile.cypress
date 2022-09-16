@@ -26,7 +26,7 @@ RUN echo "whoami: $(whoami)" \
   # which means the current user is root
   && id \
   && npm install -g typescript \
-  && npm install -g cypress \
+  && npm install -g "cypress@10.8.0" \
   && npm install -g find-cypress-specs \
   && (node -p "process.env.CI_XBUILD && process.arch === 'arm64' ? 'Skipping cypress verify on arm64 due to SIGSEGV.' : process.exit(1)" \
     || (cypress verify \
