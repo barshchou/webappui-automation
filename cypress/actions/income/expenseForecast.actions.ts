@@ -407,7 +407,7 @@ class ExpenseForecastActions extends BaseActionsExt<typeof expenseForecastPage> 
     private SumPsfDependingOnBasis(input: JQuery<HTMLElement>, index: number, grossBuildingArea: number, 
         resUnits = 0, rooms = 0, AliasName: string): ExpenseForecastActions {
         cy.get(`@${AliasName}`).then(sum => {
-            this.radioButtonBasis(input);
+            this.radioButtonBasis(input[index]);
             cy.get(`@${Alias.expenseForecastAliases.basisValue}`).then(basisValue => {
                 let sumPSF = Number(sum);
                 let expenseBasis = String(basisValue);
@@ -501,7 +501,7 @@ class ExpenseForecastActions extends BaseActionsExt<typeof expenseForecastPage> 
     private SumPerUnitDependingOnBasis(input: JQuery<HTMLElement>, index: number, grossBuildingArea: number, 
         resUnits = 0, rooms = 0, AliasName: string): ExpenseForecastActions {
         cy.get(`@${AliasName}`).then(sum => {
-            this.radioButtonBasis(input);
+            this.radioButtonBasis(input[index]);
             cy.get(`@${Alias.expenseForecastAliases.basisValue}`).then(basisValue => {
                 let sumPerUnit = Number(sum);
                 let expenseBasis = String(basisValue);
@@ -528,7 +528,7 @@ class ExpenseForecastActions extends BaseActionsExt<typeof expenseForecastPage> 
         return this;
     }
 
-    private radioButtonBasis(input: JQuery<HTMLElement>,): ExpenseForecastActions {
+    private radioButtonBasis(input: HTMLElement): ExpenseForecastActions {
         cy.wrap(input).parents('[data-qa$=-forecast-item]').find('[data-qa="checked"]').find('[type="radio"]')
             .invoke('prop', 'value').then(basisValue => {
                 cy.wrap(basisValue).as(Alias.expenseForecastAliases.basisValue);
