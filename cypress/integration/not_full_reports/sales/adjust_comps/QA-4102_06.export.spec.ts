@@ -50,8 +50,7 @@ describe("[QA-4102_06] -> Total Utility Adjustments in Sales Adjustment Grid is 
 
             cy.stepInfo("9. Generate and download this report");
             _NavigationSection.openReviewAndExport();
-            ReviewExport
-                .generateDocxReport().waitForReportGenerated()
+            ReviewExport.generateDocxReport().waitForReportGenerated()
                 .downloadAndConvertDocxReport(testData.reportCreationData.reportNumber);
         });
 
