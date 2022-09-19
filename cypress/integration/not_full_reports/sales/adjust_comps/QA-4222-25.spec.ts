@@ -1,5 +1,5 @@
 import { _NavigationSection } from '../../../../actions/base';
-import testData from "../../../../fixtures/not_full_reports/sales/adjust_comps/QA-4222.fixture";
+import testData from "../../../../fixtures/not_full_reports/sales/adjust_comps/QA-4222-25.fixture";
 import { createReport } from "../../../../actions/base/baseTest.actions";
 import { Sales } from "../../../../actions";
 
@@ -10,7 +10,7 @@ describe(`Check Property Rights Discussion`,
             createReport(testData.reportCreationData);
         });
 
-        it("[QA-4222]", () => {
+        it("[QA-4222][QA-4223][QA-42224][QA-4225]", () => {
             cy.stepInfo(`4. Navigate to Find Comps and add sales comps`);
             _NavigationSection.navigateToFindComps();
             Sales._FindComps.AddressSearch.openAddressSearchTab()
@@ -24,8 +24,14 @@ describe(`Check Property Rights Discussion`,
             testData.comparablesAdjustments.forEach(marketAdjustments => {
                 Sales._AdjustComps.enterMarketAdjustmentsGroup(Object.keys(marketAdjustments.adjustments), 
                     Object.values(marketAdjustments.adjustments))
-                    .verifyDiscussionCommentary(testData.discussionTitle, 
-                        marketAdjustments.propertyRightsDiscussionText);
+                    .verifyDiscussionCommentary(testData.propertyRightsDiscussionTitle, 
+                        marketAdjustments.propertyRightsDiscussionText)
+                    .verifyDiscussionCommentary(testData.financingTermsDiscussionTitle, 
+                        marketAdjustments.financingTermsDiscussion)
+                    .verifyDiscussionCommentary(testData.conditionOfSaleDiscussionTitle, 
+                        marketAdjustments.conditionsOfSaleDiscussion)
+                    .verifyDiscussionCommentary(testData.marketConditionDiscussionTitle, 
+                        marketAdjustments.marketConditionTimeDiscussion);
             });
         });
     });
