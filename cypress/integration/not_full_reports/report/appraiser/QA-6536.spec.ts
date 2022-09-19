@@ -2,7 +2,6 @@ import { _NavigationSection } from '../../../../actions/base';
 import { createReport } from '../../../../actions/base/baseTest.actions';
 import { Report,  } from '../../../../actions';
 import testData from "../../../../fixtures/not_full_reports/report/appraiser/QA-6536.fixture";
-import { uppercaseFirstLetterEachWord } from '../../../../../utils/string.utils';
 
 describe("The full name of a added third-party inspector is automatically capitalized", 
     { tags:[ "@report", "@appraiser" ] }, () => {
