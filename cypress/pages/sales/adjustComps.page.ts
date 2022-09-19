@@ -168,6 +168,14 @@ class AdjustCompsPage extends BasePage {
     getAdjustmentExpansionCellLabel(adjustmentLabel: BoweryReports.AdjustmentExpansionLabels) {
         return cy.get(`[data-qa='${adjustmentLabel}.label']`);
     }
+
+    discussionsSections(title: string) {
+        return cy.xpath(`//h6[.='${title}']`);
+    }
+
+    discussionSectionGeneratedCommentary(title: BoweryReports.AdjustCompsDiscussionTitles) {
+        return cy.get(`[data-qa='${title}.commentary-generated-text']`);
+    }
 }
 
 export default new AdjustCompsPage();

@@ -364,6 +364,18 @@ class AdjustCompsActions extends BaseActionsExt<typeof adjustCompsPage> {
         
         return this;
     }
+
+    expandDiscussionSection(title: string): AdjustCompsActions {
+        adjustCompsPage.discussionsSections(title).click();
+        return this;
+    }
+
+    verifyDiscussionCommentary(discussionTitle: BoweryReports.AdjustCompsDiscussionTitles,
+        expectedText: string): AdjustCompsActions {
+        adjustCompsPage.discussionSectionGeneratedCommentary(discussionTitle)
+            .should('have.text', expectedText);
+        return this;
+    }
 }
 
 export default new AdjustCompsActions(adjustCompsPage);

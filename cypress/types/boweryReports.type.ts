@@ -290,4 +290,7 @@ export namespace BoweryReports {
 
     export type EditOnSubjectPropertySections = typeof
         Enums.EDIT_ON_SUBJECT_PROPERTY_SECTIONS[KeyInfo.EditOnSubjectPropertySections]
+
+    export type AdjustCompsDiscussionTitles = 
+        typeof Enums.ADJUST_COMPS_DISCUSSION_TITLES[KeyInfo.AdjustCompsDiscussionTitles]
 }
