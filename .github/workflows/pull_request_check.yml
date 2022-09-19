@@ -8,7 +8,7 @@ jobs:
   Run-tsc-check:
     runs-on: ubuntu-latest
     if: github.event.label.name == 'ready_for_review'
-    container: cypress/included:10.8.0
+    container: boweryautomation/cypress-latest-chrome-latest
     steps:
       - name: Checkout
         uses: actions/checkout@v3
@@ -25,7 +25,7 @@ jobs:
     needs: Run-tsc-check
     timeout-minutes: 20
     runs-on: ubuntu-latest
-    container: cypress/included:10.8.0
+    container: boweryautomation/cypress-latest-chrome-latest
     permissions:
       id-token: write
       contents: read
@@ -79,7 +79,7 @@ jobs:
     needs: [Run-tsc-check, Run-smoke-tests]
     timeout-minutes: 90
     runs-on: ubuntu-latest
-    container: cypress/included:10.8.0
+    container: boweryautomation/cypress-latest-chrome-latest
     permissions:
       id-token: write
       contents: read
@@ -91,9 +91,6 @@ jobs:
       
       - name: Installing modules
         uses: bahmutov/npm-install@v1.8.21
-
-      - name: Install find specs module
-        run: npm install -g find-cypress-specs@latest
 
       - name: Define included specs
         id: define_specs

@@ -30,7 +30,7 @@ conditionalDescribe("Verify the functionality of the Client field.",
                 .enterClientName("Debbie Gerstner");
 
             cy.stepInfo(`3. Proceed to the Organization > Create New Client page and create a new client, save it.`);
-            Report._Client.clickAddClientButton();
+            Report._Client.clickAddNewClient();
             Organization._CreateNewClient.createNewClient(testData.clientCreationData);
 
             cy.stepInfo(`4. Proceed to the Report > Client page and verify that a newly created client is 
@@ -38,12 +38,12 @@ conditionalDescribe("Verify the functionality of the Client field.",
             cy.go("back");
             Report._Client.verifyProgressBarNotExist()
                 .enterClientName(testData.shortTextToType);
-            Report._Client.Page.clientNameField.should("have.value", testData.textToType);
+            Report._Client.Page.getClientNameField().should("have.value", testData.textToType);
 
             cy.stepInfo(`5. Verify that the Client can be selected by entering manually 
             the full First and Last name, save it.`);
             Report._Client.enterClientName(testData.textToType);
-            Report._Client.Page.clientNameField.should("have.value", testData.textToType);
+            Report._Client.Page.getClientNameField().should("have.value", testData.textToType);
 
             cy.stepInfo(`6. Verify the Client Company is displayed in the Intended User and 
             Identification of the Client section as a chip and to the Client Guidelines Discussion - 
@@ -53,7 +53,8 @@ conditionalDescribe("Verify the functionality of the Client field.",
             cy.stepInfo(`7. Proceed to the Preview & Edit > Cover page and verify that 
             the Client from the previous step is displayed in the REQUESTED BY section.`);
             _NavigationSection.navigateToCoverPage();
-            PreviewEdit._CoverPage.Page.requestedClientName.should("have.text", testData.textToType);
+            PreviewEdit._CoverPage.Page.getRequestedRow(testData.clientName)
+                .should("have.text", testData.textToType);
 
             cy.stepInfo(`8. Proceed to the Preview & Edit > Letter of Transmittal page and 
             verify that the Client from the previous step is displayed.`);

@@ -28,7 +28,5 @@ export default {
     totalRealEstateTax: _totalRealEstateTax, 
     landTaxAssessedValue: _landTaxAssessedValue,
     buildingTaxAssessedValue: _buildingTaxAssessedValue,
-    taxPercent: _taxPercent,
-    featureFlagKey: Enums.FEATURE_FLAG_KEYS.flexibleTaxes,
-    onFeatureFlag: 0,
+    taxPercent: _taxPercent
 };

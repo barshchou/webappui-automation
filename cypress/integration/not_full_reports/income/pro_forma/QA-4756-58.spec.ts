@@ -4,15 +4,12 @@ import { createReport } from "../../../../actions/base/baseTest.actions";
 import { _NavigationSection } from "../../../../actions/base";
 import { DataCollections, Income } from "../../../../actions";
 import proFormaTypes from "../../../../enums/proFormaTypes.enum";
-import launchDarklyApi from '../../../../api/launchDarkly.api';
 
 // ToDo: https://bowery.atlassian.net/browse/QA-6956
 describe("Pro Forma Page validation Operating Expenses -> Real Estate Taxes", 
-    { tags:[ "@income", "@pro_forma", "@feature_flag" ] }, () => { 
+    { tags:[ "@income", "@pro_forma" ] }, () => { 
     
         before("Login, create report, prepare data", () => {
-            launchDarklyApi.setFeatureFlagForUser(testData.featureFlagKey, testData.onFeatureFlag);
-
             cy.stepInfo(`1. Create new report or open the report which is already created. 
                     Make sure that there is at least three commercial units.`);
             createReport(testData.reportCreationData);
@@ -60,9 +57,5 @@ describe("Pro Forma Page validation Operating Expenses -> Real Estate Taxes",
             Income._ProFormaActions.verifyCategoryPerUnitTotal(
                 `$${numberWithCommas(Math.round(testData.totalRealEstateTaxPerUnit))}`, 
                 proFormaTypes.realEstateTaxes);
-        });
-
-        after(() => {
-            launchDarklyApi.removeUserTarget(testData.featureFlagKey);
         });
     });

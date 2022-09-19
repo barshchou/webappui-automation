@@ -12,8 +12,6 @@ const reportCreationFixture = () => {
 export default {
     reportCreationData: reportCreationFixture(),
     leaseStatus: Enums.LEASE_STATUS.occupied,
-    featureFlagKey: Enums.FEATURE_FLAG_KEYS.flexibleTaxes,
-    onFeatureFlag: 0,
     basisForSquareFootAnalysis: Enums.BASIS_SQUARE_FOOT_ANALYSIS.grossLeasableArea,
     squareFootAnalysisArea: 1000, 
     residentialUnits: 2,

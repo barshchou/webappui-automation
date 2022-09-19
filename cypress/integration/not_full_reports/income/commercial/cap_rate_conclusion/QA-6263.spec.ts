@@ -3,13 +3,11 @@ import testData from
     "../../../../../fixtures/not_full_reports/income/commercial/cap_rate_conclusion/QA-6263.fixture";
 import { DataCollections, Income, Property } from "../../../../../actions";
 import { createReport } from "../../../../../actions/base/baseTest.actions";
-import launchDarklyApi from '../../../../../api/launchDarkly.api';
 
 describe("As Stabilized Market Value Per is calculated with correct formula in Cap Rate Conclusion Summary Table", 
-    { tags:[ "@income", "@commercial", "@cap_rate_conclusion", "@feature_flag" ] }, () => {
+    { tags:[ "@income", "@commercial", "@cap_rate_conclusion", ] }, () => {
         beforeEach("Login, create report", () => {
-            cy.stepInfo(`1. Set feature flag and create report`);
-            launchDarklyApi.setFeatureFlagForUser(testData.enableFlexibleGbaAnalysis, testData.onFeatureFlag);
+            cy.stepInfo(`1. Create report`);
             createReport(testData.reportCreationData);
 
             cy.stepInfo(`2. Set square foot analysis and value for it; 
@@ -55,9 +53,5 @@ describe("As Stabilized Market Value Per is calculated with correct formula in C
             cy.stepInfo(`8.Make Sure Prospective Market Value As Stabilized (Final Value) is Prospective Market Value 
             As Stabilized (Amount) rounded according to “Round to nearest” value`);
             Income._CapRateConclusion.verifyFinalValueCalculated(testData.valueConclusionAsStabilized);
-        });
-
-        after(`Remove feature flag`, () => {
-            launchDarklyApi.removeUserTarget(testData.enableFlexibleGbaAnalysis);
         });
     });

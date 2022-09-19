@@ -2,14 +2,12 @@ import testData from "../../../../fixtures/not_full_reports/income/tax_info/QA-5
 import { createReport } from "../../../../actions/base/baseTest.actions";
 import { _NavigationSection } from "../../../../actions/base";
 import { Income, ReviewExport } from '../../../../actions';
-import launchDarklyApi from "../../../../api/launchDarkly.api";
 
 describe("Check that rows added in the app are displayed in Tax Info --> Tax Liability", 
     { tags: [ "@check_export", "@income", "@tax_info" ] }, () => {
     
         it("[QA-5519-23_26]", () => {
-            cy.stepInfo("1. Set feature flag and create report");
-            launchDarklyApi.setFeatureFlagForUser(testData.featureFlagKey, testData.onFeatureFlag);
+            cy.stepInfo("1. Create report");
             createReport(testData.reportCreationData);
 
             cy.stepInfo("2. Navigate to Income -> Tax Info");
@@ -52,9 +50,5 @@ describe("Check that rows added in the app are displayed in Tax Info --> Tax Lia
                     cy.contains(testData.rowNames.additional).should("exist");
                     cy.contains(testData.rowNames.special).should("exist");
                 }); 
-        });
-
-        after(() => {
-            launchDarklyApi.removeUserTarget(testData.featureFlagKey);
         });
     });

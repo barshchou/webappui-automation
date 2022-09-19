@@ -35,7 +35,7 @@ on:
         type: string
         description: Thread number(between 1 and 15)
         required: false
-        default: 15
+        default: "15"
 
 jobs:
   concurrency:
@@ -51,7 +51,7 @@ jobs:
   Not-full-reports-run:
     runs-on: ubuntu-latest
     timeout-minutes: 180
-    container: cypress/included:10.8.0
+    container: boweryautomation/cypress-latest-chrome-latest
     needs: concurrency
     permissions:
       id-token: write

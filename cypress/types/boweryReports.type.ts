@@ -284,6 +284,10 @@ export namespace BoweryReports {
     export type ExpenseItemBasisOfComparison = typeof
         Enums.EXPENSE_ITEM_BASIS_OF_COMPARISON[KeyInfo.ExpenseItemBasisOfComparison]
 
+    export type CoverPageLocatorNames= typeof Enums.COVER_PAGE_LOCATOR_NAMES[
+        KeyInfo.CoverPageLocatorNames
+    ]
+    
     export type PagesTexboxNamesType = typeof Enums.PAGES_TEXTBOX_NAMES[KeyInfo.PagesTexboxNamesKeys]
 
     export type FinalValuesApproach = typeof Enums.FINAL_VALUES_APPROACH[KeyInfo.FinalValuesApproach]

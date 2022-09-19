@@ -1,16 +1,14 @@
 import { _NavigationSection } from '../../../../actions/base';
 import testData from "../../../../fixtures/not_full_reports/sales/adjust_comps/QA-4130.fixture";
 import { createReport } from "../../../../actions/base/baseTest.actions";
-import launchDarklyApi from "../../../../api/launchDarkly.api";
 import { Income, Sales, DataCollections } from "../../../../actions";
 
 // ToDo: Test fails due to problem with rounding: https://bowery.atlassian.net/browse/QA-6954
 describe("Adjusted Price per Residential Unit in Sales Adjustment Grid is calculated with correct formula", 
-    { tags: [ "@adjust_comps", "@sales", "@feature_flag" ] }, () => {
+    { tags: [ "@adjust_comps", "@sales" ] }, () => {
 
         beforeEach("Login, create report", () => {
-            cy.stepInfo(`1. Turn on “Enable flexible gba analysis” feature flag`);
-            launchDarklyApi.setFeatureFlagForUser(testData.featureFlagKey, testData.onFeatureFlag);
+            cy.stepInfo(`1. Create report`);
             createReport(testData.reportCreationData);
         });
 
@@ -45,9 +43,5 @@ describe("Adjusted Price per Residential Unit in Sales Adjustment Grid is calcul
                 .verifyExpandMarketAdjustmentPricePerUnit(testData.calculationUnits[0], testData.numberUnits)
                 .verifyExpandMarketAdjustmentPricePerUnit(testData.calculationUnits[1], 
                     testData.numberUnits + testData.numberUnits);
-        });
-
-        after("Remove feature flag", () => {
-            launchDarklyApi.removeUserTarget(testData.featureFlagKey);
         });
     });

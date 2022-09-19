@@ -2,13 +2,11 @@ import testData from "../../../../fixtures/not_full_reports/income/tax_info/QA-5
 import { createReport } from "../../../../actions/base/baseTest.actions";
 import { _NavigationSection } from "../../../../actions/base";
 import { ReviewExport, Income } from '../../../../actions';
-import launchDarklyApi from "../../../../api/launchDarkly.api";
 
 describe("Export column order both assessment psf and assessment per unit", 
-    { tags: [ "@check_export", "@income", "@tax_info", "@feature_flag" ] }, () => {
+    { tags: [ "@check_export", "@income", "@tax_info" ] }, () => {
         it("[QA-5182]", () => {
-            cy.stepInfo("1. Set feature flag and create report");
-            launchDarklyApi.setFeatureFlagForUser(testData.featureFlagKey, testData.onFeatureFlag);
+            cy.stepInfo("1. Create report");
             createReport(testData.reportCreationData);
 
             cy.stepInfo("2. Navigate to Income -> Tax Info");
@@ -38,10 +36,5 @@ describe("Export column order both assessment psf and assessment per unit",
                 cy.contains(testData.exportSectionName).scrollIntoView().next().next()
                     .next().next().next().next().next().should("have.text", testData.commentary);
             });
-        });
-
-
-        after(() => {
-            launchDarklyApi.removeUserTarget(testData.featureFlagKey);
         });
     });

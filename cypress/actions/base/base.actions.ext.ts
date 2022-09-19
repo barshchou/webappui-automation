@@ -1,3 +1,4 @@
+import { normalizeText } from './../../../utils/string.utils';
 import { RealClickOptions } from 'cypress-real-events/commands/realClick';
 /* eslint-disable @typescript-eslint/triple-slash-reference */
 // eslint-disable-next-line multiline-comment-style
@@ -21,8 +22,9 @@ export default class BaseActionsExt<T extends BasePage> extends BaseActions {
         this.Page = page;
     }
 
-    verifyTooltipNotExist() {
-        this.Page.tooltip.should("not.exist");
+    verifyTooltipExistOrNot(isExist = true) {
+        const matcher = isExist ? "exist" : "not.exist";
+        this.Page.tooltip.should(matcher);
         return this;
     } 
 
@@ -127,11 +129,22 @@ export default class BaseActionsExt<T extends BasePage> extends BaseActions {
         return this;
     }
 
-    verifyFormCommentTextBoxText(name: string, textToBe: string | number, matcher = "contain.text"): this {
-        let expectedText = typeof textToBe ===  "number"
-            ? `${numberWithCommas(textToBe)}`
-            : textToBe;
-        this.Page.formCommentTextBox(name).should(matcher, expectedText);
+    verifyFormCommentTextBoxText(
+        name: string, 
+        textToBe: string | number, 
+        matcher = "contain.text",
+        isNormalize = false,): this {
+        if (isNormalize) {
+            this.Page.formCommentTextBox(name).invoke("text").then(text => {
+                const normalText = normalizeText(text);
+                expect(normalText).to.include(textToBe);
+            });
+        } else {
+            let expectedText = typeof textToBe ===  "number"
+                ? `${numberWithCommas(textToBe)}`
+                : textToBe;
+            this.Page.formCommentTextBox(name).should(matcher, expectedText);
+        }
         return this;
     }
 

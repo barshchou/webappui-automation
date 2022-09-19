@@ -125,6 +125,12 @@ class AdjustCompsActions extends BaseActionsExt<typeof adjustCompsPage> {
         return this;
     }
 
+    verifyMarketAdjustmentByName(adjustmentName: string, value: number, index = 0): AdjustCompsActions {
+        adjustCompsPage.getMarketAdjustmentsRowCells(adjustmentName).eq(index)
+            .should('have.value', `${value}%`);
+        return this;
+    }
+
     clearOtherAdjustmentByColumn(rowNumber = 0, index = 0): AdjustCompsActions {
         adjustCompsPage.getOtherAdjustmentRowCells(rowNumber).eq(index).clear();
         return this;
