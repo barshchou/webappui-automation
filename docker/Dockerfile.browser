@@ -4,9 +4,6 @@ USER root
 
 RUN node --version
 
-COPY ./global-profile.sh /tmp/global-profile.sh
-RUN cat /tmp/global-profile.sh >> /etc/bash.bashrc && rm /tmp/global-profile.sh
-
 # Install dependencies
 RUN apt-get update && \
   apt-get install -y \
@@ -28,11 +25,10 @@ RUN wget --no-verbose /usr/src/libappindicator3-1_0.4.92-7_amd64.deb "http://ftp
   rm -f /usr/src/libappindicator3-1_0.4.92-7_amd64.deb
 
 # install Chrome browser
-RUN node -p "process.arch === 'arm64' ? 'Not downloading Chrome since we are on arm64: https://crbug.com/677140' : process.exit(1)" || \
-  (wget --no-verbose -O /usr/src/google-chrome-stable_current_amd64.deb "http://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb" && \
+RUN wget --no-verbose -O /usr/src/google-chrome-stable_current_amd64.deb "http://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb" && \
   dpkg -i /usr/src/google-chrome-stable_current_amd64.deb ; \
   apt-get install -f -y && \
-  rm -f /usr/src/google-chrome-stable_current_amd64.deb)
+  rm -f /usr/src/google-chrome-stable_current_amd64.deb
 
 # "fake" dbus address to prevent errors
 # https://github.com/SeleniumHQ/docker-selenium/issues/87
