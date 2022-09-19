@@ -19,10 +19,19 @@ describe("Verify the functionality of the Interest Appraised radio buttons secti
                 cy.stepInfo("2. Verify the radio buttons are NOT selected by default");
                 Report._KeyInfo.verifyAllInterestAppraisedNotChecked(data.reportInclude);
 
-                cy.stepInfo("3. Verify the radio buttons are selected by default");
-                Report._KeyInfo.checkAllInterestAppraisedByValues(data.interestAppraised);
+                cy.stepInfo("3. First check");
+                data.firstCheck.forEach((value, index) => {
+                    Report._KeyInfo.Page.getRadioButtonByValue(value).eq(index).click();
+                    Report._KeyInfo.verifyProgressBarNotExist();
+                });
 
-                cy.stepInfo("4. Verify that the radio button selection affects the Generated Commentary");
+                cy.stepInfo("4. Verify the radio buttons are selected by default");
+                data.interestAppraised.forEach((value, index) => {
+                    Report._KeyInfo.Page.getRadioButtonByValue(value).eq(index).click();
+                    Report._KeyInfo.verifyProgressBarNotExist();
+                });
+
+                cy.stepInfo("5. Verify that the radio button selection affects the Generated Commentary");
                 Report._KeyInfo.Page.formCommentTextBox(testData.propertyRightsAppraised).invoke("text").then(text => {
                     expect(normalizeText(text)).to.be.include(data.commentToBe);
                 });
