@@ -50,8 +50,6 @@ const _compsFixture = [
     }
 ];
 
-
-
 export default {
     reportCreationData: ReportDataCreator.getReportData("4226", {
         incomeValue: Enums.INCOME_TYPE.both
