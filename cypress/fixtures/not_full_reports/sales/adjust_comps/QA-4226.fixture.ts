@@ -2,7 +2,7 @@ import Enums from "../../../../enums/enums";
 import ReportDataCreator from "../../../data_creator/reportData.creator";
 
 const city = "New York";
-const state = "New York";
+const state = Enums.ORGANIZATION_STATE.newYork;
 const neighborhood = "Albany";
 const area = "Bronx County";
 const compProperty = Enums.COMP_PROPERTIES_PATHS_DB.compPropertyPathsInDB.saleStatus;
