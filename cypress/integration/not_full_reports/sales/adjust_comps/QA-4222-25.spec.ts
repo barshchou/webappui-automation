@@ -11,12 +11,12 @@ describe(`Check Property Rights Discussion`,
         });
 
         it("[QA-4222][QA-4223][QA-42224][QA-4225]", () => {
-            cy.stepInfo(`4. Navigate to Find Comps and add sales comps`);
+            cy.stepInfo(`2. Navigate to Find Comps and add sales comps`);
             _NavigationSection.navigateToFindComps();
             Sales._FindComps.AddressSearch.openAddressSearchTab()
                 .addCompByParameter(1, testData.compProperty, testData.compStatusDate);
 
-            cy.stepInfo(`5. Navigate to Adjust Comps and add appropriate Market Adjustments and
+            cy.stepInfo(`3. Navigate to Adjust Comps and add appropriate Market Adjustments and
             verify generated commentary`);
             _NavigationSection.navigateToAdjustComps();
             Sales._AdjustComps.checkCalculationUnitsRadio(testData.calculationUnits)
