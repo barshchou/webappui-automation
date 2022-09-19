@@ -67,9 +67,7 @@ describe("Verify the 'Add expense category' button is displayed on the Expense H
 
             cy.stepInfo("9. Generate and download report");
             _NavigationSection.openReviewAndExport();
-            ReviewExport
-                .generateDocxReport()
-                .waitForReportGenerated()
+            ReviewExport.generateDocxReport().waitForReportGenerated()
                 .downloadAndConvertDocxReport(testData.reportCreationData.reportNumber);
         });
 

@@ -71,8 +71,7 @@ describe("Check custom Utilities adjustment",
 
             cy.stepInfo(`5. Prepare report for export validation`);
             _NavigationSection.openReviewAndExport();
-            ReviewExport.selectSectionsToIncludeInExport(testData.sectionToExport)
-                .generateDocxReport().waitForReportGenerated()
+            ReviewExport.generateDocxReport().waitForReportGenerated()
                 .downloadAndConvertDocxReport(testData.reportCreationData.reportNumber);
         });
 
