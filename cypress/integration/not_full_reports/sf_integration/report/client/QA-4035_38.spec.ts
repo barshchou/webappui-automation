@@ -16,7 +16,7 @@ describe(`Verify that the Client field is pre-filled on the WebApp with the date
         _NavigationSection.navigateToClientPage();
 
         cy.stepInfo("3. Verify name in the Client field");
-        Report._Client.Page.clientNameField.should("have.value", testData.clientName);
+        Report._Client.Page.getClientNameField().should("have.value", testData.clientName);
 
         cy.stepInfo("4. Export the report");
         _NavigationSection.Actions.openReviewAndExport();

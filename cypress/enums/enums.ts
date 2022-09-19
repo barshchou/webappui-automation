@@ -99,6 +99,7 @@ import expenseHistoryDataProviderEnum from "./expense/expenseHistoryDataProvider
 import expenseItemBasisOfComparisonEnum from "./expense/expenseItemBasisOfComparison.enum";
 import exportTitlesEnum from "./exportTitles.enum";
 import compStatusValuesEnum from "./findComps/compStatusValues.enum";
+import coverPageLocatorNamesEnum from "./coverPageLocatorNames.enum";
 import marketResearchTypesEnum from "./salesforceJobs/marketResearchTypes.enum";
 import compPropertyPathsInDB from "./compplex/compPropertiesAndValues.enum";
 import saleStatusValuesInDB from "./compplex/compPropertiesAndValues.enum";
@@ -212,6 +213,7 @@ export default {
     EXPENSE_ITEM_BASIS_OF_COMPARISON: expenseItemBasisOfComparisonEnum,
     EXPORT_TITLES: exportTitlesEnum,
     COMP_STATUS_VALUES: compStatusValuesEnum,
+    COVER_PAGE_LOCATOR_NAMES: coverPageLocatorNamesEnum,
     MARKET_RESEARCH_TYPES: marketResearchTypesEnum,
     FINAL_VALUES_APPROACH: finalValueApproachEnum,
     COMP_PROPERTIES_PATHS_DB: compPropertyPathsInDB,
