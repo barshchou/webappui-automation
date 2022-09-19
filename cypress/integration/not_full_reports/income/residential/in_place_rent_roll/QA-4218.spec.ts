@@ -1,10 +1,9 @@
 import testData from "../../../../../fixtures/not_full_reports/income/residential/in_place_rent_roll/QA-4218.fixture";
 import { createReport } from "../../../../../actions/base/baseTest.actions";
-import NavigationSection from "../../../../../actions/base/navigationSection.actions";
 import Enums from "../../../../../enums/enums";
-import { Income } from "../../../../../actions";
-import Property from "../../../../../actions/property/property.manager";
+import { DataCollections, Income } from "../../../../../actions";
 import ReportDataCreator from "../../../../../fixtures/data_creator/reportData.creator";
+import { _NavigationSection } from "../../../../../actions/base";
 
 describe("Verify the grid is present", 
     { tags:[ "@income", "@residential", "@in_place_rent_roll" ] }, () => {
@@ -19,13 +18,9 @@ describe("Verify the grid is present",
 
             it(`Test for ${type} type of report`, () => {
                 createReport(reportCreationData);
-                NavigationSection.navigateToResInPlaceRentRoll();
+                _NavigationSection.navigateToResInPlaceRentRoll();
                 if (reportCreationData.conclusionValue === Enums.VALUE_CONCLUSION_TYPE.AS_IS) {
                     cy.contains(testData.asIsText).should("exist");
-                    /**
-                     * ernst: maybe we should call these consts the same as they were calling
-                     * Residential, but not _Residential
-                     */
                     Income._Residential.InPlaceRentRoll.clickCloseIcon();
                     cy.contains(testData.asIsText).should("not.exist");
                 } else {
@@ -35,9 +30,9 @@ describe("Verify the grid is present",
                 }
                 Income._Residential.InPlaceRentRoll.verifyColumnExist(testData.columnName)
                     .verifyNumberOfUnitsNumberCells();
-                NavigationSection.navigateToPropertySummary();
-                Property.Summary.enterNumberOfResUnits(testData.numberOfUnits);
-                NavigationSection.navigateToResInPlaceRentRoll();
+                _NavigationSection.navigateToSubjectPropertyData();
+                DataCollections._SubjectPropertyData.enterNumberOfResUnits(testData.numberOfUnits);
+                _NavigationSection.navigateToResInPlaceRentRoll();
                 Income._Residential.InPlaceRentRoll.verifyNumberOfUnitsNumberCells(testData.numberOfUnits);
             });
         });

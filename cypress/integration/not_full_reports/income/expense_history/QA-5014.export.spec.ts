@@ -31,7 +31,7 @@ describe("Verify the 'Add expense category' button is displayed on the Expense H
             Income._ExpenseHistory.clickAddExpenseCategoryButton()
                 .enterNewCategoryName(testData.expenseCategory)
                 .verifyNewCategoryEnteredName(testData.expenseCategory)
-                .clickCloseIcon();
+                .clearCustomCategoryInput();
             Income._ExpenseHistory.verifyNewCategoryEnteredName("")
                 .Page.formCancelButton().click();
 

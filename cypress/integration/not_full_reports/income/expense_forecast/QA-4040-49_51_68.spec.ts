@@ -1,4 +1,4 @@
-import { Property } from '../../../../actions';
+import { DataCollections } from '../../../../actions';
 import testData from "../../../../fixtures/not_full_reports/income/expense_forecast/QA-4040-49_51_68.fixture";
 import { _NavigationSection } from "../../../../actions/base";
 import { Income } from "../../../../actions";
@@ -10,9 +10,10 @@ describe(`Verify that Generated Commentary are updated on the Expense Forecast p
         before("Login, create report", () => {
             createReport(testData.reportCreationData);
             Cypress.config('numTestsKeptInMemory', 0);
-            _NavigationSection.navigateToPropertySummary();
-            Property._Summary.enterNumberOfResUnits(testData.residentialUnits)
-                .clickSaveButton();
+            _NavigationSection.navigateToSubjectPropertyData();
+            DataCollections._SubjectPropertyData.enterNumberOfResUnits(testData.residentialUnits)
+                .clickSaveButton()
+                .verifyProgressBarNotExist();
             cy.saveLocalStorage();
         });
         beforeEach(() => {
@@ -39,7 +40,8 @@ describe(`Verify that Generated Commentary are updated on the Expense Forecast p
                     testData.expenseForecastWaterAndSewer)
                 .editExpenseForecastCommentary(testData.editedCommentary, testData.expenseForecastWaterAndSewer)
                 .verifyForecastCommentary(testData.editedCommentary, testData.expenseForecastWaterAndSewer);
-            Income._ExpenseForecastActions.clickSaveButton();
+            Income._ExpenseForecastActions.clickSaveButton()
+                .verifyProgressBarNotExist();
         });
 
         it("[QA-4040] Verify the generated commentary and inputs for Insurance", () => {
@@ -64,7 +66,8 @@ describe(`Verify that Generated Commentary are updated on the Expense Forecast p
                     testData.expenseForecastInsurance)
                 .editExpenseForecastCommentary(testData.editedCommentary, testData.expenseForecastInsurance)
                 .verifyForecastCommentary(testData.editedCommentary, testData.expenseForecastInsurance);
-            Income._ExpenseForecastActions.clickSaveButton();
+            Income._ExpenseForecastActions.clickSaveButton()
+                .verifyProgressBarNotExist();
         });
 
         it("[QA-4041] Verify the generated commentary and inputs for Electricity", () => {
@@ -90,7 +93,8 @@ describe(`Verify that Generated Commentary are updated on the Expense Forecast p
                     testData.expenseForecastElectricity)
                 .editExpenseForecastCommentary(testData.editedCommentary, testData.expenseForecastElectricity)
                 .verifyForecastCommentary(testData.editedCommentary, testData.expenseForecastElectricity);
-            Income._ExpenseForecastActions.clickSaveButton();
+            Income._ExpenseForecastActions.clickSaveButton()
+                .verifyProgressBarNotExist();
         });
 
         it("[QA-4043] Verify the generated commentary and inputs for PayRoll & Benefits", () => {
@@ -116,7 +120,8 @@ describe(`Verify that Generated Commentary are updated on the Expense Forecast p
                     testData.expenseForecastPayrollAndBenefits)
                 .editExpenseForecastCommentary(testData.editedCommentary, testData.expenseForecastPayrollAndBenefits)
                 .verifyForecastCommentary(testData.editedCommentary, testData.expenseForecastPayrollAndBenefits);
-            Income._ExpenseForecastActions.clickSaveButton();
+            Income._ExpenseForecastActions.clickSaveButton()
+                .verifyProgressBarNotExist();
         });
 
         it("[QA-4044] Verify the generated commentary and inputs for General & Administrative", () => {
@@ -145,7 +150,8 @@ describe(`Verify that Generated Commentary are updated on the Expense Forecast p
                 .editExpenseForecastCommentary(testData.editedCommentary, 
                     testData.expenseForecastGeneralAndAdministrative)
                 .verifyForecastCommentary(testData.editedCommentary, testData.expenseForecastGeneralAndAdministrative);
-            Income._ExpenseForecastActions.clickSaveButton();
+            Income._ExpenseForecastActions.clickSaveButton()
+                .verifyProgressBarNotExist();
         });
 
         it("[QA-4045] Verify the generated commentary and inputs for Miscellaneous", () => {
@@ -171,7 +177,8 @@ describe(`Verify that Generated Commentary are updated on the Expense Forecast p
                     testData.expenseForecastMiscellaneous)
                 .editExpenseForecastCommentary(testData.editedCommentary, testData.expenseForecastMiscellaneous)
                 .verifyForecastCommentary(testData.editedCommentary, testData.expenseForecastMiscellaneous);
-            Income._ExpenseForecastActions.clickSaveButton();
+            Income._ExpenseForecastActions.clickSaveButton()
+                .verifyProgressBarNotExist();
         });
 
         it("[QA-4047] [QA-4068] Verify the generated commentary and inputs for Fuel", () => {
@@ -222,7 +229,8 @@ describe(`Verify that Generated Commentary are updated on the Expense Forecast p
                     testData.expenseForecastFuel, 2)
                 .editExpenseForecastCommentary(testData.editedCommentary, testData.expenseForecastFuel, false, 2)
                 .verifyForecastCommentary(testData.editedCommentary, testData.expenseForecastFuel, 2);
-            Income._ExpenseForecastActions.clickSaveButton();
+            Income._ExpenseForecastActions.clickSaveButton()
+                .verifyProgressBarNotExist();
         });
 
         it("[QA-4048] Verify the generated commentary and inputs for Legal & Professional fees", () => {
@@ -248,7 +256,8 @@ describe(`Verify that Generated Commentary are updated on the Expense Forecast p
                     testData.expenseForecastLegalAndProfessional)
                 .editExpenseForecastCommentary(testData.editedCommentary, testData.expenseForecastLegalAndProfessional)
                 .verifyForecastCommentary(testData.editedCommentary, testData.expenseForecastLegalAndProfessional);
-            Income._ExpenseForecastActions.clickSaveButton();
+            Income._ExpenseForecastActions.clickSaveButton()
+                .verifyProgressBarNotExist();
         });
 
         it("[QA-4049] Verify the generated commentary and inputs for Management & Fees", () => {
@@ -272,7 +281,8 @@ describe(`Verify that Generated Commentary are updated on the Expense Forecast p
                     testData.expenseForecastManagement)
                 .editExpenseForecastCommentary(testData.editedCommentary, testData.expenseForecastManagement)
                 .verifyForecastCommentary(testData.editedCommentary, testData.expenseForecastManagement);
-            Income._ExpenseForecastActions.clickSaveButton();
+            Income._ExpenseForecastActions.clickSaveButton()
+                .verifyProgressBarNotExist();
         });
 
         it("[QA-4051] Verify the generated commentary and inputs for Repairs & Maintenance", () => {
@@ -298,7 +308,8 @@ describe(`Verify that Generated Commentary are updated on the Expense Forecast p
                     testData.expenseForecastRepairAndMaintenance)
                 .editExpenseForecastCommentary(testData.editedCommentary, testData.expenseForecastRepairAndMaintenance)
                 .verifyForecastCommentary(testData.editedCommentary, testData.expenseForecastRepairAndMaintenance);
-            Income._ExpenseForecastActions.clickSaveButton();
+            Income._ExpenseForecastActions.clickSaveButton()
+                .verifyProgressBarNotExist();
         });
 
         it("[QA-4046] Verify the generated commentary and inputs for Replacement & Reserve", () => {

@@ -1,7 +1,7 @@
 import testData from "../../../../fixtures/not_full_reports/final/final_values_reconciliation/QA-6268-70.fixture";
 import { createReport } from "../../../../actions/base/baseTest.actions";
 import { _NavigationSection } from '../../../../actions/base';
-import { Income, Property, Sales, Final } from "../../../../actions";
+import { Income, Property, Sales, Final, DataCollections } from "../../../../actions";
 
 // TODO: Test fails due to bug: https://bowery.atlassian.net/browse/WEB-6862
 describe(`As Is, As Stabilized, As Completed Market Value is calculated correctly on Reconciliation card 
@@ -14,8 +14,8 @@ describe(`As Is, As Stabilized, As Completed Market Value is calculated correctl
         cy.stepInfo(`2. Set square foot analysis and value for it; 
                         set commercial and residential units; 
                         set commercial units SF`);
-        _NavigationSection.navigateToPropertySummary();
-        Property._Summary.selectBasisSquareFootAnalysis(testData.basisForSquareFootAnalysis)
+        _NavigationSection.navigateToSubjectPropertyData();
+        DataCollections._SubjectPropertyData.selectBasisSquareFootAnalysis(testData.basisForSquareFootAnalysis)
             .fillBasisSquareFootAnalysis(testData.squareFootAnalysisArea)
             .enterNumberOfCommercialUnits(testData.commercialUnits)
             .enterNumberOfResUnits(testData.residentialUnits);
@@ -96,7 +96,7 @@ describe(`As Is, As Stabilized, As Completed Market Value is calculated correctl
         _NavigationSection.navigateToSalesValueConclusion();
         Sales._ValueConclusion.enterSaleValueConclusion(testData.concludedValuePerSf);
 
-        cy.stepInfo(`5. Save 'Final Market Value' for further checks`);
+        cy.stepInfo(`12. Save 'Final Market Value' for further checks`);
         Sales._ValueConclusion.setMarketValueFinal(testData.valueConclusionAsComplete)
             .setMarketValueFinal(testData.valueConclusionAsStabilized)
             .setMarketValueFinal(testData.valueConclusionAsIs);

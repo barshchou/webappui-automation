@@ -7,7 +7,8 @@ const _numberOfCommercialUnits = 3;
 const _numberOfResidentialUnits = 5;
 const _landTaxAssessedValue = 999999;
 const _buildingTaxAssessedValue = 456450;
-const _taxPercent = 10.755;
+// ToDo: Retreive this value from UI and make calculations in action
+const _taxPercent = 10.646;
 
 const _totalRealEstateTax = ((_landTaxAssessedValue + _buildingTaxAssessedValue) * _taxPercent) / 100;
 const _totalRealEstateTaxPerSf = _totalRealEstateTax / _grossBuildingArea;
@@ -27,7 +28,5 @@ export default {
     totalRealEstateTax: _totalRealEstateTax, 
     landTaxAssessedValue: _landTaxAssessedValue,
     buildingTaxAssessedValue: _buildingTaxAssessedValue,
-    taxPercent: _taxPercent,
-    featureFlagKey: Enums.FEATURE_FLAG_KEYS.flexibleTaxes,
-    onFeatureFlag: 0,
+    taxPercent: _taxPercent
 };

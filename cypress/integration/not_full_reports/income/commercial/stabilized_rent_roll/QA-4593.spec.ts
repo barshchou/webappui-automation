@@ -1,4 +1,4 @@
-import { Base, Income, Property } from "../../../../../actions"; 
+import { DataCollections, Income } from "../../../../../actions";
 import { _NavigationSection } from "../../../../../actions/base";
 import { createReport } from "../../../../../actions/base/baseTest.actions";
 import testData from "../../../../../fixtures/not_full_reports/income/commercial/stabilized_rent_roll/QA-4593.fixture";
@@ -13,15 +13,15 @@ describe(`Verify the Save button functionality on the Stabilized Rent Roll page`
         it("Test body", () => {
             cy.stepInfo("Precondition: Navigate to Summary page and set commercial units. "+
             "Navigate to In Place Rent Roll and fill units data. At least 1 unit must be 'Vacant'");
-            _NavigationSection.navigateToPropertySummary();
-            Property._Summary.enterNumberOfCommercialUnits(testData.numberOfCommercialUnits);
-            Base._NavigationSection.navigateToCommercialInPlaceRentRoll();
+            _NavigationSection.navigateToSubjectPropertyData();
+            DataCollections._SubjectPropertyData.enterNumberOfCommercialUnits(testData.numberOfCommercialUnits);
+            _NavigationSection.navigateToCommercialInPlaceRentRoll();
             Income._CommercialManager.InPlaceRentRoll
                 .chooseListLeaseStatuses(testData.leaseStatuses, testData.numberOfCommercialUnits)
                 .chooseCheckBoxesIsInspectedFromList(testData.isInspected);
 
             cy.stepInfo(`1. Verify the Save button is displayed on the Stabilized Rent Roll page `);
-            Base._NavigationSection.navigateToCommercialStabilizedRentRoll();
+            _NavigationSection.navigateToCommercialStabilizedRentRoll();
             Income._CommercialManager.StabilizedRentRoll.verifyThatPageIsOpened()
                 .Page.SaveBtn.scrollIntoView().should('exist');
 

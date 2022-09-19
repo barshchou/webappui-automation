@@ -1,6 +1,6 @@
 import testData from "../../../../fixtures/not_full_reports/income/expense_forecast/QA-5049-51.fixture";
 import { _NavigationSection } from "../../../../actions/base";
-import { Income, Property } from "../../../../actions";
+import { DataCollections, Income } from "../../../../actions";
 import { createReport } from "../../../../actions/base/baseTest.actions";
 
 describe(`[QA-5049] [QA-5050] [QA-5051] [Income>Expense forecast] Custom card values calculations + card appearance`,
@@ -16,8 +16,8 @@ describe(`[QA-5049] [QA-5050] [QA-5051] [Income>Expense forecast] Custom card va
 
         it(`[QA-5049] "Per Unit" value is calculated correct if "Per SF" radio button is selected`, () => {
             cy.stepInfo(`1. Go to Property > Summary, add residential units and Gross Building Area`);
-            _NavigationSection.navigateToPropertySummary();
-            Property._Summary.enterNumberOfResUnits(testData.buildingDescription.numberOfUnits)
+            _NavigationSection.navigateToSubjectPropertyData();
+            DataCollections._SubjectPropertyData.enterNumberOfResUnits(testData.buildingDescription.numberOfUnits)
                 .enterGrossBuildingArea(testData.buildingDescription.grossArea);
 
             cy.stepInfo(`2. Go to Expense Forecast and add new Expense Forecast with valid name`);
@@ -43,8 +43,8 @@ describe(`[QA-5049] [QA-5050] [QA-5051] [Income>Expense forecast] Custom card va
                 });
 
             cy.stepInfo(`6. Go to Property > Summary and add residential units equal 0`);
-            _NavigationSection.navigateToPropertySummary();
-            Property._Summary.enterNumberOfResUnits(testData.numberOfResidentialUnitsZero);
+            _NavigationSection.navigateToSubjectPropertyData();
+            DataCollections._SubjectPropertyData.enterNumberOfResUnits(testData.numberOfResidentialUnitsZero);
 
             cy.stepInfo(`7. Verify if number of Residential Unit equal 0 →  expected result will be "Per Unit: $NaN"`);
             _NavigationSection.navigateToExpenseForecast();
@@ -58,8 +58,8 @@ describe(`[QA-5049] [QA-5050] [QA-5051] [Income>Expense forecast] Custom card va
 
         it(`[QA-5050] "Per SF" value is calculated correct if "Per Unit" radio button is selected`, () => {
             cy.stepInfo(`1. Go to Property > Summary, add residential units and Gross Building Area`);
-            _NavigationSection.navigateToPropertySummary();
-            Property._Summary.enterNumberOfResUnits(testData.buildingDescription.numberOfUnits)
+            _NavigationSection.navigateToSubjectPropertyData();
+            DataCollections._SubjectPropertyData.enterNumberOfResUnits(testData.buildingDescription.numberOfUnits)
                 .enterGrossBuildingArea(testData.buildingDescription.grossArea);
 
             cy.stepInfo(`2. Switch basis in Custom Expense card`);
@@ -82,8 +82,8 @@ describe(`[QA-5049] [QA-5050] [QA-5051] [Income>Expense forecast] Custom card va
                 });
 
             cy.stepInfo(`5. Go to Property > Summary and add residential units equal 0`);
-            _NavigationSection.navigateToPropertySummary();
-            Property._Summary.enterNumberOfResUnits(testData.buildingDescription.numberOfUnits)
+            _NavigationSection.navigateToSubjectPropertyData();
+            DataCollections._SubjectPropertyData.enterNumberOfResUnits(testData.buildingDescription.numberOfUnits)
                 .enterGrossBuildingArea(testData.numberOfResidentialUnitsZero);
 
             cy.stepInfo(`6. Verify if selected Basis for Square Foot Analysis equal 0 -> 

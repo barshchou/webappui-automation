@@ -12,7 +12,8 @@ const _numberOfCommercialUnits = 3;
 const _numberOfResidentialUnits = 5;
 const _landTaxAssessedValue = 999999;
 const _buildingTaxAssessedValue = 456450;
-const _taxPercent = 10.755;
+// ToDo: Retreive this value from UI and make calculations in action
+const _taxPercent = 10.646;
 const _basis = "sf" as BoweryReports.UnitSF;
 const _customForecast = 45;
 const _waterForecast = 12;
@@ -120,7 +121,5 @@ export default {
     waterAndSewerTotal: _totalWater, 
     landTaxAssessedValue: _landTaxAssessedValue,
     buildingTaxAssessedValue: _buildingTaxAssessedValue,
-    customCategories: _customCategories(),
-    featureFlagKey: Enums.FEATURE_FLAG_KEYS.flexibleTaxes,
-    onFeatureFlag: 0,
+    customCategories: _customCategories()
 };

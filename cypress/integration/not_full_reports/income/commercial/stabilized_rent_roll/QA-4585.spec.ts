@@ -1,7 +1,7 @@
 import testData from "../../../../../fixtures/not_full_reports/income/commercial/stabilized_rent_roll/QA-4585.fixture";
 import { createReport } from "../../../../../actions/base/baseTest.actions";
 import { _NavigationSection } from "../../../../../actions/base";
-import { Property } from "../../../../../actions";
+import { DataCollections, Property } from "../../../../../actions";
 import { Income } from "../../../../../actions";
 
 describe("Verify the Commercial Stabilized Rent Roll table", 
@@ -15,8 +15,8 @@ describe("Verify the Commercial Stabilized Rent Roll table",
         it("Test body", () => {
             cy.stepInfo(`2. Proceed to the Property > Commercial Units and fill the Commercial Unit # SF field 
             and select the Use* radio button (e.g. Retail), save it.`);
-            _NavigationSection.navigateToPropertySummary();
-            Property._Summary.enterNumberOfCommercialUnits(testData.numberOfCommercialUnits);
+            _NavigationSection.navigateToSubjectPropertyData();
+            DataCollections._SubjectPropertyData.enterNumberOfCommercialUnits(testData.numberOfCommercialUnits);
             _NavigationSection.navigateToCommercialUnits();
             Property._CommercialUnits.enterListUnitSF(testData.listOfUnitsSF, testData.numberOfCommercialUnits);
             for (let i = 0; i < testData.numberOfCommercialUnits; i++) {
@@ -82,7 +82,5 @@ describe("Verify the Commercial Stabilized Rent Roll table",
             _NavigationSection.navigateToCommercialStabilizedRentRoll()
                 .verifyProgressBarNotExist();
             Income._CommercialManager.StabilizedRentRoll.verifyTenantNameByRow(testData.leaseStatuses[1], "", 1);
-        
-            cy.stepInfo(`11. Proceed to the Income > Commercial > Stabilized Rent Roll page.`);
         });
     });

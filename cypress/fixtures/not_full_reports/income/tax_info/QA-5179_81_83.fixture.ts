@@ -25,8 +25,6 @@ const _verifyExportValues = [
 export default {
     reportCreationData: reportCreationFixture(),
     title: "Tax Calculation Discussion",
-    featureFlagKey: Enums.FEATURE_FLAG_KEYS.flexibleTaxes,
-    onFeatureFlag: 0,
     verifyExportValues: _verifyExportValues,
     checkValue: Enums.PER_UNIT_PER_SF.perUnit
 };

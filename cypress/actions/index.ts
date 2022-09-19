@@ -5,6 +5,7 @@ import * as _OrganizationActions from "./organization";
 import * as _PreviewEditActions from "./preview_edit";
 import * as _PropertyActions from "./property";
 import * as _ReportActions from "./report";
+import * as _DataCollections from "./data_collections";
 import _CompPlexActions from "./comp_plex/comp_plex.actions";
 /**
  * ernst: refactor this class when it will be necessary
@@ -22,3 +23,4 @@ export const Report = _ReportActions;
 export const ReviewExport = _ReviewExportActions;
 export const Sales = _SalesActions;
 export const CompPlex = _CompPlexActions;
+export const DataCollections = _DataCollections;
