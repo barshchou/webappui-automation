@@ -7,11 +7,11 @@ class ClientPage extends BasePage {
 
     get warningAddBtn() { return cy.xpath("//*[contains(@data-qa, 'callout-btn')]"); }
 
-    get clientNameField() { return cy.get("*[name=client]"); }
+    getClientNameField(index = 0) { return cy.get("*[name=client]").eq(index); }
 
-    get clientFileNumberField() { return cy.get('[name$="clientFileNumber"]'); }
+    getClientFileNumberField(index = 0) { return cy.get(`[name='reportClients[${index}].clientFileNumber']`); }
 
-    get nycbApplicationNumber() { return cy.get("[name$=applicationNumber]"); }
+    getNYCBApplicationNumber(index = 0) { return cy.get(`[name='reportClients[${index}].applicationNumber']`); }
 
     get appraiserCommentary() { return cy.get("[name='clientGuidelinesDiscussion.additionalCommentary']"); }
 
@@ -32,6 +32,15 @@ class ClientPage extends BasePage {
     chipModified(index?: number) { return cy.get('[ui="indicator"]').eq((index !== 0) ? index : 0); }
 
     get addNewClient() { return cy.xpath("//*[@data-qa='callout-btn']"); }
+
+    get addAdditionalClientBtn() { return cy.contains("Add additional client"); } 
+
+    get maxClientMessage() { return cy.contains("Max of four clients allowed"); }
+
+    get undoBtn() { return cy.contains("Undo"); }
+
+    getClientListItem(name: string) { return cy.get(`[data-value='${name}']`); }
+
 }
 
 export default new ClientPage();

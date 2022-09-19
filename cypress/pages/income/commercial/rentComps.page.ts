@@ -136,8 +136,6 @@ class CommercialRentCompsPage extends BasePage {
     get componentErrorElement() { return cy.get("#component-error-text"); }
 
     getEditCompButton(rowNumber = 0) { return cy.get("[data-testid='EditIcon']").parent("button").eq(rowNumber); }
-    
-    getRemoveCompButton(rowNumber = 0) { return cy.get("[data-testid='CancelIcon']").eq(rowNumber); } 
   
 }
 

@@ -518,7 +518,7 @@ class CapRateConclusionActions extends BaseActionsExt<typeof capRateConclusionPa
         return this;
     }
 
-    private setAmountAlias(conclusionValueName: BoweryReports.ValueConclusionName): 
+    setAmountAlias(conclusionValueName: BoweryReports.ValueConclusionName): 
     CapRateConclusionActions {
         let key = conclusionValueName != enums.VALUE_CONCLUSION_NAME.asIs 
             ? conclusionValueName == enums.VALUE_CONCLUSION_NAME.asStabilized 

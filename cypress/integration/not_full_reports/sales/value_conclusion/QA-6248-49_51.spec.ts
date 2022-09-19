@@ -1,15 +1,13 @@
 import testData from "../../../../fixtures/not_full_reports/sales/value_conclusion/QA-6248-49.fixture";
 import { createReport } from "../../../../actions/base/baseTest.actions";
 import { DataCollections, Income, Property, Sales } from "../../../../actions";
-import launchDarklyApi from "../../../../api/launchDarkly.api";
 import { _NavigationSection } from "../../../../actions/base";
 
 describe(`Prospective Market Value As Complete is calculated with correct formula`,
     { tags:[ "@sales", "@value_conclusion" ] }, () => {
 
         beforeEach("Login, create report", () => {
-            cy.stepInfo(`1. Set feature flag and create report`);
-            launchDarklyApi.setFeatureFlagForUser(testData.featureFlagKey, testData.onFeatureFlag);
+            cy.stepInfo(`1. Create report`);
             createReport(testData.reportCreationData);
 
             cy.stepInfo(`2. Set square foot analysis and value for it; 

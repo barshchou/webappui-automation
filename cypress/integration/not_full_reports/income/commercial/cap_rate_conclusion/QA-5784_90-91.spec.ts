@@ -3,14 +3,12 @@ import testData from
     "../../../../../fixtures/not_full_reports/income/commercial/cap_rate_conclusion/QA-5784_90-91.fixture";
 import { DataCollections, Income, Property } from "../../../../../actions";
 import { createReport } from "../../../../../actions/base/baseTest.actions";
-import launchDarklyApi from '../../../../../api/launchDarkly.api';
 
 // ToDo: Test fails due to problem with rounding: https://bowery.atlassian.net/browse/QA-6954
 describe("Validation of Market Values Per SF for ACAS reports", 
-    { tags:[ "@income", "@commercial", "@cap_rate_conclusion", "@feature_flag" ] }, () => {
+    { tags:[ "@income", "@commercial", "@cap_rate_conclusion" ] }, () => {
         beforeEach("Login, create report", () => {
-            cy.stepInfo(`1. Set feature flag and create report`);
-            launchDarklyApi.setFeatureFlagForUser(testData.featureFlagKey, testData.onFeatureFlag);
+            cy.stepInfo(`1. Create report`);
             createReport(testData.reportCreationData);
 
             cy.stepInfo(`2. Set square foot analysis and value for it; 
@@ -138,9 +136,5 @@ describe("Validation of Market Values Per SF for ACAS reports",
             based on selected Basis for Square Foot Analysis`);
             Income._CapRateConclusion.verifyMarketValuePerSFCalculated(testData.squareFootAnalysisArea, 
                 testData.valueConclusionAsIs);
-        });
-
-        after(`Remove feature flag`, () => {
-            launchDarklyApi.removeUserTarget(testData.featureFlagKey);
         });
     });
