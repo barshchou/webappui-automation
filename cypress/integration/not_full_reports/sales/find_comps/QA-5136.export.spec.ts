@@ -8,7 +8,7 @@ import { pathSpecData } from '../../../../../utils/fixtures.utils';
 import { _saveDataInFile } from '../../../../support/commands';
 
 describe(`Check the order of comps in the export when 'custom' dropdown is chosen`, 
-    { tags: [ "@sales", "@find_comps", "@comp_plex", "@check_export" ] }, () => {
+    { tags: [ "@sales", "@find_comps", "@comp_plex", "@check_export", "@fix" ] }, () => {
     
         it("QA-5136]", () => {
             createReport(testData.reportCreationData);
@@ -50,8 +50,7 @@ describe(`Check the order of comps in the export when 'custom' dropdown is chose
 
             cy.stepInfo(`5. User navigates to Review&Export and downloads report`);
             _NavigationSection.openReviewAndExport();
-            ReviewExport.selectSectionsToIncludeInExport(testData.sectionToExport)
-                .generateDocxReport().waitForReportGenerated()
+            ReviewExport.generateDocxReport().waitForReportGenerated()
                 .downloadAndConvertDocxReport(testData.reportCreationData.reportNumber);
         });
 

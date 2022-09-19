@@ -49,8 +49,7 @@ describe(`Verify the "Linked" chips dropdown in the new narrative component for 
 
         cy.stepInfo("4. Download report");
         _NavigationSection.openReviewAndExport();
-        ReviewExport.selectSectionsToIncludeInExport(testData.sectionToExport)
-            .generateDocxReport().waitForReportGenerated()
+        ReviewExport.generateDocxReport().waitForReportGenerated()
             .downloadAndConvertDocxReport(testData.reportCreationData.reportNumber);
     });
 

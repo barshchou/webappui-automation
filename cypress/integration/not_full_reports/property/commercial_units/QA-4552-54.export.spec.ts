@@ -36,8 +36,7 @@ describe(`[QA-4552][QA-4553][QA-4554] Verify the "Linked" chips dropdown in the 
                 .verifyProgressBarNotExist();
     
             _NavigationSection.openReviewAndExport();
-            ReviewExport.selectSectionsToIncludeInExport(testData.sectionToExport)
-                .generateDocxReport().waitForReportGenerated()
+            ReviewExport.generateDocxReport().waitForReportGenerated()
                 .downloadAndConvertDocxReport(testData.reportCreationDataAsIs.reportNumber);
         });
 
@@ -86,8 +85,7 @@ describe(`[QA-4552][QA-4553][QA-4554] Verify the "Linked" chips dropdown in the 
                 .verifyProgressBarNotExist();
 
             _NavigationSection.openReviewAndExport();
-            ReviewExport.selectSectionsToIncludeInExport(testData.sectionToExport)
-                .generateDocxReport().waitForReportGenerated()
+            ReviewExport.generateDocxReport().waitForReportGenerated()
                 .downloadAndConvertDocxReport(testData.reportCreationDataAsIs.reportNumber);
         });
 
@@ -136,8 +134,7 @@ describe(`[QA-4552][QA-4553][QA-4554] Verify the "Linked" chips dropdown in the 
                 .verifyProgressBarNotExist();
 
             _NavigationSection.openReviewAndExport();
-            ReviewExport.selectSectionsToIncludeInExport(testData.sectionToExport)
-                .generateDocxReport().waitForReportGenerated()
+            ReviewExport.generateDocxReport().waitForReportGenerated()
                 .downloadAndConvertDocxReport(testData.reportCreationDataAsIs.reportNumber);
         });
 
