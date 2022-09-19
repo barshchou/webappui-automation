@@ -9,5 +9,6 @@ export default {
     textToType: "Harley Young",
     companyName: "Test Company & CO",
     identificationOfTheClient: Enums.INTRODUCTION_TEXTBOX_NAMES.identificationOfTheClient, 
-    intendedUseAndUser: Enums.INTRODUCTION_TEXTBOX_NAMES.intendedUseAndUser
+    intendedUseAndUser: Enums.INTRODUCTION_TEXTBOX_NAMES.intendedUseAndUser,
+    clientName:  Enums.COVER_PAGE_LOCATOR_NAMES.clientName
 };
