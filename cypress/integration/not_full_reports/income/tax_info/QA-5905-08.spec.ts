@@ -2,15 +2,12 @@ import testData from "../../../../fixtures/not_full_reports/income/tax_info/QA-5
 import { createReport } from "../../../../actions/base/baseTest.actions";
 import { _NavigationSection } from "../../../../actions/base";
 import { DataCollections, Income } from '../../../../actions';
-import launchDarklyApi from "../../../../api/launchDarkly.api";
 import { numberWithCommas } from '../../../../../utils/numbers.utils';
 
 describe(`Tax Liability (PSF) for Summary tab sections is calculated correctly according to selected Basis 
         for Square Foot Analysis`, { tags: [ "@income", "@tax_info" ] }, () => {
     beforeEach('Login, create report, navigate to Tax Info Projected tab', () => {
-        cy.stepInfo(`1. Set feature flag and create report`);
-        launchDarklyApi.setFeatureFlagForUser(testData.flexibleTaxesKey, testData.onFeatureFlag)
-            .setFeatureFlagForUser(testData.flexibleGbaAnalysisKey, testData.onFeatureFlag);
+        cy.stepInfo(`1. Create report`);
         createReport(testData.reportCreationData);
 
         cy.stepInfo(`2. Basis for Square Foot Analysis should be selected and filled on Property > Summary form`);
@@ -82,10 +79,5 @@ describe(`Tax Liability (PSF) for Summary tab sections is calculated correctly a
                     Tax Liability (Total) / selected Basis for Square Foot Analysis`);
         Income._TaxInfo.verifyTaxLiabilityOnSummaryTab(testData.squareFootAnalysisArea, 
             testData.opinionProvided);
-    });
-
-    after(() => {
-        launchDarklyApi.removeUserTarget(testData.flexibleTaxesKey);
-        launchDarklyApi.removeUserTarget(testData.flexibleGbaAnalysisKey);
     });
 });

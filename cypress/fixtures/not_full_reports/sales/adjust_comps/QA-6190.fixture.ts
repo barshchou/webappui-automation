@@ -20,9 +20,7 @@ export default {
         incomeValue: Enums.INCOME_TYPE.both
     }),
     calculationUnits: Enums.CALCULATION_UNITS.psf,
-    featureFlagKey: Enums.FEATURE_FLAG_KEYS.enableFlexibleGbaAnalysis,
     numberUnits: 2,
-    onFeatureFlag: 0,
     residentialUnit: _rentRollResidentialUnitFixture,
     concludedCapRate: 10,
     adjustmentName: Enums.SALES_ADJUSTMENT_GRID.marketAdjustment,
