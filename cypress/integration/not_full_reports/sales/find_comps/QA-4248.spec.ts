@@ -39,6 +39,6 @@ describe.skip("Verify the Comps can be added by entering the existing Report ID 
             Sales.FindComps.checkSingleSalesCompsByEventId()
                 .selectAllCompsForImport()
                 .checkSelectedSingleSalesComps()
-                .JobSearch.clickImportCompsFromReportButton();
+                .JobSearch.clickAddToReportButton();
         });
     });
