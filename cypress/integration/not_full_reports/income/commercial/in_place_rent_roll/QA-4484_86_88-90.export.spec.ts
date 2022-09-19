@@ -62,8 +62,7 @@ describe(`[Income > Commercial > In-Place Rent Roll > Generated Commentary]
             .verifyProgressBarNotExist();
         
         _NavigationSection.openReviewAndExport();
-        ReviewExport.selectSectionsToIncludeInExport(testData.sectionToExport)
-            .generateDocxReport().waitForReportGenerated()
+        ReviewExport.generateDocxReport().waitForReportGenerated()
             .downloadAndConvertDocxReport(testData.reportCreationDataAsIs.reportNumber);
     });
 
@@ -116,8 +115,7 @@ describe(`[Income > Commercial > In-Place Rent Roll > Generated Commentary]
             .verifyProgressBarNotExist();
 
         _NavigationSection.openReviewAndExport();
-        ReviewExport.selectSectionsToIncludeInExport(testData.sectionToExport)
-            .generateDocxReport().waitForReportGenerated()
+        ReviewExport.generateDocxReport().waitForReportGenerated()
             .downloadAndConvertDocxReport(testData.reportCreationDataAsStabilized.reportNumber);
     });
 
@@ -172,8 +170,7 @@ describe(`[Income > Commercial > In-Place Rent Roll > Generated Commentary]
             .verifyProgressBarNotExist();
 
         _NavigationSection.openReviewAndExport();
-        ReviewExport.selectSectionsToIncludeInExport(testData.sectionToExport)
-            .generateDocxReport().waitForReportGenerated()
+        ReviewExport.generateDocxReport().waitForReportGenerated()
             .downloadAndConvertDocxReport(testData.reportCreationDataAsComplete.reportNumber);
     });
 

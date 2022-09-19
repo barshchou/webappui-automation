@@ -35,8 +35,7 @@ describe(`Generated Commentary is dynamically updated with relevant information
     
             cy.stepInfo("6. Export the report");
             _NavigationSection.openReviewAndExport();
-            ReviewExport.selectSectionsToIncludeInExport(testData.sectionToExport)
-                .generateDocxReport().waitForReportGenerated()
+            ReviewExport.generateDocxReport().waitForReportGenerated()
                 .downloadAndConvertDocxReport(report.fixture.reportNumber);
         });
     });

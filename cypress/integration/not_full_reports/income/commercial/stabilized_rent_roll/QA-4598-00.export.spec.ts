@@ -39,8 +39,7 @@ new narrative component added through "=" in the Generated Commentary on the Sta
             .verifyProgressBarNotExist();
 
         _NavigationSection.openReviewAndExport();
-        ReviewExport.selectSectionsToIncludeInExport(testData.sectionToExport)
-            .generateDocxReport().waitForReportGenerated()
+        ReviewExport.generateDocxReport().waitForReportGenerated()
             .downloadAndConvertDocxReport(testData.reportCreationDataAsIs.reportNumber);
     });
 

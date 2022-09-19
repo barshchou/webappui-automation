@@ -29,8 +29,7 @@ describe(`[Assessed Value & RE Taxes] Verify the 'Tax Calculation Discussion' ge
 
         cy.stepInfo(`5. Export the report`);
         _NavigationSection.Actions.openReviewAndExport();
-        ReviewExport.selectSectionsToIncludeInExport(testData.sectionToExport)
-            .generateDocxReport().waitForReportGenerated()
+        ReviewExport.generateDocxReport().waitForReportGenerated()
             .downloadAndConvertDocxReport(testData.reportCreationData.reportNumber);
     });
 

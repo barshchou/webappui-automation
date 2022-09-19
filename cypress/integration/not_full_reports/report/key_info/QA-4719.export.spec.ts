@@ -47,8 +47,7 @@ describe(`Verify the "Linked" chips dropdown in the new narrative component
         });
 
         _NavigationSection.openReviewAndExport();
-        ReviewExport
-            .generateDocxReport().waitForReportGenerated()
+        ReviewExport.generateDocxReport().waitForReportGenerated()
             .downloadAndConvertDocxReport(testData.reportCreationData.reportNumber);
     });
     
