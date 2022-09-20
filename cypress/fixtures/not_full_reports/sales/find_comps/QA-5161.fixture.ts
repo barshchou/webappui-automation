@@ -3,37 +3,18 @@ import Enums from "../../../../enums/enums";
 import { BoweryReports } from "../../../../types/boweryReports.type";
 import { BoweryAutomation } from "../../../../types/boweryAutomation.type";
 
-const reportCreationData: BoweryAutomation.ReportCreationData = ReportDataCreator.getReportData("5157_61", {
+const reportCreationData: BoweryAutomation.ReportCreationData = ReportDataCreator.getReportData("5161", {
     incomeValue: Enums.INCOME_TYPE.both,
     conclusionValue: Enums.VALUE_CONCLUSION_TYPE.AS_COMPLETE
 });
 
-const filePath = "test_files/CostarExport 5161.csv";
+const filePath = "test_files/CostarExport_3Contract_3Listing_3Date.csv";
 const sortSalesCompsDateSold = Enums.SORT_VALUES.dateSold;
 const salePeriodValue = Enums.SALE_PERIOD_VALUES.lastThreeMonths;
-
-const arrayOfCompsForAdditionFromMap1 = [
-    {
-        address: "116 Cooper Street"
-    },
-    {
-        address: "1715 Lexington Avenue"
-    },
-    {
-        address: "1074 Fulton Street"
-    },
-    {
-        address: "31-83 34 Street"
-    },
-];
-const arrayOfCompsForAdditionFromMap2 = [
-    {
-        address: "168 North 10 Street"
-    },
-    {
-        address: "151 Freeman Street"
-    }
-];
+const compProperty = Enums.COMP_PROPERTIES_PATHS_DB.compPropertyPathsInDB.saleStatus;
+const compStatusContract = Enums.COMP_PROPERTIES_PATHS_DB.saleStatusValuesInDB.inContract;
+const compStatusDate = Enums.COMP_PROPERTIES_PATHS_DB.saleStatusValuesInDB.date;
+const compStatusListing = Enums.COMP_PROPERTIES_PATHS_DB.saleStatusValuesInDB.listing;
 
 const comparableFixtureManual = {
     address1: "388 Greenwich Street, New York, NY, USA",
@@ -87,12 +68,14 @@ const arrayOfCompsForManualAddition = [
 ];
 
 export default {
-    arrayOfCompsForAdditionFromMap1,
-    arrayOfCompsForAdditionFromMap2,
     comparableFixtureManual,
     reportCreationData,
     sortSalesCompsDateSold,
     salePeriodValue,
     filePath,
-    arrayOfCompsForManualAddition
+    arrayOfCompsForManualAddition,
+    compProperty,
+    compStatusContract,
+    compStatusDate,
+    compStatusListing
 };

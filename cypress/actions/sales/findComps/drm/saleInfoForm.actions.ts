@@ -46,5 +46,17 @@ class SaleInfoFromActions {
         this.Page.SaleStatusDropdown.click();
         this.Page.getSaleStatus(status).click();
     }
+    
+    saveChangesOnDone(): SaleInfoFromActions {
+        this.Page.SaleInfoDoneBtn.should('be.enabled').focus().click();
+        return this;
+    }
+
+    checkRadioButtonSaleCondition(radioName: CompPlex.SaleInfo.SaleCondition): SaleInfoFromActions {
+        this.Page.saleCondition(radioName).should('exist').focus().check({ force: true })
+            .should('be.checked');
+        return this;
+    }
+
 }
 export default new SaleInfoFromActions(findCompsPage);

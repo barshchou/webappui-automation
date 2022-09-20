@@ -304,19 +304,30 @@ class JobSearchActions {
     }
     
     /**
-     * Action opens 'JOB SEARCH' tab, enters report id, finds comp on map
+     * Action enters salesforce job id, finds comp on map
      * and imports comps to existing report
      */
-    addNewCompViaReportId(reportId: string) {
+    addNewCompViaSfJobId(reportId: string) {
         this.enterReportToSearchComp(reportId)
             .clickSearchButton()
             .clickSelectCompsIconOnMap()
             .clickSelectCompsButton()
             .clickSelectAllButton()
-            .clickImportCompsFromReportButton();
+            .clickAddToReportButton();
         return this;
     }
 
+    /**
+     * Action enters report's id and imports comps to existing report
+     */
+    addNewCompViaReportId(reportId: string) {
+        this.enterReportToSearchComp(reportId)
+            .clickSearchButton()
+            .clickSelectCompsFromReportButton()
+            .clickSelectAllButton()
+            .clickAddToReportButton();
+        return this;
+    }
     
     /**
      * Action enters report id into field 'Report ID' on 'JOB SEARCH' tab
@@ -352,19 +363,25 @@ class JobSearchActions {
 
     clickSearchButton() {
         findCompsPage.searchButton.should('exist')
-            .should('be.enabled').click();
+            .click({ force:true });
         return this;
     }
     
     clickSelectCompsIconOnMap(index = 0) {
         findCompsPage.selectCompsIconOnMap.should('exist');
-        findCompsPage.selectCompsIconOnMap.eq(index).click();
+        findCompsPage.selectCompsIconOnMap.eq(index).click({ force:true });
         findCompsPage.selectCompsButton.should('exist');
         return this;
     }
 
     clickSelectCompsButton() {
         findCompsPage.selectCompsButton.should('exist')
+            .should('be.enabled').click();
+        return this;
+    }
+
+    clickSelectCompsFromReportButton() {
+        findCompsPage.selectCompsForReportButton.should('exist')
             .should('be.enabled').click();
         return this;
     }
@@ -376,7 +393,7 @@ class JobSearchActions {
         return this;
     }
 
-    clickImportCompsFromReportButton() {
+    clickAddToReportButton() {
         findCompsPage.addToReportCompsButton.should("be.visible")
             .should("be.enabled").click();
         return this;

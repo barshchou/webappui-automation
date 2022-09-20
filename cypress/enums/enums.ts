@@ -108,6 +108,7 @@ import finalValueApproachEnum from "./final/finalValuesReconciliation/finalValue
 import valueConclusionMarketValueNamesEnum from "./sales/value_conclusion/valueConclusionMarketValueNames.enum";
 import subjectPropertyDataSectionsEnum from "./subject_property_data_sections.enum";
 import editOnSubjectPropertySectionsEnum from "./edit_on_subject_property_sections.enum";
+import saleCondition from "./findComps/saleInformation/saleCondition.enum";
 import discussionSectionsEnum from "./adjustComps/discussionSections.enum";
 import discussionTitlesEnum from "./adjustComps/discussionTitles.enum";
 
@@ -222,6 +223,7 @@ export default {
     VALUE_CONCLUSION_MARKET_VALUE_NAMES: valueConclusionMarketValueNamesEnum,
     SUBJECT_PROPERTY_DATA_SECTIONS: subjectPropertyDataSectionsEnum,
     EDIT_ON_SUBJECT_PROPERTY_SECTIONS: editOnSubjectPropertySectionsEnum,
+    SALE_CONDITION: saleCondition,
     ADJUST_COMPS_DISCUSSION_SECTIONS: discussionSectionsEnum,
     ADJUST_COMPS_DISCUSSION_TITLES: discussionTitlesEnum
 };

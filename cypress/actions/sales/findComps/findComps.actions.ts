@@ -16,6 +16,7 @@ import { isDateHasCorrectFormat } from "../../../../utils/date.utils";
 import jobSearchActions from "./drm/job-search.actions";
 import addressSearchActions from "./drm/address-search.actions";
 import Enums from "../../../enums/enums";
+import salesCompDetailsActions from "./drm/salesCompDetails.actions";
 
 const { compPlex } = Alias.pageElements;
 
@@ -45,6 +46,10 @@ class FindCompsActions extends BaseActionsExt<typeof findCompsPage> {
 
     get AddressSearch() {
         return addressSearchActions;
+    }
+
+    get SalesCompDetails() {
+        return salesCompDetailsActions;
     }
 
     verifySpinnerExist(): FindCompsActions {
@@ -118,15 +123,17 @@ class FindCompsActions extends BaseActionsExt<typeof findCompsPage> {
 
     uploadComps(filePath: string): FindCompsActions {
         findCompsPage.csvInput.attachFile(getUploadFixture(filePath));
+        this.verifyUploadCompsSucceeded();
+        findCompsPage.csvUploadDoneButton.click();
+        findCompsPage.salesCompsDateSold.should(($compsDateList) => {
+            expect($compsDateList.length).to.be.above(1);
+        });
         return this;
     }
 
     verifyUploadCompsSucceeded(): FindCompsActions {
-        findCompsPage.loadingModalCSV.should('exist');
-        findCompsPage.loadingModalCSV.should('not.exist');
-        findCompsPage.salesCompsDateSold.should(($compsDateList) => {
-            expect($compsDateList.length).to.be.above(1);
-        });
+        findCompsPage.csvUploadDoneButton.should('exist').should('not.be.enabled');
+        findCompsPage.csvUploadDoneButton.should('be.enabled');
         return this;
     }
 
@@ -406,8 +413,7 @@ class FindCompsActions extends BaseActionsExt<typeof findCompsPage> {
             numberArray.sort((firstEl, secondEl) => (firstEl < secondEl) ? 1 : -1);
             wordsArray.sort((firstEl, secondEl) => (firstEl > secondEl) ? 1 : -1);
             let arrayForCompare = wordsArray.concat(numberArray);
-            cy.log(<any>focusArray); 
-            cy.log(<any>arrayForCompare); 
+            cy.log(`Array ${<any>focusArray} is compared with array ${<any>arrayForCompare}`); 
             expect(focusArray.length === arrayForCompare.length && focusArray.every((value, index) => 
                 value === arrayForCompare[index])
             ).to.be.equal(true);
@@ -518,6 +524,17 @@ class FindCompsActions extends BaseActionsExt<typeof findCompsPage> {
         
         findCompsPage.loadingModalSpinner.should('exist');
         findCompsPage.loadingModalSpinner.should('not.exist');
+        return this;
+    }
+
+    openDetailsModal(address: string): FindCompsActions {
+        this.Page.detailsButtonByAddress(address).should('exist').click();
+        this.Page.propertyInfoEditBtn.should('exist');
+        return this;
+    }
+
+    addDeletedCompByAddress(address: string): FindCompsActions {
+        findCompsPage.addRemovedCompButtonByAddress(address).should("exist").click();
         return this;
     }
 }
