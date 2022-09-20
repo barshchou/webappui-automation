@@ -16,5 +16,6 @@ export default {
     calculationUnits: Enums.CALCULATION_UNITS.psf,
     basis:"Price per SF",
     exportSectionName: Enums.EXPORT_TITLES.cumulativePricePerSf,
-    contractPrice: 150000
+    contractPrice: 150000,
+    sectionToExport: [ Enums.SECTIONS_TO_INCLUDE_IN_EXPORT.salesComparisonApproach ]
 };

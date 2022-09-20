@@ -18,7 +18,8 @@ describe("Generated Commentary is the same both in the Webapp and downloaded doc
 
             cy.stepInfo('4. Export report');
             _NavigationSection.openReviewAndExport();
-            ReviewExport.generateDocxReport().waitForReportGenerated()
+            ReviewExport.selectSectionsToIncludeInExport(testData.sectionToExport)
+                .generateDocxReport().waitForReportGenerated()
                 .downloadAndConvertDocxReport(testData.reportCreationData.reportNumber);
         });
 

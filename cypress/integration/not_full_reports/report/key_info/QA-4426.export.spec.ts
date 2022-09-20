@@ -26,7 +26,8 @@ describe("Check the generated commentary for Property Rights Appraised Discussio
                             the h2 Introduction > Property Rights 
                             Appraised section in the exported report.`);
                 _NavigationSection.openReviewAndExport();
-                ReviewExport.generateDocxReport().waitForReportGenerated()
+                ReviewExport.selectSectionsToIncludeInExport(testData.sectionToExport)
+                    .generateDocxReport().waitForReportGenerated()
                     .downloadAndConvertDocxReport(
                         reportCreationFixture(item.reportConclusion, `_${index + 1}`).reportNumber);
             });

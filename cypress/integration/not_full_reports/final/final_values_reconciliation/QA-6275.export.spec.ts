@@ -117,7 +117,8 @@ describe(`Sales Comparison Approach is exported correctly to Final Value Conclus
 
             cy.stepInfo("14. Export the report");
             _NavigationSection.Actions.openReviewAndExport();
-            ReviewExport.generateDocxReport().waitForReportGenerated()
+            ReviewExport.selectSectionsToIncludeInExport(testData.sectionToExport)
+                .generateDocxReport().waitForReportGenerated()
                 .downloadAndConvertDocxReport(testData.reportCreationData.reportNumber);
         });
 

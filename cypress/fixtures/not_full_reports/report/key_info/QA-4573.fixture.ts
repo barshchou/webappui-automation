@@ -8,5 +8,6 @@ const reportCreationFixture = () => {
 export default {
     reportCreationData: reportCreationFixture(),
     sourceText: "Source: Federal Reserve Economic Data (FRED)",
-    exportSectionName: Enums.EXPORT_TITLES.mortgageComponent
+    exportSectionName: Enums.EXPORT_TITLES.mortgageComponent,
+    sectionToExport: [ Enums.SECTIONS_TO_INCLUDE_IN_EXPORT.incomeCapitalizationApproach ]
 };

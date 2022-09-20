@@ -31,5 +31,6 @@ export default {
     definitionOfMarketValueTitle: Enums.PAGES_TEXTBOX_NAMES.definitionOfMarketValue,
     propertyRightsSection: Enums.EXPORT_TITLES.propertyRightsAppraised,
     definitionOfMarketValueSection: Enums.EXPORT_TITLES.definitionOfMarketValue,
+    sectionToExport: [ Enums.SECTIONS_TO_INCLUDE_IN_EXPORT.introduction ],
     chipNames
 };

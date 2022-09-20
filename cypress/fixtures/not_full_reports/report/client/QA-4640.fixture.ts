@@ -23,4 +23,5 @@ export default {
     identificationOfTheClientSection: Enums.EXPORT_TITLES.identificationOfTheClient,
     intendedUseSection: Enums.EXPORT_TITLES.intendedUseAndUser,
     chipNames,
+    sectionToExport: [ Enums.SECTIONS_TO_INCLUDE_IN_EXPORT.introduction ]
 };

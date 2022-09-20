@@ -27,7 +27,7 @@ describe(`Check the order of comps in the export when 'custom' dropdown is chose
 
             cy.stepInfo(`2. User selects n-first comps from map`);
             testData.compsToAdd.forEach(() => {
-                Sales._FindComps.Actions.selectCompFromMap();
+                Sales._FindComps.selectCompFromMap();
             });
 
             Sales._FindComps.verifyComparablesNumber(testData.compsToAdd.length)
@@ -49,9 +49,8 @@ describe(`Check the order of comps in the export when 'custom' dropdown is chose
             });
 
             cy.stepInfo(`5. User navigates to Review&Export and downloads report`);
-            _NavigationSection.Actions.openReviewAndExport();
-            ReviewExport.Actions.generateDocxReport()
-                .waitForReportGenerated()
+            _NavigationSection.openReviewAndExport();
+            ReviewExport.generateDocxReport().waitForReportGenerated()
                 .downloadAndConvertDocxReport(testData.reportCreationData.reportNumber);
         });
 

@@ -7,5 +7,6 @@ export default {
         conclusionValue: Enums.VALUE_CONCLUSION_TYPE.AS_COMPLETE
     }),
     leaseStatus: Enums.LEASE_STATUS.occupied,
-    defaultValue: "Average"
+    defaultValue: "Average",
+    sectionToExport: [ Enums.SECTIONS_TO_INCLUDE_IN_EXPORT.descriptionOfImprovements ]
 };

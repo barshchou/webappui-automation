@@ -26,7 +26,8 @@ describe(`[QA-5095] Selected expenses forecast is exported to Estimated Operatin
             cy.stepInfo("3. Save the page and generate a report");
             Income._ExpenseForecastActions.clickSaveButton();
             _NavigationSection.openReviewAndExport();
-            ReviewExport.generateDocxReport().waitForReportGenerated()
+            ReviewExport
+                .generateDocxReport().waitForReportGenerated()
                 .downloadAndConvertDocxReport(reportCreationFixture("Per SF").reportNumber);
         });
 
@@ -70,7 +71,8 @@ describe(`[QA-5095] Selected expenses forecast is exported to Estimated Operatin
             cy.stepInfo("3. Save the page and generate a report");
             Income._ExpenseForecastActions.clickSaveButton();
             _NavigationSection.openReviewAndExport();
-            ReviewExport.generateDocxReport().waitForReportGenerated()
+            ReviewExport
+                .generateDocxReport().waitForReportGenerated()
                 .downloadAndConvertDocxReport(reportCreationFixture("Per Unit").reportNumber);
 
         });
@@ -112,7 +114,8 @@ describe(`[QA-5095] Selected expenses forecast is exported to Estimated Operatin
             cy.stepInfo("3. Save the page and generate a report");
             Income._ExpenseForecastActions.clickSaveButton();
             _NavigationSection.openReviewAndExport();
-            ReviewExport.generateDocxReport().waitForReportGenerated()
+            ReviewExport
+                .generateDocxReport().waitForReportGenerated()
                 .downloadAndConvertDocxReport(reportCreationFixture("Per Room").reportNumber);
         });
 
@@ -124,7 +127,7 @@ describe(`[QA-5095] Selected expenses forecast is exported to Estimated Operatin
                                 in Estimated Operating Expense section`);
                     cy.visit(<string>file);
                     cy.contains(testData.exportSectionName).scrollIntoView();
-                    cy.xpath(`//h4[text()='${testData.fuelForecastName}']/following-sibling::p`)
+                    cy.xpath(`//h4[text()='${testData.fuelForecastName}']/following-sibling::p`).eq(0)
                         .should("include.text", 
                             `$${numberWithCommas(testData.fuelForecastPerRoom.forecast.toFixed(2))}`)
                         .should("include.text", testData.perRoomTitle);

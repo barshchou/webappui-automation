@@ -26,5 +26,6 @@ export default {
     identificationOfTheClientCommentaryTitle:  Enums.PAGES_TEXTBOX_NAMES.identificationOfTheClient,
     identificationOfTheClientSection: Enums.EXPORT_TITLES.identificationOfTheClient,
     intendedUseSection: Enums.EXPORT_TITLES.intendedUseAndUser,
-    chipNames
+    chipNames,
+    sectionToExport: [ Enums.SECTIONS_TO_INCLUDE_IN_EXPORT.introduction ]
 };

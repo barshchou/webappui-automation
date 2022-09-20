@@ -76,6 +76,7 @@ export type ExpenseDataProvider = keyof typeof Enums.EXPENSE_DATA_PROVIDER
 export type ExpenseItemBasisOfComparison = keyof typeof Enums.EXPENSE_ITEM_BASIS_OF_COMPARISON
 export type ExportTitlesKeys = keyof typeof Enums.EXPORT_TITLES
 export type CompStatusValues = keyof typeof Enums.COMP_STATUS_VALUES
+export type SectionsToIncludeInExportKeys = keyof typeof Enums.SECTIONS_TO_INCLUDE_IN_EXPORT
 export type CoverPageLocatorNames = keyof typeof Enums.COVER_PAGE_LOCATOR_NAMES
 export type CompPropertiesPathsInDatabase =  keyof typeof Enums.COMP_PROPERTIES_PATHS_DB.compPropertyPathsInDB
 export type CompSaleStatusInDatabase =  keyof typeof Enums.COMP_PROPERTIES_PATHS_DB.saleStatusValuesInDB
