@@ -54,7 +54,7 @@ jobs:
             aws-region: 'us-east-1'
 
       - name: Run smoke end-to-end tests with Currents dev
-        uses: Bowery-RES/action-run-e2e-tests@latest
+        uses: Bowery-RES/action-run-e2e-tests@v2.1.0
         with:
           github_token: ${{ secrets.GH_PERSONAL_ACCESS_TOKEN }}
           url: ${{ github.event.inputs.url }}
