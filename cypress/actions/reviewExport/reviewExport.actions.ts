@@ -187,6 +187,7 @@ class ReviewExportActions extends BaseActionsExt<typeof reviewExportPage> {
         isCheck = true): ReviewExportActions {
         this.selectDeselectAllSectionsForExport(false);
         sectionNames.forEach(sectionName => {
+            cy.log(`Selecting section ${sectionName} to check/uncheck`);
             this.checkUncheckSectionToIncludeInExport(sectionName, isCheck)
                 .verifySectionToIncludeInExportCheckboxState(sectionName, isCheck);
         });
