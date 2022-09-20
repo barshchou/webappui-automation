@@ -184,6 +184,7 @@ class ReviewExportActions extends BaseActionsExt<typeof reviewExportPage> {
     selectSectionsToIncludeInExport(sectionNames: Array<BoweryReports.SectionsToIncludeInExport>): ReviewExportActions {
         this.selectDeselectAllSectionsForExport(false);
         sectionNames.forEach(sectionName => {
+            cy.log(`Selecting section ${sectionName} to check/uncheck`);
             this.checkUncheckSectionToIncludeInExport(sectionName)
                 .verifySectionToIncludeInExportCheckboxState(sectionName);
         });
