@@ -107,6 +107,7 @@ export default defineConfig({
         env: {
             report: "api",
             burn: undefined,
+            grep: undefined,
             grepFilterSpecs: true
         }
     },
