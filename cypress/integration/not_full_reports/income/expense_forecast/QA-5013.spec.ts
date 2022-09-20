@@ -50,8 +50,8 @@ describe(`[QA-5013] [Income>Expense forecast] Selected expense card is displayed
             testData.verifyTOECommentGenerated(testData.buildingDescription.grossArea,
                 testData.numberOfResidentialUnits,
                 testData.rentRollResUnitFixture.rooms,
-            ).
-                verifyTOEAppraisersValueLinePSF(testData.buildingDescription.grossArea,
+            )
+                .verifyTOEAppraisersValueLinePSF(testData.buildingDescription.grossArea,
                     testData.numberOfResidentialUnits,
                     testData.rentRollResUnitFixture.rooms);
         });
@@ -89,8 +89,8 @@ describe(`[QA-5013] [Income>Expense forecast] Selected expense card is displayed
             testData.verifyTOECommentGenerated(testData.buildingDescription.grossArea,
                 testData.numberOfResidentialUnits,
                 testData.rentRollResUnitFixture.rooms,
-            ).
-                verifyTOEAppraisersValueLinePSF(testData.buildingDescription.grossArea,
+            )
+                .verifyTOEAppraisersValueLinePSF(testData.buildingDescription.grossArea,
                     testData.numberOfResidentialUnits,
                     testData.rentRollResUnitFixture.rooms);
         });
@@ -101,8 +101,8 @@ describe(`[QA-5013] [Income>Expense forecast] Selected expense card is displayed
             Income._ExpenseForecastActions.chooseForecastItemBasis(testData.expenseForecastTotalFixture('unit'));
             testData.verifyTOECommentGenerated(testData.buildingDescription.grossArea,
                 testData.numberOfResidentialUnits,
-                testData.rentRollResUnitFixture.rooms).
-                verifyTOEAppraisersValueLinePerUnit(testData.buildingDescription.grossArea,
+                testData.rentRollResUnitFixture.rooms)
+                .verifyTOEAppraisersValueLinePerUnit(testData.buildingDescription.grossArea,
                     testData.numberOfResidentialUnits,
                     testData.rentRollResUnitFixture.rooms);
             Income._ExpenseForecastActions.chooseForecastItemBasis(testData.expenseForecastTotalFixture('sf'));
@@ -125,8 +125,8 @@ describe(`[QA-5013] [Income>Expense forecast] Selected expense card is displayed
             testData.verifyTOECommentGenerated(testData.buildingDescription.grossArea,
                 testData.numberOfResidentialUnits,
                 testData.rentRollResUnitFixture.rooms,
-            ).
-                verifyTOEAppraisersValueLinePSF(testData.buildingDescription.grossArea,
+            )
+                .verifyTOEAppraisersValueLinePSF(testData.buildingDescription.grossArea,
                     testData.numberOfResidentialUnits,
                     testData.rentRollResUnitFixture.rooms);
         });
@@ -137,8 +137,8 @@ describe(`[QA-5013] [Income>Expense forecast] Selected expense card is displayed
             Income._ExpenseForecastActions.chooseForecastItemBasis(testData.expenseForecastTotalFixture('unit'));
             testData.verifyTOECommentGenerated(testData.buildingDescription.grossArea,
                 testData.numberOfResidentialUnits,
-                testData.rentRollResUnitFixture.rooms).
-                verifyTOEAppraisersValueLinePerUnit(testData.buildingDescription.grossArea,
+                testData.rentRollResUnitFixture.rooms)
+                .verifyTOEAppraisersValueLinePerUnit(testData.buildingDescription.grossArea,
                     testData.numberOfResidentialUnits,
                     testData.rentRollResUnitFixture.rooms);
             Income._ExpenseForecastActions.chooseForecastItemBasis(testData.expenseForecastTotalFixture('sf'));
@@ -163,8 +163,8 @@ describe(`[QA-5013] [Income>Expense forecast] Selected expense card is displayed
             testData.verifyTOECommentGenerated(testData.buildingDescription.grossArea,
                 testData.numberOfResidentialUnits,
                 testData.rentRollResUnitFixture.rooms,
-            ).
-                verifyTOEAppraisersValueLinePSF(testData.buildingDescription.grossArea,
+            )
+                .verifyTOEAppraisersValueLinePSF(testData.buildingDescription.grossArea,
                     testData.numberOfResidentialUnits,
                     testData.rentRollResUnitFixture.rooms);
         });
@@ -201,8 +201,8 @@ describe(`[QA-5013] [Income>Expense forecast] Selected expense card is displayed
             testData.verifyTOECommentGenerated(testData.buildingDescription.grossArea,
                 testData.numberOfResidentialUnits,
                 testData.rentRollResUnitFixture.rooms,
-            ).
-                verifyTOEAppraisersValueLinePSF(testData.buildingDescription.grossArea,
+            )
+                .verifyTOEAppraisersValueLinePSF(testData.buildingDescription.grossArea,
                     testData.numberOfResidentialUnits,
                     testData.rentRollResUnitFixture.rooms);
         });
@@ -239,8 +239,8 @@ describe(`[QA-5013] [Income>Expense forecast] Selected expense card is displayed
             testData.verifyTOECommentGenerated(testData.buildingDescription.grossArea,
                 testData.numberOfResidentialUnits,
                 testData.rentRollResUnitFixture.rooms,
-            ).
-                verifyTOEAppraisersValueLinePSF(testData.buildingDescription.grossArea,
+            )
+                .verifyTOEAppraisersValueLinePSF(testData.buildingDescription.grossArea,
                     testData.numberOfResidentialUnits,
                     testData.rentRollResUnitFixture.rooms);
         });
@@ -251,8 +251,8 @@ describe(`[QA-5013] [Income>Expense forecast] Selected expense card is displayed
             Income._ExpenseForecastActions.chooseForecastItemBasis(testData.expenseForecastTotalFixture('unit'));
             testData.verifyTOECommentGenerated(testData.buildingDescription.grossArea,
                 testData.numberOfResidentialUnits,
-                testData.rentRollResUnitFixture.rooms).
-                verifyTOEAppraisersValueLinePerUnit(testData.buildingDescription.grossArea,
+                testData.rentRollResUnitFixture.rooms)
+                .verifyTOEAppraisersValueLinePerUnit(testData.buildingDescription.grossArea,
                     testData.numberOfResidentialUnits,
                     testData.rentRollResUnitFixture.rooms);
             Income._ExpenseForecastActions.chooseForecastItemBasis(testData.expenseForecastTotalFixture('sf'));
