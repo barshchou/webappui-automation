@@ -18,7 +18,10 @@ const buildingInputs = allInputs.filter(unit => unit.startsWith("building"));
 const sharedOutdoorSpaceCheckboxes  = allCheckboxes.filter(unit => unit.startsWith("building.outdoorSpace"));
 
 export default {
-    reportCreationData: ReportDataCreator.getReportData("4694"),
+    reportCreationData: ReportDataCreator.getReportData("4694", {
+        conclusionValue: Enums.VALUE_CONCLUSION_TYPE.AS_IS,
+        incomeValue: Enums.INCOME_TYPE.both
+    }),
     enterValue: "Lorem Ipsum is simply dummy text he leap into. 1234567890:?;№!@#$%^&*(){}<>",
     numberValue: 10,
     imagePath: "test_files/Laundry_Room.png",
