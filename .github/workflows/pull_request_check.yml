@@ -25,7 +25,6 @@ jobs:
     needs: Run-tsc-check
     timeout-minutes: 20
     runs-on: ubuntu-latest
-    if: github.event.label.name != 'ready_for_review'
     container: boweryautomation/cypress-latest-chrome-latest
     permissions:
       id-token: write
