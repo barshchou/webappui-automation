@@ -45,7 +45,7 @@ const uploadValues = [
     {
         specName: "[QA-6747]",
         checkboxName: Enums.AMENITIES_CHECKBOXES.hasStorefrontExposure,
-        uploadName: Enums.AMENITIES_UPLOADS.storefrontExposure
+        uploadName: Enums.AMENITIES_UPLOADS.storeFrontExposure
     },
     {
         specName: "[QA-6748]",
