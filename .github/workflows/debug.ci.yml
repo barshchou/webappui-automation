@@ -27,7 +27,7 @@ on:
         type: string
         description: Run tests with specific tags
         required: false
-        default: grep=,grepTags=,burn=
+        default: grepTags=
       ref:
         type: string
         description: Select branch, tag, commit ref
