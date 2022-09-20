@@ -95,6 +95,12 @@ export default defineConfig({
             });
 
             on("task", {
+                async deleteFolder(_folderName: string) {
+                    return await fsUtil._deleteFolder(_folderName);
+                }
+            });
+            
+            on("task", {
                 async retrieveDataFromDb({ dbUrl, dbName, compPropertyPathInDB, compPropertyValueInDB }) {
                     return await db.retrieveDataFromDb(dbUrl, dbName, compPropertyPathInDB, compPropertyValueInDB);
                 }

@@ -133,7 +133,7 @@ class CommercialRentCompsActions extends BaseActionsExt<typeof rentCompsPage> {
     }
 
     clickRemoveButtonByRowNumber(rowNumber = 0): CommercialRentCompsActions {
-        rentCompsPage.getRemoveCompButton(rowNumber).click();
+        rentCompsPage.getRemoveIcon(rowNumber).click();
         return this;
     }
 

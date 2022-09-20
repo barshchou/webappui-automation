@@ -8,7 +8,6 @@ const { _jobSearch, _propertyInfoEnum, _saleInfoEnum, _addressSearch } = enums.C
 namespace Keys {
     export type BuildingType = keyof typeof _propertyInfoEnum.buildingType
     export type SaleStatus = keyof typeof _saleInfoEnum
-
 }
 
 export namespace CompPlex {
@@ -18,6 +17,7 @@ export namespace CompPlex {
     export namespace SaleInfo {
         export type SaleStatus = typeof enums.COMPPLEX_ENUM
             ._saleInfoEnum[Keys.SaleStatus]  
+        export type SaleCondition = typeof enums.SALE_CONDITION[KeyInfo.SaleCondition]
     }
 
     export namespace JobSearch {

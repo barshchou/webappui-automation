@@ -1,4 +1,4 @@
-import { conditionalDescribe } from './../../../checkIsProd.utils';
+import { conditionalDescribe } from '../../../checkIsProd.utils';
 import testData from "../../../../fixtures/not_full_reports/sales/value_conclusion/QA-4324.fixture";
 import { _NavigationSection } from '../../../../actions/base';
 import { createReport } from "../../../../actions/base/baseTest.actions";
@@ -38,7 +38,8 @@ conditionalDescribe("Sales Value Conclusion Discussion Generated Commentary has 
 
             cy.stepInfo('5. Export report');
             _NavigationSection.openReviewAndExport();
-            ReviewExport.generateDocxReport().waitForReportGenerated()
+            ReviewExport.selectSectionsToIncludeInExport(testData.sectionToExport)
+                .generateDocxReport().waitForReportGenerated()
                 .downloadAndConvertDocxReport(testData.reportCreationData.reportNumber);
         });
 

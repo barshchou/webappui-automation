@@ -31,5 +31,6 @@ export default {
     verifyExport: "test",
     residentialUnits: rentRollResidentialUnitsFixture(),
     verifyText: "Rent Roll Summary by Unit Type",
-    exportSectionName: Enums.EXPORT_TITLES.currentResidentialRentRoll
+    exportSectionName: Enums.EXPORT_TITLES.currentResidentialRentRoll,
+    sectionToExport: [ Enums.SECTIONS_TO_INCLUDE_IN_EXPORT.incomeCapitalizationApproach ]
 };

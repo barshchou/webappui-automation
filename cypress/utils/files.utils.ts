@@ -1,6 +1,6 @@
 import { sync } from "glob";
 import { convertToHtml } from "mammoth";
-import { existsSync, writeFileSync } from "fs";
+import { existsSync, writeFileSync, rmdir } from "fs";
 
 /**
  * Get relative path to the file (report docx file or converted html in our case)
@@ -53,8 +53,26 @@ const _waitForFileExists = async (filePath: string, currentTime = 0, timeout = 6
     return _waitForFileExists(filePath, currentTime + 1000, timeout);
 };
 
+/**
+ * @description Deleting specific folder. 
+ */
+const _deleteFolder = async (_folderName: string): Promise<null> => {
+    await new Promise((resolve, reject) => {
+        rmdir(_folderName, { maxRetries: 10, recursive: true }, (err) => {
+            if (err) {
+                reject(err);
+            }
+            resolve(null);
+        });
+    });
+    // eslint-disable-next-line no-console
+    console.log(`Folder ${_folderName} was successfully deleted!`);
+    return null;
+};
+
 export default {
     _waitForFileExists,
     _convertDocxToHtml,
-    _getFilePath
+    _getFilePath,
+    _deleteFolder
 };

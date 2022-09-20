@@ -36,7 +36,8 @@ describe("Check that rows added in the app are displayed in Tax Info --> Tax Lia
 
             cy.stepInfo("7. Download and convert Docx Report");
             _NavigationSection.openReviewAndExport();
-            ReviewExport.generateDocxReport().waitForReportGenerated()
+            ReviewExport.selectSectionsToIncludeInExport(testData.sectionToExport)
+                .generateDocxReport().waitForReportGenerated()
                 .downloadAndConvertDocxReport(testData.reportCreationData.reportNumber);
         });
 
@@ -44,7 +45,7 @@ describe("Check that rows added in the app are displayed in Tax Info --> Tax Lia
             cy.task("getFilePath", { _reportName: testData.reportCreationData.reportNumber, _docxHtml: "html" })
                 .then(file => {
                     cy.log(<string>file);
-                    cy.stepInfo("8. Verify rows added in export export");
+                    cy.stepInfo("8. Verify rows added in export");
                     cy.visit(<string>file);
                     cy.contains(testData.rowNames.additional).should("exist");
                     cy.contains(testData.rowNames.special).should("exist");

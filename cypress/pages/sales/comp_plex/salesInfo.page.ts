@@ -23,6 +23,10 @@ export default class SaleInformationForm {
 
     get SaleDateCalendarNewComp() { return cy.get('[data-qa="Sale Date"]'); }
 
+    get ListingAsOfDateCalendarNewComp() { return cy.get('[data-qa="Listing as of Date"]'); }
+
+    get ContractDateCalendarNewComp() { return cy.get('[data-qa="Contract Date"]'); }
+
     get SaleDateToday() {
         return cy.get('[class="ant-picker-today-btn"]');
     }
@@ -62,4 +66,9 @@ export default class SaleInformationForm {
     get contractPriceInput() {
         return cy.get(`[data-qa="Contract Price"]`);
     }
+
+    saleCondition(radioName: CompPlex.SaleInfo.SaleCondition) {
+        return cy.get(`input[class="ant-radio-input"][value="${radioName}"]`);
+    }
+    
 }

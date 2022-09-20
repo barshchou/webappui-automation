@@ -29,5 +29,6 @@ export default {
     calculationTypePercent: Enums.CALCULATION_TYPE.percent,
     calculationTypeSF: Enums.CALCULATION_TYPE.dollarPerSF,
     leaseTermsAdjustments: _leaseTermsAdjustments(),
-    marketConditionAdjustments: _marketConditionAdjustments()
+    marketConditionAdjustments: _marketConditionAdjustments(),
+    sectionToExport: [ Enums.SECTIONS_TO_INCLUDE_IN_EXPORT.incomeCapitalizationApproach ]
 };

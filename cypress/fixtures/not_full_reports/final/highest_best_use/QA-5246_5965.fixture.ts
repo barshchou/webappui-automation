@@ -13,8 +13,14 @@ const typesAs: BoweryReports.FeasiblePropertyType[] = [
     Enums.FEASIBLE_PROPERTY_TYPES.industrialSpace
 ];
 
+const _sectionsToExport: BoweryReports.SectionsToIncludeInExport[] = [
+    Enums.SECTIONS_TO_INCLUDE_IN_EXPORT.highestAndBestUse,
+    Enums.SECTIONS_TO_INCLUDE_IN_EXPORT.zoningSummary
+];
+
 export default {
     reportCreationData: ReportDataCreator.getReportData("5246"),
     textToType: "test chip",
     typesAs,
+    sectionsToExport: _sectionsToExport
 };

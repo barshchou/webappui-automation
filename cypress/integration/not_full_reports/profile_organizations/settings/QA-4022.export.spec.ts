@@ -22,7 +22,8 @@ describe("[QA-4022] A hard coded sentence is updated on the Organization page",
             _NavigationSection.returnToHomePage();
             _HomePage.openReportByName(testData.reportCreationData.reportNumber);
             _NavigationSection.openReviewAndExport();
-            ReviewExport.generateDocxReport().waitForReportGenerated()
+            ReviewExport.selectSectionsToIncludeInExport(testData.sectionToExport)
+                .generateDocxReport().waitForReportGenerated()
                 .downloadAndConvertDocxReport(testData.reportCreationData.reportNumber);
         });
 

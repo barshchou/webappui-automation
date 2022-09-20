@@ -31,7 +31,8 @@ describe("Verify the functionality of the Ceiling Height radio button",
 
             cy.stepInfo("5. [QA-4430] [QA-4442] Prepare report for export validation");
             _NavigationSection.openReviewAndExport();
-            ReviewExport.generateDocxReport()
+            ReviewExport.selectSectionsToIncludeInExport(testData.sectionToExport)
+                .generateDocxReport()
                 .waitForReportGenerated()
                 .downloadAndConvertDocxReport(testData.reportCreationData.reportNumber);
 

@@ -115,46 +115,42 @@ describe(`[QA-5025] [Income>Expense forecast] Selected existing expense card is 
                 );
         });
 
-        it(`Verify If “Include Expense on Pro Forma”  checkbox is selected but there is 
+        it(`Verify If “Include Expense on Pro Forma” checkbox is selected but there is 
                 data left in the forecast, this data is included in calculations on Pro forma and Expense forecast page 
                 (Per Room measure for Fuel + Full Appraiser's forecasts)`, () => {
 
-            /*
-             * TODO: Uncomment this code + code below, after bug fix https://bowery.atlassian.net/browse/WEB-5881
-             * 
-             * Income._ExpenseForecastActions.chooseForecastItemBasis(testData.expenseForecastFuelFixture("room"));
-             *  Income._ExpenseForecastActions.totalSumForecastPSFAllCards(
-             *      testData.buildingDescription.grossArea,
-             *      testData.numberOfResidentialUnits,
-             *      testData.rentRollResUnitFixture.rooms
-             *  )
-             *      .totalSumForecastPerUnitAllCards(
-             *          testData.buildingDescription.grossArea,
-             *          testData.numberOfResidentialUnits,
-             *          testData.rentRollResUnitFixture.rooms
-             *      );
-             *  _NavigationSection.navigateToProForma();
-             *  Income._ProFormaActions.verifyTotalTOEexTaxesIncludeForecasts(testData.buildingDescription.grossArea)
-             *      .verifyPsfTOEexTaxesIncludeForecasts()
-             *      .verifyPerUnitTOEexTaxesIncludeForecasts()
-             *      .verifyTotalTOEIncludeForecasts(testData.buildingDescription.grossArea)
-             *      .verifyPsfTOEIncludeForecasts()
-             *      .verifyPerUnitTOEIncludeForecasts()
-             *      .verifyTotalNOIIncludeForecasts(testData.buildingDescription.grossArea)
-             *      .verifyPsfNOIIncludeForecasts()
-             *      .verifyPerUnitNOIIncludeForecasts();
-             *  _NavigationSection.navigateToExpenseForecast();
-             *  Income._ExpenseForecastActions.verifyTotalForecastPSF(
-             *      testData.buildingDescription.grossArea,
-             *      testData.numberOfResidentialUnits,
-             *      testData.rentRollResUnitFixture.rooms
-             *  )
-             *      .chooseForecastItemBasis(testData.expenseForecastTotalFixture('unit'))
-             *      .verifyTotalForecastPerUnit(
-             *          testData.buildingDescription.grossArea,
-             *          testData.numberOfResidentialUnits,
-             *          testData.rentRollResUnitFixture.rooms
-             *      );
-             */
+            Income._ExpenseForecastActions.chooseForecastItemBasis(testData.expenseForecastFuelFixture("room"));
+            Income._ExpenseForecastActions.totalSumForecastPSFAllCards(
+                testData.buildingDescription.grossArea,
+                testData.numberOfResidentialUnits,
+                testData.rentRollResUnitFixture.rooms
+            )
+                .totalSumForecastPerUnitAllCards(
+                    testData.buildingDescription.grossArea,
+                    testData.numberOfResidentialUnits,
+                    testData.rentRollResUnitFixture.rooms
+                );
+            _NavigationSection.navigateToProForma();
+            Income._ProFormaActions.verifyTotalTOEexTaxesIncludeForecasts(testData.buildingDescription.grossArea)
+                .verifyPsfTOEexTaxesIncludeForecasts()
+                .verifyPerUnitTOEexTaxesIncludeForecasts()
+                .verifyTotalTOEIncludeForecasts(testData.buildingDescription.grossArea)
+                .verifyPsfTOEIncludeForecasts()
+                .verifyPerUnitTOEIncludeForecasts()
+                .verifyTotalNOIIncludeForecasts(testData.buildingDescription.grossArea)
+                .verifyPsfNOIIncludeForecasts()
+                .verifyPerUnitNOIIncludeForecasts();
+            _NavigationSection.navigateToExpenseForecast();
+            Income._ExpenseForecastActions.verifyTotalForecastPSF(
+                testData.buildingDescription.grossArea,
+                testData.numberOfResidentialUnits,
+                testData.rentRollResUnitFixture.rooms
+            )
+                .chooseForecastItemBasis(testData.expenseForecastTotalFixture('unit'))
+                .verifyTotalForecastPerUnit(
+                    testData.buildingDescription.grossArea,
+                    testData.numberOfResidentialUnits,
+                    testData.rentRollResUnitFixture.rooms
+                );
         });
     });

@@ -4,23 +4,25 @@ import BaseActionsExt from "../base/base.actions.ext";
 import routesUtils from "../../utils/routes.utils";
 
 class ClientActions extends BaseActionsExt<typeof clientPage> {
-    verifyInputChangesToBeUnsaved(clientFileNumber: string): ClientActions {
-        clientPage.clientFileNumberField.should("have.value", clientFileNumber);
+    verifyInputChangesToBeUnsaved(clientFileNumber: string, index = 0): ClientActions {
+        clientPage.getClientFileNumberField(index).should("have.value", clientFileNumber);
         return this;
     }
 
-    enterClientName(name: string): ClientActions {
-        clientPage.clientNameField.clear().type(name).type("{enter}");
+    enterClientName(name: string, index = 0): ClientActions {
+        clientPage.getClientNameField(index).clear().type(name).type("{enter}");
         return this;
     }
     
-    enterClientFileNumber(name:string): ClientActions {
-        clientPage.clientFileNumberField.clear().type(name).should("have.value", name);
+    enterClientFileNumber(name:string, index = 0): ClientActions {
+        clientPage.getClientFileNumberField(index).clear().type(name).should("have.value", name);
+        clientPage.getClientFileNumberField(index).should("have.value", name);
         return this;
     }
 
-    enterNycbApplicationNumber(name:string): ClientActions {
-        clientPage.nycbApplicationNumber.clear().type(name).should("have.value", name);
+    enterNycbApplicationNumber(name:string, index = 0): ClientActions {
+        clientPage.getNYCBApplicationNumber(index).clear().type(name).should("have.value", name);
+        clientPage.getNYCBApplicationNumber(index).should("have.value", name);
         return this;
     }
 
@@ -71,6 +73,58 @@ class ClientActions extends BaseActionsExt<typeof clientPage> {
     verifyNarrativeSuggestions(verifyListValue: string, numberLists = 0): ClientActions {
         clientPage.narrativeSuggestionsList.eq(numberLists)
             .contains(verifyListValue).should("have.text", verifyListValue);
+        return this;
+    }
+
+    clickAddAdditionalClientBtn(): ClientActions {
+        clientPage.addAdditionalClientBtn.click({ force: true });
+        return this;
+    }
+
+    verifyAdditionalClientAdded(clientIndex = 1): ClientActions {
+        clientPage.getClientNameField(clientIndex).should("exist");
+        clientPage.getClientFileNumberField(clientIndex).should("exist");
+        clientPage.getNYCBApplicationNumber(clientIndex).should("exist");
+        return this;
+    }
+
+    clickRemoveAdditionalClientBtn(index = 0): ClientActions {
+        clientPage.getRemoveIcon(index).click();
+        return this;
+    }
+
+    verifyAdditionalClientRemoved(clientIndex = 1, undoIndex = 0): ClientActions {
+        clientPage.undoBtn.eq(undoIndex).should("exist");
+        // Wait when remove additional client
+        cy.wait(4000);
+        clientPage.getClientFileNumberField(clientIndex).should("not.exist");
+        clientPage.getNYCBApplicationNumber(clientIndex).should("not.exist");
+        return this;
+    }
+
+    clickUndoBtn(index = 0): ClientActions {
+        clientPage.undoBtn.eq(index).click();
+        return this;
+    }
+
+    verifyAdditionalClientEnableOrNot(clientIndex = 1, isEnable = true): ClientActions {
+        const matcher = isEnable ? "be.enabled" : "be.disabled";
+        clientPage.getClientNameField(clientIndex).should(matcher);
+        clientPage.getClientFileNumberField(clientIndex).should(matcher);
+        clientPage.getNYCBApplicationNumber(clientIndex).should(matcher);
+        return this;
+    }
+
+    clickAddNewClient(): ClientActions {
+        clientPage.addNewClient.click();
+        this.submitSaveChangesModal();
+        return this;
+    }
+
+    selectClient(enterValue: string, clientName: string, index = 0): ClientActions {
+        clientPage.getClientNameField(index).type(enterValue);
+        clientPage.getClientListItem(clientName).click();
+        clientPage.getClientNameField(index).should("have.value", clientName);
         return this;
     }
 }

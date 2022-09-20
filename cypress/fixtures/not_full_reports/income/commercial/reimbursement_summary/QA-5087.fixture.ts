@@ -34,7 +34,6 @@ const _expenseForecastUtilitiesFixture = (): BoweryReports.ForecastItem => {
     };
 };
 
-
 export default {
     reportCreationData: reportCreationFixture(),
     numberOfCommercialUnits: _numberOfCommercialUnits,
@@ -52,5 +51,6 @@ export default {
     commercialExpenseSection: Enums.EXPORT_TITLES.commercialExpenseReimbursement,
     potentialGrossSection: Enums.EXPORT_TITLES.potentialGrossCommercialRent,
     commercialVacancySection: Enums.EXPORT_TITLES.commercialVacancyAndCollectionLoss,
-    stabilizedIncomeSection: Enums.EXPORT_TITLES.stabilizedIncomeAndExpenses
+    stabilizedIncomeSection: Enums.EXPORT_TITLES.stabilizedIncomeAndExpenses,
+    sectionToExport: [ Enums.SECTIONS_TO_INCLUDE_IN_EXPORT.incomeCapitalizationApproach ]
 };
