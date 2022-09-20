@@ -153,7 +153,7 @@ class ReviewExportActions extends BaseActionsExt<typeof reviewExportPage> {
      * @param sectionName Name of section with checkbox
      * @param isCheck Should section be included in the exported report or not
      */
-    checkUncheckSectionToIncludeInExport(sectionName: BoweryReports.SectionsToIncludeInExport, isCheck = true): 
+    private checkUncheckSectionToIncludeInExport(sectionName: BoweryReports.SectionsToIncludeInExport, isCheck = true): 
     ReviewExportActions {
         reviewExportPage.getIncludeSectionCheckbox(sectionName).invoke('attr', 'class').then(classAttr => {
             const checked = classAttr.includes("checked");
@@ -170,8 +170,9 @@ class ReviewExportActions extends BaseActionsExt<typeof reviewExportPage> {
      * @param sectionName Name of section with checkbox
      * @param isChecked Should section checkbox be checked at the moment or not
      */
-    verifySectionToIncludeInExportCheckboxState(sectionName: BoweryReports.SectionsToIncludeInExport, isChecked = true):
-    ReviewExportActions {
+    private verifySectionToIncludeInExportCheckboxState(sectionName: BoweryReports.SectionsToIncludeInExport, 
+        isChecked = true):
+        ReviewExportActions {
         const assertion = isChecked ? "be.checked" : "not.be.checked";
         reviewExportPage.getIncludeSectionCheckbox(sectionName).should(assertion);
         return this;
@@ -180,12 +181,14 @@ class ReviewExportActions extends BaseActionsExt<typeof reviewExportPage> {
     /**
      * Select specified section to include them in exported report.
      * @param sectionNames Name of sections to include in exported report
+     * @param isCheck Should sections be included in the exported report or not
      */
-    selectSectionsToIncludeInExport(sectionNames: Array<BoweryReports.SectionsToIncludeInExport>): ReviewExportActions {
+    selectSectionsToIncludeInExport(sectionNames: Array<BoweryReports.SectionsToIncludeInExport>,
+        isCheck = true): ReviewExportActions {
         this.selectDeselectAllSectionsForExport(false);
         sectionNames.forEach(sectionName => {
-            this.checkUncheckSectionToIncludeInExport(sectionName)
-                .verifySectionToIncludeInExportCheckboxState(sectionName);
+            this.checkUncheckSectionToIncludeInExport(sectionName, isCheck)
+                .verifySectionToIncludeInExportCheckboxState(sectionName, isCheck);
         });
         return this;
     }
