@@ -98,5 +98,5 @@ jobs:
         uses: actions/upload-artifact@v3
         with:
           name: downloaded-reports
-          path: cypress/archive
+          path: cypress/downloads
           retention-days: 2

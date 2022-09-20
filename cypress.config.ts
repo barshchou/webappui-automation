@@ -95,8 +95,8 @@ export default defineConfig({
             });
 
             on("task", {
-                async deleteFolder(folderName: string) {
-                    return await fsUtil._deleteFolder(folderName);
+                async deleteFolder(_folderName: string) {
+                    return await fsUtil._deleteFolder(_folderName);
                 }
             });
             
