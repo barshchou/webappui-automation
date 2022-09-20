@@ -2,21 +2,6 @@ import descriptionPage from "../../pages/property/description.page";
 import BaseActionsExt from "../base/base.actions.ext";
 
 class DescriptionActions extends BaseActionsExt<typeof descriptionPage> {
-
-    selectGeneralPropertyCondition(conditionValue: string): DescriptionActions {
-        descriptionPage.selectGeneralConditionButton.click();
-        descriptionPage.getDropdownOptionByValue(conditionValue).should("exist").click();
-        descriptionPage.selectGeneralConditionButton.should("have.text", conditionValue);
-        return this;
-    }
-
-    selectAsStabilizedPropertyCondition(conditionValue: string): DescriptionActions {
-        descriptionPage.selectAsStabilizedConditionButton.click();
-        descriptionPage.getDropdownOptionByValue(conditionValue).should("exist").click();
-        descriptionPage.selectAsStabilizedConditionButton.should("have.text", conditionValue);
-        return this;
-    }
-
     checkCheckboxByLabel(label: string): DescriptionActions {
         descriptionPage.getCheckboxByLabel(label).check().should("have.value", "true");
         if (label === "Stairs") {

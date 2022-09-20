@@ -41,9 +41,10 @@ describe.skip("Full bowery way, multifamily as complete report", { tags: [ "@ful
         Property.History.checkIsUnderContractCheckbox()
             .enterContractDetails(testData.contractDetails)
             .clickSaveContinueButton();
-        Property.Description.selectGeneralPropertyCondition(testData.siteInspection.generalPropertyCondition)
-            .selectAsStabilizedPropertyCondition(testData.siteInspection.stabilizedCondition)
-            .checkListCheckboxesByLabels(testData.siteInspection.locationsInspectedLabels)
+        DataCollections._SubjectPropertyData.selectGeneralPropertyCondition(
+            testData.siteInspection.generalPropertyCondition)
+            .selectAsStabilizedPropertyCondition(testData.siteInspection.stabilizedCondition);
+        Property.Description.checkListCheckboxesByLabels(testData.siteInspection.locationsInspectedLabels)
             .checkStairConditionByValue(testData.siteInspection.stairCondition)
             .checkFoundationByValue(testData.descriptionOfImprovements.foundationValue)
             .checkStructuralSystemByValue(testData.descriptionOfImprovements.structuralSystemValue)
