@@ -100,7 +100,7 @@ jobs:
           git checkout origin/${{ github.base_ref }}
           git checkout origin/${{ github.head_ref }}
           git checkout ${{ github.sha }}
-          CHANGED_SPECS=$(npx find-cypress-specs --branch master)
+          CHANGED_SPECS=$(npx find-cypress-specs --branch ${{ github.base_ref }})
           echo ::set-output name=CHANGED_SPECS::$CHANGED_SPECS
 
       - name: Configure secrets
