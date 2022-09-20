@@ -84,6 +84,13 @@ jobs:
       id-token: write
       contents: read
     steps:
+      - name: Configure secrets
+        if: ${{ !env.ACT }}
+        uses: aws-actions/configure-aws-credentials@v1
+        with:
+          role-to-assume: arn:aws:iam::814827541967:role/GithubOIDC-Role-QMKR3DR5WV3B
+          aws-region: 'us-east-1'
+
       - name: Run included specs
         uses: Bowery-RES/action-run-pr-included-tests@latest
         with:
