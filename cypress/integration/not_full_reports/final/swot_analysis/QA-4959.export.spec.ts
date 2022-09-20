@@ -27,7 +27,8 @@ describe("Verify the text in the Opportunities section on the SWOT Analysis page
 
             cy.stepInfo("3. Export the report");
             _NavigationSection.openReviewAndExport();
-            ReviewExport.generateDocxReport().waitForReportGenerated()
+            ReviewExport.selectSectionsToIncludeInExport(testData.sectionToExport)
+                .generateDocxReport().waitForReportGenerated()
                 .downloadAndConvertDocxReport(testData.reportCreationData.reportNumber);
         });
 

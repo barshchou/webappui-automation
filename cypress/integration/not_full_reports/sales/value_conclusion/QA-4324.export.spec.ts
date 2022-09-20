@@ -38,7 +38,8 @@ conditionalDescribe("Sales Value Conclusion Discussion Generated Commentary has 
 
             cy.stepInfo('5. Export report');
             _NavigationSection.openReviewAndExport();
-            ReviewExport.generateDocxReport().waitForReportGenerated()
+            ReviewExport.selectSectionsToIncludeInExport(testData.sectionToExport)
+                .generateDocxReport().waitForReportGenerated()
                 .downloadAndConvertDocxReport(testData.reportCreationData.reportNumber);
         });
 

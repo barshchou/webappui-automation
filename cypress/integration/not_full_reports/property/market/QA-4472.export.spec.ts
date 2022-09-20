@@ -25,7 +25,8 @@ describe(`[QA-4472] [Property > Market] Summary of Rent Stabilization Laws`,
 
             cy.stepInfo(`4. Export the report.`);
             _NavigationSection.openReviewAndExport();
-            ReviewExport.generateDocxReport().waitForReportGenerated()
+            ReviewExport.selectSectionsToIncludeInExport(testData.sectionsToExport)
+                .generateDocxReport().waitForReportGenerated()
                 .downloadAndConvertDocxReport(testData.reportCreationData.reportNumber);
         });
 

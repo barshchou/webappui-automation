@@ -1,19 +1,28 @@
 import ReportDataCreator from "../../../data_creator/reportData.creator";
-import enums from "../../../../enums/enums";
+import Enums from "../../../../enums/enums";
 import { BoweryReports } from "../../../../types/boweryReports.type";
 
 const reportCreationFixture = () => {
     return ReportDataCreator.getReportData("4472", {
-        templateValue: enums.TEMPLATE_TYPE.notFreddieMac,
-        incomeValue: enums.INCOME_TYPE.both,
-        conclusionValue: enums.VALUE_CONCLUSION_TYPE.AS_COMPLETE });
+        templateValue: Enums.TEMPLATE_TYPE.notFreddieMac,
+        incomeValue: Enums.INCOME_TYPE.both,
+        conclusionValue: Enums.VALUE_CONCLUSION_TYPE.AS_COMPLETE });
 };
 
 const _marketAnalysisUses: BoweryReports.MarketAnalysisUses[] = [
-    enums.MARKET_ANALYSIS_USES.multifamily,
-    enums.MARKET_ANALYSIS_USES.retail,
-    enums.MARKET_ANALYSIS_USES.office,
-    enums.MARKET_ANALYSIS_USES.industrial
+    Enums.MARKET_ANALYSIS_USES.multifamily,
+    Enums.MARKET_ANALYSIS_USES.retail,
+    Enums.MARKET_ANALYSIS_USES.office,
+    Enums.MARKET_ANALYSIS_USES.industrial
+];
+
+const _sectionsToExport: BoweryReports.SectionsToIncludeInExport[] = [
+    Enums.SECTIONS_TO_INCLUDE_IN_EXPORT.highestAndBestUse,
+    Enums.SECTIONS_TO_INCLUDE_IN_EXPORT.multifamilySubmarketAnalysis,
+    Enums.SECTIONS_TO_INCLUDE_IN_EXPORT.retailSubmarketAnalysis,
+    Enums.SECTIONS_TO_INCLUDE_IN_EXPORT.officeSubmarketAnalysis,
+    Enums.SECTIONS_TO_INCLUDE_IN_EXPORT.industrialSubmarketAnalysis,
+    Enums.SECTIONS_TO_INCLUDE_IN_EXPORT.addenda
 ];
 
 export default {
@@ -21,8 +30,9 @@ export default {
     marketAnalysisUses: _marketAnalysisUses,
     fileName: "QA-4472.docx",
     fileContent: "abcdefghijklmnopqrstuvwxyz1234567890",
-    sectionBeforeSubmarketFiles: enums.EXPORT_TITLES.submarketAnalyses,
-    sectionAfterSubmarketFiles: enums.EXPORT_TITLES.highestAndBestUse,
-    sectionBeforeMarketFiles: enums.EXPORT_TITLES.comparableSalesOutline,
-    sectionAfterMarketFiles: enums.EXPORT_TITLES.qualifications
+    sectionBeforeSubmarketFiles: Enums.EXPORT_TITLES.submarketAnalyses,
+    sectionAfterSubmarketFiles: Enums.EXPORT_TITLES.highestAndBestUse,
+    sectionBeforeMarketFiles: Enums.EXPORT_TITLES.comparableSalesOutline,
+    sectionAfterMarketFiles: Enums.EXPORT_TITLES.qualifications,
+    sectionsToExport: _sectionsToExport
 };

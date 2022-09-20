@@ -18,7 +18,8 @@ describe("Verify the report export with a pre-filled Letter of Engagement from D
 
             cy.stepInfo(`3. Export the report`);
             _NavigationSection.openReviewAndExport();
-            ReviewExport.generateDocxReport().waitForReportGenerated()
+            ReviewExport.selectSectionsToIncludeInExport(testData.sectionToExport)
+                .generateDocxReport().waitForReportGenerated()
                 .downloadAndConvertDocxReport(`JOB-${testData.reportCreationData.reportNumber}_462`);
         });
 

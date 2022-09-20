@@ -22,5 +22,6 @@ export default {
     intendedUseSection: Enums.EXPORT_TITLES.intendedUseAndUser,
     intendedUser: Enums.PAGES_TEXTBOX_NAMES.intendedUser,
     identificationOfTheClient: Enums.PAGES_TEXTBOX_NAMES.identificationOfTheClient,
-    chipNames
+    chipNames,
+    sectionToExport: [ Enums.SECTIONS_TO_INCLUDE_IN_EXPORT.introduction ]
 };

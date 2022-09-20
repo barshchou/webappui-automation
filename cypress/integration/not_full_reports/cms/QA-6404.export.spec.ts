@@ -28,7 +28,8 @@ conditionalDescribe("[QA-6404] Verify possibility to edit text",
             _NavigationSection.returnToHomePage();
             _HomePage.openReportByName(testData.reportCreationData.reportNumber);
             _NavigationSection.openReviewAndExport();
-            ReviewExport.generateDocxReport().waitForReportGenerated()
+            ReviewExport.selectSectionsToIncludeInExport(testData.sectionToExport)
+                .generateDocxReport().waitForReportGenerated()
                 .downloadAndConvertDocxReport(testData.reportCreationData.reportNumber);
         });
 
