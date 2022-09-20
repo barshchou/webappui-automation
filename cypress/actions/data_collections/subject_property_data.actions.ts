@@ -158,6 +158,11 @@ class SubjectPropertyDataActions extends BaseActionsExt<typeof subjectPropertyDa
         return this;
     }
 
+    setBuildingType(type: string): SubjectPropertyDataActions {
+        subjectPropertyDataPage.buildingTypeDropdown.click();
+        subjectPropertyDataPage.buildingType(type).scrollIntoView().click();
+        return this;
+    }
 }
 
 export default new SubjectPropertyDataActions(subjectPropertyDataPage);

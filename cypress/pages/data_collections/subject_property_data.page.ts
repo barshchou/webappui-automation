@@ -49,6 +49,10 @@ class SubjectPropertyDataPage extends BasePage {
 
     get currentOwnerField() { return cy.get("[name=currentOwner]"); }
 
+    get buildingTypeDropdown() { return cy.get('[data-qa="buildingType-select-list"]'); }
+
+    buildingType(type: string) { return cy.get(`[data-qa="buildingType-${type}-select-option"]`); }
+
 }
 
 export default new SubjectPropertyDataPage();

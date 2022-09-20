@@ -2,7 +2,8 @@ const compPropertyPathsInDB = {
     saleStatus: "latestVersion.saleInformation.saleStatus",
     saleCondition: "latestVersion.saleInformation.saleCondition",
     city: "address.city",
-    neighborhood: "latestVersion.propertyInformation.neighborhood"
+    neighborhood: "latestVersion.propertyInformation.neighborhood",
+    buildingType: "latestVersion.propertyInformation.buildingType"
 } as const;
 
 const saleStatusValuesInDB = {
@@ -20,10 +21,16 @@ const neighborhoodValues = {
     williamsburg: "Williamsburg"
 } as const;
 
+const buildingTypeValues = {
+    elevator: "elevator",
+    walkup: "walk-up"
+};
+
 export default {
     compPropertyPathsInDB,
     saleStatusValuesInDB,
     saleConditionValuesInDB,
-    neighborhoodValues
+    neighborhoodValues,
+    buildingTypeValues
 };
    

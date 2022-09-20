@@ -291,6 +291,14 @@ class NavigationSectionActions extends BaseActionsExt<typeof navigationSectionPa
         return this;
     }
 
+    navigateToPropertyMaps(): NavigationSectionActions {
+        this.clickPropertyButton()
+            .clickMapsButton()
+            .submitSaveChangesModal()
+            .waitForUrl(routesUtils.amenities);
+        return this;
+    }
+
     navigateToProfileOrganization(nameLink: string): NavigationSectionActions {
         this.clickProfileOrganization()
             .selectLink(nameLink)
