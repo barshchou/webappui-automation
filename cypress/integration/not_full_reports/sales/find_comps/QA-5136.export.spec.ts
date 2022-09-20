@@ -8,7 +8,7 @@ import { pathSpecData } from '../../../../../utils/fixtures.utils';
 import { _saveDataInFile } from '../../../../support/commands';
 
 describe(`Check the order of comps in the export when 'custom' dropdown is chosen`, 
-    { tags: [ "@sales", "@find_comps", "@comp_plex", "@check_export", "@fix" ] }, () => {
+    { tags: [ "@sales", "@find_comps", "@comp_plex", "@check_export" ] }, () => {
     
         it("QA-5136]", () => {
             createReport(testData.reportCreationData);
