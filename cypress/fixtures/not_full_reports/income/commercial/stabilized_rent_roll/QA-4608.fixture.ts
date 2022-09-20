@@ -122,5 +122,6 @@ export default {
     exportTableValues: _exportTableValues,
     totalRowName: _totalRowName,
     exportedTableColumnNames: _exportedTableColumnNames,
-    exportSectionName: Enums.EXPORT_TITLES.commercialStabilizedRentRoll
+    exportSectionName: Enums.EXPORT_TITLES.commercialStabilizedRentRoll,
+    sectionToExport: [ Enums.SECTIONS_TO_INCLUDE_IN_EXPORT.incomeCapitalizationApproach ]
 };

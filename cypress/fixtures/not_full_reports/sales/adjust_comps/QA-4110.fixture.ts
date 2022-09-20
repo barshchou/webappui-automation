@@ -25,6 +25,7 @@ export default {
     calculationUnits: Enums.CALCULATION_UNITS.perTotalUnits,
     basis: "Price per Unit",
     cumulativePricePerUnit: _cumulativePricePerUnit,
+    sectionToExport: [ Enums.SECTIONS_TO_INCLUDE_IN_EXPORT.salesComparisonApproach ],
     exportSectionName: Enums.EXPORT_TITLES.cumulativePricePerUnit,
     compProperty,
     compStatusContract,

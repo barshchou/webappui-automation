@@ -23,7 +23,8 @@ describe(`[Property > Market] Summary of Rent Stabilization Laws`,
 
             cy.stepInfo(`4. Export the report.`);
             _NavigationSection.openReviewAndExport();
-            ReviewExport.generateDocxReport().waitForReportGenerated()
+            ReviewExport.selectSectionsToIncludeInExport(testData.sectionToExport)
+                .generateDocxReport().waitForReportGenerated()
                 .downloadAndConvertDocxReport(testData.reportCreationData.reportNumber);
         });
 
@@ -52,7 +53,8 @@ describe(`[Property > Market] Summary of Rent Stabilization Laws`,
 
             cy.stepInfo(`3. Export the report.`);
             _NavigationSection.openReviewAndExport();
-            ReviewExport.generateDocxReport().waitForReportGenerated()
+            ReviewExport.selectSectionsToIncludeInExport(testData.sectionToExport)
+                .generateDocxReport().waitForReportGenerated()
                 .downloadAndConvertDocxReport(testData.reportCreationData.reportNumber);
         });
 

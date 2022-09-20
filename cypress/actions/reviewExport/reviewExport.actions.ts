@@ -137,5 +137,61 @@ class ReviewExportActions extends BaseActionsExt<typeof reviewExportPage> {
         reviewExportPage.resultModalCloseButton(success).click();
         return this;
     }
+
+    /**
+     * Select or deselect all sections for exporting in the report.
+     * @param select Should all sections be included in the exported report or not
+     */
+    selectDeselectAllSectionsForExport(select = true): ReviewExportActions {
+        reviewExportPage.loadingSectionsForm.should("not.exist");
+        select ? reviewExportPage.selectAllButton.click() : reviewExportPage.deselectAllButton.click();
+        return this;
+    }
+
+    /**
+     * Select or deselect chosen section for exporting in the report.
+     * @param sectionName Name of section with checkbox
+     * @param isCheck Should section be included in the exported report or not
+     */
+    private checkUncheckSectionToIncludeInExport(sectionName: BoweryReports.SectionsToIncludeInExport, isCheck = true): 
+    ReviewExportActions {
+        reviewExportPage.getIncludeSectionCheckbox(sectionName).invoke('attr', 'class').then(classAttr => {
+            const checked = classAttr.includes("checked");
+            if (checked != isCheck) {
+                isCheck ? reviewExportPage.getIncludeSectionCheckbox(sectionName)
+                    .check() : reviewExportPage.getIncludeSectionCheckbox(sectionName).uncheck();
+            }
+        });
+        return this;
+    }
+
+    /**
+     * Retrieve section checkbox  and verify its state.
+     * @param sectionName Name of section with checkbox
+     * @param isChecked Should section checkbox be checked at the moment or not
+     */
+    private verifySectionToIncludeInExportCheckboxState(sectionName: BoweryReports.SectionsToIncludeInExport, 
+        isChecked = true):
+        ReviewExportActions {
+        const assertion = isChecked ? "be.checked" : "not.be.checked";
+        reviewExportPage.getIncludeSectionCheckbox(sectionName).should(assertion);
+        return this;
+    }
+
+    /**
+     * Select specified section to include them in exported report.
+     * @param sectionNames Name of sections to include in exported report
+     * @param isCheck Should sections be included in the exported report or not
+     */
+    selectSectionsToIncludeInExport(sectionNames: Array<BoweryReports.SectionsToIncludeInExport>,
+        isCheck = true): ReviewExportActions {
+        this.selectDeselectAllSectionsForExport(false);
+        sectionNames.forEach(sectionName => {
+            cy.log(`Selecting section ${sectionName} to check/uncheck`);
+            this.checkUncheckSectionToIncludeInExport(sectionName, isCheck)
+                .verifySectionToIncludeInExportCheckboxState(sectionName, isCheck);
+        });
+        return this;
+    }
 }
 export default new ReviewExportActions(reviewExportPage);

@@ -96,8 +96,8 @@ describe(`Prospective Market Value As Stabilized -> Less Other Rent Loss data is
 
             cy.stepInfo(`12. Go to Settings&Report, generate report and download it`);
             _NavigationSection.openReviewAndExport();
-            ReviewExport.generateDocxReport()
-                .waitForReportGenerated()
+            ReviewExport.selectSectionsToIncludeInExport(testData.sectionToExport)
+                .generateDocxReport().waitForReportGenerated()
                 .downloadAndConvertDocxReport(testData.reportCreationData.reportNumber);
         });
 

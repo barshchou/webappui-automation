@@ -1,6 +1,6 @@
 import { BoweryReports } from "../../../../types/boweryReports.type";
 import ReportDataCreator from "../../../data_creator/reportData.creator";
-import enums from "../../../../enums/enums";
+import Enums from "../../../../enums/enums";
 
 const reportCreationFixture = () => {
     return ReportDataCreator.getReportData("4481");
@@ -14,10 +14,10 @@ const _submarketAndMarketQuarter = "Q3";
 const _submarketAndMarketYear = 2022;
 
 const _marketAnalysisUses: BoweryReports.MarketAnalysisUses[] = [
-    enums.MARKET_ANALYSIS_USES.multifamily,
-    enums.MARKET_ANALYSIS_USES.retail,
-    enums.MARKET_ANALYSIS_USES.office,
-    enums.MARKET_ANALYSIS_USES.industrial
+    Enums.MARKET_ANALYSIS_USES.multifamily,
+    Enums.MARKET_ANALYSIS_USES.retail,
+    Enums.MARKET_ANALYSIS_USES.office,
+    Enums.MARKET_ANALYSIS_USES.industrial
 ];
 
 const _multifamilyMarket = "PA-Gettysburg";
@@ -44,7 +44,7 @@ const _submarketValues: string[] = [
     _industrialSubmarket
 ];
 
-const _discussion: BoweryReports.PropertyDiscussion = enums.PROPERTY_DISCUSSION_NAMES.location;
+const _discussion: BoweryReports.PropertyDiscussion = Enums.PROPERTY_DISCUSSION_NAMES.location;
 
 const _commentary = `The subject property is located in the ${_neighborhood} neighborhood of ${_area}.`;
 
@@ -61,6 +61,7 @@ export default {
     submarketValues: _submarketValues,
     discussion: _discussion,
     commentary: _commentary,
-    exportSectionName: enums.EXPORT_TITLES.siteDescription,
-    commentName: enums.PAGES_TEXTBOX_NAMES.locationDescriptionExport
+    exportSectionName: Enums.EXPORT_TITLES.siteDescription,
+    sectionToExport: [ Enums.SECTIONS_TO_INCLUDE_IN_EXPORT.siteDescription ],
+    commentName: Enums.PAGES_TEXTBOX_NAMES.locationDescriptionExport
 };

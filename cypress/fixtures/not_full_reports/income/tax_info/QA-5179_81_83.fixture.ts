@@ -26,5 +26,6 @@ export default {
     reportCreationData: reportCreationFixture(),
     title: "Tax Calculation Discussion",
     verifyExportValues: _verifyExportValues,
-    checkValue: Enums.PER_UNIT_PER_SF.perUnit
+    checkValue: Enums.PER_UNIT_PER_SF.perUnit,
+    sectionToExport: [ Enums.SECTIONS_TO_INCLUDE_IN_EXPORT.assessedValueAndRealEstateTaxes ]
 };

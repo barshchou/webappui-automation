@@ -29,5 +29,6 @@ export default {
     swotAnalysisFlagKey: Enums.FEATURE_FLAG_KEYS.swotAnalysis,
     featureFlagEnable: 0,
     textUpdate: _languagesUpdated,
-    defaultText: _languagesDefault
+    defaultText: _languagesDefault,
+    sectionToExport: [ Enums.SECTIONS_TO_INCLUDE_IN_EXPORT.summaryOfSalientFactsAndConclusions ]
 };

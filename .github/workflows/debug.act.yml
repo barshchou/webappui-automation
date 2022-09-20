@@ -41,7 +41,7 @@ on:
 jobs:
   Not-full-reports-run-DEBUG-ACT:
     runs-on: ubuntu-latest
-    container: cypress/included:10.8.0
+    container: boweryautomation/cypress-latest-chrome-latest
     permissions:
       id-token: write
       contents: read
@@ -56,9 +56,6 @@ jobs:
       
       - name: Install Dependencies
         uses: bahmutov/npm-install@v1.8.21
-
-      - name: Install Cypress globally
-        run: npm i cypress@9.6.0 -g
 
       - name: Install Currents globally
         run: npm i @currents/cli -g

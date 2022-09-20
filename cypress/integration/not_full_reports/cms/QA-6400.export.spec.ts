@@ -55,7 +55,8 @@ conditionalDescribe("Verify page and possibility to edit text",
 
             cy.stepInfo(`4. Export report`);
             _NavigationSection.openReviewAndExport();
-            ReviewExport.generateDocxReport().waitForReportGenerated()
+            ReviewExport.selectSectionsToIncludeInExport(testData.sectionToExport)
+                .generateDocxReport().waitForReportGenerated()
                 .downloadAndConvertDocxReport(testData.reportCreationData.reportNumber);
         });
 

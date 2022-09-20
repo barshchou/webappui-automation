@@ -25,7 +25,8 @@ describe("The default status is 'Average' on the Condition column on the Unit In
 
             cy.stepInfo("4. Export report");
             _NavigationSection.openReviewAndExport();
-            ReviewExport.generateDocxReport().waitForReportGenerated()
+            ReviewExport.selectSectionsToIncludeInExport(testData.sectionToExport)
+                .generateDocxReport().waitForReportGenerated()
                 .downloadAndConvertDocxReport(testData.reportCreationData.reportNumber);
         });
 

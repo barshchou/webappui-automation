@@ -20,5 +20,6 @@ export default {
         incomeValue: Enums.INCOME_TYPE.both
     }),
     commentaryData: Object.freeze(commentaryFixture()),
-    textUpdate
+    textUpdate,
+    sectionToExport: [ Enums.SECTIONS_TO_INCLUDE_IN_EXPORT.salesComparisonApproach ]
 };

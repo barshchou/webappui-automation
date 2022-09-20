@@ -27,5 +27,6 @@ export default {
         _secondCompAdjustment
     ],
     valueConclusion: 1234,
-    comparableType: Enums.COMPARABLE_TYPES.multifamily
+    comparableType: Enums.COMPARABLE_TYPES.multifamily,
+    sectionToExport: [ Enums.SECTIONS_TO_INCLUDE_IN_EXPORT.salesComparisonApproach ]
 };

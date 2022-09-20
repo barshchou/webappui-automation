@@ -37,7 +37,7 @@ jobs:
   Not-full-reports-run-DEBUG:
     runs-on: ubuntu-latest
     timeout-minutes: 100
-    container: cypress/included:10.8.0
+    container: boweryautomation/cypress-latest-chrome-latest
     permissions:
       id-token: write
       contents: read

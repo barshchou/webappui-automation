@@ -44,5 +44,6 @@ export default {
         Enums.VALUE_CONCLUSION_MARKET_VALUE_NAMES.prospectiveMarketValueAsCompleted,
         Enums.VALUE_CONCLUSION_MARKET_VALUE_NAMES.prospectiveMarketValueAsStabilized,
         Enums.VALUE_CONCLUSION_MARKET_VALUE_NAMES.asIsMarketValue,
-    ]
+    ],
+    sectionToExport: [ Enums.SECTIONS_TO_INCLUDE_IN_EXPORT.summaryOfSalientFactsAndConclusions ]
 };

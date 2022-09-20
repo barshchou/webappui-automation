@@ -75,7 +75,8 @@ describe("Verify the Commercial Stabilized Rent Roll table on export",
         
             cy.stepInfo(`9. Export the report`);
             _NavigationSection.openReviewAndExport();
-            ReviewExport.generateDocxReport().waitForReportGenerated()
+            ReviewExport.selectSectionsToIncludeInExport(testData.sectionToExport)
+                .generateDocxReport().waitForReportGenerated()
                 .downloadAndConvertDocxReport(testData.reportCreationData.reportNumber);
         });
 
