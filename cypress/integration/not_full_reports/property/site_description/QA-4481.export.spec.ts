@@ -3,8 +3,6 @@ import { createReport } from "../../../../actions/base/baseTest.actions";
 import { _NavigationSection } from "../../../../actions/base";
 import { Property, ReviewExport } from "../../../../actions";
 
-
-// TODO: [QA-6605] Error pulling 'neighborhood' data into a comment 'Location Within Market'
 describe(`Check that generated text pulls in the first submarket`,
     { tags: [ "@property", "@site_description", "@check_export" ] }, () => {
         
