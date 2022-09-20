@@ -50,8 +50,6 @@ class AppraiserPage extends BasePage {
     stateCertificationByAppraiserName(name: string) {
         return cy.xpath(`//*[contains(text(), '${name}')]/following::*[@data-qa='certification']`);
     }
-
- 
 }
 
 export default new AppraiserPage();

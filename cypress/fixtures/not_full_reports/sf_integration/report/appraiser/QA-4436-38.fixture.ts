@@ -3,12 +3,18 @@ import ReportDataCreator from "../../../../data_creator/reportData.creator";
 
 const reportData = [
     {
-        specName: "[QA-4436]",
+        specName: {
+            name: "[QA-4436]",
+            flag: false
+        },
         stateFeatureFlag: 1,
         mather: "not.exist"
     },
     {
-        specName: "[QA-4437-38]",
+        specName: {
+            name: "[QA-4437-38]",
+            flag: true
+        },
         stateFeatureFlag: 0,
         mather: "exist"
     }

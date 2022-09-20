@@ -19,7 +19,7 @@ describe("Launch Darkly for Inspector (feature in ON/OFF)",
                 cy.stepInfo(`2. Verify that when the feature “Prefill inspector from salesforce“ is ON/OFF, 
                             the Inspector from SF appear/doesn't appear in the Appraisers table`);
                 cy.contains(testData.appraiserName).should(data.mather);
-                if (data.specName === "[QA-4437-38]") {
+                if (data.specName.flag) {
                     launchDarklyApi.removeUserTarget(testData.featureFlag);
                     cy.reload();
                     Report._Appraiser.verifyPersonallyInspectedCheckbox(testData.appraiserName, true);

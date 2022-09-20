@@ -4,6 +4,7 @@ import { Organization, Report } from '../../../../actions';
 import testData from "../../../../fixtures/not_full_reports/report/appraiser/QA-4422.fixture";
 import { conditionalDescribe } from '../../../checkIsProd.utils';
 import Enums from '../../../../enums/enums';
+import routesUtils from "../../../../utils/routes.utils";
 
 conditionalDescribe(`Verify that the newly created Lead Appraiser will be sorted alphabetically by the Last 
         name in the Full Name dropdown`, { tags: [ "@report", "@appraiser" ] }, () => {
@@ -23,16 +24,14 @@ conditionalDescribe(`Verify that the newly created Lead Appraiser will be sorted
         Organization._CreateNewUser.createNewUser(testData.clientCreationData);
 
         cy.stepInfo("3. Return to Report -> Appraiser page");
-        for (let i = 0; i < 3; i++) {
-            cy.go("back");
-        }
-
+        _NavigationSection.openPageByUrl(routesUtils.reportAppraiser);
+       
         cy.stepInfo("4. Get appraisers list and verify Lead Appraisers are sorted alphabetically");
         Report._Appraiser.Page.leadAppraiser.click();
-        Report._Appraiser.Page.appraisersList.then(elems => {
+        Report._Appraiser.Page.appraisersList.then(appraisers => {
             const lastNamesAppraisers = [];
-            elems.each((index, elem) => {
-                lastNamesAppraisers.push(elem.innerText.split(" ")[1]);
+            appraisers.each((_, appraiser) => {
+                lastNamesAppraisers.push(appraiser.innerText.split(" ")[1]);
             });
             expect(lastNamesAppraisers).to.deep.eq(lastNamesAppraisers.sort());
         });

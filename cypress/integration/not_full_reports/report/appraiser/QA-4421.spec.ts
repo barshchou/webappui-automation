@@ -16,10 +16,10 @@ describe(`Verify that the Lead Appraisers are sorted alphabetically by the Last 
 
         cy.stepInfo("2. Get appraisers list and verify Lead Appraisers are sorted alphabetically");
         Report._Appraiser.Page.leadAppraiser.click();
-        Report._Appraiser.Page.appraisersList.then(elems => {
+        Report._Appraiser.Page.appraisersList.then(appraisers => {
             const lastNamesAppraisers = [];
-            elems.each((index, elem) => {
-                lastNamesAppraisers.push(elem.innerText.split(" ")[1]);
+            appraisers.each((_, appraiser) => {
+                lastNamesAppraisers.push(appraiser.innerText.split(" ")[1]);
             });
             expect(lastNamesAppraisers).to.deep.eq(lastNamesAppraisers.sort());
         });

@@ -3,6 +3,7 @@ import { createReport } from '../../../../actions/base/baseTest.actions';
 import { Organization, Report } from '../../../../actions';
 import testData from "../../../../fixtures/not_full_reports/report/appraiser/QA-4423.fixture";
 import Enums from '../../../../enums/enums';
+import routesUtils from "../../../../utils/routes.utils";
 
 describe(`Verify that the alphabetical sorting by the Last Name in the Full Name dropdown doesn't affect 
         the selected by default Lead Appraiser`, { tags: [ "@report", "@appraiser" ] }, () => {
@@ -20,10 +21,7 @@ describe(`Verify that the alphabetical sorting by the Last Name in the Full Name
         });
        
         cy.stepInfo("2. Return to Report -> Appraiser page");
-        for (let i = 0; i < 2; i++) {
-            cy.go("back");
-        }
-        _NavigationSection.navigateToReportAppraiser();
+        _NavigationSection.openPageByUrl(routesUtils.reportAppraiser);
 
         cy.stepInfo(`3. Verify that the Lead Appraisers are sorted alphabetically by the Last name in the 
                     Full Name dropdown but the Lead Appraiser of your organization from step 2 is still selected 

@@ -109,7 +109,7 @@ class AppraiserActions extends BaseActionsExt<typeof appraiserPage> {
         return this;
     }
 
-    verifyAppraiserStateCertification(name: string, verifyValue) {
+    verifyAppraiserStateCertification(name: string, verifyValue: string) {
         appraiserPage.stateCertificationByAppraiserName(name).should("include.text", verifyValue);
         return this;
     }
