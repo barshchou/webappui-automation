@@ -77,7 +77,7 @@ class ReportCreator {
         options?.conclusionValue == undefined 
             ? this.setConclusionValue() 
             : this.setConclusionValue(options.conclusionValue);
-        
+
         return this.setReportNumber(testNumber, this.isSalesForcePull).build();
     }
 }

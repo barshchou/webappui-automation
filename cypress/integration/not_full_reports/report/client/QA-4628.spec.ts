@@ -18,7 +18,7 @@ describe("Verify the functionality of the Client File Number field",
             Report._Client.enterClientFileNumber(testData.clientFileNumber);
 
             cy.stepInfo(`3. Try to copy-paste any value into the Client File Number field, save it.`);
-            Report._Client.Page.clientFileNumberField.invoke("val", testData.clientFileNumber);
+            Report._Client.Page.getClientFileNumberField().invoke("val", testData.clientFileNumber);
 
             cy.stepInfo(`4. Proceed to the Preview & Edit > Cover page and verify that the Client 
             from the previous step is displayed in the APPRAISAL REPORT section.`);

@@ -82,5 +82,6 @@ export default {
     swotAnalysisFlagKey: Enums.FEATURE_FLAG_KEYS.swotAnalysis,
     featureFlagEnable: 0,
     textsArray: _textsArray(),
-    exportSection: Enums.EXPORT_TITLES.certification
+    exportSection: Enums.EXPORT_TITLES.certification,
+    sectionToExport: [ Enums.SECTIONS_TO_INCLUDE_IN_EXPORT.certificationSection ]
 };

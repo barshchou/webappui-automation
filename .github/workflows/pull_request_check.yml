@@ -8,7 +8,7 @@ jobs:
   Run-tsc-check:
     runs-on: ubuntu-latest
     if: github.event.label.name == 'ready_for_review'
-    container: cypress/included:10.8.0
+    container: boweryautomation/cypress-latest-chrome-latest
     steps:
       - name: Checkout
         uses: actions/checkout@v3
@@ -25,7 +25,7 @@ jobs:
     needs: Run-tsc-check
     timeout-minutes: 20
     runs-on: ubuntu-latest
-    container: cypress/included:10.8.0
+    container: boweryautomation/cypress-latest-chrome-latest
     permissions:
       id-token: write
       contents: read
@@ -79,52 +79,25 @@ jobs:
     needs: [Run-tsc-check, Run-smoke-tests]
     timeout-minutes: 90
     runs-on: ubuntu-latest
-    container: cypress/included:10.8.0
+    container: boweryautomation/cypress-latest-chrome-latest
     permissions:
       id-token: write
       contents: read
     steps:
-      - name: Checkout
-        uses: actions/checkout@v3
-        with:
-          token: ${{ secrets.GH_PERSONAL_ACCESS_TOKEN }}
-      
-      - name: Installing modules
-        uses: bahmutov/npm-install@v1.8.21
-
-      - name: Install find specs module
-        run: npm install -g find-cypress-specs@latest
-
-      - name: Define included specs
-        id: define_specs
-        run: |
-          git fetch --no-tags --depth=1 origin ${{ github.base_ref }}
-          git fetch --no-tags --depth=1 origin ${{ github.head_ref }}
-          git checkout origin/${{ github.base_ref }}
-          git checkout origin/${{ github.head_ref }}
-          git checkout ${{ github.sha }}
-          CHANGED_SPECS=$(npx find-cypress-specs --branch master)
-          echo ::set-output name=CHANGED_SPECS::$CHANGED_SPECS
-
       - name: Configure secrets
-        if: ${{ !env.ACT }} 
+        if: ${{ !env.ACT }}
         uses: aws-actions/configure-aws-credentials@v1
         with:
-            role-to-assume: arn:aws:iam::814827541967:role/GithubOIDC-Role-QMKR3DR5WV3B
-            aws-region: 'us-east-1'
+          role-to-assume: arn:aws:iam::814827541967:role/GithubOIDC-Role-QMKR3DR5WV3B
+          aws-region: 'us-east-1'
 
       - name: Run included specs
-        if: steps.define_specs.outputs.CHANGED_SPECS != null
-        uses: Bowery-RES/action-run-e2e-tests@latest
+        uses: Bowery-RES/action-run-pr-included-tests@latest
         with:
           github_token: ${{ secrets.GH_PERSONAL_ACCESS_TOKEN }}
           url: ${{ needs.Run-smoke-tests.outputs.URL }}
           customUrl: ${{ needs.Run-smoke-tests.outputs.CUSTOM_URL }}
-          spec_file: ${{ steps.define_specs.outputs.CHANGED_SPECS }}
-          tags: grep=,grepTags=,burn=
+          base_ref: ${{ github.base_ref }}
+          head_ref: ${{ github.head_ref }}
           ref: ${{ github.sha }}
           secret_name: 'Github/Cypress/webapp-e2e-secrets'
-        env:
-          DD_CIVISIBILITY_AGENTLESS_ENABLED: true
-          DD_ENV: ${{ github.event.inputs.url }}
-          DD_SERVICE: 'webapp'

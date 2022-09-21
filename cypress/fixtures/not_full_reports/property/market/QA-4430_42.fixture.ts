@@ -37,5 +37,6 @@ export default {
     "as well as our market value conclusion and it is predicated on interviews with brokers, other real " + 
     "estate industry sources and on information obtained in the verification process.",
     exposureTimeSection: Enums.EXPORT_TITLES.exposureTime,
-    marketingTimeSection: Enums.EXPORT_TITLES.marketingTime
+    marketingTimeSection: Enums.EXPORT_TITLES.marketingTime,
+    sectionToExport: [ Enums.SECTIONS_TO_INCLUDE_IN_EXPORT.introduction ]
 };

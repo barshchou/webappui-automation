@@ -39,7 +39,8 @@ the same info as on the WebApp`, { tags: [ "@income", "@expense_history", "@chec
 
             cy.stepInfo("3. Generate and download report");
             _NavigationSection.openReviewAndExport();
-            ReviewExport.generateDocxReport().waitForReportGenerated()
+            ReviewExport.selectSectionsToIncludeInExport(testData.sectionToExport)
+                .generateDocxReport().waitForReportGenerated()
                 .downloadAndConvertDocxReport(reportCreationData.reportNumber);
         });
 

@@ -39,7 +39,8 @@ describe(`Verify the Inspector's name is pre-filled in the Appraisers section on
 
         cy.stepInfo("7. Export the report");
         _NavigationSection.Actions.openReviewAndExport();
-        ReviewExport.generateDocxReport().waitForReportGenerated()
+        ReviewExport.selectSectionsToIncludeInExport(testData.sectionsToExport)
+            .generateDocxReport().waitForReportGenerated()
             .downloadAndConvertDocxReport(`JOB-${testData.reportCreationData.reportNumber}`);
     });
 

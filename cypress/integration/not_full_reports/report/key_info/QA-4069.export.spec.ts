@@ -14,7 +14,8 @@ describe("Check the helper text for Provided Documents)",
             Report._KeyInfo.uploadFile(testData.pdfFileName);
 
             _NavigationSection.openReviewAndExport();
-            ReviewExport.generateDocxReport().waitForReportGenerated()
+            ReviewExport.selectSectionsToIncludeInExport(testData.sectionToExport)
+                .generateDocxReport().waitForReportGenerated()
                 .downloadAndConvertDocxReport(testData.reportCreationData.reportNumber);
         });
 

@@ -1,4 +1,4 @@
-import enums from "../../../../enums/enums";
+import Enums from "../../../../enums/enums";
 import { BoweryReports } from "../../../../types/boweryReports.type";
 import chipsDataCreator from "../../../data_creator/chipsData.creator";
 import reportDataCreator from "../../../data_creator/reportData.creator";
@@ -23,26 +23,27 @@ const _chipsOptions: BoweryReports.ChipsCreationOptions = {
 
 export default {
     reportCreationDataAsIs: reportDataCreator.getReportData("4549-54", {
-        incomeValue: enums.INCOME_TYPE.both,
-        conclusionValue: enums.VALUE_CONCLUSION_TYPE.AS_IS
+        incomeValue: Enums.INCOME_TYPE.both,
+        conclusionValue: Enums.VALUE_CONCLUSION_TYPE.AS_IS
     }),
     reportCreationDataAsStabilized: reportDataCreator.getReportData("4549-54", {
-        incomeValue: enums.INCOME_TYPE.both,
-        conclusionValue: enums.VALUE_CONCLUSION_TYPE.AS_STABILIZED
+        incomeValue: Enums.INCOME_TYPE.both,
+        conclusionValue: Enums.VALUE_CONCLUSION_TYPE.AS_STABILIZED
     }),
     reportCreationDataAsComplete: reportDataCreator.getReportData("4549-54", {
-        incomeValue: enums.INCOME_TYPE.both,
-        conclusionValue: enums.VALUE_CONCLUSION_TYPE.AS_COMPLETE
+        incomeValue: Enums.INCOME_TYPE.both,
+        conclusionValue: Enums.VALUE_CONCLUSION_TYPE.AS_COMPLETE
     }),
     numberOfCommercialUnits: _numberOfCommercialUnits,
     numberOfResidentialUnits: _numberOfResidentialUnits,
     asIsChips: chipsDataCreator.getChipsData(_chipsOptions),
-    asStabilizedChips: chipsDataCreator.getChipsData(_chipsOptions, enums.VALUE_CONCLUSION_TYPE.AS_STABILIZED),
-    asCompletedChips: chipsDataCreator.getChipsData(_chipsOptions, enums.VALUE_CONCLUSION_TYPE.AS_COMPLETE),
+    asStabilizedChips: chipsDataCreator.getChipsData(_chipsOptions, Enums.VALUE_CONCLUSION_TYPE.AS_STABILIZED),
+    asCompletedChips: chipsDataCreator.getChipsData(_chipsOptions, Enums.VALUE_CONCLUSION_TYPE.AS_COMPLETE),
     currentNumberOfCommercialUnits: _currentNumberOfCommercialUnits,
     currentNumberOfResidentialUnits: _currentNumberOfResidentialUnits,
     grossBuildingArea: _grossBuildingArea,
     siteArea: _siteArea,
     buildingName: _buildingName,
-    exportSectionName: enums.EXPORT_TITLES.commercialSpace
+    exportSectionName: Enums.EXPORT_TITLES.commercialSpace,
+    sectionToExport: [ Enums.SECTIONS_TO_INCLUDE_IN_EXPORT.descriptionOfImprovements ]
 };

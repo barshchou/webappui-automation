@@ -3,8 +3,8 @@ import BaseActionsExt from "../base/base.actions.ext";
 
 class CoverPageActions extends BaseActionsExt<typeof coverPage> {
 
-    verifyApplicationNumber(value: string) {
-        coverPage.applicationNumberText.should("include.text", value);
+    verifyRequestedRow(name: string, value: string, index = 0) {
+        coverPage.getRequestedRow(name, index).should("include.text", value);
         return this;
     }
 }

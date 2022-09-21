@@ -22,7 +22,8 @@ describe("[QA-5179_81_83] Export column order both assessment psf and assessment
 
             cy.stepInfo("5. Export the report");
             _NavigationSection.Actions.openReviewAndExport();
-            ReviewExport.generateDocxReport().waitForReportGenerated()
+            ReviewExport.selectSectionsToIncludeInExport(testData.sectionToExport)
+                .generateDocxReport().waitForReportGenerated()
                 .downloadAndConvertDocxReport(testData.reportCreationData.reportNumber);
         });
 

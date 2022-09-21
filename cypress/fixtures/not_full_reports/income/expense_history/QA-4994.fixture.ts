@@ -15,5 +15,6 @@ export default {
     expenseYear: Number(getYearFromDate()) - 1,
     electricity: 2000,
     fuel: 999.55,
-    waterAndSewer: 5555
+    waterAndSewer: 5555,
+    sectionToExport: [ Enums.SECTIONS_TO_INCLUDE_IN_EXPORT.incomeCapitalizationApproach ]
 };

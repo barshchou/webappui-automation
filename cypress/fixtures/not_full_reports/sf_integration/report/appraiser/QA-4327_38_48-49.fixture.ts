@@ -1,5 +1,6 @@
 import ReportDataCreator from "../../../../data_creator/reportData.creator";
 import Enums from "../../../../../enums/enums";
+import { BoweryReports } from "../../../../../types/boweryReports.type";
 
 const reportCreationFixture = () => {
     return ReportDataCreator.getReportData(Enums.REPORT_TYPES_SF.withoutFreddieMac, { 
@@ -27,7 +28,13 @@ const appraisers = [
     },
 ];
 
+const _sectionsToExport: BoweryReports.SectionsToIncludeInExport[] = [
+    Enums.SECTIONS_TO_INCLUDE_IN_EXPORT.coverPage,
+    Enums.SECTIONS_TO_INCLUDE_IN_EXPORT.certificationSection
+];
+
 export default {
     reportCreationData: reportCreationFixture(),
-    appraisers
+    appraisers,
+    sectionsToExport: _sectionsToExport
 };

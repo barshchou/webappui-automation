@@ -38,7 +38,7 @@ class FindCompsPage extends BasePage {
 
     get importCompModal() { return cy.get('[class="ant-modal-content"]'); }
 
-    get csvInput() { return cy.get("[data-qa=file-input]"); }
+    get csvInput() { return cy.get('input[accept=".csv"]'); }
 
     getSelectCompFromMapButtonByAddress(address) {
         return cy.get('[data-qa="sales-comp-item"]')
@@ -93,10 +93,14 @@ class FindCompsPage extends BasePage {
             .contains("SEARCH");
     }
 
-    get selectCompsButton() {
-        return cy.get("button").contains("Select Comps");
+    get selectCompsForReportButton() {
+        return cy.contains("button", "SELECT COMPS");
     }
 
+    get selectCompsButton() {
+        return cy.get('[data-qa="select-comps-btn"]');
+    }
+    
     get selectAllButton() {
         return this.importCompModal
             .contains("SELECT ALL");
@@ -109,7 +113,7 @@ class FindCompsPage extends BasePage {
     }
 
     get createCompSearchResults() {
-        return cy.get("[data-qa=search-result-form] tbody tr");
+        return cy.get("[data-qa=search-result-form] tbody tr", { timeout: 60000 });
     }
 
     get createNewCompButton() { return cy.contains("Create New"); }
@@ -133,15 +137,15 @@ class FindCompsPage extends BasePage {
     }
 
     get salesCompsDateSold() {
-        return cy.get('[data-qa="sale-date"]');
+        return cy.get('[data-qa="selected-sales-comps-table"]').find('[data-qa="sale-date"]');
     }
 
-    get loadingModalCSV() {
-        return cy.get('[data-qa="loading-modal"] [data-icon="file-upload"]', { timeout: 60000 });
+    get csvUploadDoneButton() { 
+        return cy.get('[data-qa="upload-csv-complete"]', { timeout: 60000 });
     }
 
     get resetAllButton() {
-        return cy.contains('RESET ALL');
+        return cy.get('[data-qa="reset-all-btn"]');
     }
 
     get loadingModalSpinner() {
@@ -195,6 +199,21 @@ class FindCompsPage extends BasePage {
     get zoomInButton() { return cy.get(`.leaflet-control-zoom-in`).eq(0); }
 
     get loadingModal() { return cy.get("*[data-qa='loading-modal']"); }
+
+    //TODO Add data-qa attr for details button https://bowery.atlassian.net/browse/QA-6952
+    detailsButtonByAddress(address: string) {
+        return this.salesComparablesTable.contains(address).parent('tr').find('[data-qa="selected-comp-actions"]')
+            .contains('button', 'Details');
+    }
+
+    addRemovedCompButtonByAddress(address: string) {
+        return cy.contains('Removed Comps').parent().parent().contains(address)
+            .parent().find('[data-testid="AddCircleIcon"]');
+    }
+
+    get salesComparablesTable() {
+        return cy.get('[data-qa="selected-sales-comps-table"]');
+    }
 }
 
 /**
