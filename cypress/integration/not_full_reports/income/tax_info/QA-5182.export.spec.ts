@@ -3,7 +3,8 @@ import { createReport } from "../../../../actions/base/baseTest.actions";
 import { _NavigationSection } from "../../../../actions/base";
 import { ReviewExport, Income } from '../../../../actions';
 
-describe("Export column order both assessment psf and assessment per unit", 
+//TODO this test is depricated and should be updated (test-case is updated already)
+describe.skip("Export column order both assessment psf and assessment per unit", 
     { tags: [ "@check_export", "@income", "@tax_info" ] }, () => {
         it("[QA-5182]", () => {
             cy.stepInfo("1. Create report");
@@ -17,7 +18,7 @@ describe("Export column order both assessment psf and assessment per unit",
                 .clickAddSpecialAssessmentRate();
 
             cy.stepInfo("4. Export the report");
-            _NavigationSection.Actions.openReviewAndExport();
+            _NavigationSection.Actions.openReviewAndExport();cy.pause();
             ReviewExport.generateDocxReport().waitForReportGenerated()
                 .downloadAndConvertDocxReport(testData.reportCreationData.reportNumber);
         });
