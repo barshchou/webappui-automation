@@ -3,6 +3,7 @@ import { createReport } from "../../../../actions/base/baseTest.actions";
 import NavigationSection from "../../../../actions/base/navigationSection.actions";
 import Income from "../../../../actions/income/income.manager";
 
+// TODO: Test fails due to https://bowery.atlassian.net/browse/WEB-7020
 describe("Comparable Min, Max, Avg values for Repairs & Maintenance Per Unit are correctly calculated and displayed",
     { tags:[ "@expense_forecast", "@income", "@snapshot_tests" ] }, () => {
         beforeEach('Create a report', () => {

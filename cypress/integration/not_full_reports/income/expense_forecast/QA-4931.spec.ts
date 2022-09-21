@@ -4,6 +4,7 @@ import tableExpenseHistoryCellNames from "../../../../../cypress/enums/expense/e
 import { _NavigationSection } from "../../../../actions/base";
 import { DataCollections, Income } from "../../../../actions";
 
+// TODO: Test fails due to https://bowery.atlassian.net/browse/WEB-7012 
 describe("Historical expense Repairs & Maintenance Per Unit is correctly calculated and displayed", 
     { tags:[ "@expense_forecast", "@income", "@snapshot_tests" ] }, () => {
     

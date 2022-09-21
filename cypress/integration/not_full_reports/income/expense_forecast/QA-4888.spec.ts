@@ -4,6 +4,7 @@ import { Income, DataCollections } from "../../../../actions";
 import { _NavigationSection } from "../../../../actions/base";
 import tableExpenseHistoryCellNames from "../../../../../cypress/enums/expense/expenseHistoryTableRows.enum";
 
+// TODO: Test fails due to https://bowery.atlassian.net/browse/WEB-7012 
 describe("Historical expense Electricity Per Unit is correctly calculated and displayed",
     { tags:[ "@snapshot_tests", "@income", "@expense_forecast" ] }, () => {
 
