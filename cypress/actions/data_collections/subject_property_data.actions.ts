@@ -6,6 +6,7 @@ import {
     isHasDecimalPartMoreNumberOfDigits,
     numberWithCommas
 } from "../../../utils/numbers.utils";
+import enums from "../../enums/enums";
 
 class SubjectPropertyDataActions extends BaseActionsExt<typeof subjectPropertyDataPage> {
 
@@ -161,6 +162,19 @@ class SubjectPropertyDataActions extends BaseActionsExt<typeof subjectPropertyDa
     setBuildingType(type: string): SubjectPropertyDataActions {
         subjectPropertyDataPage.buildingTypeDropdown.click();
         subjectPropertyDataPage.buildingType(type).scrollIntoView().click();
+        return this;
+    }
+
+    selectBuildingCondition(valueConclusion: BoweryReports.ValueConclusionName, 
+        condition: BoweryReports.PropertyConditions): SubjectPropertyDataActions {
+        if (valueConclusion === enums.VALUE_CONCLUSION_NAME.asIs) {
+            subjectPropertyDataPage.buildingAsIsConditionDropdown.click();
+        } else {
+            subjectPropertyDataPage.buildingAsStabilizedConditionDropdown.click();
+        }
+
+        subjectPropertyDataPage.buildingConditionValue(condition).click();
+        
         return this;
     }
 }

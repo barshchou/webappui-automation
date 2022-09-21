@@ -20,7 +20,7 @@ const _compsFixture = [
             neighborhoodAdjustment: negativeAdjustmentNeighborhood,
             locationInNeighborhoodAdjustment: negativeAdjustmentLocation
         },
-        locationDiscussionDiscussionText: "The subject property is located in the " + neighborhood + 
+        locationDiscussionText: "The subject property is located in the " + neighborhood + 
         " neighborhood of " + city + ", " + state + ".\n" +
         "Comparable 1 is located in a superior area within " + neighborhood + ", and thus required " + 
         "a "+ Math.abs(negativeAdjustmentLocation) + "% downward adjustment.\n" + 
@@ -32,7 +32,7 @@ const _compsFixture = [
             neighborhoodAdjustment: positiveAdjustmentNeighborhood,
             locationInNeighborhoodAdjustment: positiveAdjustmentLocation
         },
-        locationDiscussionDiscussionText: "The subject property is located in the " + neighborhood + 
+        locationDiscussionText: "The subject property is located in the " + neighborhood + 
         " neighborhood of " + city + ", " + state + ".\n" +
         "Comparable 1 is located in an inferior area within " + neighborhood + " and thus required a " + 
         positiveAdjustmentLocation + "% upward adjustment.\n" + 
@@ -44,7 +44,7 @@ const _compsFixture = [
             neighborhoodAdjustment: 0,
             locationInNeighborhoodAdjustment: 0
         },
-        locationDiscussionDiscussionText: "The subject property is located in the " + neighborhood + 
+        locationDiscussionText: "The subject property is located in the " + neighborhood + 
         " neighborhood of " + city + ", " + state +". All comparables used in this analysis are in similar " + 
         "locations compared to the subject property. Therefore, no adjustments were required."
     }

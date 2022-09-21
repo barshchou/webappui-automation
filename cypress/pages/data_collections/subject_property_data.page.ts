@@ -53,6 +53,14 @@ class SubjectPropertyDataPage extends BasePage {
 
     buildingType(type: string) { return cy.get(`[data-qa="buildingType-${type}-select-option"]`); }
 
+    get buildingAsIsConditionDropdown() { return cy.get(`[data-qa="generalCondition.value-form-control"]`); }
+
+    get buildingAsStabilizedConditionDropdown() { 
+        return cy.get(`[data-qa="generalAsStabilizedCondition.value-form-control"]`); 
+    }
+
+    buildingConditionValue(condition: string) { return cy.get(`[data-value='${condition}']`); }
+
 }
 
 export default new SubjectPropertyDataPage();

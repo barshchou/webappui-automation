@@ -38,6 +38,10 @@ class AdjustCompsPage extends BasePage {
         return cy.get(`[name*='adjustments.otherAdjustment[${rowNumber}]']`); 
     }
 
+    getOtherAdjustmentsRowCells(otherAdjustmentName: string) { 
+        return cy.get(`[name*='adjustments.${otherAdjustmentName}']`); 
+    }
+
     getOtherUtilitiesAdjustmentRowCells(rowNumber: number) { 
         return cy.get(`[name*='utilityAdjustment.otherAdjustment[${rowNumber}]']`); 
     }

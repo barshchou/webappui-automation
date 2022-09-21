@@ -99,6 +99,19 @@ class AdjustCompsActions extends BaseActionsExt<typeof adjustCompsPage> {
         return this;
     }
 
+    enterOtherAdjustmentGroup(adjustmentName: string[], value: number[], index = 0): AdjustCompsActions {
+        adjustmentName.forEach((adjustment, i) => {
+            this.enterOtherAdjustmentByName(adjustment, value[i], index);
+        });
+        return this;
+    }
+
+    enterOtherAdjustmentByName(adjustmentName: string, value: number, index = 0): AdjustCompsActions {
+        adjustCompsPage.getOtherAdjustmentsRowCells(adjustmentName).eq(index).scrollIntoView().clear()
+            .type(`${value}{del}`).should("have.value", `${value}%`);
+        return this;
+    }
+
     enterUtilitiesAdjustmentGroup(adjustmentName: string[], value: number[], index = 0): AdjustCompsActions {
         adjustmentName.forEach((adjustment, i) => {
             this.enterUtilitiesAdjustmentByName(adjustment, value[i], index);

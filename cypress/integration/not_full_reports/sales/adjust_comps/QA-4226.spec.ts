@@ -31,7 +31,7 @@ describe(`Check Location Discussion`,
                 Sales._AdjustComps.enterLocationAdjustmentGroup(Object.keys(locationAdjustment.adjustments), 
                     Object.values(locationAdjustment.adjustments))
                     .verifyDiscussionCommentary(testData.locationDiscussionTitle, 
-                        locationAdjustment.locationDiscussionDiscussionText);
+                        locationAdjustment.locationDiscussionText);
             });
         });
     });
