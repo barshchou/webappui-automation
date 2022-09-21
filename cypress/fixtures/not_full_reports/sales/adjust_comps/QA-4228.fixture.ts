@@ -12,7 +12,7 @@ const negativeConditionAdjustment = -90;
 const yearBuilt = 1945;
 const buildingConditionAsIs = Enums.PROPERTY_CONDITIONS.excellent;
 const buildingConditionAsStabilized = Enums.PROPERTY_CONDITIONS.excellent;
-const calculationUnits = Enums.CALCULATION_UNITS.perResidentialUnits;
+const _calculationUnits = Enums.CALCULATION_UNITS.perResidentialUnits;
 const _calculationUnitsText = (calculationUnits: string) => {
     let text = Enums.EXPENSE_ITEM_BASIS_OF_COMPARISON.perUnit;
     if (calculationUnits !== Enums.CALCULATION_UNITS.perResidentialUnits) {
@@ -89,8 +89,8 @@ export default {
     adjustmentName: Enums.SALES_ADJUSTMENT_GRID.locationAdjustment,
     compProperty,
     compStatusDate,
-    calculationUnits: Enums.CALCULATION_UNITS.perResidentialUnits,
-    comparablesAdjustments: _compsFixture(calculationUnits),
+    calculationUnits: _calculationUnits,
+    comparablesAdjustments: _compsFixture(_calculationUnits),
     discussionSection: Enums.ADJUST_COMPS_DISCUSSION_SECTIONS.other,
     sizeDiscussionTitle: Enums.ADJUST_COMPS_DISCUSSION_TITLES.sizeAdjustmentDiscussion,
     rentStabilizationDiscussionTitle: Enums.ADJUST_COMPS_DISCUSSION_TITLES.incomeLevelDiscussion,
