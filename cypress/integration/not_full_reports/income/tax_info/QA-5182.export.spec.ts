@@ -18,7 +18,7 @@ describe.skip("Export column order both assessment psf and assessment per unit",
                 .clickAddSpecialAssessmentRate();
 
             cy.stepInfo("4. Export the report");
-            _NavigationSection.Actions.openReviewAndExport();cy.pause();
+            _NavigationSection.Actions.openReviewAndExport();
             ReviewExport.generateDocxReport().waitForReportGenerated()
                 .downloadAndConvertDocxReport(testData.reportCreationData.reportNumber);
         });
