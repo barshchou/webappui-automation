@@ -28,7 +28,7 @@ class ComplexDatabaseModule {
             console.log('Connected successfully to server');
             const db = client.db(dbName);
             const collection = db.collection(collectionName);
-            let data = await collection.find({ $or: [ { filter } ] }, { limit:10 }).toArray();
+            let data = await collection.find(filter, { limit:10 }).toArray();
             return data; 
         } catch (error) {
             console.warn("Error occurred during DB connection or data retrieve");
