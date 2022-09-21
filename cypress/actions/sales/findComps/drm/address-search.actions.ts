@@ -2,7 +2,7 @@
 import { findCompsPage } from "../../../../pages/sales/findComps.page";
 import { Alias } from '../../../../utils/alias.utils';
 import ComplexDatabaseModule from "../../../../../cypress/db/index";
-import { CompPlex } from "../../../../types/compplex.type";
+import { Filter } from "mongodb";
 
 class AddressSearchActions {
     Page: typeof findCompsPage;
@@ -65,11 +65,10 @@ class AddressSearchActions {
      * @param compProperty Comps property
      * @param compPropertyValue Comps property value
      */
-    addCompByParameter (compIndex: number, compProperty: CompPlex.AddressSearch.CompPropertyInDB,
-        compPropertyValue: string) { 
-        ComplexDatabaseModule.getCompsArrayFromDb(compProperty, compPropertyValue).then(dataArray => {
+    addCompByParameter (filter: Filter<object>, index = 0) { 
+        ComplexDatabaseModule.getCompsArrayFromDb(filter).then(dataArray => {
             cy.log(`Array of comps in database`, <string>dataArray);
-            let comp = dataArray[compIndex];
+            let comp = dataArray[index];
             let { address: { flatValue }, id } = <any>comp;
             let compAddress = flatValue;
             let compId = id;

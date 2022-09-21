@@ -1,6 +1,5 @@
 /* eslint-disable no-console */
-import { MongoClient } from 'mongodb';
-import { CompPlex } from "../types/compplex.type";
+import { Filter, MongoClient } from 'mongodb';
 
 class ComplexDatabaseModule {
     
@@ -10,11 +9,9 @@ class ComplexDatabaseModule {
      * @param compProperty Comp property path in database collection
      * @param compPropertyValue Comp property value in database collection
      */
-    getCompsArrayFromDb = (compProperty: CompPlex.AddressSearch.CompPropertyInDB, 
-        compPropertyValue: string) => {
+    getCompsArrayFromDb = (filter: Filter<object>) => {
         const { mongoUrl, dbName } = this.selectDatabaseSecrets();
-        return cy.task('retrieveDataFromDb', { dbUrl: mongoUrl, dbName: dbName, 
-            compPropertyPathInDB: compProperty, compPropertyValueInDB: compPropertyValue });
+        return cy.task('retrieveDataFromDb', { dbUrl: mongoUrl, dbName: dbName, filter });
     };
  
     /**
@@ -23,17 +20,15 @@ class ComplexDatabaseModule {
      * @param compPropertyPathInDB Comp property path in database collection
      * @param compPropertyValueInDB Comp property value in database collection
      */
-    retrieveDataFromDb = async (url: string, dbName: string, compPropertyPathInDB: string, 
-        compPropertyValueInDB: string) => {
+    retrieveDataFromDb = async (url: string, dbName: string, filter: Filter<object>) => {
         const client = new MongoClient(url);
         const collectionName = "sales-transactions";
-        const filter = { [compPropertyPathInDB] : compPropertyValueInDB } ;
         try {
             await client.connect();
             console.log('Connected successfully to server');
             const db = client.db(dbName);
             const collection = db.collection(collectionName);
-            let data = await collection.find(filter, { limit:10 }).toArray();
+            let data = await collection.find({ $or: [ { filter } ] }, { limit:10 }).toArray();
             return data; 
         } catch (error) {
             console.warn("Error occurred during DB connection or data retrieve");
