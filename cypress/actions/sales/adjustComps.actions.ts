@@ -333,8 +333,7 @@ class AdjustCompsActions extends BaseActionsExt<typeof adjustCompsPage> {
         adjustCompsPage.getExpandMarketAdjustmentSubjectRow("Sale Price").invoke("text").then(salePrice => {
             const salePriceNumber = getNumberFromDollarNumberWithCommas(salePrice);
             const pricePerSf = salePriceNumber / area;
-            // ToDo: Fix this rounding after resolving https://bowery.atlassian.net/browse/QA-6954
-            const pricePerSfAdjusted = (Math.round(pricePerSf * 1000)) / 1000;
+            const pricePerSfAdjusted = (Math.round(pricePerSf * 100)) / 100;
             const pricePerSfToBe = `$${numberWithCommas(pricePerSfAdjusted.toFixed(2))}`;
             adjustCompsPage.getExpandMarketAdjustmentSubjectRow("Price per SF").should("have.text", pricePerSfToBe);
         });
