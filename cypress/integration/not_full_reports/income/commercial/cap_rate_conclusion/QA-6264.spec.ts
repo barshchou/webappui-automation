@@ -5,7 +5,7 @@ import { DataCollections, Income, Property } from "../../../../../actions";
 import { createReport } from "../../../../../actions/base/baseTest.actions";
 
 // ToDo: Test fails due to problem with rounding: https://bowery.atlassian.net/browse/QA-6954
-describe.skip("As Complete Market Value is calculated with correct formula in Cap Rate Conclusion Summary Table", 
+describe("As Complete Market Value is calculated with correct formula in Cap Rate Conclusion Summary Table", 
     { tags:[ "@income", "@commercial", "@cap_rate_conclusion" ] }, () => {
         beforeEach("Login, create report", () => {
             cy.stepInfo(`1. Create report`);
