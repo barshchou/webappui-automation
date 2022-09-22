@@ -101,8 +101,8 @@ export default defineConfig({
             });
             
             on("task", {
-                async retrieveDataFromDb({ dbUrl, dbName, findFilter }) {
-                    return await db.retrieveDataFromDb(dbUrl, dbName, findFilter);
+                async retrieveDataFromDb({ dbUrl, dbName, filter }) {
+                    return await db.retrieveDataFromDb(dbUrl, dbName, filter);
                 }
             });
 
