@@ -319,12 +319,13 @@ class ProFormaActions extends BaseActionsExt<typeof proFormaPage> {
         return this;
     }
 
-    calculateTotalRealEstateTax(landTaxAssessedValue: number, buildingTaxAssessedValue: number) {
+    calculateTotalRealEstateTax(landTaxAssessedValue: number, buildingTaxAssessedValue: number): number {
+        let totalRealEstateTax = 0;
         cy._mapGet(taxInfoKeys.taxRates).then((taxRateText) => {
             const taxRate = getNumberFromPercentNumberWithCommas(taxRateText);
-            const totalRealEstateTax = Math.round(((landTaxAssessedValue + buildingTaxAssessedValue) * taxRate) / 100);
-            return totalRealEstateTax;
+            totalRealEstateTax = Math.round(((landTaxAssessedValue + buildingTaxAssessedValue) * taxRate) / 100);
         });
+        return totalRealEstateTax;
     }
 
 }
