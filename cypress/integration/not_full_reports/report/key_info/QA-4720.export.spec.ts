@@ -26,7 +26,7 @@ ACAS reports for Property Rights Appraised and Definition
             .formCommentTextBox(testData.propertyRightsAppraisedTitle));
         testData.chips.forEach(chip => {
             Report._KeyInfo.Page.formCommentTextBox(testData.propertyRightsAppraisedTitle)
-                .type(`=${chip.typeSuggestValue}`);
+                .realType(`=${chip.typeSuggestValue}`);
             Report._KeyInfo.clickNarrativeSuggestions(chip.suggestionName);
             cy.wait(1000);
             Report._KeyInfo.verifyFormCommentTextBoxText(testData.propertyRightsAppraisedTitle, chip.verifySuggest);
@@ -35,7 +35,7 @@ ACAS reports for Property Rights Appraised and Definition
             .formCommentTextBox(testData.definitionOfMarketValueTitle));
         testData.chips.forEach(chip => {
             Report._KeyInfo.Page.formCommentTextBox(testData.definitionOfMarketValueTitle)
-                .type(`=${chip.typeSuggestValue}`);
+                .realType(`=${chip.typeSuggestValue}`);
             Report._KeyInfo.clickNarrativeSuggestions(chip.suggestionName, 2);
             cy.wait(1000);
             Report._KeyInfo.verifyFormCommentTextBoxText(testData.definitionOfMarketValueTitle, chip.verifySuggest);

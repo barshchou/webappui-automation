@@ -23,21 +23,24 @@ describe(`Verify the "Linked" chips dropdown in the new narrative component for
         options 'Gross Building Area', 'Building Name', 'Property Type', 'Residential Unit Count', 
         'Commercial Unit Count', 'Street Address', 'Street Name', 'Site Area', 'Year Built', 
         'Block', 'Lot', 'Concluded Cap Rate', 'Zones', 'Condition'.`);
-        Report._KeyInfo.activateTextAreaInput( Report._KeyInfo.Page
+        Report._KeyInfo.activateTextAreaInput(Report._KeyInfo.Page
             .formCommentTextBox(testData.propertyRightsAppraisedTitle));
         testData.chips.forEach(chip => {
-            Report._KeyInfo.enterFormCommentTextBox(testData.propertyRightsAppraisedTitle,
-                `=${chip.typeSuggestValue}`, false)
-                .clickNarrativeSuggestions(chip.suggestionName)
-                .verifyFormCommentTextBoxText(testData.propertyRightsAppraisedTitle, chip.verifySuggest);
+            Report._KeyInfo.Page.formCommentTextBox(testData.propertyRightsAppraisedTitle)
+                .realType(`=${chip.typeSuggestValue}`);
+            Report._KeyInfo.clickNarrativeSuggestions(chip.suggestionName);
+            cy.wait(1000);
+            Report._KeyInfo.verifyFormCommentTextBoxText(testData.propertyRightsAppraisedTitle, chip.verifySuggest);
         });
+        cy.pause();
         Report._KeyInfo.activateTextAreaInput( Report._KeyInfo.Page
             .formCommentTextBox(testData.definitionOfMarketValueTitle));
         testData.chips.forEach(chip => {
-            Report._KeyInfo.enterFormCommentTextBox(testData.definitionOfMarketValueTitle,
-                `=${chip.typeSuggestValue}`, false)
-                .clickNarrativeSuggestions(chip.suggestionName, 2)
-                .verifyFormCommentTextBoxText(testData.definitionOfMarketValueTitle, chip.verifySuggest);
+            Report._KeyInfo.Page.formCommentTextBox(testData.definitionOfMarketValueTitle)
+                .realType(`=${chip.typeSuggestValue}`);
+            Report._KeyInfo.clickNarrativeSuggestions(chip.suggestionName, 2);
+            cy.wait(1000);
+            Report._KeyInfo.verifyFormCommentTextBoxText(testData.definitionOfMarketValueTitle, chip.verifySuggest);
         });
         Report._KeyInfo.inactivateTextAreaInput();
 
