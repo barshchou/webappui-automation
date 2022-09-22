@@ -2,12 +2,14 @@ import proFormaPage from "../../pages/income/proForma.page";
 import {
     getNumberFromMinusDollarNumberWithCommas,
     numberWithCommas,
-    getNumberFromDollarNumberWithCommas
+    getNumberFromDollarNumberWithCommas,
+    getNumberFromPercentNumberWithCommas
 } from "../../../utils/numbers.utils";
 import BaseActionsExt from "../base/base.actions.ext";
 import { BoweryReports } from "../../types/boweryReports.type";
 import enums from "../../enums/enums";
 import { Alias } from "../../utils/alias.utils";
+import taxInfoKeys from "../../utils/mapKeys/income/tax_Info/taxInfoKeys";
 
 class ProFormaActions extends BaseActionsExt<typeof proFormaPage> {
 
@@ -315,6 +317,14 @@ class ProFormaActions extends BaseActionsExt<typeof proFormaPage> {
                 });
         });
         return this;
+    }
+
+    calculateTotalRealEstateTax(landTaxAssessedValue: number, buildingTaxAssessedValue: number) {
+        cy._mapGet(taxInfoKeys.taxRates).then((taxRateText) => {
+            const taxRate = getNumberFromPercentNumberWithCommas(taxRateText);
+            const totalRealEstateTax = Math.round(((landTaxAssessedValue + buildingTaxAssessedValue) * taxRate) / 100);
+            return totalRealEstateTax;
+        });
     }
 
 }

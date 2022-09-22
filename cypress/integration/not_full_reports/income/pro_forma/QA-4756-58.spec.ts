@@ -5,7 +5,6 @@ import { _NavigationSection } from "../../../../actions/base";
 import { DataCollections, Income } from "../../../../actions";
 import proFormaTypes from "../../../../enums/proFormaTypes.enum";
 
-// ToDo: https://bowery.atlassian.net/browse/QA-6956
 describe("Pro Forma Page validation Operating Expenses -> Real Estate Taxes", 
     { tags:[ "@income", "@pro_forma" ] }, () => { 
     
@@ -24,6 +23,7 @@ describe("Pro Forma Page validation Operating Expenses -> Real Estate Taxes",
             Income._TaxInfo.switchIncludeTransitionalCheckbox(false)
                 .enterTaxableAssessedLandValue(testData.landTaxAssessedValue)
                 .enterTaxableAssessedBuildingValue(testData.buildingTaxAssessedValue)
+                .saveTaxRate()
                 .clickSaveButton();
             cy.saveLocalStorage();
         });
@@ -37,8 +37,11 @@ describe("Pro Forma Page validation Operating Expenses -> Real Estate Taxes",
         it("[QA-4756]", () => {
             cy.stepInfo(`3. The value in the Real Estate Taxes is taken from 
                     Income → Tax Info → Tax Information → Summary → Tax Liability (Total) cell`);
+            const totalRealEstateTax = Income._ProFormaActions.calculateTotalRealEstateTax(
+                testData.landTaxAssessedValue, 
+                testData.buildingTaxAssessedValue);
             Income._ProFormaActions.verifyCategoryTotal(
-                `$${numberWithCommas(Math.round(testData.totalRealEstateTax))}`, 
+                `$${numberWithCommas(Math.round(totalRealEstateTax))}`, 
                 proFormaTypes.realEstateTaxes);
         });
 
@@ -46,16 +49,24 @@ describe("Pro Forma Page validation Operating Expenses -> Real Estate Taxes",
             cy.stepInfo(`3. The value in the Real Estate Taxes → PSF is calculated 
                     by the formula: Total / GBA or is taken from Income → Tax Info → 
                     Tax Information → Summary → Tax Liability (PSF) cell`);
+            const totalRealEstateTax = Income._ProFormaActions.calculateTotalRealEstateTax(
+                testData.landTaxAssessedValue, 
+                testData.buildingTaxAssessedValue);
+            const totalRealEstateTaxPerSf = totalRealEstateTax / testData.grossBuildingArea;
             Income._ProFormaActions.verifyCategoryPSFTotal(
-                `$${numberWithCommas(testData.totalRealEstateTaxPerSf.toFixed(2))}`, 
+                `$${numberWithCommas(totalRealEstateTaxPerSf.toFixed(2))}`, 
                 proFormaTypes.realEstateTaxes);
         });
 
         it("[QA-4758]", () => {
             cy.stepInfo(`3. The value in the Real Estate Taxes → Per Unit is calculated 
                     by the formula: Total / # of Residential Units`);
+            const totalRealEstateTax = Income._ProFormaActions.calculateTotalRealEstateTax(
+                testData.landTaxAssessedValue, 
+                testData.buildingTaxAssessedValue);
+            const totalRealEstateTaxPerUnit = totalRealEstateTax / testData.numberOfResidentialUnits;
             Income._ProFormaActions.verifyCategoryPerUnitTotal(
-                `$${numberWithCommas(Math.round(testData.totalRealEstateTaxPerUnit))}`, 
+                `$${numberWithCommas(Math.round(totalRealEstateTaxPerUnit))}`, 
                 proFormaTypes.realEstateTaxes);
         });
     });

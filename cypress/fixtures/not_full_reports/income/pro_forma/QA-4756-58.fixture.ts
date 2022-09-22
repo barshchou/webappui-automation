@@ -27,6 +27,5 @@ export default {
     totalRealEstateTaxPerUnit: _totalRealEstateTaxPerUnit,
     totalRealEstateTax: _totalRealEstateTax, 
     landTaxAssessedValue: _landTaxAssessedValue,
-    buildingTaxAssessedValue: _buildingTaxAssessedValue,
-    taxPercent: _taxPercent
+    buildingTaxAssessedValue: _buildingTaxAssessedValue
 };
