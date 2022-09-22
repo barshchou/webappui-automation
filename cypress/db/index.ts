@@ -70,10 +70,9 @@ class ComplexDatabaseModule {
                 mongoUrl: Cypress.env("COMP_PLEX_DB_DEV_URL"),
                 dbName: Cypress.env("COMP_PLEX_DB_DEV_NAME")
             },
-            //We don't have keys for prod db yet
             "prod":{
-                mongoUrl: Cypress.env("-"),
-                dbName: Cypress.env("-")
+                mongoUrl: Cypress.env("COMP_PLEX_DB_PROD_URL"),
+                dbName: Cypress.env("COMP_PLEX_DB_PROD_NAME")
             },
             "staging":{
                 mongoUrl: Cypress.env("COMP_PLEX_DB_STAGE_URL"),

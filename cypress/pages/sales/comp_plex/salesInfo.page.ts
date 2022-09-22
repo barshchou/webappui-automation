@@ -2,11 +2,11 @@ import { CompPlex } from "../../../types/compplex.type";
 
 export default class SaleInformationForm {
     get SaleInfoCancelBtn() {
-        return cy.get('[data-qa="sale-info-cancel-btn"]', { includeShadowDom:true });
+        return cy.get('[data-qa="info-cancel-btn"]');
     }
 
     get SaleInfoDoneBtn() {
-        return cy.get('[data-qa="sale-info-done-btn"]', { includeShadowDom:true });
+        return cy.get('[data-qa="info-done-btn"]');
     }
 
     get LinkTypeInput() {
