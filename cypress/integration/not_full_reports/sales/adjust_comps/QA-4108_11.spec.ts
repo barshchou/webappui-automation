@@ -19,7 +19,7 @@ describe("Verify Grid is calculated with correct formula",
             _NavigationSection.navigateToFindComps();
             for (let i = 1; i < 3; i++) {
                 Sales._FindComps.AddressSearch.openAddressSearchTab()
-                    .addCompByParameter(i, testData.compProperty, testData.compStatusDate);
+                    .addCompByParameter(testData.filter, i);
             }
 
             cy.stepInfo(`2. Navigate to Sales > Adjust Comps > Sales Adjustment Grid`);
