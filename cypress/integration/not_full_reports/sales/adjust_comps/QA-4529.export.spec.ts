@@ -13,7 +13,7 @@ describe("Check custom Utilities adjustment",
             _NavigationSection.navigateToFindComps();
             for (let i = 1; i < 3; i++) {
                 Sales._FindComps.AddressSearch.openAddressSearchTab()
-                    .addCompByParameter(testData.filter, 1);
+                    .addCompByParameter(testData.filter, i);
             }
 
             cy.stepInfo(`2. Open Adjust comps page, verify custom utilities adjustment row can be added and deleted`);
