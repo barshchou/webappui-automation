@@ -2,6 +2,7 @@ import testData from "../../../../../fixtures/not_full_reports/income/commercial
 import Income from "../../../../../actions/income/income.manager";
 import NavigationSection from "../../../../../actions/base/navigationSection.actions";
 import { createReport } from "../../../../../actions/base/baseTest.actions";
+import Enums from "../../../../../enums/enums";
 
 describe(`Current Commercial Income Discussion > Verify the Revert to Original button and 
     'Changes will be lost' functionality`, 
@@ -11,19 +12,20 @@ describe(`Current Commercial Income Discussion > Verify the Revert to Original b
         createReport(testData.reportCreationData);
     });
 
-    //TODO update test after test-cases updates QA-6543
     it("Test body", () => {
         NavigationSection.navigateToCommercialInPlaceRentRoll()
             .verifyProgressBarNotExist();
-        Income.Commercial.InPlaceRentRoll.editDiscussion(testData.editedCommentary)
-            .activateTextAreaInput(Income.Commercial.InPlaceRentRoll.Page.commentaryText)
+        Income.Commercial.InPlaceRentRoll.activateTextAreaInput(Income.Commercial.InPlaceRentRoll.Page.commentaryText)
+            .Page.formRevertToOriginalBtnBySectionName(Enums.PAGES_TEXTBOX_NAMES.currentCommercialIncomeDiscussion)
+            .should("be.disabled");
+        Income.Commercial.InPlaceRentRoll.editDiscussion(testData.editedCommentary, true, false)
             .clickRevertToOriginalButton()
             .clickCloseButton()
-            .verifyCommentaryFullText(testData.editedCommentary)
+            .verifyCommentaryContainsText(testData.editedCommentary)
             .activateTextAreaInput(Income.Commercial.InPlaceRentRoll.Page.commentaryText)
             .clickRevertToOriginalButton()
             .clickCancelRevertButton()
-            .verifyCommentaryFullText(testData.editedCommentary)
+            .verifyCommentaryContainsText(testData.editedCommentary)
             .activateTextAreaInput(Income.Commercial.InPlaceRentRoll.Page.commentaryText)
             .clickRevertToOriginalButton()
             .clickYesRevertButton()
