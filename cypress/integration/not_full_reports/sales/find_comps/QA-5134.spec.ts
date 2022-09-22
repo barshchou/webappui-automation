@@ -4,6 +4,7 @@ import { _NavigationSection } from '../../../../actions/base';
 import testData from "../../../../fixtures/not_full_reports/sales/find_comps/QA-5134.fixture";
 import { createReport } from "../../../../actions/base/baseTest.actions";
 import mapKeysUtils from "../../../../utils/mapKeys.utils";
+import { filter } from 'cypress/types/bluebird';
 
 describe(`Check when "custom" dropdown is selected user can drag&drop comps`, 
     { tags: [ "@sales", "@find_comps", "@comp_plex" ] }, () => {
@@ -22,7 +23,7 @@ describe(`Check when "custom" dropdown is selected user can drag&drop comps`,
             cy.stepInfo(`2. User selects n-first comps from map`);
             for (let i = 1; i < 3; i++) {
                 Sales._FindComps.AddressSearch.openAddressSearchTab()
-                    .addCompByParameter(i, testData.compProperty, testData.compStatusDate);
+                    .addCompByParameter(filter, i);
             }
 
             cy.stepInfo(`3. When sort for Selected Comparables set to "Sale Date",

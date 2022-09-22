@@ -18,7 +18,7 @@ describe("Calculation of Market Condition adjustment",
             NavigationSection.navigateToFindComps();
             for (let i = 1; i < 3; i++) {
                 Sales._FindComps.AddressSearch.openAddressSearchTab()
-                    .addCompByParameter(i, testData.compProperty, testData.compStatusDate);
+                    .addCompByParameter(testData.filter, i);
             }
     
             cy.stepInfo(`3. Open Adjust comps page, and copy paste value into Market Condition Adjustment field`);
