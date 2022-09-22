@@ -15,9 +15,9 @@ describe("Current Commercial Income Discussion > Modified label and Save button 
             _NavigationSection.navigateToCommercialInPlaceRentRoll()
                 .verifyProgressBarNotExist();
             Income._CommercialManager.InPlaceRentRoll
+                .editDiscussion(testData.editedCommentary, true, false)
                 .activateTextAreaInput(Income._CommercialManager.InPlaceRentRoll.Page
                     .formCommentTextBox(Enums.PAGES_TEXTBOX_NAMES.currentCommercialIncomeDiscussion))
-                .editDiscussion(testData.editedCommentary, true, false)
                 .Page.formRevertToOriginalBtnBySectionName(Enums.PAGES_TEXTBOX_NAMES.currentCommercialIncomeDiscussion)
                 .should("be.visible");
             Income._CommercialManager.InPlaceRentRoll.inactivateTextAreaInput().Page

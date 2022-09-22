@@ -19,7 +19,10 @@ describe(`Current Commercial Income Discussion > Verify the Revert to Original b
             .Page.formRevertToOriginalBtnBySectionName(Enums.PAGES_TEXTBOX_NAMES.currentCommercialIncomeDiscussion)
             .should("be.disabled");
         Income.Commercial.InPlaceRentRoll.editDiscussion(testData.editedCommentary, true, false)
-            .clickRevertToOriginalButton()
+            .activateTextAreaInput(Income.Commercial.InPlaceRentRoll.Page.commentaryText)
+            .Page.formRevertToOriginalBtnBySectionName(Enums.PAGES_TEXTBOX_NAMES.currentCommercialIncomeDiscussion)
+            .should("not.be.disabled");
+        Income.Commercial.InPlaceRentRoll.clickRevertToOriginalButton()
             .clickCloseButton()
             .verifyCommentaryContainsText(testData.editedCommentary)
             .activateTextAreaInput(Income.Commercial.InPlaceRentRoll.Page.commentaryText)

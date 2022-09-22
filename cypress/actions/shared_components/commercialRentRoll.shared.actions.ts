@@ -226,8 +226,8 @@ class CommercialRentRollSharedComponent<T extends CommercialRentRollSharedCompon
     }
 
     editDiscussionTextArea(value: string, clearText = true): this {
-        clearText ? this.Page.commentaryText.clear().type(value) :
-            this.Page.commentaryText.type(value);
+        clearText ? this.Page.commentaryText.clear().realType(value) :
+            this.Page.commentaryText.realType(value);
         return this;
     }
 
@@ -247,7 +247,6 @@ class CommercialRentRollSharedComponent<T extends CommercialRentRollSharedCompon
     }
 
     editDiscussion(newCommentary: string, clearText = true, isFullTextVerification = true): this {
-        this.Page.modifiedLabel(false).should("not.exist");
         this.activateTextAreaInput(this.Page.commentaryText)
             .editDiscussionTextArea(newCommentary, clearText)
             .inactivateTextAreaInput();
