@@ -2,6 +2,7 @@ import testData from "../../../../fixtures/not_full_reports/sales/adjust_comps/Q
 import { createReport } from "../../../../actions/base/baseTest.actions";
 import NavigationSection from "../../../../actions/base/navigationSection.actions";
 import { Sales, Report } from "../../../../actions";
+import { Alias } from "../../../../utils/alias.utils";
  
 describe("Calculation of Market Condition adjustment", 
     { tags: [ "@adjust_comps", "@sales" ] }, () => {
@@ -19,6 +20,9 @@ describe("Calculation of Market Condition adjustment",
             for (let i = 1; i < 3; i++) {
                 Sales._FindComps.AddressSearch.openAddressSearchTab()
                     .addCompByParameter(i, testData.compProperty, testData.compStatusDate);
+                cy._mapGet(Alias.salesCompsEventIds).then(comp => {
+                    Sales._FindComps.AddressSearch.getCompSaleDateBySalesId(comp, i);
+                });
             }
     
             cy.stepInfo(`3. Open Adjust comps page, and copy paste value into Market Condition Adjustment field`);
@@ -38,10 +42,12 @@ describe("Calculation of Market Condition adjustment",
     
             cy.stepInfo(`6. Fill MarketConditionAdjustment and Verify Market Condition Calculation formula`);
             Sales._AdjustComps.enterMarketConditionAdjustment(testData.marketConditionAdjustment);
-            testData.addressDates.forEach((val, index) => {
-                Sales._AdjustComps.verifyMarketConditionsTime(testData.dateOfValue, val, index);
-            });
-
+            for (let index = 0; index < 2; index++) {
+                cy._mapGet(`${Alias.compProperties.saleDate}${index + 1}`).then(saleDate => {
+                    Sales._AdjustComps.verifyMarketConditionsTime(testData.dateOfValue, saleDate, index);
+                });
+            } 
+            
             cy.stepInfo(`7. Verify the Cumulative Price Per SF row is calculated correctly 
             when the Market Conditions is 0 (and >1)`);
             for (let i = 0; i < 2; i++) {

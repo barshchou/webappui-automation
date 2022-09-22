@@ -79,5 +79,8 @@ export const Alias = {
     jobSearch:{
         selectedCompData:"jobSearchSelectedCompData",
         jobCardComp:"jobSearchCompCard"
+    },
+    compProperties: {
+        saleDate: "compSaleDate"
     }
 };

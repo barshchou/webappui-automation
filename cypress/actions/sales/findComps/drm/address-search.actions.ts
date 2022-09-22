@@ -75,10 +75,18 @@ class AddressSearchActions {
             let compId = id;
             cy.log(`Address of necessary comp is ${compAddress}, and its id is ${compId}`);
             this.addCompViaAddressSearchById(compAddress, compId);
-        } ); 
+            cy._mapSet(Alias.salesCompsEventIds, compId);
+        }); 
     
         return this;
     }
 
+    getCompSaleDateBySalesId(compSalesId: string, index = 0): this { 
+        ComplexDatabaseModule.getCompBySalesIdFromDb(compSalesId).then(dataArray => {
+            cy.log(`Comp Sale Date is ${dataArray[0].saleDate}, sale id: ${compSalesId}.`);
+            cy._mapSet(`${Alias.compProperties.saleDate}${index}`, dataArray[0].saleDate);
+        } ); 
+        return this;
+    }
 }
 export default new AddressSearchActions(findCompsPage);

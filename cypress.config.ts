@@ -106,6 +106,12 @@ export default defineConfig({
                 }
             });
 
+            on("task", {
+                async retrieveCompBySalesId({ dbUrl, dbName, compSalesId }) {
+                    return await db.retrieveCompBySalesId(dbUrl, dbName, compSalesId);
+                }
+            });
+
             return config;
         },
         excludeSpecPattern: '*.studio.*',
