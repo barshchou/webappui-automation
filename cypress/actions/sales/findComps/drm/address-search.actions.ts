@@ -65,7 +65,8 @@ class AddressSearchActions {
      * @param compProperty Comps property
      * @param compPropertyValue Comps property value
      */
-    addCompByParameter (filter: Filter<object>, index = 0) { 
+    addCompByParameter (filter: Filter<object>, index = 0) {
+        cy.log(`Using filter ${JSON.stringify(filter)} to query data from db`); 
         ComplexDatabaseModule.getCompsArrayFromDb(filter).then(dataArray => {
             cy.log(`Array of comps in database`, <string>dataArray);
             let comp = dataArray[index];

@@ -21,6 +21,7 @@ class ComplexDatabaseModule {
      * @param compPropertyValueInDB Comp property value in database collection
      */
     retrieveDataFromDb = async (url: string, dbName: string, filter: Filter<object>) => {
+        console.log(`Using filter ${JSON.stringify(filter)} to query data from DB`);
         const client = new MongoClient(url);
         const collectionName = "sales-transactions";
         try {
