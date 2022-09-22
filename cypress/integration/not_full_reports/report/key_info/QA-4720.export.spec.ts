@@ -4,6 +4,7 @@ import { _NavigationSection } from "../../../../actions/base";
 import { createReport } from "../../../../actions/base/baseTest.actions";
 import testData from '../../../../fixtures/not_full_reports/report/key_info/QA-4720.fixture';
 
+// TODO: Test fail. [QA-7001]
 describe(`Verify the "Linked" chips dropdown in the new narrative component for 
 ACAS reports for Property Rights Appraised and Definition 
     of Market Value sections`, { tags:[ "@report", "@key_info", "@check_export" ] }, () => {
@@ -28,16 +29,20 @@ ACAS reports for Property Rights Appraised and Definition
             Report._KeyInfo.Page.formCommentTextBox(testData.propertyRightsAppraisedTitle)
                 .realType(`=${chip.typeSuggestValue}`);
             Report._KeyInfo.clickNarrativeSuggestions(chip.suggestionName);
-            cy.wait(1000);
             Report._KeyInfo.verifyFormCommentTextBoxText(testData.propertyRightsAppraisedTitle, chip.verifySuggest);
         });
+
+        /*
+         * When typing 'condition' in narrative component clicked value isn't appear in 
+         * text box. Need to add some workaround.
+         */
         Report._KeyInfo.activateTextAreaInput(Report._KeyInfo.Page
             .formCommentTextBox(testData.definitionOfMarketValueTitle));
         testData.chips.forEach(chip => {
             Report._KeyInfo.Page.formCommentTextBox(testData.definitionOfMarketValueTitle)
                 .realType(`=${chip.typeSuggestValue}`);
+            cy.scrollTo("bottom");
             Report._KeyInfo.clickNarrativeSuggestions(chip.suggestionName, 2);
-            cy.wait(1000);
             Report._KeyInfo.verifyFormCommentTextBoxText(testData.definitionOfMarketValueTitle, chip.verifySuggest);
         });
         Report._KeyInfo.inactivateTextAreaInput()
