@@ -39,6 +39,5 @@
       "curly": "warn",
       "default-case":"warn",
       "max-len": ["warn", { "code": 120 }],
-      // "multiline-comment-style": "warn"
     }
 }
