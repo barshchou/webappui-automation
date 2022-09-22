@@ -11,7 +11,7 @@ class ComplexDatabaseModule {
      */
     getCompsArrayFromDb = (filter: Filter<object>) => {
         const { mongoUrl, dbName } = this.selectDatabaseSecrets();
-        return cy.task('retrieveDataFromDb', { dbUrl: mongoUrl, dbName: dbName, filter });
+        return cy.task('retrieveDataFromDb', { dbUrl: mongoUrl, dbName: dbName, filter: filter });
     };
  
     /**
