@@ -25,12 +25,12 @@ conditionalDescribe(`[QA-5157] [QA-5161] [Sales > Find Comps] "Date Sold" sortin
                       - date sold from most to least recent 
                       (comps added via address search)`);
         Sales._FindComps.AddressSearch.openAddressSearchTab()
-            .addCompByParameter(1, testData.compProperty, testData.compStatusDate)
-            .addCompByParameter(4, testData.compProperty, testData.compStatusDate)
-            .addCompByParameter(0, testData.compProperty, testData.compStatusContract)
-            .addCompByParameter(1, testData.compProperty, testData.compStatusContract)
-            .addCompByParameter(0, testData.compProperty, testData.compStatusListing)
-            .addCompByParameter(1, testData.compProperty, testData.compStatusListing);       
+            .addCompByParameter(testData.filterStatusDate, 1)
+            .addCompByParameter(testData.filterStatusDate, 4)
+            .addCompByParameter(testData.filterStatusContract, 0)
+            .addCompByParameter(testData.filterStatusContract, 1)
+            .addCompByParameter(testData.filterStatusListing, 0)
+            .addCompByParameter(testData.filterStatusListing, 1);       
         Sales._FindComps.checkSalesCompSortedByDateSold();
 
         cy.stepInfo(`2.Verify that when "Date Sold" option in Sort dropdown is selected 

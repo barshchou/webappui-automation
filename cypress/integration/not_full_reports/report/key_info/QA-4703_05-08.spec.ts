@@ -1,8 +1,8 @@
-import testData from "../../../../fixtures/not_full_reports/report/key_info/QA-4703_05-07.fixture";
+import testData from "../../../../fixtures/not_full_reports/report/key_info/QA-4703_05-08.fixture";
 import { createReport } from "../../../../actions/base/baseTest.actions";
 import { Report } from "../../../../actions";
 
-describe(`[QA-4703_05-07] Verify the revert commentary functionality for Property Rights Appraised 
+describe(`[QA-4703_05-08] Verify the revert commentary functionality for Property Rights Appraised 
 and Definition of Market Value sections`,
 { tags: [ "@report", "@key_info" ] }, () => {
     beforeEach("Login, create report", () => {
@@ -41,14 +41,17 @@ and Definition of Market Value sections`,
             .verifyFormCommentTextBoxText(testData.definitionOfMarketValueTitle, testData.enterValue);
     });
 
-    it(`[QA-4705-07]`, () => {
-
+    it(`[QA-4705-08]`, () => {
         cy.stepInfo(`1. Edit comment and verify that the Revert to Original button 
             becomes enabled for both sections`);
         Report._KeyInfo.enterFormCommentTextBox(testData.propertyRightsAppraisedTitle, testData.enterValue)
-            .Page.formRevertToOriginalBtnBySectionName(testData.propertyRightsAppraisedTitle).should("not.be.disabled");
+            .Page.modifiedLabel(true, 0).should("be.visible");
+        Report._KeyInfo.Page.formRevertToOriginalBtnBySectionName(
+            testData.propertyRightsAppraisedTitle).should("not.be.disabled");
         Report._KeyInfo.enterFormCommentTextBox(testData.definitionOfMarketValueTitle, testData.enterValue)
-            .Page.formRevertToOriginalBtnBySectionName(testData.definitionOfMarketValueTitle).should("not.be.disabled");
+            .Page.modifiedLabel(true, 1).should("be.visible");
+        Report._KeyInfo.Page.formRevertToOriginalBtnBySectionName(testData.definitionOfMarketValueTitle)
+            .should("not.be.disabled");
 
         cy.stepInfo(`2. Click on the Revert to Original button and verify the 'Changes will be lost modal' 
             is displayed for both sections`);
@@ -56,10 +59,11 @@ and Definition of Market Value sections`,
             .formCommentTextBox(testData.propertyRightsAppraisedTitle))
             .revertToOriginalCommentarySectionByName(testData.propertyRightsAppraisedTitle)
             .verifyFormCommentTextBoxText(testData.propertyRightsAppraisedTitle,
-                testData.enterValue, "not.contain.text")
-            .revertToOriginalCommentarySectionByName(testData.definitionOfMarketValueTitle)
-            .verifyFormCommentTextBoxText(testData.definitionOfMarketValueTitle,
                 testData.enterValue, "not.contain.text");
+        Report._KeyInfo.revertToOriginalCommentarySectionByName(testData.definitionOfMarketValueTitle)
+            .verifyFormCommentTextBoxText(testData.definitionOfMarketValueTitle,
+                testData.enterValue, "not.contain.text")
+            .Page.modifiedLabel(false).should("not.exist");
 
         cy.stepInfo(`3. CLick on the Revert ot Original button and Click on the X icon and verify that 
             the modal is closed and no changes are applied`);

@@ -51,6 +51,8 @@ class KeyInfoPage extends BasePage {
     }
 
     get inputToCheckMyDateIsDifferent() { return cy.get("*[data-qa='isDifferentDateOfValuation']"); }
+
+    getRadioButtonByValue(value: string) { return cy.get(`[value='${value}']`); }
 }
 
 export default new KeyInfoPage();

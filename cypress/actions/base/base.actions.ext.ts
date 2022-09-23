@@ -115,7 +115,7 @@ export default class BaseActionsExt<T extends BasePage> extends BaseActions {
     // TODO: QA-6548 Removed cy.wait() when we determine how to save changes after editing
     enterFormCommentTextBox(name: string, text: string, isClickHeader = true, 
         option: RealClickOptions = { position: "bottomRight" }): this {
-        this.Page.formCommentTextBox(name).realClick({ position: option.position }).type(text);
+        this.Page.formCommentTextBox(name).realClick({ position: option.position }).realType(text);
         if (isClickHeader) {
             this.Page.Header.realClick();
         }
