@@ -4,10 +4,11 @@ import { Filter, MongoClient } from 'mongodb';
 class ComplexDatabaseModule {
     
     /**
-     * Function determines url and name of comp-plex database, then  connects to database and retrieve 
-     * the array (max = 10) of comps with necessary property and its value 
-     * @param compProperty Comp property path in database collection
-     * @param compPropertyValue Comp property value in database collection
+     * Evaluates `mongoUrl` and database name depending from environment under the test 
+     * and then executes `retrieveDataFromDb` Cypress task 
+     * @param  filter The filter predicate for mongo `find` method. 
+     * If unspecified, then all documents in the collection will match the predicate 
+     * @see https://mongodb.github.io/node-mongodb-native/4.10/classes/Collection.html#find     
      */
     getCompsArrayFromDb = (filter: Filter<object>) => {
         const { mongoUrl, dbName } = this.selectDatabaseSecrets();
