@@ -3,7 +3,8 @@ const compPropertyPathsInDB = {
     saleCondition: "latestVersion.saleInformation.saleCondition",
     city: "address.city",
     neighborhood: "latestVersion.propertyInformation.neighborhood",
-    buildingType: "latestVersion.propertyInformation.buildingType"
+    buildingType: "latestVersion.propertyInformation.buildingType",
+    saleTransactionId: "id"
 } as const;
 
 const saleStatusValuesInDB = {

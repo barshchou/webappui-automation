@@ -11,13 +11,11 @@ const _dateOfValuationFixture: BoweryReports.KeyInfoDateType = {
 const compProperty = Enums.COMP_PROPERTIES_PATHS_DB.compPropertyPathsInDB.saleStatus;
 const compStatusDate = Enums.COMP_PROPERTIES_PATHS_DB.saleStatusValuesInDB.date;
 
-const filter: Filter<object>  = { $or: [ { [compProperty]:compStatusDate } ] };
+const filter: Filter<object>  = { $or: [ { [compProperty]: compStatusDate } ] };
 
 export default {
     reportCreationData: ReportDataCreator.getReportData("5350_5706", { incomeValue: Enums.INCOME_TYPE.both }),
     marketConditionAdjustment: 2,
-    // TODO: Dates are hardcoded, need to query data from selected comps after [QA-6755] implementation
-    addressDates: [ new Date(2019, 2, 27), new Date(2018, 7, 11) ],
     dateOfValue: new Date(2022, 1, 15),
     valuationDateFixture: _dateOfValuationFixture,
     comparablesAdjustments: {
