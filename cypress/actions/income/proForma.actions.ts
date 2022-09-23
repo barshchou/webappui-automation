@@ -322,7 +322,7 @@ class ProFormaActions extends BaseActionsExt<typeof proFormaPage> {
 
     calculateAndSaveTotalRealEstateTax(landTaxAssessedValue: number,
         buildingTaxAssessedValue: number): ProFormaActions {
-        // Real Estate Taxes = (landTaxAssessed + buildingAssessed) * tax / 100
+        // Total Real Estate Taxes = (landTaxAssessed + buildingAssessed) * tax / 100
         cy._mapGet(taxInfoKeys.taxRates).then((taxRateText) => {
             const taxRate = getNumberFromPercentNumberWithCommas(taxRateText);
             const totalRealEstateTax = ((landTaxAssessedValue + buildingTaxAssessedValue) * taxRate) / 100;
@@ -332,6 +332,7 @@ class ProFormaActions extends BaseActionsExt<typeof proFormaPage> {
     }
 
     calculateAndSaveTotalRealEstateTaxPerSf(grossBuildingArea: number): ProFormaActions {
+        // Total Real Estate Taxes Per SF = Total Real Estate Taxes / Gross Building Area
         cy._mapGet(proFormaKeys.totalRealEstateTax).then((totalRealEstateTax) => {
             const totalRealEstateTaxPerSf = totalRealEstateTax / grossBuildingArea;
             cy._mapSet(proFormaKeys.totalRealEstateTaxPerSf, totalRealEstateTaxPerSf);
@@ -340,6 +341,7 @@ class ProFormaActions extends BaseActionsExt<typeof proFormaPage> {
     }
 
     calculateAndSaveTotalRealEstateTaxPerUnit(numberOfResidentialUnits: number): ProFormaActions {
+        // Total Real Estate Taxes Per Unit = Total Real Estate Taxes / Number of Residential Units
         cy._mapGet(proFormaKeys.totalRealEstateTax).then((totalRealEstateTax) => {
             const totalRealEstateTaxPerUnit = totalRealEstateTax / numberOfResidentialUnits;
             cy._mapSet(proFormaKeys.totalRealEstateTaxPerUnit, totalRealEstateTaxPerUnit);
