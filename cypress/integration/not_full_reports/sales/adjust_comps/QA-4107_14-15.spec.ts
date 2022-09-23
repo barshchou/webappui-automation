@@ -14,7 +14,7 @@ describe("Adjusted Price per Residential Unit in Sales Adjustment Grid is calcul
             NavigationSection.navigateToFindComps();
             for (let i = 1; i < 3; i++) {
                 Sales._FindComps.AddressSearch.openAddressSearchTab()
-                    .addCompByParameter(i, testData.compProperty, testData.compStatusDate);
+                    .addCompByParameter(testData.filter, i);
             }
 
             cy.stepInfo("3. Navigate to Sales > Adjust Comps > Sales Adjustment Grid");
@@ -38,7 +38,7 @@ describe("Adjusted Price per Residential Unit in Sales Adjustment Grid is calcul
             NavigationSection.navigateToFindComps();
             for (let i = 1; i < 3; i++) {
                 Sales._FindComps.AddressSearch.openAddressSearchTab()
-                    .addCompByParameter(i, testData.compProperty, testData.compStatusDate);
+                    .addCompByParameter(testData.filter, i);
             }
 
             cy.stepInfo("3. Navigate to Sales > Adjust Comps > Sales Adjustment Grid");
@@ -63,7 +63,7 @@ describe("Adjusted Price per Residential Unit in Sales Adjustment Grid is calcul
             NavigationSection.navigateToFindComps();
             for (let i = 1; i < 3; i++) {
                 Sales._FindComps.AddressSearch.openAddressSearchTab()
-                    .addCompByParameter(i, testData.compProperty, testData.compStatusDate);
+                    .addCompByParameter(testData.filter, i);
             }
 
             cy.stepInfo("3. Navigate to Sales > Adjust Comps > Sales Adjustment Grid");

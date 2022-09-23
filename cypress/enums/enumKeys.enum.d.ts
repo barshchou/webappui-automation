@@ -86,3 +86,5 @@ export type FinalValuesApproach = keyof typeof Enums.FINAL_VALUES_APPROACH
 export type ValueConclusionMarketValueNames = keyof typeof Enums.VALUE_CONCLUSION_MARKET_VALUE_NAMES
 export type SubjectPropertyDataSections = keyof typeof Enums.SUBJECT_PROPERTY_DATA_SECTIONS
 export type EditOnSubjectPropertySections = keyof typeof Enums.EDIT_ON_SUBJECT_PROPERTY_SECTIONS
+export type AdjustCompsDiscussionSections = keyof typeof Enums.ADJUST_COMPS_DISCUSSION_SECTIONS
+export type AdjustCompsDiscussionTitles = keyof typeof Enums.ADJUST_COMPS_DISCUSSION_TITLES

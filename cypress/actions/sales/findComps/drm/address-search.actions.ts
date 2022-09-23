@@ -2,7 +2,7 @@
 import { findCompsPage } from "../../../../pages/sales/findComps.page";
 import { Alias } from '../../../../utils/alias.utils';
 import ComplexDatabaseModule from "../../../../../cypress/db/index";
-import { CompPlex } from "../../../../types/compplex.type";
+import { Filter } from "mongodb";
 
 class AddressSearchActions {
     Page: typeof findCompsPage;
@@ -60,16 +60,18 @@ class AddressSearchActions {
     }
   
     /**
-     * Action adds a comp (by index from retrieved array) with necessary property and its value
-     * @param compIndex Comps index in array, retrieved from db 
-     * @param compProperty Comps property
-     * @param compPropertyValue Comps property value
+     * Look up for sales comps in database, extracts its FLAT_VALUE 
+     * and then adds sales comps through Address Search with FLAT_VALUE
+     * @param filter The filter predicate for mongo `find` method. 
+     * If unspecified, then all documents in the collection will match the predicate 
+     * @see https://mongodb.github.io/node-mongodb-native/4.10/classes/Collection.html#find
+     * @param index number of element to be retrieved from array. If not set - will retrieve first elem
      */
-    addCompByParameter (compIndex: number, compProperty: CompPlex.AddressSearch.CompPropertyInDB,
-        compPropertyValue: string) { 
-        ComplexDatabaseModule.getCompsArrayFromDb(compProperty, compPropertyValue).then(dataArray => {
+    addCompByParameter (filter: Filter<object>, index = 0) {
+        cy.log(`Using filter ${JSON.stringify(filter)} to query data from db`); 
+        ComplexDatabaseModule.getCompsArrayFromDb(filter).then(dataArray => {
             cy.log(`Array of comps in database`, <string>dataArray);
-            let comp = dataArray[compIndex];
+            let comp = dataArray[index];
             let { address: { flatValue }, id } = <any>comp;
             let compAddress = flatValue;
             let compId = id;

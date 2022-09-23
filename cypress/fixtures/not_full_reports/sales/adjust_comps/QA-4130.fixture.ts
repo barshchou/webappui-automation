@@ -1,3 +1,4 @@
+import { Filter } from "mongodb";
 import Enums from "../../../../enums/enums";
 import { BoweryReports } from "../../../../types/boweryReports.type";
 import ReportDataCreator from "../../../data_creator/reportData.creator";
@@ -14,9 +15,9 @@ const _calculationUnits = [  Enums.CALCULATION_UNITS.perResidentialUnits,  Enums
 const _existColumns = [ "Cumulative Price Per Unit", "Adjusted Price Per Unit" ];
 
 const compProperty = Enums.COMP_PROPERTIES_PATHS_DB.compPropertyPathsInDB.saleStatus;
-const compStatusContract = Enums.COMP_PROPERTIES_PATHS_DB.saleStatusValuesInDB.inContract;
 const compStatusDate = Enums.COMP_PROPERTIES_PATHS_DB.saleStatusValuesInDB.date;
-const compStatusListing = Enums.COMP_PROPERTIES_PATHS_DB.saleStatusValuesInDB.listing;
+
+const filter: Filter<object> = { $or: [ { [compProperty]: compStatusDate } ] };
 
 export default {
     reportCreationData: ReportDataCreator.getReportData("4130", {
@@ -28,8 +29,5 @@ export default {
     residentialUnit: _rentRollResidentialUnitFixture,
     concludedCapRate: 10,
     adjustmentName: Enums.SALES_ADJUSTMENT_GRID.marketAdjustment,
-    compProperty,
-    compStatusContract,
-    compStatusDate,
-    compStatusListing
+    filter
 };

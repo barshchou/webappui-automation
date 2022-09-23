@@ -266,6 +266,14 @@ class NavigationSectionActions extends BaseActionsExt<typeof navigationSectionPa
         return this;
     }
 
+    navigateToPropertyResidentialUnits(): NavigationSectionActions {
+        this.clickPropertyButton()
+            .clickPropertyResidentialUnitGroups()
+            .submitSaveChangesModal()
+            .waitForUrl(routesUtils.propertyResidentialUnits);
+        return this;
+    }
+
     navigateToRentReconciliation(): NavigationSectionActions {
         this.clickIncomeApproachButton()
             .clickCommercialMenuIfClosed()
@@ -278,6 +286,14 @@ class NavigationSectionActions extends BaseActionsExt<typeof navigationSectionPa
     navigateToPropertyAmenities(): NavigationSectionActions {
         this.clickPropertyButton()
             .clickAmenitiesButton()
+            .submitSaveChangesModal()
+            .waitForUrl(routesUtils.amenities);
+        return this;
+    }
+
+    navigateToPropertyMaps(): NavigationSectionActions {
+        this.clickPropertyButton()
+            .clickMapsButton()
             .submitSaveChangesModal()
             .waitForUrl(routesUtils.amenities);
         return this;
@@ -933,6 +949,11 @@ class NavigationSectionActions extends BaseActionsExt<typeof navigationSectionPa
     clickSubjectPropertyDataSectionAnchor(section: BoweryReports.SubjectPropertyDataSections
     ): NavigationSectionActions {
         navigationSectionPage.getSubjectPropertyDataSectionAnchor(section).click();
+        return this;
+    }
+
+    clickPropertyResidentialUnitGroups(): NavigationSectionActions {
+        navigationSectionPage.propertyResidentialUnits.click();
         return this;
     }
 

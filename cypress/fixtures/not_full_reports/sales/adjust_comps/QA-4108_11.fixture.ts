@@ -1,3 +1,4 @@
+import { Filter } from "mongodb";
 import Enums from "../../../../enums/enums";
 import ReportDataCreator from "../../../data_creator/reportData.creator";
 
@@ -24,9 +25,9 @@ const _locationAdjustments = {
 };
 
 const compProperty = Enums.COMP_PROPERTIES_PATHS_DB.compPropertyPathsInDB.saleStatus;
-const compStatusContract = Enums.COMP_PROPERTIES_PATHS_DB.saleStatusValuesInDB.inContract;
 const compStatusDate = Enums.COMP_PROPERTIES_PATHS_DB.saleStatusValuesInDB.date;
-const compStatusListing = Enums.COMP_PROPERTIES_PATHS_DB.saleStatusValuesInDB.listing;
+
+const filter: Filter<object> = { $and: [ { [compProperty]: compStatusDate } ] };
 
 export default {
     reportCreationData: _reportCreationData,
@@ -34,8 +35,5 @@ export default {
     locationAdjustments: _locationAdjustments,
     comparable: Object.freeze(comparableFixture()),
     calculationUnits: Enums.CALCULATION_UNITS.perResidentialUnits,
-    compProperty,
-    compStatusContract,
-    compStatusDate,
-    compStatusListing
+    filter
 };

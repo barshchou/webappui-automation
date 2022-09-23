@@ -1,6 +1,7 @@
 import Enums from "../../../../enums/enums";
 import ReportDataCreator from "../../../data_creator/reportData.creator";
 import { BoweryReports } from "../../../../types/boweryReports.type";
+import { Filter } from "mongodb";
 
 const _reportCreationData = ReportDataCreator.getReportData("4102_06", {
     incomeValue: Enums.INCOME_TYPE.both
@@ -21,6 +22,8 @@ const compStatusContract = Enums.COMP_PROPERTIES_PATHS_DB.saleStatusValuesInDB.i
 const compStatusDate = Enums.COMP_PROPERTIES_PATHS_DB.saleStatusValuesInDB.date;
 const compStatusListing = Enums.COMP_PROPERTIES_PATHS_DB.saleStatusValuesInDB.listing;
 
+const filter: Filter<object> = { $and: [ { [compProperty]:compStatusDate } ] };
+
 
 export default {
     reportCreationData: _reportCreationData,
@@ -34,8 +37,7 @@ export default {
     compAddress: _compAddress,
     exportSectionName: Enums.EXPORT_TITLES.cumulativePricePerUnit,
     sectionToExport: [ Enums.SECTIONS_TO_INCLUDE_IN_EXPORT.salesComparisonApproach ],
-    compProperty,
     compStatusContract,
-    compStatusDate,
-    compStatusListing
+    compStatusListing,
+    filter
 };

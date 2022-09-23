@@ -37,7 +37,7 @@ describe("Adjusted Price per Residential Unit in Sales Adjustment Grid is calcul
             filled Sale Price, GBA (or selected Basis of Comparison), Residential/Commercial units , save the page`);
             _NavigationSection.navigateToFindComps();
             Sales._FindComps.AddressSearch.openAddressSearchTab()
-                .addCompByParameter(1, testData.compProperty, testData.compStatusDate);
+                .addCompByParameter(testData.filter, 1);
             _NavigationSection.navigateToAdjustComps();
             Sales._AdjustComps.expandAdjustmentDetails(testData.adjustmentName)
                 .verifyExpandMarketAdjustmentPricePerUnit(testData.calculationUnits[0], testData.numberUnits)
