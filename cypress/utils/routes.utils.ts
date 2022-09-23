@@ -53,7 +53,8 @@ const routes =  {
     commercialCompGroupsDiscussion: "/commercial-comp-groups-discussion",
     finalValuesReconciliation: "/final-values-and-reconciliation",
     organizationNewClient: "/organization-new-client",
-    subjectPropertyData: "/subject-property"
+    subjectPropertyData: "/subject-property",
+    propertyResidentialUnits: "/typical-residential-conditions"
 } as const;
 
 export default routes;
