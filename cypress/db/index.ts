@@ -14,31 +14,6 @@ class ComplexDatabaseModule {
         const { mongoUrl, dbName } = this.selectDatabaseSecrets();
         return cy.task('retrieveDataFromDb', { dbUrl: mongoUrl, dbName: dbName, filter: filter });
     };
-
-    getCompBySalesIdFromDb = (compSalesId: string) => {
-        const { mongoUrl, dbName } = this.selectDatabaseSecrets();
-        return cy.task('retrieveCompBySalesId', { dbUrl: mongoUrl, dbName: dbName, compSalesId: compSalesId });
-    };
-
-    retrieveCompBySalesId = async (url: string, dbName: string, compSalesId: string) => {
-        const client = new MongoClient(url);
-        const collectionName = "sales-transactions";
-        const filter = { id : compSalesId } ;
-        try {
-            await client.connect();
-            console.log('Connected successfully to server');
-            const db = client.db(dbName);
-            const collection = db.collection(collectionName);
-            let data = await collection.find(filter, { limit:10 }).toArray();
-            return data; 
-        } catch (error) {
-            console.warn("Error occurred during DB connection or data retrieve");
-            console.log(error);
-        } finally {
-            client.close();
-            console.log("Disconnected from DB");
-        }
-    };
  
     /**
      * Function connects to Comp-plex database and retrieve the array (max = 10) of comps with 

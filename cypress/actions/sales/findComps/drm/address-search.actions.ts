@@ -3,6 +3,7 @@ import { findCompsPage } from "../../../../pages/sales/findComps.page";
 import { Alias } from '../../../../utils/alias.utils';
 import ComplexDatabaseModule from "../../../../../cypress/db/index";
 import { Filter } from "mongodb";
+import Enums from "../../../../enums/enums";
 
 class AddressSearchActions {
     Page: typeof findCompsPage;
@@ -83,9 +84,12 @@ class AddressSearchActions {
         return this;
     }
 
-    getCompSaleDateBySalesId(compSalesId: string, index = 0): this { 
-        ComplexDatabaseModule.getCompBySalesIdFromDb(compSalesId).then(dataArray => {
-            cy.log(`Comp Sale Date is ${dataArray[0].saleDate}, sale id: ${compSalesId}.`);
+    getCompSaleDateBySalesId(compId: string, index = 0): this { 
+        const filter = { $or: [ { 
+            [ Enums.COMP_PROPERTIES_PATHS_DB.compPropertyPathsInDB.saleTransactionId ]: compId 
+        } ] };
+        ComplexDatabaseModule.getCompsArrayFromDb(filter).then(dataArray => {
+            cy.log(`Comp Sale Date is ${dataArray[0].saleDate}`);
             cy._mapSet(`${Alias.compProperties.saleDate}${index}`, dataArray[0].saleDate);
         } ); 
         return this;

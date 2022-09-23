@@ -11,7 +11,7 @@ const _dateOfValuationFixture: BoweryReports.KeyInfoDateType = {
 const compProperty = Enums.COMP_PROPERTIES_PATHS_DB.compPropertyPathsInDB.saleStatus;
 const compStatusDate = Enums.COMP_PROPERTIES_PATHS_DB.saleStatusValuesInDB.date;
 
-const filter: Filter<object>  = { $or: [ { [compProperty]:compStatusDate } ] };
+const filter: Filter<object>  = { $or: [ { [compProperty]: compStatusDate } ] };
 
 export default {
     reportCreationData: ReportDataCreator.getReportData("5350_5706", { incomeValue: Enums.INCOME_TYPE.both }),

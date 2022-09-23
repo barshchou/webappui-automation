@@ -3,7 +3,8 @@ import { createReport } from "../../../../actions/base/baseTest.actions";
 import NavigationSection from "../../../../actions/base/navigationSection.actions";
 import { Sales, Report } from "../../../../actions";
 import { Alias } from "../../../../utils/alias.utils";
- 
+
+//TODO: [QA-7003] Updating Date Of Valuation doesn't trigger save changes modal.
 describe("Calculation of Market Condition adjustment", 
     { tags: [ "@adjust_comps", "@sales" ] }, () => {
 
@@ -13,13 +14,15 @@ describe("Calculation of Market Condition adjustment",
 
         it("[QA-5350_5706]", () => {
             cy.stepInfo(`1. Report > Key Info and fill the Date of Valuation`);
-            Report._KeyInfo.enterDateByType(testData.valuationDateFixture);
+            Report._KeyInfo.enterDateByType(testData.valuationDateFixture)
+                .clickSaveButton()
+                .verifyProgressBarNotExist();
     
             cy.stepInfo(`2. Navigate to the Sales > Find Comps and add a few Sales Comp`);
             NavigationSection.navigateToFindComps();
             for (let i = 1; i < 3; i++) {
                 Sales._FindComps.AddressSearch.openAddressSearchTab()
-                    .addCompByParameter(i, testData.compProperty, testData.compStatusDate);
+                    .addCompByParameter(testData.filter, i);
                 cy._mapGet(Alias.salesCompsEventIds).then(comp => {
                     Sales._FindComps.AddressSearch.getCompSaleDateBySalesId(comp, i);
                 });
