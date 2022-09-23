@@ -4,8 +4,8 @@ import { Income, DataCollections } from "../../../../actions";
 import { _NavigationSection } from "../../../../actions/base";
 import Enums from "../../../../enums/enums";
 import { numberWithCommas } from "../../../../../utils/numbers.utils";
+import proFormaKeys from "../../../../utils/mapKeys/income/pro_forma/proFormaKeys";
 
-// ToDo: https://bowery.atlassian.net/browse/QA-6956
 describe("Pro Forma -> Expenses", 
     { tags:[ "@income", "@pro_forma" ] }, () => {
 
@@ -37,6 +37,7 @@ describe("Pro Forma -> Expenses",
             Income._TaxInfo.switchIncludeTransitionalCheckbox(false)
                 .enterTaxableAssessedLandValue(testData.landTaxAssessedValue)
                 .enterTaxableAssessedBuildingValue(testData.buildingTaxAssessedValue)
+                .saveTaxRate()
                 .clickSaveButton()
                 .verifyProgressBarNotExist();
 
@@ -50,6 +51,16 @@ describe("Pro Forma -> Expenses",
 
         it("[QA-5054] Appraiser's Forecast of Custom Expense Forecast is included in calculation", () => {
             cy.stepInfo("4. On Pro Forma page validate Custom Expense Forecast is included in calculation");
+            Income._ProFormaActions.calculateAndSaveTotalRealEstateTax(
+                testData.landTaxAssessedValue,
+                testData.buildingTaxAssessedValue
+            ).calculateAndSaveTotalOperatingExpenses(
+                testData.fuelTotal,
+                testData.reserversTotal,
+                testData.waterAndSewerTotal,
+                testData.customTotal
+            ).calculateAndSaveTotalOperatingExpensesExTaxes();
+
             Income._ProFormaActions
                 .verifyCategoryTotal(`$${numberWithCommas(Math.round(testData.totalCustomCategory))}`, 
                     testData.customCategoryFirstCapital.name)
@@ -62,13 +73,24 @@ describe("Pro Forma -> Expenses",
                 .verifyCategoryTotal(`$${numberWithCommas(Math.round(testData.waterAndSewerTotal))}`, 
                     Enums.PRO_FORMA_TYPES.waterAndSewer)
                 .verifyCategoryTotal(`$${numberWithCommas(Math.round(testData.fuelTotal))}`, 
-                    Enums.PRO_FORMA_TYPES.fuel)
-                .verifyCategoryTotal(`$${numberWithCommas(Math.round(testData.totalToe))}`, 
-                    Enums.PRO_FORMA_TYPES.totalOperatingExpenses)
-                .verifyCategoryTotal(`$${numberWithCommas(Math.round(testData.totalToeNetRe))}`, 
-                    Enums.PRO_FORMA_TYPES.totalOperatingExpensesExTaxes)
-                .verifyCategoryTotal(`-$${numberWithCommas(Math.round(testData.netOperationIncome))}`, 
+                    Enums.PRO_FORMA_TYPES.fuel);
+
+            cy._mapGet(proFormaKeys.totalOperatingExpenses).then((totalOperatingExpenses) => {
+                // Total Operating Income = -Total Operating Expenses
+                const netOperationIncome = totalOperatingExpenses;
+                Income._ProFormaActions.verifyCategoryTotal(`$${numberWithCommas(Math.round(totalOperatingExpenses))}`, 
+                    Enums.PRO_FORMA_TYPES.totalOperatingExpenses
+                ).verifyCategoryTotal(`-$${numberWithCommas(Math.round(netOperationIncome))}`, 
                     Enums.PRO_FORMA_TYPES.netOperatingIncome);
+            });
+
+            cy._mapGet(proFormaKeys.totalOperatingExpensesExTaxes).then((totalOperatingExpensesExTaxes) => {
+                Income._ProFormaActions.verifyCategoryTotal(
+                    `$${numberWithCommas(Math.round(totalOperatingExpensesExTaxes))}`, 
+                    Enums.PRO_FORMA_TYPES.totalOperatingExpensesExTaxes
+                );
+            });
+
         });
 
         it("[QA-5053] Custom Expense Forecast is displayed in Operating Expenses grid on Pro Forma", () => {

@@ -322,9 +322,10 @@ class ProFormaActions extends BaseActionsExt<typeof proFormaPage> {
 
     calculateAndSaveTotalRealEstateTax(landTaxAssessedValue: number,
         buildingTaxAssessedValue: number): ProFormaActions {
+        // Real Estate Taxes = (landTaxAssessed + buildingAssessed) * tax / 100
         cy._mapGet(taxInfoKeys.taxRates).then((taxRateText) => {
             const taxRate = getNumberFromPercentNumberWithCommas(taxRateText);
-            const totalRealEstateTax = Math.round(((landTaxAssessedValue + buildingTaxAssessedValue) * taxRate) / 100);
+            const totalRealEstateTax = ((landTaxAssessedValue + buildingTaxAssessedValue) * taxRate) / 100;
             cy._mapSet(proFormaKeys.totalRealEstateTax, totalRealEstateTax);
         });
         return this;
@@ -340,7 +341,7 @@ class ProFormaActions extends BaseActionsExt<typeof proFormaPage> {
 
     calculateAndSaveTotalRealEstateTaxPerUnit(numberOfResidentialUnits: number): ProFormaActions {
         cy._mapGet(proFormaKeys.totalRealEstateTax).then((totalRealEstateTax) => {
-            const totalRealEstateTaxPerUnit = Math.round(totalRealEstateTax / numberOfResidentialUnits);
+            const totalRealEstateTaxPerUnit = totalRealEstateTax / numberOfResidentialUnits;
             cy._mapSet(proFormaKeys.totalRealEstateTaxPerUnit, totalRealEstateTaxPerUnit);
         });
         return this;
@@ -350,6 +351,7 @@ class ProFormaActions extends BaseActionsExt<typeof proFormaPage> {
         totalReserves: number,
         totalWater: number,
         totalCustoms: number): ProFormaActions {
+        // Total Operating Expenses = Total of all expenses(included custom) + Real Estate Taxes total
         cy._mapGet(proFormaKeys.totalRealEstateTax).then((totalRealEstateTax) => {
             const totalOperatingExpenses = totalFuel + totalReserves + totalWater + totalCustoms + totalRealEstateTax;
             cy._mapSet(proFormaKeys.totalOperatingExpenses, totalOperatingExpenses);
@@ -358,6 +360,7 @@ class ProFormaActions extends BaseActionsExt<typeof proFormaPage> {
     }
 
     calculateAndSaveTotalOperatingExpensesExTaxes(): ProFormaActions {
+        // Total Operating Expenses ex Taxed = Total Operating Expenses - Real Estate Taxes total
         cy._mapGet(proFormaKeys.totalRealEstateTax).then((totalRealEstateTax) => {
             cy._mapGet(proFormaKeys.totalOperatingExpenses).then((totalOperatingExpenses) => {
                 const totalOperatingExpensesExTaxes = totalOperatingExpenses - totalRealEstateTax;

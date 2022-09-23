@@ -43,7 +43,7 @@ describe("Pro Forma Page validation Operating Expenses -> Real Estate Taxes",
                 testData.buildingTaxAssessedValue);
             cy._mapGet(proFormaKeys.totalRealEstateTax).then((totalRealEstateTax) => {
                 Income._ProFormaActions.verifyCategoryTotal(
-                    `$${numberWithCommas(totalRealEstateTax)}`, 
+                    `$${numberWithCommas(Math.round(totalRealEstateTax))}`, 
                     proFormaTypes.realEstateTaxes);
             });
         });
@@ -67,7 +67,7 @@ describe("Pro Forma Page validation Operating Expenses -> Real Estate Taxes",
             Income._ProFormaActions.calculateAndSaveTotalRealEstateTaxPerUnit(testData.numberOfResidentialUnits);
             cy._mapGet(proFormaKeys.totalRealEstateTaxPerUnit).then((totalRealEstateTaxPerUnit) => {
                 Income._ProFormaActions.verifyCategoryPerUnitTotal(
-                    `$${numberWithCommas(totalRealEstateTaxPerUnit)}`, 
+                    `$${numberWithCommas(Math.round(totalRealEstateTaxPerUnit))}`, 
                     proFormaTypes.realEstateTaxes);
             });
         });
