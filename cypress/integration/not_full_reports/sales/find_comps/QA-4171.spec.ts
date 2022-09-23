@@ -2,7 +2,6 @@ import testData from "../../../../fixtures/not_full_reports/sales/find_comps/QA-
 import NavigationSection from "../../../../actions/base/navigationSection.actions";
 import Sales from "../../../../actions/sales/sales.manager";
 import { createReport } from "../../../../actions/base/baseTest.actions";
-import { filter } from "cypress/types/bluebird";
 
 describe("Selected Comparables table. Verify the functionality of Remove button", 
     { tags:[ "@find_comps", "@sales" ] }, () => {
@@ -13,7 +12,7 @@ describe("Selected Comparables table. Verify the functionality of Remove button"
         it("Test body", () => {
             NavigationSection.navigateToFindComps();
             Sales.FindComps.AddressSearch.openAddressSearchTab()
-                .addCompByParameter(filter, 1);
+                .addCompByParameter(testData.filter, 1);
             Sales.FindComps.verifyAddedCompAddress(testData.comparable.address)
                 .removeCompByAddress(testData.comparable.address)
                 .verifyCompIsInRemovedSection(testData.comparable.address)
