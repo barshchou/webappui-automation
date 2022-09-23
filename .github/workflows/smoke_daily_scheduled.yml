@@ -31,7 +31,7 @@ jobs:
           github_token: ${{ secrets.GH_PERSONAL_ACCESS_TOKEN }}
           url: prod
           spec_file: cypress/integration/**
-          tags: grep=,grepTags=@smoke,burn=
+          tags: grepTags=@smoke
           secret_name: 'Github/Cypress/webapp-e2e-secrets'
         env:
           DD_CIVISIBILITY_AGENTLESS_ENABLED: true

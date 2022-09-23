@@ -111,7 +111,10 @@ export default defineConfig({
         excludeSpecPattern: '*.studio.*',
         specPattern: 'cypress/integration/**/*.spec.{js,jsx,ts,tsx}',
         env: {
-            report: "api"
+            report: "api",
+            burn: undefined,
+            grep: undefined,
+            grepFilterSpecs: true
         }
     },
 });

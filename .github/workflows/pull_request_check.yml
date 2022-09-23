@@ -67,7 +67,7 @@ jobs:
           github_token: ${{ secrets.GH_PERSONAL_ACCESS_TOKEN }}
           url: ${{ steps.define_pull_request_data.outputs.URL }}
           customUrl: ${{ steps.define_pull_request_data.outputs.CUSTOM_URL }}
-          tags: grep=,grepTags=@smoke,burn=
+          tags: grepTags=@smoke
           ref: ${{ github.sha }}
           secret_name: 'Github/Cypress/webapp-e2e-secrets'
         env:
