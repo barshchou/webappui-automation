@@ -1,3 +1,4 @@
+import { Filter } from "mongodb";
 import Enums from "../../../../enums/enums";
 import ReportDataCreator from "../../../data_creator/reportData.creator";
 
@@ -11,6 +12,8 @@ const _calculationUnitsText = (calculationUnits: string) => {
     }
     return text;
 };
+
+const filter: Filter<object> = { $or: [ { [compProperty]:compStatusDate } ] };
 
 const unitOfComparisonDiscussionText = "In the Sales Comparison Approach, an opinion of market value is provided by "+
 "comparing the subject property to transactions of competitive assets. A major premise is the principle of "+
@@ -32,8 +35,7 @@ export default {
         conclusionValue: Enums.VALUE_CONCLUSION_TYPE.AS_COMPLETE
     }),
     adjustmentName: Enums.SALES_ADJUSTMENT_GRID.locationAdjustment,
-    compProperty,
-    compStatusDate,
+    filter,
     calculationUnits: _calculationUnits,
     comparablesAdjustmentsText: unitOfComparisonDiscussionText,
     discussionSection: Enums.ADJUST_COMPS_DISCUSSION_SECTIONS.unitOfComparison,

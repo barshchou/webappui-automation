@@ -20,7 +20,7 @@ describe(`Check Location Discussion`,
             cy.stepInfo(`3. Navigate to Find Comps and add sales comps`);
             _NavigationSection.navigateToFindComps();
             Sales._FindComps.AddressSearch.openAddressSearchTab()
-                .addCompByParameter(1, testData.compNeighborhood, testData.compNeighborhoodValues);
+                .addCompByParameter(testData.filter, 1);
 
             cy.stepInfo(`4. Navigate to Adjust Comps and add appropriate Location Adjustments and
             verify generated commentary`);

@@ -32,8 +32,7 @@ describe(`Check Utility Discussion`,
                 cy.stepInfo(`5. Navigate to Find Comps and add sales comps`);
                 _NavigationSection.navigateToFindComps();
                 Sales._FindComps.AddressSearch.openAddressSearchTab()
-                    .addCompByParameter(1, testData.compBuildingType, 
-                        testData.compBuildingTypeValue);
+                    .addCompByParameter(testData.filter, 1);
 
                 cy.stepInfo(`6. Navigate to Adjust Comps and add appropriate Utilities and
                 verify generated commentary`);

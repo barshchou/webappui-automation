@@ -1,8 +1,10 @@
+import { Filter } from "mongodb";
 import Enums from "../../../../enums/enums";
 import ReportDataCreator from "../../../data_creator/reportData.creator";
 
 const compBuildingType = Enums.COMP_PROPERTIES_PATHS_DB.compPropertyPathsInDB.buildingType;
 const compBuildingTypeValue = Enums.COMP_PROPERTIES_PATHS_DB.buildingTypeValues.walkup;
+const filter: Filter<object> = { $or: [ { [compBuildingType]:compBuildingTypeValue } ] };
 const positiveCommercialAdjustment = 70;
 const positiveCornerAdjustment = 60;
 const positiveFinishesAdjustment = 50;
@@ -198,6 +200,5 @@ export default {
     bathroomCondition,
     bedroomCondition,
     livingRoomCondition,
-    compBuildingType,
-    compBuildingTypeValue
+    filter
 };
