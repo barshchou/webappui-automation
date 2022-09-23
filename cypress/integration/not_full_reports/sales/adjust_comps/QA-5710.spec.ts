@@ -12,7 +12,7 @@ describe(`Check that negative sales adjustments can be typed in`,
             cy.stepInfo(`Precondition: Add any comp`);
             _NavigationSection.navigateToFindComps();
             Sales._FindComps.AddressSearch.openAddressSearchTab()
-                .addCompByParameter(1, testData.compProperty, testData.compStatusDate);
+                .addCompByParameter(testData.filter, 1);
 
             cy.stepInfo(`1. Go to Sales > Adjust Comps`);
             _NavigationSection.navigateToAdjustComps();

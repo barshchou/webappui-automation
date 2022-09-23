@@ -16,7 +16,7 @@ describe("Check custom adjustment",
             NavigationSection.navigateToFindComps();
             for (let i = 1; i < 3; i++) {
                 Sales._FindComps.AddressSearch.openAddressSearchTab()
-                    .addCompByParameter(i, testData.compProperty, testData.compStatusDate);
+                    .addCompByParameter(testData.filter, i);
             }
 
             cy.stepInfo("2. Open Adjust comps page, verify custom adjustment row can be added and edited");
