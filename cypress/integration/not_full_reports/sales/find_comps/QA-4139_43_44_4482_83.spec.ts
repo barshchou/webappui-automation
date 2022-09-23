@@ -42,7 +42,8 @@ conditionalDescribe("Group of tests for numeric inputs at create comp modal",
                 .Page.errorMessageNewComp.should("exist");
         });
 
-        it(`QA-4143: Verify the #Commercial Units* field`, () => {        
+        //TODO test is not relevant anymore 
+        it.skip(`QA-4143: Verify the #Commercial Units* field`, () => {        
             Sales._FindComps.Page.createCompNumberCommercialUnits.should("not.exist");
             Sales._FindComps.selectDropdownOptionNewComp(Sales._FindComps.Page.comparableTypeDropdown, 
                 testData.comparableType);
@@ -68,7 +69,8 @@ conditionalDescribe("Group of tests for numeric inputs at create comp modal",
         /**
          * ernst: Requires changes in Commercial Area* field to make it testable
          */
-        it(`QA-4144: Verify the Commercial Area* field`, () => {
+        //TODO test is not relevant anymore 
+        it.skip(`QA-4144: Verify the Commercial Area* field`, () => {
             Sales._FindComps.Page.commercialAreaNewComp.should("not.exist");
             Sales._FindComps.selectDropdownOptionNewComp(Sales._FindComps.Page.comparableTypeDropdown, 
                 testData.comparableType);

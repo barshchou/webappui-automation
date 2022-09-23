@@ -1,10 +1,10 @@
-import { ReviewExport } from '../../../../actions';
 import { Report } from "../../../../actions";
 import { _NavigationSection } from "../../../../actions/base";
 import { createReport } from "../../../../actions/base/baseTest.actions";
 import testData from '../../../../fixtures/not_full_reports/report/key_info/QA-4721_24-26.fixture';
 import { _ReportTitles } from "../../../../enums/pages_titles";
 import routesUtils from "../../../../utils/routes.utils";
+import subjectPropertyDataRouts from "../../../../utils/subject_property_data_routs.utils";
 
 describe(`Verify the Save and Save & Continue button functionality on the Report > Key Info page:`,
     { tags:[ "@report", "@key_info" ] }, () => {
@@ -104,11 +104,12 @@ describe(`Verify the Save and Save & Continue button functionality on the Report
                     "not.contain.text");
         });
 
+        // Test QA-4726 will be updated. 
         it("[QA-4726]", () => {
             cy.stepInfo(`1. Click on the Back button and verify the user is redirected 
-            to another page (Settings & Export > Review and Export).`);
+            to another page (Subject Property Data).`);
             Report._KeyInfo.clickBackButton();
-            _NavigationSection.submitSaveChangesModal();
-            ReviewExport.verifyPageIsOpened();
+            _NavigationSection.submitSaveChangesModal()
+                .waitForUrl(subjectPropertyDataRouts.subjectProperty);        
         });
     });

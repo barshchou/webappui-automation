@@ -1,13 +1,6 @@
 import BasePage from "../base/base.page";
 
 class DescriptionPage extends BasePage {
-    get selectGeneralConditionButton() { return cy.get("*[data-qa*='generalCondition'] [data-qa='select-value']"); }
-
-    getDropdownOptionByValue(value: string) { return cy.get(`li[role=option][data-value='${value}']`); }
-
-    get selectAsStabilizedConditionButton() { 
-        return cy.get("*[data-qa*=generalAsStabilizedCondition] [data-qa='select-value']"); 
-    }
 
     getCheckboxByLabel(label: string) { return cy.get(`*[label='${label}'] input`); }
 

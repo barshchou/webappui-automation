@@ -10,6 +10,21 @@ import Enums from "../../enums/enums";
 
 class SubjectPropertyDataActions extends BaseActionsExt<typeof subjectPropertyDataPage> {
 
+    
+    selectGeneralPropertyCondition(conditionValue: string): SubjectPropertyDataActions {
+        subjectPropertyDataPage.selectGeneralConditionButton.click();
+        subjectPropertyDataPage.getDropdownOptionByValue(conditionValue).should("exist").click();
+        subjectPropertyDataPage.selectGeneralConditionButton.should("have.text", conditionValue);
+        return this;
+    }
+
+    selectAsStabilizedPropertyCondition(conditionValue: string): SubjectPropertyDataActions {
+        subjectPropertyDataPage.selectAsStabilizedConditionButton.click();
+        subjectPropertyDataPage.getDropdownOptionByValue(conditionValue).should("exist").click();
+        subjectPropertyDataPage.selectAsStabilizedConditionButton.should("have.text", conditionValue);
+        return this;
+    }
+
     enterNumberOfResUnits(number: number, notInclude?: string[]): SubjectPropertyDataActions {
         subjectPropertyDataPage.numberOfResUnitsInput.clear().type(`${number}`).should("have.value", number);
         if (notInclude) {

@@ -4,6 +4,7 @@ import { Income, DataCollections } from "../../../../actions";
 import { _NavigationSection } from "../../../../actions/base";
 import tableExpenseHistoryCellNames from "../../../../enums/expense/expenseHistoryTableRows.enum";
 
+// TODO: Test fails due to https://bowery.atlassian.net/browse/WEB-7012 
 describe("[QA-5776] Historical expense Management Fees Per SF is correctly calculated and displayed",
     { tags: [ "@snapshot_tests", "@income", "@expense_forecast" ] }, () => {
         beforeEach("Login, create report", () => {
