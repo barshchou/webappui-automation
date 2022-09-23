@@ -85,7 +85,7 @@ class AddressSearchActions {
     }
 
     getCompSaleDateBySalesId(compId: string, index = 0): this { 
-        const filter = { $or: [ { 
+        const filter: Filter<object> = { $or: [ { 
             [ Enums.COMP_PROPERTIES_PATHS_DB.compPropertyPathsInDB.saleTransactionId ]: compId 
         } ] };
         ComplexDatabaseModule.getCompsArrayFromDb(filter).then(dataArray => {
