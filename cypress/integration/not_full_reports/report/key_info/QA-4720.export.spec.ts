@@ -33,15 +33,14 @@ ACAS reports for Property Rights Appraised and Definition
         });
 
         /*
-         * When typing 'condition' in narrative component clicked value isn't appear in 
-         * text box. Need to add some workaround.
+         * [QA-7001] When typing 'condition' in narrative component clicked value isn't appear in 
+         * text box. Need to add workaround or investigate issue and submit a bug.
          */
         Report._KeyInfo.activateTextAreaInput(Report._KeyInfo.Page
             .formCommentTextBox(testData.definitionOfMarketValueTitle));
         testData.chips.forEach(chip => {
             Report._KeyInfo.Page.formCommentTextBox(testData.definitionOfMarketValueTitle)
                 .realType(`=${chip.typeSuggestValue}`);
-            cy.scrollTo("bottom");
             Report._KeyInfo.clickNarrativeSuggestions(chip.suggestionName, 2);
             Report._KeyInfo.verifyFormCommentTextBoxText(testData.definitionOfMarketValueTitle, chip.verifySuggest);
         });

@@ -8,7 +8,7 @@ describe(`Verify the "Linked" chips dropdown in the new narrative component for 
         report for Intended User and Identification of the Client sections`,
 { tags:[ "@report", "@client", "@check_export" ] }, () => {
 
-    it.only("[QA-4641]",  () => {
+    it("[QA-4641]",  () => {
         cy.stepInfo(`Login, create report`);
         createReport(testData.reportCreationData);
 
