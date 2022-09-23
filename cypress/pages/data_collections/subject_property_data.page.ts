@@ -56,6 +56,18 @@ class SubjectPropertyDataPage extends BasePage {
     }
 
     getDropdownOptionByValue(value: string) { return cy.get(`li[role=option][data-value='${value}']`); }
+    
+    get buildingTypeDropdown() { return cy.get('[data-qa="buildingType-select-list"]'); }
+
+    buildingType(type: string) { return cy.get(`[data-qa="buildingType-${type}-select-option"]`); }
+
+    get buildingAsIsConditionDropdown() { return cy.get(`[data-qa="generalCondition.value-form-control"]`); }
+
+    get buildingAsStabilizedConditionDropdown() { 
+        return cy.get(`[data-qa="generalAsStabilizedCondition.value-form-control"]`); 
+    }
+
+    buildingConditionValue(condition: string) { return cy.get(`[data-value='${condition}']`); }
 
 }
 
