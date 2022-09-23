@@ -22,7 +22,7 @@ describe(`Check when "custom" dropdown is selected user can drag&drop comps`,
             cy.stepInfo(`2. User selects n-first comps from map`);
             for (let i = 1; i < 3; i++) {
                 Sales._FindComps.AddressSearch.openAddressSearchTab()
-                    .addCompByParameter(i, testData.compProperty, testData.compStatusDate);
+                    .addCompByParameter(testData.filter, i);
             }
 
             cy.stepInfo(`3. When sort for Selected Comparables set to "Sale Date",

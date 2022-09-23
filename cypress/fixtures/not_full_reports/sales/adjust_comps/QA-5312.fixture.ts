@@ -1,3 +1,4 @@
+import { Filter } from "mongodb";
 import rowsMarketadjustmentEnum from "../../../../enums/adjustComps/marketadjustment.enum";
 import salesadjustmentgridEnum from "../../../../enums/adjustComps/salesadjustment.enum";
 import Enums from "../../../../enums/enums";
@@ -14,17 +15,14 @@ const _adjustmentName: BoweryReports.SalesAdjustmentGrid.AdjustmentName = salesa
 const _rowName: BoweryReports.SalesAdjustmentGrid.RowsMarketAdjustment = rowsMarketadjustmentEnum.propertyDescription;
 
 const compProperty = Enums.COMP_PROPERTIES_PATHS_DB.compPropertyPathsInDB.saleStatus;
-const compStatusContract = Enums.COMP_PROPERTIES_PATHS_DB.saleStatusValuesInDB.inContract;
 const compStatusDate = Enums.COMP_PROPERTIES_PATHS_DB.saleStatusValuesInDB.date;
-const compStatusListing = Enums.COMP_PROPERTIES_PATHS_DB.saleStatusValuesInDB.listing;
+
+const filter: Filter<object> = { $or: [ { [compProperty]:compStatusDate } ] };
 
 export default {
     reportCreationData: _reportCreationData,
     numberOfSalesComps:_numberOfSalesComps,
     adjustmentName: _adjustmentName,
     rowName: _rowName,
-    compProperty,
-    compStatusContract,
-    compStatusDate,
-    compStatusListing
+    filter
 };

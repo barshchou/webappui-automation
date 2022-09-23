@@ -1,3 +1,4 @@
+import { Filter } from "mongodb";
 import Enums from "../../../../enums/enums";
 import ReportDataCreator from "../../../data_creator/reportData.creator";
 
@@ -11,11 +12,12 @@ const _comparableAdjustments = {
     marketConditions: -99,
 };
 
+const filter: Filter<object> = { $or:[ { [compProperty]: compStatusDate } ] };
+
 export default {
     reportCreationData: ReportDataCreator.getReportData("5710", { 
         incomeValue: Enums.INCOME_TYPE.commercial 
     }),
     comparableAdjustment: _comparableAdjustments,
-    compProperty,
-    compStatusDate
+    filter
 };

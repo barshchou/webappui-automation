@@ -1,3 +1,4 @@
+import { Filter } from "mongodb";
 import Enums from "../../../../enums/enums";
 import ReportDataCreator from "../../../data_creator/reportData.creator";
 
@@ -15,9 +16,9 @@ const _compAdjustments = {
 };
 
 const compProperty = Enums.COMP_PROPERTIES_PATHS_DB.compPropertyPathsInDB.saleStatus;
-const compStatusContract = Enums.COMP_PROPERTIES_PATHS_DB.saleStatusValuesInDB.inContract;
 const compStatusDate = Enums.COMP_PROPERTIES_PATHS_DB.saleStatusValuesInDB.date;
-const compStatusListing = Enums.COMP_PROPERTIES_PATHS_DB.saleStatusValuesInDB.listing;
+
+const filter: Filter<object> = { $or: [ { [compProperty]: compStatusDate } ] };
 
 export default {
     reportCreationData: _reportCreationData,
@@ -27,8 +28,5 @@ export default {
     cumulativePricePerUnit: _cumulativePricePerUnit,
     sectionToExport: [ Enums.SECTIONS_TO_INCLUDE_IN_EXPORT.salesComparisonApproach ],
     exportSectionName: Enums.EXPORT_TITLES.cumulativePricePerUnit,
-    compProperty,
-    compStatusContract,
-    compStatusDate,
-    compStatusListing
+    filter
 };

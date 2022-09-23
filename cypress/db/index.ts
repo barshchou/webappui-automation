@@ -1,20 +1,18 @@
 /* eslint-disable no-console */
-import { MongoClient } from 'mongodb';
-import { CompPlex } from "../types/compplex.type";
+import { Filter, MongoClient } from 'mongodb';
 
 class ComplexDatabaseModule {
     
     /**
-     * Function determines url and name of comp-plex database, then  connects to database and retrieve 
-     * the array (max = 10) of comps with necessary property and its value 
-     * @param compProperty Comp property path in database collection
-     * @param compPropertyValue Comp property value in database collection
+     * Evaluates `mongoUrl` and database name depending from environment under the test 
+     * and then executes `retrieveDataFromDb` Cypress task 
+     * @param  filter The filter predicate for mongo `find` method. 
+     * If unspecified, then all documents in the collection will match the predicate 
+     * @see https://mongodb.github.io/node-mongodb-native/4.10/classes/Collection.html#find     
      */
-    getCompsArrayFromDb = (compProperty: CompPlex.AddressSearch.CompPropertyInDB, 
-        compPropertyValue: string) => {
+    getCompsArrayFromDb = (filter: Filter<object>) => {
         const { mongoUrl, dbName } = this.selectDatabaseSecrets();
-        return cy.task('retrieveDataFromDb', { dbUrl: mongoUrl, dbName: dbName, 
-            compPropertyPathInDB: compProperty, compPropertyValueInDB: compPropertyValue });
+        return cy.task('retrieveDataFromDb', { dbUrl: mongoUrl, dbName: dbName, filter: filter });
     };
  
     /**
@@ -23,11 +21,10 @@ class ComplexDatabaseModule {
      * @param compPropertyPathInDB Comp property path in database collection
      * @param compPropertyValueInDB Comp property value in database collection
      */
-    retrieveDataFromDb = async (url: string, dbName: string, compPropertyPathInDB: string, 
-        compPropertyValueInDB: string) => {
+    retrieveDataFromDb = async (url: string, dbName: string, filter: Filter<object>) => {
+        console.log(`Using filter ${JSON.stringify(filter)} to query data from DB`);
         const client = new MongoClient(url);
         const collectionName = "sales-transactions";
-        const filter = { [compPropertyPathInDB] : compPropertyValueInDB } ;
         try {
             await client.connect();
             console.log('Connected successfully to server');
@@ -70,10 +67,9 @@ class ComplexDatabaseModule {
                 mongoUrl: Cypress.env("COMP_PLEX_DB_DEV_URL"),
                 dbName: Cypress.env("COMP_PLEX_DB_DEV_NAME")
             },
-            //We don't have keys for prod db yet
             "prod":{
-                mongoUrl: Cypress.env("-"),
-                dbName: Cypress.env("-")
+                mongoUrl: Cypress.env("COMP_PLEX_DB_PROD_URL"),
+                dbName: Cypress.env("COMP_PLEX_DB_PROD_NAME")
             },
             "staging":{
                 mongoUrl: Cypress.env("COMP_PLEX_DB_STAGE_URL"),

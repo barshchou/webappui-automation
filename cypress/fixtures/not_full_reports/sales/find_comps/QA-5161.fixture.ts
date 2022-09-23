@@ -2,6 +2,7 @@ import ReportDataCreator from "../../../data_creator/reportData.creator";
 import Enums from "../../../../enums/enums";
 import { BoweryReports } from "../../../../types/boweryReports.type";
 import { BoweryAutomation } from "../../../../types/boweryAutomation.type";
+import { Filter } from "mongodb";
 
 const reportCreationData: BoweryAutomation.ReportCreationData = ReportDataCreator.getReportData("5161", {
     incomeValue: Enums.INCOME_TYPE.both,
@@ -15,6 +16,10 @@ const compProperty = Enums.COMP_PROPERTIES_PATHS_DB.compPropertyPathsInDB.saleSt
 const compStatusContract = Enums.COMP_PROPERTIES_PATHS_DB.saleStatusValuesInDB.inContract;
 const compStatusDate = Enums.COMP_PROPERTIES_PATHS_DB.saleStatusValuesInDB.date;
 const compStatusListing = Enums.COMP_PROPERTIES_PATHS_DB.saleStatusValuesInDB.listing;
+
+const filterStatusDate: Filter<object> = { $or:[ { [compProperty]:compStatusDate } ] };
+const filterStatusContract: Filter<object> = { $or:[ { [compProperty]: compStatusContract } ] };
+const filterStatusListing: Filter<object>  = { $or:[ { [compProperty]: compStatusListing } ] };
 
 const comparableFixtureManual = {
     address1: "388 Greenwich Street, New York, NY, USA",
@@ -74,8 +79,7 @@ export default {
     salePeriodValue,
     filePath,
     arrayOfCompsForManualAddition,
-    compProperty,
-    compStatusContract,
-    compStatusDate,
-    compStatusListing
+    filterStatusDate,
+    filterStatusContract,
+    filterStatusListing
 };
