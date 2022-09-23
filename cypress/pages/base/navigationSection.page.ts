@@ -20,6 +20,8 @@ class NavigationSection extends BasePage {
 
     get residentialUnitGroups() { return cy.get('[id="residential-unit-groups"]'); }
 
+    get propertyResidentialUnits() { return cy.get('#typical-residential-conditions'); }
+
     get commercialStabRentRollButton() { return cy.get("#commercial-projected-rent-roll"); }
 
     get finalButton() { return cy.get("#final svg"); }
