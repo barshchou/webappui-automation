@@ -3,7 +3,6 @@ import { _NavigationSection } from "../../../../actions/base";
 import { Income } from "../../../../actions";
 import { createReport } from "../../../../actions/base/baseTest.actions";
 
-// TODO: Test fails due to https://bowery.atlassian.net/browse/WEB-7020
 describe(`Comparable Min, Max, Avg values for Water & Sewer Per Unit are correctly calculated and displayed`,
     { tags:[ "@income", "@expense_forecast", "@snapshot_tests" ] }, () => {
 

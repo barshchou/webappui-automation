@@ -3,7 +3,6 @@ import { createReport } from "../../../../actions/base/baseTest.actions";
 import Income from "../../../../actions/income/income.manager";
 import { _NavigationSection } from "../../../../actions/base";
 
-// TODO: Test fails due to https://bowery.atlassian.net/browse/WEB-7020
 describe("Comparable Min, Max, Avg values for Electricity Per Unit are correctly calculated and displayed", 
     { tags:[ "@snapshot_tests", "@expense_forecast", "@income" ] }, () => {
 
