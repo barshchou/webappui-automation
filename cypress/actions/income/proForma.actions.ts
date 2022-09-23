@@ -10,6 +10,7 @@ import { BoweryReports } from "../../types/boweryReports.type";
 import enums from "../../enums/enums";
 import { Alias } from "../../utils/alias.utils";
 import taxInfoKeys from "../../utils/mapKeys/income/tax_Info/taxInfoKeys";
+import proFormaKeys from "../../utils/mapKeys/income/pro_forma/proFormaKeys";
 
 class ProFormaActions extends BaseActionsExt<typeof proFormaPage> {
 
@@ -319,13 +320,51 @@ class ProFormaActions extends BaseActionsExt<typeof proFormaPage> {
         return this;
     }
 
-    calculateTotalRealEstateTax(landTaxAssessedValue: number, buildingTaxAssessedValue: number): number {
-        let totalRealEstateTax = 0;
+    calculateAndSaveTotalRealEstateTax(landTaxAssessedValue: number,
+        buildingTaxAssessedValue: number): ProFormaActions {
         cy._mapGet(taxInfoKeys.taxRates).then((taxRateText) => {
             const taxRate = getNumberFromPercentNumberWithCommas(taxRateText);
-            totalRealEstateTax = Math.round(((landTaxAssessedValue + buildingTaxAssessedValue) * taxRate) / 100);
+            const totalRealEstateTax = Math.round(((landTaxAssessedValue + buildingTaxAssessedValue) * taxRate) / 100);
+            cy._mapSet(proFormaKeys.totalRealEstateTax, totalRealEstateTax);
         });
-        return totalRealEstateTax;
+        return this;
+    }
+
+    calculateAndSaveTotalRealEstateTaxPerSf(grossBuildingArea: number): ProFormaActions {
+        cy._mapGet(proFormaKeys.totalRealEstateTax).then((totalRealEstateTax) => {
+            const totalRealEstateTaxPerSf = totalRealEstateTax / grossBuildingArea;
+            cy._mapSet(proFormaKeys.totalRealEstateTaxPerSf, totalRealEstateTaxPerSf);
+        });
+        return this;
+    }
+
+    calculateAndSaveTotalRealEstateTaxPerUnit(numberOfResidentialUnits: number): ProFormaActions {
+        cy._mapGet(proFormaKeys.totalRealEstateTax).then((totalRealEstateTax) => {
+            const totalRealEstateTaxPerUnit = Math.round(totalRealEstateTax / numberOfResidentialUnits);
+            cy._mapSet(proFormaKeys.totalRealEstateTaxPerUnit, totalRealEstateTaxPerUnit);
+        });
+        return this;
+    }
+
+    calculateAndSaveTotalOperatingExpenses(totalFuel: number,
+        totalReserves: number,
+        totalWater: number,
+        totalCustoms: number): ProFormaActions {
+        cy._mapGet(proFormaKeys.totalRealEstateTax).then((totalRealEstateTax) => {
+            const totalOperatingExpenses = totalFuel + totalReserves + totalWater + totalCustoms + totalRealEstateTax;
+            cy._mapSet(proFormaKeys.totalOperatingExpenses, totalOperatingExpenses);
+        });
+        return this;
+    }
+
+    calculateAndSaveTotalOperatingExpensesExTaxes(): ProFormaActions {
+        cy._mapGet(proFormaKeys.totalRealEstateTax).then((totalRealEstateTax) => {
+            cy._mapGet(proFormaKeys.totalOperatingExpenses).then((totalOperatingExpenses) => {
+                const totalOperatingExpensesExTaxes = totalOperatingExpenses - totalRealEstateTax;
+                cy._mapSet(proFormaKeys.totalOperatingExpensesExTaxes, totalOperatingExpensesExTaxes);
+            });
+        });
+        return this;
     }
 
 }
