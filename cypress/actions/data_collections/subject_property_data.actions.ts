@@ -6,7 +6,7 @@ import {
     isHasDecimalPartMoreNumberOfDigits,
     numberWithCommas
 } from "../../../utils/numbers.utils";
-import enums from "../../enums/enums";
+import Enums from "../../enums/enums";
 
 class SubjectPropertyDataActions extends BaseActionsExt<typeof subjectPropertyDataPage> {
 
@@ -167,7 +167,7 @@ class SubjectPropertyDataActions extends BaseActionsExt<typeof subjectPropertyDa
 
     selectBuildingCondition(valueConclusion: BoweryReports.ValueConclusionName, 
         condition: BoweryReports.PropertyConditions): SubjectPropertyDataActions {
-        if (valueConclusion === enums.VALUE_CONCLUSION_NAME.asIs) {
+        if (valueConclusion === Enums.VALUE_CONCLUSION_NAME.asIs) {
             subjectPropertyDataPage.buildingAsIsConditionDropdown.click();
         } else {
             subjectPropertyDataPage.buildingAsStabilizedConditionDropdown.click();
