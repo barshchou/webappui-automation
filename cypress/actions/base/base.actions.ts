@@ -138,7 +138,7 @@ export default class BaseActions {
     }
 
     activateTextAreaInput(textAreaInput: Cypress.Chainable<JQuery<HTMLElement>>) {
-        textAreaInput.scrollIntoView().realClick({ clickCount: 5, position: "bottomRight" })
+        textAreaInput.scrollIntoView().realClick({ position: "bottom" })
             .should("be.focused");
         return this;
     }
