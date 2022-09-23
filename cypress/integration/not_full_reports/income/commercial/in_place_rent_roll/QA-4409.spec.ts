@@ -12,12 +12,15 @@ describe("Verify the functionality of Edit and Cancel commentary buttons",
         });
 
         it("Test body", () => {
+            cy.stepInfo("1. Navigate to Commercial In-Place Rent Roll");
             _NavigationSection.navigateToCommercialInPlaceRentRoll()
                 .verifyProgressBarNotExist();
+            cy.stepInfo("2. Try to edit generated commentary");
             Income._CommercialManager.InPlaceRentRoll
                 .activateTextAreaInput(Income._CommercialManager.InPlaceRentRoll.Page
                     .formCommentTextBox(Enums.PAGES_TEXTBOX_NAMES.currentCommercialIncomeDiscussion))
                 .editDiscussionTextArea(testData.newCommentary);
+            cy.stepInfo("3. Verify, that revert button is visible, verify entered text");
             Income._CommercialManager.InPlaceRentRoll.Page
                 .formRevertToOriginalBtnBySectionName(Enums.PAGES_TEXTBOX_NAMES.currentCommercialIncomeDiscussion)
                 .should("exist").and("be.visible");
