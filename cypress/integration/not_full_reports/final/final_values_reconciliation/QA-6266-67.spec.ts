@@ -3,7 +3,6 @@ import { createReport } from "../../../../actions/base/baseTest.actions";
 import { _NavigationSection } from '../../../../actions/base';
 import { Income, Property, Sales, Final, DataCollections } from "../../../../actions";
 
-// TODO: Test fails due to bug: https://bowery.atlassian.net/browse/WEB-6862
 describe(`As Is, As Stabilized, Market Value is calculated correctly on Reconciliation card for AsStabilized report`,
     { tags:[ "@final", "@final_values_reconciliation" ] }, () => {
         beforeEach("Login, create report", () => {
