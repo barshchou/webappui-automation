@@ -53,13 +53,13 @@ describe("Pro Forma -> Expenses",
             cy.stepInfo("4. On Pro Forma page validate Custom Expense Forecast is included in calculation");
             Income._ProFormaActions.calculateAndSaveTotalRealEstateTax(
                 testData.landTaxAssessedValue,
-                testData.buildingTaxAssessedValue
-            ).calculateAndSaveTotalOperatingExpenses(
-                testData.fuelTotal,
-                testData.reserversTotal,
-                testData.waterAndSewerTotal,
-                testData.customTotal
-            ).calculateAndSaveTotalOperatingExpensesExTaxes();
+                testData.buildingTaxAssessedValue)
+                .calculateAndSaveTotalOperatingExpenses(
+                    testData.fuelTotal,
+                    testData.reserversTotal,
+                    testData.waterAndSewerTotal,
+                    testData.customTotal)
+                .calculateAndSaveTotalOperatingExpensesExTaxes();
 
             Income._ProFormaActions
                 .verifyCategoryTotal(`$${numberWithCommas(Math.round(testData.totalCustomCategory))}`, 
