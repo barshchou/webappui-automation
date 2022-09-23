@@ -1,3 +1,4 @@
+import { Filter } from "mongodb";
 import Enums from "../../../../enums/enums";
 import ReportDataCreator from "../../../data_creator/reportData.creator";
 
@@ -13,6 +14,8 @@ const positiveAdjustmentNeighborhood = 50;
 const positiveAdjustmentLocation = 60;
 const negativeAdjustmentNeighborhood = -70;
 const negativeAdjustmentLocation = -80;
+
+const filter: Filter<object> = { $or:[ { [compNeighborhood]:compNeighborhoodValues } ] };
 
 const _compsFixture = [
     {
@@ -64,5 +67,6 @@ export default {
     discussionSection: Enums.ADJUST_COMPS_DISCUSSION_SECTIONS.location,
     locationDiscussionTitle: Enums.ADJUST_COMPS_DISCUSSION_TITLES.locationDiscussion,
     neighborhood,
-    area
+    area,
+    filter
 };

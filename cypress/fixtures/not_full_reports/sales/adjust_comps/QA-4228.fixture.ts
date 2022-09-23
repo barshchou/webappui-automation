@@ -1,8 +1,10 @@
+import { Filter } from "mongodb";
 import Enums from "../../../../enums/enums";
 import ReportDataCreator from "../../../data_creator/reportData.creator";
 
 const compProperty = Enums.COMP_PROPERTIES_PATHS_DB.compPropertyPathsInDB.saleStatus;
 const compStatusDate = Enums.COMP_PROPERTIES_PATHS_DB.saleStatusValuesInDB.date;
+const filter: Filter<object> = { $or:[ { [compProperty]:compStatusDate } ] };
 const positiveSizeAdjustment = 50;
 const positiveStabilizationLevelAdjustment = 60;
 const positiveConditionAdjustment = 70;
@@ -87,8 +89,7 @@ export default {
         conclusionValue: Enums.VALUE_CONCLUSION_TYPE.AS_COMPLETE
     }),
     adjustmentName: Enums.SALES_ADJUSTMENT_GRID.locationAdjustment,
-    compProperty,
-    compStatusDate,
+    filter,
     calculationUnits: _calculationUnits,
     comparablesAdjustments: _compsFixture(_calculationUnits),
     discussionSection: Enums.ADJUST_COMPS_DISCUSSION_SECTIONS.other,

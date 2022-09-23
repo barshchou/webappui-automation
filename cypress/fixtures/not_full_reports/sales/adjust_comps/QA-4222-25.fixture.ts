@@ -1,3 +1,4 @@
+import { Filter } from "mongodb";
 import Enums from "../../../../enums/enums";
 import ReportDataCreator from "../../../data_creator/reportData.creator";
 
@@ -64,6 +65,7 @@ const _compsFixture = [
 
 const compProperty = Enums.COMP_PROPERTIES_PATHS_DB.compPropertyPathsInDB.saleStatus;
 const compStatusDate = Enums.COMP_PROPERTIES_PATHS_DB.saleStatusValuesInDB.date;
+const filter: Filter<object> = { $or:[ { [compProperty]:compStatusDate } ] };
 
 export default {
     reportCreationData: ReportDataCreator.getReportData("4222", {
@@ -78,5 +80,6 @@ export default {
     propertyRightsDiscussionTitle: Enums.ADJUST_COMPS_DISCUSSION_TITLES.propertyRightsDiscussion,
     financingTermsDiscussionTitle: Enums.ADJUST_COMPS_DISCUSSION_TITLES.financingTermsDiscussion,
     conditionOfSaleDiscussionTitle: Enums.ADJUST_COMPS_DISCUSSION_TITLES.conditionsOfSaleDiscussion,
-    marketConditionDiscussionTitle: Enums.ADJUST_COMPS_DISCUSSION_TITLES.marketConditionsDiscussion
+    marketConditionDiscussionTitle: Enums.ADJUST_COMPS_DISCUSSION_TITLES.marketConditionsDiscussion,
+    filter
 };

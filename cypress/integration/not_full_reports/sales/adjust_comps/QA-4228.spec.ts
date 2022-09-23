@@ -20,7 +20,7 @@ describe(`Check Other Adjustment Discussions`,
             cy.stepInfo(`2. Navigate to Find Comps and add sales comps`);
             _NavigationSection.navigateToFindComps();
             Sales._FindComps.AddressSearch.openAddressSearchTab()
-                .addCompByParameter(1, testData.compProperty, testData.compStatusDate);
+                .addCompByParameter(testData.filter, 1);
 
             cy.stepInfo(`3. Navigate to Adjust Comps and add appropriate Other Adjustments and
             verify generated commentary`);

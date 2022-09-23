@@ -3,6 +3,7 @@ import { _NavigationSection } from "../../../../actions/base";
 import { createReport } from "../../../../actions/base/baseTest.actions";
 import testData from '../../../../fixtures/not_full_reports/report/client/QA-4640.fixture';
 
+// TODO: Recheck test task [QA-6999]. Test fail due to bug: https://bowery.atlassian.net/browse/WEB-6902
 describe(`Verify the "Linked" chips dropdown in the new narrative component for As Is and As Stabilized 
         report for Intended User and Identification of the Client sections`,
 { tags:[ "@report", "@client", "@check_export" ] }, () => {
@@ -28,7 +29,7 @@ describe(`Verify the "Linked" chips dropdown in the new narrative component for 
             Report._Client.activateTextAreaInput(
                 Report._Client.Page.formCommentTextBox(testData.intendedUserCommentaryTitle))
                 .Page.formCommentTextBox(testData.intendedUserCommentaryTitle)
-                .type(`=${chip.typeSuggestValue}`);
+                .realType(`=${chip.typeSuggestValue}`);
             Report._Client.clickNarrativeSuggestions(chip.suggestionName)
                 .verifyFormCommentTextBoxText(testData.intendedUserCommentaryTitle, chip.verifySuggest);
         });
@@ -36,7 +37,7 @@ describe(`Verify the "Linked" chips dropdown in the new narrative component for 
             Report._Client.Page.formCommentTextBox(testData.identificationOfTheClientCommentaryTitle));
         testData.chips.forEach(chip => {
             Report._Client.Page.formCommentTextBox(testData.identificationOfTheClientCommentaryTitle)
-                .type(`=${chip.typeSuggestValue}`);
+                .realType(`=${chip.typeSuggestValue}`);
             Report._Client.clickNarrativeSuggestions(chip.suggestionName, 1)
                 .verifyFormCommentTextBoxText(testData.identificationOfTheClientCommentaryTitle, chip.verifySuggest);
         });
