@@ -12,8 +12,6 @@ const _numberOfCommercialUnits = 3;
 const _numberOfResidentialUnits = 5;
 const _landTaxAssessedValue = 999999;
 const _buildingTaxAssessedValue = 456450;
-// ToDo: Retreive this value from UI and make calculations in action
-const _taxPercent = 10.646;
 const _basis = "sf" as BoweryReports.UnitSF;
 const _customForecast = 45;
 const _waterForecast = 12;
@@ -25,26 +23,15 @@ const _customCategoriesAmount = 3; //pay attention to custom categories amount a
 /*
  * Formulas for calculation Pro Forma table.
  *  Expenses:
- *  Real Estate Taxes = (landTaxAssessed + buildingAssessed) * tax / 100
  *  Water And Reserves = water forecast * GBA
  *  Fuel = fuel forecast * GBA
  *  Custom expense = custom forecast * GBA
- * 
- *  Totals:
- *  Total Operating Expenses = Total of all expenses(included custom) + Real Estate Taxes total
- *  Total Operating Expenses ex Taxed = Total Operating Expenses - Real Estate Taxes total
- *  Total Operating Income = Effective Gross Income - Total Operating Expenses
  */
-const _totalRealEstateTax = ((_landTaxAssessedValue + _buildingTaxAssessedValue) * _taxPercent) / 100;
 const _totalWater = _waterForecast * _grossBuildingArea;
 const _totalReserves = _reservesForecast * _grossBuildingArea;
 const _totalFuel = _fuelForecast * _grossBuildingArea;
 const _totalCustomCategory = _customForecast * _grossBuildingArea;
 const _totalCustoms = _totalCustomCategory * _customCategoriesAmount;
-
-const _totalTOE = _totalFuel + _totalReserves + _totalWater + _totalCustoms + _totalRealEstateTax;
-const _totalTOEexTaxes = _totalTOE - _totalRealEstateTax;
-const _totalNetOperatingIncome = _totalTOE;
 
 //#endregion
 
@@ -107,15 +94,11 @@ export default {
     customCategoryFirstCapital: _customCategoryFirstCapital(),
     customCategoryAllCapitals: _customCategoryAllCapitals(),
     customCategoryMix: _customCategoryMix(),
-    totalRealEstateTax: _totalRealEstateTax,
     grossBuildingArea: _grossBuildingArea,
     numberOfCommercialUnits: _numberOfCommercialUnits,
     numberOfResidentialUnits: _numberOfResidentialUnits,
-    totalToe: _totalTOE,
-    totalToeNetRe: _totalTOEexTaxes,
     totalCustomCategory: _totalCustomCategory,
     customTotal: _totalCustoms,
-    netOperationIncome: _totalNetOperatingIncome,
     reserversTotal: _totalReserves,
     fuelTotal: _totalFuel,
     waterAndSewerTotal: _totalWater, 

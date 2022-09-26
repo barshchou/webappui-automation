@@ -2,12 +2,15 @@ import proFormaPage from "../../pages/income/proForma.page";
 import {
     getNumberFromMinusDollarNumberWithCommas,
     numberWithCommas,
-    getNumberFromDollarNumberWithCommas
+    getNumberFromDollarNumberWithCommas,
+    getNumberFromPercentNumberWithCommas
 } from "../../../utils/numbers.utils";
 import BaseActionsExt from "../base/base.actions.ext";
 import { BoweryReports } from "../../types/boweryReports.type";
 import enums from "../../enums/enums";
 import { Alias } from "../../utils/alias.utils";
+import taxInfoKeys from "../../utils/mapKeys/income/tax_Info/taxInfoKeys";
+import proFormaKeys from "../../utils/mapKeys/income/pro_forma/proFormaKeys";
 
 class ProFormaActions extends BaseActionsExt<typeof proFormaPage> {
 
@@ -313,6 +316,58 @@ class ProFormaActions extends BaseActionsExt<typeof proFormaPage> {
                                 });
                         });
                 });
+        });
+        return this;
+    }
+
+    calculateAndSaveTotalRealEstateTax(landTaxAssessedValue: number,
+        buildingTaxAssessedValue: number): ProFormaActions {
+        // Total Real Estate Taxes = (landTaxAssessed + buildingAssessed) * tax / 100
+        cy._mapGet(taxInfoKeys.taxRates).then((taxRateText) => {
+            const taxRate = getNumberFromPercentNumberWithCommas(taxRateText);
+            const totalRealEstateTax = ((landTaxAssessedValue + buildingTaxAssessedValue) * taxRate) / 100;
+            cy._mapSet(proFormaKeys.totalRealEstateTax, totalRealEstateTax);
+        });
+        return this;
+    }
+
+    calculateAndSaveTotalRealEstateTaxPerSf(grossBuildingArea: number): ProFormaActions {
+        // Total Real Estate Taxes Per SF = Total Real Estate Taxes / Gross Building Area
+        cy._mapGet(proFormaKeys.totalRealEstateTax).then((totalRealEstateTax) => {
+            const totalRealEstateTaxPerSf = totalRealEstateTax / grossBuildingArea;
+            cy._mapSet(proFormaKeys.totalRealEstateTaxPerSf, totalRealEstateTaxPerSf);
+        });
+        return this;
+    }
+
+    calculateAndSaveTotalRealEstateTaxPerUnit(numberOfResidentialUnits: number): ProFormaActions {
+        // Total Real Estate Taxes Per Unit = Total Real Estate Taxes / Number of Residential Units
+        cy._mapGet(proFormaKeys.totalRealEstateTax).then((totalRealEstateTax) => {
+            const totalRealEstateTaxPerUnit = totalRealEstateTax / numberOfResidentialUnits;
+            cy._mapSet(proFormaKeys.totalRealEstateTaxPerUnit, totalRealEstateTaxPerUnit);
+        });
+        return this;
+    }
+
+    calculateAndSaveTotalOperatingExpenses(totalFuel: number,
+        totalReserves: number,
+        totalWater: number,
+        totalCustoms: number): ProFormaActions {
+        // Total Operating Expenses = Total of all expenses(included custom) + Real Estate Taxes total
+        cy._mapGet(proFormaKeys.totalRealEstateTax).then((totalRealEstateTax) => {
+            const totalOperatingExpenses = totalFuel + totalReserves + totalWater + totalCustoms + totalRealEstateTax;
+            cy._mapSet(proFormaKeys.totalOperatingExpenses, totalOperatingExpenses);
+        });
+        return this;
+    }
+
+    calculateAndSaveTotalOperatingExpensesExTaxes(): ProFormaActions {
+        // Total Operating Expenses ex Taxed = Total Operating Expenses - Real Estate Taxes total
+        cy._mapGet(proFormaKeys.totalRealEstateTax).then((totalRealEstateTax) => {
+            cy._mapGet(proFormaKeys.totalOperatingExpenses).then((totalOperatingExpenses) => {
+                const totalOperatingExpensesExTaxes = totalOperatingExpenses - totalRealEstateTax;
+                cy._mapSet(proFormaKeys.totalOperatingExpensesExTaxes, totalOperatingExpensesExTaxes);
+            });
         });
         return this;
     }
