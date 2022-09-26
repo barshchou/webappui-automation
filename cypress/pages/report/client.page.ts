@@ -7,7 +7,9 @@ class ClientPage extends BasePage {
 
     get warningAddBtn() { return cy.xpath("//*[contains(@data-qa, 'callout-btn')]"); }
 
-    getClientNameField(index = 0) { return cy.get("*[name=client]").eq(index); }
+    getClientNameField(index = 0) { 
+        return cy.get('[placeholder="Search Clients"]').eq(index); 
+    }
 
     getClientFileNumberField(index = 0) { return cy.get(`[name='reportClients[${index}].clientFileNumber']`); }
 
