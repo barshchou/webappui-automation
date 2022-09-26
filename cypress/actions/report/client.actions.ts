@@ -10,18 +10,25 @@ class ClientActions extends BaseActionsExt<typeof clientPage> {
     }
 
     enterClientName(name: string, index = 0): ClientActions {
-        clientPage.getClientNameField(index).clear().type(name).type("{enter}");
+        /**
+         * ernst: need to add logic for case when we see "No Option" suggestion
+         * Or this is a bug because we can't enter suggested name to input via Enter key
+         */
+        clientPage.getClientNameField(index).realClick({ position: "bottom" }).clear().type(name)
+            .pause().type("{enter}");
         return this;
     }
     
     enterClientFileNumber(name:string, index = 0): ClientActions {
-        clientPage.getClientFileNumberField(index).clear().type(name).should("have.value", name);
+        clientPage.getClientFileNumberField(index).
+            realClick({ position: "bottom" }).clear().type(name).should("have.value", name);
         clientPage.getClientFileNumberField(index).should("have.value", name);
         return this;
     }
 
     enterNycbApplicationNumber(name:string, index = 0): ClientActions {
-        clientPage.getNYCBApplicationNumber(index).clear().type(name).should("have.value", name);
+        clientPage.getNYCBApplicationNumber(index)
+            .realClick({ position: "bottom" }).clear().type(name).should("have.value", name);
         clientPage.getNYCBApplicationNumber(index).should("have.value", name);
         return this;
     }
@@ -77,7 +84,7 @@ class ClientActions extends BaseActionsExt<typeof clientPage> {
     }
 
     clickAddAdditionalClientBtn(): ClientActions {
-        clientPage.addAdditionalClientBtn.click({ force: true });
+        clientPage.addAdditionalClientBtn.click();
         return this;
     }
 
