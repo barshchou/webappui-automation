@@ -8,7 +8,7 @@ import testData from '../../../../fixtures/not_full_reports/report/client/QA-462
 import { conditionalDescribe } from "../../../checkIsProd.utils";
 
 conditionalDescribe("Verify the functionality of the Client field.", 
-    { tags:[ "@report", "@client" ] }, () => {
+    { tags:[ "@report", "@client", "@fix" ] }, () => {
         beforeEach("Restore state. Create report", () => {
             loginAction();
             cy.stepInfo(`Clean up state before tests run. Delete existing user.`);

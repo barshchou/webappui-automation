@@ -4,7 +4,7 @@ import { createReport } from "../../../../actions/base/baseTest.actions";
 import { _NavigationSection } from "../../../../actions/base";
 
 describe("Verify the display of the multiple clients on the Cover page on export", 
-    { tags: [ "@report", "@client", "@check_export" ] }, () => {
+    { tags: [ "@report", "@client", "@check_export", "@fix" ] }, () => {
 
         it("[QA-6593_96]", () => {
             cy.stepInfo("Login, create report");
