@@ -6,34 +6,34 @@ import { createReport } from "../../../../actions/base/baseTest.actions";
 describe(`[QA-5025] [Income>Expense forecast] Selected existing expense card is included in calculation`,
     { tags: [ "@income", "@expense_forecast" ] }, () => {
 
-        before("Login, create report", () => {
+        before("Precondition", () => {
             Cypress.config('numTestsKeptInMemory', 0);
+
+            cy.stepInfo(`1. Login, create report`);
             createReport(testData.reportCreationData);
-            cy.saveLocalStorage();
-        });
-
-        beforeEach(() => {
-            cy.restoreLocalStorage();
-        });
-
-        it("Precondition", () => {
-
-            cy.stepInfo(`1. Go to Property > Summary and add residential and commercial units`);
+           
+            cy.stepInfo(`2. Go to Property > Summary and add residential and commercial units`);
             _NavigationSection.navigateToSubjectPropertyData();
             DataCollections._SubjectPropertyData.enterNumberOfResUnits(testData.numberOfResidentialUnits)
                 .enterNumberOfCommercialUnits(testData.numberOfCommercialUnits)
                 .enterGrossBuildingArea(testData.buildingDescription.grossArea);
 
-            cy.stepInfo(`2. Go to Income > Residential > In-Place Rent Roll and add rooms to residential units`);
+            cy.stepInfo(`3. Go to Income > Residential > In-Place Rent Roll and add rooms to residential units`);
             _NavigationSection.navigateToResInPlaceRentRoll();
             Income._Residential.InPlaceRentRoll.checkCheckboxByLabel(testData.perRoomAnalysis)
                 .enterRoomsNumberByRowNumber(testData.rentRollResUnitFixture.rooms, 0);
 
-            cy.stepInfo(`3. Go to Income > ExpenseForecast and add data in the forecast`);
+            cy.stepInfo(`4. Go to Income > ExpenseForecast and add data in the forecast`);
             _NavigationSection.navigateToExpenseForecast();
             testData.expenseForecastFixtureArray().forEach(element => {
                 Income._ExpenseForecastActions.enterForecastItemForecast(element);
             });
+    
+            cy.saveLocalStorage();
+        });
+
+        beforeEach(() => {
+            cy.restoreLocalStorage();
         });
 
         it(`Verify If “Include Expense on Pro Forma”  checkbox is selected but there is 

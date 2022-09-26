@@ -3,7 +3,6 @@ import testData from "../../../../fixtures/not_full_reports/sales/adjust_comps/Q
 import { createReport } from "../../../../actions/base/baseTest.actions";
 import { Income, Sales, DataCollections } from "../../../../actions";
 
-// ToDo: Test fails due to problem with rounding: https://bowery.atlassian.net/browse/QA-6954
 describe("Adjusted Price Per SF in Sales Adjustment Grid is calculated with correct formula", 
     { tags: [ "@adjust_comps", "@sales" ] }, () => {
         beforeEach("Login, create report", () => {

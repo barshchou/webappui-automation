@@ -3,6 +3,7 @@ import testData from "../../../../fixtures/not_full_reports/report/client/QA-464
 import { createReport } from "../../../../actions/base/baseTest.actions";
 import { _NavigationSection } from '../../../../actions/base';
 
+// TODO: Recheck test task [QA-6999]. Test fail due to bug: https://bowery.atlassian.net/browse/WEB-6902
 describe("Verify the Client Guidelines Discussion on the page",
     { tags: [ "@report", "@client", "@check_export" ] }, () => {
         it("[QA-4642]",  () => {
@@ -20,7 +21,7 @@ describe("Verify the Client Guidelines Discussion on the page",
                         'Lot', 'Concluded Cap Rate', 'Zones', 'CurrentCondition', 'As Stabilized Condition'`);
             Report._Client.activateTextAreaInput(Report._Client.Page.formCommentTextBox(testData.intendedUser));
             testData.chips.forEach(chip => {
-                Report._Client.Page.formCommentTextBox(testData.intendedUser).type(`=${chip.typeSuggestValue}`);
+                Report._Client.Page.formCommentTextBox(testData.intendedUser).realType(`=${chip.typeSuggestValue}`);
                 Report._Client.clickNarrativeSuggestions(chip.suggestionName)
                     .verifyFormCommentTextBoxText(testData.intendedUser, chip.verifySuggest);
             });
@@ -28,7 +29,7 @@ describe("Verify the Client Guidelines Discussion on the page",
                 .formCommentTextBox(testData.identificationOfTheClient));
             testData.chips.forEach(chip => {
                 Report._Client.Page.formCommentTextBox(testData.identificationOfTheClient)
-                    .type(`=${chip.typeSuggestValue}`);
+                    .realType(`=${chip.typeSuggestValue}`);
                 Report._Client.clickNarrativeSuggestions(chip.suggestionName, 1)
                     .verifyFormCommentTextBoxText(testData.identificationOfTheClient,
                         chip.verifySuggest);

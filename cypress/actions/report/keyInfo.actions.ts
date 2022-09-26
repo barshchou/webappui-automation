@@ -42,6 +42,26 @@ class KeyInfoActions extends BaseActionsExt<typeof keyInfoPage> {
         return this;
     }
 
+    verifyAllInterestAppraisedNotChecked( reportInclude: 
+    {isAsStabilized: boolean, asCompleteInterests: boolean}): KeyInfoActions {
+        for (let i = 0; i <= 2; i++) {
+            keyInfoPage.asIsMarketInterests.eq(i).should("not.be.checked");
+        }
+
+        if (reportInclude.isAsStabilized) { 
+            for (let i = 0; i < 2; i++) {
+                keyInfoPage.asStabilizedInterests.eq(i).should("not.be.checked");
+            }
+        }
+
+        if (reportInclude.asCompleteInterests) {
+            for (let i = 0; i < 2; i++) {
+                keyInfoPage.asCompleteInterests.eq(i).should("not.be.checked");
+            }
+        }
+        return this;
+    }
+
     enterDateByType(date: BoweryReports.KeyInfoDateType, sameInspectionDate = true): KeyInfoActions { 
         if (!sameInspectionDate) {
             keyInfoPage.inputToCheckMyDateIsDifferent.click();

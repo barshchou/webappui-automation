@@ -19,7 +19,7 @@ describe(`[Sales > Find Comps] Check the comps order when "custom" dropdown is c
             cy.stepInfo(`2. User selects n-first comps from map`);
             for (let i = 1; i < 3; i++) {
                 Sales._FindComps.AddressSearch.openAddressSearchTab()
-                    .addCompByParameter(i, testData.compProperty, testData.compStatusDate);
+                    .addCompByParameter(testData.filter, i);
             }
 
             Sales._FindComps.verifyComparablesNumber(testData.compsToAdd)

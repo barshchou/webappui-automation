@@ -8,7 +8,7 @@ export default class BasePage {
     }
 
     get pageTitle() {
-        return cy.get("h5");
+        return cy.get("h5", { timeout: 30000 });
     }
 
     get SaveAndContinueBtn() {

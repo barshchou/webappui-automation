@@ -22,6 +22,7 @@ describe(`Verify the Back button functionality on the Stabilized Rent Roll page`
             cy.stepInfo(` 2. Click on the Back button and verify the user is redirected to 
             the previous page (Income > Commercial > Comp Groups Discussion).`);
             Income._CommercialManager.StabilizedRentRoll.Actions.clickBackButton();
+            _NavigationSection.submitSaveChangesModal();
             Income._CommercialManager.CompGroups.verifyThatPageIsOpened();
         });
     });

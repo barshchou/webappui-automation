@@ -26,7 +26,7 @@ on:
         type: string
         description: Run test with specific tags (via grep,grepTags,burn)
         required: false
-        default: grep=,grepTags=-@smoke,burn=
+        default: grepTags=-@smoke
       ref:
         type: string
         description: Select branch, tag, commit ref
@@ -70,7 +70,7 @@ jobs:
             aws-region: 'us-east-1'
         
       - name: Run end-to-end tests with Currents dev
-        uses: Bowery-RES/action-run-e2e-tests@latest
+        uses: Bowery-RES/action-run-e2e-tests@v2.1.0
         with:
           github_token: ${{ secrets.GH_PERSONAL_ACCESS_TOKEN }}
           url: ${{ github.event.inputs.url }}

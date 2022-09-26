@@ -36,7 +36,7 @@ on:
         type: string
         description: Run tests with specific tags
         required: false
-        default: grep=,grepTags=,burn=
+        default: grepTags=
         
 jobs:
   Not-full-reports-run-DEBUG-ACT:

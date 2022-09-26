@@ -99,6 +99,19 @@ class AdjustCompsActions extends BaseActionsExt<typeof adjustCompsPage> {
         return this;
     }
 
+    enterOtherAdjustmentGroup(adjustmentName: string[], value: number[], index = 0): AdjustCompsActions {
+        adjustmentName.forEach((adjustment, i) => {
+            this.enterOtherAdjustmentByName(adjustment, value[i], index);
+        });
+        return this;
+    }
+
+    enterOtherAdjustmentByName(adjustmentName: string, value: number, index = 0): AdjustCompsActions {
+        adjustCompsPage.getOtherAdjustmentsRowCells(adjustmentName).eq(index).scrollIntoView().clear()
+            .type(`${value}{del}`).should("have.value", `${value}%`);
+        return this;
+    }
+
     enterUtilitiesAdjustmentGroup(adjustmentName: string[], value: number[], index = 0): AdjustCompsActions {
         adjustmentName.forEach((adjustment, i) => {
             this.enterUtilitiesAdjustmentByName(adjustment, value[i], index);
@@ -289,8 +302,8 @@ class AdjustCompsActions extends BaseActionsExt<typeof adjustCompsPage> {
         return this;
     }
 
-    verifyMarketConditionsTime(dateOfValue: Date, saleDate: Date, index = 0): AdjustCompsActions {
-        const diff = new Date(+saleDate).setHours(12) - new Date(+dateOfValue).setHours(12);
+    verifyMarketConditionsTime(dateOfValue: Date, saleDate: string, index = 0): AdjustCompsActions {
+        let diff = Date.parse(saleDate) - new Date(+dateOfValue).setHours(24);
         const daysDifference = Math.round(diff/8.64e7);
         adjustCompsPage.marketConditionAdjustmentInput.invoke("val").then((val: number) => {
             const marketConditionsTime = Math.round(Math.abs(daysDifference) / 365 * val);
@@ -333,8 +346,7 @@ class AdjustCompsActions extends BaseActionsExt<typeof adjustCompsPage> {
         adjustCompsPage.getExpandMarketAdjustmentSubjectRow("Sale Price").invoke("text").then(salePrice => {
             const salePriceNumber = getNumberFromDollarNumberWithCommas(salePrice);
             const pricePerSf = salePriceNumber / area;
-            // ToDo: Fix this rounding after resolving https://bowery.atlassian.net/browse/QA-6954
-            const pricePerSfAdjusted = (Math.round(pricePerSf * 1000)) / 1000;
+            const pricePerSfAdjusted = (Math.round(pricePerSf * 100)) / 100;
             const pricePerSfToBe = `$${numberWithCommas(pricePerSfAdjusted.toFixed(2))}`;
             adjustCompsPage.getExpandMarketAdjustmentSubjectRow("Price per SF").should("have.text", pricePerSfToBe);
         });
@@ -362,6 +374,18 @@ class AdjustCompsActions extends BaseActionsExt<typeof adjustCompsPage> {
                 .should("include.text", `$${numberWithCommas(salePrice)}`);
         });
         
+        return this;
+    }
+
+    expandDiscussionSection(title: string): AdjustCompsActions {
+        adjustCompsPage.discussionsSections(title).click();
+        return this;
+    }
+
+    verifyDiscussionCommentary(discussionTitle: BoweryReports.AdjustCompsDiscussionTitles,
+        expectedText: string): AdjustCompsActions {
+        adjustCompsPage.discussionSectionGeneratedCommentary(discussionTitle)
+            .should('have.text', expectedText);
         return this;
     }
 }

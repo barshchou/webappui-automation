@@ -49,6 +49,26 @@ class SubjectPropertyDataPage extends BasePage {
 
     get currentOwnerField() { return cy.get("[name=currentOwner]"); }
 
+    get selectGeneralConditionButton() { return cy.get("*[data-qa*='generalCondition'] [data-qa='select-value']"); } 
+    
+    get selectAsStabilizedConditionButton() { 
+        return cy.get("*[data-qa*=generalAsStabilizedCondition] [data-qa='select-value']");
+    }
+
+    getDropdownOptionByValue(value: string) { return cy.get(`li[role=option][data-value='${value}']`); }
+    
+    get buildingTypeDropdown() { return cy.get('[data-qa="buildingType-select-list"]'); }
+
+    buildingType(type: string) { return cy.get(`[data-qa="buildingType-${type}-select-option"]`); }
+
+    get buildingAsIsConditionDropdown() { return cy.get(`[data-qa="generalCondition.value-form-control"]`); }
+
+    get buildingAsStabilizedConditionDropdown() { 
+        return cy.get(`[data-qa="generalAsStabilizedCondition.value-form-control"]`); 
+    }
+
+    buildingConditionValue(condition: string) { return cy.get(`[data-value='${condition}']`); }
+
 }
 
 export default new SubjectPropertyDataPage();

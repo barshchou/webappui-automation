@@ -31,7 +31,7 @@ jobs:
           github_token: ${{ secrets.GH_PERSONAL_ACCESS_TOKEN }}
           url: staging
           spec_file: cypress/integration/not_full_reports/**
-          tags: grep=,grepTags=-@smoke,burn=
+          tags: grepTags=-@smoke
           secret_name: 'Github/Cypress/webapp-e2e-secrets'
         env:
           DD_CIVISIBILITY_AGENTLESS_ENABLED: true

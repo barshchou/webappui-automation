@@ -9,7 +9,7 @@ const amenitiesUploads = {
     commonLoungeSpace: "commonLoungeSpace",
     courtyard: "courtyard",
     loading: "loading",
-    storefrontExposure: "storefrontExposure",
+    storeFrontExposure: "storeFrontExposure",
     warehouseSpace: "warehouseSpace",
     outdoorSeating: "outdoorSeating",
     driveThru: "driveThru",

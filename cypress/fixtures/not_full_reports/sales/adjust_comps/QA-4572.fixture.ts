@@ -1,10 +1,11 @@
+import { Filter } from "mongodb";
 import Enums from "../../../../enums/enums";
 import ReportDataCreator from "../../../data_creator/reportData.creator";
 
 const compProperty = Enums.COMP_PROPERTIES_PATHS_DB.compPropertyPathsInDB.saleStatus;
-const compStatusContract = Enums.COMP_PROPERTIES_PATHS_DB.saleStatusValuesInDB.inContract;
 const compStatusDate = Enums.COMP_PROPERTIES_PATHS_DB.saleStatusValuesInDB.date;
-const compStatusListing = Enums.COMP_PROPERTIES_PATHS_DB.saleStatusValuesInDB.listing;
+
+const filter: Filter<object> = { $or: [ { [compProperty]: compStatusDate } ] };
 
 export default {
     reportCreationData: ReportDataCreator.getReportData("4572"),
@@ -24,8 +25,5 @@ export default {
     },
     otherAdjustmentName: "Other Adjustment",
     otherAdjustmentNewName: "test other adj name",
-    compProperty,
-    compStatusContract,
-    compStatusDate,
-    compStatusListing
+    filter
 };

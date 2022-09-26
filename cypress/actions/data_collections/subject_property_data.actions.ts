@@ -6,8 +6,24 @@ import {
     isHasDecimalPartMoreNumberOfDigits,
     numberWithCommas
 } from "../../../utils/numbers.utils";
+import Enums from "../../enums/enums";
 
 class SubjectPropertyDataActions extends BaseActionsExt<typeof subjectPropertyDataPage> {
+
+    
+    selectGeneralPropertyCondition(conditionValue: string): SubjectPropertyDataActions {
+        subjectPropertyDataPage.selectGeneralConditionButton.click();
+        subjectPropertyDataPage.getDropdownOptionByValue(conditionValue).should("exist").click();
+        subjectPropertyDataPage.selectGeneralConditionButton.should("have.text", conditionValue);
+        return this;
+    }
+
+    selectAsStabilizedPropertyCondition(conditionValue: string): SubjectPropertyDataActions {
+        subjectPropertyDataPage.selectAsStabilizedConditionButton.click();
+        subjectPropertyDataPage.getDropdownOptionByValue(conditionValue).should("exist").click();
+        subjectPropertyDataPage.selectAsStabilizedConditionButton.should("have.text", conditionValue);
+        return this;
+    }
 
     enterNumberOfResUnits(number: number, notInclude?: string[]): SubjectPropertyDataActions {
         subjectPropertyDataPage.numberOfResUnitsInput.clear().type(`${number}`).should("have.value", number);
@@ -158,6 +174,24 @@ class SubjectPropertyDataActions extends BaseActionsExt<typeof subjectPropertyDa
         return this;
     }
 
+    setBuildingType(type: string): SubjectPropertyDataActions {
+        subjectPropertyDataPage.buildingTypeDropdown.click();
+        subjectPropertyDataPage.buildingType(type).scrollIntoView().click();
+        return this;
+    }
+
+    selectBuildingCondition(valueConclusion: BoweryReports.ValueConclusionName, 
+        condition: BoweryReports.PropertyConditions): SubjectPropertyDataActions {
+        if (valueConclusion === Enums.VALUE_CONCLUSION_NAME.asIs) {
+            subjectPropertyDataPage.buildingAsIsConditionDropdown.click();
+        } else {
+            subjectPropertyDataPage.buildingAsStabilizedConditionDropdown.click();
+        }
+
+        subjectPropertyDataPage.buildingConditionValue(condition).click();
+        
+        return this;
+    }
 }
 
 export default new SubjectPropertyDataActions(subjectPropertyDataPage);

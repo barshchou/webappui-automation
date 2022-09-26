@@ -15,7 +15,7 @@ describe("Total Utility Adjustments in Sales Adjustment Grid is calculated with 
             _NavigationSection.navigateToFindComps();
             for (let i = 1; i < 3; i++) {
                 Sales._FindComps.AddressSearch.openAddressSearchTab()
-                    .addCompByParameter(i, testData.compProperty, testData.compStatusDate);
+                    .addCompByParameter(testData.filter, i);
                 Sales._FindComps.Page.getSelectedComparable(i-1).should('be.visible');
             }
 

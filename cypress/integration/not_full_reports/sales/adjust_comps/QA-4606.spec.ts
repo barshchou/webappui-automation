@@ -1,6 +1,6 @@
 import { createReportData } from '../../../../fixtures/not_full_reports/sales/adjust_comps/QA-4606.fixture';
 import testData from "../../../../fixtures/not_full_reports/sales/adjust_comps/QA-4606.fixture";
-import { Property, Sales } from "../../../../actions";
+import { DataCollections, Sales } from "../../../../actions";
 import { _NavigationSection as NavigationSection } from "../../../../actions/base";
 import { createReport } from "../../../../actions/base/baseTest.actions";
 
@@ -19,11 +19,13 @@ describe("Check the reference 'Condition' line in the Sales Adjustment Grid",
 
                 cy.stepInfo(`3. Navigate Property > Property Description > Site Description and 
                 verify As Is General Property Condition`);
-                NavigationSection.navigateToPropertyDescription();
+                NavigationSection.navigateToSubjectPropertyData();
                 if (conclusion === "AS_COMPLETE") {
-                    Property._Description.selectAsStabilizedPropertyCondition(testData.propertyCondition);
+                    DataCollections._SubjectPropertyData.selectAsStabilizedPropertyCondition(
+                        testData.propertyCondition);
                 } else {
-                    Property._Description.selectGeneralPropertyCondition(testData.propertyCondition);
+                    DataCollections._SubjectPropertyData.selectGeneralPropertyCondition(
+                        testData.propertyCondition);
                 }
 
                 cy.stepInfo(`4. Navigate to Sales > Adjust Comps > Sales Adjustment Grid`);
