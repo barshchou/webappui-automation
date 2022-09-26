@@ -330,7 +330,7 @@ class ExpenseForecastActions extends BaseActionsExt<typeof expenseForecastPage> 
         index = 1): ExpenseForecastActions {
         let item = this.getItemNameForAverage(forecastItem.name);
         this.activateTextAreaInput((this.Page.getExpenseCommentary(item,  index)));
-        this.Page.getExpenseCommentaryRevertToOriginal(item, index).click();
+        this.Page.getExpenseCommentaryRevertToOriginal(item, index).realClick();
         this.verifyProgressBarNotExist();
         expenseForecastPage.formYesRevertBtn.click();
         expenseForecastPage.getExpenseCommentarySaveButton(item).click();
