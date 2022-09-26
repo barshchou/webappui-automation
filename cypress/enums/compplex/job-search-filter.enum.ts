@@ -21,10 +21,10 @@ const propertyType = {
 const numberFilters = {
     grossBuildingArea:"grossBuildingArea",
     salePrice:"salePrice",
-    pricePerUnit: "pricePerUnit",
     pricePerSF:"pricePerSF",
-    residentialUnits:"residentialUnits",
+    pricePerUnit: "pricePerUnit",
     commercialUnits:"commercialUnits",
+    residentialUnits:"residentialUnits",
     capRate:"capRate"
 } as const;
 
