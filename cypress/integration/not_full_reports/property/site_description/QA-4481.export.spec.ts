@@ -4,7 +4,7 @@ import { _NavigationSection } from "../../../../actions/base";
 import { Property, ReviewExport } from "../../../../actions";
 
 describe(`Check that generated text pulls in the first submarket`,
-    { tags: [ "@property", "@site_description", "@check_export" ] }, () => {
+    { tags: [ "@property", "@site_description", "@check_export", "@test" ] }, () => {
         
         it("[QA-4481]", () => {
             cy.stepInfo(`1. Create a new report on the WebApp and navigate to Property > Market.`);

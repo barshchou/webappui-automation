@@ -4,7 +4,7 @@ import { _NavigationSection } from "../../../../actions/base";
 import { Property } from "../../../../actions";
 
 describe(`[Property > Market > Market reports] Check unselecting checkboxes`,
-    { tags:[ "@property", "@market" ] }, () => {
+    { tags:[ "@property", "@market", "@test" ] }, () => {
         it("[4468-70]", () => {
             cy.stepInfo(`1. Create a new report on the WebApp and navigate to Property > Market.`);
             createReport(testData.reportCreationData);
