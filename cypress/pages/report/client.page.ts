@@ -41,7 +41,10 @@ class ClientPage extends BasePage {
 
     get undoBtn() { return cy.contains("Undo"); }
 
-    getClientListItem(name: string) { return cy.get(`[data-value='${name}']`); }
+    // TODO: QA-7019 - Add data-qa after MUI5 migration
+    getClientListItem(name: string) { 
+        return cy.xpath(`//*[@id="root"]/following-sibling::div//li`).contains(name); 
+    }
 
 }
 
