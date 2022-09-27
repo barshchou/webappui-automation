@@ -306,37 +306,6 @@ class ExpenseForecastActions extends BaseActionsExt<typeof expenseForecastPage> 
         return this;
     }
 
-    verifyForecastCommentary(textToBe: string, forecastItem: BoweryReports.ForecastItem, 
-        index = 1): ExpenseForecastActions {
-        expenseForecastPage.getExpenseCommentary(this.getItemNameForAverage(forecastItem.name), index)
-            .should("contain.text", textToBe);
-        return this;
-    }
-
-    editExpenseForecastCommentary(newText: string, forecastItem: BoweryReports.ForecastItem, 
-        isWithClear = false, index = 1): ExpenseForecastActions {
-        let item = this.getItemNameForAverage(forecastItem.name);
-        this.activateTextAreaInput((this.Page.getExpenseCommentary(item,  index)));
-        if (isWithClear) {
-            expenseForecastPage.getExpenseCommentary(item, index).clear();
-        }
-        expenseForecastPage.getExpenseCommentary(item, index).type(newText);
-        this.inactivateTextAreaInput();
-        expenseForecastPage.getExpenseCommentaryModified(item).should("exist");
-        return this;
-    }
-
-    revertToOriginalExpenseForecastCommentary(forecastItem: BoweryReports.ForecastItem, 
-        index = 1): ExpenseForecastActions {
-        let item = this.getItemNameForAverage(forecastItem.name);
-        this.activateTextAreaInput((this.Page.getExpenseCommentary(item,  index)));
-        this.Page.getExpenseCommentaryRevertToOriginal(item, index).click();
-        this.verifyProgressBarNotExist();
-        expenseForecastPage.formYesRevertBtn.click();
-        expenseForecastPage.getExpenseCommentarySaveButton(item).click();
-        return this;
-    }
-
     switchExpenseForecastBasis(forecastItem: ForecastItem, customCategory = false, index = 0): ExpenseForecastActions {
         let expenseName = customCategory ? `customExpenses[${index}]` : forecastItem.name;
         expenseForecastPage.getElementBasisToSwitch(expenseName, forecastItem.basis).click();
