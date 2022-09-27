@@ -10,12 +10,18 @@ class ClientActions extends BaseActionsExt<typeof clientPage> {
     }
 
     enterClientName(name: string, index = 0): ClientActions {
-        /**
-         * ernst: need to add logic for case when we see "No Option" suggestion
-         * Or this is a bug because we can't enter suggested name to input via Enter key
-         */
-        clientPage.getClientNameField(index).realClick({ position: "bottom" }).clear().type(name)
-            .pause().type("{enter}");
+        clientPage.getClientNameField(index).realClick({ position: "bottom" }).clear().type(name);
+        // TODO: QA-7019: add data-qa for suggested list on Report > Client
+        cy.xpath('//*[@id="root"]//following-sibling::*[@role="presentation"]').then((elem) => {
+            if (elem.is(":visible") && elem.text() == "No options") {
+                return;
+            }
+            if (elem.is(":visible") && elem.text() != "No options") {
+                cy.wrap(elem).click();
+                return;
+            }
+        });
+
         return this;
     }
     
@@ -84,6 +90,7 @@ class ClientActions extends BaseActionsExt<typeof clientPage> {
     }
 
     clickAddAdditionalClientBtn(): ClientActions {
+        // todo: add logic for max client number case
         clientPage.addAdditionalClientBtn.click();
         return this;
     }
