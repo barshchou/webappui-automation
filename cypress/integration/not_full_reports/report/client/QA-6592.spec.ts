@@ -15,7 +15,7 @@ describe("Verify the display of the Clients column",
         it("[QA-6592]", () => {
             cy.stepInfo("2. Fill the 'Client' field and click 'Add additional client");
             Report._Client.enterClientName(testData.clientName)
-                .clickAddAdditionalClientBtn();
+                .clickAddAdditionalClientBtn(0);
 
             cy.stepInfo("3. Fill the Client 2 field with any valid data");
             Report._Client.enterClientName(testData.clientName, 1)

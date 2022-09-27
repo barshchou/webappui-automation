@@ -23,7 +23,7 @@ describe("Verify the functionality of the Add Additional Client",
 
             cy.stepInfo("5. Click on the 'Add Additional Client' three times button");
             for (let i = 0; i < 3; i++) {
-                Report._Client.clickAddAdditionalClientBtn();
+                Report._Client.clickAddAdditionalClientBtn(i);
             }
 
             cy.stepInfo(`6. Verify the 'Client X', 'Client File Number' and 'NYCB Application Number' 
@@ -41,7 +41,7 @@ describe("Verify the functionality of the Add Additional Client",
         it("[QA-6539]", () => {
             cy.stepInfo("2. Fill the 'Client' field and click 'Add additional client");
             Report._Client.enterClientName(testData.clientNames[0])
-                .clickAddAdditionalClientBtn();
+                .clickAddAdditionalClientBtn(0);
 
             cy.stepInfo("3. Hover the remove 'X' button and verify the tooltip 'Remove' is displayed on hover");
             Report._Client.Page.getRemoveIcon().trigger("mouseover");
@@ -57,7 +57,7 @@ describe("Verify the functionality of the Add Additional Client",
         it("[QA-6540]", () => {
             cy.stepInfo("2. Fill the 'Client' field and click 'Add additional client");
             Report._Client.enterClientName(testData.clientNames[0])
-                .clickAddAdditionalClientBtn();
+                .clickAddAdditionalClientBtn(0);
 
             cy.stepInfo(`2. Click on the remove 'X' button and Click on the 'Undo' button. 
                         Verify fields enable or disable, remove icon visible or not`);
@@ -86,7 +86,7 @@ describe("Verify the functionality of the Add Additional Client",
 
             cy.stepInfo("5. Add and Fill additional clients");
             for (let i = 0; i < 3; i++) {
-                Report._Client.clickAddAdditionalClientBtn()
+                Report._Client.clickAddAdditionalClientBtn(i)
                     .enterClientName(testData.clientNames[i + 1], i + 1);
             }
 

@@ -89,9 +89,17 @@ class ClientActions extends BaseActionsExt<typeof clientPage> {
         return this;
     }
 
-    clickAddAdditionalClientBtn(): ClientActions {
-        // todo: add logic for max client number case
-        clientPage.addAdditionalClientBtn.click();
+    /**
+     * Note: `index` - is an index of Client to be added. If index = 3 - will not click to
+     * @param index number of client to be added. 
+     * Increments index inside in order to check when max client number is countered
+     */
+    clickAddAdditionalClientBtn(index): ClientActions {
+        if (index + 1 != 4) {
+            this.Page.addAdditionalClientBtn.click();
+        } else {
+            cy.log("No more clients can be added");
+        }
         return this;
     }
 

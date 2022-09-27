@@ -20,7 +20,7 @@ describe("Verify the display of the multiple clients on the Cover page on export
 
             cy.stepInfo("3. Click 3 times 'Add additional client");
             for (let i = 0; i < 3; i++) {
-                Report._Client.clickAddAdditionalClientBtn();(testData.nycbNumber, i + 1);
+                Report._Client.clickAddAdditionalClientBtn(i);(testData.nycbNumber, i + 1);
             }
 
             cy.stepInfo(`4. Fill in the Client X field and NYCB Application Number for both clients fields with 
