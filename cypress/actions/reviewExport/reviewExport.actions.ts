@@ -155,13 +155,8 @@ class ReviewExportActions extends BaseActionsExt<typeof reviewExportPage> {
      */
     private checkUncheckSectionToIncludeInExport(sectionName: BoweryReports.SectionsToIncludeInExport, isCheck = true): 
     ReviewExportActions {
-        reviewExportPage.getIncludeSectionCheckbox(sectionName).invoke('attr', 'class').then(classAttr => {
-            const checked = classAttr.includes("checked");
-            if (checked != isCheck) {
-                isCheck ? reviewExportPage.getIncludeSectionCheckbox(sectionName)
-                    .check() : reviewExportPage.getIncludeSectionCheckbox(sectionName).uncheck();
-            }
-        });
+        isCheck ? reviewExportPage.getIncludeSectionCheckbox(sectionName).check().should("have.value", "true")
+            : reviewExportPage.getIncludeSectionCheckbox(sectionName).uncheck().should("have.value", "false");
         return this;
     }
 

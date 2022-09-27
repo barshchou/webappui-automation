@@ -518,6 +518,12 @@ class TaxInfoActions extends BaseActionsExt<typeof taxInfoPage> {
         taxInfoPage.projectedTaxesIncludedInputs(inputName).should("have.text", valueToBe);
         return this;
     }
+
+    saveTaxRate(): TaxInfoActions {
+        this.getValuesFromRows("Tax Rate");
+        return this;
+    }
+
 }
 
 export default new TaxInfoActions(taxInfoPage);

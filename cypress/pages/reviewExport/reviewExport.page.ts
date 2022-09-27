@@ -41,7 +41,7 @@ class ReviewExportPage extends BasePage {
     }
 
     get loadingSectionsForm() {
-        return cy.xpath("//form[@id='reviewAndExport-final-form']//hr/following-sibling::div");
+        return cy.get("[data-qa='loadingList']");
     }
 }
 export default new ReviewExportPage();
