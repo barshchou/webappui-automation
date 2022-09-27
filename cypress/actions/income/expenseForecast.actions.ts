@@ -352,6 +352,12 @@ class ExpenseForecastActions extends BaseActionsExt<typeof expenseForecastPage> 
         return this;
     }
 
+    verifyCustomCategoryAlreadyExists(exist = true): ExpenseForecastActions {
+        let matcher = exist ? 'exist' : 'not.exist';
+        expenseForecastPage.categoryErrorMessage.should(matcher);
+        return this;
+    }
+
     /**
      * 1. Action takes all allForecastsInputs (forecast expense card inputs).
      * 2. In cycle we check all forecast cards does it has checkbox "Include Expense on Pro Forma" or not: 

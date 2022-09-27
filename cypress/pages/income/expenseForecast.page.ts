@@ -170,6 +170,10 @@ class ExpenseForecastPage extends BasePage {
     get electricityCardText() { 
         return cy.xpath("//span[@data-qa='electricity.includeInProForma-checked']/following-sibling::span"); 
     }
+
+    get categoryErrorMessage() {
+        return cy.xpath(`//*[.='Expense category already exists']`);
+    }
 }
 
 export default new ExpenseForecastPage();
