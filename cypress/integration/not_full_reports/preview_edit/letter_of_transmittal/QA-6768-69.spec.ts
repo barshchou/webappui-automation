@@ -17,8 +17,14 @@ describe('Verify the display of the multiple clients on the Letter of Transmitta
             testData.inputValues.forEach((value, index) => {
                 Report._Client.enterClientName(value.clientName, index)
                     .enterClientFileNumber(value.clientFileNumber, index)
-                    .enterNycbApplicationNumber(value.nycbNumber, index)
-                    .clickAddAdditionalClientBtn();
+                    .enterNycbApplicationNumber(value.nycbNumber, index);
+                
+                if (index !=  testData.inputValues.length - 1 ) {
+                    cy.log("Adding a new client");
+                    Report._Client.clickAddAdditionalClientBtn();
+                } else {
+                    cy.log("No more clients to add");
+                } 
             });
 
             cy.stepInfo("4. Navigate to Report > Client page");
@@ -45,8 +51,14 @@ describe('Verify the display of the multiple clients on the Letter of Transmitta
             testData.inputValues.forEach((value, index) => {
                 Report._Client.enterClientName(value.clientName, index)
                     .enterClientFileNumber(value.clientFileNumber, index)
-                    .enterNycbApplicationNumber(value.nycbNumber, index)
-                    .clickAddAdditionalClientBtn();
+                    .enterNycbApplicationNumber(value.nycbNumber, index);
+                    
+                if (index !=  testData.inputValues.length - 1 ) {
+                    cy.log("Adding a new client");
+                    Report._Client.clickAddAdditionalClientBtn();
+                } else {
+                    cy.log("No more clients to add");
+                } 
             });
 
             cy.stepInfo("4. Navigate to Report > Client page");
