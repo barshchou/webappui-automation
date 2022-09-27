@@ -25,7 +25,7 @@ describe(`Verify that the Client field is pre-filled on the WebApp with the date
             .downloadAndConvertDocxReport(`JOB-${testData.reportCreationData.reportNumber}_462`);
     });
 
-    it("Check export", () => {
+    it.only("Check export", () => {
         cy.task("getFilePath",
             { _reportName: `${testData.reportCreationData.reportNumber}_462`, _docxHtml: "html" }
         ).then(file => {
@@ -35,7 +35,7 @@ describe(`Verify that the Client field is pre-filled on the WebApp with the date
             cy.stepInfo("5. Verify export name");
             cy.contains("Requested By").next().should("include.text", testData.clientName);
             cy.contains("In accordance with your request").prev()
-                .prev().prev().scrollIntoView().should("include.text", testData.clientName);
+                .prev().scrollIntoView().should("include.text", testData.clientName);
         });
     });
 
