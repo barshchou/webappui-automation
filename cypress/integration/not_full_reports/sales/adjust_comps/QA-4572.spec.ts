@@ -3,6 +3,7 @@ import { createReport } from "../../../../actions/base/baseTest.actions";
 import NavigationSection from "../../../../actions/base/navigationSection.actions";
 import { Sales, ReviewExport } from "../../../../actions";
 
+// ToDo: Test might fail due to problem with rounding: https://bowery.atlassian.net/browse/QA-6594
 describe("Check custom adjustment", 
     { tags: [ "@adjust_comps", "@sales" ] }, () => {
         
@@ -10,7 +11,6 @@ describe("Check custom adjustment",
             createReport(testData.reportCreationData);
         });
 
-        //TODO: Find out about values round in this test
         it("Test body", () => {
             cy.stepInfo("1. Navigate to Find comps page and add a couple of sales comps");
             NavigationSection.navigateToFindComps();
