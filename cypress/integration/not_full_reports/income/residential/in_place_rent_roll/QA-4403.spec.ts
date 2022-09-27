@@ -5,7 +5,7 @@ import Property from "../../../../../actions/property/property.manager";
 import { createReport } from "../../../../../actions/base/baseTest.actions";
 
 describe("Verify the Unsaved changes modal functionality", 
-    { tags:[ "@income", "@residential", "@in_place_rent_roll" ] }, () => {
+    { tags:[ "@income", "@residential", "@in_place_rent_roll", "@fix" ] }, () => {
         
         beforeEach("Login, create report", () => {
             createReport(testData.reportCreationData);

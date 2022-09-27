@@ -5,7 +5,7 @@ import Income from "../../../../../actions/income/income.manager";
 import { createReport } from "../../../../../actions/base/baseTest.actions";
 
 describe("Verify the Save and Save&Continue buttons functionality", 
-    { tags:[ "@income", "@residential", "@in_place_rent_roll" ] }, () => {
+    { tags:[ "@income", "@residential", "@in_place_rent_roll", "@fix" ] }, () => {
         
         beforeEach("Login, create report, check checkbox", () => {
             createReport(testData.reportCreationData);
