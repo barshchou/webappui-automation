@@ -11,6 +11,7 @@ const grossBuildingArea = 3000;
 const customCategoryUppercase = "HEATING";
 const customCategoryDiffCase = "HeATinG";
 const customCategoryName = "Heating";
+const regularExpense = "iNsuranCe";
 
 const _customCategory: BoweryReports.ForecastItem = {
     name: customCategoryName,
@@ -25,5 +26,6 @@ export default {
     grossBuildingArea,
     customCategoryUppercase,
     customCategoryDiffCase,
-    customCategoryName
+    customCategoryName,
+    regularExpense
 };

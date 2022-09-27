@@ -43,5 +43,13 @@ describe(`Warning Message is displayed if user creates a custom expenses with a 
             Income._ExpenseForecastActions.verifyCustomCategoryAlreadyExists();
             Income._ExpenseForecastActions.Page.formSaveBtn(1).should('be.disabled');
             Income._ExpenseForecastActions.Page.formCancelButton().click();
+
+            cy.stepInfo(`6. Add new custom category with the name of regular expense`);
+            Income._ExpenseForecastActions.Page.createNewCategoryButton.click();
+            Income._ExpenseForecastActions.Page.newCategoryExpenseName.clear()
+                .type(`${testData.regularExpense}{downArrow}{enter}`);
+            Income._ExpenseForecastActions.verifyCustomCategoryAlreadyExists();
+            Income._ExpenseForecastActions.Page.formSaveBtn(1).should('be.disabled');
+            Income._ExpenseForecastActions.Page.formCancelButton().click();
         });
     });
