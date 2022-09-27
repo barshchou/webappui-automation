@@ -100,8 +100,17 @@ class AppraiserActions extends BaseActionsExt<typeof appraiserPage> {
     }
 
     verifyAppraisersFromRequest() {
-        cy.wait(`@${Alias.reportId}`, { timeout: 10000 }).then(( { response } ) => {
-            const appraisersArray = response.body.new.previewAndEdit.certification.appraisers;
+        cy._mapGet(mapKeysUtils.reportId).then(reportId => {
+            // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+            // @ts-ignore
+            const req = Cypress.ProxyLogging.proxyRequests.find(
+                _req => _req.consoleProps.URL.endsWith(`/report/${reportId}`)
+            );
+
+            const appraisersArray = (
+                JSON.parse(req.consoleProps["Response Body"])
+            ).new.previewAndEdit.certification.appraisers;
+
             appraisersArray.forEach(({ fullName }) => {
                 appraiserPage.appraiserSignCheckbox(fullName).should('exist');
             });
