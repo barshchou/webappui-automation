@@ -110,4 +110,8 @@ export default class BasePage {
     get formConfirmDeleteButton() {
         return cy.xpath(`//*[.='Confirm']`);
     }
+
+    get formConfirmCloseButton() {
+        return cy.get(`[data-testid="CloseIcon"]`);
+    }
 }
