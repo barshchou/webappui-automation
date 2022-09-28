@@ -4,7 +4,7 @@ import { _NavigationSection } from "../../../../actions/base";
 import { Income } from "../../../../actions";
 import { createReport } from "../../../../actions/base/baseTest.actions";
 
-describe(`Verify that Generated Commentary are updated on the Expense Forecast page`,
+describe.skip(`Verify that Generated Commentary are updated on the Expense Forecast page`,
     { tags: [ "@income", "@expense_forecast" ] }, () => {
 
         before("Login, create report", () => {
