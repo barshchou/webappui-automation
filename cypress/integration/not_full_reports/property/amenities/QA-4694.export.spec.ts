@@ -3,7 +3,9 @@ import { _NavigationSection } from "../../../../actions/base";
 import { createReport } from "../../../../actions/base/baseTest.actions";
 import testData from "../../../../fixtures/not_full_reports/property/amenities/QA-4694.fixture";
 
-describe("Verify the fields of the Amenities page", { tags:[ "@property", "@amenities", "@check_export" ] }, () => {
+describe("Verify the fields of the Amenities page", { 
+    tags:[ "@property", "@amenities", "@check_export", "@bug", "@WEB-7126" ] 
+}, () => {
     it("[QA-4694]", () => {
         cy.stepInfo("1. Login, create report");
         createReport(testData.reportCreationData);
@@ -39,6 +41,7 @@ describe("Verify the fields of the Amenities page", { tags:[ "@property", "@amen
             .Page.getDoormanRadio(testData.doormanRadio).click().should("be.checked");
 
         cy.stepInfo("7. Export report");
+        cy.pause();
         _NavigationSection.openReviewAndExport();
         ReviewExport.generateDocxReport().waitForReportGenerated()
             .downloadAndConvertDocxReport(testData.reportCreationData.reportNumber);
