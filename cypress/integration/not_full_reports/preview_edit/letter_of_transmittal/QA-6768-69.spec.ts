@@ -4,7 +4,7 @@ import { createReport } from '../../../../actions/base/baseTest.actions';
 import testData from "../../../../fixtures/not_full_reports/review_edit/letter_of_transmittal/QA-6768-69.fixture";
 
 describe('Verify the display of the multiple clients on the Letter of Transmittal',
-    { tags: [ "@preview_edit", "@letter_of_transmittal", "@check_export", "@fix" ] }, () => {
+    { tags: [ "@preview_edit", "@letter_of_transmittal", "@check_export" ] }, () => {
 
         it("[QA-6769]", () => {
             cy.stepInfo("1. Login, create a report with freddie mac");

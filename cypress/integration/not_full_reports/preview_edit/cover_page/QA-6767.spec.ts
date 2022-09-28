@@ -4,7 +4,7 @@ import { createReport } from '../../../../actions/base/baseTest.actions';
 import testData from "../../../../fixtures/not_full_reports/review_edit/cover_page/QA-6767.fixture";
 
 describe("Verify the display of the multiple clients on the Cover page",
-    { tags: [ "@preview_edit", "@cover_page", "@fix" ] }, () => {
+    { tags: [ "@preview_edit", "@cover_page" ] }, () => {
 
         beforeEach("Login, create a report", () => {
             createReport(testData.reportCreationData);

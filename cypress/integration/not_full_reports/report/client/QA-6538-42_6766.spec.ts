@@ -4,7 +4,7 @@ import { createReport } from "../../../../actions/base/baseTest.actions";
 import { _NavigationSection } from "../../../../actions/base";
 
 describe("Verify the functionality of the Add Additional Client", 
-    { tags: [ "@report", "@client", "@fix" ] }, () => {
+    { tags: [ "@report", "@client" ] }, () => {
         beforeEach("Login, create report", () => {
             createReport(testData.reportCreationData);
 

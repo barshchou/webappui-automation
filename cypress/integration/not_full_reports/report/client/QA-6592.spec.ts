@@ -4,7 +4,7 @@ import { createReport } from "../../../../actions/base/baseTest.actions";
 import { _HomePage, _NavigationSection } from "../../../../actions/base";
 
 describe("Verify the display of the Clients column", 
-    { tags: [ "@report", "@client", "@fix" ] }, () => {
+    { tags: [ "@report", "@client" ] }, () => {
         beforeEach("Login, create report", () => {
             createReport(testData.reportCreationData);
 

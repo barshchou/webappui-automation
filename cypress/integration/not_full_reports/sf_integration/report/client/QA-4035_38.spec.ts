@@ -5,7 +5,7 @@ import testData from '../../../../../fixtures/not_full_reports/sf_integration/re
 
 describe(`Verify that the Client field is pre-filled on the WebApp with the date corresponding to the 
         Client Contact for that job in SalesForce.`, {
-    tags: [ "@report", "@client", "@check_export", "@salesforce", "@fix" ]
+    tags: [ "@report", "@client", "@check_export", "@salesforce" ]
 }, () => {
     it("[QA-4035_38]", () => {
         cy.stepInfo(`1. Create a new report on the WebApp (Note: the JOB # of that report corresponds
