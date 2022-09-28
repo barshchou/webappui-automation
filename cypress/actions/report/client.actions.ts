@@ -11,8 +11,7 @@ class ClientActions extends BaseActionsExt<typeof clientPage> {
 
     enterClientName(name: string, index = 0): ClientActions {
         clientPage.getClientNameField(index).realClick({ position: "bottom" }).clear().type(name);
-        // TODO: QA-7019: add data-qa for suggested list on Report > Client
-        cy.xpath('//*[@id="root"]//following-sibling::*[@role="presentation"]').then((elem) => {
+        clientPage.listClientNames.then((elem) => {
             if (elem.is(":visible") && elem.text() == "No options") {
                 return;
             }

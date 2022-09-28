@@ -46,6 +46,11 @@ class ClientPage extends BasePage {
         return cy.xpath(`//*[@id="root"]/following-sibling::div//li`).contains(name); 
     }
 
+    // TODO: QA-7019: add data-qa for suggested list on Report > Client
+    get listClientNames() {
+        return cy.xpath('//*[@id="root"]//following-sibling::*[@role="presentation"]');
+    }
+
 }
 
 export default new ClientPage();
