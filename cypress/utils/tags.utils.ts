@@ -64,6 +64,10 @@ export enum Tag {
     final_values_reconciliation = "@final_values_reconciliation",
     cover_page= "@cover_page",
     letter_of_transmittal= "@letter_of_transmittal",
+
+    //#region bugs and issues related tags
     bug = "@bug",
-    narrative_comp = "@narrative_comp"
+    narrative_comp = "@narrative_comp",
+    performance_issues = "@performance_issues",
+    save_changes_modal="@save_changes_modal"
 }
