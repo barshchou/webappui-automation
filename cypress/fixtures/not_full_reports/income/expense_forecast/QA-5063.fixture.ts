@@ -3,12 +3,13 @@ import ReportDataCreator from "../../../data_creator/reportData.creator";
 import Enums from "../../../../enums/enums";
 
 const reportCreationFixture = () => {
-    return ReportDataCreator.getReportData("5064");
+    return ReportDataCreator.getReportData("5063");
 };
 
 const residentialUnits = 3;
 const grossBuildingArea = 3000;
 const customCategoryName = "Heating";
+const newCategoryName = "heating new";
 
 const _customCategory: BoweryReports.ForecastItem = {
     name: customCategoryName,
@@ -21,5 +22,6 @@ export default {
     customCategory: _customCategory,
     residentialUnits,
     grossBuildingArea,
-    customCategoryName
+    customCategoryName,
+    newCategoryName
 };
