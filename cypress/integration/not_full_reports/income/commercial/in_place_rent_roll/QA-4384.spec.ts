@@ -5,8 +5,10 @@ import Property from "../../../../../actions/property/property.manager";
 import { createReport } from "../../../../../actions/base/baseTest.actions";
 import { BoweryReports } from "../../../../../types/boweryReports.type";
 
+// TODO: remove  "@bug", "@save_changes_modal" from tags after verification of QA-4558 and QA-4384
+
 describe("Verify the Use column in the grid", 
-    { tags:[ "@income", "@commercial", "@in_place_rent_roll" ] }, () => {
+    { tags:[ "@income", "@commercial", "@in_place_rent_roll", "@bug", "@save_changes_modal" ] }, () => {
 
         const useRadios: BoweryReports.CommercialUnits.GroupsValues[] = [ 
             "retail", 
@@ -32,7 +34,9 @@ describe("Verify the Use column in the grid",
                 NavigationSection.navigateToCommercialUnits();
                 Property.CommercialUnits.clickCommercialUnitTabByIndex()
                     .clickRadioButtonByValueAndUnitIndex(groupName, useRadios[index]);
-                NavigationSection.navigateToCommercialInPlaceRentRoll();
+                NavigationSection
+                    .clickSaveButton()
+                    .navigateToCommercialInPlaceRentRoll();
                 Income.Commercial.InPlaceRentRoll.verifyUseCellByRow(useText);
             });
         });
