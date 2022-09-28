@@ -5,7 +5,7 @@ import { createReport } from "../../../../actions/base/baseTest.actions";
 import { Sales } from "../../../../actions";
 
 describe(`Check Location Discussion`, 
-    { tags: [ "@adjust_comps", "@sales" ] }, () => {
+    { tags: [ "@adjust_comps", "@sales", "@broken_comp_from_db" ] }, () => {
         beforeEach("Login, create report", () => {
             cy.stepInfo(`1. Create report`);
             createReport(testData.reportCreationData);

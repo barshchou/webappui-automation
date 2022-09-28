@@ -6,7 +6,7 @@ import Enums from "../../../../enums/enums";
 import { toCamelCase, toLowerCaseFirstLetterInString } from "../../../../../utils/string.utils";
 
 describe("Verify that the user can display historical expense values on a PSF basis on the Expense History page",
-    { tags: [ "@income", "@expense_history" ] }, () => {
+    { tags: [ "@income", "@expense_history", "@require_investigation" ] }, () => {
     
         beforeEach("Create report, enter gba value", () => {
             createReport(testData.reportCreationData);
