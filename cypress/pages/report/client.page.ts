@@ -7,7 +7,9 @@ class ClientPage extends BasePage {
 
     get warningAddBtn() { return cy.xpath("//*[contains(@data-qa, 'callout-btn')]"); }
 
-    getClientNameField(index = 0) { return cy.get("*[name=client]").eq(index); }
+    getClientNameField(index = 0) { 
+        return cy.get('[placeholder="Search Clients"]').eq(index); 
+    }
 
     getClientFileNumberField(index = 0) { return cy.get(`[name='reportClients[${index}].clientFileNumber']`); }
 
@@ -33,13 +35,21 @@ class ClientPage extends BasePage {
 
     get addNewClient() { return cy.xpath("//*[@data-qa='callout-btn']"); }
 
-    get addAdditionalClientBtn() { return cy.contains("Add additional client"); } 
+    get addAdditionalClientBtn() { return cy.get('[data-qa="addAdditionalClientBtn"]'); } 
 
     get maxClientMessage() { return cy.contains("Max of four clients allowed"); }
 
     get undoBtn() { return cy.contains("Undo"); }
 
-    getClientListItem(name: string) { return cy.get(`[data-value='${name}']`); }
+    // TODO: QA-7019 - Add data-qa after MUI5 migration
+    getClientListItem(name: string) { 
+        return cy.xpath(`//*[@id="root"]/following-sibling::div//li`).contains(name); 
+    }
+
+    // TODO: QA-7019: add data-qa for suggested list on Report > Client
+    get listClientNames() {
+        return cy.xpath('//*[@id="root"]//following-sibling::*[@role="presentation"]');
+    }
 
 }
 

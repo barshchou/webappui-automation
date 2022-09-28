@@ -18,7 +18,7 @@ describe("Verify the display of the multiple clients on the Cover page",
                 Report._Client.enterClientName(value.clientName, index)
                     .enterClientFileNumber(value.clientFileNumber, index)
                     .enterNycbApplicationNumber(value.nycbNumber, index)
-                    .clickAddAdditionalClientBtn();
+                    .clickAddAdditionalClientBtn(index);
             });
 
             cy.stepInfo("2. Proceed to the Preview & Edit > Cover page");
