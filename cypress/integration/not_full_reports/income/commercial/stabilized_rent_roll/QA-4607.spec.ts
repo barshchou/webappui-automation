@@ -47,7 +47,7 @@ describe("Verify the Commercial Stabilized Rent Roll table",
 
             cy.stepInfo(`6. On the Income > Commercial > Rent Reconciliation, the Market Rent Conclusion 
                     field is filled with any value`);
-            _NavigationSection.navigateToRentReconciliation();
+            _NavigationSection.navigateToRentReconciliation(30000);
             Income._CommercialManager.RentReconciliation.addMarketRentConclusion(testData.marketRentConclusion);
         });
 

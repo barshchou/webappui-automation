@@ -211,8 +211,8 @@ export default class BaseActionsExt<T extends BasePage> extends BaseActions {
         return this;
     }
 
-    waitForUrl(route: Utils.Routes) {
-        cy.url().should("include", route);
+    waitForUrl(route: Utils.Routes, _timeout?: number) {
+        cy.url({ timeout: _timeout }).should("include", route);
         return this;
     }
 
