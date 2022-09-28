@@ -598,6 +598,11 @@ class ExpenseForecastActions extends BaseActionsExt<typeof expenseForecastPage> 
         return this;
     }
 
+    deleteCustomExpenseCategory(categoryName: string): ExpenseForecastActions {
+        expenseForecastPage.customCategoryDeleteButton(categoryName).click();
+        expenseForecastPage.formConfirmDeleteButton.click();
+        return this;
+    }
 }
 
 export default new ExpenseForecastActions(expenseForecastPage);

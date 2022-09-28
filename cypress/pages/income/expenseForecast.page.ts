@@ -174,6 +174,11 @@ class ExpenseForecastPage extends BasePage {
     get categoryErrorMessage() {
         return cy.xpath(`//*[.='Expense category already exists']`);
     }
+
+    customCategoryDeleteButton(categoryName: string) {
+        let name = categoryName.charAt(0).toLocaleUpperCase() + categoryName.toLocaleLowerCase().slice(1);
+        return cy.xpath(`//*[@data-qa="${name}-forecast-item"]//following::*[@data-testid="DeleteIcon"]`);
+    }
 }
 
 export default new ExpenseForecastPage();
