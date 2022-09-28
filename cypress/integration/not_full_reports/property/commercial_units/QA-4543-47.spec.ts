@@ -5,7 +5,7 @@ import { _NavigationSection } from "../../../../actions/base";
 
 describe(`[QA-4543][QA-4544][QA-4545][QA-4546][QA-4547] 
 Verify the buttons functionality on Property > Commercial Units page.`,
-{ tags: [ "@property", "@commercial_units" ] }, () => {
+{ tags: [ "@property", "@commercial_units", "@narrative_comp" ] }, () => {
 
     before("Report creation and several commercial units addition", () => {
         createReport(testData.reportCreationData);
@@ -71,7 +71,7 @@ Verify the buttons functionality on Property > Commercial Units page.`,
     });
 
     //TODO update test after test-cases updates QA-6543
-    it("[QA-4546]", () => {
+    it.only("[QA-4546]", () => {
         cy.stepInfo(`1. Verify the 'Changes will be lost' modal functionality`);
         _NavigationSection.navigateToCommercialUnits();
         Property._CommercialUnits.verifyThatPageIsOpened();
