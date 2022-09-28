@@ -354,7 +354,7 @@ class ExpenseForecastActions extends BaseActionsExt<typeof expenseForecastPage> 
 
     verifyCustomCategoryAlreadyExists(exist = true): ExpenseForecastActions {
         let matcher = exist ? 'exist' : 'not.exist';
-        expenseForecastPage.categoryErrorMessage.should(matcher);
+        expenseForecastPage.categoryErrorMessageExists.should(matcher);
         return this;
     }
 

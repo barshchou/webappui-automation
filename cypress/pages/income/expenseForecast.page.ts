@@ -171,8 +171,12 @@ class ExpenseForecastPage extends BasePage {
         return cy.xpath("//span[@data-qa='electricity.includeInProForma-checked']/following-sibling::span"); 
     }
 
-    get categoryErrorMessage() {
+    get categoryErrorMessageExists() {
         return cy.xpath(`//*[.='Expense category already exists']`);
+    }
+
+    get categoryErrorMessageRequired() {
+        return cy.xpath(`//*[.='Category name is required']`);
     }
 
     customCategoryDeleteButton(categoryName: string) {
