@@ -63,5 +63,7 @@ export enum Tag {
     property_history = "@property_history",
     final_values_reconciliation = "@final_values_reconciliation",
     cover_page= "@cover_page",
-    letter_of_transmittal= "@letter_of_transmittal"
+    letter_of_transmittal= "@letter_of_transmittal",
+    bug = "@bug",
+    narrative_comp = "@narrative_comp"
 }

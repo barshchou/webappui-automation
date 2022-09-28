@@ -5,7 +5,7 @@ import { _NavigationSection } from "../../../../actions/base";
 import tableExpenseHistoryCellNames from "../../../../enums/expense/expenseHistoryTableRows.enum";
 
 describe("[QA-5812] Historical expenses Per SF in Total Operating Expenses is correctly calculated and displayed",
-    { tags: [ "@snapshot_tests", "@income", "@expense_forecast" ] }, () => {
+    { tags: [ "@snapshot_tests", "@income", "@expense_forecast", "@bug", "@WEB-7110" ] }, () => {
         beforeEach("Login, create report", () => {
             createReport(testData.reportCreationData);
         });
