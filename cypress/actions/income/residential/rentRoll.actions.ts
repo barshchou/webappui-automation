@@ -188,8 +188,16 @@ class InPlaceRentRollActions extends ResidentialRentRollSharedActions<typeof ren
     }
 
     setIsInspectedCheckboxByRowNumber(number = 0, isCheck = true): InPlaceRentRollActions {
-        isCheck === true ? rentRollPage.isInspectedInputs.eq(number).check()
-            :  rentRollPage.isInspectedInputs.eq(number).uncheck();
+        rentRollPage.isInspectedInputs.eq(number).as("inspectedInputs");
+        if (isCheck === true) {
+            cy.get("@inspectedInputs").click().find("input")
+                .check();
+            cy.get("@inspectedInputs").find("input").should("be.checked");
+        } else {
+            cy.get("@inspectedInputs").click().find("input")
+                .uncheck();
+            cy.get("@inspectedInputs").find("input").should("not.be.checked");
+        }
         return this;
     }
 
