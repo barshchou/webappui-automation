@@ -183,6 +183,10 @@ class ExpenseForecastPage extends BasePage {
         let name = categoryName.charAt(0).toLocaleUpperCase() + categoryName.toLocaleLowerCase().slice(1);
         return cy.xpath(`//*[@data-qa="${name}-forecast-item"]//following::*[@data-testid="DeleteIcon"]`);
     }
+
+    get editCustomCategoryModalHeader() {
+        return cy.xpath(`//h2[.='Edit Custom Expense Category']`);
+    }
 }
 
 export default new ExpenseForecastPage();
