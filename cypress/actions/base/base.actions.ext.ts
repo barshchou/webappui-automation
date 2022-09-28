@@ -173,7 +173,7 @@ export default class BaseActionsExt<T extends BasePage> extends BaseActions {
     }
 
     clickRevertToOriginalButtonBySection(name: string): this {
-        this.Page.formRevertToOriginalBtnBySectionName(name).realClick({ position: "center" });
+        this.Page.formRevertToOriginalBtnBySectionName(name).realClick();
         return this;
     }
 
