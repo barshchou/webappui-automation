@@ -4,9 +4,9 @@ import { Income, DataCollections } from "../../../../actions";
 import { _NavigationSection } from "../../../../actions/base";
 import tableExpenseHistoryCellNames from "../../../../enums/expense/expenseHistoryTableRows.enum";
 
-// TODO: Test fails due to https://bowery.atlassian.net/browse/WEB-7012 
+// TODO: Test fails due to https://bowery.atlassian.net/browse/WEB-7012 and WEB-7110
 describe("Historical expense Water & Sewer Per SF/Unit is correctly calculated and displayed",
-    { tags:[ "@snapshot_tests", "@income", "@expense_forecast" ] }, () => {
+    { tags:[ "@snapshot_tests", "@income", "@expense_forecast", "@bug", "@WEB-7012", "@WEB-7110" ] }, () => {
 
         before("Login, create report", () => {
             createReport(testData.reportCreationData);
