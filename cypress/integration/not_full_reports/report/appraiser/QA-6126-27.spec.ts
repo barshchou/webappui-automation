@@ -7,7 +7,7 @@ import { normalizeText } from '../../../../../utils/string.utils';
 
 // TODO: Export fails due to https://bowery.atlassian.net/browse/WEB-6739
 describe("Generated Commentary is dynamically updated with relevant information (Freddie Mac report)", 
-    { tags:[ "@report", "@appraiser", "@check_export" ] }, () => {
+    { tags:[ "@report", "@appraiser", "@check_export", "@bug", "@WEB-6739" ] }, () => {
 
         it("[QA-6126-27]", () => {
             cy.stepInfo("Precondition: Create report");
@@ -41,7 +41,7 @@ describe("Generated Commentary is dynamically updated with relevant information 
                 .downloadAndConvertDocxReport(testData.reportCreationData.reportNumber);
         });
 
-        it('Check export', () => {
+        it.only('Check export', () => {
             cy.task("getFilePath", { _reportName: testData.reportCreationData.reportNumber, _docxHtml: "html" })
                 .then(file => {
                     cy.log(<string>file);
