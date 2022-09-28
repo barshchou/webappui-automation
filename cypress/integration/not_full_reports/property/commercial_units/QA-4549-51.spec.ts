@@ -4,7 +4,7 @@ import { createReport } from "../../../../actions/base/baseTest.actions";
 import testData from "../../../../fixtures/not_full_reports/property/commercial_units/QA-4549-54.fixture";
 
 describe(`[QA-4549][QA-4550][QA-4551] Verify the "Linked" chips dropdown in the new narrative component`, 
-    { tags: [ "@property", "@commercial_units", "@narrative_comp" ] }, () => {
+    { tags: [ "@property", "@commercial_units", "@update_test", "@narrative_comp" ] }, () => {
         before('Create report', () => {
             cy.stepInfo(`Preconditions: The mixed report is created and several commercial units are added.`);
             createReport(testData.reportCreationDataAsIs);

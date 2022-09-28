@@ -69,5 +69,7 @@ export enum Tag {
     bug = "@bug",
     narrative_comp = "@narrative_comp",
     performance_issues = "@performance_issues",
-    save_changes_modal="@save_changes_modal"
+    save_changes_modal="@save_changes_modal",
+    // ernst: requires automated test update
+    update_test="@update_test"
 }
