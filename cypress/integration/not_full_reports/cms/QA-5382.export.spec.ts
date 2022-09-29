@@ -54,7 +54,7 @@ conditionalDescribe("Verify possibility to edit text",
                 loginAction();
                 _NavigationSection.navigateToContentManagementSystem();
                 _CmsBaseActions.openCertificationPage()
-                    .revertSectionToOriginal(testData.sectionName);
+                    .revertToOriginalCommentarySectionByName(testData.sectionName);
             }
 
             cy.stepInfo('Remove feature flags');
