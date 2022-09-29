@@ -1,11 +1,12 @@
-import { Property } from './../../../../actions/index';
+import { Property } from '../../../../actions';
 import { _NavigationSection } from '../../../../actions/base';
 import testData from "../../../../fixtures/not_full_reports/sales/adjust_comps/QA-4226.fixture";
 import { createReport } from "../../../../actions/base/baseTest.actions";
 import { Sales } from "../../../../actions";
 
+// TODO: This spec fails due to save changes modal bug: https://bowery.atlassian.net/browse/WEB-7133
 describe(`Check Location Discussion`, 
-    { tags: [ "@adjust_comps", "@sales" ] }, () => {
+    { tags: [ "@adjust_comps", "@sales", "@bug", "@WEB-7133" ] }, () => {
         beforeEach("Login, create report", () => {
             cy.stepInfo(`1. Create report`);
             createReport(testData.reportCreationData);

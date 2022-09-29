@@ -2,12 +2,12 @@ import { DataCollections, ReviewExport } from '../../../../actions';
 import { Report } from "../../../../actions";
 import { _NavigationSection } from "../../../../actions/base";
 import { createReport } from "../../../../actions/base/baseTest.actions";
-import testData from '../../../../fixtures/not_full_reports/report/key_info/QA-4718.fixture';
+import testData from '../../../../fixtures/not_full_reports/report/key_info/QA-4718_1.fixture';
 
 describe(`Verify the "Linked" chips dropdown in the new narrative component for 
-        Property Rights Appraised and Definition of Market Value sections`,
+        Property Rights Appraised section`,
 { tags:[ "@report", "@key_info", "@check_export" ] }, () => {
-    it("[QA-4718]", () => {
+    it("[QA-4718]. Property Rights Appraised", () => {
         cy.stepInfo("Login, create report");
         createReport(testData.reportCreationData);
 
@@ -32,14 +32,6 @@ describe(`Verify the "Linked" chips dropdown in the new narrative component for
             Report._KeyInfo.verifyFormCommentTextBoxText(testData.propertyRightsAppraisedTitle, chip.verifySuggest);
         });
 
-        Report._KeyInfo.activateTextAreaInput( Report._KeyInfo.Page
-            .formCommentTextBox(testData.definitionOfMarketValueTitle));
-        testData.chips.forEach(chip => {
-            Report._KeyInfo.Page.formCommentTextBox(testData.definitionOfMarketValueTitle)
-                .realType(`=${chip.typeSuggestValue}`);
-            Report._KeyInfo.clickNarrativeSuggestions(chip.suggestionName, 2);
-            Report._KeyInfo.verifyFormCommentTextBoxText(testData.definitionOfMarketValueTitle, chip.verifySuggest);
-        });
         Report._KeyInfo.inactivateTextAreaInput();
 
         cy.stepInfo("3. Verify chip style");
@@ -61,11 +53,7 @@ describe(`Verify the "Linked" chips dropdown in the new narrative component for
                 testData.chips.forEach(chip => {
                     cy.contains(testData.propertyRightsSection).next().scrollIntoView()
                         .should("include.text", chip.verifyExport);
-                    cy.contains(testData.definitionOfMarketValueSection).next().next().scrollIntoView()
-                        .should("include.text", chip.verifySuggest);
                 });
             }); 
     });
 });
-
-    

@@ -4,7 +4,7 @@ import { _NavigationSection } from "../../../../actions/base";
 import { DataCollections, Income, Property } from "../../../../actions";
 
 describe("Verify the functionality of the Use* radio button", 
-    { tags:[ "@property", "@commercial_units" ] }, () => {
+    { tags:[ "@property", "@commercial_units", "@performance_issues", "@bug", "@save_changes_modal" ] }, () => {
 
         beforeEach("Login, create report", () => {
             createReport(testData.reportCreationData);
@@ -91,7 +91,7 @@ describe("Verify the functionality of the Use* radio button",
             });
         });
 
-        it("[QA-4558] Verify that the radio button selection affects the Income > Pro Forma page", () => {
+        it.skip("[QA-4558] Verify that the radio button selection affects the Income > Pro Forma page", () => {
             testData.useRadios.forEach((radio, index) => {
                 Property._CommercialUnits.clickRadioButtonByValueAndUnitIndex(testData.groupName, radio);
                 if (radio === "other") { 

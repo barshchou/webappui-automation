@@ -29,7 +29,6 @@ export default class BaseActions {
 
     goBackWithSave() {
         cy.go("back");
-        this.clickYesButton();
     }
 
     goBackWithoutSave() {

@@ -39,9 +39,7 @@ class ContentManagementSystemActions extends BaseActionsExt<typeof contentManage
     }
 
     updateSectionDiscussion(sectionName: string, text: string, clear = false): ContentManagementSystemActions {
-        this.clickSectionForEdit(sectionName)
-            .editSectionDiscussionText(sectionName, text, clear);
-
+        this.editSectionDiscussionText(sectionName, text, clear);
         // Get some time to not overlap comment saving with global save
         cy.wait(1000);
         this.saveCmsSettings();
@@ -49,19 +47,17 @@ class ContentManagementSystemActions extends BaseActionsExt<typeof contentManage
     }
 
     editSectionDiscussionText(sectionName: string, text: string, clear = false): ContentManagementSystemActions {
-        if (clear) { 
-            this.clickSectionForEdit(sectionName);
-            this.Page.formCommentTextBox(sectionName).clear(); 
-        }
+        this.clickSectionForEdit(sectionName);
+        if (clear) { this.Page.formCommentTextBox(sectionName).clear(); } 
         this.Page.formCommentTextBox(sectionName)
-            .type(text);
+            .realType(text);
         this.verifyDiscussionText(sectionName, text);
         return this;
     }
 
     clickSectionForEdit(sectionName: string): ContentManagementSystemActions {
-        this.Page.formCommentTextBox(sectionName)
-            .scrollIntoView().realClick();
+        this.Page.formCommentTextBox(sectionName).scrollIntoView()
+            .realClick();
         return this;
     }
 

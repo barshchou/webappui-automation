@@ -3,8 +3,8 @@ import { _NavigationSection } from "../../../../actions/base";
 import { DataCollections, Income } from "../../../../actions";
 import { createReport } from "../../../../actions/base/baseTest.actions";
 
-describe(`[QA-5025] [Income>Expense forecast] Selected existing expense card is included in calculation`,
-    { tags: [ "@income", "@expense_forecast" ] }, () => {
+describe.skip(`[QA-5025] [Income>Expense forecast] Selected existing expense card is included in calculation`,
+    { tags: [ "@income", "@expense_forecast", "@performance_issues" ] }, () => {
 
         before("Precondition", () => {
             Cypress.config('numTestsKeptInMemory', 0);

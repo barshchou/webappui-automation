@@ -89,3 +89,4 @@ export type SubjectPropertyDataSections = keyof typeof Enums.SUBJECT_PROPERTY_DA
 export type EditOnSubjectPropertySections = keyof typeof Enums.EDIT_ON_SUBJECT_PROPERTY_SECTIONS
 export type AdjustCompsDiscussionSections = keyof typeof Enums.ADJUST_COMPS_DISCUSSION_SECTIONS
 export type AdjustCompsDiscussionTitles = keyof typeof Enums.ADJUST_COMPS_DISCUSSION_TITLES
+export type ExpenseForecastDiscussionNames = keyof typeof Enums.EXPENSE_DISCUSSION_NAMES

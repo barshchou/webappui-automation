@@ -35,7 +35,7 @@ describe(`Verify that the Client field is pre-filled on the WebApp with the date
             cy.stepInfo("5. Verify export name");
             cy.contains("Requested By").next().should("include.text", testData.clientName);
             cy.contains("In accordance with your request").prev()
-                .prev().prev().scrollIntoView().should("include.text", testData.clientName);
+                .prev().scrollIntoView().should("include.text", testData.clientName);
         });
     });
 

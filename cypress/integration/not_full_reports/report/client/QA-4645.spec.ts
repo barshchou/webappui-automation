@@ -3,7 +3,6 @@ import { createReport } from "../../../../actions/base/baseTest.actions";
 import NavigationSection from "../../../../actions/base/navigationSection.actions";
 import { Report } from '../../../../actions';
 
-// TODO: Test fail. Recheck after fix: https://bowery.atlassian.net/browse/WEB-6818
 describe("Verify the Client Guidelines Discussion on the page", 
     { tags: [ "@report", "@client" ] }, () => {
         beforeEach("Login, create report", () => {

@@ -5,7 +5,7 @@ import { _NavigationSection } from '../../../../actions/base';
 
 // TODO: Recheck test task [QA-6999]. Test fail due to bug: https://bowery.atlassian.net/browse/WEB-6902
 describe("Verify the Client Guidelines Discussion on the page",
-    { tags: [ "@report", "@client", "@check_export" ] }, () => {
+    { tags: [ "@report", "@client", "@check_export", "@QA-6999", "@bug", "@WEB-6902" ] }, () => {
         it("[QA-4642]",  () => {
             cy.stepInfo(`1. Proceed to the Report > Client page`);
             createReport(testData.reportCreationData);

@@ -6,7 +6,7 @@ import tableExpenseHistoryCellNames from "../../../../../cypress/enums/expense/e
 
 // TODO: Test fails due to https://bowery.atlassian.net/browse/WEB-7012 
 describe("Historical expense Electricity Per Unit is correctly calculated and displayed",
-    { tags:[ "@snapshot_tests", "@income", "@expense_forecast" ] }, () => {
+    { tags:[ "@snapshot_tests", "@income", "@expense_forecast", "@bug", "@WEB-7012", "@WEB-7110" ] }, () => {
 
         beforeEach("Login, create report", () => {
             createReport(testData.reportCreationData);

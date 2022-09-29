@@ -18,7 +18,7 @@ describe('Verify the display of the multiple clients on the Letter of Transmitta
                 Report._Client.enterClientName(value.clientName, index)
                     .enterClientFileNumber(value.clientFileNumber, index)
                     .enterNycbApplicationNumber(value.nycbNumber, index)
-                    .clickAddAdditionalClientBtn();
+                    .clickAddAdditionalClientBtn(index);
             });
 
             cy.stepInfo(`4. Verify the Client, Client 2, Client 3 and Client 4 organizations are displayed separated by

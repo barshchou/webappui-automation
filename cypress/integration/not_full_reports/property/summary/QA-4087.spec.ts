@@ -5,7 +5,7 @@ import { DataCollections, Property } from "../../../../actions";
 import Enums from "../../../../enums/enums";
 import subjectPropertyDataRouts from "../../../../utils/subject_property_data_routs.utils";
 
-describe.skip("[QA-4087] Verify validation of the Residential Units and Commercial Units fields.",
+describe("[QA-4087] Verify validation of the Residential Units and Commercial Units fields.",
     { tags: [ "@property", "@summary", "@data_collections", "@subject_property_data", "@property_description" ] },
     () => {
 

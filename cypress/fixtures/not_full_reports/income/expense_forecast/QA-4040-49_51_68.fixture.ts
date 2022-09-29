@@ -1,5 +1,6 @@
 import { BoweryReports } from "../../../../types/boweryReports.type";
 import ReportDataCreator from "../../../data_creator/reportData.creator";
+import Enums from "../../../../enums/enums";
 
 const reportCreationFixture = () => {
     return ReportDataCreator.getReportData("4040-49_51_68");
@@ -7,89 +8,100 @@ const reportCreationFixture = () => {
 
 const expenseForecastWaterAndSewerFixture = (): BoweryReports.ForecastItem => {
     return {
-        name: "waterAndSewer",
+        name: Enums.EXPENSES_CARD_NAMES.waterAndSewer,
         basis: "sf",
-        forecast: 2
+        forecast: 2,
+        discussionName: Enums.EXPENSE_DISCUSSION_NAMES.waterAndSewer
     };
 };
 
 const expenseForecastReplacementReserveFixture = (): BoweryReports.ForecastItem => {
     return {
-        name: "reserves",
+        name: Enums.EXPENSES_CARD_NAMES.replacementsAndReserves,
         basis: "sf",
-        forecast: 2
+        forecast: 2,
+        discussionName: Enums.EXPENSE_DISCUSSION_NAMES.replacementReserves
     };
 };
 
 const expenseForecastInsuranceFixture = (): BoweryReports.ForecastItem => {
     return {
-        name: "insurance",
+        name: Enums.EXPENSES_CARD_NAMES.insurance,
         basis: "sf",
-        forecast: 4
+        forecast: 4,
+        discussionName: Enums.EXPENSE_DISCUSSION_NAMES.insurance
     };
 };
 
 const expenseForecastPayrollAndBenefitsFixture = (): BoweryReports.ForecastItem => {
     return {
-        name: "payrollAndBenefits",
+        name: Enums.EXPENSES_CARD_NAMES.payrollBenefits,
         basis: "sf",
-        forecast: 4
+        forecast: 4,
+        discussionName: Enums.EXPENSE_DISCUSSION_NAMES.payrollAndBenefits
     };
 };
 
 const expenseForecastRepairAndMaintenanceFixture = (): BoweryReports.ForecastItem => {
     return {
-        name: "repairsAndMaintenance",
+        name: Enums.EXPENSES_CARD_NAMES.repairAndMaintenance,
         basis: "sf",
-        forecast: 2.1
+        forecast: 2.1,
+        discussionName: Enums.EXPENSE_DISCUSSION_NAMES.repairsAndMaintenance
     };
 };
 
 const expenseForecastElectricityFixture = (): BoweryReports.ForecastItem => {
     return {
-        name: "electricity",
+        name: Enums.EXPENSES_CARD_NAMES.electricity,
         basis: "sf",
-        forecast: 5
+        forecast: 5,
+        discussionName: Enums.EXPENSE_DISCUSSION_NAMES.electricity
     };
 };
 
 const expenseForecastGeneralAndAdministrativeFixture = (): BoweryReports.ForecastItem => {
     return {
-        name: "generalAndAdministrative",
+        name: Enums.EXPENSES_CARD_NAMES.generalAndAdministrative,
         basis: "sf",
-        forecast: 5
+        forecast: 5,
+        discussionName: Enums.EXPENSE_DISCUSSION_NAMES.generalAndAdministrative
     };
 };
 
 const expenseForecastMiscellaneousFixture = (): BoweryReports.ForecastItem => {
     return {
-        name: "miscellaneous",
+        name: Enums.EXPENSES_CARD_NAMES.miscellaneous,
         basis: "sf",
-        forecast: 5
+        forecast: 5,
+        discussionName: Enums.EXPENSE_DISCUSSION_NAMES.miscellaneous
     };
 };
 
 const expenseForecastManagementFeesFixture = (): BoweryReports.ForecastItem => {
     return {
-        name: "management",
+        name: Enums.EXPENSES_CARD_NAMES.managementFees,
         basis: "sf",
-        forecast: 5
+        forecast: 5,
+        discussionName: Enums.EXPENSE_DISCUSSION_NAMES.managementFees
     };
 };
 
 const expenseForecastFuelFixture = (): BoweryReports.ForecastItem => {
     return {
-        name: "fuel",
+        name: Enums.EXPENSES_CARD_NAMES.fuel,
         basis: "sf",
-        forecast: 5
+        forecast: 5,
+        discussionName: Enums.EXPENSE_DISCUSSION_NAMES.fuel
     };
 };
 
 const expenseForecastLegalAndProfessionalFixture = (): BoweryReports.ForecastItem => {
     return {
-        name: "legalAndProfessionalFees",
+        name: Enums.EXPENSES_CARD_NAMES.legalAndProfessional,
         basis: "sf",
-        forecast: 6
+        forecast: 6,
+        discussionName: Enums.EXPENSE_DISCUSSION_NAMES.legalAndProfessionalFees
     };
 };
 

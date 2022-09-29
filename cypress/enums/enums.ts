@@ -113,6 +113,7 @@ import editOnSubjectPropertySectionsEnum from "./edit_on_subject_property_sectio
 import saleCondition from "./findComps/saleInformation/saleCondition.enum";
 import discussionSectionsEnum from "./adjustComps/discussionSections.enum";
 import discussionTitlesEnum from "./adjustComps/discussionTitles.enum";
+import expenseDiscussionsNamesEnum from "./expense/expenseDiscussionsNames.enum";
 
 export default {
     TEMPLATE_TYPE: templateTypesEnum,
@@ -229,5 +230,6 @@ export default {
     EDIT_ON_SUBJECT_PROPERTY_SECTIONS: editOnSubjectPropertySectionsEnum,
     SALE_CONDITION: saleCondition,
     ADJUST_COMPS_DISCUSSION_SECTIONS: discussionSectionsEnum,
-    ADJUST_COMPS_DISCUSSION_TITLES: discussionTitlesEnum
+    ADJUST_COMPS_DISCUSSION_TITLES: discussionTitlesEnum,
+    EXPENSE_DISCUSSION_NAMES: expenseDiscussionsNamesEnum
 };

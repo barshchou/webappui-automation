@@ -4,7 +4,7 @@ import { createReport } from "../../../../actions/base/baseTest.actions";
 import testData from '../../../../fixtures/not_full_reports/report/client/QA-4648.fixture';
 
 describe("[QA-4648] Verify the Save button functionality on the Report > Client page", 
-    { tags:[ "@report", "@client" ] }, () => {
+    { tags:[ "@report", "@client", "@bug", "@WEB-6902", "@narrative_comp" ] }, () => {
         beforeEach("Login, create report", () => {
             createReport(testData.reportCreationData);
         });

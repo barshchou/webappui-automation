@@ -274,12 +274,12 @@ class NavigationSectionActions extends BaseActionsExt<typeof navigationSectionPa
         return this;
     }
 
-    navigateToRentReconciliation(): NavigationSectionActions {
+    navigateToRentReconciliation(timeout?: number): NavigationSectionActions {
         this.clickIncomeApproachButton()
             .clickCommercialMenuIfClosed()
             .clickRentReconciliationButton()
             .submitSaveChangesModal()
-            .waitForUrl(routesUtils.commercialRentReconciliation);
+            .waitForUrl(routesUtils.commercialRentReconciliation, timeout);
         return this;
     }
 

@@ -83,23 +83,6 @@ class ExpenseForecastPage extends BasePage {
             cy.contains('TOTAL OPERATING EXPENSES').parent().parent().find('[data-qa$=historical]').contains(type);
     }
 
-    getExpenseCommentary(forecastItem: string, index = 1) {
-        return cy.xpath(`//*[@data-qa="${forecastItem}-forecast-item"]//following::div[@data-slate-editor][${index}]`);
-    }
-
-    getExpenseCommentarySaveButton(forecastItem: string, index = 1) {
-        return cy.xpath(`//*[@data-qa="${forecastItem}-forecast-item"]//following::button[.='Save'][${index}]`);
-    }
-
-    getExpenseCommentaryModified(forecastItem: string) { 
-        return cy.xpath(`//*[@data-qa="${forecastItem}-forecast-item"]//following::*[.='Modified'][2]`); 
-    }
-
-    getExpenseCommentaryRevertToOriginal(forecastItem: string, index = 1) {
-        return cy.xpath(
-            `//*[@data-qa="${forecastItem}-forecast-item"]//following::button[.='Revert to Original'][${index}]`);
-    }
-
     getCheckboxIncludeInProForma(forecastItem: string) { 
         return cy.get(`[data-qa=${forecastItem}-forecast-item] input[type="checkbox"]`).first(); 
     }
@@ -169,6 +152,40 @@ class ExpenseForecastPage extends BasePage {
 
     get electricityCardText() { 
         return cy.xpath("//span[@data-qa='electricity.includeInProForma-checked']/following-sibling::span"); 
+    }
+
+    get categoryErrorMessageExists() {
+        return cy.xpath(`//*[.='Expense category already exists']`);
+    }
+
+    get categoryErrorMessageRequired() {
+        return cy.xpath(`//*[.='Category name is required']`);
+    }
+
+    customCategoryDeleteButton(categoryName: string) {
+        let name = categoryName.charAt(0).toLocaleUpperCase() + categoryName.toLocaleLowerCase().slice(1);
+        return cy.xpath(`//*[@data-qa="${name}-forecast-item"]//following::*[@data-testid="DeleteIcon"]`);
+    }
+
+    get editCustomCategoryModalHeader() {
+        return cy.xpath(`//h2[.='Edit Custom Expense Category']`);
+    }
+
+    getExpenseCommentary(forecastItem: string, index = 1) {
+        return cy.xpath(`//*[@data-qa="${forecastItem}-forecast-item"]//following::div[@data-slate-editor][${index}]`);
+    }
+
+    getExpenseCommentaryModified(forecastItem: string) { 
+        return cy.xpath(`//*[@data-qa="${forecastItem}-forecast-item"]//following::*[.='Modified'][2]`); 
+    }
+
+    getExpenseCommentaryRevertToOriginal(forecastItem: string, index = 1) {
+        return cy.xpath(
+            `//*[@data-qa="${forecastItem}-forecast-item"]//following::button[.='Revert to Original'][${index}]`);
+    }
+
+    getExpenseCommentarySaveButton(forecastItem: string, index = 1) {
+        return cy.xpath(`//*[@data-qa="${forecastItem}-forecast-item"]//following::button[.='Save'][${index}]`);
     }
 }
 

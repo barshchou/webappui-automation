@@ -25,5 +25,7 @@ export default {
     },
     otherAdjustmentName: "Other Adjustment",
     otherAdjustmentNewName: "test other adj name",
-    filter
+    filter,
+    sectionToExport: [ Enums.SECTIONS_TO_INCLUDE_IN_EXPORT.salesComparisonApproach ],
+    exportSection: Enums.EXPORT_TITLES.salesComparisonApproach
 };

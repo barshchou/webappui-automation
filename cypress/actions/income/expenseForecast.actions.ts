@@ -306,13 +306,6 @@ class ExpenseForecastActions extends BaseActionsExt<typeof expenseForecastPage> 
         return this;
     }
 
-    verifyForecastCommentary(textToBe: string, forecastItem: BoweryReports.ForecastItem, 
-        index = 1): ExpenseForecastActions {
-        expenseForecastPage.getExpenseCommentary(this.getItemNameForAverage(forecastItem.name), index)
-            .should("contain.text", textToBe);
-        return this;
-    }
-
     editExpenseForecastCommentary(newText: string, forecastItem: BoweryReports.ForecastItem, 
         isWithClear = false, index = 1): ExpenseForecastActions {
         let item = this.getItemNameForAverage(forecastItem.name);
@@ -330,7 +323,7 @@ class ExpenseForecastActions extends BaseActionsExt<typeof expenseForecastPage> 
         index = 1): ExpenseForecastActions {
         let item = this.getItemNameForAverage(forecastItem.name);
         this.activateTextAreaInput((this.Page.getExpenseCommentary(item,  index)));
-        this.Page.getExpenseCommentaryRevertToOriginal(item, index).click();
+        this.Page.getExpenseCommentaryRevertToOriginal(item, index).realClick();
         this.verifyProgressBarNotExist();
         expenseForecastPage.formYesRevertBtn.click();
         expenseForecastPage.getExpenseCommentarySaveButton(item).click();
@@ -349,6 +342,12 @@ class ExpenseForecastActions extends BaseActionsExt<typeof expenseForecastPage> 
         this.Page.formSaveBtn(1).click();
         this.verifyProgressBarNotExist();
         expenseForecastPage.forecastItemCardFull(categoryName).should("exist");
+        return this;
+    }
+
+    verifyCustomCategoryAlreadyExists(exist = true): ExpenseForecastActions {
+        let matcher = exist ? 'exist' : 'not.exist';
+        expenseForecastPage.categoryErrorMessageExists.should(matcher);
         return this;
     }
 
@@ -592,6 +591,11 @@ class ExpenseForecastActions extends BaseActionsExt<typeof expenseForecastPage> 
         return this;
     }
 
+    deleteCustomExpenseCategory(categoryName: string): ExpenseForecastActions {
+        expenseForecastPage.customCategoryDeleteButton(categoryName).click();
+        expenseForecastPage.formConfirmDeleteButton.click();
+        return this;
+    }
 }
 
 export default new ExpenseForecastActions(expenseForecastPage);
