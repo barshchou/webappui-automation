@@ -144,17 +144,47 @@ class FindCompsActions extends BaseActionsExt<typeof findCompsPage> {
         return this;
     }
 
-    selectFilterCompStatusValue(compStatus: BoweryReports.FindComps.CompStatusValues | 
-    BoweryReports.FindComps.CompStatusValues[]): FindCompsActions {
+    selectUnselectFilterCompStatusValue(compStatus: BoweryReports.FindComps.CompStatusValues | 
+    BoweryReports.FindComps.CompStatusValues[], selectStatus = true): FindCompsActions {
         const statuses = Array.isArray(compStatus) ? compStatus : [ compStatus ];
         findCompsPage.compStatusFilter.click();
         statuses.forEach(status => {
-            findCompsPage.filterOptionValue(status).click();
+            findCompsPage.filterOptionValue(status).should('exist').click();
             this.verifySpinnerExist()
                 .verifySpinnerNotExist();
-            findCompsPage.compStatusFilter.children("input").should("contain.value", status);
+            selectStatus === true 
+                ? findCompsPage.compStatusFilter.children("input").should("contain.value", status)
+                : findCompsPage.compStatusFilter.children("input").should("not.contain.value", status);   
         });
         findCompsPage.compStatusFilter.realClick();
+        findCompsPage.filterOptionValue(Enums.COMP_STATUS_VALUES_FROM_STATUS_DROPDOWN.statusesFromStatusDropdown.any)
+            .should('not.exist');
+        return this;
+    }
+
+    /**
+     * Verifies if list of comps includes only comps with selected "Comp Status"
+     * @param status value or array of values in comp's card in the list
+     */
+    verifyCompsFromListByStatus(status: BoweryReports.FindComps.CompStatusValuesFromCompsList |
+    BoweryReports.FindComps.CompStatusValuesFromCompsList[] ): FindCompsActions { 
+        cy.get("comp-plex").shadow().find('[id="root"]').then(shadowBody => {
+            // condition for check, if list of comps contains comps or not
+            if (shadowBody.find(`[data-qa="sales-comp-item"]`).length > 0) {
+                findCompsPage.compFromList.then(comps => {
+                    for (let i = 0; i < comps.length; i++) {
+                        cy.wrap(comps[i]).find('div[aria-label]').invoke('text').then(text => {
+                            // condition for check, if transmitted parameter 'status' is array of statuses or not 
+                            Array.isArray(status)
+                                ? expect(text).to.be.oneOf(status)
+                                : expect(text).to.be.equal(status);
+                        });
+                    }
+                });
+            } else {
+                cy.log(`Comps with ${status} status don't exist on map`);
+            }
+        });   
         return this;
     }
 
