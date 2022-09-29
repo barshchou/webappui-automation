@@ -41,7 +41,7 @@ describe("Generated Commentary is dynamically updated with relevant information 
                 .downloadAndConvertDocxReport(testData.reportCreationData.reportNumber);
         });
 
-        it.only('Check export', () => {
+        it('Check export', () => {
             cy.task("getFilePath", { _reportName: testData.reportCreationData.reportNumber, _docxHtml: "html" })
                 .then(file => {
                     cy.log(<string>file);

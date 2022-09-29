@@ -34,7 +34,7 @@ describe(`Verify the Save button functionality for Intended User sections.`,
 
             cy.stepInfo(`5. Click save button, refresh page and Verify text save`);
             Report._Client.clickSaveButton();
-            // todo: add waitForPatchRequest for report
+            // TODO: https://bowery.atlassian.net/browse/QA-7052
             cy.reload();
             Report._Client.verifyFormCommentTextBoxText(testData.intendedUser,
                 testData.verifyAreaValue);
