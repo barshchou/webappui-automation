@@ -44,14 +44,5 @@ describe(`[QA-6178] Filters functionality`, {
             .selectUnselectFilterCompStatusValue(testData.statusFromDropdownConfirmed, false)
             .selectUnselectFilterCompStatusValue(testData.statusFromDropdownVerified)
             .verifyCompsFromListByStatus(testData.statusVerifiedFromCompsList);
-   
-        // cy.get(`@${Alias.gql.SearchSalesTransactions}`).then( response  => {
-        //     cy.log(response);
-        //     let compsArrayList = response.body.data.searchTransactionsByAddresses;
-
-        // });
-        // Sales._FindComps.selectFilterCompStatusValue(testData.statusAny);
-        
-        //Sales._FindComps.JobSearch.clearAllFiltersViaReset();
     });
 });
