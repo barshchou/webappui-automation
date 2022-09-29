@@ -10,18 +10,30 @@ class ClientActions extends BaseActionsExt<typeof clientPage> {
     }
 
     enterClientName(name: string, index = 0): ClientActions {
-        clientPage.getClientNameField(index).clear().type(name).type("{enter}");
+        clientPage.getClientNameField(index).realClick({ position: "bottom" }).clear().type(name);
+        clientPage.listClientNames.then((elem) => {
+            if (elem.is(":visible") && elem.text() == "No options") {
+                return;
+            }
+            if (elem.is(":visible") && elem.text() != "No options") {
+                cy.wrap(elem).click();
+                return;
+            }
+        });
+
         return this;
     }
     
     enterClientFileNumber(name:string, index = 0): ClientActions {
-        clientPage.getClientFileNumberField(index).clear().type(name).should("have.value", name);
+        clientPage.getClientFileNumberField(index).
+            realClick({ position: "bottom" }).clear().type(name).should("have.value", name);
         clientPage.getClientFileNumberField(index).should("have.value", name);
         return this;
     }
 
     enterNycbApplicationNumber(name:string, index = 0): ClientActions {
-        clientPage.getNYCBApplicationNumber(index).clear().type(name).should("have.value", name);
+        clientPage.getNYCBApplicationNumber(index)
+            .realClick({ position: "bottom" }).clear().type(name).should("have.value", name);
         clientPage.getNYCBApplicationNumber(index).should("have.value", name);
         return this;
     }
@@ -76,8 +88,17 @@ class ClientActions extends BaseActionsExt<typeof clientPage> {
         return this;
     }
 
-    clickAddAdditionalClientBtn(): ClientActions {
-        clientPage.addAdditionalClientBtn.click({ force: true });
+    /**
+     * Note: `index` - is an index of Client to be added. If index = 3 - will not click to
+     * @param index number of client to be added. 
+     * Increments index inside in order to check when max client number is countered
+     */
+    clickAddAdditionalClientBtn(index): ClientActions {
+        if (index + 1 != 4) {
+            this.Page.addAdditionalClientBtn.click();
+        } else {
+            cy.log("No more clients can be added");
+        }
         return this;
     }
 

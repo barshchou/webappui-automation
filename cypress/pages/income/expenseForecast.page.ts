@@ -83,23 +83,6 @@ class ExpenseForecastPage extends BasePage {
             cy.contains('TOTAL OPERATING EXPENSES').parent().parent().find('[data-qa$=historical]').contains(type);
     }
 
-    getExpenseCommentary(forecastItem: string, index = 1) {
-        return cy.xpath(`//*[@data-qa="${forecastItem}-forecast-item"]//following::div[@data-slate-editor][${index}]`);
-    }
-
-    getExpenseCommentarySaveButton(forecastItem: string, index = 1) {
-        return cy.xpath(`//*[@data-qa="${forecastItem}-forecast-item"]//following::button[.='Save'][${index}]`);
-    }
-
-    getExpenseCommentaryModified(forecastItem: string) { 
-        return cy.xpath(`//*[@data-qa="${forecastItem}-forecast-item"]//following::*[.='Modified'][2]`); 
-    }
-
-    getExpenseCommentaryRevertToOriginal(forecastItem: string, index = 1) {
-        return cy.xpath(
-            `//*[@data-qa="${forecastItem}-forecast-item"]//following::button[.='Revert to Original'][${index}]`);
-    }
-
     getCheckboxIncludeInProForma(forecastItem: string) { 
         return cy.get(`[data-qa=${forecastItem}-forecast-item] input[type="checkbox"]`).first(); 
     }
