@@ -4,7 +4,7 @@ import { createReport } from "../../../../actions/base/baseTest.actions";
 import testData from '../../../../fixtures/not_full_reports/report/client/QA-4636.fixture';
 
 describe(`Verify the Modified label functionality for Intended User and Identification of the Client sections`,
-    { tags:[ "@report", "@client" ] }, () => {
+    { tags:[ "@report", "@client", "@bug", "@WEB_6902", "@narrative_comp" ] }, () => {
         beforeEach("Login, create report", () => {
             createReport(testData.reportCreationData);
         });

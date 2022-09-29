@@ -6,7 +6,7 @@ import { createReport } from "../../../../../actions/base/baseTest.actions";
 
 // ToDo: Test fails due to problem with rounding: https://bowery.atlassian.net/browse/QA-6954
 describe("Validation of Market Values Per SF for ACAS reports", 
-    { tags:[ "@income", "@commercial", "@cap_rate_conclusion" ] }, () => {
+    { tags:[ "@income", "@commercial", "@cap_rate_conclusion", "@bug", "@QA-6954", "@WEB-7050" ] }, () => {
         beforeEach("Login, create report", () => {
             cy.stepInfo(`1. Create report`);
             createReport(testData.reportCreationData);

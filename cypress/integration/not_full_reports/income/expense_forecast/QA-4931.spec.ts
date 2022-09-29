@@ -6,7 +6,7 @@ import { DataCollections, Income } from "../../../../actions";
 
 // TODO: Test fails due to https://bowery.atlassian.net/browse/WEB-7012 
 describe("Historical expense Repairs & Maintenance Per Unit is correctly calculated and displayed", 
-    { tags:[ "@expense_forecast", "@income", "@snapshot_tests" ] }, () => {
+    { tags:[ "@expense_forecast", "@income", "@snapshot_tests", "@bug", "@WEB-7110", "@WEB-7012" ] }, () => {
     
         beforeEach("Login, create report", () => {
             createReport(testData.reportCreationData);

@@ -6,7 +6,7 @@ import testData from '../../../../fixtures/not_full_reports/report/client/QA-464
 // TODO: Recheck test task [QA-6999]. Test fail due to bug: https://bowery.atlassian.net/browse/WEB-6902
 describe(`Verify the "Linked" chips dropdown in the new narrative component for As Is and As Stabilized 
         report for Intended User and Identification of the Client sections`,
-{ tags:[ "@report", "@client", "@check_export" ] }, () => {
+{ tags:[ "@report", "@client", "@check_export", "QA-6999", "@bug", "@WEB-6902" ] }, () => {
 
     it("[QA-4640]", () => {
         cy.stepInfo(`Login, create report`);

@@ -6,7 +6,7 @@ import testData from "../../../../../fixtures/not_full_reports/income/commercial
 describe(`Verify the suggested text dropdown in the new narrative component added through 
 "=" for the 'Unchanged Renovation' 
   option in the Generated Commentary on the Stabilized Rent Roll page.`, 
-{ tags: [ "@income", "@commercial", "@stabilized_rent_roll" ] }, () => {
+{ tags: [ "@income", "@commercial", "@stabilized_rent_roll", "@bug", "@WEB-6902", "@narrative_comp" ] }, () => {
       
     beforeEach("Login, create report", () => {
         cy.stepInfo(`Preconditions: The mixed report is created and several commercial units are added.`);

@@ -5,14 +5,14 @@ import enums from '../../../../enums/enums';
 import { BoweryReports } from "../../../../types/boweryReports.type";
 
 export const reportCreationFixture = () => {
-    return ReportDataCreator.getReportData("4718", {
+    return ReportDataCreator.getReportData("4718_1", {
         templateValue: Enums.TEMPLATE_TYPE.notFreddieMac,
         incomeValue: Enums.INCOME_TYPE.both,
         conclusionValue: Enums.VALUE_CONCLUSION_TYPE.AS_IS
     });
 };
 
-const buildingName = 'Test Building Name QA-4718';
+const buildingName = 'Test Building Name QA-4718_1';
 
 const _chipsOptions: BoweryReports.ChipsCreationOptions = {
     buildingName
@@ -28,9 +28,7 @@ export default {
     chips: chipsDataCreator.getChipsData(_chipsOptions, enums.VALUE_CONCLUSION_TYPE.AS_STABILIZED),
     buildingName,
     propertyRightsAppraisedTitle: Enums.PAGES_TEXTBOX_NAMES.propertyRightsAppraised,
-    definitionOfMarketValueTitle: Enums.PAGES_TEXTBOX_NAMES.definitionOfMarketValue,
     propertyRightsSection: Enums.EXPORT_TITLES.propertyRightsAppraised,
-    definitionOfMarketValueSection: Enums.EXPORT_TITLES.definitionOfMarketValue,
     sectionToExport: [ Enums.SECTIONS_TO_INCLUDE_IN_EXPORT.introduction ],
     chipNames
 };

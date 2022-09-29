@@ -5,7 +5,7 @@ import testData from
     "../../../../../fixtures/not_full_reports/income/commercial/stabilized_rent_roll/QA-4589-92_94.fixture";
 
 describe(`Verify the commentary functionality`, 
-    { tags:[ "@income", "@commercial", "@stabilized_rent_roll" ] }, () => {
+    { tags:[ "@income", "@commercial", "@stabilized_rent_roll", "@update_test" ] }, () => {
 
         before("Login, create report", () => {
             createReport(testData.reportCreationData);

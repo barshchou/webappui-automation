@@ -394,7 +394,8 @@ class CommercialRentCompsActions extends BaseActionsExt<typeof rentCompsPage> {
 
     verifyCommercialUnitDetailsUnitMeasureRadioChecked(measureValue: BoweryReports.UnitsOfMeasure):
     CommercialRentCompsActions {
-        rentCompsPage.getUnitMeasureRadioByValue(measureValue).parent("[data-qa=checked]").should("exist");
+        rentCompsPage.getUnitMeasureRadioByValue(measureValue)
+            .should("exist");
         return this;
     }
 

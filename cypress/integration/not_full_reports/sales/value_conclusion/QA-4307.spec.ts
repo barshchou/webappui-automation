@@ -6,7 +6,7 @@ import { createReport } from "../../../../actions/base/baseTest.actions";
 
 describe(`As Is Market Value -> Time Period date is pulled from Report ->
     Key Info -> Date of validation (As is)`, 
-{ tags: [ "@sales", "@value_conclusion" ] }, () => {
+{ tags: [ "@sales", "@value_conclusion", "@bug", "@WEB-7111" ] }, () => {
     beforeEach("Login, create report", () => {
         createReport(testData.reportCreationData);
     });

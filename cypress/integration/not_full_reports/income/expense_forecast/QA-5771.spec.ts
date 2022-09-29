@@ -5,7 +5,7 @@ import { _NavigationSection } from "../../../../actions/base";
 import tableExpenseHistoryCellNames from "../../../../enums/expense/expenseHistoryTableRows.enum";
 
 describe("[QA-5771] Historical expense Payroll & Benefits Per SF is correctly calculated and displayed",
-    { tags: [ "@snapshot_tests", "@income", "@expense_forecast" ] }, () => {
+    { tags: [ "@snapshot_tests", "@income", "@expense_forecast", "@bug", "@WEB-7110" ] }, () => {
 
         beforeEach("Login, create report", () => {
             createReport(testData.reportCreationData);
