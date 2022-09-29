@@ -170,6 +170,23 @@ class ExpenseForecastPage extends BasePage {
     get editCustomCategoryModalHeader() {
         return cy.xpath(`//h2[.='Edit Custom Expense Category']`);
     }
+
+    getExpenseCommentary(forecastItem: string, index = 1) {
+        return cy.xpath(`//*[@data-qa="${forecastItem}-forecast-item"]//following::div[@data-slate-editor][${index}]`);
+    }
+
+    getExpenseCommentaryModified(forecastItem: string) { 
+        return cy.xpath(`//*[@data-qa="${forecastItem}-forecast-item"]//following::*[.='Modified'][2]`); 
+    }
+
+    getExpenseCommentaryRevertToOriginal(forecastItem: string, index = 1) {
+        return cy.xpath(
+            `//*[@data-qa="${forecastItem}-forecast-item"]//following::button[.='Revert to Original'][${index}]`);
+    }
+
+    getExpenseCommentarySaveButton(forecastItem: string, index = 1) {
+        return cy.xpath(`//*[@data-qa="${forecastItem}-forecast-item"]//following::button[.='Save'][${index}]`);
+    }
 }
 
 export default new ExpenseForecastPage();
