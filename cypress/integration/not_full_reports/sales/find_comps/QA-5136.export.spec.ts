@@ -22,7 +22,7 @@ describe(`Check the order of comps in the export when 'custom' dropdown is chose
             Sales._FindComps.zoomInAndResetFilters();
 
             Sales._FindComps.resetAllFilters()
-                .selectFilterCompStatusValue(testData.statusesToCheck)
+                .selectUnselectFilterCompStatusValue(testData.statusesToCheck)
                 .verifyProgressBarNotExist();
 
             cy.stepInfo(`2. User selects n-first comps from map`);

@@ -21,6 +21,8 @@ export default {
     compsToAdd: [ 0, 1 ],
     aliasCompsBefore,
     memoTestDataFile,
-    statusesToCheck: [ Enums.COMP_STATUS_VALUES.confirmed, Enums.COMP_STATUS_VALUES.verified ],
+    statusesToCheck: [ 
+        Enums.COMP_STATUS_VALUES_FROM_STATUS_DROPDOWN.statusesFromStatusDropdown.confirmed, 
+        Enums.COMP_STATUS_VALUES_FROM_STATUS_DROPDOWN.statusesFromStatusDropdown.verified ],
     sectionToExport: [ Enums.SECTIONS_TO_INCLUDE_IN_EXPORT.salesComparisonApproach ]
 };

@@ -40,9 +40,10 @@ class FindCompsPage extends BasePage {
 
     get csvInput() { return cy.get('input[accept=".csv"]'); }
 
+    get compFromList() { return cy.get('[data-qa="sales-comp-item"]'); }
+
     getSelectCompFromMapButtonByAddress(address) {
-        return cy.get('[data-qa="sales-comp-item"]')
-            .contains(`${address}`).parent().parent()
+        return this.compFromList.contains(`${address}`).parent().parent()
             .find('[data-qa="sales-comp-item-add-btn"]');
     }
 
@@ -51,8 +52,7 @@ class FindCompsPage extends BasePage {
      * @returns List of all rendered sales comps in search list
      */
     getSelectCompFromMapButton() {
-        return cy.get('[data-qa="sales-comp-item"]')
-            .find('[data-qa="sales-comp-item-add-btn"]');
+        return this.compFromList.find('[data-qa="sales-comp-item-add-btn"]');
     }
 
     /**
