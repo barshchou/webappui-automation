@@ -3,7 +3,7 @@ import { navigateToCompplex } from "../../../../actions/base/baseTest.actions";
 import testData from "../../../../fixtures/comp_plex/sales/find_comps/QA-6178.fixture";
 
 describe(`[QA-6178] Filters functionality`, {
-    tags: [ "@comp_plex_standalone1" ] }, () => {
+    tags: [ "@comp_plex_standalone" ] }, () => {
     before(() => {
         navigateToCompplex();
     });
