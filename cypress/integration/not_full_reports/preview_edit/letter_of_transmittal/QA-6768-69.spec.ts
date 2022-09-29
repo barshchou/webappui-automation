@@ -18,7 +18,7 @@ describe('Verify the display of the multiple clients on the Letter of Transmitta
                 Report._Client.enterClientName(value.clientName, index)
                     .enterClientFileNumber(value.clientFileNumber, index)
                     .enterNycbApplicationNumber(value.nycbNumber, index)
-                    .clickAddAdditionalClientBtn();
+                    .clickAddAdditionalClientBtn(index);
             });
 
             cy.stepInfo("4. Navigate to Report > Client page");
@@ -46,7 +46,7 @@ describe('Verify the display of the multiple clients on the Letter of Transmitta
                 Report._Client.enterClientName(value.clientName, index)
                     .enterClientFileNumber(value.clientFileNumber, index)
                     .enterNycbApplicationNumber(value.nycbNumber, index)
-                    .clickAddAdditionalClientBtn();
+                    .clickAddAdditionalClientBtn(index);
             });
 
             cy.stepInfo("4. Navigate to Report > Client page");

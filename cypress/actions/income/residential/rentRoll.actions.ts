@@ -8,6 +8,7 @@ import {
 import ResidentialRentRollSharedActions from "../../shared_components/residentialRentRoll.shared.actions";
 import { BoweryReports } from "../../../types/boweryReports.type";
 import { isProdEnv } from "../../../integration/checkIsProd.utils";
+import { _NavigationSection } from "../../base";
 
 class InPlaceRentRollActions extends ResidentialRentRollSharedActions<typeof rentRollPage> {
 
@@ -39,8 +40,8 @@ class InPlaceRentRollActions extends ResidentialRentRollSharedActions<typeof ren
     }
 
     goToPropSummaryWithSaveLeavingFirst(): InPlaceRentRollActions {
-        this.clickGoToPropSummaryButton()
-            .clickYesButton();
+        this.clickGoToPropSummaryButton();
+        _NavigationSection.submitSaveChangesModal();
         return this;
     }
 

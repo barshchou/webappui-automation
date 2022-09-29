@@ -35,7 +35,7 @@ conditionalDescribe("Newly created client is displayed for a Client 2, Client 3 
             cy.stepInfo("5. Proceed back to the Report > Client page and Click on the 'Add Additional Client' button");
             cy.go("back");
             for (let i = 0; i < 3; i++) {
-                Report._Client.clickAddAdditionalClientBtn();
+                Report._Client.clickAddAdditionalClientBtn(i);
             }
 
             cy.stepInfo(`6. Verify in the Client X field enter the name of the newly created client and select it`);

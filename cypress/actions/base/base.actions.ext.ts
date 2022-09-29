@@ -159,17 +159,7 @@ export default class BaseActionsExt<T extends BasePage> extends BaseActions {
         this.Page.successModal.should('not.be.visible');
         return this;
     }
-
-    revertSectionToOriginal(sectionName: string): this {
-        this.Page.formCommentTextBox(sectionName).scrollIntoView().realClick();
-        this.Page.formCommentTextBox(sectionName).type(`{ESC}`);
-        this.Page.formCommentTextBox(sectionName).focus();
-        this.Page.formRevertToOriginalBtnBySectionName(sectionName).click({ force: true });
-        this.clickFormYesRevertButton();
-        this.saveCmsSettings();
-        return this;
-    }
-
+    
     revertToOriginalCommentarySectionByName(name: string): this {
         this.Page.formCommentTextBox(name).realClick();
         this.clickRevertToOriginalButtonBySection(name)
@@ -178,7 +168,7 @@ export default class BaseActionsExt<T extends BasePage> extends BaseActions {
     }
 
     clickFormYesRevertButton(): this {
-        this.Page.formYesRevertBtn.click();
+        this.Page.formYesRevertBtn.realClick();
         return this;
     }
 

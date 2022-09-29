@@ -59,7 +59,7 @@ conditionalDescribe("[QA-4727] Verify possibility to edit text",
                 loginAction();
                 _NavigationSection.navigateToContentManagementSystem();
                 _CmsBaseActions.openLetterOfTransmittalPage()
-                    .revertSectionToOriginal(testData.sectionName);
+                    .revertToOriginalCommentarySectionByName(testData.sectionName);
             }
 
             cy.stepInfo('Remove feature flags');

@@ -50,7 +50,7 @@ conditionalDescribe("[QA-6404] Verify possibility to edit text",
                 loginAction();
                 _NavigationSection.navigateToContentManagementSystem();
                 _CmsBaseActions.openIncomeCapitalizationApproachPage()
-                    .revertSectionToOriginal(testData.sectionName);
+                    .revertToOriginalCommentarySectionByName(testData.sectionName);
             }
 
             cy.stepInfo('Remove feature flags');
