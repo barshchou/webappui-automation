@@ -6,8 +6,9 @@ import Enums from '../../../../enums/enums';
 import { normalizeText } from '../../../../../utils/string.utils';
 
 // TODO: Export fails due to https://bowery.atlassian.net/browse/WEB-6739
+// TODO: QA-7044-45 Update test
 describe("Generated Commentary is dynamically updated with relevant information (Freddie Mac report)", 
-    { tags:[ "@report", "@appraiser", "@check_export" ] }, () => {
+    { tags:[ "@report", "@appraiser", "@check_export", "@update_test" ] }, () => {
 
         it("[QA-6126-27]", () => {
             cy.stepInfo("Precondition: Create report");

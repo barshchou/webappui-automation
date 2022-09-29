@@ -3,8 +3,9 @@ import { _NavigationSection } from "../../../../actions/base";
 import { createReport } from "../../../../actions/base/baseTest.actions";
 import testData from '../../../../fixtures/not_full_reports/report/client/QA-4630.fixture';
 
+// TODO: QA-7033 Update test
 describe("Verify the functionality of the NYCB Application No. (optional) field",
-    { tags:[ "@report", "@client" ] }, () => {
+    { tags:[ "@report", "@client", "@update_test" ] }, () => {
         beforeEach("Login, create report", () => {
             createReport(testData.reportCreationData);
         });
