@@ -98,7 +98,8 @@ import chipsEnum from "./chips.enum";
 import expenseHistoryDataProviderEnum from "./expense/expenseHistoryDataProvider.enum";
 import expenseItemBasisOfComparisonEnum from "./expense/expenseItemBasisOfComparison.enum";
 import exportTitlesEnum from "./exportTitles.enum";
-import compStatusValuesEnum from "./findComps/compStatusValues.enum";
+import statusesFromStatusDropdown from "./findComps/compStatusValues.enum";
+import statusesFromCompsList from "./findComps/compStatusValues.enum";
 import sectionsToIncludeInExport from "./sectionsToIncludeInExport.enum";
 import coverPageLocatorNamesEnum from "./coverPageLocatorNames.enum";
 import marketResearchTypesEnum from "./salesforceJobs/marketResearchTypes.enum";
@@ -214,7 +215,8 @@ export default {
     EXPENSE_DATA_PROVIDER: expenseHistoryDataProviderEnum,
     EXPENSE_ITEM_BASIS_OF_COMPARISON: expenseItemBasisOfComparisonEnum,
     EXPORT_TITLES: exportTitlesEnum,
-    COMP_STATUS_VALUES: compStatusValuesEnum,
+    COMP_STATUS_VALUES_FROM_STATUS_DROPDOWN: statusesFromStatusDropdown,
+    COMP_STATUS_VALUES_FROM_COMPS_LIST: statusesFromCompsList,
     SECTIONS_TO_INCLUDE_IN_EXPORT: sectionsToIncludeInExport,
     COVER_PAGE_LOCATOR_NAMES: coverPageLocatorNamesEnum,
     MARKET_RESEARCH_TYPES: marketResearchTypesEnum,

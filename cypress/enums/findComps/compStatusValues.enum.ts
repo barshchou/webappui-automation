@@ -1,8 +1,19 @@
-const statuses = {
+const statusesFromStatusDropdown = {
+    doNotUse: "doNotUse",
     draft: "draft",
     confirmed: "confirmed",
     verified: "verified",
     any: "any"
 } as const;
 
-export default Object.freeze(statuses);
+const statusesFromCompsList = {
+    doNotUse: "Do Not Use",
+    draft: "Draft",
+    confirmed: "Confirmed",
+    verified: "Verified"
+} as const;
+
+export default { 
+    statusesFromStatusDropdown, 
+    statusesFromCompsList
+};
