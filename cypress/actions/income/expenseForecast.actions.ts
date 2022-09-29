@@ -306,13 +306,6 @@ class ExpenseForecastActions extends BaseActionsExt<typeof expenseForecastPage> 
         return this;
     }
 
-    verifyForecastCommentary(textToBe: string, forecastItem: BoweryReports.ForecastItem, 
-        index = 1): ExpenseForecastActions {
-        expenseForecastPage.getExpenseCommentary(this.getItemNameForAverage(forecastItem.name), index)
-            .should("contain.text", textToBe);
-        return this;
-    }
-
     editExpenseForecastCommentary(newText: string, forecastItem: BoweryReports.ForecastItem, 
         isWithClear = false, index = 1): ExpenseForecastActions {
         let item = this.getItemNameForAverage(forecastItem.name);
