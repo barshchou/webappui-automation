@@ -7,7 +7,7 @@ import routesUtils from "../../../../utils/routes.utils";
 import subjectPropertyDataRouts from "../../../../utils/subject_property_data_routs.utils";
 
 describe(`Verify the Save and Save & Continue button functionality on the Report > Key Info page:`,
-    { tags:[ "@report", "@key_info", "@fix" ] }, () => {
+    { tags:[ "@report", "@key_info" ] }, () => {
         beforeEach("Login, create report", () => {
             createReport(testData.reportCreationData);
         });

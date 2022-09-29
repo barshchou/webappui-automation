@@ -6,7 +6,7 @@ import { DataCollections, Income, Property } from "../../../../../actions";
 import Enums from "../../../../../enums/enums";
 
 describe("Verify the Import manager functionality", 
-    { tags:[ "@income", "@residential", "@in_place_rent_roll", "@fix" ] }, () => {
+    { tags:[ "@income", "@residential", "@in_place_rent_roll" ] }, () => {
         
         beforeEach("Login, create report", () => {
             createReport(testData.reportCreationData);
