@@ -5,8 +5,9 @@ import { Income, DataCollections } from "../../../../actions";
 import Enums from "../../../../enums/enums";
 import { toCamelCase, toLowerCaseFirstLetterInString } from "../../../../../utils/string.utils";
 
+// TODO: This spec fails due to the following bug: https://bowery.atlassian.net/browse/WEB-7135
 describe("Verify that the user can display historical expense values on a PSF basis on the Expense History page",
-    { tags: [ "@income", "@expense_history", "@require_investigation" ] }, () => {
+    { tags: [ "@income", "@expense_history", "@bug" ] }, () => {
     
         beforeEach("Create report, enter gba value", () => {
             createReport(testData.reportCreationData);
