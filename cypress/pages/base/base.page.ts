@@ -106,4 +106,12 @@ export default class BasePage {
     }
     
     getDefaultCommentChip(chipName: string) { return cy.get(`[aria-label='${chipName}']`); }
+
+    get formConfirmDeleteButton() {
+        return cy.xpath(`//*[.='Confirm']`);
+    }
+
+    get formConfirmCloseButton() {
+        return cy.get(`[data-testid="CloseIcon"]`);
+    }
 }

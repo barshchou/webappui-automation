@@ -306,6 +306,30 @@ class ExpenseForecastActions extends BaseActionsExt<typeof expenseForecastPage> 
         return this;
     }
 
+    editExpenseForecastCommentary(newText: string, forecastItem: BoweryReports.ForecastItem, 
+        isWithClear = false, index = 1): ExpenseForecastActions {
+        let item = this.getItemNameForAverage(forecastItem.name);
+        this.activateTextAreaInput((this.Page.getExpenseCommentary(item,  index)));
+        if (isWithClear) {
+            expenseForecastPage.getExpenseCommentary(item, index).clear();
+        }
+        expenseForecastPage.getExpenseCommentary(item, index).type(newText);
+        this.inactivateTextAreaInput();
+        expenseForecastPage.getExpenseCommentaryModified(item).should("exist");
+        return this;
+    }
+
+    revertToOriginalExpenseForecastCommentary(forecastItem: BoweryReports.ForecastItem, 
+        index = 1): ExpenseForecastActions {
+        let item = this.getItemNameForAverage(forecastItem.name);
+        this.activateTextAreaInput((this.Page.getExpenseCommentary(item,  index)));
+        this.Page.getExpenseCommentaryRevertToOriginal(item, index).realClick();
+        this.verifyProgressBarNotExist();
+        expenseForecastPage.formYesRevertBtn.click();
+        expenseForecastPage.getExpenseCommentarySaveButton(item).click();
+        return this;
+    }
+
     switchExpenseForecastBasis(forecastItem: ForecastItem, customCategory = false, index = 0): ExpenseForecastActions {
         let expenseName = customCategory ? `customExpenses[${index}]` : forecastItem.name;
         expenseForecastPage.getElementBasisToSwitch(expenseName, forecastItem.basis).click();
@@ -318,6 +342,12 @@ class ExpenseForecastActions extends BaseActionsExt<typeof expenseForecastPage> 
         this.Page.formSaveBtn(1).click();
         this.verifyProgressBarNotExist();
         expenseForecastPage.forecastItemCardFull(categoryName).should("exist");
+        return this;
+    }
+
+    verifyCustomCategoryAlreadyExists(exist = true): ExpenseForecastActions {
+        let matcher = exist ? 'exist' : 'not.exist';
+        expenseForecastPage.categoryErrorMessageExists.should(matcher);
         return this;
     }
 
@@ -561,6 +591,11 @@ class ExpenseForecastActions extends BaseActionsExt<typeof expenseForecastPage> 
         return this;
     }
 
+    deleteCustomExpenseCategory(categoryName: string): ExpenseForecastActions {
+        expenseForecastPage.customCategoryDeleteButton(categoryName).click();
+        expenseForecastPage.formConfirmDeleteButton.click();
+        return this;
+    }
 }
 
 export default new ExpenseForecastActions(expenseForecastPage);
