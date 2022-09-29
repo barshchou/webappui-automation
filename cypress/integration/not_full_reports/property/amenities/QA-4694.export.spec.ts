@@ -41,7 +41,6 @@ describe("Verify the fields of the Amenities page", {
             .Page.getDoormanRadio(testData.doormanRadio).click().should("be.checked");
 
         cy.stepInfo("7. Export report");
-        cy.pause();
         _NavigationSection.openReviewAndExport();
         ReviewExport.generateDocxReport().waitForReportGenerated()
             .downloadAndConvertDocxReport(testData.reportCreationData.reportNumber);
