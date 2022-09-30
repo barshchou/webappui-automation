@@ -5,7 +5,7 @@ import { Income, Sales, DataCollections } from "../../../../actions";
 
 // ToDo: Test fails due to problem with rounding: https://bowery.atlassian.net/browse/QA-6954
 describe("Adjusted Price per Residential Unit in Sales Adjustment Grid is calculated with correct formula", 
-    { tags: [ "@adjust_comps", "@sales" ] }, () => {
+    { tags: [ "@adjust_comps", "@sales", "@QA-6954", "@bug", "@WEB-7050" ] }, () => {
 
         beforeEach("Login, create report", () => {
             cy.stepInfo(`1. Create report`);

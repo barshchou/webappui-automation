@@ -5,7 +5,7 @@ import { Sales, ReviewExport } from "../../../../actions";
 
 // ToDo: Test fails due to problem with rounding: https://bowery.atlassian.net/browse/QA-6954
 describe("Check custom Utilities adjustment", 
-    { tags:[ "@sales", "@adjust_comps", "@check_export" ] }, () => {
+    { tags:[ "@sales", "@adjust_comps", "@check_export", "@QA-6954", "@bug", "@WEB-7050" ] }, () => {
         it("Verify custom utilities adjustments on UI and prepare report for export", () => {
             createReport(testData.reportCreationData);
 

@@ -5,7 +5,7 @@ import testData from '../../../../fixtures/not_full_reports/report/client/QA-463
 
 describe(`Verify the 'Changes will be lost' modal functionality for Intended User
         and Identification of the Client sections`,
-{ tags: [ "@report", "@client" ] }, () => {
+{ tags: [ "@report", "@client", "@bug", "@WEB-6902", "@narrative_comp" ] }, () => {
     beforeEach("Login, create report", () => {
         createReport(testData.reportCreationData);
     });

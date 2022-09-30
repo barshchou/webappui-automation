@@ -8,7 +8,7 @@ const reportFixtures = [
             Enums.MARKET_RESEARCH_TYPES.withFullMarketAndSubmarket, {}, true),
         marketAnalysisUses: Enums.MARKET_ANALYSIS_USES.multifamily,
         market: "NY-New York",
-        submarket: "NY-South Shore Brooklyn"
+        submarket: "NY-Prospect Park"
     },
     {
         specName: "[QA-4836]",
@@ -16,7 +16,7 @@ const reportFixtures = [
             Enums.MARKET_RESEARCH_TYPES.withFullMarketAndSubmarket, {}, true),
         marketAnalysisUses: Enums.MARKET_ANALYSIS_USES.retail,
         market: "NY-New York",
-        submarket: "NY-South Brooklyn"
+        submarket: "NY-North Brooklyn"
     },
     {
         specName: "[QA-4837]",
@@ -24,7 +24,7 @@ const reportFixtures = [
             Enums.MARKET_RESEARCH_TYPES.withFullMarketAndSubmarket, {}, true),
         marketAnalysisUses: Enums.MARKET_ANALYSIS_USES.office,
         market: "NY-New York",
-        submarket: "NY-South Brooklyn"
+        submarket: "NY-North Brooklyn"
     },
     {
         specName: "[QA-4838-39]",
@@ -32,7 +32,7 @@ const reportFixtures = [
             Enums.MARKET_RESEARCH_TYPES.withFullMarketAndSubmarket, {}, true),
         marketAnalysisUses: Enums.MARKET_ANALYSIS_USES.industrial,
         market: "NY-New York",
-        submarket: "NY-South Brooklyn"
+        submarket: "NY-North Brooklyn"
     },
     {
         specName: "[QA-4840]",

@@ -5,7 +5,7 @@ import { Income } from "../../../../actions";
 import { createReport } from "../../../../actions/base/baseTest.actions";
 import Enums from "../../../../enums/enums";
 
-describe(`Verify that Generated Commentary are updated on the Expense Forecast page`,
+describe.skip(`Verify that Generated Commentary are updated on the Expense Forecast page`,
     { tags: [ "@income", "@expense_forecast" ] }, () => {
 
         before("Login, create report", () => {

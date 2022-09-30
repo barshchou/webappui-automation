@@ -5,7 +5,7 @@ import { createReport } from "../../../../actions/base/baseTest.actions";
 import testData from "../../../../fixtures/not_full_reports/property/commercial_units/QA-4549-54.fixture";
 
 describe(`[QA-4552][QA-4553][QA-4554] Verify the "Linked" chips dropdown in the new narrative component`, 
-    { tags: [ "@property", "@commercial_units", "@check_export" ] }, () => {
+    { tags: [ "@property", "@commercial_units", "@check_export", "@update_test" ] }, () => {
 
         //TODO update test after test-cases updates QA-6543
         it("[QA-4552] As Is", () => {

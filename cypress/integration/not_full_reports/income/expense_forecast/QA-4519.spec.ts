@@ -6,7 +6,7 @@ import tableExpenseHistoryCellNames from "../../../../enums/expense/expenseHisto
 
 // TODO: Test fails due to https://bowery.atlassian.net/browse/WEB-7012 
 describe("Historical expense Insurance Per SF is correctly calculated and displayed",
-    { tags:[ "@snapshot_tests", "@income", "@expense_forecast" ] }, () => {
+    { tags:[ "@snapshot_tests", "@income", "@expense_forecast", "@bug", "@WEB-7012", "@WEB-7110" ] }, () => {
 
         beforeEach("Login, create report", () => {
             createReport(testData.reportCreationData);

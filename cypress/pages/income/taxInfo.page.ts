@@ -148,12 +148,14 @@ class TaxInfoPage extends BasePage {
         return cy.get(`[data-qa='Current-${name}-value-cell']`).eq(rowNumber); 
     }
 
+    // TODO: QA-7019
     get addAdditionalTaxRate() {
         return cy.xpath("//button/span[contains(text(), 'Add Additional Tax Rate')]");
     }
 
+    // TODO: QA-7019
     get addSpecialAssessment() {
-        return cy.xpath("//button/span[contains(text(), 'Add Special Assessment')]");
+        return cy.xpath("//button/span[contains(text(), 'ADD SPECIAL ASSESSMENT')]");
     }
 
     get taxableAssessedValueProvidedInput() {

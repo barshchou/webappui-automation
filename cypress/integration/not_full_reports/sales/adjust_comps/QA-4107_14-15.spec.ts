@@ -4,7 +4,7 @@ import { _NavigationSection as NavigationSection } from "../../../../actions/bas
 import { createReport } from "../../../../actions/base/baseTest.actions";
 
 describe("Adjusted Price per Residential Unit in Sales Adjustment Grid is calculated with correct formula", 
-    { tags: [ "@adjust_comps", "@sales" ] }, () => {
+    { tags: [ "@adjust_comps", "@sales", "@bug", "@QA-6954", "@WEB-7050" ] }, () => {
 
         it("[QA-4107]", () => {
             cy.stepInfo("1. Login, create report");
