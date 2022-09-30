@@ -144,6 +144,15 @@ class FindCompsActions extends BaseActionsExt<typeof findCompsPage> {
         return this;
     }
 
+    closeCompStatusDropdown(): FindCompsActions {
+        findCompsPage.filterOptionValue(Enums.COMP_STATUS_VALUES_FROM_STATUS_DROPDOWN.statusesFromStatusDropdown.any)
+            .should('exist');
+        findCompsPage.compStatusFilter.realClick();
+        findCompsPage.filterOptionValue(Enums.COMP_STATUS_VALUES_FROM_STATUS_DROPDOWN.statusesFromStatusDropdown.any)
+            .should('not.exist');
+        return this;
+    }
+
     selectUnselectFilterCompStatusValue(compStatus: BoweryReports.FindComps.CompStatusValues | 
     BoweryReports.FindComps.CompStatusValues[], selectStatus = true): FindCompsActions {
         const statuses = Array.isArray(compStatus) ? compStatus : [ compStatus ];
@@ -156,9 +165,7 @@ class FindCompsActions extends BaseActionsExt<typeof findCompsPage> {
                 ? findCompsPage.compStatusFilter.children("input").should("contain.value", status)
                 : findCompsPage.compStatusFilter.children("input").should("not.contain.value", status);   
         });
-        findCompsPage.compStatusFilter.realClick();
-        findCompsPage.filterOptionValue(Enums.COMP_STATUS_VALUES_FROM_STATUS_DROPDOWN.statusesFromStatusDropdown.any)
-            .should('not.exist');
+        this.closeCompStatusDropdown();
         return this;
     }
 

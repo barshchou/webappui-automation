@@ -25,8 +25,7 @@ describe(`[QA-6178] Filters functionality`, {
         testData.allStatusesFromDropdownExceptAny.forEach(status => {
             Sales._FindComps.Page.filterOptionValue(status).should("not.be.enabled");
         });
-        Sales._FindComps.Page.compStatusFilter.should("exist")
-            .realClick();
+        Sales._FindComps.closeCompStatusDropdown();
 
         cy.stepInfo(`3. Check that map shows the results based on the options chosen`);
         Sales._FindComps.verifyCompsFromListByStatus(testData.allStatusesFromCompsList);
