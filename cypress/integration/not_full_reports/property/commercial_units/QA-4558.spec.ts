@@ -4,7 +4,7 @@ import { _NavigationSection } from "../../../../actions/base";
 import { DataCollections, Income, Property } from "../../../../actions";
 
 describe("Verify the functionality of the Use* radio button", 
-    { tags:[ "@property", "@commercial_units", "@performance_issues", "@bug", "@save_changes_modal" ] }, () => {
+    { tags:[ "@property", "@commercial_units", "@performance_issues", "@bug", "@WEB-7133" ] }, () => {
 
         beforeEach("Login, create report", () => {
             createReport(testData.reportCreationData);
