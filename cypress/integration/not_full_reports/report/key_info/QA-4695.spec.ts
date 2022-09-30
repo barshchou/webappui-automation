@@ -3,8 +3,9 @@ import { createReport } from "../../../../actions/base/baseTest.actions";
 import testData from '../../../../fixtures/not_full_reports/report/key_info/QA-4695.fixture';
 import Enums from "../../../../enums/enums";
 
+// TODO: QA-7037 Update test
 describe("Verify the Save button functionality on the Report > Client page",
-    { tags:[ "@report", "@key_info" ] }, () => {
+    { tags:[ "@report", "@key_info", "@update_test" ] }, () => {
         beforeEach("Login, create report", () => {
             createReport(testData.reportCreationData);
         });

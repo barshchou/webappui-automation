@@ -5,8 +5,9 @@ import { _NavigationSection } from "../../../../actions/base";
 import Enums from '../../../../enums/enums';
 import { conditionalDescribe } from '../../../checkIsProd.utils';
 
+// TODO: QA-7050 Update test
 conditionalDescribe("Newly created client is displayed for a Client 2, Client 3 and Client 4 fields", 
-    { tags: [ "@report", "@client" ] }, () => {
+    { tags: [ "@report", "@client", "@update_test" ] }, () => {
         beforeEach("Restore state. Create report", () => {
             loginAction();
             cy.stepInfo(`Clean up state before tests run. Delete existing user.`);

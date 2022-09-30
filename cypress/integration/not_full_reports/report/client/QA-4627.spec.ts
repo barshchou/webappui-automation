@@ -7,8 +7,9 @@ import Enums from '../../../../enums/enums';
 import testData from '../../../../fixtures/not_full_reports/report/client/QA-4627.fixture';
 import { conditionalDescribe } from "../../../checkIsProd.utils";
 
+// TODO: QA-7035 Update test
 conditionalDescribe("Verify the functionality of the Client field.", 
-    { tags:[ "@report", "@client", "@bug", "@WEB-7106" ] }, () => {
+    { tags:[ "@report", "@client", "@bug", "@WEB-7106", "@update_test" ] }, () => {
         beforeEach("Restore state. Create report", () => {
             loginAction();
             cy.stepInfo(`Clean up state before tests run. Delete existing user.`);

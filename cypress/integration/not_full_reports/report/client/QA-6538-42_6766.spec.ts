@@ -3,8 +3,9 @@ import testData from "../../../../fixtures/not_full_reports/report/client/QA-653
 import { createReport } from "../../../../actions/base/baseTest.actions";
 import { _NavigationSection } from "../../../../actions/base";
 
+// TODO: QA-7046-49_51 Update test
 describe("Verify the functionality of the Add Additional Client", 
-    { tags: [ "@report", "@client" ] }, () => {
+    { tags: [ "@report", "@client", "@update_test" ] }, () => {
         beforeEach("Login, create report", () => {
             createReport(testData.reportCreationData);
 

@@ -6,8 +6,9 @@ import Enums from '../../../../enums/enums';
 import { normalizeText } from '../../../../../utils/string.utils';
 
 // ToDo: Export error https://bowery.atlassian.net/browse/WEB-6739
+// TODO: QA-7039-43 Update test
 describe("Add Appraiser / Inspector button functionality", 
-    { tags:[ "@report", "@appraiser", "@check_export", "@bug", "@WEB-6739" ] }, () => {
+    { tags:[ "@report", "@appraiser", "@check_export", "@bug", "@WEB-6739", "@update_test" ] }, () => {
 
         it("[QA-5998-99_6012_33-34]", () => {
             cy.stepInfo("Precondition: Create report");
