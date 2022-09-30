@@ -1,3 +1,7 @@
+/**
+ * TODO: [QA-7058] Add data-qa to SalesComps statuses from FindComps > CompSearch > SearchList 
+ */
+
 const statusesFromStatusDropdown = {
     doNotUse: "doNotUse",
     draft: "draft",

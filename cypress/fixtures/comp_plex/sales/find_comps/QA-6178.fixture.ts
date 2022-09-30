@@ -1,22 +1,33 @@
 import Enums from "../../../../enums/enums";
 
+const { 
+    doNotUse, draft, 
+    confirmed, verified, any  
+} = Enums.COMP_STATUS_VALUES_FROM_STATUS_DROPDOWN.statusesFromStatusDropdown;
+
+// add property alias 
+// const { 
+//     doNotUse,
+
+// } = Enums.COMP_STATUS_VALUES_FROM_STATUS_DROPDOWN.statusesFromCompsList;
+
 export default {
     allStatusesFromDropdown: [ 
-        Enums.COMP_STATUS_VALUES_FROM_STATUS_DROPDOWN.statusesFromStatusDropdown.doNotUse, 
-        Enums.COMP_STATUS_VALUES_FROM_STATUS_DROPDOWN.statusesFromStatusDropdown.draft, 
-        Enums.COMP_STATUS_VALUES_FROM_STATUS_DROPDOWN.statusesFromStatusDropdown.confirmed, 
-        Enums.COMP_STATUS_VALUES_FROM_STATUS_DROPDOWN.statusesFromStatusDropdown.verified, 
-        Enums.COMP_STATUS_VALUES_FROM_STATUS_DROPDOWN.statusesFromStatusDropdown.any ],
+        doNotUse, 
+        draft, 
+        confirmed, 
+        verified, 
+        any ],
     allStatusesFromDropdownExceptAny: [ 
-        Enums.COMP_STATUS_VALUES_FROM_STATUS_DROPDOWN.statusesFromStatusDropdown.doNotUse, 
-        Enums.COMP_STATUS_VALUES_FROM_STATUS_DROPDOWN.statusesFromStatusDropdown.draft, 
-        Enums.COMP_STATUS_VALUES_FROM_STATUS_DROPDOWN.statusesFromStatusDropdown.confirmed, 
-        Enums.COMP_STATUS_VALUES_FROM_STATUS_DROPDOWN.statusesFromStatusDropdown.verified ],
-    statusFromDropdownDoNotUse: Enums.COMP_STATUS_VALUES_FROM_STATUS_DROPDOWN.statusesFromStatusDropdown.doNotUse,
-    statusFromStatusDropdownDraft: Enums.COMP_STATUS_VALUES_FROM_STATUS_DROPDOWN.statusesFromStatusDropdown.draft,
-    statusFromDropdownConfirmed: Enums.COMP_STATUS_VALUES_FROM_STATUS_DROPDOWN.statusesFromStatusDropdown.confirmed,
-    statusFromDropdownVerified: Enums.COMP_STATUS_VALUES_FROM_STATUS_DROPDOWN.statusesFromStatusDropdown.verified,
-    statusFromDropdownAny: Enums.COMP_STATUS_VALUES_FROM_STATUS_DROPDOWN.statusesFromStatusDropdown.any,
+        doNotUse, 
+        draft, 
+        confirmed, 
+        verified ],
+    statusFromDropdownDoNotUse: doNotUse,
+    statusFromStatusDropdownDraft: draft,
+    statusFromDropdownConfirmed: confirmed,
+    statusFromDropdownVerified: verified,
+    statusFromDropdownAny: any,
 
     allStatusesFromCompsList: [ 
         Enums.COMP_STATUS_VALUES_FROM_STATUS_DROPDOWN.statusesFromCompsList.doNotUse,  

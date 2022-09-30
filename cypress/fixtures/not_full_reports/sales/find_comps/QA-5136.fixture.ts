@@ -10,6 +10,8 @@ const aliasCompsBefore = "aliasCompsBefore";
  */
 const memoTestDataFile = `${mapKeysUtils.salesCompsAddresses}.txt`;
 
+// add object destr from Enums.COMP_STATUS_VALUES_FROM_STATUS_DROPDOWN.statusesFromStatusDropdown
+
 export default {
     reportCreationData: ReportDataCreator.getReportData("5136", {
         incomeValue: Enums.INCOME_TYPE.both,

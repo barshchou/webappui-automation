@@ -144,6 +144,11 @@ class FindCompsActions extends BaseActionsExt<typeof findCompsPage> {
         return this;
     }
 
+    /**
+     * TODO: create universal method for closing filters with dropdown 
+     * (use Omit<Filters,SizeRangeFilter> for type constructing)
+     * @returns 
+     */
     closeCompStatusDropdown(): FindCompsActions {
         findCompsPage.filterOptionValue(Enums.COMP_STATUS_VALUES_FROM_STATUS_DROPDOWN.statusesFromStatusDropdown.any)
             .should('exist');
@@ -153,12 +158,19 @@ class FindCompsActions extends BaseActionsExt<typeof findCompsPage> {
         return this;
     }
 
+    /**
+     * 
+     * @param compStatus 
+     * @param selectStatus TOOD: rename to statusSelectDeselect
+     * @returns 
+     */
     selectUnselectFilterCompStatusValue(compStatus: BoweryReports.FindComps.CompStatusValues | 
     BoweryReports.FindComps.CompStatusValues[], selectStatus = true): FindCompsActions {
         const statuses = Array.isArray(compStatus) ? compStatus : [ compStatus ];
         findCompsPage.compStatusFilter.click();
         statuses.forEach(status => {
             findCompsPage.filterOptionValue(status).should('exist').click();
+            // ernst: add network wait + check for gql operation param (we need to validate the name of filterStatus)
             this.verifySpinnerExist()
                 .verifySpinnerNotExist();
             selectStatus === true 
@@ -176,6 +188,11 @@ class FindCompsActions extends BaseActionsExt<typeof findCompsPage> {
     verifyCompsFromListByStatus(status: BoweryReports.FindComps.CompStatusValuesFromCompsList |
     BoweryReports.FindComps.CompStatusValuesFromCompsList[] ): FindCompsActions { 
         cy.get("comp-plex").shadow().find('[id="root"]').then(shadowBody => {
+
+            // cy.wrap(shadowBody).find(`[data-qa="sales-comp-item"]`).spread((...elems) => {
+            //     elems;
+            // });
+
             // condition for check, if list of comps contains comps or not
             if (shadowBody.find(`[data-qa="sales-comp-item"]`).length > 0) {
                 findCompsPage.compFromList.then(comps => {
