@@ -18,6 +18,18 @@ require('dd-trace/ci/cypress/support');
 const registerCypressGrep = require('cypress-grep');
 registerCypressGrep();
 
+//#region validations for specs in `afterEach` hook
+const skipExportTest = () => {
+    //@ts-ignore
+    if (cy.state("error") != undefined ) {
+        // @ts-ignore
+        const testToSkip: Mocha.Test = cy.state("test").parent.tests.slice(-1)[0];
+
+        testToSkip.pending = true;
+    }
+};
+//#endregion
+
 Cypress.on("uncaught:exception", () => {
     /*
      * returning false here prevents Cypress from
@@ -53,7 +65,11 @@ after(() => {
 });
 
 afterEach(() => {
+    // ernst: check whether we running spec with export validation
     if (Cypress.spec.name.includes("export")) {
+
+        skipExportTest();
+
         if (!Cypress.currentTest.title.includes("Check export")) {
             cy.logNode(`Deleting report in check export spec`);
             cy.deleteApiReport();
