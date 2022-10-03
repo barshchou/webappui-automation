@@ -38,9 +38,7 @@ describe(`Generated Commentary is dynamically updated with relevant information
             ReviewExport.generateDocxReport().waitForReportGenerated()
                 .downloadAndConvertDocxReport(report.fixture.reportNumber);
         });
-    });
 
-    testData.dataReportFixtures.forEach(report => {
         it(`Check export ${report.testName}`, () => {
             cy.task("getFilePath",
                 { _reportName: report.fixture.reportNumber, _docxHtml: "html" }
