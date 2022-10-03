@@ -18,18 +18,6 @@ require('dd-trace/ci/cypress/support');
 const registerCypressGrep = require('cypress-grep');
 registerCypressGrep();
 
-//#region validations for specs in `afterEach` hook
-const skipExportTest = () => {
-    //@ts-ignore
-    if (cy.state("error") != undefined ) {
-        // @ts-ignore
-        const testToSkip: Mocha.Test = cy.state("test").parent.tests.slice(-1)[0];
-
-        testToSkip.pending = true;
-    }
-};
-//#endregion
-
 Cypress.on("uncaught:exception", () => {
     /*
      * returning false here prevents Cypress from
@@ -67,7 +55,6 @@ after(() => {
 afterEach(() => {
     // ernst: check whether we running spec with export validation
     if (Cypress.spec.name.includes("export")) {
-
         skipExportTest();
 
         if (!Cypress.currentTest.title.includes("Check export")) {
@@ -197,3 +184,31 @@ declare global {
         }
     }
 }
+
+//#region Custom helpers for `afterEach` hook
+
+/**
+ * Skipping n+1-Test in Suite if n-Test has failed + check whether n+1 Test is for export validation. 
+ * In that case, "Check export" test will be skipped  
+ * and we'll not get "test error noise" with `CypressError: "cy.task('getFilePath')" timed out after waiting 60000ms.`
+ */
+const skipExportTest = () => {
+    //@ts-ignore
+    if (cy.state("error") != undefined) {
+        
+        //@ts-ignore
+        const testIndex: number = () => cy.state("test").parent.tests.findIndex(
+            // @ts-ignore
+            test => test.title === cy.state("test").title
+        );
+
+        // @ts-ignore
+        const testToSkip: Mocha.Test = cy.state("test").parent.tests[testIndex() + 1];
+
+        testToSkip.title.includes("Check export") 
+            ? testToSkip.pending = true 
+            : cy.logNode("Next Test is not report validation, should not be skipped");
+    }
+};
+
+//#endregion
