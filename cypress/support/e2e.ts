@@ -194,8 +194,10 @@ declare global {
  */
 const skipExportTest = () => {
     //@ts-ignore
-    if (cy.state("error") != undefined) {
-        
+    if (!Cypress._.isUndefined(cy.state("error"))) {
+        /**
+         * Index of current Test in Suite
+         */
         //@ts-ignore
         const testIndex: number = () => cy.state("test").parent.tests.findIndex(
             // @ts-ignore
@@ -203,11 +205,13 @@ const skipExportTest = () => {
         );
 
         // @ts-ignore
-        const testToSkip: Mocha.Test = cy.state("test").parent.tests[testIndex() + 1];
+        const testToSkip: Mocha.Test | undefined = cy.state("test").parent.tests[testIndex() + 1];
 
-        testToSkip.title.includes("Check export") 
-            ? testToSkip.pending = true 
-            : cy.logNode("Next Test is not report validation, should not be skipped");
+        if (!Cypress._.isUndefined(testToSkip)) {
+            testToSkip.title.includes("Check export") 
+                ? testToSkip.pending = true 
+                : cy.logNode("Next Test is not report validation, should not be skipped"); 
+        }
     }
 };
 
