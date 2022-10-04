@@ -9,7 +9,9 @@ class AppraiserPage extends BasePage {
         return cy.xpath(`//*[@data-qa='fullName']//*[@data-qa='select-value']`);
     }
 
-    get btnAddAppraiserInspector() { return cy.get("[data-qa='addAppraiserInspector']"); }
+    get btnAddAppraiserInspector() { 
+        return cy.get("[data-qa='addAppraiserInspector']").should("be.visible"); 
+    }
 
     getAppraiserOptionFromList(index = 0) {
         return cy.get(`[data-option-index="${index}"]`).should("be.visible");

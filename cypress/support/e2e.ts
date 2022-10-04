@@ -53,7 +53,10 @@ after(() => {
 });
 
 afterEach(() => {
+    // ernst: check whether we running spec with export validation
     if (Cypress.spec.name.includes("export")) {
+        skipExportTest();
+
         if (!Cypress.currentTest.title.includes("Check export")) {
             cy.logNode(`Deleting report in check export spec`);
             cy.deleteApiReport();
@@ -181,3 +184,35 @@ declare global {
         }
     }
 }
+
+//#region Custom helpers for `afterEach` hook
+
+/**
+ * Skipping n+1-Test in Suite if n-Test has failed + check whether n+1 Test is for export validation. 
+ * In that case, "Check export" test will be skipped  
+ * and we'll not get "test error noise" with `CypressError: "cy.task('getFilePath')" timed out after waiting 60000ms.`
+ */
+const skipExportTest = () => {
+    //@ts-ignore
+    if (!Cypress._.isUndefined(cy.state("error"))) {
+        /**
+         * Index of current Test in Suite
+         */
+        //@ts-ignore
+        const testIndex: number = () => cy.state("test").parent.tests.findIndex(
+            // @ts-ignore
+            test => test.title === cy.state("test").title
+        );
+
+        // @ts-ignore
+        const testToSkip: Mocha.Test | undefined = cy.state("test").parent.tests[testIndex() + 1];
+
+        if (!Cypress._.isUndefined(testToSkip)) {
+            testToSkip.title.includes("Check export") 
+                ? testToSkip.pending = true 
+                : cy.logNode("Next Test is not report validation, should not be skipped"); 
+        }
+    }
+};
+
+//#endregion
