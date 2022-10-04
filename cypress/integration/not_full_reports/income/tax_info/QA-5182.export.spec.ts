@@ -6,7 +6,7 @@ import { ReviewExport, Income } from '../../../../actions';
 //TODO this test is depricated and should be updated (test-case is updated already)
 // TODO: QA-7038 Update test
 describe("Export column order both assessment psf and assessment per unit", 
-    { tags: [ "@check_export", "@income", "@tax_info", "@update_test" ] }, () => {
+    { tags: [ "@check_export", "@income", "@tax_info", "@update_test", "@QA-7030", "@QA-7038" ] }, () => {
         it("[QA-5182]", () => {
             cy.stepInfo("1. Create report");
             createReport(testData.reportCreationData);

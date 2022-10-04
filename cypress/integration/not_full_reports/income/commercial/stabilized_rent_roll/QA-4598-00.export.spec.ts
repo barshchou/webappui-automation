@@ -7,7 +7,7 @@ import testData from
 
 describe(`[QA-4598][QA-4599][QA-4600] Verify the suggested text dropdown in the 
 new narrative component added through "=" in the Generated Commentary on the Stabilized Rent Roll page.`, 
-{ tags: [ "@income", "@commercial", "@stabilized_rent_roll", "@check_export", "@update_test" ] }, () => {
+{ tags: [ "@income", "@commercial", "@stabilized_rent_roll", "@check_export", "@update_test", "@QA-7030" ] }, () => {
 
     //TODO update test after test-cases updates QA-6543
     it("[QA-4598] As Is", () => {

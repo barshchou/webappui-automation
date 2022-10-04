@@ -5,7 +5,7 @@ import { _NavigationSection } from "../../../../actions/base";
 
 describe(`[QA-4543][QA-4544][QA-4545][QA-4546][QA-4547] 
 Verify the buttons functionality on Property > Commercial Units page.`,
-{ tags: [ "@property", "@commercial_units", "@narrative_comp", "@update_test" ] }, () => {
+{ tags: [ "@property", "@commercial_units", "@narrative_comp", "@update_test", "@QA-7030" ] }, () => {
 
     before("Report creation and several commercial units addition", () => {
         createReport(testData.reportCreationData);
