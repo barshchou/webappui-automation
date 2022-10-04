@@ -21,8 +21,8 @@ const _rentRollResidentialUnitsFixture: BoweryReports.ResidentialUnit[] = [
     },
 ];
 
-const _commentaryToBe = "462 1st Avenue currently contains 1 occupied unit " + 
-    "generating $69,096 of total annual residential income.";
+const _commentaryToBe = "462 1st Avenue currently contains 0 occupied unit " + 
+    "generating $0 of total annual residential income.";
 
 export default {
     reportCreationData: ReportDataCreator.getReportData("4093-96"),
