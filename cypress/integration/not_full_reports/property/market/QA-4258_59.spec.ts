@@ -4,7 +4,8 @@ import { _NavigationSection } from "../../../../actions/base";
 import { Property } from "../../../../actions";
 import Enums from "../../../../enums/enums";
 
-describe("Verify area analysis pull from dropbox", { tags: [ "@property", "@market" ] }, () => {
+// TODO: Figure out how to make QA-4258_59 robust to Dropbox changes
+describe.skip("Verify area analysis pull from dropbox", { tags: [ "@property", "@market" ] }, () => {
     
     beforeEach("Login, create report", () => {
         createReport(testData.reportCreationData);
