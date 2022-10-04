@@ -44,8 +44,8 @@ ACAS reports for Property Rights Appraised and Definition
             .formCommentTextBox(testData.definitionOfMarketValueTitle));
         testData.chips.forEach(chip => {
             // [QA-7001] - possible solution: activating textarea on every chip
-            // Report._KeyInfo.activateTextAreaInput(Report._KeyInfo.Page
-            //     .formCommentTextBox(testData.definitionOfMarketValueTitle));
+            Report._KeyInfo.activateTextAreaInput(Report._KeyInfo.Page
+                .formCommentTextBox(testData.definitionOfMarketValueTitle));
             Report._KeyInfo.Page.formCommentTextBox(testData.definitionOfMarketValueTitle)
                 .realType(`=${chip.typeSuggestValue}`);
             Report._KeyInfo.clickNarrativeSuggestions(chip.suggestionName, 2);
