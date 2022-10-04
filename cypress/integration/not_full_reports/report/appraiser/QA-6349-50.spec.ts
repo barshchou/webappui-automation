@@ -4,7 +4,7 @@ import { Report } from '../../../../actions';
 import testData from "../../../../fixtures/not_full_reports/report/appraiser/QA-6349-50.fixture";
 
 describe(`Verify the correct State is displayed in the State Certification after the user added a new appraiser
-         who has a license for this state`, { tags:[ "@report", "@appraiser" ] }, () => {
+         who has a license for this state`, { tags:[ "@report", "@appraiser", "@QA-7030" ] }, () => {
 
     testData.dataFixture.forEach(value => {
         it(`${value.specName}, NY report`, () => {

@@ -11,7 +11,7 @@ import { conditionalDescribe } from "../../../checkIsProd.utils";
  * + add `data-qa` attribute to "Add appraiser / inspector" btn in `appraiser.page.ts`
  */
 conditionalDescribe("Verify that 'Sign Report' checkbox for different user roles", 
-    { tags:[ "@permissions_roles", "@report_status", "@report", "@appraiser" ] }, () => {
+    { tags:[ "@permissions_roles", "@report_status", "@report", "@appraiser", "@QA-7030" ] }, () => {
 
         before('Create a report', () => {
             cy.stepInfo('Precondition: Create report with Admin user');

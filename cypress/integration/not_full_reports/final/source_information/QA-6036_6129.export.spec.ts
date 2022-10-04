@@ -6,7 +6,7 @@ import { normalizeText } from "../../../../../utils/string.utils";
 
 describe(`Generated Commentary is dynamically updated with relevant information 
         with (Freddie Mac and not-Freddie Mac report)`,
-{ tags: [ "@final", "@source_information", "@check_export", "@bug", "@WEB-7107" ] }, () => {
+{ tags: [ "@final", "@source_information", "@check_export", "@QA-7030", "@bug", "@WEB-7107" ] }, () => {
 
     testData.dataReportFixtures.forEach(report => {
         it(`${report.testName}`, () => {

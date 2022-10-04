@@ -8,7 +8,7 @@ import { normalizeText } from '../../../../../utils/string.utils';
 // TODO: Export fails due to https://bowery.atlassian.net/browse/WEB-6739
 // TODO: QA-7044-45 Update test
 describe("Generated Commentary is dynamically updated with relevant information (Freddie Mac report)", 
-    { tags:[ "@report", "@appraiser", "@check_export", "@bug", "@WEB-6739", "@update_test" ] }, () => {
+    { tags:[ "@report", "@appraiser", "@check_export", "@bug", "@WEB-6739", "@update_test", "@QA-7030" ] }, () => {
 
         it("[QA-6126-27]", () => {
             cy.stepInfo("Precondition: Create report");

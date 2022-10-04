@@ -4,7 +4,7 @@ import { Report,  } from '../../../../actions';
 import testData from "../../../../fixtures/not_full_reports/report/appraiser/QA-6536.fixture";
 
 describe("The full name of a added third-party inspector is automatically capitalized", 
-    { tags:[ "@report", "@appraiser" ] }, () => {
+    { tags:[ "@report", "@appraiser", "@QA-7030" ] }, () => {
 
         beforeEach("Login, create report", () => {
             createReport(testData.reportCreationData);
