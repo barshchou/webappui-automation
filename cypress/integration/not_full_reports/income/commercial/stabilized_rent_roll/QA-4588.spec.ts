@@ -4,7 +4,7 @@ import { createReport } from "../../../../../actions/base/baseTest.actions";
 import testData from "../../../../../fixtures/not_full_reports/income/commercial/stabilized_rent_roll/QA-4588.fixture";
 
 describe(`Verify the Back button functionality on the Stabilized Rent Roll page`, 
-    { tags:[ "@income", "@commercial", "@stabilized_rent_roll" ] }, () => {
+    { tags:[ "@income", "@commercial", "@stabilized_rent_roll", "@bug", "@WEB-7167" ] }, () => {
         it("'As Is' report", () => {
             cy.stepInfo(`1. Create new 'As Is' report`);
             createReport(testData.reportCreationDataAsIs);
